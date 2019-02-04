@@ -159,6 +159,8 @@ plot + geom_point() + facet_wrap(~ Lake) + xlab("Length (mm)") + ylab("Trophic P
 
     * Exactement de la même façon?
 
+<br>
+
 --
 
 * Est-ce qu'on s'attend à ce que ces relations soient pareilles entre les lacs?
@@ -171,11 +173,19 @@ plot + geom_point() + facet_wrap(~ Lake) + xlab("Length (mm)") + ylab("Trophic P
 
 Comment pourrions-nous analyser ces données?
 
+<br>
+
 Nous pourrions:
 
-**Option 1. Séparer**: Faire une analyse separée pour chaque espèces et chaque lac
+<br>
 
-**Option 2. Regrouper**: Faire une seule analyse en ignorant les variables espèces et lac
+**Option 1. Séparer**: 
+
+- Faire une analyse separée pour chaque espèces et chaque lac
+
+**Option 2. Regrouper**: 
+
+- Faire une seule analyse en ignorant les variables espèces et lac
 
 ---
 
@@ -208,14 +218,16 @@ Nous pourrions:
 ]
 
 ---
+## 1. Pourquoi choisir un MLM?
 
 .comment[
 * Pour notre question, on veut seulement savoir s'il y a un **effet général de la longueur corporelle sur la position trophique**
 
 * Ceci pourrait varier faiblement par espèce à cause de différents taux de croissance et/ou par lac à cause de différences dans la disponibilité de nourriture. On ne s'intéresse pas directement à ces facteurs non mesurés, mais on doit contrôler leur effet dans le modèle
 ]
+
 ---
-#1. Qu'est-ce qu'un MLM et pourquoi est-ce important?
+## 1. Pourquoi choisir un MLM?
 
 .left[Les MLMs sont un compromis entre séparer et regrouper. Ils:
 ]
@@ -225,7 +237,7 @@ Nous pourrions:
 2. Utilisent toutes les données disponibles (regrouper) tout en contrôlant les différences entre les lacs et les espèces (pseudo-replication)
 
 ---
-#1. Qu'est-ce qu'un MLM et pourquoi est-ce important?
+## 1. Pourquoi choisir un MLM?
 
 **Effet fixe VS aléatoire**
 
@@ -853,6 +865,7 @@ Pourquoi n'est il pas surprenant que sa valeur AICc était la deuxième meilleur
 ---
 
 # Solution!
+
 .large[**Discussion de groupe...**]
 
 .right[![:scale 30%](images/rubicub.png)]
