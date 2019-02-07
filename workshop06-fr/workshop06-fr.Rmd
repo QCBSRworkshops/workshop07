@@ -132,7 +132,7 @@ plot + geom_point() + xlab("Length (mm)") + ylab("Trophic Position") + labs(titl
 
 ```{r, echo=FALSE}
 # Graphique 2 - Par espèce
-plot + geom_point() + facet_wrap(~ Fish_Species) + xlab("Length (mm)") + ylab("Trophic Position") + 
+plot + geom_point() + facet_wrap(~ Fish_Species) + xlab("Length (mm)") + ylab("Trophic Position") +
    labs(title="By Species") + fig
 ```
 
@@ -142,8 +142,8 @@ plot + geom_point() + facet_wrap(~ Fish_Species) + xlab("Length (mm)") + ylab("T
 <br>
 
 ```{r, echo=F}
-# Graphique 3 – Par lac 
-plot + geom_point() + facet_wrap(~ Lake) + xlab("Length (mm)") + ylab("Trophic Position") + 
+# Graphique 3 – Par lac
+plot + geom_point() + facet_wrap(~ Lake) + xlab("Length (mm)") + ylab("Trophic Position") +
    labs(title="By Lake") + fig
 ```
 
@@ -177,11 +177,11 @@ Nous pourrions:
 
 <br>
 
-**Option 1. Séparer**: 
+**Option 1. Séparer**:
 
 - Faire une analyse separée pour chaque espèces et chaque lac
 
-**Option 2. Regrouper**: 
+**Option 2. Regrouper**:
 
 - Faire une seule analyse en ignorant les variables espèces et lac
 
@@ -253,7 +253,7 @@ Il existe plusieurs définitions possibles des effets fixes et aléatoires et no
 * On souhaite émettre des conclusions à propos des niveaux du facteur d'où les données proviennent
 
 ---
-#1. Qu'est-ce qu'un MLM et pourquoi est-ce important?
+## 1. Pourquoi choisir un MLM?
 
 ### Effet aléatoire
 
@@ -314,7 +314,7 @@ Cela économise des degrés de liberté (moins d’estimation de paramètres son
 <img style="float: right; width:50%;margin: 1%" src="images/fig_9_w5.png">
 Le même principe s’applique aux pentes qui varient selon un facteur donné, juste plus difficile à visualiser
 
-Comme pour les intercepts, seuls la moyenne et l’écart-type des pentes sont estimés au lieu de trois pentes distinctes. 
+Comme pour les intercepts, seuls la moyenne et l’écart-type des pentes sont estimés au lieu de trois pentes distinctes.
 </p>
 
 ---
@@ -352,13 +352,13 @@ les points provenant d'un même lac sont traités comme une seule observation ca
 
 ![](images/fig_11_w5.png)
 
-les points provenant d'un même lac sont traités indépendamment car peu corrélés 
+les points provenant d'un même lac sont traités indépendamment car peu corrélés
 
 ![:faic](arrow-right) grande taille effective de l'échantillon et petits intervalles de confiance pour la pente et l'intercept.
 ]
 
 ---
-# Defi 2 ![:cube]()
+# Défi 2 ![:cube]()
 
 <br>
 
@@ -416,7 +416,7 @@ Comment le CIC et l'intervalle de confiance seront affectés dans ces deux scén
 
 ## Comment implémenter un MLM dans R ?
 
-**Etape1:** Construction du modèle *a priori* et exploration des données
+**Étape 1:** Construction du modèle *a priori* et exploration des données
 
 * Modèle basé sur connaissance *a priori*:
 
@@ -452,7 +452,7 @@ table(data$Fish_Species)
 ```
 
 
-* Ce jeu de données est parfaitement equilibré, mais les **modèles mixtes peuvent analyser les plans experimentaux non equilibrés**, comme c'est souvent le cas en écologie!
+.comment[Ce jeu de données est parfaitement équilibré, mais les **modèles mixtes peuvent analyser les plans expérimentaux non équilibrés**, comme c'est souvent le cas en écologie!]
 
 ---
 ## Exploration des données
@@ -472,9 +472,9 @@ hist(data$Trophic_Pos)
 
 Vérification de la colinéarité entre vos variables explicatives
 
-Il n'est pas recommandé d'inclure des variables explicatives colinéaires dans un même modèle, car leur effet sur la variable réponse sera confondu
+Le problème avec les prédicteurs colinéaires est simplement qu'ils expliquent la même chose, alors leur effet sur la variable réponse sera confondu dans le modèle
 
-Dans cet exemple, il n’y a pas de risque de colinéarité avec seulement une variable continue. Si vous aviez une autre variable continue (Var2) et vous pourriez vérifier la colinéarité à l'aide du code suivant :
+Dans cet exemple, il n’y a pas de risque de colinéarité avec seulement une variable continue. Si vous aviez une autre variable continue (Var2), une façon simple de vérifier la colinéarité est:
 
 ```{r, eval = F}
 plot(data)
@@ -566,12 +566,12 @@ Représentez graphiquement la valeur des résidus en fonction des niveaux des fa
 ```{r, fig.width=10, fig.height=5, eval = F}
 par(mfrow=c(1,2))
 
-plot(lm.test.resid ~ data$Fish_Species, 
+plot(lm.test.resid ~ data$Fish_Species,
      xlab = "Species", ylab = "Standardized residuals")
 
 abline(0, 0, lty = 2)
 
-plot(lm.test.resid ~ data$Lake, 
+plot(lm.test.resid ~ data$Lake,
      xlab = "Lake", ylab = "Standardized residuals")
 
 abline(0, 0, lty = 2)
@@ -584,10 +584,10 @@ Représentez graphiquement la valeur des résidus en fonction des niveaux des fa
 
 ```{r, fig.width=10, fig.height=5, echo = F}
 par(mfrow=c(1,2), mar = c(4,4,1,1))
-plot(lm.test.resid ~ data$Fish_Species, 
+plot(lm.test.resid ~ data$Fish_Species,
      xlab = "Species", ylab = "Standardized residuals")
 abline(0, 0, lty = 2)
-plot(lm.test.resid ~ data$Lake, 
+plot(lm.test.resid ~ data$Lake,
      xlab = "Lake", ylab = "Standardized residuals")
 abline(0, 0, lty = 2)
 ```
@@ -621,7 +621,7 @@ abline(0, 0, lty = 2)
 
 **Étape 2:** Coder les modèles potentiels et sélectionner le meilleur modèle
 
-* Traduison notre modèle... 
+* Traduison notre modèle...
 
 $$PT_{ijk} ~ Longueur_i + Lac_j + Espèce_k + \epsilon$$
 
@@ -643,12 +643,12 @@ lmer(Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species),
 
 REML (Restricted Maximum Likelihood) est la méthode par défaut dans la fonction `lmer`
 
-Il est à noter que l'estimateur de l’écart-type du maximum de vraisemblance (ML, pour Maximum Likelihood) est biaisé d’un facteur $(n-2) / n$. La méthode REML corrige ce biais. 
+Il est à noter que l'estimateur de l’écart-type du maximum de vraisemblance (ML, pour Maximum Likelihood) est biaisé d’un facteur $(n-2) / n$. La méthode REML corrige ce biais.
 
 
 - On devrait comparer les **modèles d'effets aléatoires nichés avec REML**
 
-- Tandis qu'on devrait comparer les **modèles nichés à effets fixes avec ML** 
+- Tandis qu'on devrait comparer les **modèles nichés à effets fixes avec ML**
 
 
 ---
@@ -695,7 +695,7 @@ lmer(Z_TP ~ Z_Length + (1 + Z_Length | Lake) + (1 + Z_Length | Fish_Species),
 ---
 ## Défi 5 ![:cube]()
 
-Faites une liste de 7 modèles alternatifs qui pourraient être construits et comparés à partir de celui-ci:
+Faites une liste de 7 modèles alternatifs qui pourraient être comparés à celui-ci:
 
 ```{r, eval=F}
 lmer(Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species),
@@ -703,7 +703,7 @@ lmer(Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species),
 ```
 
 
-.comment[Note: Si nous avions différents effets fixes entre les modèles, nous aurions dû indiquer `REML=FALSE`. Cependant, vous devez rapporter les estimations des paramètres du "meilleur" modèle en utilisant `REML=TRUE`]
+.comment[Note: Si nous avions différents effets fixes entre les modèles, nous aurions dû indiquer `REML=FALSE` pour les comparer avec un méthode de vraisemblance comme l'AIC. Ici, vous devez rapporter les estimations des paramètres du "meilleur" modèle en utilisant `REML=TRUE`]
 
 
 ---
@@ -728,7 +728,7 @@ M0 <- lm(Z_TP ~ Z_Length, data = data)
 # modèle complet avec variation des intercepts
 M1 <- lmer(Z_TP ~ Z_Length + (1 | Fish_Species) + (1 | Lake), data = data, REML = FALSE)
 # modèle complet avec variation des intercepts et de pentes
-M2 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 + Z_Length | Lake), 
+M2 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 + Z_Length | Lake),
            data = data, REML = FALSE)
 # Pas d'effet lac, les intercepts varient par espèces
 M3 <- lmer(Z_TP ~ Z_Length + (1 | Fish_Species), data = data, REML = FALSE)
@@ -739,10 +739,10 @@ M5 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species), data = data, REML = 
 # Pas d'effet de l'espèces, les intercepts et les pentes varient par lac
 M6 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Lake), data = data, REML = FALSE)
 # modèle complet, variation d'intercept et pente par lac
-M7 <- lmer(Z_TP ~ Z_Length + (1 | Fish_Species) + (1 + Z_Length | Lake), 
+M7 <- lmer(Z_TP ~ Z_Length + (1 | Fish_Species) + (1 + Z_Length | Lake),
            data = data, REML = FALSE)
 # modèle complet, variation d'intercept et pente par espèces
-M8 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake), 
+M8 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake),
            data = data, REML = FALSE)
 ```
 
@@ -803,7 +803,7 @@ Regardons de plus près M8 et M2. On peut exclure les autres car ils ont des AIC
 Quelle est la structure du meilleur modèle?
 
 ```{r, eval = F}
-M8 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake), 
+M8 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake),
            data = data, REML = FALSE)
 ```
 
@@ -820,10 +820,10 @@ L'intercept et l'effet de la longueur sur la position trophique peut varier selo
 Une fois que les meilleurs modèles sont sélectionnés il faut remettre la méthode d'estimation a `REML=TRUE`
 
 ```{r}
-M8 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake), 
+M8 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake),
            data = data, REML = TRUE)
 
-M2 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 + Z_Length | Lake), 
+M2 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 + Z_Length | Lake),
            data = data, REML = TRUE)
 ```
 
@@ -838,10 +838,10 @@ Comment diffère-t-il de M8 d'un point de vue écologique?
 Pourquoi n'est il pas surprenant que sa valeur d'AICc était la deuxième meilleure?
 
 ```{r, eval = F}
-M8 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake), 
+M8 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake),
            data = data, REML = TRUE)
 
-M2 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 + Z_Length | Lake), 
+M2 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 + Z_Length | Lake),
            data = data, REML = TRUE)
 ```
 
@@ -855,7 +855,7 @@ M2 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 + Z_Length | Lak
 --
 
 .alert[M2] La position trophique est une fonction de la longueur. L'intercept et l'effet de la longueur sur la position trophique peuvent varier selon l'espèce de poissons et le lac.
-  
+
   * .small[les facteurs intrinsèques des espèces et des lacs sont à la base de relations différentes entre la position trophique et la longueur (i.e. pentes et intercepts)]
 
 .alert[M8] La position trophique est une fonction de la longueur. L'intercept et l'effet de la longueur sur la position trophique peut varier selon l’espèce de poissons, mais seulement l'intercept peut varier par lac.
@@ -893,7 +893,7 @@ M2 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 + Z_Length | Lak
 
 Vous devez vérifier que le modèle respecte toutes les suppositions de base:
 
-1. Vérifier l'homogénéité des résidus
+1. Vérifier l'homogénéité de la variance
   - Faire un graphique des valeurs prédites en fonction des valeurs résiduelles
 
 2. Vérifier l'indépendance des résidus
@@ -916,7 +916,16 @@ plot(resid(M8) ~ fitted(M8), xlab = 'Valeurs pérdites', ylab = 'Résidus normal
 abline(h = 0, lty = 2)
 ```
 
-L'étendue homogène des résidus ![:faic](arrow-right) la supposition est respectée!
+Étendue homogène des résidus ![:faic](arrow-right) la supposition est respectée!
+
+---
+## Valider le modèle
+
+1- Vérifier l'homogénéité de la variance
+
+.center[
+![](images/resid-plots.gif)
+]
 
 ---
 ## Valider le modèle
@@ -1029,7 +1038,7 @@ hist(resid(M8))
 Si l’intervalle de confiance à 95% de la pente ( $pente ± SE * 1.96$ ) inclut zéro, la pente (ici = 0.4223), et donc l'effet de la longueur sur la position trophique, n’est pas significativement différente de zéro au seuil $\alpha$ = 0.05.
 
 ---
-## Defi 7 ![:cube]()
+## Défi 7 ![:cube]()
 
 <br>
 
@@ -1053,21 +1062,20 @@ Si l’intervalle de confiance à 95% de la pente ( $pente ± SE * 1.96$ ) inclu
 
 2. Est-ce que la pente de Z_Length est significativement différente de 0 ?
 
-  - Oui, car l'IC n'inclut pas 0
+  - Oui, car l'IC [0.2459, 0.5987] n'inclut pas 0
 
 
 ---
-## Interpréter et visualiser le modèle
+## Défi 8 ![:cube]()
 
-* Les différentes intercepts et pentes générées par le modèle peuvent être illustrées dans des figures pour mieux visualiser les résultats d'un modèle mixte
-
-
----
-## Défi ![:cube]()
+* Il est possible de visualiser graphiquement les différentes intercepts et pentes du modèle pour mieux interpréter les résultats
 
 Prenez 2 minutes pour refléchir aux différentes façon pour représenter les résultats de M8.
 
 *Indice: considérez les différents "niveaux" du modèle*
+
+
+
 
 ---
 ## Solution ![:cube]()
@@ -1086,7 +1094,7 @@ Pour faire ces figures, il nous faut:
 - Les coefficients du modèle complet qui sont dans le résumé du modèle
 
 ```{r}  
-summ_M8$coefficients 
+summ_M8$coefficients
 ```
 
 Intercept = -0.0009059
@@ -1099,7 +1107,7 @@ Pente = 9.4222687
 Pour faire ces figures, il nous faut:
 
 - Les coefficients pour chaque niveau du modèle qu'on obtient avec la fonction `coef`
-  
+
 ```{r}
 coef(M8)
 ```
@@ -1112,17 +1120,17 @@ a) Figure avec toutes les données regroupées
 library(ggplot2)
 
 # Thème ggplot simplifié
-fig <- theme_bw() + 
-  theme(panel.grid.minor=element_blank(), panel.grid.major=element_blank(), 
+fig <- theme_bw() +
+  theme(panel.grid.minor=element_blank(), panel.grid.major=element_blank(),
         panel.background=element_blank()) +
   theme(strip.background=element_blank(), strip.text.y = element_text()) +
   theme(legend.background=element_blank()) +
-  theme(legend.key=element_blank()) + 
+  theme(legend.key=element_blank()) +
   theme(panel.border = element_rect(col = "black", fill=NA))
 
 plot <- ggplot(aes(Z_Length, Z_TP), data = data)
-Plot_AllData <- plot + geom_point() + 
-  xlab("Longueur (mm)") + ylab("Position trophique") + 
+Plot_AllData <- plot + geom_point() +
+  xlab("Longueur (mm)") + ylab("Position trophique") +
   labs(title = "Toutes les données") + fig
 
 Plot_AllData + geom_abline(intercept = -.0009059, slope = 0.4222697)
@@ -1134,8 +1142,8 @@ Plot_AllData + geom_abline(intercept = -.0009059, slope = 0.4222697)
 a) Figure avec toutes les données regroupées
 ```{r, echo = F}
 plot <- ggplot(aes(Z_Length, Z_TP), data = data)
-Plot_AllData <- plot + geom_point() + 
-  xlab("Longueur (mm)") + ylab("Position trophique") + 
+Plot_AllData <- plot + geom_point() +
+  xlab("Longueur (mm)") + ylab("Position trophique") +
   labs(title = "Toutes les données") + fig
 
 Plot_AllData + geom_abline(intercept = -.0009059, slope = 0.4222697)
@@ -1153,12 +1161,12 @@ colnames(Lake.coef) <- c("Intercept", "Slope")
 Species.coef <- as.data.frame(coef(M8)$Fish_Species)
 colnames(Species.coef) <- c("Intercept", "Slope")
 
-Plot_BySpecies<-plot + geom_point(aes(colour = factor(Fish_Species)), size = 4) + 
-  xlab("Longueur (mm)") + ylab("Position trophique") + 
+Plot_BySpecies<-plot + geom_point(aes(colour = factor(Fish_Species)), size = 4) +
+  xlab("Longueur (mm)") + ylab("Position trophique") +
   labs(title = "Par espèce") + fig
 
 # Ajoutez les lignes de régression pour chaque espèce
-Plot_BySpecies + 
+Plot_BySpecies +
   geom_abline(intercept = Species.coef[1,1], slope = Species.coef[1,2], col = "coral2") +
   geom_abline(intercept = Species.coef[2,1], slope = Species.coef[2,2], col = "green4") +
   geom_abline(intercept = Species.coef[3,1], slope = Species.coef[3,2], col = "blue1")
@@ -1177,12 +1185,12 @@ colnames(Lake.coef) <- c("Intercept", "Slope")
 Species.coef <- as.data.frame(coef(M8)$Fish_Species)
 colnames(Species.coef) <- c("Intercept", "Slope")
 
-Plot_BySpecies<-plot + geom_point(aes(colour = factor(Fish_Species)), size = 4) + 
-  xlab("Longueur (mm)") + ylab("Position trophique") + 
+Plot_BySpecies<-plot + geom_point(aes(colour = factor(Fish_Species)), size = 4) +
+  xlab("Longueur (mm)") + ylab("Position trophique") +
   labs(title = "Par espèce") + fig
 
 # Ajoutez les lignes de régression pour chaque espèce
-Plot_BySpecies + 
+Plot_BySpecies +
   geom_abline(intercept = Species.coef[1,1], slope = Species.coef[1,2], col = "coral2") +
   geom_abline(intercept = Species.coef[2,1], slope = Species.coef[2,2], col = "green4") +
   geom_abline(intercept = Species.coef[3,1], slope = Species.coef[3,2], col = "blue1")
@@ -1194,14 +1202,14 @@ Plot_BySpecies +
 
 c) Figure par lac
 ```{r, eval=F}
-Plot_ByLake<-plot + geom_point(aes(colour = factor(Lake)), size = 4) + 
-  xlab("Length (mm)") + ylab("Trophic Position") + 
+Plot_ByLake<-plot + geom_point(aes(colour = factor(Lake)), size = 4) +
+  xlab("Length (mm)") + ylab("Trophic Position") +
   labs(title = "By Lake") + fig
 
 # Ajouter les lignes de régression avec les intercepts spécifiques à chaque lac
-Plot_ByLake + 
+Plot_ByLake +
   geom_abline(intercept = Lake.coef[1,1], slope = Lake.coef[1,2], col = "coral2") +
-  geom_abline(intercept = Lake.coef[2,1], slope = Lake.coef[2,2], col = "khaki4") + 
+  geom_abline(intercept = Lake.coef[2,1], slope = Lake.coef[2,2], col = "khaki4") +
   geom_abline(intercept = Lake.coef[3,1], slope = Lake.coef[3,2], col = "green4") +
   geom_abline(intercept = Lake.coef[4,1], slope = Lake.coef[4,2], col = "darkgoldenrod") +
   geom_abline(intercept = Lake.coef[5,1], slope = Lake.coef[5,2], col = "royalblue1") +
@@ -1214,14 +1222,14 @@ Plot_ByLake +
 
 c) Figure par lac
 ```{r, echo = F, fig.width=8}
-Plot_ByLake<-plot + geom_point(aes(colour = factor(Lake)), size = 4) + 
-  xlab("Longueur (mm)") + ylab("Position trophique") + 
+Plot_ByLake<-plot + geom_point(aes(colour = factor(Lake)), size = 4) +
+  xlab("Longueur (mm)") + ylab("Position trophique") +
   labs(title = "par lac") + fig
 
 # Ajouter les lignes de régression avec les intercepts spécifiques à chaque lac
-Plot_ByLake + 
+Plot_ByLake +
   geom_abline(intercept = Lake.coef[1,1], slope = Lake.coef[1,2], col = "coral2") +
-  geom_abline(intercept = Lake.coef[2,1], slope = Lake.coef[2,2], col="khaki4") + 
+  geom_abline(intercept = Lake.coef[2,1], slope = Lake.coef[2,2], col="khaki4") +
   geom_abline(intercept = Lake.coef[3,1], slope = Lake.coef[3,2], col="green4") +
   geom_abline(intercept = Lake.coef[4,1], slope = Lake.coef[4,2], col="darkgoldenrod") +
   geom_abline(intercept = Lake.coef[5,1], slope = Lake.coef[5,2], col="royalblue1") +
@@ -1243,7 +1251,7 @@ Les modèles mixtes sont très utiles pour prendre en compte la structure comple
 
 
 ---
-## Défi 8 ![:cube]()
+## Défi 9 ![:cube]()
 
 <br>
 
@@ -1263,14 +1271,14 @@ Les modèles mixtes sont très utiles pour prendre en compte la structure comple
 <br>
 
 ```{r, eval = F}
-lmer(Bio_Div ~ Prodcutivite + (1 | Foret / Site))
+lmer(Biodiv ~ Productivite + (1 | Foret / Site))
 ```
 
 Ici les effets aléatoires sont nichés (i.e. Sites dans forêt) et non croisés
 
 
 ---
-## Défi 9![:cube]()
+## Défi 10![:cube]()
 
 <br>
 
@@ -1292,12 +1300,12 @@ Ici les effets aléatoires sont nichés (i.e. Sites dans forêt) et non croisés
 
 
 ```{r, eval = F}
-lmer(Mercury ~ Length * Habitat_Type + (1 | Site))
+lmer(Mercure ~ Longueur * Habitat + (1 | Site))
 ```
 
 
 ---
-## Défi!![:cube]()
+## Défi 11!![:cube]()
 
 * Discutez du jeu de données sur lequel vous travaillez avec votre voisin et déterminez si un modèle mixte serait approprié.
 
