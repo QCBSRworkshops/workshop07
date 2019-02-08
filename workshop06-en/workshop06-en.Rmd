@@ -696,15 +696,15 @@ lmer(Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species),
 ## Solution ![:cube]()
 
 
-* Nous allons aussi construire le **modèle linéaire de base** `lm()` parce qu'il est toujours utile de voir la variation dans les valeurs de AICc.
+* We will also build the **basic linear model** `lm()` because it is always useful to see the variation in the AICc values.
 
 ```{r}
 M0 <- lm(Z_TP ~ Z_Length, data = data)
 ```
 
-* Par contre, pour comparer ce modèle aux MLMs, il est important de .alert[changer la méthode d'estimation à ML (REML=F)] parce que `lm()` n'utilise pas la même méthode d'estimation que `lmer()`
-  - Démontrer que les résultats de la méthode des moindres carrés (least squares) est équivalente aux résultats de la méthode ML pour les modèles linéaires de bases!
-
+* However, to compare this model to the MLMs, it is important to .alert[change the estimation method to ML (REML = F)] because `lm()` does not use the same estimation method as `lm ()`
+  - Demonstrate that the results of the least squares method is equivalent to the results of the ML method for basic linear models!
+  
 ---
 ## Solution
 
@@ -902,7 +902,7 @@ plot(resid(M8) ~ fitted(M8), xlab = 'Predicted values', ylab = 'Normalized resid
 abline(h = 0, lty = 2)
 ```
 
-Homogeneous dispersion of the residuals ![:Faic](arrow-right) the assumption is respected!
+Homogeneous dispersion of the residuals ![:faic](arrow-right) the assumption is respected!
 
 ---
 ## Model validation
