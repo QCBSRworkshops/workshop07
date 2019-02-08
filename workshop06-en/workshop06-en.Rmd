@@ -96,7 +96,7 @@ Throughout this workshop, there will be a serie of **challenges** that you can r
 
 * Open the workshop script in R
 
-* Reproduce the plots 1 to 3 from the script. Observe the plots and try to get a sense of what you see. 
+* Reproduce the plots 1 to 3 from the script. Observe the plots and try to get a sense of what you see.
 
 ---
 ## Solution ![:cube]()
@@ -146,15 +146,15 @@ plot + geom_point() + facet_wrap(~ Lake) + xlab("Length (mm)") + ylab("Trophic P
 
 **Group discussion**
 
-* Do you expect all species to increase in trophic position with length? 
-  
+* Do you expect all species to increase in trophic position with length?
+
   * In the exact same way?
-  
+
 <br>
 
 --
 
-*Do you expect these relationships to be the same across lakes? 
+*Do you expect these relationships to be the same across lakes?
 
   * What might differ?
 
@@ -386,7 +386,7 @@ How will the ICC and the confidence intervals be affected in these two scenarios
 <br>
 
 <img style="float: right; width:40%;margin: 1%" src="images/lego.jpg">
-**Step 1:** *A priori* model building and data exploration
+.comment[**Step 1: *A priori* model building and data exploration**]
 <br>
 
 **Step 2:** Code potential models and model selection
@@ -405,7 +405,7 @@ How will the ICC and the confidence intervals be affected in these two scenarios
 ---
 ## How to implement an LMM in R?
 
-**Step 1:** *A priori* model building and data exploration
+.comment[**Step 1: *A priori* model building and data exploration**]
 
 * What we know *a priori*:
 
@@ -590,7 +590,7 @@ abline(0, 0, lty = 2)
 **Step 1:** *A priori* model building and data exploration
 <br>
 
-**Step 2: Code potential models and model selection**
+.comment[**Step 2: Code potential models and model selection**]
 
 <br>
 
@@ -605,7 +605,7 @@ abline(0, 0, lty = 2)
 ---
 ## How to implement an LMM in R?
 
-**Step 2:** Code potential models and model selection
+.comment[**Step 2: Code potential models and model selection**]
 
 * Translate this model...
 
@@ -704,7 +704,7 @@ M0 <- lm(Z_TP ~ Z_Length, data = data)
 
 * However, to compare this model to the MLMs, it is important to .alert[change the estimation method to ML (REML = F)] because `lm()` does not use the same estimation method as `lm ()`
   - Demonstrate that the results of the least squares method is equivalent to the results of the ML method for basic linear models!
-  
+
 ---
 ## Solution
 
@@ -818,7 +818,7 @@ M2 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 + Z_Length | Lak
 
 Take 2 minutes with your neighbour to draw out the model structure of M2.
 
-Biologically, how does it differ from M8? 
+Biologically, how does it differ from M8?
 
 Why is it not surprising that it's AICc value was 2nd best?
 
@@ -862,7 +862,7 @@ M2 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 + Z_Length | Lak
 
 <br>
 
-**Step 3: Model validation**
+.comment[**Step 3: Model validation**]
 
 <br>
 
@@ -875,7 +875,7 @@ M2 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 + Z_Length | Lak
 ---
 ## How to implement an LMM in R?
 
-**Step 3: Model validation**
+.comment[**Step 3: Model validation**]
 
 You must verify that the model follows all the basic assumptions:
 
@@ -992,13 +992,13 @@ hist(resid(M8))
 
 <br>
 
-**Step 4: Model interpretation and visualization**
+.comment[**Step 4: Model interpretation and visualization**]
 
 
 ---
 ## How to implement an LMM in R?
 
-**Step 4: Model interpretation and visualization**
+.comment[**Step 4: Model interpretation and visualization**]
 
 ```{r}
 (summ_M8 <- summary(M8))
@@ -1008,7 +1008,7 @@ hist(resid(M8))
 ---
 ## How to implement an LMM in R?
 
-**Step 4: Model interpretation and visualization**
+.comment[**Step 4: Model interpretation and visualization**]
 
 .center[
 ![](images/fig_30_w5.png)
@@ -1308,4 +1308,4 @@ class: inverse, center, bottom
 
 # Thank you for attending this workshop!
 
-![:scale 50%](images/QCBS_logo.png)
+![:scale 50%](images/qcbs_logo.png)

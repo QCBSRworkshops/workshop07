@@ -45,10 +45,10 @@ library(AICcmodavg)
 1. Qu'est-ce qu'un modèle linéaire à effets mixtes (MLM) et pourquoi est-ce important?
 
 2. Comment appliquer, vérifier les suppositions, comparer et présenter les résultats des MLMs dans R?
-    - Construction et exploration a priori des modèles et données
-    - Codage et sélection des modèles potentiels
-    - Validation des modèles
-    - Interprétation des résultats et visualisation du modèle
+    - Construction du modèle *a priori* et exploration des données
+    - Coder les modèles potentiels et sélection du meilleur modèle
+    - Validation du modèle
+    - Interprétation et visualisation des résultats
 
 ---
 ## 1. Pourquoi choisir un MLM?
@@ -395,19 +395,19 @@ Comment le CIC et l'intervalle de confiance seront affectés dans ces deux scén
 
 
 <img style="float: right; width:40%;margin: 1%" src="images/lego.jpg">
-**Étape 1:** Construction du modèle *a priori* et exploration des données
+.comment[**Étape 1: Construction du modèle *a priori* et exploration des données**]
 
 <br>
 
-**Étape 2:** Coder les modèles potentiels et sélectionner le meilleur modèle
+**Étape 2:** Coder les modèles potentiels et sélection du meilleur modèle
 
 <br>
 
-**Étape 3:** Valider le modèle
+**Étape 3:** Validation du modèle
 
 <br>
 
-**Étape 4:** Interpréter les résultats et visualiser le modèle
+**Étape 4:** Interprétation et visualisation des résultats
 
 
 
@@ -416,7 +416,7 @@ Comment le CIC et l'intervalle de confiance seront affectés dans ces deux scén
 
 ## Comment implémenter un MLM dans R ?
 
-**Étape 1:** Construction du modèle *a priori* et exploration des données
+.comment[**Étape 1: Construction du modèle *a priori* et exploration des données**]
 
 * Modèle basé sur connaissance *a priori*:
 
@@ -605,21 +605,21 @@ abline(0, 0, lty = 2)
 
 <br>
 
-**Étape 2: Coder les modèles potentiels et sélectionner le meilleur modèle**
+.comment[**Étape 2: Coder les modèles potentiels et sélection du meilleur modèle**]
 
 <br>
 
-Étape 3: Valider le modèle
+Étape 3: Validation du modèle
 
 <br>
 
-Étape 4: Interpréter les résultats et visualiser le modèle
+Étape 4: Interprétation et visualisation des résultats
 
 
 ---
 ## Comment implémenter un MLM dans R ?
 
-**Étape 2:** Coder les modèles potentiels et sélectionner le meilleur modèle
+.comment[**Étape 2: Coder les modèles potentiels et sélection du meilleur modèle**]
 
 * Traduison notre modèle...
 
@@ -874,22 +874,22 @@ M2 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 + Z_Length | Lak
 
 <br>
 
-Étape 2: Coder les modèles potentiels et sélectionner le meilleur modèle
+Étape 2: Coder les modèles potentiels et sélection du meilleur modèle
 
 <br>
 
-**Étape 3: Valider le modèle**
+.comment[**Étape 3: Validation du modèle**]
 
 <br>
 
-Étape 4: Interpréter les résultats et visualiser le modèle
+Étape 4: Interprétation et visualisation des résultats
 
 
 
 ---
 ## Comment implémenter un MLM dans R?
 
-**Étape 3: Valider le modèle**
+.comment[**Étape 3: Validation du modèle**]
 
 Vous devez vérifier que le modèle respecte toutes les suppositions de base:
 
@@ -906,7 +906,7 @@ Vous devez vérifier que le modèle respecte toutes les suppositions de base:
 
 
 ---
-## Valider le modèle
+## Validation du modèle
 
 1- Vérifier l'homogénéité de la variance
 
@@ -919,7 +919,7 @@ abline(h = 0, lty = 2)
 Étendue homogène des résidus ![:faic](arrow-right) la supposition est respectée!
 
 ---
-## Valider le modèle
+## Validation du modèle
 
 1- Vérifier l'homogénéité de la variance
 
@@ -928,7 +928,7 @@ abline(h = 0, lty = 2)
 ]
 
 ---
-## Valider le modèle
+## Validation du modèle
 
 2- Vérifier l'indépendance des résidus avec chaque covariable
 
@@ -946,7 +946,7 @@ abline(h = 0, lty = 2)
 ```
 
 ---
-## Valider le modèle
+## Validation du modèle
 
 2- Vérifier l'indépendance des résidus avec chaque covariable
 
@@ -966,7 +966,7 @@ abline(h = 0, lty = 2)
 .comment[Note: Les regroupements de données sont dus à la structure des données, où des poissons de seulement 5 classes de taille  (grand, petit, et trois groupes entre les deux) étaient capturés.]
 
 ---
-## Valider le modèle
+## Validation du modèle
 
 2- Vérifier l'indépendance des résidus avec chaque covariable
 
@@ -977,7 +977,7 @@ abline(h = 0, lty = 2)
   - Puisque dans notre cas, nous avons inclus toutes les variables mesurées dans notre modèle, nous ne pouvons pas faire cette étape.
 
 ---
-## Valider le modèle
+## Validation du modèle
 
 3- Vérifier la normalité des résidus
 
@@ -998,22 +998,22 @@ hist(resid(M8))
 
 <br>
 
-Étape 2: Coder les modèles potentiels et sélectionner le meilleur modèle
+Étape 2: Coder les modèles potentiels et sélection du meilleur modèle
 
 <br>
 
-Étape 3: Valider le modèle
+Étape 3: Validation du modèle
 
 <br>
 
-**Étape 4: Interpréter les résultats et visualiser le modèle**
+.comment[**Étape 4: Interprétation et visualisation des résultats**]
 
 
 
 ---
 ## Comment implémenter un MLM dans R ?
 
-**Étape 4: Interpréter les résultats et visualiser le modèle**
+.comment[**Étape 4: Interprétation et visualisation des résultats**]
 
 ```{r}
 (summ_M8 <- summary(M8))
@@ -1023,7 +1023,7 @@ hist(resid(M8))
 ---
 ## Comment implémenter un MLM dans R ?
 
-**Étape 4: Interpréter les résultats et visualiser le modèle**
+.comment[**Étape 4: Interprétation et visualisation des résultats**]
 
 .center[
 ![](images/fig_30_w5.png)
@@ -1326,6 +1326,6 @@ lmer(Mercure ~ Longueur * Habitat + (1 | Site))
 ---
 class: inverse, center, bottom
 
-# Thank you for attending this workshop!
+# Merci de votre participation à cet atelier!
 
-![:scale 50%](images/QCBS_logo.png)
+![:scale 50%](images/qcbs_logo.png)
