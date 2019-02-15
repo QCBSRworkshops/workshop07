@@ -662,6 +662,7 @@ lmer(Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species),
 ---
 ## Solution ![:cube]()
 
+<br>
 
 ```{r}
 lmer(Z_TP ~ Z_Length + (1 + Z_Length | Lake) + (1 + Z_Length | Fish_Species),
@@ -1101,20 +1102,22 @@ a) Figure with all data grouped
 library(ggplot2)
 
 # Create a simplified ggplot theme
-fig <- theme_bw() +
-  theme(panel.grid.minor=element_blank(), panel.grid.major=element_blank(),
+fig <- theme_bw() + 
+  theme(panel.grid.minor=element_blank(), 
+        panel.grid.major=element_blank(),
         panel.background=element_blank()) +
-  theme(strip.background=element_blank(), strip.text.y = element_text()) +
+  theme(strip.background=element_blank(), 
+        strip.text.y = element_text()) + 
   theme(legend.background=element_blank()) +
-  theme(legend.key=element_blank()) +
-  theme(panel.border = element_rect(col = "black", fill=NA))
+  theme(legend.key=element_blank()) + 
+  theme(panel.border = element_rect(colour="black", fill=NA))
 
 plot <- ggplot(aes(Z_Length, Z_TP), data = data)
 Plot_AllData <- plot + geom_point() +
   xlab("Length (mm)") + ylab("Trophic position") +
   labs(title = "All data") + fig
 
-Plot_AllData + geom_abline(intercept = -.0009059, slope = 0.4222697)
+Plot_AllData + geom_abline(intercept = -0.0009059, slope = 0.4222697)
 ```
 
 ---
@@ -1127,7 +1130,7 @@ Plot_AllData <- plot + geom_point() +
   xlab("Length (mm)") + ylab("Trophic position") +
   labs(title = "All data") + fig
 
-Plot_AllData + geom_abline(intercept = -.0009059, slope = 0.4222697)
+Plot_AllData + geom_abline(intercept = -0.0009059, slope = 0.4222697)
 ```
 
 ---

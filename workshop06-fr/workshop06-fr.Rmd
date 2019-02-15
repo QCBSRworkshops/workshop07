@@ -322,7 +322,7 @@ Comme pour les intercepts, seuls la moyenne et l’écart-type des pentes sont e
 
 Si une certaine espèce ou un lac est peu représenté (faible *n*) dans les données, le modèle va accorder plus d'importance au modèle groupé pour estimer l'intercept et la pente de cette espèce ou de ce lac.
 
-.center[![: scale 50%](images/fig_12_w5.png) ]
+.center[![:scale 50%](images/fig_12_w5.png) ]
 
 ---
 ## Tenir compte de la structure des données
@@ -676,6 +676,7 @@ lmer(Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species),
 ---
 ## Solution ![:cube]()
 
+<br>
 
 ```{r}
 lmer(Z_TP ~ Z_Length + (1 + Z_Length | Lake) + (1 + Z_Length | Fish_Species),
@@ -1126,7 +1127,7 @@ fig <- theme_bw() +
   theme(strip.background=element_blank(), strip.text.y = element_text()) +
   theme(legend.background=element_blank()) +
   theme(legend.key=element_blank()) +
-  theme(panel.border = element_rect(col = "black", fill=NA))
+  theme(panel.border = element_rect(colour = "black", fill=NA))
 
 plot <- ggplot(aes(Z_Length, Z_TP), data = data)
 Plot_AllData <- plot + geom_point() +
