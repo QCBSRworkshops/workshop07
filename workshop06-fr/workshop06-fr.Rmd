@@ -109,7 +109,7 @@ essayez d'obtenir une idée de ce qui se passe
 <br>
 
 ```{r, echo=F}
-data <- read.csv('qcbs_w6_data.csv')
+data <- read.csv('data/qcbs_w6_data.csv')
 
 # thème simplifié
 fig <- theme_bw() + theme(panel.grid.minor=element_blank(), panel.grid.major=element_blank(), panel.background=element_blank()) +
@@ -434,7 +434,7 @@ $$PT_{ijk} ~ Longueur_i + Lac_j + Espèce_k + \epsilon$$
 Les données ont-elles la bonne structure?
 
 ```{r}
-data <- read.csv('qcbs_w6_data.csv')
+data <- read.csv('data/qcbs_w6_data.csv')
 str(data)
 ```
 

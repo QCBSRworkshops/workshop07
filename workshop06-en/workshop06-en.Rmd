@@ -104,7 +104,7 @@ Throughout this workshop, there will be a serie of **challenges** that you can r
 <br>
 
 ```{r, echo=F}
-data <- read.csv('qcbs_w6_data.csv')
+data <- read.csv('data/qcbs_w6_data.csv')
 
 # simple theme
 fig <- theme_bw() + theme(panel.grid.minor=element_blank(), panel.grid.major=element_blank(), panel.background=element_blank()) +
@@ -423,7 +423,7 @@ $$PT_{ijk} ~ Lenght_i + Lake_j + Species_k + \epsilon$$
 Does the data have the right structure?
 
 ```{r}
-data <- read.csv('qcbs_w6_data.csv')
+data <- read.csv('data/qcbs_w6_data.csv')
 str(data)
 ```
 
@@ -1102,14 +1102,14 @@ a) Figure with all data grouped
 library(ggplot2)
 
 # Create a simplified ggplot theme
-fig <- theme_bw() + 
-  theme(panel.grid.minor=element_blank(), 
+fig <- theme_bw() +
+  theme(panel.grid.minor=element_blank(),
         panel.grid.major=element_blank(),
         panel.background=element_blank()) +
-  theme(strip.background=element_blank(), 
-        strip.text.y = element_text()) + 
+  theme(strip.background=element_blank(),
+        strip.text.y = element_text()) +
   theme(legend.background=element_blank()) +
-  theme(legend.key=element_blank()) + 
+  theme(legend.key=element_blank()) +
   theme(panel.border = element_rect(colour="black", fill=NA))
 
 plot <- ggplot(aes(Z_Length, Z_TP), data = data)
