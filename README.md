@@ -10,10 +10,10 @@ Cette série de 10 ateliers guide les participants à travers les étapes requis
 
 Le contenu de cet atelier a été révisé par plusieurs membres du CSBQ. Si vous souhaitez y apporter des modifications, veuillez SVP contacter les coordonnateurs actuels de la série, listés [ici](https://wiki.qcbs.ca/r).
 
-# Workshop 1: Introduction to R
+# Workshop 6: Linear mixed effects models
 
-In this introductory R Workshop you will learn what R open-source statistical software is, why you should absolutely start using it, and all the first steps to help you get started in R. We will show you how R can act as a calculator, teach you about the various types of objects in R, show you how to use functions and load packages, and find all the resources you need to get help. If any of this sounds obscure, don’t worry! By the end of this workshop you’ll know what all these words mean!
+Mixed effects models allow ecologists to overcome a number of limitations associated with traditional linear models. In this workshop, you will learn when it is important to use a mixed effects model to analyze your data. We will walk you through the steps to conduct a linear mixed model analysis, check its assumptions, report results, and visually represent your model in R.
 
-# Atelier 1: Introduction à R
+# Atelier 6: Modèles linéaires à effets mixtes
 
-Dans cet atelier d’introduction à R, vous apprendrez ce qu’est le logiciel d’analyse statistique R, vous verrez plusieurs raisons pourquoi vous devriez absolument l’utiliser (!), et vous ferez vos premiers pas dans ce logiciel. Vous verrez comment R peut être utilisé comme une calculatrice, vous apprendrez ce qu’est un « objet » dans R, et vous utiliserez des fonctions simples. De plus, vous apprendrez comment télécharger de nouvelles fonctions et comment trouver des ressources d’aide pour utiliser R. Si tout ceci vous semble étrange, ne vous inquiétez pas! À la fin de cet atelier, vous comprendrez tous ces concepts.
+Les modèles à effets mixtes permettent aux écologistes de surmonter un certain nombre de limitations liées aux modèles linéaires traditionnels. Dans cet atelier, vous apprendrez à déterminer si vous devez utiliser un modèle à effets mixtes pour analyser vos données. Nous allons vous guider à travers les étapes nécessaires pour utiliser un modèle linéaire mixte, vérifier les suppositions de base et présenter les résultats de votre modèle dans R. 
