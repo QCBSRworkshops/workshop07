@@ -12,8 +12,30 @@ Le contenu de cet atelier a été révisé par plusieurs membres du CSBQ. Si vou
 
 # Workshop 6: Linear mixed effects models
 
+[![Build Status](https://travis-ci.org/QCBSRworkshops/workshop06.svg?branch=dev)](https://travis-ci.org/QCBSRworkshops/workshop06)
+
 Mixed effects models allow ecologists to overcome a number of limitations associated with traditional linear models. In this workshop, you will learn when it is important to use a mixed effects model to analyze your data. We will walk you through the steps to conduct a linear mixed model analysis, check its assumptions, report results, and visually represent your model in R.
 
 # Atelier 6: Modèles linéaires à effets mixtes
 
-Les modèles à effets mixtes permettent aux écologistes de surmonter un certain nombre de limitations liées aux modèles linéaires traditionnels. Dans cet atelier, vous apprendrez à déterminer si vous devez utiliser un modèle à effets mixtes pour analyser vos données. Nous allons vous guider à travers les étapes nécessaires pour utiliser un modèle linéaire mixte, vérifier les suppositions de base et présenter les résultats de votre modèle dans R. 
+[![Build Status](https://travis-ci.org/QCBSRworkshops/workshop06.svg?branch=dev)](https://travis-ci.org/QCBSRworkshops/workshop06)
+
+Les modèles à effets mixtes permettent aux écologistes de surmonter un certain nombre de limitations liées aux modèles linéaires traditionnels. Dans cet atelier, vous apprendrez à déterminer si vous devez utiliser un modèle à effets mixtes pour analyser vos données. Nous allons vous guider à travers les étapes nécessaires pour utiliser un modèle linéaire mixte, vérifier les suppositions de base et présenter les résultats de votre modèle dans R.
+
+# Links
+
+#### [English](https://qcbsrworkshops.github.io/workshop06/workshop06-en/workshop06-en.html)
+
+#### [Français](https://qcbsrworkshops.github.io/workshop06/workshop06-fr/workshop06-fr.html)
+
+# Developers
+
+1. Set the working directory set to this folder.
+2. then use:
+
+``` r
+install.packages("remotes")
+remotes::install_github("QCBSRworkshops/qcbsRworkshops")
+library("qcbsRworkshops")
+build_workshops()
+```
