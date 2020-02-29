@@ -1,14 +1,14 @@
 Package: placeholder
 Type: Tutorial
 Title: Workshop 06
-Version: 0.0.1
+Version: 0.0.2
 Authors@R: c(
   person("Team", "QCBS", role = c("aut", "cre"), email = "kevin.cazelles@gmail.com")
   )
 Imports:
+  AICcmodavg,
   tidyverse,
   lme4,
-  AICcmodavg,
   qcbsRworkshops,
   xaringan
 Remotes:
