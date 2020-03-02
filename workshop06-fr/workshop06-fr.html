@@ -31,76 +31,118 @@ class: center, middle, inverse, title-slide
 # Objectifs
 &lt;br&gt;
 
-1. Comprendre ce que sont les effets mixtes et ce que sont les modèles linéaires à 
-effets mixtes (MLMs) 
+1. Comprendre ce que sont les effets mixtes et ce que sont les modèles linéaires à
+effets mixtes (MLMs)
 
-2. Comprendre leur pertinence pour les sciences de la biodiversté
+2. Comprendre leur pertinence notamment pour les sciences de la biodiversté
 
 3. Apprendre à utiliser les MLMs dans R
     - Exploration des données
-    - Construction du modèle *a priori* 
-    - Coder les modèles potentiels 
+    - Construction du modèle *a priori*
+    - Coder les modèles potentiels
     - Sélection du meilleur modèle
     - Validation du modèle
     - Interprétation et visualisation des résultats
 
 
-&lt;!-- Les données écologiques et biologiques peuvent être complexes et désordonnées! --&gt;
-&lt;!-- * Structure particulière dans les données --&gt;
-&lt;!-- * Plusieurs covariables (facteurs de regroupement) --&gt;
-&lt;!-- * Faible taille d'échantillons --&gt;
-
 ---
 # Question
-
-Introduction au jeu de données
-
-.center[ ![:scale 75%](images/fig_1_qcbs_wiki.png) ]
 
 .alert[** Est-ce que la position trophique des poissons augmente avec leur taille?**
 ]
 
+Pour répondre, 3 espèces ont été sélectionnées et dix individus par espèce ont été mesurés (longueur corporelle) dans six lacs différents
 
+.center[ ![:scale 75%](images/fig_1_qcbs_wiki.png) ]
 
----
-# Défi 1 ![:cube]()
-
-* Introduction au jeu de données
-
-* Ouvrez le script de l'atelier dans R
-
-* Faites les graphiques 1 à 3,
-regardez les graphiques et
-essayez d'obtenir une idée de ce qui se passe
 
 
 
 ---
-# Solution ![:cube]()
+# Familiarisez vous avec le jeu de données
+&lt;br&gt;
+
+1. Ouvrez le jeu de données
+
+2. Ouvrez le script de l'atelier dans R
+
+3. Visualisez la relation entre taille et position trophique
+
+--
 
 &lt;br&gt;
 
-&lt;img src="workshop06-fr_files/figure-html/unnamed-chunk-3-1.png" width="432" style="display: block; margin: auto;" /&gt;
 
+```r
+data &lt;- read.csv('data/qcbs_w6_data.csv')
+head(data)
+#   Lake Fish_Species Fish_Length Trophic_Pos
+# 1   L1           S1    105.1501    2.602388
+# 2   L1           S1    194.5708    2.703522
+# 3   L1           S1    294.3636    2.742878
+# 4   L1           S1    413.5295    2.737743
+# 5   L1           S1    237.4739    2.785936
+# 6   L1           S1    107.9315    2.723862
+```
 
 
 ---
-# Solution ![:cube]()
+# Visualisation avec toutes les données
 
 &lt;br&gt;
 
 &lt;img src="workshop06-fr_files/figure-html/unnamed-chunk-4-1.png" width="432" style="display: block; margin: auto;" /&gt;
 
 ---
-# Solution ![:cube]()
+# Visualisation de l'ensemble des données
 
 &lt;br&gt;
 
-&lt;img src="workshop06-fr_files/figure-html/unnamed-chunk-5-1.png" width="432" style="display: block; margin: auto;" /&gt;
+
+```r
+# thème simplifié
+fig &lt;- theme_bw() + theme(panel.grid.minor=element_blank(),
+    panel.grid.major=element_blank(), panel.background=element_blank()) +
+    theme(strip.background=element_blank(), strip.text.y = element_text()) +
+    theme(legend.background=element_blank()) +
+    theme(legend.key=element_blank()) +
+    theme(panel.border = element_rect(colour="black", fill=NA))
+
+# Faites les trois graphiques suivants pour explorer les données
+plot &lt;- ggplot(aes(Fish_Length,Trophic_Pos),data=data)
+
+# Graphique 1 - Toutes les données
+plot + geom_point() + xlab("Length (mm)") + ylab("Trophic Position") + labs(title="All Data") + fig
+```
 
 
 ---
-# 1. Pourquoi choisir un MLM?
+# Visualisation par espèce
+
+
+```r
+# Graphique 2 - Par espèce
+plot + geom_point() + facet_wrap(~ Fish_Species) + xlab("Length (mm)") + ylab("Trophic Position") +
+   labs(title="By Species") + fig
+```
+
+&lt;img src="workshop06-fr_files/figure-html/unnamed-chunk-6-1.png" width="432" style="display: block; margin: auto;" /&gt;
+
+---
+# Visualisation par Lake
+
+
+```r
+# Graphique 3 – Par lac
+plot + geom_point() + facet_wrap(~ Lake) + xlab("Length (mm)") + ylab("Trophic Position") +
+   labs(title="By Lake") + fig
+```
+
+&lt;img src="workshop06-fr_files/figure-html/unnamed-chunk-7-1.png" width="432" style="display: block; margin: auto;" /&gt;
+
+
+---
+# Pourquoi choisir un MLM?
 
 **Discussion de groupe**
 
@@ -117,26 +159,29 @@ essayez d'obtenir une idée de ce qui se passe
     * Comment pourraient-elles différer?
 
 ---
-# 1. Pourquoi choisir un MLM?
-
-Comment pourrions-nous analyser ces données?
+# Pourquoi choisir un MLM?
 
 &lt;br&gt;
 
-Nous pourrions:
+.large[**Comment pourrions-nous analyser ces données?**]
+
+--
 
 &lt;br&gt;
 
 **Option 1. Séparer**:
 
-- Faire une analyse separée pour chaque espèces et chaque lac
+- Faire une analyse séparée pour chaque espèces et chaque lac
+
+&lt;br&gt;
 
 **Option 2. Regrouper**:
 
 - Faire une seule analyse en ignorant les variables espèces et lac
 
+
 ---
-# 1. Pourquoi choisir un MLM?
+# Pourquoi choisir un MLM?
 
 .pull-left[![](images/fig_5_w5.png) ]
 
@@ -146,11 +191,11 @@ Nous pourrions:
 
 * Taille d'échantillon *n* = 10 pour chaque analyse (i.e. 10 poissons/espèces/lac)
 
-* Peu de chances de détecter un effet a cause de la faible taille d'échantillion *n*
+* Peu de chances de détecter un effet a cause de la faible taille d’échantillon *n*
 ]
 
 ---
-# 1. Pourquoi choisir un MLM?
+# Pourquoi choisir un MLM?
 
 .pull-left[![](images/fig_6_w5.png)]
 
@@ -164,119 +209,114 @@ Nous pourrions:
 ]
 
 ---
-# 1. Pourquoi choisir un MLM?
+# Pourquoi choisir un MLM?
 
 
-* Pour notre question, on veut seulement savoir s'il y a un .alert[effet général de la longueur corporelle sur la position trophique]
+* Pour **notre question**, on veut seulement savoir s'il y a un **effet général de la longueur corporelle sur la position trophique**,
 
-* Ceci pourrait varier faiblement par espèce à cause de différents taux de croissance et/ou par lac à cause de différences dans la disponibilité de nourriture. On ne s'intéresse pas directement à ces facteurs non mesurés, mais on doit contrôler leur effet dans le modèle
+* Ceci pourrait varier faiblement par espèce à cause de différents taux de croissance et/ou par lac à cause de différences dans la disponibilité de nourriture. **On ne s'intéresse pas directement à ces facteurs non mesurés, mais on doit contrôler leur effet dans le modèle**.
 
+--
 
----
-# 1. Pourquoi choisir un MLM?
+&lt;br&gt;
 
-Les MLMs sont un compromis entre séparer et regrouper. Ils:
+Les MLMs sont un **compromis entre séparer et regrouper**. Ils:
 
+1. Prendre entre compte de la variabilité spécifique pour chaque espèce et chaque lac (séparer) mais en calculant moins de paramètres;
 
-1. Estiment une pente et un intercept pour chaque espèce et chaque lac (séparer) mais en calculant moins de paramètres qu'une regression classique
-
-2. Utilisent toutes les données disponibles (regrouper) tout en contrôlant les différences entre les lacs et les espèces (pseudo-replication)
-
----
-# 1. Pourquoi choisir un MLM?
-
-**Effet fixe VS aléatoire**
-
-Dans la littérature des MLMs, vous rencontrerez ces termes souvent.
-
-Il existe plusieurs définitions possibles des effets fixes et aléatoires et nous vous présenterons aujourd'hui celles que nous trouvons plus faciles a appliquer
+2. Utilisent toutes les données disponibles (regrouper) tout en contrôlant les différences entre les lacs et les espèces (pseudo-replication).
 
 ---
-# 1. Pourquoi choisir un MLM?
+# Pourquoi choisir un MLM?
+
+**Effet fixe VS effet aléatoire**
+
+Dans la littérature des MLMs, vous rencontrerez souvent ces termes souvent. Il existe plusieurs façon de les présenter et nous vous présenterons ici celles que nous trouvons les plus faciles à appliquer.
+
+--
 
 ### Effet fixe
 
-* Les données proviennent de tous les niveaux possibles d'un facteur (variable qualitative)
+* Les données proviennent de tous les niveaux possibles d'un facteur (variable qualitative),
 
-* On souhaite émettre des conclusions à propos des niveaux du facteur d'où les données proviennent
+* On souhaite émettre des conclusions à propos des niveaux du facteur d'où les données proviennent.
 
 ---
-# 1. Pourquoi choisir un MLM?
+# Pourquoi choisir un MLM?
 
 ### Effet aléatoire
 
-* Seulement des variables qualitatives = facteur aléatoire
+* Seulement des variables qualitatives = facteur aléatoire;
 
 * Les données incluent seulement un échantillon aléatoire de tous les niveaux possibles du facteur, qui sont tous d'intérêt
 
-* Souvent des facteurs groupants
+* Permet de structurer le processus d'erreur.
 
 ---
-# 1. Pourquoi choisir un MLM?
+# Pourquoi choisir un MLM?
+&lt;br&gt;
 
-**Comment fonctionnent les MLMs?**
+#### Comment fonctionnent les MLMs?
+&lt;br&gt;
 
-**A.** Permet aux intercepts et/ou aux pentes de varier selon un facteur donné (**effet aléatoire**), e.g. par lac et/ou par espèce
-
-**B.** Les intercepts, les pentes et leur intervalle de confiance sont ajustés pour **prendre en compte la structure des données**
-
----
-# Effet aléatoire sur l'intercept
+**A.** Permet aux intercepts et/ou aux pentes d'être considérés comme propre à une population donnée (**effet aléatoire**), e.g. par lac et/ou par espèce
 
 &lt;br&gt;
 
-&lt;p&gt;
+**B.** Les intercepts, les pentes et leur intervalle de confiance sont ajustés pour **prendre en compte la structure des données**.
+
+
+---
+# Effet aléatoire sur l'intercept
+&lt;br&gt;
+
 &lt;img style="float: right; width:50%;margin: 1%" src="images/fig_7_w5.png"&gt;
 
-On fait la supposition que les intercepts proviennent d'une distribution normale
+On fait la supposition que les intercepts proviennent d'une distribution normale et on a seulement besoin d'estimer la moyenne (intercept général) et l'écart type de la distribution normale (effet aléatoire) au lieu d'estimer un intercept par espèce (ce qui rajoute 2 paramètres).
 
-Seulement besoin d'estimer la moyenne et l'écart type de la distribution normale au lieu de 3 intercepts, une par espèce
-&lt;/p&gt;
+&lt;br&gt;&lt;br&gt;
 
-&lt;br&gt;
+Au lieu d'estimer d'estimer un intercept par espèce (trois paramètres pour 3 espèces) on estime un intercept générale et un effet aléatoire soit 2 paramètres. Avec `\(n\)` espèce, dans le premier cas on estime `\(n-1\)` paramètres
+alors qu'on reste à 2 paramètres dans le second cas!
 
-.comment[Notez que plus votre facteur comporte de niveaux, plus la moyenne et l'écart-type de la distribution normale seront estimés précisément. Trois niveaux c'est un peu faible, mais plus facile à visualiser!]
+
+
 
 ---
 # Effet aléatoire sur l'intercept
+&lt;br&gt;&lt;br&gt;
 
-&lt;br&gt;
-
-&lt;p&gt;
 &lt;img style="float: right; width:50%;margin: 1%" src="images/fig_8_w5.png"&gt;
 Même principe pour les lacs
 
 Estime 2 paramètres (moyenne et écart-type) au lieu de 6 intercepts.
 
 Cela économise des degrés de liberté (moins d’estimation de paramètres sont nécessaires)
-&lt;/p&gt;
+
 
 
 ---
 # Effet aléatoire sur la pente
+&lt;br&gt;&lt;br&gt;
 
-
-&lt;br&gt;
-
-&lt;p&gt;
 &lt;img style="float: right; width:50%;margin: 1%" src="images/fig_9_w5.png"&gt;
-Le même principe s’applique aux pentes qui varient selon un facteur donné, juste plus difficile à visualiser
+Le même principe s’applique aux pentes qui varient selon un facteur donné, juste plus difficile à visualiser.
 
 Comme pour les intercepts, seuls la moyenne et l’écart-type des pentes sont estimés au lieu de trois pentes distinctes.
-&lt;/p&gt;
 
 ---
 # Tenir compte de la structure des données
+&lt;br&gt;
 
-Si une certaine espèce ou un lac est peu représenté (faible *n*) dans les données, le modèle va accorder plus d'importance au modèle groupé pour estimer l'intercept et la pente de cette espèce ou de ce lac.
+Si une certaine espèce ou un lac est peu représenté (faible `\(n\)`) dans les données, le modèle va accorder plus d'importance au modèle groupé pour estimer l'intercept et la pente de cette espèce ou de ce lac.
 
-.center[![:scale 50%](images/fig_12_w5.png) ]
+.center[![:scale 60%](images/fig_12_w5.png) ]
 
 ---
 # Tenir compte de la structure des données
+&lt;br&gt;&lt;br&gt;
 
-* Les intervalles de confiance des intercepts et pentes sont ajustés pour tenir compte de la pseudo-replication basée sur le **coefficient de corrélation intra-classe (CCI)**
-
+* Les intervalles de confiance des intercepts et pentes sont ajustés pour tenir compte de la pseudo-replication basée sur le **coefficient de corrélation intra-classe (CCI)**.
 
 * Combien de variation y a-t-il dans chaque groupe VS entre les groupes ?
 
@@ -306,11 +346,11 @@ les points provenant d'un même lac sont traités indépendamment car peu corré
 ]
 
 ---
-# Défi 2 ![:cube]()
+# Question / défi ![:cube]()
 
 &lt;br&gt;
 
-Comment le CIC et l'intervalle de confiance seront affectés dans ces deux scénarios ?
+**Comment le CIC et l'intervalle de confiance seront affectés dans ces deux scénarios ?**
 
 **Q1.** Les positions trophiques des poissons ne varient pas entre les lacs
 
@@ -341,8 +381,8 @@ Comment le CIC et l'intervalle de confiance seront affectés dans ces deux scén
 &lt;br&gt;
 
 
-&lt;img style="float: right; width:40%;margin: 1%" src="images/lego.jpg"&gt;
-.comment[**Étape 1: Construction du modèle *a priori* et exploration des données**]
+&lt;img style="float: right; width:32%;margin: 1%" src="images/lego.jpg"&gt;
+###### Étape 1: Construction du modèle *a priori* et exploration des données
 
 &lt;br&gt;
 
@@ -360,9 +400,8 @@ Comment le CIC et l'intervalle de confiance seront affectés dans ces deux scén
 
 
 ---
-# Comment implémenter un MLM dans R ?
-
-.comment[**Étape 1: Construction du modèle *a priori* et exploration des données**]
+# Étape 1 - exploration des données
+&lt;br&gt;
 
 * Modèle basé sur connaissance *a priori*:
 
@@ -370,14 +409,13 @@ Comment le CIC et l'intervalle de confiance seront affectés dans ces deux scén
 
   * Donc nous voulons un modèle qui ressemble a ceci:
 
-`$$PT_{ijk} ~ Longueur_i + Lac_j + Espèce_k + \epsilon$$`
+`$$PT_{ijk} \sim Longueur_i + Lac_j + Espèce_k + \varepsilon$$`
 
 
 ---
-# Exploration des données
+# Étape 1 - exploration des données
 
-
-Les données ont-elles la bonne structure?
+**Les données ont-elles la bonne structure?**
 
 
 ```r
@@ -390,13 +428,13 @@ str(data)
 #  $ Trophic_Pos : num  2.6 2.7 2.74 2.74 2.79 ...
 ```
 
+.comment[**Il est recommandé de faire le ménage de votre espace de travail (`rm.list()`) avant de construire un modèle**.]
 
-&gt; Il est recommandé de faire le ménage de votre espace de travail (`rm.list()`) avant de construire un modèle
 
 ---
-# Exploration des données
+# Étape 1 - exploration des données
 
-Regardez la distribution des échantillons pour chaque facteur:
+**Regardez la distribution des échantillons pour chaque facteur**:
 
 
 ```r
@@ -410,11 +448,11 @@ table(data$Fish_Species)
 # 60 60 60
 ```
 
-
 .comment[Ce jeu de données est parfaitement équilibré, mais les **modèles mixtes peuvent analyser les plans expérimentaux non équilibrés**, comme c'est souvent le cas en écologie!]
 
+
 ---
-# Exploration des données
+# Étape 1 - exploration des données
 
 Regardez la distribution des variables continues
 
@@ -425,16 +463,17 @@ hist(data$Fish_Length)
 hist(data$Trophic_Pos)
 ```
 
-&lt;img src="workshop06-fr_files/figure-html/unnamed-chunk-8-1.png" width="720" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop06-fr_files/figure-html/unnamed-chunk-10-1.png" width="720" style="display: block; margin: auto;" /&gt;
 
 .small[Des déviations majeures pourraient causer des problèmes d'hétéroscédasticité. Si nécessaire, faites des transformations. Dans ce cas-ci, **les données semblent correctes**.]
 
+
 ---
-# Exploration des données
+# Étape 1 - exploration des données
 
-Vérification de la colinéarité entre vos variables explicatives
+**Vérification de la colinéarité entre vos variables explicatives**
 
-Le problème avec les prédicteurs colinéaires est simplement qu'ils expliquent la même chose, alors leur effet sur la variable réponse sera confondu dans le modèle
+Le problème avec les prédicteurs colinéaires est simplement qu'ils expliquent la même chose, alors leur effet sur la variable réponse sera confondu dans le modèle.
 
 Dans cet exemple, il n’y a pas de risque de colinéarité avec seulement une variable continue. Si vous aviez une autre variable continue (Var2), une façon simple de vérifier la colinéarité est:
 
@@ -447,10 +486,9 @@ cor(var1, var2)
 
 
 ---
-# Défi 3 ![:cube]()
+# Question / défi ![:cube]()
 
 Quelles mesures supplémentaires aurions-nous pu prendre sur le terrain et qui auraient pu être fortement corrélées avec la longueur corporelle?
-
 
 --
 
@@ -458,19 +496,19 @@ Quelles mesures supplémentaires aurions-nous pu prendre sur le terrain et qui a
 
 
 ---
-# Exploration des données
+# Étape 1 - exploration des données
 
 **Considérez l'échelle de vos données**
 
-* Si deux variables dans un même modèle ont des échelles très différentes, il est probable que le modèle mixte indique un problême de convergence en essayant de calculer les paramètres.
+* Si deux variables dans un même modèle ont des échelles très différentes, il est probable que le modèle mixte indique un problème de convergence en essayant de calculer les paramètres.
 
-* La correction Z standardise les variables et résout ce problème :
+* La correction Z standardise les variables et résout ce problème (fonction `scale()` dans R) :
 
-`$$z = \frac{(x-moyenne(x))}{ecart.type(x)}$$`
+`$$z = \frac{(x-\bar{x})}{\sqrt{\text{var}(x)}}$$`
 
 
 ---
-# Exploration des données
+# Étape 1 - exploration des données
 
 **Considérez l'échelle de vos données**
 
@@ -479,7 +517,7 @@ Quelles mesures supplémentaires aurions-nous pu prendre sur le terrain et qui a
 * Position trophique ![:faic](arrow-right) Courte échelle
 
 ---
-# Exploration des données
+# Étape 1 - exploration des données
 
 **Considérez l'échelle de vos données**
 
@@ -487,16 +525,16 @@ Quelles mesures supplémentaires aurions-nous pu prendre sur le terrain et qui a
 
 
 ```r
-#Longueur corrigée:
+#Longueur corrigée, ""à la main"
 data$Z_Length &lt;- (data$Fish_Length-mean(data$Fish_Length))/sd(data$Fish_Length)
 
-#Position trophique corrigée:
-data$Z_TP&lt;- (data$Trophic_Pos-mean(data$Trophic_Pos))/sd(data$Trophic_Pos)
+#Position trophique corrigée, avec scale
+data$Z_TP&lt;- scale(data$Trophic_Pos)
 ```
 
 
 ---
-# Exploration des données
+# Étape 1 - exploration des données
 
 Pour savoir si un modèle mixte est nécessaire pour vos données, vous devez déterminer s'il est important de prendre en compte l'effet aléatoire de facteurs qui pourraient influencer la relation qui vous intéresse (dans notre cas, lac et espèce)
 
@@ -509,10 +547,10 @@ Nous pouvons le faire en :
 3. Produisant un graphique de la valeur des résidus en fonction des niveaux des facteurs potentiellement aléatoires
 
 ---
-# Exploration des données
+# Étape 1 - exploration des données
 
 
-1. Creer un modèle linéaire sans les facteurs
+1. Créer un modèle linéaire sans les facteurs
 
 ```r
 lm.test &lt;- lm(Z_TP ~ Z_Length, data = data)
@@ -549,7 +587,7 @@ abline(0, 0, lty = 2)
 
 Représentez graphiquement la valeur des résidus en fonction des niveaux des facteurs
 
-&lt;img src="workshop06-fr_files/figure-html/unnamed-chunk-14-1.png" width="720" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop06-fr_files/figure-html/unnamed-chunk-16-1.png" width="720" style="display: block; margin: auto;" /&gt;
 
 .alert[Ces patrons suggèrent qu'il y a de la variance résiduelle qui pourrait être expliquée par ces facteurs, et ils devraient donc être inclus dans le modèle]
 
@@ -558,12 +596,12 @@ Représentez graphiquement la valeur des résidus en fonction des niveaux des fa
 
 &lt;br&gt;
 
-&lt;img style="float: right; width:40%;margin: 1%" src="images/lego.jpg"&gt;
+&lt;img style="float: right; width:32%;margin: 1%" src="images/lego.jpg"&gt;
 Étape 1: Construction du modèle *a priori* et exploration des données
 
 &lt;br&gt;
 
-.comment[**Étape 2: Coder les modèles potentiels et sélection du meilleur modèle**]
+###### Étape 2: Coder les modèles potentiels et sélection du meilleur modèle
 
 &lt;br&gt;
 
@@ -575,15 +613,13 @@ Représentez graphiquement la valeur des résidus en fonction des niveaux des fa
 
 
 ---
-# Comment implémenter un MLM dans R ?
+# Étape 2 - coder les modèles
 
-.comment[**Étape 2: Coder les modèles potentiels et sélection du meilleur modèle**]
+###### Traduisons notre modèle...
 
-* Traduison notre modèle...
+`$$PT_{ijk} \sim Longueur_i + Lac_j + Espèce_k + \epsilon$$`
 
-`$$PT_{ijk} ~ Longueur_i + Lac_j + Espèce_k + \epsilon$$`
-
-* ... En code R
+###### ... En code R
 
 
 ```r
@@ -592,6 +628,7 @@ lmer(Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species),
      data = data, REML = TRUE)
 ```
 
+--
 
 * `lmer` ![:faic](arrow-right) fonction "linear mixed model" du package `lme4`
 * `(1 | Lake)` ![:faic](arrow-right) indique que les intercepts peuvent varier
@@ -600,7 +637,7 @@ lmer(Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species),
 ---
 # Note à propos de la méthode d'estimation
 
-REML (Restricted Maximum Likelihood) est la méthode par défaut dans la fonction `lmer`
+REML (Restricted Maximum Likelihood) est la méthode par défaut dans la fonction `lmer` (voir `?lmer`).
 
 Il est à noter que l'estimateur de l’écart-type du maximum de vraisemblance (ML, pour Maximum Likelihood) est biaisé d’un facteur `\((n-2) / n\)`. La méthode REML corrige ce biais.
 
@@ -621,7 +658,7 @@ Il est à noter que l'estimateur de l’écart-type du maximum de vraisemblance 
 
 
 ---
-# Défi 4 ![:cube]()
+# Défi 3 ![:cube]()
 
 Réecrivez le code suivant de façon à ce que les **pentes** de la relation position trophique en fonction de longueur corporelle **varient par lac et par espèces**:
 
@@ -685,7 +722,7 @@ lmer(Z_TP ~ Z_Length + (1 + Z_Length | Lake) + (1 + Z_Length | Fish_Species),
 * Avec le jeu de données sur lequel vous travaillez, il y a plusieurs modèles alternatifs qui pourraient mieux correspondre à vos données
 
 ---
-# Défi 5 ![:cube]()
+# Défi 4 ![:cube]()
 
 Faites une liste de 7 modèles alternatifs qui pourraient être comparés à celui-ci:
 
@@ -837,7 +874,7 @@ M2 &lt;- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 + Z_Length | 
 
 
 ---
-# Défi 6 ![:cube]()
+# Défi 5 ![:cube]()
 
 Prenez 2 minutes avec votre voisin pour étudier la structure du modèle M2.
 
@@ -877,7 +914,7 @@ M2 &lt;- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 + Z_Length | 
 
 &lt;br&gt;
 
-&lt;img style="float: right; width:40%;margin: 1%" src="images/lego.jpg"&gt;
+&lt;img style="float: right; width:32%;margin: 1%" src="images/lego.jpg"&gt;
 Étape 1: Construction du modèle *a priori* et exploration des données
 
 &lt;br&gt;
@@ -886,7 +923,7 @@ M2 &lt;- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 + Z_Length | 
 
 &lt;br&gt;
 
-.comment[**Étape 3: Validation du modèle**]
+###### Étape 3: Validation du modèle
 
 &lt;br&gt;
 
@@ -895,9 +932,8 @@ M2 &lt;- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 + Z_Length | 
 
 
 ---
-# Comment implémenter un MLM dans R?
+# Étape 3 - validation du modèle
 
-.comment[**Étape 3: Validation du modèle**]
 
 Vous devez vérifier que le modèle respecte toutes les suppositions de base:
 
@@ -908,13 +944,13 @@ Vous devez vérifier que le modèle respecte toutes les suppositions de base:
   - Graphique des résidus VS chaque covariable du modèle
   - Graphique des résidus VS chaque covariable non incluse du modèle
 
-&lt;img style="float: right; width:40%;margin: 1%" src="images/lego.jpg"&gt;
+&lt;img style="float: right; width:32%;margin: 1%" src="images/lego.jpg"&gt;
 3. Vérifier la normalité
   - Histogramme
 
 
 ---
-# Validation du modèle
+# Étape 3 - validation du modèle
 
 1- Vérifier l'homogénéité de la variance
 
@@ -924,12 +960,12 @@ plot(resid(M8) ~ fitted(M8), xlab = 'Valeurs pérdites', ylab = 'Résidus normal
 abline(h = 0, lty = 2)
 ```
 
-&lt;img src="workshop06-fr_files/figure-html/unnamed-chunk-27-1.png" width="324" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop06-fr_files/figure-html/unnamed-chunk-29-1.png" width="324" style="display: block; margin: auto;" /&gt;
 
 Étendue homogène des résidus ![:faic](arrow-right) la supposition est respectée!
 
 ---
-# Validation du modèle
+# Étape 3 - validation du modèle
 
 1- Vérifier l'homogénéité de la variance
 
@@ -938,7 +974,7 @@ abline(h = 0, lty = 2)
 ]
 
 ---
-# Validation du modèle
+# Étape 3 - validation du modèle
 
 2- Vérifier l'indépendance des résidus avec chaque covariable
 
@@ -957,19 +993,18 @@ abline(h = 0, lty = 2)
 ```
 
 ---
-# Validation du modèle
+# Étape 3 - validation du modèle
 
 2- Vérifier l'indépendance des résidus avec chaque covariable
 
-&lt;img src="workshop06-fr_files/figure-html/unnamed-chunk-29-1.png" width="864" style="display: block; margin: auto;" /&gt;
-
+&lt;img src="workshop06-fr_files/figure-html/unnamed-chunk-31-1.png" width="864" style="display: block; margin: auto;" /&gt;
 
 Étendue homogène des résidus autour de 0 ![:faic](arrow-right) pas de patron des résidus en fonction de la variable, la supposition est respectée!
 
 .comment[Note: Les regroupements de données sont dus à la structure des données, où des poissons de seulement 5 classes de taille  (grand, petit, et trois groupes entre les deux) étaient capturés.]
 
 ---
-# Validation du modèle
+# Étape 3 - validation du modèle
 
 2- Vérifier l'indépendance des résidus avec chaque covariable
 
@@ -980,7 +1015,7 @@ abline(h = 0, lty = 2)
   - Puisque dans notre cas, nous avons inclus toutes les variables mesurées dans notre modèle, nous ne pouvons pas faire cette étape.
 
 ---
-# Validation du modèle
+# Étape 3 - validation du modèle
 
 3- Vérifier la normalité des résidus
 
@@ -991,7 +1026,7 @@ abline(h = 0, lty = 2)
 hist(resid(M8))
 ```
 
-&lt;img src="workshop06-fr_files/figure-html/unnamed-chunk-30-1.png" width="360" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop06-fr_files/figure-html/unnamed-chunk-32-1.png" width="360" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -999,7 +1034,7 @@ hist(resid(M8))
 
 &lt;br&gt;
 
-&lt;img style="float: right; width:40%;margin: 1%" src="images/lego.jpg"&gt;
+&lt;img style="float: right; width:32%;margin: 1%" src="images/lego.jpg"&gt;
 Étape 1: Construction du modèle *a priori* et exploration des données
 
 &lt;br&gt;
@@ -1012,14 +1047,13 @@ hist(resid(M8))
 
 &lt;br&gt;
 
-.comment[**Étape 4: Interprétation et visualisation des résultats**]
+###### Étape 4: Interprétation et visualisation des résultats
 
 
 
 ---
-# Comment implémenter un MLM dans R ?
+# Étape 4 - interprétation et visualisation
 
-.comment[**Étape 4: Interprétation et visualisation des résultats**]
 
 
 ```r
@@ -1056,7 +1090,7 @@ hist(resid(M8))
 
 
 ---
-# Comment implémenter un MLM dans R ?
+# Étape 4 - interprétation et visualisation
 
 .comment[**Étape 4: Interprétation et visualisation des résultats**]
 
@@ -1072,8 +1106,9 @@ hist(resid(M8))
 
 Si l’intervalle de confiance à 95% de la pente ( `\(pente ± SE * 1.96\)` ) inclut zéro, la pente (ici = 0.4223), et donc l'effet de la longueur sur la position trophique, n’est pas significativement différente de zéro au seuil `\(\alpha\)` = 0.05.
 
+
 ---
-# Défi 7 ![:cube]()
+# Défi 6 ![:cube]()
 
 &lt;br&gt;
 
@@ -1101,11 +1136,11 @@ Si l’intervalle de confiance à 95% de la pente ( `\(pente ± SE * 1.96\)` ) i
 
 
 ---
-# Défi 8 ![:cube]()
+# Défi 7 ![:cube]()
 
 * Il est possible de visualiser graphiquement les différentes intercepts et pentes du modèle pour mieux interpréter les résultats
 
-Prenez 2 minutes pour refléchir aux différentes façon pour représenter les résultats de M8.
+Prenez 2 minutes pour réfléchir aux différentes façon pour représenter les résultats de M8.
 
 *Indice: considérez les différents "niveaux" du modèle*
 
@@ -1198,7 +1233,7 @@ Plot_AllData + geom_abline(intercept = -.0009059, slope = 0.4222697)
 # Solution ![:cube]()
 
 a) Figure avec toutes les données regroupées
-&lt;img src="workshop06-fr_files/figure-html/unnamed-chunk-35-1.png" width="432" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop06-fr_files/figure-html/unnamed-chunk-37-1.png" width="432" style="display: block; margin: auto;" /&gt;
 
 ---
 # Solution ![:cube]()
@@ -1230,7 +1265,7 @@ Plot_BySpecies +
 
 b) Figure par espèce
 
-&lt;img src="workshop06-fr_files/figure-html/unnamed-chunk-37-1.png" width="576" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop06-fr_files/figure-html/unnamed-chunk-39-1.png" width="576" style="display: block; margin: auto;" /&gt;
 
 ---
 # Solution ![:cube]()
@@ -1257,7 +1292,7 @@ Plot_ByLake +
 # Solution ![:cube]()
 
 c) Figure par lac
-&lt;img src="workshop06-fr_files/figure-html/unnamed-chunk-39-1.png" width="576" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop06-fr_files/figure-html/unnamed-chunk-41-1.png" width="576" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -1273,7 +1308,7 @@ Les modèles mixtes sont très utiles pour prendre en compte la structure comple
 
 
 ---
-# Défi 9 ![:cube]()
+# Défi 8 ![:cube]()
 
 &lt;br&gt;
 
@@ -1288,7 +1323,7 @@ Les modèles mixtes sont très utiles pour prendre en compte la structure comple
 .alert[Quel modèle mixte pourriez-vous utiliser pour ce jeu de données?]
 
 ---
-# Solution!![:cube]()
+# Solution! ![:cube]()
 
 &lt;br&gt;
 
@@ -1301,7 +1336,7 @@ Ici les effets aléatoires sont nichés (i.e. Sites dans forêt) et non croisés
 
 
 ---
-# Défi 10![:cube]()
+# Défi 9 ![:cube]()
 
 &lt;br&gt;
 
@@ -1328,7 +1363,7 @@ lmer(Mercure ~ Longueur * Habitat + (1 | Site))
 
 
 ---
-# Défi 11!![:cube]()
+# Défi 10!![:cube]()
 
 * Discutez du jeu de données sur lequel vous travaillez avec votre voisin et déterminez si un modèle mixte serait approprié.
 
