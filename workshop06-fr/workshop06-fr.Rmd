@@ -1004,7 +1004,6 @@ hist(resid(M8))
 ---
 # Étape 4 - interprétation et visualisation
 
-
 ```{r}
 (summ_M8 <- summary(M8))
 ```
@@ -1012,8 +1011,6 @@ hist(resid(M8))
 
 ---
 # Étape 4 - interprétation et visualisation
-
-.comment[**Étape 4: Interprétation et visualisation des résultats**]
 
 .center[
 ![](images/fig_30_w5.png)
@@ -1025,7 +1022,9 @@ hist(resid(M8))
 ![](images/fig_31_w5.png)
 ]
 
-Si l’intervalle de confiance à 95% de la pente ( $pente ± SE * 1.96$ ) inclut zéro, la pente (ici = 0.4223), et donc l'effet de la longueur sur la position trophique, n’est pas significativement différente de zéro au seuil $\alpha$ = 0.05.
+https://stats.stackexchange.com/questions/185360/t-value-associated-with-nlme-lme4
+
+Si l’intervalle de confiance à 95% de la pente ($pente ± SE * 1.96$) inclut zéro, la pente (ici = 0.4223), et donc l'effet de la longueur sur la position trophique, n’est pas significativement différente de zéro au seuil $\alpha$ = 0.05.
 
 
 ---
@@ -1061,11 +1060,9 @@ Si l’intervalle de confiance à 95% de la pente ( $pente ± SE * 1.96$ ) inclu
 
 * Il est possible de visualiser graphiquement les différentes intercepts et pentes du modèle pour mieux interpréter les résultats
 
-Prenez 2 minutes pour réfléchir aux différentes façon pour représenter les résultats de M8.
+Prenez 2 minutes pour réfléchir aux différentes façons pour représenter les résultats de M8.
 
 *Indice: considérez les différents "niveaux" du modèle*
-
-
 
 
 ---
@@ -1088,9 +1085,9 @@ Pour faire ces figures, il nous faut:
 summ_M8$coefficients
 ```
 
-Intercept = -0.0009059
+- Intercept = $`r summ_M8$coefficients[1,1]`$
+- Pente = $`r summ_M8$coefficients[2,1]`$
 
-Pente = 9.4222687
 
 ---
 # Solution ![:cube]()
@@ -1145,7 +1142,7 @@ Plot_AllData + geom_abline(intercept = -.0009059, slope = 0.4222697)
 
 b) Figure par espèce
 
-```{r, eval = F}
+```{r, eval = FALSE}
 # mettre les coefs dans un tableau pour les rendre plus faciles à manipuler
 Lake.coef <- as.data.frame(coef(M8)$Lake)
 colnames(Lake.coef) <- c("Intercept", "Slope")
@@ -1267,6 +1264,7 @@ lmer(Biodiv ~ Productivite + (1 | Foret / Site))
 
 Ici les effets aléatoires sont nichés (i.e. Sites dans forêt) et non croisés
 
+https://stats.stackexchange.com/questions/228800/crossed-vs-nested-random-effects-how-do-they-differ-and-how-are-they-specified
 
 ---
 # Défi 9 ![:cube]()
@@ -1275,7 +1273,7 @@ Ici les effets aléatoires sont nichés (i.e. Sites dans forêt) et non croisés
 
 **Situation:**
 
-* Vous avez recolté **200 poissons** dans **12 sites différents** distribués également dans **4 habitats** différents qui se retrouvent dans **un même lac**.
+* Vous avez récolté **200 poissons** dans **12 sites différents** distribués également dans **4 habitats** différents qui se retrouvent dans **un même lac**.
 
 * Vous avez mesuré la **longueur de chaque poisson** et la **quantité de mercure dans ses tissus**.
 
@@ -1289,9 +1287,11 @@ Ici les effets aléatoires sont nichés (i.e. Sites dans forêt) et non croisés
 <br>
 
 
-```{r, eval = F}
+```{r, eval = FALSE}
 lmer(Mercure ~ Longueur * Habitat + (1 | Site))
 ```
+
+
 
 
 ---
@@ -1302,6 +1302,7 @@ lmer(Mercure ~ Longueur * Habitat + (1 | Site))
 * Si oui, travaillez ensemble pour écrire le code que vous utiliseriez pour faire ce modèle dans R.
 
 * Si non, imaginez un jeu de données fictif pour lequel un modèle mixte serait approprié et codez ce modèle.
+
 
 ---
 # Ressources additionnelles

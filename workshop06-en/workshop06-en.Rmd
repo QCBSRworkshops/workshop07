@@ -1076,13 +1076,11 @@ To produce these figures, we need:
 
 - The coefficients of the full model that are in the model summary
 
-```{r}  
+```{r}
 summ_M8$coefficients
 ```
-
-Intercept = -0.0009059
-
-Slope = 9.4222687
+- Intercept = $`r summ_M8$coefficients[1,1]`$
+- Slope = $`r summ_M8$coefficients[2,1]`$
 
 ---
 ## Solution ![:cube]()
