@@ -1,4 +1,6 @@
-# [QCBS R Workshop series](https://wiki.qcbs.ca/r)
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+# [QCBS R Workshop series](https://wiki.qcbs.ca/r) <i class='fa fa-guthb'></i>
 
 This series of 10 workshops walks participants through the steps required to
 use R for a wide array of statistical analyses relevant to research in biology
@@ -9,7 +11,7 @@ The content of this workshop has been peer-reviewed by several QCBS members. If
 you would like to suggest modifications, please contact the current series
 coordinators, listed [here](https://wiki.qcbs.ca/r).
 
-# [Série d'ateliers R du CSBQ](https://wiki.qcbs.ca/r)
+# [Série d'ateliers R du CSBQ](https://wiki.qcbs.ca/r) <i class='fa fa-guthb'></i>
 
 Cette série de 10 ateliers guide les participants à travers les étapes requises
 afin de maîtriser le logiciel R pour une grande variété d’analyses statistiques
