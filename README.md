@@ -24,8 +24,8 @@ souhaitez y apporter des modifications, veuillez SVP contacter les
 coordonnateurs actuels de la série, listés [ici](https://wiki.qcbs.ca/r).
 
 # Workshop 6: Linear mixed effects models
-[![Build Status](https://img.shields.io/travis/QCBSRworkshops/workshop06/dev?style=for-the-badge)](https://travis-ci.org/QCBSRworkshops/workshop06) 
-[![](https://img.shields.io/static/v1?style=for-the-badge&label=Presentation&message=Atelier%206&color=blue)](https://qcbsrworkshops.github.io/workshop06/workshop06-en/workshop06-en.html)
+[![Build Status](https://img.shields.io/travis/QCBSRworkshops/workshop06/dev?style=for-the-badge)](https://travis-ci.org/QCBSRworkshops/workshop06)
+[![](https://img.shields.io/static/v1?style=for-the-badge&label=Presentation&message=Workshop%206&color=blue)](https://qcbsrworkshops.github.io/workshop06/workshop06-en/workshop06-en.html)
 [![](https://img.shields.io/static/v1?style=for-the-badge&label=Wiki&message=Workshop%206&color=violet)](https://wiki.qcbs.ca/r_workshop6)
 
 Mixed effects models allow ecologists to overcome a number of limitations
@@ -35,7 +35,7 @@ walk you through the steps to conduct a linear mixed model analysis, check its
 assumptions, report results, and visually represent your model in R.
 
 # Atelier 6: Modèles linéaires à effets mixtes
-[![Build Status](https://img.shields.io/travis/QCBSRworkshops/workshop06/dev?style=for-the-badge)](https://travis-ci.org/QCBSRworkshops/workshop06) 
+[![Build Status](https://img.shields.io/travis/QCBSRworkshops/workshop06/dev?style=for-the-badge)](https://travis-ci.org/QCBSRworkshops/workshop06)
 [![](https://img.shields.io/static/v1?style=for-the-badge&label=Présentation&message=Atelier%206&color=blue)](https://qcbsrworkshops.github.io/workshop06/workshop06-fr/workshop06-fr.html)
 [![](https://img.shields.io/static/v1?style=for-the-badge&label=Wiki&message=Atelier%206&color=violet)](https://wiki.qcbs.ca/r_atelier6)
 
@@ -47,7 +47,7 @@ nécessaires pour utiliser un modèle linéaire mixte, vérifier les supposition
 de base et présenter les résultats de votre modèle dans R.
 
 
-# How to contribute 
+# How to contribute
 
 Guidelines are available at the following
 https://qcbsrworkshops.github.io/guidelines.html.

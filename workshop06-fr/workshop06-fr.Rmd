@@ -23,7 +23,7 @@ knitr::opts_chunk$set(
   warning = FALSE,
   message = FALSE,
   cache = TRUE,
-  fig.width=6, fig.height=6,
+  fig.width = 6, fig.height = 6,
   fig.retina = 3,
   fig.align = 'center'
 )
@@ -65,7 +65,7 @@ effets mixtes (MLMs)
 .alert[** Est-ce que la position trophique des poissons augmente avec leur taille?**
 ]
 
-Pour répondre, 3 espèces ont été sélectionnées et dix individus par espèce ont été mesurés (longueur corporelle) dans six lacs différents
+Pour répondre, 3 espèces ont été sélectionnées et dix individus par espèce ont été mesurés (longueur corporelle) dans six lacs différents.
 
 .center[ ![:scale 75%](images/fig_1_qcbs_wiki.png) ]
 
@@ -76,11 +76,11 @@ Pour répondre, 3 espèces ont été sélectionnées et dix individus par espèc
 # Familiarisez vous avec le jeu de données
 <br>
 
-1. Ouvrez le jeu de données
+1. Ouvrez le jeu de données,
 
-2. Ouvrez le script de l'atelier dans R
+2. Ouvrez le script de l'atelier dans R,
 
-3. Visualisez la relation entre taille et position trophique
+3. Visualisez la relation entre taille et position trophique.
 
 --
 
@@ -97,7 +97,7 @@ head(data)
 
 <br>
 
-```{r, echo=F}
+```{r, echo= FALSE}
 data <- read.csv('data/qcbs_w6_data.csv')
 
 # thème simplifié
@@ -117,7 +117,7 @@ plot + geom_point() + xlab("Length (mm)") + ylab("Trophic Position") + labs(titl
 
 <br>
 
-```{r, eval=F}
+```{r, eval= FALSE}
 # thème simplifié
 fig <- theme_bw() + theme(panel.grid.minor=element_blank(),
     panel.grid.major=element_blank(), panel.background=element_blank()) +
@@ -241,26 +241,23 @@ Les MLMs sont un **compromis entre séparer et regrouper**. Ils:
 ---
 # Pourquoi choisir un MLM?
 
-**Effet fixe VS effet aléatoire**
+#### Effet fixe VS effet aléatoire
 
 Dans la littérature des MLMs, vous rencontrerez souvent ces termes souvent. Il existe plusieurs façon de les présenter et nous vous présenterons ici celles que nous trouvons les plus faciles à appliquer.
 
 --
 
-### Effet fixe
+##### Effet fixe
 
 * Les données proviennent de tous les niveaux possibles d'un facteur (variable qualitative),
 
 * On souhaite émettre des conclusions à propos des niveaux du facteur d'où les données proviennent.
 
----
-# Pourquoi choisir un MLM?
+--
 
-### Effet aléatoire
+##### Effet aléatoire
 
 * Seulement des variables qualitatives = facteur aléatoire;
-
-* Les données incluent seulement un échantillon aléatoire de tous les niveaux possibles du facteur, qui sont tous d'intérêt
 
 * Permet de structurer le processus d'erreur.
 
@@ -497,7 +494,7 @@ Quelles mesures supplémentaires aurions-nous pu prendre sur le terrain et qui a
 
 * Si deux variables dans un même modèle ont des échelles très différentes, il est probable que le modèle mixte indique un problème de convergence en essayant de calculer les paramètres.
 
-* La correction Z standardise les variables et résout ce problème (fonction `scale()` dans R) :
+* La [correction Z](https://fr.wikipedia.org/wiki/Cote_Z_(statistiques) standardise les variables et résout ce problème (fonction `scale()` dans R) :
 
 $$z = \frac{(x-\bar{x})}{\sqrt{\text{var}(x)}}$$
 
@@ -616,7 +613,7 @@ abline(0, 0, lty = 2)
 
 ###### Traduisons notre modèle...
 
-$$PT_{ijk} \sim Longueur_i + Lac_j + Espèce_k + \epsilon$$
+$$PT_{ijk} \sim Longueur_i + Lac_j + Espèce_k + \varepsilon$$
 
 ###### ... En code R
 
@@ -646,19 +643,40 @@ Il est à noter que l'estimateur de l’écart-type du maximum de vraisemblance 
 
 
 ---
-# Coder et sélectionner le meilleur modèle
+# Étape 2 -  coder et sélectionner le meilleur modèle
 
-.comment[Comment faire si on souhaite que la pente puisse varier ?]
+<br>
+
+##### Comment faire si on souhaite que la pente puisse varier ?
 
 .center[
 ![](images/fig_22_w5.png)
 ]
 
 
+
+---
+# Étape 2 -  coder et sélectionner le meilleur modèle
+
+<br>
+
+##### Plus généralement
+
+- `(1 | Lake)` effet aléatoire par lac sur l'ordonnée à l'origine
+- `(1 + Z_Length | Lake)` effet aléatoire par lac sur la pente à l'origine et la
+pente (NB: (`Z_Length | Lake)` donne le même résultat)
+- `(-1 + Z_Length | Lake)` pour avoir uniquement l'effet aléatoire sur la pente
+- `(1 | Lake) + (1 | Species)`  pour des effets aléatoires croisés
+- `(1 | Lake:Fish_Species)` pour utiliser l'interaction entre 2 facteurs groupant
+- si votre jeu de données inclus des effets nichés, vous pouvez utiliser `/`
+pour les déclarer, e.g. `(1 | facteur1 / facteur2)` si `facteur2` est niché dans `facteur1` ([voir ![:faic](stack-exchange)](https://stats.stackexchange.com/questions/228800/crossed-vs-nested-random-effects-how-do-they-differ-and-how-are-they-specified))
+
+
+
 ---
 # Défi 3 ![:cube]()
 
-Réecrivez le code suivant de façon à ce que les **pentes** de la relation position trophique en fonction de longueur corporelle **varient par lac et par espèces**:
+Réécrivez le code suivant de façon à ce que les **pentes** de la relation position trophique en fonction de longueur corporelle **varient par lac et par espèces**:
 
 ```{r}
 lmer(Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species),
@@ -679,24 +697,23 @@ lmer(Z_TP ~ Z_Length + (1 + Z_Length | Lake) + (1 + Z_Length | Fish_Species),
 
 
 ---
-# Coder et sélectionner le meilleur modèle
+# Étape 2 -  coder et sélectionner le meilleur modèle
 
 <br>
 
-* Pour déterminer si vous avez construit le meilleur modèle mixte base sur vos connaissances a priori, vous devez comparer ce modèle a priori aux autres modèles alternatifs
+* Pour déterminer si vous avez construit le meilleur modèle mixte base sur vos connaissances a priori, vous devez comparer ce modèle a priori aux autres modèles alternatifs,
 
-* Avec le jeu de données sur lequel vous travaillez, il y a plusieurs modèles alternatifs qui pourraient mieux correspondre à vos données
+* Avec le jeu de données sur lequel vous travaillez, il y a plusieurs modèles alternatifs qui pourraient mieux correspondre à vos données.
 
 ---
 # Défi 4 ![:cube]()
 
 Faites une liste de 7 modèles alternatifs qui pourraient être comparés à celui-ci:
 
-```{r, eval=F}
+```{r, eval = FALSE}
 lmer(Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species),
      data = data, REML = TRUE)
 ```
-
 
 .comment[Note: Si nous avions différents effets fixes entre les modèles, nous aurions dû indiquer `REML=FALSE` pour les comparer avec un méthode de vraisemblance comme l'AIC. Ici, vous devez rapporter les estimations des paramètres du "meilleur" modèle en utilisant `REML=TRUE`]
 
@@ -711,7 +728,7 @@ lmer(Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species),
 M0 <- lm(Z_TP ~ Z_Length, data = data)
 ```
 
-* Par contre, pour comparer ce modèle aux MLMs, il est important de .alert[changer la méthode d'estimation à ML (REML=F)] parce que `lm()` n'utilise pas la même méthode d'estimation que `lmer()`
+* Par contre, pour comparer ce modèle aux MLMs, il est important de .alert[changer la méthode d'estimation à ML (REML=FALSE)] parce que `lm()` n'utilise pas la même méthode d'estimation que `lmer()`
   - Démontrer que les résultats de la méthode des moindres carrés (least squares) est équivalente aux résultats de la méthode ML pour les modèles linéaires de bases!
 
 ---
@@ -741,13 +758,15 @@ M8 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake),
            data = data, REML = FALSE)
 ```
 
+![:faic](question) `boundary (singular) fit: see ?isSingular`, voir [cette discussion ![:faic](stack-exchange)]( https://stats.stackexchange.com/questions/185360/t-value-associated-with-nlme-lme4)
+
 
 ---
 # Coder et sélectionner le meilleur modèle
 
-* Maintenant que nous avons une liste de modèles potentiels, nous voulons les comparer entre eux pour sélectionner celui(ceux) qui a(ont) le plus de pouvoir predictif
+* Maintenant que nous avons une liste de modèles potentiels, nous voulons les comparer entre eux pour sélectionner celui(ceux) qui a(ont) le plus de pouvoir prédictif
 
-* Les modèles peuvent être comparés en utiliant la fonction `AICc` provenant du package `AICcmodavg`
+* Les modèles peuvent être comparés en utilisant la fonction `AICc` provenant du package `AICcmodavg`
 
 * Le critère d'information Akaike (AIC) est une **mesure de qualité du modèle** pouvant être utilisée pour comparer les modèles
 
@@ -831,7 +850,7 @@ Comment diffère-t-il de M8 d'un point de vue écologique?
 
 Pourquoi n'est il pas surprenant que sa valeur d'AICc était la deuxième meilleure?
 
-```{r, eval = F}
+```{r, eval = FALSE}
 M8 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake),
            data = data, REML = TRUE)
 
@@ -1000,31 +1019,83 @@ hist(resid(M8))
 ###### Étape 4: Interprétation et visualisation des résultats
 
 
+---
+# Étape 4 - interprétation et visualisation
+
+```{r, eval = FALSE}
+summ_M8 <- summary(M8)
+summ_M8
+```
 
 ---
 # Étape 4 - interprétation et visualisation
 
-```{r}
-(summ_M8 <- summary(M8))
+
+```{r, echo = FALSE}
+summ_M8 <- summary(M8)
+summary(M8)
 ```
 
 
 ---
 # Étape 4 - interprétation et visualisation
 
-.center[
-![](images/fig_30_w5.png)
-]
+    # Random effects:
+    #  Groups       Name        Variance Std.Dev. Corr
+    #  Lake         (Intercept) 0.20500  0.4528
+    #  Fish_Species (Intercept) 0.86621  0.9307
+    #               Z_Length    0.02464  0.1570   1.00
+    #  Residual                 0.05040  0.2245
+
+- `Groups`: facteurs groupant,
+- `Name`:
+  - `(Intercept)` pour l'ordonnée à l'origine,
+  - ou le nom de la variable sur lequel porte l'effet mixe dans le cas d'une pente aléatoire, (`Z_length` dans notre exemple)
+- `Variance` la variance estimée de l'effet (`Std.Dev.` est l'écart type de cette valeur)
+- `Corr` indique la corrélation entre la pente aléatoire et l'ordonnée à l'origine aléatoire pour un groupement donné (voir [cette discussion ![:faic](stack-exchange)](https://stats.stackexchange.com/questions/320978/understanding-and-coding-random-intercept-correlation-lmer))
+
+
+---
+# Étape 4 - interprétation et visualisation
+
+
+
+    # Fixed effects:
+    #              Estimate Std. Error t value
+    # (Intercept) -0.000906   0.568493  -0.002
+    # Z_Length     0.422270   0.092170   4.581
+
+Cette partie présente l'estimation des effet fixe. Une valeur de la statistique T (test de Student)](https://en.wikipedia.org/wiki/T-statistic) est retournée **sans p-value** (c'est un choix des auteurs du package, voir pourquoi dans [cette discussion](https://stats.stackexchange.com/questions/185360/t-value-associated-with-nlme-lme4)).
+
+Cette statistique peut-être utilisée telle quelle. Vous pouvez aussi calculer
+l’intervalle de confiance (IC) à 95% avec cette table en utilisant
+
+$$ IC = Estimate \pm 1.96Std.Error $$
+
+Si 0 est dans cet interval, alors le paramètre n’est pas significativement
+différente de zéro au seuil $\alpha$ = 0.05.
+
+
+
+---
+# Étape 4 - interprétation et visualisation
 
 <br>
 
-.center[
-![](images/fig_31_w5.png)
-]
+##### Quelques fonctions utiles
 
-https://stats.stackexchange.com/questions/185360/t-value-associated-with-nlme-lme4
+- `coef(M8)` et `ranef(M8)` retourne les effets aléatoires du modèle M8
 
-Si l’intervalle de confiance à 95% de la pente ($pente ± SE * 1.96$) inclut zéro, la pente (ici = 0.4223), et donc l'effet de la longueur sur la position trophique, n’est pas significativement différente de zéro au seuil $\alpha$ = 0.05.
+- `coef(summary(M8))` retourne les effets fixes
+
+- `sigma(M8)` retourne l’écart type de la variance résiduelle
+
+- `fitted(M8)` retourne les valeurs prédites par le modèle
+
+- `residuals(M8)` retourne les résidus
+
+
+
 
 
 ---
@@ -1144,9 +1215,9 @@ b) Figure par espèce
 
 ```{r, eval = FALSE}
 # mettre les coefs dans un tableau pour les rendre plus faciles à manipuler
-Lake.coef <- as.data.frame(coef(M8)$Lake)
+Lake.coef <- coef(M8)$Lake
 colnames(Lake.coef) <- c("Intercept", "Slope")
-Species.coef <- as.data.frame(coef(M8)$Fish_Species)
+Species.coef <- coef(M8)$Fish_Species
 colnames(Species.coef) <- c("Intercept", "Slope")
 
 Plot_BySpecies<-plot + geom_point(aes(colour = factor(Fish_Species)), size = 4) +
@@ -1189,7 +1260,7 @@ Plot_BySpecies +
 # Solution ![:cube]()
 
 c) Figure par lac
-```{r, eval=F}
+```{r, eval= FALSE}
 Plot_ByLake<-plot + geom_point(aes(colour = factor(Lake)), size = 4) +
   xlab("Length (mm)") + ylab("Trophic Position") +
   labs(title = "By Lake") + fig
@@ -1258,13 +1329,14 @@ Les modèles mixtes sont très utiles pour prendre en compte la structure comple
 
 <br>
 
-```{r, eval = F}
+```{r, eval = FALSE}
 lmer(Biodiv ~ Productivite + (1 | Foret / Site))
 ```
 
-Ici les effets aléatoires sont nichés (i.e. Sites dans forêt) et non croisés
+Ici les effets aléatoires sont nichés (i.e. Sites dans forêt) et non croisés.
+Pourquoi utiliser `(1 | Foret / Site)` plutôt que `(1 | Foret) + (1 | Site)` ?
+Regardez [cette réponse sur ![:faic](stack-exchange)](https://stats.stackexchange.com/questions/228800/crossed-vs-nested-random-effects-how-do-they-differ-and-how-are-they-specified)!
 
-https://stats.stackexchange.com/questions/228800/crossed-vs-nested-random-effects-how-do-they-differ-and-how-are-they-specified
 
 ---
 # Défi 9 ![:cube]()
