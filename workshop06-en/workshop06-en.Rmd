@@ -1097,7 +1097,7 @@ coef(M8)
 ## Solution ![:cube]()
 
 a) Figure with all data grouped
-```{r, eval = F}
+```{r, eval = FALSE}
 library(ggplot2)
 
 # Create a simplified ggplot theme
