@@ -27,30 +27,27 @@ knitr::opts_chunk$set(
   fig.retina = 3,
   fig.align = 'center'
 )
-```
-
-```{r, echo = FALSE}
 options(repos=structure(c(CRAN="http://cran.r-project.org")))
 ```
 
-```{r, include = FALSE}
-if (!require(ggplot2)) install.packages("ggplot2")
-library(ggplot2)
-if (!require(lme4)) install.packages("lme4")
-library(lme4)
-if (!require(AICcmodavg)) install.packages("AICcmodavg")
-library(AICcmodavg)
+class: inverse, center, middle
+
+```{R install_pkgs, echo = FALSE, results = "asis"}
+cat(
+  qcbsRworkshops::first_slides(6, c('ggplot2', 'lme4', 'AICcmodavg'), lang = "fr")
+)
 ```
 
-# Objectifs
+---
+
+# Objectifs d'apprentissage
 <br>
 
-1. Comprendre ce que sont les effets mixtes et ce que sont les modèles linéaires à
-effets mixtes (MLMs)
+##### 1. Comprendre ce que sont les modèles linéaires à effets mixtes (MLMs)
 
-2. Comprendre leur pertinence notamment pour les sciences de la biodiversté
+##### 2. Comprendre leur pertinence notamment pour les sciences de la biodiversité
 
-3. Apprendre à utiliser les MLMs dans R
+##### 3. Apprendre à utiliser les MLMs dans R
     - Exploration des données
     - Construction du modèle *a priori*
     - Coder les modèles potentiels
@@ -68,7 +65,6 @@ effets mixtes (MLMs)
 Pour répondre, 3 espèces ont été sélectionnées et dix individus par espèce ont été mesurés (longueur corporelle) dans six lacs différents.
 
 .center[ ![:scale 75%](images/fig_1_qcbs_wiki.png) ]
-
 
 
 
@@ -98,6 +94,7 @@ head(data)
 <br>
 
 ```{r, echo= FALSE}
+library(ggplot2)
 data <- read.csv('data/qcbs_w6_data.csv')
 
 # thème simplifié
@@ -215,7 +212,7 @@ plot + geom_point() + facet_wrap(~ Lake) + xlab("Length (mm)") + ylab("Trophic P
 **Option 2. Regrouper:**
 * Très grande taille d'échantillon!
 
-* Et la pseudoreplication? (les poissons d'un même lac et d'une même espèce sont correlés).
+* Et la pseudoreplication? (les poissons d'un même lac et d'une même espèce sont corrélés).
 
 * Beaucoup de bruit! Une partie doit être due aux effets de l'espèce et du lac.
 ]
@@ -556,7 +553,7 @@ lm.test.resid <- rstandard(lm.test)
 
 Représentez graphiquement la valeur des résidus en fonction des niveaux des facteurs
 
-```{r, fig.width=10, fig.height=5, eval = F}
+```{r, fig.width=10, fig.height=5, eval = FALSE}
 par(mfrow=c(1,2))
 
 plot(lm.test.resid ~ data$Fish_Species,
@@ -575,7 +572,7 @@ abline(0, 0, lty = 2)
 
 Représentez graphiquement la valeur des résidus en fonction des niveaux des facteurs
 
-```{r, fig.width=10, fig.height=5, echo = F}
+```{r, fig.width=10, fig.height=5, echo = FALSE}
 par(mfrow=c(1,2), mar = c(4,4,1,1))
 plot(lm.test.resid ~ data$Fish_Species,
      xlab = "Species", ylab = "Standardized residuals")
@@ -616,6 +613,10 @@ abline(0, 0, lty = 2)
 $$PT_{ijk} \sim Longueur_i + Lac_j + Espèce_k + \varepsilon$$
 
 ###### ... En code R
+
+```{r, include = FALSE}
+library(lme4)
+```
 
 ```{r, eval = FALSE}
 library(lme4)
@@ -777,11 +778,14 @@ M8 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake),
 
 Pour trouver la valeur AICc d'un modèle, utilisez :
 
-```{r, eval = F}
+```{r}
 library(AICcmodavg)
 AICc(M1)
 ```
 
+
+---
+# Coder et sélectionner le meilleur modèle
 
 Pour regrouper toutes les valeurs d'AICc dans un seul tableau, utilisez :
 
@@ -815,7 +819,7 @@ Regardons de plus près M8 et M2. On peut exclure les autres car ils ont des AIC
 
 Quelle est la structure du meilleur modèle?
 
-```{r, eval = F}
+```{r, eval = FALSE}
 M8 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake),
            data = data, REML = FALSE)
 ```
@@ -943,7 +947,7 @@ abline(h = 0, lty = 2)
 
 2- Vérifier l'indépendance des résidus avec chaque covariable
 
-```{r, fig.width=11, fig.height=4.5, eval = F}
+```{r, fig.width=11, fig.height=4.5, eval = FALSE}
 par(mfrow = c(1,3), mar=c(4,4,.5,.5))
 
 plot(resid(M8) ~ data$Z_Length, xlab = "Longueur", ylab = "Résidus normalisés")
@@ -961,7 +965,7 @@ abline(h = 0, lty = 2)
 
 2- Vérifier l'indépendance des résidus avec chaque covariable
 
-```{r, fig.width=12, fig.height=4.5, echo = F}
+```{r, fig.width=12, fig.height=4.5, echo = FALSE}
 par(mfrow = c(1,3), mar=c(4,4,.5,.5), cex.lab = 1.5)
 plot(resid(M8) ~ data$Z_Length, xlab = "Longueur", ylab = "Résidus normalisés")
 abline(h = 0, lty = 2)
@@ -1057,8 +1061,6 @@ summary(M8)
 
 ---
 # Étape 4 - interprétation et visualisation
-
-
 
     # Fixed effects:
     #              Estimate Std. Error t value
@@ -1175,7 +1177,7 @@ coef(M8)
 # Solution ![:cube]()
 
 a) Figure avec toutes les données regroupées
-```{r, eval = F}
+```{r, eval = FALSE}
 library(ggplot2)
 
 # Thème ggplot simplifié
@@ -1199,7 +1201,7 @@ Plot_AllData + geom_abline(intercept = -.0009059, slope = 0.4222697)
 # Solution ![:cube]()
 
 a) Figure avec toutes les données regroupées
-```{r, echo = F}
+```{r, echo = FALSE}
 plot <- ggplot(aes(Z_Length, Z_TP), data = data)
 Plot_AllData <- plot + geom_point() +
   xlab("Longueur (mm)") + ylab("Position trophique") +

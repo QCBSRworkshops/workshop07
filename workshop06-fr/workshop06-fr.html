@@ -24,19 +24,39 @@ class: center, middle, inverse, title-slide
 
 
 
+class: inverse, center, middle
 
+# À propos de cet atelier
+[![badge](https://img.shields.io/static/v1?style=for-the-badge&amp;label=repo&amp;message=dev&amp;color=6f42c1&amp;logo=github)](https://github.com/QCBSRworkshops/workshop06)
+[![badge](https://img.shields.io/static/v1?style=for-the-badge&amp;label=wiki&amp;message=06&amp;logo=wikipedia)](https://wiki.qcbs.ca/r_atelier6)
+[![badge](https://img.shields.io/static/v1?style=for-the-badge&amp;label=Diapos&amp;message=06&amp;color=red&amp;logo=html5)](https://qcbsrworkshops.github.io/workshop06/workshop06-fr/workshop06-fr.html)
+[![badge](https://img.shields.io/static/v1?style=for-the-badge&amp;label=Diapos&amp;message=06&amp;color=red&amp;logo=adobe-acrobat-reader)](https://qcbsrworkshops.github.io/workshop06/workshop06-fr/workshop06-fr.pdf)
+[![badge](https://img.shields.io/static/v1?style=for-the-badge&amp;label=script&amp;message=06&amp;color=2a50b8&amp;logo=r)](https://qcbsrworkshops.github.io/workshop06/workshop06-fr/workshop06-fr.R)
 
+---
 
+# Packages requis
 
-# Objectifs
+* [ggplot2](https://cran.r-project.org/package=ggplot2)
+* [lme4](https://cran.r-project.org/package=lme4)
+* [AICcmodavg](https://cran.r-project.org/package=AICcmodavg)
+
 &lt;br&gt;
 
-1. Comprendre ce que sont les effets mixtes et ce que sont les modèles linéaires à
-effets mixtes (MLMs)
+```R
+install.packages(c('ggplot2', 'lme4', 'AICcmodavg'))
+```
 
-2. Comprendre leur pertinence notamment pour les sciences de la biodiversté
+---
 
-3. Apprendre à utiliser les MLMs dans R
+# Objectifs d'apprentissage
+&lt;br&gt;
+
+##### 1. Comprendre ce que sont les modèles linéaires à effets mixtes (MLMs)
+
+##### 2. Comprendre leur pertinence notamment pour les sciences de la biodiversité
+
+##### 3. Apprendre à utiliser les MLMs dans R
     - Exploration des données
     - Construction du modèle *a priori*
     - Coder les modèles potentiels
@@ -54,7 +74,6 @@ effets mixtes (MLMs)
 Pour répondre, 3 espèces ont été sélectionnées et dix individus par espèce ont été mesurés (longueur corporelle) dans six lacs différents.
 
 .center[ ![:scale 75%](images/fig_1_qcbs_wiki.png) ]
-
 
 
 
@@ -91,7 +110,7 @@ head(data)
 
 &lt;br&gt;
 
-&lt;img src="workshop06-fr_files/figure-html/unnamed-chunk-4-1.png" width="432" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop06-fr_files/figure-html/unnamed-chunk-2-1.png" width="432" style="display: block; margin: auto;" /&gt;
 
 ---
 # Visualisation de l'ensemble des données
@@ -126,7 +145,7 @@ plot + geom_point() + facet_wrap(~ Fish_Species) + xlab("Length (mm)") + ylab("T
    labs(title="By Species") + fig
 ```
 
-&lt;img src="workshop06-fr_files/figure-html/unnamed-chunk-6-1.png" width="432" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop06-fr_files/figure-html/unnamed-chunk-4-1.png" width="432" style="display: block; margin: auto;" /&gt;
 
 ---
 # Visualisation par Lake
@@ -138,7 +157,7 @@ plot + geom_point() + facet_wrap(~ Lake) + xlab("Length (mm)") + ylab("Trophic P
    labs(title="By Lake") + fig
 ```
 
-&lt;img src="workshop06-fr_files/figure-html/unnamed-chunk-7-1.png" width="432" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop06-fr_files/figure-html/unnamed-chunk-5-1.png" width="432" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -203,7 +222,7 @@ plot + geom_point() + facet_wrap(~ Lake) + xlab("Length (mm)") + ylab("Trophic P
 **Option 2. Regrouper:**
 * Très grande taille d'échantillon!
 
-* Et la pseudoreplication? (les poissons d'un même lac et d'une même espèce sont correlés).
+* Et la pseudoreplication? (les poissons d'un même lac et d'une même espèce sont corrélés).
 
 * Beaucoup de bruit! Une partie doit être due aux effets de l'espèce et du lac.
 ]
@@ -460,7 +479,7 @@ hist(data$Fish_Length)
 hist(data$Trophic_Pos)
 ```
 
-&lt;img src="workshop06-fr_files/figure-html/unnamed-chunk-10-1.png" width="720" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop06-fr_files/figure-html/unnamed-chunk-8-1.png" width="720" style="display: block; margin: auto;" /&gt;
 
 .small[Des déviations majeures pourraient causer des problèmes d'hétéroscédasticité. Si nécessaire, faites des transformations. Dans ce cas-ci, **les données semblent correctes**.]
 
@@ -584,7 +603,7 @@ abline(0, 0, lty = 2)
 
 Représentez graphiquement la valeur des résidus en fonction des niveaux des facteurs
 
-&lt;img src="workshop06-fr_files/figure-html/unnamed-chunk-16-1.png" width="720" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop06-fr_files/figure-html/unnamed-chunk-14-1.png" width="720" style="display: block; margin: auto;" /&gt;
 
 .alert[Ces patrons suggèrent qu'il y a de la variance résiduelle qui pourrait être expliquée par ces facteurs, et ils devraient donc être inclus dans le modèle]
 
@@ -617,6 +636,8 @@ Représentez graphiquement la valeur des résidus en fonction des niveaux des fa
 `$$PT_{ijk} \sim Longueur_i + Lac_j + Espèce_k + \varepsilon$$`
 
 ###### ... En code R
+
+
 
 
 ```r
@@ -818,8 +839,12 @@ Pour trouver la valeur AICc d'un modèle, utilisez :
 ```r
 library(AICcmodavg)
 AICc(M1)
+# [1] 77.305
 ```
 
+
+---
+# Coder et sélectionner le meilleur modèle
 
 Pour regrouper toutes les valeurs d'AICc dans un seul tableau, utilisez :
 
@@ -979,7 +1004,7 @@ plot(resid(M8) ~ fitted(M8), xlab = 'Valeurs pérdites', ylab = 'Résidus normal
 abline(h = 0, lty = 2)
 ```
 
-&lt;img src="workshop06-fr_files/figure-html/unnamed-chunk-29-1.png" width="324" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop06-fr_files/figure-html/unnamed-chunk-28-1.png" width="324" style="display: block; margin: auto;" /&gt;
 
 Étendue homogène des résidus ![:faic](arrow-right) la supposition est respectée!
 
@@ -1016,7 +1041,7 @@ abline(h = 0, lty = 2)
 
 2- Vérifier l'indépendance des résidus avec chaque covariable
 
-&lt;img src="workshop06-fr_files/figure-html/unnamed-chunk-31-1.png" width="864" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop06-fr_files/figure-html/unnamed-chunk-30-1.png" width="864" style="display: block; margin: auto;" /&gt;
 
 Étendue homogène des résidus autour de 0 ![:faic](arrow-right) pas de patron des résidus en fonction de la variable, la supposition est respectée!
 
@@ -1045,7 +1070,7 @@ abline(h = 0, lty = 2)
 hist(resid(M8))
 ```
 
-&lt;img src="workshop06-fr_files/figure-html/unnamed-chunk-32-1.png" width="360" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop06-fr_files/figure-html/unnamed-chunk-31-1.png" width="360" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -1135,8 +1160,6 @@ summ_M8
 
 ---
 # Étape 4 - interprétation et visualisation
-
-
 
     # Fixed effects:
     #              Estimate Std. Error t value
@@ -1300,7 +1323,7 @@ Plot_AllData + geom_abline(intercept = -.0009059, slope = 0.4222697)
 # Solution ![:cube]()
 
 a) Figure avec toutes les données regroupées
-&lt;img src="workshop06-fr_files/figure-html/unnamed-chunk-38-1.png" width="432" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop06-fr_files/figure-html/unnamed-chunk-37-1.png" width="432" style="display: block; margin: auto;" /&gt;
 
 ---
 # Solution ![:cube]()
@@ -1332,7 +1355,7 @@ Plot_BySpecies +
 
 b) Figure par espèce
 
-&lt;img src="workshop06-fr_files/figure-html/unnamed-chunk-40-1.png" width="576" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop06-fr_files/figure-html/unnamed-chunk-39-1.png" width="576" style="display: block; margin: auto;" /&gt;
 
 ---
 # Solution ![:cube]()
@@ -1359,7 +1382,7 @@ Plot_ByLake +
 # Solution ![:cube]()
 
 c) Figure par lac
-&lt;img src="workshop06-fr_files/figure-html/unnamed-chunk-42-1.png" width="576" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop06-fr_files/figure-html/unnamed-chunk-41-1.png" width="576" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -1512,6 +1535,42 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+(function() {
+  "use strict"
+  /* Replace <script> tags in slides area to make them executable
+   *
+   * Runs after post-processing of markdown source into slides and replaces only
+   * <script>s on the last slide of continued slides using the .has-continuation
+   * class added by xaringan. Finally, any <script>s in the slides area that
+   * aren't executed are commented out.
+   */
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container:not(.has-continuation) script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+  var scriptsNotExecuted = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container.has-continuation script'
+  );
+  if (!scriptsNotExecuted.length) return;
+  for (var i = 0; i < scriptsNotExecuted.length; i++) {
+    var comment = document.createComment(scriptsNotExecuted[i].outerHTML)
+    scriptsNotExecuted[i].parentElement.replaceChild(comment, scriptsNotExecuted[i])
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
 // adds .remark-code-has-line-highlighted class to <pre> parent elements
 // of code chunks containing highlighted lines with class .remark-code-line-highlighted
 (function(d) {
@@ -1529,17 +1588,6 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   }
   preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
 })(document);</script>
-
-<script>
-(function() {
-  var links = document.getElementsByTagName('a');
-  for (var i = 0; i < links.length; i++) {
-    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
-      links[i].target = '_blank';
-    }
-  }
-})();
-</script>
 
 <script>
 slideshow._releaseMath = function(el) {

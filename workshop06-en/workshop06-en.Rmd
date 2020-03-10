@@ -15,37 +15,35 @@ output:
 ---
 
 
-```{r setup, echo = F}
+```{r setup, echo = FALSE}
 knitr::opts_chunk$set(
   comment = "#",
   collapse = TRUE,
   warning = FALSE,
   message = FALSE,
-  cache = T,
+  cache = TRUE,
   fig.width=6, fig.height=6,
   fig.retina = 3,
   fig.align = 'center'
 )
-```
-
-```{r, echo =F}
 options(repos=structure(c(CRAN="http://cran.r-project.org")))
 ```
 
-```{r, include = FALSE}
-if (!require(ggplot2)) install.packages("ggplot2")
-library(ggplot2)
-if (!require(lme4)) install.packages("lme4")
-library(lme4)
-if (!require(AICcmodavg)) install.packages("AICcmodavg")
-library(AICcmodavg)
+class: inverse, center, middle
+
+```{R install_pkgs, echo = FALSE, results = "asis"}
+cat(
+  qcbsRworkshops::first_slides(6, c('ggplot2', 'lme4', 'AICcmodavg'))
+)
 ```
 
-# Objectives
+---
 
-1. What is a linear mixed effects model (LMM) and why should I care?
+# Learning objectives
 
-2. How do I implement LMM's in R?
+##### 1. What is a linear mixed effects model (LMM) and why should I care?
+
+##### 2. How do I implement LMM's in R?
   - A priori model building and data exploration
   - Coding potential models and model selection
   - Model validation
@@ -79,7 +77,7 @@ Introduction to the example dataset
 
 <br>
 
-Throughout this workshop, there will be a serie of **challenges** that you can recognize by this rubix cube
+Throughout this workshop, there will be a series of **challenges** that you can recognize by this rubix cube
 
 .center[
 ![:scale 25%](images/rubicub.png)
@@ -104,7 +102,8 @@ Throughout this workshop, there will be a serie of **challenges** that you can r
 
 <br>
 
-```{r, echo=F}
+```{r, echo= FALSE}
+library(ggplot2)
 data <- read.csv('data/qcbs_w6_data.csv')
 
 # simple theme
@@ -135,7 +134,7 @@ plot + geom_point() + facet_wrap(~ Fish_Species) + xlab("Length (mm)") + ylab("T
 
 <br>
 
-```{r, echo=F}
+```{r, echo= FALSE}
 # Plot 3 – By lake
 plot + geom_point() + facet_wrap(~ Lake) + xlab("Length (mm)") + ylab("Trophic Position") +
    labs(title="By Lake") + fig
@@ -234,9 +233,9 @@ LMM are a balance between separating and lumping. They:
 
 **Fixed vs Random Effects**
 
-In the litterature on LMM, we will meet those terms frequently.
+In the literature on LMM, we will meet those terms frequently.
 
-There are many possible Challengenitions, and we chose to present those we think are easier to apply when doing your analyses.
+There are many possible way to introduce them and we chose to present those we think are easier to apply when doing your analyses.
 
 ---
 ## 1. Why choose a LMM?
@@ -466,7 +465,7 @@ Check for collinearity between your explanatory variables
 
 - In this example, there is no risk of collinearity with only one continuous variable. If you had another continuous variable (Var2), one simple way to check for collinearity is:
 
-```{r, eval = F}
+```{r, eval = FALSE}
 plot(data)
 
 cor(var1, var2)
@@ -502,7 +501,7 @@ $$z = \frac{(x-mean(x))}{standard.deviation(x)}$$
 
 * Body length ![:faic](arrow-right) Long scale
 
-* Trophi position ![:faic](arrow-right) Short scale
+* Trophic position ![:faic](arrow-right) Short scale
 
 ---
 ## Data exploration
@@ -553,7 +552,7 @@ lm.test.resid <- rstandard(lm.test)
 
 3. Plot the residuals against the levels of the potential random factors
 
-```{r, fig.width=10, fig.height=5, eval = F}
+```{r, fig.width=10, fig.height=5, eval = FALSE}
 par(mfrow=c(1,2))
 
 plot(lm.test.resid ~ data$Fish_Species,
@@ -572,7 +571,7 @@ abline(0, 0, lty = 2)
 
 3. Plot the residuals against the levels of the potential random factors
 
-```{r, fig.width=10, fig.height=5, echo = F}
+```{r, fig.width=10, fig.height=5, echo = FALSE}
 par(mfrow=c(1,2), mar = c(4,4,1,1))
 plot(lm.test.resid ~ data$Fish_Species,
      xlab = "Species", ylab = "Standardized residuals")
@@ -614,7 +613,11 @@ $$PT_{ijk} ~ Length_i + Lac_j + Espèce_k + \epsilon$$
 
 * ... in R code
 
-```{r, eval = F}
+```{r, include = FALSE}
+library(lme4)
+```
+
+```{r, eval = FALSE}
 library(lme4)
 lmer(Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species),
      data = data, REML = TRUE)
@@ -635,7 +638,7 @@ Note that the standard deviation estimator in the Maximum Likelihood (ML) is bia
 
 - We should compare **nested random effect models with REML**
 
-- While we should compare **nested fixed effect models with ML **
+- While we should compare **nested fixed effect models with ML**
 
 
 ---
@@ -685,7 +688,7 @@ lmer(Z_TP ~ Z_Length + (1 + Z_Length | Lake) + (1 + Z_Length | Fish_Species),
 
 Make a list of 7 alternative models that could be compared to this one:
 
-```{r, eval=F}
+```{r, eval= FALSE}
 lmer(Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species),
      data = data, REML = TRUE)
 ```
@@ -751,10 +754,13 @@ M8 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake),
 
 To find the AICc value of a model, use:
 
-```{r, eval = F}
+```{r}
 library(AICcmodavg)
 AICc(M1)
 ```
+
+---
+## Code potential models and model selection
 
 
 To group all AICc values into a single table, use:
@@ -789,7 +795,7 @@ Let's take a closer look at M8 and M2. We can exclude the others because they ha
 
 What is the structure of the best model?
 
-```{r, eval = F}
+```{r, eval = FALSE}
 M8 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake),
            data = data, REML = FALSE)
 ```
@@ -824,7 +830,7 @@ Biologically, how does it differ from M8?
 
 Why is it not surprising that it's AICc value was 2nd best?
 
-```{r, eval = F}
+```{r, eval = FALSE}
 M8 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake),
            data = data, REML = TRUE)
 
@@ -920,7 +926,7 @@ Homogeneous dispersion of the residuals ![:faic](arrow-right) the assumption is 
 
 2- Check the independence of the model residuals with each covariate
 
-```{r, fig.width=11, fig.height=4.5, eval = F}
+```{r, fig.width=11, fig.height=4.5, eval = FALSE}
 par(mfrow = c(1,3), mar=c(4,4,.5,.5))
 
 plot(resid(M8) ~ data$Z_Length, xlab = "Length", ylab = "Normalized residuals")
@@ -938,7 +944,7 @@ abline(h = 0, lty = 2)
 
 2- Check the independence of the model residuals with each covariate
 
-```{r, fig.width=12, fig.height=4.5, echo = F}
+```{r, fig.width=12, fig.height=4.5, echo = FALSE}
 par(mfrow = c(1,3), mar=c(4,4,.5,.5), cex.lab = 1.5)
 plot(resid(M8) ~ data$Z_Length, xlab = "Length", ylab = "Normalized residuals")
 abline(h = 0, lty = 2)
@@ -1123,7 +1129,7 @@ Plot_AllData + geom_abline(intercept = -0.0009059, slope = 0.4222697)
 ## Solution ![:cube]()
 
 a) Figure with all data grouped
-```{r, echo = F}
+```{r, echo = FALSE}
 plot <- ggplot(aes(Z_Length, Z_TP), data = data)
 Plot_AllData <- plot + geom_point() +
   xlab("Length (mm)") + ylab("Trophic position") +
@@ -1137,7 +1143,7 @@ Plot_AllData + geom_abline(intercept = -0.0009059, slope = 0.4222697)
 
 b) Figure by species
 
-```{r, eval = F}
+```{r, eval = FALSE}
 # create a table with the coefs to facilitate their manipulation
 Lake.coef <- as.data.frame(coef(M8)$Lake)
 colnames(Lake.coef) <- c("Intercept", "Slope")
@@ -1184,7 +1190,7 @@ Plot_BySpecies +
 ## Solution ![:cube]()
 
 c) Figure by lake
-```{r, eval=F}
+```{r, eval= FALSE}
 Plot_ByLake <- plot + geom_point(aes(colour = factor(Lake)), size = 4) +
   xlab("Length (mm)") + ylab("Trophic Position") +
   labs(title = "By Lake") + fig
@@ -1254,7 +1260,7 @@ Mixed models are very useful for taking into account the complex structure of ec
 
 <br>
 
-```{r, eval = F}
+```{r, eval = FALSE}
 lmer(Biodiv ~ Productivity + (1 | Forest / Site))
 ```
 
@@ -1281,7 +1287,7 @@ Here the random effects are nested (i.e. Sites within forest) and not crossed
 <br>
 
 
-```{r, eval = F}
+```{r, eval = FALSE}
 lmer(Mercury ~ Length * Habitat_Type + (1 | Site))
 ```
 

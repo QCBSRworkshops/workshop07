@@ -24,15 +24,36 @@ class: center, middle, inverse, title-slide
 
 
 
+class: inverse, center, middle
 
+# About this workshop
+[![badge](https://img.shields.io/static/v1?style=for-the-badge&amp;label=repo&amp;message=dev&amp;color=6f42c1&amp;logo=github)](https://github.com/QCBSRworkshops/workshop06)
+[![badge](https://img.shields.io/static/v1?style=for-the-badge&amp;label=wiki&amp;message=06&amp;logo=wikipedia)](https://wiki.qcbs.ca/r_workshop6)
+[![badge](https://img.shields.io/static/v1?style=for-the-badge&amp;label=Slides&amp;message=06&amp;color=red&amp;logo=html5)](https://qcbsrworkshops.github.io/workshop06/workshop06-en/workshop06-en.html)
+[![badge](https://img.shields.io/static/v1?style=for-the-badge&amp;label=Slides&amp;message=06&amp;color=red&amp;logo=adobe-acrobat-reader)](https://qcbsrworkshops.github.io/workshop06/workshop06-en/workshop06-en.pdf)
+[![badge](https://img.shields.io/static/v1?style=for-the-badge&amp;label=script&amp;message=06&amp;color=2a50b8&amp;logo=r)](https://qcbsrworkshops.github.io/workshop06/workshop06-en/workshop06-en.R)
 
+---
 
+# Required packages
 
-# Objectives
+* [ggplot2](https://cran.r-project.org/package=ggplot2)
+* [lme4](https://cran.r-project.org/package=lme4)
+* [AICcmodavg](https://cran.r-project.org/package=AICcmodavg)
 
-1. What is a linear mixed effects model (LMM) and why should I care?
+&lt;br&gt;
 
-2. How do I implement LMM's in R?
+```R
+install.packages(c('ggplot2', 'lme4', 'AICcmodavg'))
+```
+
+---
+
+# Learning objectives
+
+##### 1. What is a linear mixed effects model (LMM) and why should I care?
+
+##### 2. How do I implement LMM's in R?
   - A priori model building and data exploration
   - Coding potential models and model selection
   - Model validation
@@ -66,7 +87,7 @@ Introduction to the example dataset
 
 &lt;br&gt;
 
-Throughout this workshop, there will be a serie of **challenges** that you can recognize by this rubix cube
+Throughout this workshop, there will be a series of **challenges** that you can recognize by this rubix cube
 
 .center[
 ![:scale 25%](images/rubicub.png)
@@ -91,22 +112,22 @@ Throughout this workshop, there will be a serie of **challenges** that you can r
 
 &lt;br&gt;
 
+&lt;img src="workshop06-en_files/figure-html/unnamed-chunk-1-1.png" width="432" style="display: block; margin: auto;" /&gt;
+
+
+---
+## Solution ![:cube]()
+
+&lt;br&gt;
+
+&lt;img src="workshop06-en_files/figure-html/unnamed-chunk-2-1.png" width="432" style="display: block; margin: auto;" /&gt;
+
+---
+## Solution ![:cube]()
+
+&lt;br&gt;
+
 &lt;img src="workshop06-en_files/figure-html/unnamed-chunk-3-1.png" width="432" style="display: block; margin: auto;" /&gt;
-
-
----
-## Solution ![:cube]()
-
-&lt;br&gt;
-
-&lt;img src="workshop06-en_files/figure-html/unnamed-chunk-4-1.png" width="432" style="display: block; margin: auto;" /&gt;
-
----
-## Solution ![:cube]()
-
-&lt;br&gt;
-
-&lt;img src="workshop06-en_files/figure-html/unnamed-chunk-5-1.png" width="432" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -201,9 +222,9 @@ LMM are a balance between separating and lumping. They:
 
 **Fixed vs Random Effects**
 
-In the litterature on LMM, we will meet those terms frequently.
+In the literature on LMM, we will meet those terms frequently.
 
-There are many possible Challengenitions, and we chose to present those we think are easier to apply when doing your analyses.
+There are many possible way to introduce them and we chose to present those we think are easier to apply when doing your analyses.
 
 ---
 ## 1. Why choose a LMM?
@@ -436,7 +457,7 @@ hist(data$Fish_Length)
 hist(data$Trophic_Pos)
 ```
 
-&lt;img src="workshop06-en_files/figure-html/unnamed-chunk-8-1.png" width="720" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop06-en_files/figure-html/unnamed-chunk-6-1.png" width="720" style="display: block; margin: auto;" /&gt;
 
 .small[Major deviations could cause heteroscedasticity problems. If necessary, make transformations. In this case, **the data seems OK**.]
 
@@ -486,7 +507,7 @@ What additional measures could we have taken in the field that could have been s
 
 * Body length ![:faic](arrow-right) Long scale
 
-* Trophi position ![:faic](arrow-right) Short scale
+* Trophic position ![:faic](arrow-right) Short scale
 
 ---
 ## Data exploration
@@ -560,7 +581,7 @@ abline(0, 0, lty = 2)
 
 3. Plot the residuals against the levels of the potential random factors
 
-&lt;img src="workshop06-en_files/figure-html/unnamed-chunk-14-1.png" width="720" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop06-en_files/figure-html/unnamed-chunk-12-1.png" width="720" style="display: block; margin: auto;" /&gt;
 
 .alert[These patterns suggest that there is residual variance that could be explained by these factors, so they should be included in the model.]
 
@@ -595,6 +616,8 @@ abline(0, 0, lty = 2)
 * ... in R code
 
 
+
+
 ```r
 library(lme4)
 lmer(Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species),
@@ -616,7 +639,7 @@ Note that the standard deviation estimator in the Maximum Likelihood (ML) is bia
 
 - We should compare **nested random effect models with REML**
 
-- While we should compare **nested fixed effect models with ML **
+- While we should compare **nested fixed effect models with ML**
 
 
 ---
@@ -771,7 +794,11 @@ To find the AICc value of a model, use:
 ```r
 library(AICcmodavg)
 AICc(M1)
+# [1] 77.305
 ```
+
+---
+## Code potential models and model selection
 
 
 To group all AICc values into a single table, use:
@@ -935,7 +962,7 @@ plot(resid(M8) ~ fitted(M8), xlab = 'Predicted values', ylab = 'Normalized resid
 abline(h = 0, lty = 2)
 ```
 
-&lt;img src="workshop06-en_files/figure-html/unnamed-chunk-27-1.png" width="324" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop06-en_files/figure-html/unnamed-chunk-26-1.png" width="324" style="display: block; margin: auto;" /&gt;
 
 Homogeneous dispersion of the residuals ![:faic](arrow-right) the assumption is respected!
 
@@ -972,7 +999,7 @@ abline(h = 0, lty = 2)
 
 2- Check the independence of the model residuals with each covariate
 
-&lt;img src="workshop06-en_files/figure-html/unnamed-chunk-29-1.png" width="864" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop06-en_files/figure-html/unnamed-chunk-28-1.png" width="864" style="display: block; margin: auto;" /&gt;
 
 
 Homogeneous dispersion of the residuals around 0 ![:faic](arrow-right) no pattern of residuals depending on the variable, the assumption is respected!
@@ -1003,7 +1030,7 @@ Homogeneous dispersion of the residuals around 0 ![:faic](arrow-right) no patter
 hist(resid(M8))
 ```
 
-&lt;img src="workshop06-en_files/figure-html/unnamed-chunk-30-1.png" width="360" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop06-en_files/figure-html/unnamed-chunk-29-1.png" width="360" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -1204,7 +1231,7 @@ Plot_AllData + geom_abline(intercept = -0.0009059, slope = 0.4222697)
 ## Solution ![:cube]()
 
 a) Figure with all data grouped
-&lt;img src="workshop06-en_files/figure-html/unnamed-chunk-35-1.png" width="432" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop06-en_files/figure-html/unnamed-chunk-34-1.png" width="432" style="display: block; margin: auto;" /&gt;
 
 ---
 ## Solution ![:cube]()
@@ -1236,7 +1263,7 @@ Plot_BySpecies +
 
 b) Figure by species
 
-&lt;img src="workshop06-en_files/figure-html/unnamed-chunk-37-1.png" width="576" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop06-en_files/figure-html/unnamed-chunk-36-1.png" width="576" style="display: block; margin: auto;" /&gt;
 
 ---
 ## Solution ![:cube]()
@@ -1263,7 +1290,7 @@ Plot_ByLake +
 ## Solution ![:cube]()
 
 c) Figure by lake
-&lt;img src="workshop06-en_files/figure-html/unnamed-chunk-39-1.png" width="576" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop06-en_files/figure-html/unnamed-chunk-38-1.png" width="576" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -1403,9 +1430,35 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     }
     deleted = true;
   });
-})();</script>
-
-<script>
+})();
+(function() {
+  "use strict"
+  /* Replace <script> tags in slides area to make them executable
+   *
+   * Runs after post-processing of markdown source into slides and replaces only
+   * <script>s on the last slide of continued slides using the .has-continuation
+   * class added by xaringan. Finally, any <script>s in the slides area that
+   * aren't executed are commented out.
+   */
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container:not(.has-continuation) script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+  var scriptsNotExecuted = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container.has-continuation script'
+  );
+  if (!scriptsNotExecuted.length) return;
+  for (var i = 0; i < scriptsNotExecuted.length; i++) {
+    var comment = document.createComment(scriptsNotExecuted[i].outerHTML)
+    scriptsNotExecuted[i].parentElement.replaceChild(comment, scriptsNotExecuted[i])
+  }
+})();
 (function() {
   var links = document.getElementsByTagName('a');
   for (var i = 0; i < links.length; i++) {
@@ -1413,8 +1466,7 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
       links[i].target = '_blank';
     }
   }
-})();
-</script>
+})();</script>
 
 <script>
 slideshow._releaseMath = function(el) {
