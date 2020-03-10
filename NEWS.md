@@ -1,6 +1,9 @@
+# version 0.1.0.9000
+
+* load ggplot2 before using it
+
 # version 0.1.0
 
-* update README.
 * Use `first_slides()` from the helper package to generate the 2 first slides.
 * Fix a bunch of typos.
 * Load packages only when needed.

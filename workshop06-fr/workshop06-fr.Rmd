@@ -94,6 +94,7 @@ head(data)
 <br>
 
 ```{r, echo= FALSE}
+library(ggplot2)
 data <- read.csv('data/qcbs_w6_data.csv')
 
 # thème simplifié
