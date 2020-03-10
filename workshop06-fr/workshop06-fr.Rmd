@@ -614,6 +614,10 @@ $$PT_{ijk} \sim Longueur_i + Lac_j + Espèce_k + \varepsilon$$
 
 ###### ... En code R
 
+```{r, include = FALSE}
+library(lme4)
+```
+
 ```{r, eval = FALSE}
 library(lme4)
 lmer(Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species),
@@ -774,11 +778,14 @@ M8 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake),
 
 Pour trouver la valeur AICc d'un modèle, utilisez :
 
-```{r, eval = FALSE}
+```{r}
 library(AICcmodavg)
 AICc(M1)
 ```
 
+
+---
+# Coder et sélectionner le meilleur modèle
 
 Pour regrouper toutes les valeurs d'AICc dans un seul tableau, utilisez :
 

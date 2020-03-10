@@ -613,6 +613,10 @@ $$PT_{ijk} ~ Length_i + Lac_j + Espèce_k + \epsilon$$
 
 * ... in R code
 
+```{r, include = FALSE}
+library(lme4)
+```
+
 ```{r, eval = FALSE}
 library(lme4)
 lmer(Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species),
@@ -750,10 +754,13 @@ M8 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake),
 
 To find the AICc value of a model, use:
 
-```{r, eval = FALSE}
+```{r}
 library(AICcmodavg)
 AICc(M1)
 ```
+
+---
+## Code potential models and model selection
 
 
 To group all AICc values into a single table, use:

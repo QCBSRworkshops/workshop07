@@ -1,6 +1,6 @@
 # version 0.1.0.9000
 
-* load ggplot2 before using it
+* load packages before using them
 
 # version 0.1.0
 
