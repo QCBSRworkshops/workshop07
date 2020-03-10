@@ -1,4 +1,0 @@
-cran_pkgs:
-    - tidyverse
-    - lme4
-    - AICcmodavg
