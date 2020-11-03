@@ -1,7 +1,8 @@
 language: r
-pandoc_version: 2.2.1
+os: linux
 dist: focal
-sudo: required
+r: release
+pandoc_version: 2.9.2
 
 branches:
   only:
@@ -9,13 +10,13 @@ branches:
     - master
 
 cache:
-  packages: yes
+  packages: true
   directories:
     - $HOME/bin
 
 script:
   - Rscript -e "qcbsRworkshops::build_workshops(update_template = TRUE, pdf = TRUE, script = TRUE)"
-  
+
 before_deploy:
   - mkdir public
   - cp README.md public
@@ -23,9 +24,10 @@ before_deploy:
 
 deploy:
   provider: pages
+  token: $GH_TOKEN
+  strategy: git 
   skip_cleanup: true
-  github_token: $GH_TOKEN
-  keep_history: true
+  keep_history: false
   target_branch: master
   local_dir: public
   on:

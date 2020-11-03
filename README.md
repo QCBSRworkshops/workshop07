@@ -19,6 +19,7 @@ ou ouvrez un pull request (voir les instructions https://qcbsrworkshops.github.i
 [![badge](https://img.shields.io/static/v1?style=flat-square&label=Slides&message=06&color=red&logo=html5)](https://qcbsrworkshops.github.io/workshop06/workshop06-en/workshop06-en.html)
 [![badge](https://img.shields.io/static/v1?style=flat-square&label=Slides&message=06&color=red&logo=adobe-acrobat-reader)](https://qcbsrworkshops.github.io/workshop06/workshop06-en/workshop06-en.pdf)
 [![badge](https://img.shields.io/static/v1?style=flat-square&label=script&message=06&color=2a50b8&logo=r)](https://qcbsrworkshops.github.io/workshop06/workshop06-en/workshop06-en.R)
+
 Mixed effects models allow ecologists to overcome a number of limitations
 associated with traditional linear models. In this workshop, you will learn
 when it is important to use a mixed effects model to analyze your data. We will

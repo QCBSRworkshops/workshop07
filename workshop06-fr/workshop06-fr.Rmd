@@ -83,7 +83,7 @@ Pour répondre, 3 espèces ont été sélectionnées et dix individus par espèc
 <br>
 
 ```{r, eval = TRUE}
-data <- read.csv('data/qcbs_w6_data.csv')
+data <- read.csv('data/qcbs_w6_data.csv', stringsAsFactors = TRUE)
 head(data)
 ```
 

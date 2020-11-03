@@ -102,9 +102,9 @@ Throughout this workshop, there will be a series of **challenges** that you can 
 
 <br>
 
-```{r, echo= FALSE}
+```{r, echo = FALSE}
 library(ggplot2)
-data <- read.csv('data/qcbs_w6_data.csv')
+data <- read.csv('data/qcbs_w6_data.csv', stringsAsFactors = TRUE)
 
 # simple theme
 fig <- theme_bw() + theme(panel.grid.minor=element_blank(), panel.grid.major=element_blank(), panel.background=element_blank()) +
@@ -177,7 +177,7 @@ You can:
 
 **Option 2. Lump**:
 
-- Run one analysis ignoring ake and species
+- Run one analysis ignoring lake and species
 
 ---
 
@@ -449,7 +449,7 @@ table(data$Fish_Species)
 Look at the distribution of continuous variables
 
 ```{r, fig.width=10, fig.height=4}
-par(mfrow=c(1,2), mar = c(4,4,1,1))
+par(mfrow = c(1, 2), mar = c(4, 4, 1, 1))
 hist(data$Fish_Length)
 hist(data$Trophic_Pos)
 ```
@@ -515,7 +515,7 @@ $$z = \frac{(x-mean(x))}{standard.deviation(x)}$$
 data$Z_Length <- (data$Fish_Length-mean(data$Fish_Length))/sd(data$Fish_Length)
 
 # Standardized trophic position:
-data$Z_TP<- (data$Trophic_Pos-mean(data$Trophic_Pos))/sd(data$Trophic_Pos)
+data$Z_TP <- (data$Trophic_Pos-mean(data$Trophic_Pos))/sd(data$Trophic_Pos)
 ```
 
 
@@ -572,7 +572,7 @@ abline(0, 0, lty = 2)
 3. Plot the residuals against the levels of the potential random factors
 
 ```{r, fig.width=10, fig.height=5, echo = FALSE}
-par(mfrow=c(1,2), mar = c(4,4,1,1))
+par(mfrow = c(1, 2), mar = c(4, 4, 1, 1))
 plot(lm.test.resid ~ data$Fish_Species,
      xlab = "Species", ylab = "Standardized residuals")
 abline(0, 0, lty = 2)
