@@ -14,7 +14,6 @@ output:
       highlightLines: false
 ---
 
-
 ```{r setup, echo = FALSE}
 knitr::opts_chunk$set(
   comment = "#",
@@ -26,7 +25,7 @@ knitr::opts_chunk$set(
   fig.retina = 3,
   fig.align = 'center'
 )
-options(repos=structure(c(CRAN="http://cran.r-project.org")))
+options(repos = structure(c(CRAN="http://cran.r-project.org")))
 ```
 
 class: inverse, center, middle
@@ -93,7 +92,7 @@ Throughout this workshop, there will be a series of **challenges** that you can 
 
 * Introduction to the example dataset
 
-* Open the workshop script in R
+* Open the workshop script in `R`
 
 * Reproduce the plots 1 to 3 from the script. Observe the plots and try to get a sense of what you see.
 
@@ -555,12 +554,12 @@ lm.test.resid <- rstandard(lm.test)
 ```{r, fig.width=10, fig.height=5, eval = FALSE}
 par(mfrow=c(1,2))
 
-plot(lm.test.resid ~ data$Fish_Species,
+plot(lm.test.resid ~ as.factor(data$Fish_Species),
      xlab = "Species", ylab = "Standardized residuals")
 
 abline(0, 0, lty = 2)
 
-plot(lm.test.resid ~ data$Lake,
+plot(lm.test.resid ~ as.factor(data$Lake),
      xlab = "Lake", ylab = "Standardized residuals")
 
 abline(0, 0, lty = 2)
@@ -573,10 +572,10 @@ abline(0, 0, lty = 2)
 
 ```{r, fig.width=10, fig.height=5, echo = FALSE}
 par(mfrow = c(1, 2), mar = c(4, 4, 1, 1))
-plot(lm.test.resid ~ data$Fish_Species,
+plot(lm.test.resid ~ as.factor(data$Fish_Species),
      xlab = "Species", ylab = "Standardized residuals")
 abline(0, 0, lty = 2)
-plot(lm.test.resid ~ data$Lake,
+plot(lm.test.resid ~ as.factor(data$Lake),
      xlab = "Lake", ylab = "Standardized residuals")
 abline(0, 0, lty = 2)
 ```

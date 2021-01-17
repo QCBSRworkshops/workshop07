@@ -556,12 +556,12 @@ Représentez graphiquement la valeur des résidus en fonction des niveaux des fa
 ```{r, fig.width=10, fig.height=5, eval = FALSE}
 par(mfrow=c(1,2))
 
-plot(lm.test.resid ~ data$Fish_Species,
+plot(lm.test.resid ~ as.factor(data$Fish_Species),
      xlab = "Species", ylab = "Standardized residuals")
 
 abline(0, 0, lty = 2)
 
-plot(lm.test.resid ~ data$Lake,
+plot(lm.test.resid ~ as.factor(data$Lake),
      xlab = "Lake", ylab = "Standardized residuals")
 
 abline(0, 0, lty = 2)
@@ -574,10 +574,10 @@ Représentez graphiquement la valeur des résidus en fonction des niveaux des fa
 
 ```{r, fig.width=10, fig.height=5, echo = FALSE}
 par(mfrow=c(1,2), mar = c(4,4,1,1))
-plot(lm.test.resid ~ data$Fish_Species,
+plot(lm.test.resid ~ as.factor(data$Fish_Species),
      xlab = "Species", ylab = "Standardized residuals")
 abline(0, 0, lty = 2)
-plot(lm.test.resid ~ data$Lake,
+plot(lm.test.resid ~ as.factor(data$Lake),
      xlab = "Lake", ylab = "Standardized residuals")
 abline(0, 0, lty = 2)
 ```
