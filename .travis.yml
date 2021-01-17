@@ -1,7 +1,6 @@
 language: r
 os: linux
 dist: focal
-r: release
 pandoc_version: 2.9.2
 
 branches:
@@ -24,10 +23,9 @@ before_deploy:
 
 deploy:
   provider: pages
-  token: $GH_TOKEN
-  strategy: git 
   skip_cleanup: true
   keep_history: false
+  github_token: $GH_TOKEN
   target_branch: master
   local_dir: public
   on:
