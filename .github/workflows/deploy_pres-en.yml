@@ -18,14 +18,22 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Setup R  
+      - name: Set up R  
         uses: r-lib/actions/setup-r@v1
-      
+            
+      - name: Cache R packages
+        uses: actions/cache@v1
+        with:
+          path: ${{ env.R_LIBS_USER }}
+          key:  r-${{ hashFiles('DESCRIPTION') }}
+
       - name: Install pandoc and pandoc citeproc
         uses: r-lib/actions/setup-pandoc@v1
         
-      - name: Install R dependencies
-        run: Rscript -e 'install.packages(c("knitr", "xaringan", "ggplot2", "png"))'
+      - name: Install R pacakges and dependencies
+        run: |
+          Rscript -e 'options(Ncpus = 4); pkgs = c("xaringan", "ggplot2", "tidyverse"); 
+          if(length(new.pkgs <- setdiff(pkgs, rownames(installed.packages())))) install.packages(new.pkgs)'
         
       - name: Render presentation
         run: Rscript -e 'rmarkdown::render("workshop06-pres-en.Rmd")'
