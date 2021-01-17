@@ -31,11 +31,21 @@ options(repos=structure(c(CRAN="http://cran.r-project.org")))
 
 class: inverse, center, middle
 
-```{R install_pkgs, eval = FALSE, include = FALSE, results = "asis"}
-cat(
-  qcbsRworkshops::first_slides(6, c('ggplot2', 'lme4', 'AICcmodavg'), lang = "fr")
-)
+```{r install_pkgs, message=FALSE, warning=FALSE, include=FALSE, results=0}
+# Standard procedure to check and install packages and their dependencies, if needed
+
+list.of.packages <- c("ggplot2", "lme4", "AICcmodavg")
+
+new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
+
+if(length(new.packages) > 0) {
+  install.packages(new.packages, dependencies = TRUE) 
+  print(paste0("The following package was installed:", new.packages)) 
+} else if(length(new.packages) == 0) {
+    print("All packages were already installed previously")
+  }
 ```
+
 # À propos de cet atelier
 [![badge](https://img.shields.io/static/v1?style=for-the-badge&label=repo&message=dev&color=6f42c1&logo=github)](https://github.com/QCBSRworkshops/workshop06)
 [![badge](https://img.shields.io/static/v1?style=for-the-badge&label=wiki&message=06&logo=wikipedia)](https://wiki.qcbs.ca/r_atelier6)
