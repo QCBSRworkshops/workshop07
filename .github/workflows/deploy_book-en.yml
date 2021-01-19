@@ -3,7 +3,7 @@ on:
     branches:
        - dev
   repository_dispatch: 
-    types: [pong]
+    types: [pong_book]
 
 name: render-book-en
 
@@ -21,7 +21,7 @@ jobs:
           curl -X POST https://api.github.com/repos/QCBSRworkshops/templateWorkshops/dispatches \
           -H 'Accept: application/vnd.github.everest-preview+json' \
           -u ${{ secrets.ACCESS_TOKEN }} \
-          --data '{"event_type": "acknowledged", "client_payload": { "repository": "'"$GITHUB_REPOSITORY"'" }}'
+          --data '{"event_type": "acknowledged_book", "client_payload": { "repository": "'"$GITHUB_REPOSITORY"'" }}'
           
   book-en-job:
     name: Render the book for this workshop in bookdown
