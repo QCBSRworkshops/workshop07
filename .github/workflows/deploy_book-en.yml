@@ -2,7 +2,7 @@ on:
   push:
      branches:
        - dev
-  repository_dispatch:
+  repository_dispatch: pong
 
 name: render-book-en
 
@@ -14,13 +14,13 @@ jobs:
         run: |
           echo "Event '${{ github.event.action }}' received from '${{ github.event.client_payload.repository }}'"
           
-      - name: PONG - Dispatch response to received PING
-        if: github.event.action == 'ping'
+      - name: ACKNOWLEDGE - Dispatch response to received PONG
+        if: github.event.action == 'pong'
         run: |
           curl -X POST https://api.github.com/repos/QCBSRworkshops/templateWorkshops/dispatches \
           -H 'Accept: application/vnd.github.everest-preview+json' \
           -u ${{ secrets.ACCESS_TOKEN }} \
-          --data '{"event_type": "pong", "client_payload": { "repository": "'"$GITHUB_REPOSITORY"'" }}'
+          --data '{"event_type": "acknowledged", "client_payload": { "repository": "'"$GITHUB_REPOSITORY"'" }}'
           
   book-en-job:
     name: Render the book for this workshop in bookdown
@@ -66,8 +66,7 @@ jobs:
   
 # Need to first create an empty gh-pages branch
 # see https://pkgdown.r-lib.org/reference/deploy_site_github.html
-# and also add secrets for a GH_PAT and EMAIL to the repository
-# gh-action from Cecilapp/GitHub-Pages-deploy
+# and also add secrets for an ACCESS_TOKEN
 
   checkout-and-deploy:
    name: Checkout and deploy the book within the master repository
