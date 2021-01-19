@@ -1,8 +1,9 @@
 on:
   push:
-     branches:
+    branches:
        - dev
-  repository_dispatch: pong
+  repository_dispatch: 
+    types: [pong]
 
 name: render-book-en
 

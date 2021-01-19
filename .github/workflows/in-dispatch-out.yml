@@ -1,5 +1,6 @@
 on:
   repository_dispatch:
+    types: [ping]
 
 name: dispatched-from-template
 
