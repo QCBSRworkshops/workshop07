@@ -3,7 +3,8 @@ on:
      branches:
        - dev
   repository_dispatch:
-  
+     types: ping
+
 name: render-book-en
 
 jobs:
