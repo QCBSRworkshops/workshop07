@@ -20,7 +20,21 @@ jobs:
 
       - name: Setup R  
         uses: r-lib/actions/setup-r@v1
-      
+        
+      - name: Cache R packages
+        uses: actions/cache@v1
+        with:
+          path: ${{ env.R_LIBS_USER }}
+          key:  r-${{ hashFiles('DESCRIPTION') }}
+
+      - name: Install pandoc and pandoc citeproc
+        uses: r-lib/actions/setup-pandoc@v1
+        
+      - name: Install R pacakges and dependencies
+        run: |
+          Rscript -e 'options(Ncpus = 4); pkgs = c("xaringan", "ggplot2", "tidyverse"); 
+          if(length(new.pkgs <- setdiff(pkgs, rownames(installed.packages())))) install.packages(new.pkgs)'
+              
       - name: Install pandoc and pandoc citeproc
         uses: r-lib/actions/setup-pandoc@v1
         
