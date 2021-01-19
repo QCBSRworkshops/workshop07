@@ -8,7 +8,8 @@ on:
 name: render-book-en
 
 jobs:
-  ping-pong:
+  repository-dispatch-received:
+    name: DISPATCH RECEIVED - Starting all jobs here
     runs-on: ubuntu-latest
     steps:
       - name: Event Information
@@ -38,24 +39,18 @@ jobs:
         uses: r-lib/actions/setup-r@v1
         
       - name: Cache R packages
-        uses: actions/cache@v2
+        uses: actions/cache@v2 # Must be v2 so it accepts the GITHUB_REF from the repository_dispatch
         with:
           path: ${{ env.R_LIBS_USER }}
           key:  r-${{ hashFiles('DESCRIPTION') }}
 
       - name: Install pandoc and pandoc citeproc
         uses: r-lib/actions/setup-pandoc@v1
-        
+    
       - name: Install R packages and dependencies
         run: |
           Rscript -e 'options(Ncpus = 4); pkgs = c("rmarkdown", "bookdown", "formatR"); 
-          if(length(new.pkgs <- setdiff(pkgs, rownames(installed.packages())))) install.packages(new.pkgs)'        
-      
-      - name: Install pandoc and pandoc citeproc
-        uses: r-lib/actions/setup-pandoc@v1
-        
-      - name: Install R dependencies
-        run: Rscript -e 'install.packages(c("rmarkdown", "bookdown", "formatR"))'
+          if(length(new.pkgs <- setdiff(pkgs, rownames(installed.packages())))) install.packages(new.pkgs)'
         
       - name: Render the book using bookdown
         run: Rscript -e 'bookdown::render_book("index.Rmd")'

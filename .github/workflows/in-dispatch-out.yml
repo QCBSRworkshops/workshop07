@@ -6,6 +6,7 @@ name: receive-from-template-and-dispatch-to-workflows
 
 jobs:
   dispatch-to-workflows:
+    name: Dispatch received from the template changes - Sending dispatch to workflows
     runs-on: ubuntu-latest
     steps:
       - name: Event Information
