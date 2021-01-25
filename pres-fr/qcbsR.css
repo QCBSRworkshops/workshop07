@@ -1,3 +1,7 @@
+/* DO NOT EDIT THE COMMENTS BELOW */
+/* from QCBSRworkshops/templateWorkshops */
+/* END OF DO NOT EDIT COMMENTS */
+
 html {
   margin: 0px;
   padding: 0px;
@@ -11,7 +15,7 @@ html {
 
 .remark-slide-content p {
   font-size: 1.5rem;
-  padding: .4rem 1rem .4rem 1.4rem;
+  padding: .4rem 1rem .4rem 1.2rem;
   margin: .1rem;
 }
 
@@ -21,17 +25,17 @@ html {
 }
 
 .remark-code-line {
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   line-height: 1.4;
 }
 
 .hljs {
-  padding: .8rem 1rem .8rem 1rem !important;
+  padding: .8rem !important;
   background-color: #f3f3f3 !important;
 }
 
 .remark-code .remark-code-line {
-  padding-left: 1rem !important;
+  padding-left: .6rem !important;
 }
 
 .remark-inline-code {
@@ -230,6 +234,31 @@ a:hover {
 
 .pull-right2, .pull-right2 p {
   padding-left: 0rem ;
+}
+
+.pull-left3 {
+  float: left;
+  width: 57%;
+}
+.pull-right3 {
+  float: right;
+  width: 38%;
+}
+
+.pull-right3, .pull-right3 p {
+  padding-left: 0rem ;
+}
+
+.left-code {
+  color: #777;
+  width: 57%;
+  height: 92%;
+  float: left;
+}
+.right-plot {
+  width: 38%;
+  float: right;
+  padding-left: 1%;
 }
 
 /* Blockquote */
