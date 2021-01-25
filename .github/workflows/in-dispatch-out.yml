@@ -73,7 +73,7 @@ jobs:
        - name: List directories
          run: |
            ls
-           cd pres-en/css
+           cd pres-en
            ls 
          
        - name: Commit and push to the current repository
