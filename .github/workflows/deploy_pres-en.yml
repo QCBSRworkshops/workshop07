@@ -34,6 +34,13 @@ jobs:
         run: |
           Rscript -e 'options(Ncpus = 4); pkgs = c("xaringan", "ggplot2", "tidyverse"); 
           if(length(new.pkgs <- setdiff(pkgs, rownames(installed.packages())))) install.packages(new.pkgs)'
+          
+      - name: Download template files to the working directory
+        run: | 
+          curl -O https://raw.githubusercontent.com/QCBSRworkshops/templateWorkshops/master/presentation-template/qcbsR.css 
+          curl -O https://raw.githubusercontent.com/QCBSRworkshops/templateWorkshops/master/presentation-template/qcbsR-fonts.css
+          curl -O https://raw.githubusercontent.com/QCBSRworkshops/templateWorkshops/master/presentation-template/qcbsR-macros.js
+          curl -O https://raw.githubusercontent.com/QCBSRworkshops/templateWorkshops/master/presentation-template/qcbsR-header.html
         
       - name: Render presentation
         run: Rscript -e 'rmarkdown::render("workshop06-pres-en.Rmd")'
