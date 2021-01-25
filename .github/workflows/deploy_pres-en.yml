@@ -32,8 +32,11 @@ jobs:
         
       - name: Install R pacakges and dependencies
         run: |
-          Rscript -e 'options(Ncpus = 4); pkgs = c("xaringan", "ggplot2", "tidyverse"); 
+          Rscript -e 'options(Ncpus = 4); pkgs = c("xaringan");
           if(length(new.pkgs <- setdiff(pkgs, rownames(installed.packages())))) install.packages(new.pkgs)'
+          
+      - name: List working directory
+        run: ls
           
       - name: Download template files to the working directory
         run: | 
