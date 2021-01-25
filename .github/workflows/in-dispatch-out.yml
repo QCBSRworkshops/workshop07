@@ -1,6 +1,7 @@
 on:
   push:
-    branches: master
+    branches: 
+     - dev
   repository_dispatch:
     types: [ping_book, ping_presentation]
 
