@@ -64,7 +64,7 @@ jobs:
                 --location https://api.github.com/repos/QCBSRworkshops/templateWorkshops/contents/presentation-template/qcbsR-macros.js \
                 --output pres-fr/qcbsR-macros.js
 
-       - name: List directories
+       - name: List directories # May be removed soon
          run: ls
        
        - name: Commit and push changes to the current repository

@@ -9,20 +9,20 @@ name: render-book-en
 
 jobs:
   repository-dispatch-received:
-    name: DISPATCH RECEIVED - Starting all jobs here
+    name: Dispatch received - starting all jobs here
     runs-on: ubuntu-latest
     steps:
       - name: Event Information
         run: |
           echo "Event '${{ github.event.action }}' received from '${{ github.event.client_payload.repository }}'"
           
-      - name: ACKNOWLEDGE - Dispatch response to received PONG
+      - name: Acknowledge - dispatch response to received pong
         if: github.event.action == 'pong_book'
         run: |
           curl -X POST https://api.github.com/repos/QCBSRworkshops/templateWorkshops/dispatches \
           -H 'Accept: application/vnd.github.everest-preview+json' \
           -u ${{ secrets.ACCESS_TOKEN }} \
-          --data '{"event_type": "acknowledged_book", "client_payload": { "repository": "'"$GITHUB_REPOSITORY"'" }}'
+          --data '{"event_type": "acknowledged_book_en", "client_payload": { "repository": "'"$GITHUB_REPOSITORY"'" }}'
           
   book-en-job:
     name: Render the book for this workshop in bookdown
