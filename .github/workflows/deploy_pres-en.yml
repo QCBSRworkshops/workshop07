@@ -2,6 +2,8 @@ on:
   push:
      branches:
        - dev
+     paths:
+       - pres-en/**
   repository_dispatch: 
     types: [pong_presentation]
   

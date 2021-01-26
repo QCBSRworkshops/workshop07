@@ -2,9 +2,11 @@ on:
   push:
      branches:
        - dev
+     paths:
+       - book-fr/**
   repository_dispatch: 
     types: [pong_book]
-  
+
 name: render-book-fr
 
 jobs:
