@@ -2,6 +2,8 @@ on:
   push:
     branches:
        - dev
+    paths:
+       - book-en/**
   repository_dispatch: 
     types: [pong_book]
 
