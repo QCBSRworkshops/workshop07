@@ -2,6 +2,7 @@ fig:nice-fig
 tab:nice-tab
 prerequisites
 intro
+workshop-6-linear-mixed-effects-models
 literature
 methods
 applications
