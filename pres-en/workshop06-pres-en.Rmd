@@ -11,7 +11,8 @@ output:
     css: ["default", "qcbsR.css", "qcbsR-fonts.css"]
     nature:
       beforeInit: "qcbsR-macros.js"
-      highlightLines: false
+      highlightLines: true
+      highlightStyle: github
 ---
 
 ```{r setup, echo = FALSE}
@@ -21,7 +22,7 @@ knitr::opts_chunk$set(
   warning = FALSE,
   message = FALSE,
   cache = TRUE,
-  fig.width=6, fig.height=6,
+  fig.width = 6, fig.height = 6,
   fig.retina = 3,
   fig.align = 'center'
 )
