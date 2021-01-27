@@ -1,5 +1,5 @@
 ---
-title: "Workshop 6: Linear mixed models"
+title: "Workshop 6: Linear mixed models (LMM)"
 subtitle: "QCBS R Workshop Series"
 author: "Québec Centre for Biodiversity Science"
 output:
@@ -32,7 +32,7 @@ options(repos = structure(c(CRAN="http://cran.r-project.org")))
 class: inverse, center, middle
 
 ```{r install_pkgs, message=FALSE, warning=FALSE, include=FALSE, results=0}
-# Standard procedure to check and install packages and their dependencies, if needed
+# Standard procedure to check and install packages and their dependencies, if needed.
 
 list.of.packages <- c("ggplot2", "lme4", "AICcmodavg")
 
@@ -74,7 +74,7 @@ install.packages(c('ggplot2', 'lme4', 'AICcmodavg'))
 
 ##### 1. What is a linear mixed effects model (LMM) and why should I care?
 
-##### 2. How do I implement LMM's in R?
+##### 2. How do I implement LMM in R?
   - A priori model building and data exploration
   - Coding potential models and model selection
   - Model validation
