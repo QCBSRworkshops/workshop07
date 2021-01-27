@@ -1,6 +1,6 @@
 --- 
-title: "A Minimal Book Example"
-author: "Yihui Xie"
+title: "Workshop 6: Linear Mixed Models (LMM)"
+author: "QCBS R Workshop Series"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
