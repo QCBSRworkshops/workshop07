@@ -2,7 +2,7 @@
 
 This series of 10 workshops walks participants through the steps required to use R for a wide array of statistical analyses relevant to research in biology and ecology. These open-access workshops were created by members of the QCBS both for members of the QCBS and the larger community.
 
-The content of this workshop has been peer-reviewed by several QCBS members. If you would like to suggest modifications, please contact the current series coordinators, listed [here](https://wiki.qcbs.ca/r) or open a pull request (see contributing guidelines at <https://qcbsrworkshops.github.io/guidelines.html>).
+The content of this workshop has been peer-reviewed by several QCBS members. If you would like to suggest modifications, please contact the current series coordinators, listed [here](https://wiki.qcbs.ca/r) or open a pull request (see contributing guidelines at <https://qcbsrworkshops.github.io/presenter-developer-protocol/developing-en.html>).
 
 # [Série d'ateliers R du CSBQ](https://wiki.qcbs.ca/r)
 
@@ -22,15 +22,9 @@ Mixed effects models allow ecologists to overcome a number of limitations associ
 
 Les modèles à effets mixtes permettent aux écologistes de surmonter un certain nombre de limitations liées aux modèles linéaires traditionnels. Dans cet atelier, vous apprendrez à déterminer si vous devez utiliser un modèle à effets mixtes pour analyser vos données. Nous allons vous guider à travers les étapes nécessaires pour utiliser un modèle linéaire mixte, vérifier les suppositions de base et présenter les résultats de votre modèle dans R.
 
-# How to contribute
-
-If you notice any mistakes or inconsistencies, or if you would like to make a suggestion, either in form or in content, you are invited to open an issue.
-
-Guidelines for workshop development are available at the following <https://qcbsrworkshops.github.io/presenter-developer-protocol/developing-en.html>.
-
 # Status
 
-[![template](https://github.com/QCBSRworkshops/workshop06/workflows/receive-from-template-and-dispatch-to-workflows/badge.svg)](https://github.com/QCBSRworkshops/workshop06/actions?query=workflow%3Areceive-from-template-and-dispatch-to-workflows)
+[![receive-from-template-and-dispatch-to-workflows](https://github.com/QCBSRworkshops/workshop06/workflows/receive-from-template-and-dispatch-to-workflows/badge.svg)](https://github.com/QCBSRworkshops/workshop06/actions?query=workflow%3Areceive-from-template-and-dispatch-to-workflows)
 
 Language | Slides                                                                                                                                                                                                             | Book
 :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
