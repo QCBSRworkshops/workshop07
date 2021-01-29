@@ -24,7 +24,9 @@ Les modèles à effets mixtes permettent aux écologistes de surmonter un certai
 
 # How to contribute
 
-Guidelines are available at the following <https://qcbsrworkshops.github.io/guidelines.html>.
+If you notice any mistakes or inconsistencies, or if you would like to make a suggestion, either in form or in content, you are invited to open an issue.
+
+Guidelines for workshop development are available at the following <https://qcbsrworkshops.github.io/presenter-developer-protocol/developing-en.html>.
 
 # Status
 
