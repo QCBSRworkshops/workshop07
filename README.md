@@ -28,8 +28,9 @@ FR | [![badge](https://img.shields.io/static/v1?style=flat-square&label=Diapos&m
 
 # Development status
 
-Language | Slides                                                                                                                                                                                                             | Book
-:------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Both || [![receive-from-template-and-dispatch-to-workflows](https://github.com/QCBSRworkshops/workshop06/workflows/receive-from-template-and-dispatch-to-workflows/badge.svg)](https://github.com/QCBSRworkshops/workshop06/actions?query=workflow%3Areceive-from-template-and-dispatch-to-workflows) 
+Both | [![receive-from-template-and-dispatch-to-workflows](https://github.com/QCBSRworkshops/workshop06/workflows/receive-from-template-and-dispatch-to-workflows/badge.svg)](https://github.com/QCBSRworkshops/workshop06/actions?query=workflow%3Areceive-from-template-and-dispatch-to-workflows) 
+:------- | :----- 
+Language | Slides | Book
+:------- | :----- | :-----
 EN  | [![render-presentation-en](https://github.com/QCBSRworkshops/workshop06/workflows/render-presentation-en/badge.svg)](https://github.com/QCBSRworkshops/workshop06/actions?query=workflow%3Arender-presentation-en) | [![render-book-en](https://github.com/QCBSRworkshops/workshop06/workflows/render-book-en/badge.svg)](https://github.com/QCBSRworkshops/workshop06/actions?query=workflow%3Arender-book-en)
 FR   | [![render-presentation-fr](https://github.com/QCBSRworkshops/workshop06/workflows/render-presentation-fr/badge.svg)](https://github.com/QCBSRworkshops/workshop06/actions?query=workflow%3Arender-presentation-fr) | [![render-book-fr](https://github.com/QCBSRworkshops/workshop06/workflows/render-book-fr/badge.svg)](https://github.com/QCBSRworkshops/workshop06/actions?query=workflow%3Arender-book-fr)
