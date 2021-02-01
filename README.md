@@ -22,11 +22,18 @@ Mixed effects models allow ecologists to overcome a number of limitations associ
 
 Les modèles à effets mixtes permettent aux écologistes de surmonter un certain nombre de limitations liées aux modèles linéaires traditionnels. Dans cet atelier, vous apprendrez à déterminer si vous devez utiliser un modèle à effets mixtes pour analyser vos données. Nous allons vous guider à travers les étapes nécessaires pour utiliser un modèle linéaire mixte, vérifier les suppositions de base et présenter les résultats de votre modèle dans R.
 
-# Status
+# Materials
+
+Language | Slides | Book | Wiki | Script | GitHub 
+:--------|:-------|:-----|:-----|:------ |:-------
+EN | here | here | here | here | here | here
+FR | here | here | here | here | here | here
+
+# Development status
 
 [![receive-from-template-and-dispatch-to-workflows](https://github.com/QCBSRworkshops/workshop06/workflows/receive-from-template-and-dispatch-to-workflows/badge.svg)](https://github.com/QCBSRworkshops/workshop06/actions?query=workflow%3Areceive-from-template-and-dispatch-to-workflows)
 
 Language | Slides                                                                                                                                                                                                             | Book
 :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-English  | [![render-presentation-en](https://github.com/QCBSRworkshops/workshop06/workflows/render-presentation-en/badge.svg)](https://github.com/QCBSRworkshops/workshop06/actions?query=workflow%3Arender-presentation-en) | [![render-book-en](https://github.com/QCBSRworkshops/workshop06/workflows/render-book-en/badge.svg)](https://github.com/QCBSRworkshops/workshop06/actions?query=workflow%3Arender-book-en)
-French   | [![render-presentation-fr](https://github.com/QCBSRworkshops/workshop06/workflows/render-presentation-fr/badge.svg)](https://github.com/QCBSRworkshops/workshop06/actions?query=workflow%3Arender-presentation-fr) | [![render-book-fr](https://github.com/QCBSRworkshops/workshop06/workflows/render-book-fr/badge.svg)](https://github.com/QCBSRworkshops/workshop06/actions?query=workflow%3Arender-book-fr)
+EN  | [![render-presentation-en](https://github.com/QCBSRworkshops/workshop06/workflows/render-presentation-en/badge.svg)](https://github.com/QCBSRworkshops/workshop06/actions?query=workflow%3Arender-presentation-en) | [![render-book-en](https://github.com/QCBSRworkshops/workshop06/workflows/render-book-en/badge.svg)](https://github.com/QCBSRworkshops/workshop06/actions?query=workflow%3Arender-book-en)
+FR   | [![render-presentation-fr](https://github.com/QCBSRworkshops/workshop06/workflows/render-presentation-fr/badge.svg)](https://github.com/QCBSRworkshops/workshop06/actions?query=workflow%3Arender-presentation-fr) | [![render-book-fr](https://github.com/QCBSRworkshops/workshop06/workflows/render-book-fr/badge.svg)](https://github.com/QCBSRworkshops/workshop06/actions?query=workflow%3Arender-book-fr)
