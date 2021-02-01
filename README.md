@@ -12,14 +12,13 @@ Le contenu de cet atelier a été révisé par plusieurs membres du CSBQ. Si vou
 
 # Workshop 6: Linear mixed effects models
 
-
 Mixed effects models allow ecologists to overcome a number of limitations associated with traditional linear models. In this workshop, you will learn when it is important to use a mixed effects model to analyze your data. We will walk you through the steps to conduct a linear mixed model analysis, check its assumptions, report results, and visually represent your model in R.
 
 # Atelier 6: Modèles linéaires à effets mixtes
 
 Les modèles à effets mixtes permettent aux écologistes de surmonter un certain nombre de limitations liées aux modèles linéaires traditionnels. Dans cet atelier, vous apprendrez à déterminer si vous devez utiliser un modèle à effets mixtes pour analyser vos données. Nous allons vous guider à travers les étapes nécessaires pour utiliser un modèle linéaire mixte, vérifier les suppositions de base et présenter les résultats de votre modèle dans R.
 
-# Materials
+# Workshop materials
 
 Language | Slides | Bookdown | Wiki | Script | GitHub 
 :--------|:-------|:-----|:-----|:------ |:-------
@@ -31,6 +30,8 @@ FR | [![badge](https://img.shields.io/static/v1?style=flat-square&label=Diapos&m
 **Template** 
 
 [![receive-from-template-and-dispatch-to-workflows](https://github.com/QCBSRworkshops/workshop06/workflows/receive-from-template-and-dispatch-to-workflows/badge.svg)](https://github.com/QCBSRworkshops/workshop06/actions?query=workflow%3Areceive-from-template-and-dispatch-to-workflows) 
+
+**Building workshop materials**
 
 Language | Slides | Book
 :------- | :----- | :-----
