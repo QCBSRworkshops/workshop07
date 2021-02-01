@@ -28,7 +28,8 @@ FR | [![badge](https://img.shields.io/static/v1?style=flat-square&label=Diapos&m
 
 # Development status
 
-**Template**: [![receive-from-template-and-dispatch-to-workflows](https://github.com/QCBSRworkshops/workshop06/workflows/receive-from-template-and-dispatch-to-workflows/badge.svg)](https://github.com/QCBSRworkshops/workshop06/actions?query=workflow%3Areceive-from-template-and-dispatch-to-workflows) 
+**Template** 
+[![receive-from-template-and-dispatch-to-workflows](https://github.com/QCBSRworkshops/workshop06/workflows/receive-from-template-and-dispatch-to-workflows/badge.svg)](https://github.com/QCBSRworkshops/workshop06/actions?query=workflow%3Areceive-from-template-and-dispatch-to-workflows) 
 
 Language | Slides | Book
 :------- | :----- | :-----
