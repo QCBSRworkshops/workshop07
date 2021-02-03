@@ -47,6 +47,9 @@ if(length(new.packages) > 0) {
 } else if(length(new.packages) == 0) {
     print("All packages were already installed previously")
   }
+
+# Load all required libraries at once
+lapply(list.of.packages, require, character.only = TRUE, quietly = TRUE)
 ```
 
 # About this workshop
