@@ -151,14 +151,14 @@ Throughout this workshop, there will be a series of **challenges** that you can 
 
 ```{r, echo = FALSE}
 library(ggplot2)
-data <- read.csv('data/qcbs_w6_data.csv', stringsAsFactors = TRUE)
+fish.data <- read.csv('data/qcbs_w6_data.csv', stringsAsFactors = TRUE)
 
 # simple theme
 fig <- theme_bw() + theme(panel.grid.minor=element_blank(), panel.grid.major=element_blank(), panel.background=element_blank()) +
   theme(strip.background=element_blank(), strip.text.y = element_text()) + theme(legend.background=element_blank()) +
   theme(legend.key=element_blank()) + theme(panel.border = element_rect(colour="black", fill=NA))
 
-plot <- ggplot(aes(Fish_Length,Trophic_Pos),data=data)
+plot <- ggplot(aes(Fish_Length,Trophic_Pos),data = fish.data)
 
 # Plot 1 - All data
 plot + geom_point() + xlab("Length (mm)") + ylab("Trophic Position") + labs(title="All Data") + fig
