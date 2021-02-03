@@ -1,5 +1,5 @@
 ---
-title: "Atelier 6: modèles linéaires à effets mixtes"
+title: "Atelier 7: Modèles generales et generalisés à effets mixtes"
 subtitle: "Série d'ateliers R du CSBQ"
 author: "Centre de la science de la biodiversité du Québec"
 output:
