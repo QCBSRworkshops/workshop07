@@ -1,0 +1,9 @@
+base
+ggplot2
+Matrix
+lme4
+AICcmodavg
+coda
+coefplot2
+gridExtra
+lattice
