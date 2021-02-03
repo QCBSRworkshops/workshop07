@@ -26,7 +26,10 @@ knitr::opts_chunk$set(
   fig.retina = 3,
   fig.align = 'center'
 )
+
 options(repos=structure(c(CRAN="http://cran.r-project.org")))
+
+mypar = list(mar = c(3,3,1,0.5), mgp = c(1.6, 0.3, 0), tck = -.02)
 ```
 
 class: inverse, center, middle
@@ -57,11 +60,11 @@ lapply(list.of.packages, require, character.only = TRUE, quietly = TRUE)
 
 # À propos de cet atelier
 
-[![badge](https://img.shields.io/static/v1?style=for-the-badge&label=repo&message=dev&color=6f42c1&logo=github)](https://github.com/QCBSRworkshops/workshop06)
-[![badge](https://img.shields.io/static/v1?style=for-the-badge&label=wiki&message=06&logo=wikipedia)](https://wiki.qcbs.ca/r_atelier6)
-[![badge](https://img.shields.io/static/v1?style=for-the-badge&label=Diapos&message=06&color=red&logo=html5)](https://qcbsrworkshops.github.io/workshop06/workshop06-fr/workshop06-fr.html)
-[![badge](https://img.shields.io/static/v1?style=for-the-badge&label=Diapos&message=06&color=red&logo=adobe-acrobat-reader)](https://qcbsrworkshops.github.io/workshop06/workshop06-fr/workshop06-fr.pdf)
-[![badge](https://img.shields.io/static/v1?style=for-the-badge&label=script&message=06&color=2a50b8&logo=r)](https://qcbsrworkshops.github.io/workshop06/workshop06-fr/workshop06-fr.R)
+[![badge](https://img.shields.io/static/v1?style=for-the-badge&label=repo&message=dev&color=6f42c1&logo=github)](https://github.com/QCBSRworkshops/workshop07)
+[![badge](https://img.shields.io/static/v1?style=for-the-badge&label=wiki&message=07&logo=wikipedia)](https://wiki.qcbs.ca/r_atelier7)
+[![badge](https://img.shields.io/static/v1?style=for-the-badge&label=Diapos&message=07&color=red&logo=html5)](https://qcbsrworkshops.github.io/workshop07/pres-fr/workshop07-pres-fr.html)
+[![badge](https://img.shields.io/static/v1?style=for-the-badge&label=Diapos&message=07&color=red&logo=adobe-acrobat-reader)](https://qcbsrworkshops.github.io/workshop07/workshop07-fr/workshop07-fr.pdf)
+[![badge](https://img.shields.io/static/v1?style=for-the-badge&label=script&message=07&color=2a50b8&logo=r)](https://qcbsrworkshops.github.io/workshop07/workshop07-fr/workshop07-fr.R)
 
 ---
 
@@ -91,25 +94,22 @@ install.packages(c("ggplot2",
 ---
 
 # Objectifs d'apprentissage
-<br>
 
-##### 1. Comprendre ce que sont les modèles linéaires à effets mixtes (MLMs)
+1. Décrivez ce que sont les modèles à effets mixtes ;
 
-##### 2. Comprendre leur pertinence notamment pour les sciences de la biodiversité
+2. Identifier les situations dans lesquelles l'utilisation d'effets mixtes est appropriée ;
 
-##### 3. Apprendre à utiliser les MLMs dans R
-    - Exploration des données
-    - Construction du modèle *a priori*
-    - Coder les modèles potentiels
-    - Sélection du meilleur modèle
-    - Validation du modèle
-    - Interprétation et visualisation des résultats
+3. Mettre en œuvre les modèles mixtes linéaires de base en `R` ;
+
+4. Exécuter les modèles linéaires mixtes généralisés de base dans `R` ;
+
+5. Valider, interpréter et visualiser les modèles mixtes dans  `R`.
 
 
 ---
 # Question
 
-.alert[** Est-ce que la position trophique des poissons augmente avec leur taille?**
+.alert[**Est-ce que la position trophique des poissons augmente avec leur taille?**
 ]
 
 Pour répondre, 3 espèces ont été sélectionnées et dix individus par espèce ont été mesurés (longueur corporelle) dans six lacs différents.
