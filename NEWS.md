@@ -16,7 +16,6 @@
   * liste les différents manières d'utiliser les effets aléatoires
   * clarifie l'output du modèle
 
-
 # version 0.0.1
 
 Used Rmarkdown over Prezi for the presentaiton.

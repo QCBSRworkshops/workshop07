@@ -10,11 +10,11 @@ Cette série de 10 ateliers guide les participants à travers les étapes requis
 
 Le contenu de cet atelier a été révisé par plusieurs membres du CSBQ. Si vous souhaitez y apporter des modifications, veuillez SVP contacter les coordonnateurs actuels de la série, listés [ici](https://wiki.qcbs.ca/r) ou ouvrez un pull request (voir les instructions <https://qcbsrworkshops.github.io/presenter-developer-protocol/developper-fr.html>).
 
-# Workshop 6: Linear mixed effects models
+# Workshop 7: General and generalized linear mixed effects models
 
 Mixed effects models allow ecologists to overcome a number of limitations associated with traditional linear models. In this workshop, you will learn when it is important to use a mixed effects model to analyze your data. We will walk you through the steps to conduct a linear mixed model analysis, check its assumptions, report results, and visually represent your model in R.
 
-# Atelier 6: Modèles linéaires à effets mixtes
+# Atelier 6: Modèles generales et generalisées linéaires à effets mixtes
 
 Les modèles à effets mixtes permettent aux écologistes de surmonter un certain nombre de limitations liées aux modèles linéaires traditionnels. Dans cet atelier, vous apprendrez à déterminer si vous devez utiliser un modèle à effets mixtes pour analyser vos données. Nous allons vous guider à travers les étapes nécessaires pour utiliser un modèle linéaire mixte, vérifier les suppositions de base et présenter les résultats de votre modèle dans R.
 
@@ -22,18 +22,18 @@ Les modèles à effets mixtes permettent aux écologistes de surmonter un certai
 
 Language | Slides | Bookdown | Wiki | Script | GitHub 
 :--------|:-------|:-----|:-----|:------ |:-------
-EN | [![badge](https://img.shields.io/static/v1?style=flat-square&label=Slides&message=06&color=red&logo=html5)](https://qcbsrworkshops.github.io/workshop06/pres-en/workshop06-pres-en.html) | [![badge](https://img.shields.io/static/v1?style=flat-square&label=book&message=06&logo=github)](https://qcbsrworkshops.github.io/workshop06/book-en/index.html) | [![badge](https://img.shields.io/static/v1?style=flat-square&label=wiki&message=06&logo=wikipedia)](https://wiki.qcbs.ca/r_workshop6) | ![badge](https://img.shields.io/static/v1?style=flat-square&label=script&message=06&color=2a50b8&logo=r) | [![badge](https://img.shields.io/static/v1?style=flat-square&label=repo&message=dev&color=6f42c1&logo=github)](https://github.com/QCBSRworkshops/workshop06) 
-FR | [![badge](https://img.shields.io/static/v1?style=flat-square&label=Diapos&message=06&color=red&logo=html5)](https://qcbsrworkshops.github.io/workshop06/workshop06-fr/workshop06-fr.html) | [![badge](https://img.shields.io/static/v1?style=flat-square&label=livre&message=06&logo=github)](https://qcbsrworkshops.github.io/workshop06/book-fr/index.html) | [![badge](https://img.shields.io/static/v1?style=flat-square&label=wiki&message=06&logo=wikipedia)](https://wiki.qcbs.ca/r_atelier6) | ![badge](https://img.shields.io/static/v1?style=flat-square&label=script&message=06&color=2a50b8&logo=r) | [![badge](https://img.shields.io/static/v1?style=flat-square&label=repo&message=dev&color=6f42c1&logo=github)](https://github.com/QCBSRworkshops/workshop06) 
+EN | [![badge](https://img.shields.io/static/v1?style=flat-square&label=Slides&message=07&color=red&logo=html5)](https://qcbsrworkshops.github.io/workshop07/pres-en/workshop07-pres-en.html) | [![badge](https://img.shields.io/static/v1?style=flat-square&label=book&message=07&logo=github)](https://qcbsrworkshops.github.io/workshop07/book-en/index.html) | [![badge](https://img.shields.io/static/v1?style=flat-square&label=wiki&message=07&logo=wikipedia)](https://wiki.qcbs.ca/r_workshop7) | ![badge](https://img.shields.io/static/v1?style=flat-square&label=script&message=07&color=2a50b8&logo=r) | [![badge](https://img.shields.io/static/v1?style=flat-square&label=repo&message=dev&color=6f42c1&logo=github)](https://github.com/QCBSRworkshops/workshop07) 
+FR | [![badge](https://img.shields.io/static/v1?style=flat-square&label=Diapos&message=07&color=red&logo=html5)](https://qcbsrworkshops.github.io/workshop07/workshop07-fr/workshop07-fr.html) | [![badge](https://img.shields.io/static/v1?style=flat-square&label=livre&message=07&logo=github)](https://qcbsrworkshops.github.io/workshop07/book-fr/index.html) | [![badge](https://img.shields.io/static/v1?style=flat-square&label=wiki&message=07&logo=wikipedia)](https://wiki.qcbs.ca/r_atelier7) | ![badge](https://img.shields.io/static/v1?style=flat-square&label=script&message=07&color=2a50b8&logo=r) | [![badge](https://img.shields.io/static/v1?style=flat-square&label=repo&message=dev&color=6f42c1&logo=github)](https://github.com/QCBSRworkshops/workshop07) 
 
 # Development status
 
 **Template** 
 
-[![receive-from-template-and-dispatch-to-workflows](https://github.com/QCBSRworkshops/workshop06/workflows/receive-from-template-and-dispatch-to-workflows/badge.svg)](https://github.com/QCBSRworkshops/workshop06/actions?query=workflow%3Areceive-from-template-and-dispatch-to-workflows) 
+[![receive-from-template-and-dispatch-to-workflows](https://github.com/QCBSRworkshops/workshop07/workflows/receive-from-template-and-dispatch-to-workflows/badge.svg)](https://github.com/QCBSRworkshops/workshop07/actions?query=workflow%3Areceive-from-template-and-dispatch-to-workflows)
 
 **Building workshop materials**
 
 Language | Slides | Book
 :------- | :----- | :-----
-EN  | [![render-presentation-en](https://github.com/QCBSRworkshops/workshop06/workflows/render-presentation-en/badge.svg)](https://github.com/QCBSRworkshops/workshop06/actions?query=workflow%3Arender-presentation-en) | [![render-book-en](https://github.com/QCBSRworkshops/workshop06/workflows/render-book-en/badge.svg)](https://github.com/QCBSRworkshops/workshop06/actions?query=workflow%3Arender-book-en)
-FR   | [![render-presentation-fr](https://github.com/QCBSRworkshops/workshop06/workflows/render-presentation-fr/badge.svg)](https://github.com/QCBSRworkshops/workshop06/actions?query=workflow%3Arender-presentation-fr) | [![render-book-fr](https://github.com/QCBSRworkshops/workshop06/workflows/render-book-fr/badge.svg)](https://github.com/QCBSRworkshops/workshop06/actions?query=workflow%3Arender-book-fr)
+EN  | [![render-presentation-en](https://github.com/QCBSRworkshops/workshop07/workflows/render-presentation-en/badge.svg)](https://github.com/QCBSRworkshops/workshop07/actions?query=workflow%3Arender-presentation-en) | [![render-book-en](https://github.com/QCBSRworkshops/workshop07/workflows/render-book-en/badge.svg)](https://github.com/QCBSRworkshops/workshop07/actions?query=workflow%3Arender-book-en)
+FR   | [![render-presentation-fr](https://github.com/QCBSRworkshops/workshop07/workflows/render-presentation-fr/badge.svg)](https://github.com/QCBSRworkshops/workshop07/actions?query=workflow%3Arender-presentation-fr) | [![render-book-fr](https://github.com/QCBSRworkshops/workshop07/workflows/render-book-fr/badge.svg)](https://github.com/QCBSRworkshops/workshop07/actions?query=workflow%3Arender-book-fr)
