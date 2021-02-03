@@ -1442,7 +1442,7 @@ Suivre les étapes similaires à celles introduites lors de l'atelier sur les LM
 
 Chargez les données `Arabidopsis` `banta_totalfruits.csv` dans R.
 
-```{r, echo=F}
+```{r, echo=FALSE}
 dat.tf <- read.csv("data/banta_totalfruits.csv")
 ```
 

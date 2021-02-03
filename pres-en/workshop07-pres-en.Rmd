@@ -1456,6 +1456,7 @@ dat.tf <- within(dat.tf,
 ```{r, fig.height=4, fig.width=8}
 # Boxplot of total fruits vs genotype x nutrient x clipping interaction
 library(ggplot2)
+
 ggplot(data = dat.tf, aes(factor(x = gna),y = log(total.fruits + 1))) +
   geom_boxplot(colour = "skyblue2", outlier.shape = 21,
   outlier.colour = "skyblue2") +
@@ -1643,6 +1644,7 @@ grid.arrange(d2$gen, d2$popu, nrow = 1)
 ```{r,echo=F,fig.width=9}
 library(gridExtra)
 library(lattice)
+
 pp <- list(layout.widths=list(left.padding=0, right.padding=0),
            layout.heights=list(top.padding=0, bottom.padding=0))
 r2 <- ranef(mpl1, condVar = TRUE)
