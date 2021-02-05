@@ -14,7 +14,7 @@ Le contenu de cet atelier a été révisé par plusieurs membres du CSBQ. Si vou
 
 Mixed effects models allow ecologists to overcome a number of limitations associated with traditional linear models. In this workshop, you will learn when it is important to use a mixed effects model to analyze your data. We will walk you through the steps to conduct a linear mixed model analysis, check its assumptions, report results, and visually represent your model in R.
 
-# Atelier 6: Modèles generales et generalisées linéaires à effets mixtes
+# Atelier 7: Modèles generales et generalisées linéaires à effets mixtes
 
 Les modèles à effets mixtes permettent aux écologistes de surmonter un certain nombre de limitations liées aux modèles linéaires traditionnels. Dans cet atelier, vous apprendrez à déterminer si vous devez utiliser un modèle à effets mixtes pour analyser vos données. Nous allons vous guider à travers les étapes nécessaires pour utiliser un modèle linéaire mixte, vérifier les suppositions de base et présenter les résultats de votre modèle dans R.
 
