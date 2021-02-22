@@ -1,5 +1,5 @@
 ---
-title: "Atelier 7: Modèles generales et generalisés à effets mixtes"
+title: "Atelier 7: Modèles (generalisés) à effets mixtes"
 subtitle: "Série d'ateliers R du CSBQ"
 author: "Centre de la science de la biodiversité du Québec"
 output:
@@ -68,7 +68,7 @@ lapply(list.of.packages, require, character.only = TRUE, quietly = TRUE)
 
 ---
 
-# Packages requis
+# Librairies requises
 
 * [ggplot2](https://cran.r-project.org/package=ggplot2)
 * [lme4](https://cran.r-project.org/package=lme4)
@@ -95,15 +95,15 @@ install.packages(c("ggplot2",
 
 # Objectifs d'apprentissage
 
-1. Décrivez ce que sont les modèles à effets mixtes ;
+1. Décrire les modèles (généralisés) à effets mixtes ;
 
 2. Identifier les situations dans lesquelles l'utilisation d'effets mixtes est appropriée ;
 
-3. Mettre en œuvre les modèles mixtes linéaires de base en `R` ;
+3. Mettre en œuvre des modèles linéaires mixtes de base avec `R` ;
 
-4. Exécuter les modèles linéaires mixtes généralisés de base dans `R` ;
+4. Exécuter des modèles linéaires généralisés mixtes de base avec `R` ;
 
-5. Valider, interpréter et visualiser les modèles mixtes dans  `R`.
+5. Valider, interpréter et visualiser les modèles mixtes avec `R`.
 
 
 ---
@@ -119,7 +119,7 @@ Pour répondre, 3 espèces ont été sélectionnées et dix individus par espèc
 
 
 ---
-# Familiarisez vous avec le jeu de données
+# Familiarisez-vous avec le jeu de données
 <br>
 
 1. Ouvrez le jeu de données,
@@ -139,7 +139,7 @@ head(fish.data)
 
 
 ---
-# Visualisation avec toutes les données
+# Visualisation de l'ensemble des données
 
 <br>
 
@@ -148,15 +148,15 @@ library(ggplot2)
 fish.data <- read.csv('data/qcbs_w6_data.csv')
 
 # thème simplifié
-fig <- theme_bw() + theme(panel.grid.minor=element_blank(), panel.grid.major=element_blank(), panel.background=element_blank()) +
-  theme(strip.background=element_blank(), strip.text.y = element_text()) + theme(legend.background=element_blank()) +
-  theme(legend.key=element_blank()) + theme(panel.border = element_rect(colour="black", fill=NA))
+fig <- theme_bw() + theme(panel.grid.minor = element_blank(), panel.grid.major = element_blank(), panel.background = element_blank()) +
+  theme(strip.background = element_blank(), strip.text.y = element_text()) + theme(legend.background = element_blank()) +
+  theme(legend.key = element_blank()) + theme(panel.border = element_rect(colour = "black", fill = NA))
 
 # Faites les trois graphiques suivants pour explorer les données
 plot <- ggplot(aes(Fish_Length,Trophic_Pos),data = fish.data)
 
 # Graphique 1 - Toutes les données
-plot + geom_point() + xlab("Length (mm)") + ylab("Trophic Position") + labs(title="All Data") + fig
+plot + geom_point() + xlab("Length (mm)") + ylab("Trophic Position") + labs(title = "All Data") + fig
 ```
 
 ---
@@ -166,18 +166,18 @@ plot + geom_point() + xlab("Length (mm)") + ylab("Trophic Position") + labs(titl
 
 ```{r, eval= FALSE}
 # thème simplifié
-fig <- theme_bw() + theme(panel.grid.minor=element_blank(),
-    panel.grid.major=element_blank(), panel.background=element_blank()) +
-    theme(strip.background=element_blank(), strip.text.y = element_text()) +
-    theme(legend.background=element_blank()) +
-    theme(legend.key=element_blank()) +
-    theme(panel.border = element_rect(colour="black", fill=NA))
+fig <- theme_bw() + theme(panel.grid.minor = element_blank(),
+    panel.grid.major = element_blank(), panel.background = element_blank()) +
+    theme(strip.background = element_blank(), strip.text.y = element_text()) +
+    theme(legend.background = element_blank()) +
+    theme(legend.key = element_blank()) +
+    theme(panel.border = element_rect(colour = "black", fill = NA))
 
 # Faites les trois graphiques suivants pour explorer les données
 plot <- ggplot(aes(Fish_Length,Trophic_Pos),data = fish.data)
 
 # Graphique 1 - Toutes les données
-plot + geom_point() + xlab("Length (mm)") + ylab("Trophic Position") + labs(title="All Data") + fig
+plot + geom_point() + xlab("Length (mm)") + ylab("Trophic Position") + labs(title = "All Data") + fig
 ```
 
 
@@ -187,16 +187,16 @@ plot + geom_point() + xlab("Length (mm)") + ylab("Trophic Position") + labs(titl
 ```{r}
 # Graphique 2 - Par espèce
 plot + geom_point() + facet_wrap(~ Fish_Species) + xlab("Length (mm)") + ylab("Trophic Position") +
-   labs(title="By Species") + fig
+   labs(title = "By Species") + fig
 ```
 
 ---
-# Visualisation par Lake
+# Visualisation par Lac
 
 ```{r}
 # Graphique 3 – Par lac
 plot + geom_point() + facet_wrap(~ Lake) + xlab("Length (mm)") + ylab("Trophic Position") +
-   labs(title="By Lake") + fig
+   labs(title = "By Lake") + fig
 ```
 
 
@@ -205,17 +205,16 @@ plot + geom_point() + facet_wrap(~ Lake) + xlab("Length (mm)") + ylab("Trophic P
 
 **Discussion de groupe**
 
-* Est-ce qu'on s'attend à ce que, pour toutes les espèces, la position trophique augmente avec la longueur corporelle?
+* Est-ce qu'on s'attend à ce que la position trophique augmente avec la longueur corporelle exactement de la même façon?
 
-    * Exactement de la même façon?
+    * Pour toutes les espèces?
+    * Pour tous les lacs?
 
 <br>
 
 --
 
-* Est-ce qu'on s'attend à ce que ces relations soient pareilles entre les lacs?
-
-    * Comment pourraient-elles différer?
+* Comment ces relations pourraient-elles différer?
 
 ---
 # Pourquoi choisir un MLM?
@@ -246,9 +245,9 @@ plot + geom_point() + facet_wrap(~ Lake) + xlab("Length (mm)") + ylab("Trophic P
 
 .pull-right[
 **Option 1. Séparer**
-* Estime 6 intercepts et 6 pentes pour chaque espèces (i.e. 6 lacs)
+* Estimer 6 ordonnées à l'origine et 6 pentes pour chaque espèce (car 6 lacs)
 
-* Taille d'échantillon *n* = 10 pour chaque analyse (i.e. 10 poissons/espèces/lac)
+* Taille d'échantillon *n* = 10 pour chaque analyse (i.e. 10 poissons/espèce/lac)
 
 * Peu de chances de détecter un effet a cause de la faible taille d’échantillon *n*
 ]
@@ -273,36 +272,36 @@ plot + geom_point() + facet_wrap(~ Lake) + xlab("Length (mm)") + ylab("Trophic P
 
 * Pour **notre question**, on veut seulement savoir s'il y a un **effet général de la longueur corporelle sur la position trophique**,
 
-* Ceci pourrait varier faiblement par espèce à cause de différents taux de croissance et/ou par lac à cause de différences dans la disponibilité de nourriture. **On ne s'intéresse pas directement à ces facteurs non mesurés, mais on doit contrôler leur effet dans le modèle**.
+* Ceci pourrait varier par espèce à cause de différents taux de croissance et/ou par lac à cause de différences dans la disponibilité de nourriture. **On ne s'intéresse pas directement à ces facteurs non mesurés, mais on doit contrôler leur effet dans le modèle**.
 
 --
 
 <br>
 
-Les MLMs sont un **compromis entre séparer et regrouper**. Ils:
+Les MLMs permettent de **séparer et regrouper** l'analyse. Ils:
 
-1. Prendre entre compte de la variabilité spécifique pour chaque espèce et chaque lac (séparer) mais en calculant moins de paramètres;
+1. Prennent en compte la variabilité spécifique à chaque espèce et chaque lac (**séparer**) tout en calculant moins de paramètres;
 
-2. Utilisent toutes les données disponibles (regrouper) tout en contrôlant les différences entre les lacs et les espèces (pseudo-replication).
+2. Utilisent toutes les données disponibles (**regrouper**) tout en contrôlant les différences entre les lacs et les espèces (pseudo-replication).
 
 ---
 # Pourquoi choisir un MLM?
 
 #### Effet fixe VS effet aléatoire
 
-Dans la littérature des MLMs, vous rencontrerez souvent ces termes souvent. Il existe plusieurs façon de les présenter et nous vous présenterons ici celles que nous trouvons les plus faciles à appliquer.
+Dans la littérature des MLMs, vous rencontrerez souvent ces termes. Il existe plusieurs façons de les décrire et nous vous présenterons ici celles que nous trouvons les plus faciles à appliquer.
 
 --
 
-##### Effet fixe
+##### Effet fixe : processus déterministes
 
-* Les données proviennent de tous les niveaux possibles d'un facteur (variable qualitative),
+* Les données proviennent de tous les niveaux possibles d'un facteur (variable qualitative) où d'un prédicteur (variable quantitative).
 
-* On souhaite émettre des conclusions à propos des niveaux du facteur d'où les données proviennent.
+* On souhaite émettre des conclusions à propos des niveaux du facteur d'où les données proviennent ou de la relation entre le prédicteur et la variable réponse.
 
 --
 
-##### Effet aléatoire
+##### Effet aléatoire : processus stochastiques
 
 * Seulement des variables qualitatives = facteur aléatoire;
 
@@ -315,39 +314,42 @@ Dans la littérature des MLMs, vous rencontrerez souvent ces termes souvent. Il 
 #### Comment fonctionnent les MLMs?
 <br>
 
-**A.** Permet aux intercepts et/ou aux pentes d'être considérés comme propre à une population donnée (**effet aléatoire**), e.g. par lac et/ou par espèce
+**A.** Permet aux ordonnées à l'origine et/ou aux pentes d'être considérés comme propres (c.-à.d. de varier) à une population donnée (**effet aléatoire**), e.g. par lac et/ou par espèce
 
 <br>
 
-**B.** Les intercepts, les pentes et leur intervalle de confiance sont ajustés pour **prendre en compte la structure des données**.
+**B.** Les ordonnées à l'origine, les pentes et leur intervalle de confiance sont ajustés pour **prendre en compte la structure des données**.
 
 
 ---
-# Effet aléatoire sur l'intercept
+# Effet aléatoire sur l'ordonnée à l'origine
 <br>
 
 <img style="float: right; width:50%;margin: 1%" src="images/fig_7_w5.png">
 
-On fait la supposition que les intercepts proviennent d'une distribution normale et on a seulement besoin d'estimer la moyenne (intercept général) et l'écart type de la distribution normale (effet aléatoire) au lieu d'estimer un intercept par espèce (ce qui rajoute 2 paramètres).
+On fait la supposition que les ordonnées à l'origine proviennent d'une distribution normale. 
+
+On a seulement besoin d'estimer la moyenne (ordonnée à l'origine générale) et l'écart type de la distribution normale (effet aléatoire) au lieu d'estimer une ordonnée à l'origine par espèce (ce qui ajouterait 2 paramètres).
 
 <br><br>
 
-Au lieu d'estimer d'estimer un intercept par espèce (trois paramètres pour 3 espèces) on estime un intercept générale et un effet aléatoire soit 2 paramètres. Avec $n$ espèce, dans le premier cas on estime $n-1$ paramètres
-alors qu'on reste à 2 paramètres dans le second cas!
+Au lieu d'estimer d'estimer une ordonnée à l'origine par espèce (3 paramètres), on en estime une générale ainsi qu'un effet aléatoire (2 paramètres). Avec $n$ espèce, dans le premier cas on estime $n-1$ paramètres alors qu'on reste à 2 paramètres dans le second cas!
 
+???
 
+Note: (MFF) Cette diapo est difficile à comprendre. Je me demande si il y aurait une façon de mieux décrire le second paragraphe.
 
 
 ---
-# Effet aléatoire sur l'intercept
+# Effet aléatoire sur l'ordonnée à l'origine
 <br><br>
 
 <img style="float: right; width:50%;margin: 1%" src="images/fig_8_w5.png">
 Même principe pour les lacs
 
-Estime 2 paramètres (moyenne et écart-type) au lieu de 6 intercepts.
+Estime 2 paramètres (moyenne et écart-type) au lieu de 6 ordonnées à l'origine.
 
-Cela économise des degrés de liberté (moins d’estimation de paramètres sont nécessaires)
+Cela **économise des degrés de liberté** (moins d’estimation de paramètres sont nécessaires)
 
 
 
@@ -356,15 +358,15 @@ Cela économise des degrés de liberté (moins d’estimation de paramètres son
 <br><br>
 
 <img style="float: right; width:50%;margin: 1%" src="images/fig_9_w5.png">
-Le même principe s’applique aux pentes qui varient selon un facteur donné, juste plus difficile à visualiser.
+Le même principe s’applique aux pentes qui varient selon un facteur donné.
 
-Comme pour les intercepts, seuls la moyenne et l’écart-type des pentes sont estimés au lieu de trois pentes distinctes.
+Comme pour les ordonnées à l'origine, seuls la moyenne et l’écart-type des pentes sont estimés au lieu de trois pentes distinctes.
 
 ---
 # Tenir compte de la structure des données
 <br>
 
-Si une certaine espèce ou un lac est peu représenté (faible $n$) dans les données, le modèle va accorder plus d'importance au modèle groupé pour estimer l'intercept et la pente de cette espèce ou de ce lac.
+Si une certaine espèce ou un lac est peu représenté (faible $n$) dans les données, le modèle va accorder plus d'importance au modèle groupé pour estimer l'ordonnée à l'origine et la pente de cette espèce ou de ce lac.
 
 .center[![:scale 60%](images/fig_12_w5.png) ]
 
@@ -372,9 +374,9 @@ Si une certaine espèce ou un lac est peu représenté (faible $n$) dans les don
 # Tenir compte de la structure des données
 <br><br>
 
-* Les intervalles de confiance des intercepts et pentes sont ajustés pour tenir compte de la pseudo-replication basée sur le **coefficient de corrélation intra-classe (CCI)**.
+* Les intervalles de confiance des ordonnées à l'origine et des pentes sont ajustés pour tenir compte de la pseudo-replication basée sur le **coefficient de corrélation intra-classe (CCI)**.
 
-* Combien de variation y a-t-il dans chaque groupe VS entre les groupes ?
+* Combien de variation y a-t-il dans chaque groupe VS entre les groupes?
 
 
 ---
@@ -382,23 +384,23 @@ Si une certaine espèce ou un lac est peu représenté (faible $n$) dans les don
 
 
 .pull-left[
-**CIC élevé**
+**CCI élevé**
 
 ![](images/fig_10_w5.png)
 
 les points provenant d'un même lac sont traités comme une seule observation car très corrélés
 
-![:faic](arrow-right) petite taille effective de l'échantillon et grands intervalles de confiance pour la pente et l'intercept.
+![:faic](arrow-right) petite taille effective de l'échantillon et grands intervalles de confiance pour la pente et l'ordonnée à l'origine.
 ]
 
 .pull-right[
-**CIC faible**
+**CCI faible**
 
 ![](images/fig_11_w5.png)
 
 les points provenant d'un même lac sont traités indépendamment car peu corrélés
 
-![:faic](arrow-right) grande taille effective de l'échantillon et petits intervalles de confiance pour la pente et l'intercept.
+![:faic](arrow-right) grande taille effective de l'échantillon et petits intervalles de confiance pour la pente et l'ordonnée à l'origine.
 ]
 
 ---
@@ -406,7 +408,7 @@ les points provenant d'un même lac sont traités indépendamment car peu corré
 
 <br>
 
-**Comment le CIC et l'intervalle de confiance seront affectés dans ces deux scénarios ?**
+**Comment le CCI et l'intervalle de confiance seront affectés dans ces deux scénarios?**
 
 **Q1.** Les positions trophiques des poissons ne varient pas entre les lacs
 
@@ -421,18 +423,18 @@ les points provenant d'un même lac sont traités indépendamment car peu corré
 
 **Q1.** La position trophique ne varie pas entre les lacs?
 
-.alert[R1. CIC faible, petits intervalles de confiances]
+.alert[R1. CCI faible, petits intervalles de confiances]
 
 <br>
 
 --
 
-**Q2.** La position trophique est similaire dans un lac mais différente entre les lacs ?
+**Q2.** La position trophique est similaire dans un lac mais différente entre les lacs?
 
-.alert[R2. CIC élevé, grands intervalles de confiance]
+.alert[R2. CCI élevé, grands intervalles de confiance]
 
 ---
-# Comment implémenter un MLM dans R ?
+# Comment implémenter un MLM avec R?
 
 <br>
 
