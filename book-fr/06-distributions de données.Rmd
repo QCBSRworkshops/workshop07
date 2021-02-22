@@ -1,0 +1,206 @@
+# La structure du jeu de données
+
+Lorsque nous examinons l'interaction entre les éléments nutritifs et
+l'herbivorie (clipping) à travers les neuf populations différentes,
+nous constatons que le nombre de fruits est toujours plus élevé dans le
+traitement élevé (High) en nutriments. L'effet de clipping est plus
+faible, même que dans certaines populations nous notons une pente
+négative.
+
+``` {.rsplus|}
+ggplot(dat.tf,aes(x=amd,y=log(total.fruits+1),colour=nutrient)) +
+  geom_point() + 
+  stat_summary(aes(x= as.numeric(amd)),fun.y=mean,geom="line") +
+  theme_bw() + theme(panel.margin=unit(0,"lines")) +
+  scale_color_manual(values=c("#3B9AB2","#F21A00")) + # de la palette Wes Anderson Zissou
+  facet_wrap(~popu)
+```
+
+![](images//workshp_6_glmm_popu.png){.align-center width="600"}
+
+Un graphique similaire peut être fait pour les 24 génotypes différents
+(en changeant facet\_wrap(\~gen)).\
+==== Choisir une distribution pour les résidus ====
+
+La variable réponse représente des données d'occurrences, donc nous
+devons choisir une distribution de Poisson pour modéliser cette
+variable. Rappelez-vous qu'une propriété importante de la distribution
+de Poisson est que la variance est égale à la moyenne. Cependant, comme
+nous le verrons ci-dessous, la variance de chaque groupe augmente
+beaucoup plus rapidement que la moyenne attendue sous la distribution de
+Poisson.
+
+```{r, echo = TRUE, eval = FALSE}
+
+# Créez de nouvelles variables qui représentent toutes les combinaisons de 
+# nutriments x facteur clipping x facteur aléatoire
+dat.tf <- within(dat.tf,
+{
+  # génotype x nutriments x clipping
+  gna <- interaction(gen,nutrient,amd)
+  gna <- reorder(gna, total.fruits, mean)
+  # population x nutriments x clipping
+  pna <- interaction(popu,nutrient,amd)
+  pna <- reorder(pna, total.fruits, mean)
+})
+
+
+# Boîte à moustaches du total de fruits vs. nouvelle variable (génotype x nutriments x clipping)
+ggplot(data = dat.tf, aes(factor(x = gna),y = log(total.fruits + 1))) +
+   geom_boxplot(colour = "skyblue2", outlier.shape = 21, outlier.colour = "skyblue2") + 
+   theme_bw() + theme(axis.text.x=element_text(angle=90)) + 
+   stat_summary(fun.y=mean, geom="point", colour = "red") 
+
+# Boîte à moustaches du total des fruits vs. nouvelle variable (population x nutriments x clipping)
+ggplot(data = dat.tf, aes(factor(x = pna),y = log(total.fruits + 1))) +
+  geom_boxplot(colour = "skyblue2", outlier.shape = 21, outlier.colour = "skyblue2") + 
+  theme_bw() + theme(axis.text.x=element_text(angle=90)) + 
+  stat_summary(fun.y=mean, geom="point", colour = "red") 
+```
+
+![](images/workshp_6_glmm_boxplot.png){.align-center width="750"}
+![](images//workshop_6_glmm_boxplot_popu.png){.align-center width="750"}
+
+Tel qu'illustré ci-dessus, il existe une importante hétérogénéité parmi
+la variance de chaque groupe même lorsque la variable réponse est
+transformée. Nous notons également que certains groupes ont une moyenne
+et variance de zéro.
+
+Pour identifier \_\_la famille de distribution la plus appropriée \_\_,
+nous pouvons examiner un graphique de diagnostic de la variance de
+chaque groupe par rapport à leurs moyennes. Nous présentons un exemple
+ci-dessous pour le regroupement par génotype x nutriments x herbivore
+(clipping).
+
+1.  Si nous observons une relation linéaire entre la variance et la
+    moyenne avec une pente = 1, une famille de **Poisson** serait
+    appropriée,
+2.  Si nous observons une relation moyenne-variance linéaire avec une
+    pente\> 1 (c. Var = φµ où φ \> 1), la famille **quasi-Poisson** (tel
+    que présenté ci-dessus) doit être utilisée,
+3.  Enfin, une relation quadratique entre la variance et la moyenne (c.
+    Var = µ(1 + α
+
+) ou µ(1 + µ/k)), est caractéristique des données surdispersées
+résultant d'une hétérogénéité sous-jacente entre les échantillons. Dans
+ce cas, la distribution **binomiale négative** (Poisson-gamma) serait
+plus appropriée. ![](images/worksp_6_error_dist.png){.align-center
+width="450"}
+
+En examinant la figure ci-dessus, nous constatons qu'une distribution
+quasi-Poisson linéaire peut être meilleure que la distribution binomiale
+négative, mais nous aurions besoin de modélisation supplémentaire pour
+le confirmer.
+
+## Un GLMM avec une distribution de Poisson
+
+On crée un GLMM en utilisant la fonction `glmer()` de la librairie
+*lme4*. On spécifie le modèle avec un intercepte aléatoire pour les
+facteurs génotype et population. Nous incluons les variables de nuisance
+(rack et la méthode de germination) comme effets fixes. Compte tenu de
+la relation entre la moyenne et la variance que nous avons observée
+ci-dessus, nous aurons probablement besoin d'un modèle avec
+surdispersion, mais nous allons commencer par un modèle avec une
+distribution de Poisson.
+
+```{r, echo = TRUE, eval = FALSE}
+
+mp1 <- glmer(total.fruits ~ nutrient*amd + rack + status +
+               (1|popu)+
+               (1|gen),
+             data=dat.tf, family="poisson")
+```
+
+Nous pouvons vérifier la surdispersion en utilisant la fonction
+`overdisp_fun` fournie par [Bolker et al.
+(2011)](http://www.cell.com/cms/attachment/601623/4742452/mmc1.pdf) qui
+divise les résidus de Pearson par les degrés de liberté des résidus et
+vérifie si les valeurs diffèrent de façon significative (i.e. si le
+rapport entre la déviance et les degrés de liberté est significativement
+différent de 1). Une faible valeur de p indique que les données sont
+surdispersées (i.e. le ratio est significativement différent de 1).
+
+```{r, echo = TRUE, eval = FALSE}
+# Surdispersion?
+overdisp_fun(mp1)
+
+# On peut aussi l’estimer en divisant la déviance résiduelle par les degrés de liberté des 
+# résidus
+summary(mp1)
+# déviance résiduelle = 18253.7 and dl resid = 616
+```
+
+Le ratio est \>\> 1, donc comme on s'y attendait, nous devons utiliser
+une distribution différente où la variance augmente plus rapidement que
+la moyenne, tels que la distribution binomiale négative.
+
+## Un GLMM avec un distribution binomiale négative
+
+Rappelez-vous que la distribution binomiale négative (ou Poisson-gamma)
+satisfait la supposition que la variance est \*\* proportionnelle au
+carré de la moyenne \*\*.
+
+```{r, echo = TRUE, eval = FALSE}
+# Note : Ce modèle converge si vous utilisez la version 3.0.2 de R, mais peut ne pas converger avec des 
+# versions plus récentes. Si vous avez des problèmes de convergence, essayez le code suivant avec la
+# version 3.0.2.
+
+mnb1 <- glmer.nb(total.fruits ~ nutrient*amd + rack + status + 
+               (1|popu)+
+               (1|gen),
+             data=dat.tf, control=glmerControl(optimizer="bobyqa"))
+# Le nouvel argument «control», bien qu’au-delà de la portée de cet atelier, spécifie la façon dont nous
+# optimisons les valeurs des paramètres (c. en prenant la dérivée d'une fonction ou en procédant par itération).
+# Si ce n’est pas possible de prendre la dérivée de la fonction, un algorithme itératif comme bobyqa 
+# (Bound Optimization BY Quadratic Approximation) est utilisé.
+
+# Surdispersion?
+overdisp_fun(mnb1)
+```
+
+Le rapport est maintenant beaucoup plus près de 1 (bien que la valeur p
+est encore inférieur à 0,05).
+
+## Un GLMM avec une distribution \"Poisson-lognormal\"
+
+Une autre option que nous n'avons pas encore décrit est la distribution
+Poisson-lognormal. Cette approche aborde le problème de la surdispersion
+en appliquant un effet aléatoire au niveau de l'observation (voir
+[Harrison (2014)](https://peerj.com/articles/616.pdf)), et modèle la
+variation Poisson supplémentaire de la variable de réponse en utilisant
+un effet aléatoire avec un niveau de chaque observation unique.
+
+Un modèle Poisson-lognormal peut être construit en modélisant les ε~i~
+avec une distribution a priori lognormal. Une distribution
+Poisson-lognormal avec une moyenne µ et une variance a priori lognormal
+σ^2^ est donné par :
+
+var(y) = µ + µ^2^ \[exp(σ^2^) - 1\]
+
+En revanche, nous avons vu que la distribution binomiale négative
+(Poisson-gamma) était donné par:
+
+var(y) = µ + µ^2^/k
+
+En générale, la variance σ^2^ dans la distribution Poisson-lognormal
+dépendra du niveau de regroupement que nous sélectionnons (i.e. au
+niveau individuel, génotype ou de la population). Donc, le modèle de
+Poisson-lognormal nous permet d'assigner l'agrégation observée à
+différentes sources d'hétérogénéité. Ici, afin d'évaluer un effet
+aléatoire au niveau de l'observation, nous allons l'évaluer au niveau
+individuel.
+
+```{r, echo = TRUE, eval = FALSE}
+mpl1 <- glmer(total.fruits ~ nutrient*amd + rack + status + 
+               (1|X) +
+               (1|popu)+
+               (1|gen),
+             data=dat.tf, family="poisson", control=glmerControl(optimizer="bobyqa"))
+
+overdisp_fun(mpl1)
+```
+
+Nous avons réussi! Le rapport entre la déviance et les degrés de liberté
+est maintenant conforme avec notre critère (en fait, il est plus //petit
+// 1).
+

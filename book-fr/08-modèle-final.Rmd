@@ -1,0 +1,262 @@
+# Modèle final
+
+Nous terminons cette section sur les GLMMs avec l'évaluation des effets
+fixes. Nous décrivons d'abord les modèles potentiels et les comparons
+en utilisant AICc.
+
+``` {.rsplus|}
+mpl2 <- update(mpl1, . ~ . - rack) # modèle sans rack
+mpl3 <- update(mpl1, . ~ . - status) # modèle sans status
+mpl4 <- update(mpl1, . ~ . - amd:nutrient) # modèle sans l’ interaction amd:nutrient 
+ICtab(mpl1,mpl2,mpl3,mpl4, type = c("AICc"))
+```
+
+Nous pouvons aussi utiliser les fonctions `drop1` et `dfun`, où dfun
+convertit les valeurs AIC retournées par drop1 en valeurs ΔAIC
+(produisant un tableau comparable à `ICtab` ci-dessus).
+
+``` {.rsplus|}
+(dd_LRT <- drop1(mpl1,test="Chisq"))
+# Model:
+#   total.fruits ~ nutrient * amd + rack + status + (1 | X) + (1 | popu) + (1 | gen)
+#              Df    AIC   LRT   Pr(Chi)    
+# <none>          5015.4                     
+# rack          1 5070.5 57.083 4.179e-14 ***
+# status        2 5017.0  5.612   0.06044 .  
+# nutrient:amd  1 5016.8  3.444   0.06349 .  
+# ---
+#   Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(dd_AIC <- dfun(drop1(mpl1)))
+#               Df   dAIC
+# <none>           0.000
+# rack          1 55.083
+# status        2  1.612
+# nutrient:amd  1  1.444
+```
+
+Il y a un fort effet de rack (un changement de AIC de 55 si on enlève
+cette variable), alors que les effets de « status » et de l'interaction
+sont faibles (différence AIC moins de 2). Nous pouvons donc commencer
+par enlever l'interaction non significative afin de tester les effets
+principaux de nutriments et d'herviborie (*clipping*).
+
+``` {.rsplus|}
+mpl2 <- update(mpl1, . ~ . - and:nutrient)
+
+# Avec AICc:
+mpl3 <- update(mpl2, . ~ . - rack) # modèle sans rack ou l’interaction
+mpl4 <- update(mpl2, . ~ . - status) # modèle sans status ou l’interaction
+mpl5 <- update(mpl2, . ~ . - nutrient) # modèle sans nutrient ou l’interaction
+mpl6 <- update(mpl2, . ~ . - amd) # modèle sans clipping ou l’interaction
+ICtab(mpl2,mpl3,mpl4,mpl5,mpl6, type = c("AICc"))
+#        dAICc  df
+# mpl2   0.0    9 
+# mpl4   1.2    7 
+# mpl6   10.2   8 
+# mpl3   54.2   8 
+# mpl5   135.6  8 
+
+# Ou, avec drop1:
+(dd_LRT2 <- drop1(mpl2,test="Chisq"))
+# Model:
+#   total.fruits ~ nutrient + amd + rack + status + (1 | X) + (1 | popu) + (1 | gen)
+#            Df    AIC     LRT   Pr(Chi)    
+#   <none>      5016.8                      
+#   nutrient  1 5152.5 137.688 < 2.2e-16 ***
+#   amd       1 5027.0  12.218 0.0004734 ***
+#   rack      1 5071.0  56.231 6.443e-14 ***
+#   status    2 5018.1   5.286 0.0711639 .  
+# ---
+#   Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(dd_AIC2 <- dfun(drop1(mpl2)))
+#           Df    dAIC
+# <none>        0.000
+# nutrient  1 135.688
+# amd       1  10.218
+# rack      1  54.231
+# status    2   1.286
+
+summary(mpl2)
+```
+
+Les effets de nutriments et d'herbivorie sont forts (grand changement
+d'AIC de 135,6 (mpl5) et 10,2 (mpl6) si nutriments ou *clipping* sont
+supprimés respectivement). Notre modèle final inclut l'effet fixe des
+nutriments (fortement positif) et l'effet fixe d'herbivorie (négatifs),
+la variable nuisance de rack, l'effet aléatoire au niveau de
+l'observation (1 \| X) pour tenir compte de la surdispersion et la
+variation de fruits par *population* et // génotype //.
+
+\*\* DÉFI 10 \*\*
+
+En utilisant l'ensemble de données *inverts* (temps de développement
+larvaire (PLD) de 74 espèces d'invertébrés et vertébrés marins élevés à
+différentes températures et temps), répondez aux questions suivantes:
+
+     - Quel est l'effet du type d'alimentation et du climat (effets fixes) sur PLD (variable réponse)?
+     - Est-ce que cette relation varie selon les taxons (effets aléatoires)?
+     - Quelle est la meilleure famille de distribution pour ces données?
+     - Une fois que vous avez déterminé la meilleure famille de distribution, réévaluez vos effets aléatoires et fixes.
+
+++++ Défi 10: Solution 1\|
+
+```{r, echo = TRUE, eval = FALSE}
+# Charger les données
+inverts <- read.csv("inverts.csv")
+str(inverts)
+
+mlm1 <- lm(PLD ~ temp*feeding.type, data=inverts)
+anova(mlm1) # toutes les variables sont significatives
+```
+
+++++
+
+++++ Défi 10: Solution 2\|
+
+```{r, echo = TRUE, eval = FALSE}
+
+# Réponse vs effets fixes
+ggplot(inverts,aes(x=temp,y=log(PLD+1),colour=feeding.type)) +
+  geom_point() +
+  stat_summary(aes(x=as.numeric(temp)),fun.y=mean,geom="line") +
+  theme_bw() +
+  scale_color_manual(values=c("#3B9AB2","#F21A00")) + # from Wes Anderson Zissou palette
+  facet_wrap(~taxon)
+
+# Créer de nouvelles variables qui représentent toutes les combinaisons de feeding type x temp x taxa 
+# (effets aléatoires)
+inverts <- within(inverts,
+{
+  # taxon x feeding.type
+  tft <- interaction(taxon,feeding.type,temp)
+  tft <- reorder(tft, PLD, mean)
+})
+
+# Boîte à moustaches total des fruits vs nouvelle variable (feeding type x temp x taxa)
+ggplot(data = inverts, aes(factor(x = tft),y = log(PLD))) +
+  geom_boxplot(colour = "skyblue2", outlier.shape = 21, outlier.colour = "skyblue2") + 
+  theme_bw() + theme(axis.text.x=element_text(angle=90)) + 
+  stat_summary(fun.y=mean, geom="point", colour = "red") 
+```
+
+++++
+
+++++ Défi 10: Solution 3\|
+
+```{r, echo = TRUE, eval = FALSE}
+
+grpVars <- tapply(inverts$PLD, inverts$tft, var)
+summary(grpVars)
+
+grpMeans <- tapply(inverts$PLD,inverts$tft, mean)
+summary(grpMeans)
+
+# Quasi-Poisson
+lm1 <- lm(grpVars~grpMeans-1) 
+phi.fit <- coef(lm1)
+# Le -1 spécifie un modèle avec l'intercept fixer à zéro
+
+# Binomial négative
+lm2 <- lm(grpVars ~ I(grpMeans^2) + offset(grpMeans)-1)
+k.fit <- 1/coef(lm2)
+# Offset () est utilisé pour fixer la moyenne de chaque groupe à 1
+
+# Ajustement Loess non-paramétrique
+Lfit <- loess(grpVars~grpMeans)
+
+plot(grpVars ~ grpMeans, xlab="group means", ylab="group variances" )
+abline(a=0,b=1, lty=2)
+text(60,200,"Poisson")
+curve(phi.fit*x, col=2,add=TRUE)
+# bquote()est utilisé pour remplacer des valeurs numériques dans les équations avec des symboles
+text(60,800, bquote(paste("QP: ",sigma^2==.(round(phi.fit,1))*mu)),col=2)
+curve(x*(1+x/k.fit),col=4,add=TRUE)
+text(60,1600,paste("NB: k=",round(k.fit,1),sep=""),col=4)
+mvec <- 0:120
+lines(mvec,predict(Lfit,mvec),col=5)
+text(50,1300,"loess",col=5)
+
+# Poisson GLMM 
+mp1 <- glmer(PLD ~ temp*feeding.type +
+               (1|taxon),
+             data=inverts, family="poisson")
+overdisp_fun(mp1)
+# rapport est significativement > 1
+
+# NB GLMM
+mnb1 <- glmer.nb(PLD ~ temp*feeding.type +
+                   (1|taxon),
+                 data=inverts)
+overdisp_fun(mnb1)
+# Semble bon!
+```
+
+++++
+
+++++ Défi 10: Solution 4\|
+
+```{r, echo = TRUE, eval = FALSE}
+
+# Re-évaluer les intercepts aléatoires
+summary(mnb1)$varcor
+
+mnb1.taxless <- glm.nb(PLD ~ temp*feeding.type, data=inverts)
+
+# Ici, parce que nous comparons un glmer avec un glm, nous devons faire quelque chose de différent que 
+# anova(). Pour tester l'importance de l’intercept aléatoire, nous allons comparer la vraisemblance de 
+# chaque modèle :
+NL1 <- -logLik(mnb1)
+NL0 <- -logLik(mnb1.taxless)
+devdiff <- 2*(NL0-NL1)
+dfdiff <- attr(NL1,"df")-attr(NL0,"df")
+pchisq(devdiff,dfdiff,lower.tail=FALSE)
+
+# Nous pourrions aussi comparer l'AIC du modèle avec (mnb1) et sans (mnb1.taxless) effets aléatoires avec 
+# la fonction AICtab() 
+AICtab(mnb1,mnb1.taxless) 
+# Changement important du AIC si nous supprimons l’intercept aléatoire. Donc, ça vaut la peine de garder 
+# cet effet.
+
+# Graphique diagnostic 
+locscaleplot(mnb1)
+
+# Graphique des paramètres de variance
+coefplot2(mnb1,ptype="vcov",intercept=TRUE, main="Random effect variance")
+
+# Graphique des effets fixes
+coefplot2(mnb1,intercept=TRUE,main="Fixed effect coefficient")
+
+# Graphique des intercepts aléatoires 
+pp <- list(layout.widths=list(left.padding=0, right.padding=0))
+r2 <- ranef(mnb1,condVar=TRUE)
+d2 <- dotplot(r2, par.settings=pp)
+grid.arrange(d2$taxon,nrow=1)
+
+# Évaluer pentes aléatoires
+mnb2 <- glmer.nb(PLD ~ temp*feeding.type +
+                   (PLD|taxon),
+                 data=inverts)
+                 
+# Examiner composant de variance-covariance
+summary(mnb2) # option 1
+attr(VarCorr(mnb2)$taxon,"correlation") # option 2
+printvc(mnb2) # option 3
+# Forte corrélation entre les effets aléatoires -> pas assez de puissance pour tester pentes aléatoires
+
+# Re-évaluer les effets fixes
+# Remarque : pour utiliser la fonction de drop1 nous devons spécifier le paramètre thêta et exécuter 
+# le modèle NB avec glmer :
+theta.mnb1 <- theta.md(inverts$PLD, fitted(mnb1), dfr = df.residual(mnb1))
+mnb1 <- glmer(PLD ~ temp*feeding.type +
+                (1|taxon),
+              data=inverts, family=negative.binomial(theta=theta.mnb1))
+
+(dd_LRT <- drop1(mnb1,test="Chisq"))
+(dd_AIC <- dfun(drop1(mnb1)))
+# Lorsque l’interaction feeding.type x température est supprimée, dAIC change de plus de 2 unité → suggère
+# de garder l'interaction dans le modèle
+```
+
+++++

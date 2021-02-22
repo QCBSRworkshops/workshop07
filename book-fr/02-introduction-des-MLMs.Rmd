@@ -1,0 +1,131 @@
+# (PART\*) Les mod�les lin�aires � effets mixtes (MLM) {-}
+
+# Aperçu 
+Les données écologiques et biologiques peuvent être complexes et
+désordonnées. Il existe généralement une structure particulière dans les
+données (*i.e.* les observations individuelles ne sont pas toujours
+indépendantes), les relations entre les variables d'intérêt peuvent
+différer en fonction de facteurs de regroupement, telles que les
+espèces, et la plupart du temps de faibles tailles d'échantillons
+rendent l'ajustement de modèles avec de nombreux paramètres difficile.
+Les modèles linéaires à effets mixtes (MLM) ont été développés pour
+aborder ces questions. Ils peuvent être appliqués à un grand nombre de
+questions écologiques et prennent de nombreuses formes différentes. Dans
+cet atelier, nous allons utiliser une simple approche interrogative pour
+apprendre les bases du fonctionnement des MLMs et nous verrons comment
+les ajuster. Nous terminerons par une réflexion sur l'application des
+MLMs à un ensemble de questions plus diversifiées.
+
+# Qu'est-ce qu'un MLM et pourquoi est-ce important?
+
+Les MLMs vous permettent d'utiliser toutes les données que vous avez au
+lieu d'utiliser des moyennes d'échantillons non indépendants, ils
+tiennent compte de la structure de vos données (par exemple, quadrats
+nichés dans les sites eux-mêmes nichés dans les forêts), ils permettent
+aux relations de varier en fonction de différents facteurs de
+regroupement (parfois appelés des effets aléatoires) et ils nécessitent
+moins d'estimation de paramètres que la régression classique, ce qui
+vous permet d'économiser des degrés de liberté. Mais comment font-ils
+tout cela? Ces questions vous paraîtront beaucoup plus claires apès
+avoir lu cette section. Tout d'abord, commençons par se familiariser
+avec l'ensemble des données.
+
+# Introduction au jeu de données
+
+```{r, echo = TRUE, eval = FALSE}
+# Supprimer commandes antérieures en R
+rm(list=ls()) 
+
+# Placez tout le matériel de l'atelier dans un même dossier sur votre ordinateur
+# Exécutez la ligne de code suivante et utilisez la fenêtre de navigation pour sélectionner QCBS_W6_Data.csv
+# le fichier dans le dossier qui contient le matériel de l'atelier
+file.choose()
+
+# Réglez le répertoire de travail vers le dossier qui contient les fichiers en copiant toute 
+# la sortie de la commande file.choose (), à l'exception du nom de fichier R, et collez le tout dans setwd().
+
+# Par exemple collez "/Users/ziegljac/Documents/QCBS_R/" -> incluez les guillemets
+# NON "/Users/ziegljac/Documents/QCBS_R/Get_Data_Func.R" -> incluez les guillemets 
+setwd()
+
+# Chargez les bibliothèques et les données utiles
+# Si vous n’avez jamais chargé ces bibliothèques avant, vous devrez utiliser la fonction install.packages()
+# avant la fonction library()
+library(ggplot2)
+library(lme4)
+library(arm)
+library(AICcmodavg)
+
+data <- read.csv('QCBS_W6_Data.csv')
+```
+
+Le jeu de données que nous utiliserons porte sur les positions
+trophiques de poissons. Trois espèces ont été sélectionnées pour
+l'étude et dix individus par espèce ont été mesurés (longueur
+corporelle) dans six lacs différents. Voici une représentation visuelle
+pour vous aider à comprendre tout cela ! Notez : seulement trois
+individus sont montrés par espèce, mais en réalité il y a 10 individus
+par espèce.
+
+![](images/fig_1_qcbs_wiki.png){width="800"}
+
+Une simple question à laquelle vous pourriez répondre avec ce jeu de
+données est : \"**est-ce que la position trophique des poissons augmente
+avec leur taille**\" ? Au cours de l'atelier, on tentera de répondre à
+cette question.
+
+------------------------------------------------------------------------
+
+**DÉFI 1**
+
+Pour votre premier défi, vous devez reproduire les graphiques 1 à 3 du
+code *QCBS\_W5\_LMM.R*. Regardez les graphiques et essayez d'obtenir
+une idée de ce qui se passe. Deux questions clés à se poser sont :
+
+    -Est-ce qu'on s'attend à ce que, pour toutes les espèces, la
+    position trophique augmente avec la longueur corporelle? Exactement
+    de la même façon?
+    -S'attend-on à ce que ces relations soient pareilles entre les lacs? Comment pourraient-elles différer ?
+
+++++ Réponse au défi 1 \|
+
+```{r, echo = TRUE, eval = FALSE}
+# Utilisé pour simplifier les figures
+fig <- theme_bw() + theme(panel.grid.minor=element_blank(), panel.grid.major=element_blank(), 
+  panel.background=element_blank()) + 
+  theme(strip.background=element_blank(), strip.text.y = element_text()) + 
+  theme(legend.background=element_blank()) + 
+  theme(legend.key=element_blank()) + theme(panel.border = element_rect(colour="black", fill=NA))
+
+# Faites les trois graphiques suivants pour explorer les données
+plot <- ggplot(aes(Fish_Length,Trophic_Pos),data=data)
+
+# Graphique 1 - Toutes les données
+plot + geom_point() + xlab("Length (mm)") + ylab("Trophic Position") + labs(title="All Data") + fig
+
+# Graphique 2 - Par espèce
+plot + geom_point() + facet_wrap(~ Fish_Species) + xlab("Length (mm)") + ylab("Trophic Position") + 
+   labs(title="By Species") + fig
+
+# Graphique 3 – Par lac 
+plot + geom_point() + facet_wrap(~ Lake) + xlab("Length (mm)") + ylab("Trophic Position") + 
+   labs(title="By Lake") + fig
+```
+
+**SORTIE**\
+**Graphique 1** ![](images/fig_2_w5.png){width="300"} **Graphique 2**
+![](images/fig_3_w5.png){width="300"}
+
+**Graphique 3** ![](images/plot3.png){width="300"}
+
+Est-ce qu'on s'attend à ce que, pour toutes les espèces, la position
+trophique augmente avec la longueur corporelle? Exactement de la même
+façon? Toutes les espèces semblent augmenter en position trophique avec
+la longueur, mais la pente peut être différente selon les espèces.
+
+S'attend-on à ce que ces relations soient pareilles entre les lacs?
+Comment pourraient-elles différer? Certains paramètres spécifiques à un
+lac en particulier peuvent modifier la relation, tels que la
+productivité primaire du système.
+
+++++
