@@ -1,0 +1,99 @@
+# (PART\*) Les modèles linéaires généralisés mixtes (GLMM) {-}
+
+# Les modèles linéaires généralisés mixtes (GLMM)
+
+On vient de voir que les variables réponses binaires et d'abondance
+peuvent être modélisées de façon plus appropriée en laissant tomber la
+supposition que les résidus doivent suivre une distribution normale en
+spécifiant une distribution pour les résidus (par exemple Poisson ou
+binomiale négative). Toutefois, que devrions-nous faire s'il existe une
+structure nichée dans les données ou des corrélations entre les
+observations qui causent certaines observations à être plus semblables
+les unes aux autres que les observations échantillonnées dans différents
+sites ou points dans le temps ? Comme nous l'avons vu dans [l'atelier
+6](r_atelier6), cette non-indépendance peut être expliquée en ajoutant
+des termes à effets aléatoires dans le modèle. Rappelez-vous que les
+intercepts et / ou pentes peuvent varier en fonction des effets
+aléatoires (facteurs de regroupement) et que l'écart entre ces pentes et
+/ ou intercepts suit une distribution normale. Les effets aléatoires
+sont également nommés \"estimations de rétrécissement\" parce qu'ils
+représentent une moyenne pondérée des données et de l'effet global
+(effet fixe). La quantité de rétrécissement vers l'effet global est
+plus sévère si la variabilité intra-groupe est large par rapport à la
+variabilité inter-groupe (i.e. quand nous avons moins confiance en
+l'estimation aléatoire, en raison de la faible taille de l'échantillon
+ou d'une haute variabilité intra-groupe, l'estimation est 'tirée'
+vers l'effet fixe).
+
+Les propriétés des modèles linéaires mixtes (atelier 6) qui incorporent
+des effets aléatoires et celles des modèles linéaires généralisés (vu
+ci-dessus), qui permettent de spécifier une distribution statistique
+autre que la distribution normale, peuvent être combinées dans le cadre
+des modèles linéaires mixtes généralisés (GLMMs). L'extension des GLM
+qui spécifie cette structure supplémentaire suit des étapes similaires à
+celles présentées dans l'atelier sur les modèles linéaires mixte.\
+
+Pour donner un bref aperçu des GLMM, nous allons voir une étude de cas
+présentée par [Bolker et al.
+(2009)](http://www.facecouncil.org/puf/wp-content/uploads/2009/10/Generalized-linear-mixed-models.pdf)
+et par la suite [Bolker et al.
+(2011)](http://www.cell.com/cms/attachment/601623/4742452/mmc1.pdf) où
+les observations échantillonnées dans différentes populations ont créé
+une structure (ou manque d'indépendance) dans le jeu de données. Plus
+précisément, les auteurs ont évalué comment l'abondance d'*Arabidopsis
+thaliana* (arabette des dames) varie en fonction de variables
+environnementales (disponibilité d'éléments nutritifs et herbivorie) et
+en fonction de leur population d'origine et / ou de leur génotype.\
+En utilisant l'ensemble des données d'*Arabidopsis*, nous allons
+maintenant examiner l'effet des niveaux de nutriments, d'herbivorie et
+leur interaction (effets fixes) sur la production de fruits
+d'*Arabidopsis thaliana* et la variabilité de ces relations à travers
+différentes populations et / ou génotypes (effets aléatoires).
+
+```{r, echo = TRUE, eval = FALSE}
+# Chargez et affichez le jeu de données
+dat.tf <- read.csv("Banta_TotalFruits.csv")
+str(dat.tf)
+
+# X         numéro d'observation
+# reg       facteur pour l'une des trois régions; Pays-Bas, l'Espagne ou la Suède
+# popu      facteur avec un niveau pour chaque population (effet aléatoire)
+# gen       facteur avec un niveau pour chaque génotype (effet aléatoire)
+# rack      facteur de nuisance pour l'un des deux racks placés dans la serre
+# nutrient  facteur à deux niveaux précisant une faible (valeur = 1) ou haute (valeur = 8) concentration 
+#           de nutriments (effet fixe)
+# amd       facteur à deux niveaux précisant l'absence ou la présence d'herbivorie (lésions sur le méristème apical)
+#           (effet fixe)
+# status    facteur de nuisance pour la méthode de germination
+# total.fruits  variable réponse; nombre entier indiquant le nombre de fruits par plante
+
+# 2-3 génotypes imbriqués dans chacune des neuf populations
+table(dat.tf$popu,dat.tf$gen)
+
+# Entretien : changer nombres entiers en facteurs, rajuster les niveaux d'herbivorie (amd) et renommer les 
+#             niveaux de nutriments
+dat.tf <- transform(dat.tf,
+                    X=factor(X),
+                    gen=factor(gen),
+                    rack=factor(rack),
+                    amd=factor(amd,levels=c("unclipped","clipped")),
+                    nutrient=factor(nutrient,label=c("Low","High")))
+
+# Installer / charger les librairies
+if(!require(lme4)){install.packages("lme4")}
+require(lme4)
+if(!require(coefplot2)){install.packages("coefplot2",repos="http://www.math.mcmaster.ca/bolker/R",type="source")}
+require(coefplot2)     
+if(!require(reshape)){install.packages("reshape")}
+require(reshape) 
+if(!require(ggplot2)){install.packages("ggplot2")}
+require(ggplot2)
+if(!require(plyr)){install.packages("plyr")}
+require(plyr)
+if(!require(gridExtra)){install.packages("gridExtra")}
+require(gridExtra)
+if(!require(emdbook)){install.packages("emdbook")}
+require(emdbook)
+source("glmm_funs.R")
+```
+

@@ -21,6 +21,7 @@ where,\
 (j) of species (k)\
 and\
 ε are the residuals of the model (i.e. the unexplained variation).\
+
 **Data Exploration**
 
 Always make sure you've done \"Housekeeping\" on your data before you
@@ -102,6 +103,7 @@ cor(data$Fish_Length, data$Var2)
 ------------------------------------------------------------------------
 
 **CHALLENGE 3**\
+
 What are some additional measures we could have gotten in the wild that
 might have been collinear with length?
 

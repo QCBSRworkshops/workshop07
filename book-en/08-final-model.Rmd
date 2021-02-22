@@ -106,7 +106,7 @@ time), answer the following questions:
 4.  Finally, once you determined the best distribution family,
     re-evaluate your random and fixed effects.
 
-++++ Challenge: Solution 3\|
+++++ Challenge: Solution 1\|
 
 ```{r, echo = TRUE, eval = FALSE}
 # Load data

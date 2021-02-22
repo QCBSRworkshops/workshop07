@@ -4,9 +4,9 @@
 
 -Add-
 
-# Additional resources
+# Ressources additionnelles
 
-## LMM Textbooks
+## Livres de référence pour les MLMs
 
 Gelman, A., and Hill, J. (2006). Data analysis using regression and
 multilevel/hierarchical models (Cambridge University Press).
@@ -15,9 +15,9 @@ Zuur, A., Ieno, E.N., Walker, N., Saveliev, A.A., and Smith, G.M.
 (2009). Mixed effects models and extensions in ecology with R
 (Springer).
 
-## GLMM resources
+## Ressources pour les GLMMs
 
-**Books**
+**Livres**
 
 B. Bolker (2009) [Ecological Models and Data in
 R](http://ms.mcmaster.ca/~bolker/emdbook/). Princeton University Press.\
@@ -32,7 +32,7 @@ Fisher, C. E. D. Goodwin, B. S. Robinson, D. J. Hodgson, and R. Inger.
 inference in ecology](https://peerj.com/preprints/3113/). PeerJ
 6:e4794--32.
 
-**Websites**
+**Sites web**
 
-[GLMM for ecologists](http://glmm.wikidot.com/): A great website on GLMM
-with a Q&A section!
+[GLMM for ecologists](http://glmm.wikidot.com/): Un site web très
+complet et avec une section Questions-Réponses pertinente !
