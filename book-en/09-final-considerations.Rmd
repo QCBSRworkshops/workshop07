@@ -1,0 +1,20 @@
+# (PART\*) Final considerations {-}
+
+# Summary
+
+Ordination is a powerful statistical tecnhique for studying the
+relationships of objects characterized by several descriptors (e.g.
+sites described by biotic communities, or environmental variables), but
+serveral ordination methods exist. These methods mainly differ in the
+type of distance preserved, the type of variables allowed and the
+dimensions of the ordination space. To better guide your choice of the
+ordination method to use, the following table identify the main
+characteristics of the four ordination methods presented :
+
+![](/summary_ordination.jpg){.align-center}
+
+In the next workshop, you will see how to identify the relationships
+between biotic communities and sets of environmental variables
+describing the same sites, using canonical analyses.
+
+# Additional resources
