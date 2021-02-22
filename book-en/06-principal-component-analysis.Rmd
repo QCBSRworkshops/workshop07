@@ -1,0 +1,407 @@
+# Principal Component Analysis
+
+Principal component analysis (PCA) was originally described by Pearson
+(1901) although it is more often attributed to Hotelling (1933) who
+proposed it independently. The method and several of its implications
+for data analysis are presented in the seminal paper of Rao (1964). PCA
+is used to generate a few key variables from a larger set of variables
+that still represent as much of the variation in the dataset as
+possible. PCA is a powerful technique to analyze quantitative
+descriptors (such as species abundances), but cannot be applied to
+binary data (such as species absence/presence).
+
+Based on a dataset containing normally distributed variables, the first
+axis (or principal-component axis) of a PCA is the line that goes
+through the greatest dimension of the concentration ellipsoid describing
+the multinormal distribution. Similarly, the following axes go through
+the dimensions of the concentration ellipsoid by decreasing length. One
+can thus derive a maximum of p principal axes form a data set containing
+p variables.
+
+For this, PCA rotates the original system of axes defined by the
+variables in a way that the successive new axes are orthogonal to one
+another and correspond to the successive dimensions of maximum variance
+of the scatter of points. The new variables produced in a PCA are
+uncorrelated with each other (axes are orthogonal to each other) and
+therefore may be used in other analyses such as multiple regression
+(Gotelli and Ellison 2004). The principal components give the positions
+of the objects in the new system of coordinates. PCA works on an
+association matrix among variables containing the variances and
+covariances of the variables. PCA preserves Euclidean distances and
+detects linear relationships. As a consequence, raw species abundance
+data are subjected to a pre-transformation (i.e. a Hellinger
+transformation) before computing a PCA.
+
+*To do a PCA you need:* - A set of variables (with no distinction
+between independent or dependent variables, i.e. a set of species OR a
+set of environmental variables). - Samples that are measured for the
+same set of variables. - Generally a dataset that is longer than it is
+wide is preferred.
+
+PCA is most useful with data with more than two variables, but is easier
+to describe using a two dimensional example. In this example (derived
+from Clarke and Warwick 2001) , we have nine sites with abundance data
+for two species:
+
+  Site   Species 1   Species 2
+  ------ ----------- -----------
+  A      6           2
+  B      0           0
+  C      5           8
+  D      7           6
+  E      11          6
+  F      10          10
+  G      15          8
+  H      18          14
+  I      14          14
+
+If you plotted these samples in the two dimensions, the plot would look
+like this: ![](/pcaex_1.png){width="500"}
+
+This is a straight forward scatter plot and is an ordination plot, but
+you can imagine that it is more difficult to produce and visualize such
+a plot if there were more than two species. In that case, you would want
+to reduce the number of variables to principal components. If the 2D
+plot above was too complex and we wanted to reduce the data into a
+single dimension, we would be doing so with a PCA:
+
+![](/pcaex_2.png){width="500"}
+
+In this case, the first principal component is the line of best fit
+through the points (sites) with the sites perpendicular to the line.
+
+A second principal component is then added perpendicular to the first
+axis:
+
+![](/pcaex_3.png){width="500"}
+
+The final plot then is the two PC axes rotated where the axes are now
+principal components as opposed to species:
+
+![](/pcaex_4.png){width="500"}
+
+For PCAs with more than two variables, principal components are added
+like this (Clarke and Warwick 2001):
+
+PC1 = axis that maximises the variance of the points that are projected
+perpendicularly onto the axis. PC2 = must be perpendicular to PC1, but
+the direction is again the one in which variance is maximised when
+points are perpendicularly projected. PC3 and so on: perpendicular to
+the first two axes. Essentially, when there are more than two
+dimensions, PCA produces a new space in which all PCA axes are
+orthogonal (e.g. where the correlation among any two axes is null) and
+where the PCA axes are ordered according to the percent of the variance
+of the original data they explain.
+
+The "spe" data includes 27 fish taxa. To simplify the 27 fish taxa into
+a smaller number of fish-related variables or to identify where
+different sites or samples are associated with particular fish taxa we
+can run a PCA.
+
+Run a PCA on Hellinger-transformed species data:
+
+```{r, echo = TRUE, eval = FALSE}
+#Run the PCA using the rda() function (NB: rda() is used for both PCA and RDA)
+spe.h.pca <- rda(spe.hel)
+
+#Extract the results
+summary(spe.h.pca) #overall results
+```
+
+The summary looks like this:
+
+![](/pcaoutput_1v2.png){width="800"} ![](/pcaoutput_2.png){width="800"}
+![](/pcaoutput_3.png){width="800"}
+
+**Interpretation of ordination results:**
+
+A new word from this output is \"eigenvalue\". An eigenvalue is the
+value of the change in the length of a vector, and for our purposes is
+the amount of variation explained by each axis in a PCA. As you can see,
+the summary function produces a fair amount of information. From the
+summary we can see how much of the variance in the data is explained by
+the unconstrained variables (i.e. variables where we have made no effort
+to define relationships between the variables). In this case, the total
+variance of the sites explained by the species is 0.5. The summary also
+tells you what proportion of the total explained variance is explained
+by each principal component in the PCA: the first axis of the PCA thus
+explains 51.33% of the variation, and the second axis 12.78%. You can
+also extract certain parts of the output, try this:
+
+```{r, echo = TRUE, eval = FALSE}
+summary(spe.h.pca, display=NULL) # only eigenvalues and their contribution to the variance
+eigen(cov(spe.hel)) # also compute the eigenvalues
+```
+
+Sometimes you may want to extract the scores (i.e. the coordinates
+within a PCA biplot) for either the "sites" (the rows in your dataset,
+whether they be actual sites or not) or the "species" (the variables in
+your data, whether they be actual species or some other variables). This
+is useful if you want to then use a principal component as a variable in
+another analysis, or to make additional graphics. For example, with the
+"spe" dataset, you might want to obtain a single variable that is a
+composite of all the fish abundance data and then use that use that
+variable in a regression with another variable, or plot across a spatial
+gradient. To extract scores from a PCA, use the scores() function:
+
+```{r, echo = TRUE, eval = FALSE}
+spe.scores <- scores(spe.h.pca, display="species", choices=c(1,2)) # species scores on the first two PCA axes
+site.scores <- scores(spe.h.pca, display="sites", choices=c(1,2)) # sites scores on the first two PCA axes
+#Note: if you don’t specify the number of principal components to extract (e.g. choices=c(1,2) or choices=c(1:2) then all of the scores will be extracted for all of the principal components. 
+```
+
+The PCA on the "spe" fish data produces as many principal components as
+there are fish taxon (columns), which in this case means that 27
+principal components are produced. In many cases though, you may have
+done a PCA to reduce the number of variables to deal with and produce
+composite variables for the fish. In this case, you are likely
+interested in knowing how many of these principal components are
+actually significant or adding new information to the PCA (i.e. how many
+principal components do you need to retain before you aren't really
+explaining any more variance with the additional principal components).
+To determine this, you can use the Kaiser-Guttman criterion and produce
+a barplot showing at what point the principal components are no longer
+explaining significant amount of variance. The code for the barplot
+below shows the point at which the variance explained by a new principal
+component explains less than the average amount explained by all of the
+eigenvalues:
+
+```{r, echo = TRUE, eval = FALSE}
+# Identify the significant axis using the Kaiser-Guttman criterion
+ev <- spe.h.pca$CA$eig
+ev[ev>mean(ev)]
+n <- length(ev)
+barplot(ev, main="Eigenvalues", col="grey", las=2)
+abline(h=mean(ev), col="red") 
+legend("topright", "Average eigenvalue", lwd=1, col=2, bty="n")
+```
+
+![](/pca_sigaxes_sp.png){width="500"}
+
+From this barplot, you can see that once you reach PC6, the proportion
+of variance explained falls below the average proportion explained by
+the other components. If you take another look at the PCA summary, you
+will notice that by the time you reach PC5, the cumulative proportion of
+variance explained by the principal components is 85%.
+
+A PCA is not just for species data. It can also be run and interpreted
+in the same way using standardized environmental variables:
+
+```{r, echo = TRUE, eval = FALSE}
+#Run the PCA
+env.pca <- rda(env.z) # or rda(env, scale=TRUE)
+
+#Extract the results
+summary(env.pca)
+summary(env.pca, scaling=2) 
+```
+
+Scaling refers to what portion of the PCA is scaled to the eigenvalues.
+Scaling = 2 means that the species scores are scaled by eigenvalues,
+whereas scaling = 1 means that site scores are scaled by eigenvalues.
+Scaling = 3 means that both species and site scores are scaled
+symmetrically by square root of eigenvalues. Using scaling = 1 means
+that the Euclidean distances among objects (e.g. the rows in your data)
+are preserved, whereas scaling = 2 means that the correlations amongst
+descriptors (e.g. the columns in this data) are preserved. This means
+that when you look at a biplot of a PCA that has been run with
+scaling=2, the angle between descriptors represents correlation.
+
+```{r, echo = TRUE, eval = FALSE}
+# Identify the significant axis using the Kaiser-Guttman criterion
+ev <- env.pca$CA$eig
+ev[ev>mean(ev)]
+n <- length(ev)
+barplot(ev, main="Eigenvalues", col="grey", las=2)
+abline(h=mean(ev), col="red") 
+legend("topright", "Average eigenvalue", lwd=1, col=2, bty="n")
+```
+
+Compare this eigenvalue barplot with the one you created for the species
+PCA.
+
+As you saw in the explanation of the summary output, a lot of
+information can be extracted from a PCA before even plotting it.
+However, many of us interpret data best visually and a figure of a PCA
+is often the best way to convey major patterns. PCA biplots can be
+plotted in base R. A PCA biplot includes the x-axis as the first
+Principal Component and the y-axis as the second Principal Component.
+
+For some plotting exercises, let\'s start with the *species PCA*. A
+basic biplot without any customization could be plotted like this, where
+the site positions are shown by black numbers and species' positions are
+shown by red species codes. Remember, species positions come from
+plotting species along PCs and the site positions are derived from the
+weighted sums of species scores.
+
+```{r, echo = TRUE, eval = FALSE}
+plot(spe.h.pca)
+```
+
+![](/spe_PCA1.png){width="800"}
+
+Basically, the plot above plots the PCA like this:
+
+```{r, echo = TRUE, eval = FALSE}
+plot(spe.h.pca, type="n") #produces a blank biplot with nothing displayed but the axes
+points(spe.h.pca, dis="sp", col="blue") #points are added for the species (columns) (dis=)
+#use text() instead of points() if you want the labels
+points(spe.h.pca, dis="sites", col="red") #points are added for the sites (rows)
+```
+
+![](/spe_PCA2.png){width="800"}
+
+To create more detailed plots and to play with aesthetics, try this
+code:
+
+```{r, echo = TRUE, eval = FALSE}
+#Biplot of the PCA on transformed species data (scaling 1)
+windows()
+plot(spe.h.pca)
+windows()
+biplot(spe.h.pca)
+windows()
+plot(spe.h.pca, scaling=1, type="none", # scaling 1 = distance biplot : 
+                                        # distances among objects in the biplot approximate their Euclidean distances
+                                        # but angles among descriptor vectors DO NOT reflect their correlation
+     xlab = c("PC1 (%)", round((spe.h.pca$CA$eig[1]/sum(spe.h.pca$CA$eig))*100,2)), #this comes from the summary
+     ylab = c("PC2 (%)", round((spe.h.pca$CA$eig[2]/sum(spe.h.pca$CA$eig))*100,2)))
+points(scores(spe.h.pca, display="sites", choices=c(1,2), scaling=1),
+       pch=21, col="black", bg="steelblue", cex=1.2)
+text(scores(spe.h.pca, display="species", choices=c(1), scaling=1),
+     scores(spe.h.pca, display="species", choices=c(2), scaling=1),
+     labels=rownames(scores(spe.h.pca, display="species", scaling=1)),
+     col="red", cex=0.8)  
+```
+
+This code produces 3 plots, the final plot is the most visually
+pleasing: ![](/spe_PCA3.png){width="800"}
+
+What conclusions can you draw from this plot? From the plot, you can see
+the site scores shown by the blue dots. If you superimposed site labels
+on top, you could see what sites are closer to each other in terms of
+the species found at those sites, but even without the specific labels,
+you can see that there are only a few sites that are farther away from
+the majority. The species names are shown by their names in red and from
+the plot, you can see for example that the species \"ABL\" is not found
+or not found in the same prevalence in the majority of sites as other
+species closer to the centre of the ordination.
+
+Biplots need to be interpreted in terms of angles from center of plot,
+not just in terms of proximity. Two variables at 90 degree angle are
+uncorrelated. Two variables in opposing directions are negatively
+correlated. Two variables very close together are strongly correlated,
+at least in the space described by these axes.
+
+Now let\'s look at a plot of the *environmental PCA*:
+
+```{r, echo = TRUE, eval = FALSE}
+#Biplot of the PCA on the environmental variables (scaling 2)
+windows()
+plot(env.pca)
+windows()
+plot(env.pca, scaling=2, type="none", # scaling 2 = correlation biplot : 
+                                      # distances among abjects in the biplot DO NOT approximate their Euclidean distances
+                                      # but angles among descriptor vectors reflect their correlation
+     xlab = c("PC1 (%)", round((env.pca$CA$eig[1]/sum(env.pca$CA$eig))*100,2)),
+     ylab = c("PC2 (%)", round((env.pca$CA$eig[2]/sum(env.pca$CA$eig))*100,2)),
+     xlim = c(-1,1), ylim=c(-1,1))
+points(scores(env.pca, display="sites", choices=c(1,2), scaling=2), 
+       pch=21, col="black", bg="darkgreen", cex=1.2) 
+text(scores(env.pca, display="species", choices=c(1), scaling=2),
+     scores(env.pca, display="species", choices=c(2), scaling=2),
+     labels=rownames(scores(env.pca, display="species", scaling=2)),
+     col="red", cex=0.8)
+```
+
+![](/env_PCA1.png){width="800"}
+
+Remember that a PCA biplot is really just a scatter plot, where the axes
+are scores extracted from composite variables. This means that there are
+many different ways you can plot a PCA. For example, try using your
+ggplot() skills from Workshop 4 to extract PCA scores and plot an
+ordination in ggplot.
+
+**Use of PCA axis as composite explanatory variables:**
+
+In some cases, users want to reduce several environmental variables in a
+few numbers of composite variables. When PCA axes represent ecological
+gradients (i.e. when environmental variables are correlated with PCA
+axis in a meaningful way), users can use site scores along PCA Axis in
+further analyses instead of the raw environmental data. In other words,
+sites scores along PCA Axis represent linear combinations of descriptors
+and can consequently be used as proxy of ecological conditions in
+"post-ordination" analyses. In the example above, the first PCA axis can
+be related to a gradient from oligotrophic, oxygen-rich to eutrophic,
+oxygen-deprived water: from left to right, a first group display the
+highest values of altitude (alt) and slope (pen), and the lowest values
+in river discharge (deb) and distance from the source (das). The second
+group of sites has the highest values in oxygen content (oxy) and the
+lowest in nitrate concentration (nit). A third group shows intermediate
+values in almost all the measured variables. If users are then
+interested in identifying if a specific species is associated with
+ologotrophic or eutrophic water, one can correlate the species
+abundances to sites scores along PCA Axis 1. For example, if one want to
+assess if the species TRU prefers oligotrophic or eutrophic water, the
+following linear model can be used :
+
+```{r, echo = TRUE, eval = FALSE}
+Sites_scores_Env_Axis1<- scores(env.pca, display="sites", choices=c(1), scaling=2)
+spe$ANG
+plot( Sites_scores_Env_Axis1, spe$TRU)
+summary(lm(spe$TRU~Sites_scores_Env_Axis1))
+abline(lm(spe$TRU~Sites_scores_Env_Axis1))
+```
+
+This simple model shows that the abundance of species TRU is
+significantly dependent of site scores along PCA axis 1 (t = -5.30, p =
+1.35e-05, adj-R2 = 49.22%), i.e. depends of an oligotrophic-eutrophic
+gradient. The following plot identifies a preference of this species for
+oligotrophic water.
+
+**Challenge 3** Run a PCA of the "mite" species abundance data. What are
+the significant axes of variation? Which groups of sites can you
+identify? Which species are related to each group of sites? Use:
+
+```{r, echo = TRUE, eval = FALSE}
+mite.spe <- mite #mite data is from the vegan package
+```
+
+**Challenge 3 - Solution** \<hidden\> Your code likely looks something
+like the following.
+
+```{r, echo = TRUE, eval = FALSE}
+#Hellinger transformation of mite data and PCA
+mite.spe.hel <- decostand(mite.spe, method="hellinger")
+mite.spe.h.pca <- rda(mite.spe.hel)
+ 
+#What are the significant axes?  
+ev <- mite.spe.h.pca$CA$eig 
+ev[ev>mean(ev)]
+n <- length(ev)
+barplot(ev, main="Eigenvalues", col="grey", las=2)
+abline(h=mean(ev), col="red") 
+legend("topright", "Average eigenvalue", lwd=1, col=2, bty="n") 
+
+#Output summary/results    
+summary(mite.spe.h.pca, display=NULL) 
+windows()
+
+#Plot the biplot
+plot(mite.spe.h.pca, scaling=1, type="none", 
+     xlab=c("PC1 (%)", round((mite.spe.h.pca$CA$eig[1]/sum(mite.spe.h.pca$CA$eig))*100,2)),
+     ylab=c("PC2 (%)", round((mite.spe.h.pca$CA$eig[2]/sum(mite.spe.h.pca$CA$eig))*100,2))) 
+points(scores(mite.spe.h.pca, display="sites", choices=c(1,2), scaling=1),
+       pch=21, col="black", bg="steelblue", cex=1.2)
+text(scores(mite.spe.h.pca, display="species", choices=c(1), scaling=1),
+     scores(mite.spe.h.pca, display="species", choices=c(2), scaling=1),
+     labels=rownames(scores(mite.spe.h.pca, display="species", scaling=1)),
+     col="red", cex=0.8)  
+```
+
+And your resulting biplot likely looks something like this:
+
+![](/mite_pca.png){width="800"}
+
+A dense cluster of related species and sites can be seen in the biplot.
+\</hidden\>

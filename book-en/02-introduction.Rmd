@@ -1,0 +1,27 @@
+# What is ordination?
+
+Ordination is a set of methods for depicting samples in multiple
+dimensions (Clarke and Warwick 2011) and often feels like a catch-all
+term in ecological statistics. Ecologists are often told to "run a PCA"
+in the face of complex and messy multivariate data. R code for
+ordination techniques is readily available and relatively
+straight-forward to implement for most data. Interpretation of
+ordination analyses can be more difficult, especially if you are unsure
+of the specific questions you wish to explore with a particular
+ordination method. As such, while ordination methods are very useful for
+helping simplify and make sense of multivariate data, careful
+consideration of why the methods are being used and which ones are most
+appropriate is necessary for strong ecological analyses!
+
+When you use an ordination method, you are taking a set of variables and
+creating new principal axes along which samples (sites etc.) are scored
+or ordered (Gotelli and Ellison 2004), in order to reduce or simplify
+the data, i.e. to create new axes that represent most of the variation
+in the data. As an example, a dataset with 24 variables may be reduced
+to five principal components that represent the main patterns of
+variation amongst samples. Unconstrained ordination methods are
+generally not frameworks for hypotheses testing, rather they are best
+suited for exploratory data analysis. The different types of ordination
+can be useful for many different questions; see ([the Ordination
+Website](http://ordination.okstate.edu/)) for an overview of different
+types of ordination).

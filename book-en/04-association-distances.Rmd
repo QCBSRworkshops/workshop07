@@ -1,0 +1,476 @@
+# (PART\*) Measures of association {-}
+
+# Data (dis)similarity
+
+Matrix algebra ultimately lies below all ordinations. A matrix consists
+of data (e.g. measured values) in rows and columns. Prior to starting
+multivariate analyses, you likely have matrices with ecological data
+(such as the DoubsEnv or DoubsSpe that we have used before), but in
+ordination methods, your original data matrices are used to create
+association matrices. Before launching into ordination methods, it is
+important to spend some time with your data matrices. Creating an
+association matrix between objects or among descriptors allows for
+calculations of similarity or distance between objects or descriptors
+(Legendre and Legendre 2012). Exploring the possible association
+measures that can be generated from your data prior to running
+ordinations can help you to better understand what distance measure to
+use within ordination methods. At this point in time, it may be
+difficult to see the purpose behind different dissimilarity indices, or
+describing what they do to your multivariate data, but we will need this
+knowledge when we consider canonical ordination methods later on.
+
+IN SUMMARY: To ordinate objects you need to compute distances among
+them. Distances can be computed in several ways, taking into account
+abundance or presence/absence data. More importantly, they are several
+properties that are important for distance metrics that are explored
+with the data examples below. For more information about the properties
+of distance metrics and some key terms, click on the hidden section
+below.
+
+**Some key terms:**
+
+**Association -** "general term to describe any measure or coefficient
+to quantify the resemblance or difference between objects or
+descriptors. In an analysis between descriptors, zero means no
+association." (Legendre and Legendre 2012).
+
+**Similarity -** a measure that is "maximum (S=1) when two objects are
+identical and minimum when two objects are completely different."
+(Legendre and Legendre 2012).
+
+**Distance (also called dissimilarity) -** a measure that is "maximum
+(D=1) when two objects are completely different". (Legendre and Legendre
+2012). Distance or dissimilarity (D) = 1-S
+
+Choosing an association measure depends on your data, but also on what
+you know, ecologically about your data. For example, Euclidean distance
+is a very common and easy to use distance measure and is useful for
+understanding how different two samples are based on co-occurrence of
+species. The way Euclidean distance is calculated though relies on zeros
+in the dataset, meaning that two samples or sites without any species in
+common may appear more similar than two samples that share a few
+species. This could be misleading and it would be best to choose a
+different distance measure if you have a lot of zeros in your species
+matrix. This is commonly referred to the "double zero" problem in
+ordination analyses.
+
+Here are some commonly used dissimilarity (distance) measures (recreated
+from Gotelli and Ellison 2004):
+
+  Measure name   Property      Description
+  -------------- ------------- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  Euclidean      Metric        Distance between two points in 2D space.
+  Manhattan      Metric        Distance between two points, where the distance is the sum of differences of their Cartesian coordinates, i.e. if you were to make a right able between the points.
+  Chord          Metric        This distance is generally used to assess differences due to genetic drift.
+  Mahalanobis    Metric        Distance between a point and a set distribution, where the distance is the number of standard deviations of the point from the mean of the distribution.
+  Chi-square     Metric        Similar to Euclidean.
+  Bray-Curtis    Semi-metric   Dissimilarity between two samples (or sites) where the sum of lower values for species present in both samples are divided by the sum of the species counted in each sample.
+  Jaccard        Metric        [Description](http://en.wikipedia.org/wiki/Jaccard_index)
+  Sorensen\'s    Semi-metric   Bray-Curtis is 1 - Sorensen
+
+
+# Quantifying data (dis)similarity
+
+**Quantitative species data** We can use the vegdist() function to
+compute dissimilarity indices for community composition data. These can
+then be visualized as a matrix if desired.
+
+```{r, echo = TRUE, eval = FALSE}
+spe.db<-vegdist(spe, method="bray") # "bray" with presence-absence data is Sorensen dissimilarity 
+spe.dj<-vegdist(spe, method="jac") # Jaccard dissimilarity
+spe.dg<-vegdist(spe, method="gower") # Gower dissimilarity 
+spe.db<-as.matrix(spe.db) #Put in matrix form (can visualize, write to .csv etc)
+```
+
+A condensed version of the spe.db matrix where the numbers represent the
+distance(dissimilarity) between the first 3 species in DoubsSpe would
+look like this:
+
+              Species 1   Species 2   Species 3
+  ----------- ----------- ----------- -----------
+  Species 1   0.0         0.6         0.68
+  Species 2   0.6         0.0         0.14
+  Species 3   0.68        0.14        0.0
+
+You can see that when comparing a species to itself (e.g. Species 1 to
+Species 1), the distance = 0, because species 1 is like itself and
+distance is maximum when the species compared are 100% different.
+
+These same distance measures can be calculated from presence-absence
+data by setting binary=TRUE in the vegdist() function. This will give
+slightly different distance measures.
+
+You can also create graphical depictions of these association matrices
+using a function called coldiss. \<hidden\> This function can be sourced
+using the script coldiss.R:
+
+```{r, echo = TRUE, eval = FALSE}
+windows()
+coldiss(spe.db, byrank=FALSE, diag=TRUE) # Heat map of Bray-Curtis dissimilarity
+windows()
+coldiss(spe.dj, byrank=FALSE, diag=TRUE) # Heat map of Jaccard dissimilarity
+windows() 
+coldiss(spe.dg, byrank=FALSE, diag=TRUE) # Heat map of Gower dissimilarity
+```
+
+![](/coldiss_Bray.png){width="800"}
+
+The figure shows a dissimilarity matrix which mirrors what you would see
+if you exported the matrix or viewed it within the R console. The 'hot'
+colour (purple) shows areas of high dissimilarity. \</hidden\>
+
+**Quantitative environmental data** Let's look at *associations* between
+environmental variables (also known as Q mode):
+
+```{r, echo = TRUE, eval = FALSE}
+?dist # this function also compute dissimilarity matrix
+env.de<-dist(env.z, method = "euclidean") # euclidean distance matrix of the standardized environmental variables 
+windows() #Creates a separate graphical window
+coldiss(env.de, diag=TRUE)
+```
+
+We can then look at the *dependence* between environmental variables
+(also known as R mode):
+
+```{r, echo = TRUE, eval = FALSE}
+(env.pearson<-cor(env)) # Pearson r linear correlation
+round(env.pearson, 2) #Rounds the coefficients to 2 decimal points 
+(env.ken<-cor(env, method="kendall")) # Kendall tau rank correlation
+round(env.ken, 2) 
+```
+
+The Pearson correlation measures the linear correlation between two
+variables. The Kendall tau is a rank correlation which means that it
+quantifies the relationship between two descriptors or variables when
+the data are ordered within each variable.
+
+In some cases, there may be mixed types of environmental variables. Q
+mode can still be used to find associations between these environmental
+variables. We'll do this by first creating an example dataframe:
+
+```{r, echo = TRUE, eval = FALSE}
+var.g1<-rnorm(30, 0, 1)
+var.g2<-runif(30, 0, 5)
+var.g3<-gl(3, 10)
+var.g4<-gl(2, 5, 30)
+(dat2<-data.frame(var.g1, var.g2, var.g3, var.g4))
+str(dat2)
+summary(dat2)
+```
+
+A dissimilarity matrix can be generated for these mixed variables using
+the Gower dissimilarity matrix:
+
+```{r, echo = TRUE, eval = FALSE}
+?daisy #This function can handle NAs in the data
+(dat2.dg<-daisy(dat2, metric="gower"))
+coldiss(dat2.dg)
+```
+
+**Challenge 1 - Introductory** Discuss with your neighbour: How can we
+tell how similar objects are when we have multivariate data? Make a list
+of all your suggestions.
+
+**Challenge 1 - Introductory Solution** \<hidden\> Discuss as a group.
+\</hidden\>
+
+**Challenge 1 - Advanced** Calculate the Bray-Curtis and the Gower
+dissimilarity of species abundance CHA, TRU and VAI for sites 1, 2 and 3
+(using the "spe" and "env" dataframes) *without using the decostand()
+function.*
+
+**Challenge 1 - Advanced Solution** \<hidden\>
+
+First, it is helpful to know the formula for Bray-Curtis dissimilarity
+Bray-Curtis dissimilarity : d\[jk\] = (sum abs(x\[ij\]-x\[ik\]))/(sum
+(x\[ij\]+x\[ik\]))
+
+Next, subset the species data so that only sites 1, 2 are included and
+only the species CHA, TRU and VAI
+
+```{r, echo = TRUE, eval = FALSE}
+spe.challenge<-spe[1:3,1:3] #”[1:3,” refers to rows 1 to 3 while “,1:3]” refers to the first 3 species columns (in #this case the three variables of interest)
+```
+
+Determine total species abundance for each site of interest (sum of the
+3 rows). This will be for the denominator in the above equation.
+
+```{r, echo = TRUE, eval = FALSE}
+(Abund.s1<-sum(spe.challenge[1,]))
+(Abund.s2<-sum(spe.challenge[2,]))
+(Abund.s3<-sum(spe.challenge[3,]))
+#() around code will cause output to print right away in console
+```
+
+Now calculate the difference in species abundances for each pair of
+sites. For example, what is the difference between the abundance of CHA
+and TRU in site 1? You need to calculate the following differences: CHA
+and TRU site 1 CHA and VAI site 1 TRU and VAI site 1 CHA and TRU site 2
+CHA and VAI site 2 TRU and VAI site 2 CHA and TRU site 3 CHA and VAI
+site 3 TRU and VAI site 3
+
+```{r, echo = TRUE, eval = FALSE}
+Spec.s1s2<-0
+Spec.s1s3<-0
+Spec.s2s3<-0
+for (i in 1:3) {
+  Spec.s1s2<-Spec.s1s2+abs(sum(spe.challenge[1,i]-spe.challenge[2,i]))
+  Spec.s1s3<-Spec.s1s3+abs(sum(spe.challenge[1,i]-spe.challenge[3,i]))
+  Spec.s2s3<-Spec.s2s3+abs(sum(spe.challenge[2,i]-spe.challenge[3,i])) }
+```
+
+Now take the differences you have calculated as the numerator in the
+equation for Bray-Curtis dissimilarity and the total species abundance
+that you already calculated as the denominator.
+
+```{r, echo = TRUE, eval = FALSE}
+(db.s1s2<-Spec.s1s2/(Abund.s1+Abund.s2)) #Site 1 compared to site 2
+(db.s1s3<-Spec.s1s3/(Abund.s1+Abund.s3)) #Site 1 compared to site 3
+(db.s2s3<-Spec.s2s3/(Abund.s2+Abund.s3)) #Site 2 compared to site 3 
+```
+
+You should find values of 0.5 for site 1 to site 2, 0.538 for site 1 to
+site 3 and 0.053 for site 2 to 3.
+
+Check your manual results with what you would find using the function
+vegdist() with the Bray-Curtis method:
+
+```{r, echo = TRUE, eval = FALSE}
+(spe.db.challenge<-vegdist(spe.challenge, method="bray"))
+```
+
+A matrix looking like this is produced, which should be the same as your
+manual calculations:
+
+           Site 1   Site 2
+  -------- -------- --------
+  Site 2   0.5      \--
+  Site 3   0.538    0.0526
+
+For the Gower dissimilarity, proceed in the same way but use the
+appropriate equation: Gower dissimilarity : d\[jk\] = (1/M)
+sum(abs(x\[ij\]-x\[ik\])/(max(x\[i\])-min(x\[i\])))
+
+```{r, echo = TRUE, eval = FALSE}
+# Calculate the number of columns in your dataset
+M<-ncol(spe.challenge)
+
+# Calculate the species abundance differences between pairs of sites for each species
+Spe1.s1s2<-abs(spe.challenge[1,1]-spe.challenge[2,1])
+Spe2.s1s2<-abs(spe.challenge[1,2]-spe.challenge[2,2])
+Spe3.s1s2<-abs(spe.challenge[1,3]-spe.challenge[2,3])
+Spe1.s1s3<-abs(spe.challenge[1,1]-spe.challenge[3,1])
+Spe2.s1s3<-abs(spe.challenge[1,2]-spe.challenge[3,2])
+Spe3.s1s3<-abs(spe.challenge[1,3]-spe.challenge[3,3])
+Spe1.s2s3<-abs(spe.challenge[2,1]-spe.challenge[3,1])
+Spe2.s2s3<-abs(spe.challenge[2,2]-spe.challenge[3,2])
+Spe3.s2s3<-abs(spe.challenge[2,3]-spe.challenge[3,3])
+
+# Calculate the range of each species abundance between sites  
+Range.spe1<-max(spe.challenge[,1]) - min (spe.challenge[,1])
+Range.spe2<-max(spe.challenge[,2]) - min (spe.challenge[,2])
+Range.spe3<-max(spe.challenge[,3]) - min (spe.challenge[,3])
+
+# Calculate the Gower dissimilarity  
+(dg.s1s2<-(1/M)*((Spe2.s1s2/Range.spe2)+(Spe3.s1s2/Range.spe3)))
+(dg.s1s3<-(1/M)*((Spe2.s1s3/Range.spe2)+(Spe3.s1s3/Range.spe3)))
+(dg.s2s3<-(1/M)*((Spe2.s2s3/Range.spe2)+(Spe3.s2s3/Range.spe3)))
+
+# Compare your results
+(spe.db.challenge<-vegdist(spe.challenge, method="gower"))
+```
+
+
+## Transformations of community composition data
+
+Sometimes species/community data may also need to be standardized or
+transformed. The decostand() function in vegan provides standardization
+and transformation options for community composition data.
+
+Transforming abundance or count data to presence-absence data:
+
+```{r, echo = TRUE, eval = FALSE}
+spe.pa<-decostand(spe, method="pa") 
+```
+
+Other transformations can be used to correct for the influence of rare
+species, e.g. the Hellinger transformation:
+
+```{r, echo = TRUE, eval = FALSE}
+#Hellinger transformation
+spe.hel<-decostand(spe, method="hellinger") #can also use method=”hell”
+
+#Chi-square transformation
+spe.chi<-decostand(spe, method="chi.square")
+```
+
+**Optional Challenge 2 - Advanced** Produce Hellinger and Chi-square
+transformed abundance data for the "spe" data without using decostand().
+
+**Optional Challenge 2 - Advanced Solution** \<hidden\> The Hellinger
+transformation is a transformation that down-weights the importance
+given to rare species in a sample.
+
+```{r, echo = TRUE, eval = FALSE}
+# Hellinger transformation
+# First calculate the total species abundances by site
+(site.totals=apply(spe, 1, sum))
+
+# Scale species abundances by dividing them by site totals
+(scale.spe<-spe/site.totals)
+
+# Calculate the square root of scaled species abundances
+(sqrt.scale.spe<-sqrt(scale.spe))
+
+# Compare the results
+sqrt.scale.spe
+spe.hel
+sqrt.scale.spe-spe.hel # or: sqrt.scale.spe/spe.hel
+
+# Chi-square transformation
+# First calculate the total species abundances by site
+(site.totals<-apply(spe, 1, sum))
+
+# Then calculate the square root of total species abundances
+(sqrt.spe.totals<-sqrt(apply(spe, 2, sum)))
+
+# Scale species abundances by dividing them by the site totals and the species totals
+scale.spe2<-spe
+for (i in 1:nrow(spe)) {
+  for (j in 1:ncol(spe)) {
+   (scale.spe2[i,j]=scale.spe2[i,j]/(site.totals[i]*sqrt.spe.totals[j]))   }}
+
+#Adjust the scale abundance species by multiplying by the square root of the species matrix total                                         
+(adjust.scale.spe2<-scale.spe2*sqrt(sum(rowSums(spe))))
+
+# Compare the results
+adjust.scale.spe2
+spe.chi
+adjust.scale.spe2-spe.chi # or: adjust.scale.spe2/spe.chi
+```
+
+# Clustering
+
+One application of association matrices is clustering. It is not a
+statistical method per se, because it does not test a hypothesis, but it
+highlights structures in the data by partitioning either the objects or
+the descriptors. As a result, similar objects are combined into groups,
+allowing distinctions -- or contrasts -- between groups to be
+identified. One goal of ecologists could be to divide a set of sites
+into groups with respect to their environmental conditions or their
+community composition.
+
+Clustering results are often represented as dendrograms (trees), where
+objects agglomerate into groups. There are several families of
+clustering methods, but for the purpose of this workshop, we will
+present an overview of three hierarchical agglomerative clustering
+methods: single linkage, complete linkage, and Ward's minimum variance
+clustering. See chapter 8 of Legendre and Legendre 2012 for more details
+on the different families of clustering methods.
+
+In hierarchical methods, elements of lower clusters (or groups) become
+members of larger, higher ranking clusters, e.g. species, genus, family,
+order. Prior to clustering, one needs to create an association matrix
+among the objects. Distance matrix is the default choice of clustering
+functions in R. The association matrix is first sorted in increasing
+distance order (or decreasing similarities). Then, groups are formed
+hierarchically following rules specific to each method.
+
+Let\'s take a simple example of a euclidean distance matrix between 5
+objets which were sorted in ascending order.
+
+![](/cluster.example.png){.align-center}
+
+In single linkage agglomerative clustering (also called nearest
+neighbour sorting), the objects at the closest distances agglomerate.
+The two closest objects agglomerate first, the next two closest
+objects/clusters are then linked, and so on, which often generates long
+thin clusters or chains of objects (see how objets 1 to 5 cluster
+successively). Conversely, in complete linkage agglomerative clustering,
+an object agglomerates to a group only when linked to the furthest
+element of the group, which in turn links it to all members of that
+group (in the above example, the group formed of objets 3 and 4 only
+clusters with group 1-2 at 0.4, a distance at which objets 1, 2, 3 and 4
+are all linked). As a result, complete linkage clustering will form many
+small separate groups, and is more appropriate to look for contrasts,
+discontinuities in the data.
+
+Let's compare the single and complete linkage clustering methods using
+the Doubs fish species data.
+
+Species data were already Hellinger-transformed. The cluster analysis
+requiring similarity or dissimilarity indices, the first step will be to
+generate the Hellinger distance indices.
+
+```{r, echo = TRUE, eval = FALSE}
+spe.dhel<-vegdist(spe.hel,method="euclidean") #generates the distance matrix from Hellinger transformed data
+
+#See difference between the two matrices
+head(spe.hel)# Hellinger-transformed species data
+head(spe.dhel)# Hellinger distances among sites
+```
+
+Most clustering methods can be computed with the function hclust() of
+the stats package.
+
+```{r, echo = TRUE, eval = FALSE}
+#Faire le groupement à liens simples
+#Perform single linkage clustering
+spe.dhel.single<-hclust(spe.dhel, method="single")
+plot(spe.dhel.single)
+
+#Perform complete linkage clustering
+spe.dhel.complete<-hclust(spe.dhel, method="complete")
+plot(spe.dhel.complete)
+```
+
+![](/clust_single.png){.align-center}![](/clust_complete.png){.align-center}
+
+Are there big differences between the two dendrograms?
+
+In single linkage clustering, chains of objets occur (e.g. 19, 29, 30,
+20, 26, etc.), whereas more contrasted groups are formed in the complete
+linkage clustering.
+
+Ward's minimum variance clustering differ from these two methods in that
+it clusters objects into groups using the criterion of least squares
+(similar to linear models). At the beginning, each object is considered
+being a cluster of its own. At each step, the pair of clusters merging
+is the one leading to minimum increase in total within-group sum of
+squares.
+
+Again, it is possible to generate a Ward's minimum variance clustering
+with hclust(). However, the dendogram shows squared distances by
+default. In order to compare this dendrogram to the single and complete
+linkage clustering results, one must calculate the square root of the
+distances.
+
+```{r, echo = TRUE, eval = FALSE}
+#Perform Ward minimum variance clustering
+spe.dhel.ward<-hclust(spe.dhel, method="ward.D2")
+plot(spe.dhel.ward)
+
+#Re-plot the dendrogram by using the square roots of the fusion levels
+spe.dhel.ward$height<-sqrt(spe.dhel.ward$height)
+plot(spe.dhel.ward)
+plot(spe.dhel.ward, hang=-1) # hang=-1 aligns all objets on the same line
+```
+
+![](/clust_ward.png){.align-center}
+![](/clust_wardfinal.png){.align-center}
+
+The clusters generated using Ward's method tend to be more spherical and
+to contain similar numbers of objects.
+
+One must be careful in the choice of an association measure and
+clustering method in order to correctly address a problem. What are you
+most interested in: gradients? Contrasts? In addition, the results
+should be interpreted with respect to the properties of the method used.
+If more than one method seems suitable to an ecological question,
+computing them all and compare the results would be the way to go. As a
+reminder, clustering is not a statistical method, but further steps can
+be taken to identify interpretable clusters (e.g. where to cut the
+tree), or to compute clustering statistics. Clustering can also be
+combined to ordination in order to distinguish groups of sites. These go
+beyond the scope of this workshop, but see Borcard et al. 2011 for more
+details.

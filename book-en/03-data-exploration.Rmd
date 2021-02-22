@@ -1,0 +1,116 @@
+# Exploring the dataset
+
+We will use two main data sets in the first part of this workshop.
+"DoubsSpe.csv" is a data frame of fish community data where the first
+column contains site names from 1 to 30 and the remaining columns are
+fish taxa. The taxa columns are populated by fish abundance data
+(counts). "DoubsEnv.csv" is a data frame of environmental data for the
+same sites contained in the fish community data frame. Again, the first
+column contains site names from 1 to 30. The remaining columns contain
+measurements for 11 abiotic variables. Note that data used in ordination
+analyses is generally in
+[wide-format](http://en.wikipedia.org/wiki/Wide_and_narrow_data).
+
+```{r, echo = TRUE, eval = FALSE}
+#Species community data frame (fish abundance): “DoubsSpe.csv”
+spe<- read.csv(file.choose(), row.names=1)
+spe<- spe[-8,] #Site number 8 contains no species and so row 8 (site 8) is removed. Be careful to
+#only run this command line once as you are overwriting "spe" each time. 
+
+#Environmental data frame: “DoubsEnv.csv”
+env<- read.csv(file.choose(), row.names=1)
+env<- env[-8,] #Remove corresponding abiotic data for site 8 (since removed from fish data). 
+#Again, be careful to only run the last line once. 
+```
+
+## Species data
+
+We can use summary functions to explore the "spe" data (fish community
+data) and discover things like the dimensions of the matrix, column
+headings and summary statistics for the columns. This is a review from
+===== Workshop 2.
+
+```{r, echo = TRUE, eval = FALSE}
+names(spe) #see names of columns in spe
+dim(spe) #dimensions of spe; number of columns and rows 
+str(spe) #displays internal structure of objects
+head(spe) #first few rows of the data frame
+summary(spe) #summary statistics for each column; min value, median value, max value, mean value etc.  
+```
+
+Look at the species' distribution frequencies.
+
+```{r, echo = TRUE, eval = FALSE}
+#Species distribution
+(ab <- table(unlist(spe))) #note that when you put an entire line of code in brackets like this, the output for that operation is displayed right away in the R console
+
+barplot(ab, las=1, xlab="Abundance class", ylab="Frequency", col=grey(5:0/5))
+```
+
+![](/spe_barplot.png){width="300"} Can see that there is a high
+frequency of zeros in the abundance data.
+
+See how many absences there are in the fish community data.
+
+```{r, echo = TRUE, eval = FALSE}
+sum(spe==0) 
+```
+
+Look at the proportion of zeros in the fish community data.
+
+```{r, echo = TRUE, eval = FALSE}
+sum(spe==0)/(nrow(spe)*ncol(spe))
+```
+
+The proportion of zeros in the dataset is \~0.5.
+
+See the frequency at which different numbers of species occur together.
+
+```{r, echo = TRUE, eval = FALSE}
+spe.pres <- colSums(spe>0) #compute the number of sites where each species is present. 
+hist(spe.pres, main="Species occurrence", las=1, xlab="Frequency of occurrences", breaks=seq(0,30, by=5), col="grey")
+```
+
+Can see that an intermediate number of sites contain the highest number
+of species.
+
+Calculate the number of species that occur at each site. This is a
+simplistic way of calculating species richness for each site. In some
+cases, the number of individuals found in a site may differ between
+sites. Because there may be a relationship between the number of
+individuals counted in a site or sample and the taxa or species
+richness, [rarefied species
+richness](http://cc.oulu.fi/~jarioksa/softhelp/vegan/html/diversity.html)
+may be a more appropriate metric than total richness. The rarefy()
+function in vegan can be used to generate rarefied species richness.
+
+```{r, echo = TRUE, eval = FALSE}
+site.pres <- rowSums(spe>0) #number of species with a value greater than 0 in that site row
+hist(site.pres, main="Species richness", las=1, xlab="Frequency of sites", ylab="Number of species", breaks=seq(0,30, by=5), col="grey") 
+```
+
+## Environmental data
+
+Explore the environmental data and create a panel of plots to compare
+collinearity:
+
+```{r, echo = TRUE, eval = FALSE}
+names(env)
+dim(env)
+str(env)
+head(env)
+summary(env)
+pairs(env, main="Bivariate Plots of the Environmental Data" ) 
+```
+
+In this case, the environmental data (explanatory variables) are all in
+different units and need to be standardized prior to computing distance
+measures to perform most ordination analyses. Standardize the
+environmental data (11 variables) using the function decostand() in
+vegan.
+
+```{r, echo = TRUE, eval = FALSE}
+env.z <- decostand(env, method="standardize")
+apply(env.z, 2, mean) # the data are now centered (means~0)
+apply(env.z, 2, sd)   # the data are now scaled (standard deviations=1)
+```
