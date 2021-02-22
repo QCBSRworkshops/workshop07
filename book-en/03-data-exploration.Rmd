@@ -1,116 +1,174 @@
-# Exploring the dataset
+# How do I analyze this dataset?
 
-We will use two main data sets in the first part of this workshop.
-"DoubsSpe.csv" is a data frame of fish community data where the first
-column contains site names from 1 to 30 and the remaining columns are
-fish taxa. The taxa columns are populated by fish abundance data
-(counts). "DoubsEnv.csv" is a data frame of environmental data for the
-same sites contained in the fish community data frame. Again, the first
-column contains site names from 1 to 30. The remaining columns contain
-measurements for 11 abiotic variables. Note that data used in ordination
-analyses is generally in
-[wide-format](http://en.wikipedia.org/wiki/Wide_and_narrow_data).
+## Run many separate analyses
 
-```{r, echo = TRUE, eval = FALSE}
-#Species community data frame (fish abundance): “DoubsSpe.csv”
-spe<- read.csv(file.choose(), row.names=1)
-spe<- spe[-8,] #Site number 8 contains no species and so row 8 (site 8) is removed. Be careful to
-#only run this command line once as you are overwriting "spe" each time. 
+One way to analyze this data is to fit linear regressions for each
+species in each lake. Here is a plot of species 1 in lake 1:
 
-#Environmental data frame: “DoubsEnv.csv”
-env<- read.csv(file.choose(), row.names=1)
-env<- env[-8,] #Remove corresponding abiotic data for site 8 (since removed from fish data). 
-#Again, be careful to only run the last line once. 
-```
+![](images/fig_5_w5.png){width="400"}
 
-## Species data
+Notice you would have to estimate a slope and intercept parameter for
+each regression (2 parameters x 3 species X 6 lakes = 36 parameter
+estimates) and the sample size for each analysis would be 10. There is a
+decreased chance of finding an effect due to low sample size and
+increased familywise error rate due to multiple comparisons.
 
-We can use summary functions to explore the "spe" data (fish community
-data) and discover things like the dimensions of the matrix, column
-headings and summary statistics for the columns. This is a review from
-===== Workshop 2.
+## Run one lumped analysis
 
-```{r, echo = TRUE, eval = FALSE}
-names(spe) #see names of columns in spe
-dim(spe) #dimensions of spe; number of columns and rows 
-str(spe) #displays internal structure of objects
-head(spe) #first few rows of the data frame
-summary(spe) #summary statistics for each column; min value, median value, max value, mean value etc.  
-```
+Another way to analyze this data is to fit a single linear regression
+ignoring species and lake. Again here is the plot of all the data:
 
-Look at the species' distribution frequencies.
+![](images/fig_6_w5.png){width="400"}
 
-```{r, echo = TRUE, eval = FALSE}
-#Species distribution
-(ab <- table(unlist(spe))) #note that when you put an entire line of code in brackets like this, the output for that operation is displayed right away in the R console
+Notice you now have a huge sample size and far fewer parameters to
+estimate. But what about pseudoreplication? Things within the same lake
+and species will likely be correlated. Also, look at all that noise in
+the data, surely some of it is due to differences in lakes and species.
 
-barplot(ab, las=1, xlab="Abundance class", ylab="Frequency", col=grey(5:0/5))
-```
+In this case we simply want to know if trophic position increases with
+length and we don't really care that this relationship might differ
+slightly among species due to biological processes that we didn't
+measure or among lakes due to unmeasured environmental variables. This
+is variation we simply want to control for (sometimes referred to as
+random factors).
 
-![](/spe_barplot.png){width="300"} Can see that there is a high
-frequency of zeros in the abundance data.
+## Fit a LMM
 
-See how many absences there are in the fish community data.
+LMM's are a balance between separating and lumping. They:
 
-```{r, echo = TRUE, eval = FALSE}
-sum(spe==0) 
-```
+    -Provide slope and intercept parameters for each species and lake (separating) but estimate fewer parameters than classical regression.
+    -Use all the data available (lumping) while accounting for pseudoreplication and controlling for differences among lakes and species.
 
-Look at the proportion of zeros in the fish community data.
+# Fixed and Random Effects
 
-```{r, echo = TRUE, eval = FALSE}
-sum(spe==0)/(nrow(spe)*ncol(spe))
-```
+There is a debate in the litterature about the definition of fixed and
+random effects. There are many possible definitions, and we chose to
+present those we think are easier to apply when doing your analyses.
 
-The proportion of zeros in the dataset is \~0.5.
+## Fixed effect
 
-See the frequency at which different numbers of species occur together.
+When a variable has a fixed effect, data is usually gathered from all
+it's possible levels. The person doing the analyses is also interested
+in making conclusions about the levels for which the data was gathered.
 
-```{r, echo = TRUE, eval = FALSE}
-spe.pres <- colSums(spe>0) #compute the number of sites where each species is present. 
-hist(spe.pres, main="Species occurrence", las=1, xlab="Frequency of occurrences", breaks=seq(0,30, by=5), col="grey")
-```
+Example of a fixed effect: comparing mercury concentration in fish from
+three different habitats. Habitat has a fixed effect as we sampled in
+each 3 habitats and we are interested in making conclusions about these
+specific habitats.
 
-Can see that an intermediate number of sites contain the highest number
-of species.
+## Random effect
 
-Calculate the number of species that occur at each site. This is a
-simplistic way of calculating species richness for each site. In some
-cases, the number of individuals found in a site may differ between
-sites. Because there may be a relationship between the number of
-individuals counted in a site or sample and the taxa or species
-richness, [rarefied species
-richness](http://cc.oulu.fi/~jarioksa/softhelp/vegan/html/diversity.html)
-may be a more appropriate metric than total richness. The rarefy()
-function in vegan can be used to generate rarefied species richness.
+Variables with a random effect are also called random factors, as they
+are only categorical variables (not continuous variables). A random
+effect is observed when the data only includes a random sample of the
+factor's many possible levels, which are all of interest. They usually
+are grouping factors for which you want to control the effect in your
+model, but are not interested in their specific effect on the response
+variable.
 
-```{r, echo = TRUE, eval = FALSE}
-site.pres <- rowSums(spe>0) #number of species with a value greater than 0 in that site row
-hist(site.pres, main="Species richness", las=1, xlab="Frequency of sites", ylab="Number of species", breaks=seq(0,30, by=5), col="grey") 
-```
+Example of a random effect: studying mercury contamination in fish in
+Ugandan crater lakes. For logistical reasons, you can't sample all the
+crater lakes, so you sample only 8 of them. However, fish from a given
+lake might have some sort of correlation between themselves
+(auto-correlation) since they experience the same environmental
+conditions. Even though you're not interested in the effect of each
+lake specifically, you should account for this potential correlation
+with a random factor (crater lake) in order to make conclusions about
+crater lakes in general.
 
-## Environmental data
+# How do LMM's work?
 
-Explore the environmental data and create a panel of plots to compare
-collinearity:
+## Intercepts and/or slopes are allowed to vary by lake and species
 
-```{r, echo = TRUE, eval = FALSE}
-names(env)
-dim(env)
-str(env)
-head(env)
-summary(env)
-pairs(env, main="Bivariate Plots of the Environmental Data" ) 
-```
+In LMM's allowing intercepts and/or slopes to vary by certain factors
+(random effects) simply means you assume they come from a normal
+distribution. A mean and standard deviation of that distribution are
+estimated based on your data. The most likely intercepts and slopes from
+that distribution are then fit by optimization (ex. maximum likelihood
+or restricted maximum likelihood).
 
-In this case, the environmental data (explanatory variables) are all in
-different units and need to be standardized prior to computing distance
-measures to perform most ordination analyses. Standardize the
-environmental data (11 variables) using the function decostand() in
-vegan.
+**Intercepts**
 
-```{r, echo = TRUE, eval = FALSE}
-env.z <- decostand(env, method="standardize")
-apply(env.z, 2, mean) # the data are now centered (means~0)
-apply(env.z, 2, sd)   # the data are now scaled (standard deviations=1)
-```
+In the case of species only a mean and standard deviation are estimated
+for the distribution of species intercepts instead of three separate
+species intercepts. The mean of this distribution is the 'species level
+model'. In this example, we only have three species. In general, the
+more levels you have for a given factor, the more accurately the
+parameters of the distribution can be estimated (three may be a little
+low for estimating a mean and standard deviation but it makes simpler
+graphs!). When you will implement LMM's in R, note that the intercept
+in the summary is the species level intercept (i.e. the mean of all
+random intercepts).
+
+![](images/fig_7_w5.png){width="600"}
+
+Likewise for lake only mean and standard deviation of lake intercepts
+are estimated saving you the need to estimate 6 different lake intercept
+parameters. This saves degrees of freedom as less parameter estimates
+are needed given the amount of data.
+
+![](images/fig_8_w5.png){width="600"}
+
+**Slopes**
+
+The same concept is used for allowing slopes to vary by a given factor
+(random effect). This is a little harder to visualize than the
+intercepts. In the case of species only a mean and standard deviation of
+slope parameters are estimated instead of three separate slopes. Again,
+when you will implement LMM's in R, the slope in the summary is the
+species level slope.
+
+![](images/fig_9_w5.png){width="600"}
+
+## Intercepts, slopes, and associated confidence intervals are adjusted to account for the structure of data
+
+If a certain species or lake is data poor like in the example below (we
+have a balanced design so not the case in our scenario) it will rely
+more heavily on the group level model for the intercept and slope in
+that species or lake.
+
+![](images/fig_12_w5.png){width="600"}
+
+Confidence intervals of intercepts and slopes are adjusted to account
+for pseudoreplication based on the **intraclass correlation coefficient
+(ICC)** - How much variation is there among groups versus within groups?
+This determines your **effective sample size** - An adjusted sample
+sized based on how correlated the data within groups are.
+
+**High ICC**
+
+![](images/fig_10_w5.png){width="400"}
+
+In this scenario the LMM will treat points within lake more like an
+overall mean because they are highly correlated. Therefore, the
+effective sample size will be smaller leading to larger confidence
+intervals around your slope and intercept parameters.
+
+**Low ICC**
+
+![](images/fig_11_w5.png){width="400"}
+
+In this scenario the LMM will treat points within lake more
+independently because things are less correlated within groups compared
+to among groups. Therefore the effective sample size will be larger
+leading to smaller confidence intervals around your slope and intercept
+parameters.
+
+------------------------------------------------------------------------
+
+**CHALLENGE 2**
+
+For your second challenge answer these two questions with your
+neighbours. How will the ICC and confidence intervals be affected in
+these two scenarios:
+
+    -Fish trophic positions are not variable among lakes?
+    -Fish trophic positions are similar within lakes but variable among lakes?
+
+++++ Challenge 2 Answer \|
+
+    -Low ICC smaller confidence intervals
+    -High ICC larger confidence intervals
+
+++++
+

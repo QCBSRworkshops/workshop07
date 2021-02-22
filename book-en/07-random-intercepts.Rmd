@@ -1,0 +1,165 @@
+# Random intercepts
+
+Now that we have the appropriate error distribution, we can test the
+importance of the random intercepts (for *population* and *genotype*) by
+comparing nested models with and without the random effects of interest
+using either:
+
+1.  an [information theoretic approach]{.underline} (such as, Akaike
+    Information Criterion; AIC), which as we saw in [Workshop
+    6](r_workshop6#coding_potential_models_and_model_selection) examines
+    several competing hypotheses (models) simultaneously to identify the
+    model with the highest predictive power given the data. As before,
+    we will use the AICc to correct for small sample sizes. Or,
+2.  a [frequentist approach]{.underline} (traditional null hypothesis
+    testing or drop1 approach), where the significance of each term is
+    evaluated in turn (by comparing nested models together using the
+    `anova()` function and the significance of the likelihood ratio
+    test; LRT). It's important to keep in mind that with this approach
+    we are testing a null hypothesis of zero variance for the random
+    effects, but given that we cannot have negative variance, we are
+    testing the parameter on the boundary of its feasible region.
+    Therefore, the reported p value is approximately twice what it
+    should be (i.e., we've truncated half of the possible values that
+    fall below 0).
+
+``` {.rsplus|}
+summary(mpl1)$varcor
+
+# popu only
+mpl1.popu <- glmer(total.fruits ~ nutrient*amd + rack + status + 
+                     (1|X) +
+                     (1|popu), 
+                     data=dat.tf, family="poisson", control=glmerControl(optimizer="bobyqa"))
+
+# gen only
+mpl1.gen <-glmer(total.fruits ~ nutrient*amd + rack + status + 
+                   (1|X) +
+                   (1|gen), 
+                   data=dat.tf, family="poisson", control=glmerControl(optimizer="bobyqa"))
+
+# IC approach using AICc
+ICtab(mpl1, mpl1.popu, mpl1.gen, type = c("AICc"))
+#            dAICc df
+# mpl1       0.0   10
+# mpl1.popu  2.0   9 
+# mpl1.gen   16.1  9 
+
+# Frequentist approach using LRT
+anova(mpl1,mpl1.popu)
+# Data: dat.tf
+# Df         AIC  BIC      logLik  deviance  Chisq   Chi    Df    Pr(>Chisq)  
+# mpl1.popu  9    5017.4   5057.4  -2499.7   4999.4                           
+# mpl1       10   5015.4   5059.8  -2497.7   4995.4  4.0639  1    0.04381 *
+#   ---
+#   Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+anova(mpl1,mpl1.gen)
+# Df        AIC  BIC     logLik deviance  Chisq    Chi     Df   Pr(>Chisq)    
+# mpl1.gen  9    5031.5  5071.5 -2506.8   5013.5                             
+# mpl1      10   5015.4  5059.8 -2497.7   4995.4   18.177  1   2.014e-05 ***
+#   ---
+#   Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+```
+
+The model without the random intercept for *genotype* is within 2 AICc
+units of the full model, which indicates that they are equally plausible
+(i.e., little evidence for including a random intercept for genotype).
+However, when using the Likelihood approach, and keeping in mind the
+boundary effect (p-values are inflated by a factor of 2), we note that p
+\<\< 0.05 in both anova tests. Thus the model with both random terms
+(mpl1) is selected.
+
+## Parameter plots
+
+A graphical representation of the model parameters can be obtained using
+the `coefplot2` function. For example, to view the variance terms of our
+three random intercepts:
+
+``` {.rsplus|}
+# Variance terms
+coefplot2(mpl1,ptype="vcov",intercept=TRUE,main="Random effect variance")
+
+# Fixed effects
+coefplot2(mpl1,intercept=TRUE,main="Fixed effect coefficient")
+```
+
+![](images//glmm_coefplot_int.png){width="450"}
+![](images//glmm_coefplot_pars.png){width="400"}
+
+Note that the error bars are only shown for the fixed effects because
+`glmer` doesn't give us information on the uncertainty of the variance
+terms.
+
+## Random intercept plots
+
+We can also extract the random effect (or group-level) deviations from
+the fixed intercept using the `ranef` function. This will tell us how
+much the intercept is shifted up or down in particular *populations* or
+*genotypes* relative to the fixed intercept. The deviations can then be
+plotted using `dotplot`, which will return a two-facetted plot for each
+random effect (i.e., popu and gen). Note: the `grid.arrange` function
+was used to omit the observation-level random effect (i.e. (1\|X)).
+
+``` {.rsplus|}
+pp <- list(layout.widths=list(left.padding=0, right.padding=0),
+           layout.heights=list(top.padding=0, bottom.padding=0))
+r2 <- ranef(mpl1,condVar=TRUE)
+d2 <- dotplot(r2, par.settings=pp)
+grid.arrange(d2$gen,d2$popu,nrow=1)
+```
+
+![](images//glmm_dtoplot.png){.align-center width="450"}
+
+From this plot we can see a hint of regional variability among
+populations where the Spanish populations (SP) have larger values than
+Swedish (SW) and Dutch (NL) populations. The difference among genotypes
+seems to be largely driven by genotype 34.
+
+As seen in Workshop 5, we could have also used the `coef()` function to
+plot the random effect predictions or \"estimates\", where the sum of
+random intercept deviation (obtained from `ranef()`) and the fixed
+effect (obtained from `fixef()`) is equal to the parameter estimate
+obtained from `coef()`.
+
+## Random slopes
+
+++++ Bonus Section: Random slopes\|
+
+**NB**: We cannot test for random slopes in this dataset because
+whenever random slopes for the fixed effects are included in the model,
+we obtain a strong correlation between the random intercepts and slopes.
+These perfect correlations may result from our model being
+over-parametrized. Thus, while there could very well be some variation
+in the nutrient or clipping e ffect at the genotype or population
+levels, and while this variation may be what we are most interested in,
+there is simply not enough data to test these e ffects with confidence.
+
+Let's have a look at an example of this by testing the random slope
+terms for clipping:
+
+```{r, echo = TRUE, eval = FALSE}
+# Poisson-lognormal with random slopes for popu and amd
+mpl2 <- glmer(total.fruits ~ nutrient*amd + rack + status + 
+                (1|X) +
+                (amd|popu) +
+                (amd|gen),
+              data=dat.tf, family="poisson", control=glmerControl(optimizer="bobyqa"))
+```
+
+We can examine the variance components using the model `summary`.
+Alternatively, we could examine the correlation matrix among the random
+clipping intercepts and slopes. A third option is to use the `printvc`
+function that prints the variance-covariance matrices along with an
+equals sign ( = ) next to any covariance component with a nearly perfect
+correlation.
+
+```{r, echo = TRUE, eval = FALSE}
+summary(mpl2) # option 1
+attr(VarCorr(mpl2)$gen,"correlation") # option 2
+printvc(mpl2) # option 3
+```
+
+Notice the perfect correlation between (Intercept) and amdclipped
+(slope). ++++
+

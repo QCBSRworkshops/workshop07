@@ -1,0 +1,91 @@
+# (PART\*) Generalized linear mixed models (GLMMs) {-}
+
+# Generalized linear mixed models (GLMMs)
+
+As seen above, heterogeneous response distributions can be accurately
+modelled by relaxing the assumptions of normally distributed errors and
+letting the errors take on different distribution families (e.g.,
+Poisson or negative binomial). What happens if there is a structure in
+the dataset such that observations sampled in certain sites are more
+similar (correlated) than observations sampled in different sites? As we
+saw in [Workshop 6](r_workshop6), we can account for this lack of
+independence by adding random effects in the model. Recall that
+intercepts and/or slopes are allowed to vary among grouping factors
+(random effects) and the variability in slopes/ intercepts among groups
+is assumed to follow a normal distribution. Random effects are also
+referred to as shrinkage estimates because they represent a weighted
+average of the group-level and the overall fit (fixed effect). The
+amount of shrinking towards the overall fit is more severe if the
+within-group variability is large compared to the among-group
+variability (i.e., when we have less confidence in the random estimate
+due to low sample size or high within-group variability, the estimate is
+'pulled' towards the fixed effect).
+
+The properties of Linear Mixed Models (Workshop 5) which incorporate
+random effects and those of Generalized Linear Models (seen above) which
+handle non-normal data can be combined to effectively model such
+instances in a Generalized Linear Mixed Model framework. The extension
+of GLMs to account for this additional structure follows similar steps
+introduced in the mixed modelling workshop.\
+
+To provide a brief overview of GLMMs, we will visit a case study
+presented by [Bolker et al.
+(2009)](http://www.facecouncil.org/puf/wp-content/uploads/2009/10/Generalized-linear-mixed-models.pdf)
+and later by [Bolker et al.
+(2011)](http://www.cell.com/cms/attachment/601623/4742452/mmc1.pdf)
+where the structure (or lack of independence) in the dataset was due to
+observations being measured across different populations. The authors
+evaluated the extent to which the response of *Arabidopsis thaliana*
+(mouse-ear cress) to its environmental drivers (nutrient availability
+and herbivory) varied as a result of the population and/or genotype they
+belonged to.\
+Using the *Arabidopsis* dataset and detailed analysis presented by
+Bolker and colleagues, we will explore the eff ects of nutrient levels,
+herbivory and their interaction ( fixed effects) on the production
+*Arabidopsis thaliana* and the across-population and/or across-genotype
+variability in these relationships (random eff ects).
+
+```{r, echo = TRUE, eval = FALSE}
+# First load and view the dataset
+dat.tf <- read.csv("Banta_TotalFruits.csv")
+str(dat.tf)
+
+# X  observation number 
+# reg  factor for one of three regions; Netherlands, Spain or Sweden
+# popu  factor with a level for each population (random effect)
+# gen  factor with a level for each genotype (random effect)
+# rack  nuisance factor for one of two greenhouse racks
+# nutrient  factor with levels for low (value = 1) or high (value = 8) nutrients (fixed effect)
+# amd  factor with levels for no damage or simulated herbivory (apical meristem damage) (fixed effect)
+# status  nuisance factor for germination method
+# total.fruits  the response variable; an integer indicating the number of fruits per plant 
+
+# 2-3 genotypes nested within each of the 9 populations
+table(dat.tf$popu,dat.tf$gen)
+
+# Housekeeping: make integers into factors, relevel clipping (amd) and rename nutrient levels
+dat.tf <- transform(dat.tf,
+                    X=factor(X),
+                    gen=factor(gen),
+                    rack=factor(rack),
+                    amd=factor(amd,levels=c("unclipped","clipped")),
+                    nutrient=factor(nutrient,label=c("Low","High")))
+
+# Install/load packages
+if(!require(lme4)){install.packages("lme4")}
+require(lme4)
+if(!require(coefplot2)){install.packages("coefplot2",repos="http://www.math.mcmaster.ca/bolker/R",type="source")}
+require(coefplot2)     
+if(!require(reshape)){install.packages("reshape")}
+require(reshape) 
+if(!require(ggplot2)){install.packages("ggplot2")}
+require(ggplot2)
+if(!require(plyr)){install.packages("plyr")}
+require(plyr)
+if(!require(gridExtra)){install.packages("gridExtra")}
+require(gridExtra)
+if(!require(emdbook)){install.packages("emdbook")}
+require(emdbook)
+source("glmm_funs.R")
+```
+

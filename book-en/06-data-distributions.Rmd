@@ -1,0 +1,189 @@
+# Structure in dataset
+
+When we look at the interaction between nutrient and clipping across the
+9 different populations, we note that there is a consistent nutrient e
+ffect (higher baseline under the High nutrient treatment). The effect of
+clipping is weaker, but in some populations we note a negative slope.
+
+``` {.rsplus|}
+ggplot(dat.tf,aes(x=amd,y=log(total.fruits+1),colour=nutrient)) +
+  geom_point() + 
+  stat_summary(aes(x= as.numeric(amd)),fun.y=mean,geom="line") +
+  theme_bw() + theme(panel.margin=unit(0,"lines")) +
+  scale_color_manual(values=c("#3B9AB2","#F21A00")) + # from Wes Anderson Zissou palette
+  facet_wrap(~popu)
+```
+
+![](images//workshp_6_glmm_popu.png){.align-center width="600"}
+
+A similar plot can be made for the 24 different genotypes (changing
+facet\_wrap(\~gen)).\
+==== Choosing an error distribution ====
+
+The response variable is count data which suggests that a Poisson
+distribution should be used. Recall that an important property of the
+Poisson distribution is that the variance is equal to the mean. However,
+as we will see below, the group variances increase with the mean much
+more rapidly than expected under the Poisson distribution.
+
+```{r, echo = TRUE, eval = FALSE}
+
+# Create new variables that represents every combination nutrient x clipping x random factor
+dat.tf <- within(dat.tf,
+{
+  # genotype x nutrient x clipping
+  gna <- interaction(gen,nutrient,amd)
+  gna <- reorder(gna, total.fruits, mean)
+  # population x nutrient x clipping
+  pna <- interaction(popu,nutrient,amd)
+  pna <- reorder(pna, total.fruits, mean)
+})
+
+
+# Boxplot of total fruits vs new variable (genotype x nutrient x clipping)
+ggplot(data = dat.tf, aes(factor(x = gna),y = log(total.fruits + 1))) +
+   geom_boxplot(colour = "skyblue2", outlier.shape = 21, outlier.colour = "skyblue2") + 
+   theme_bw() + theme(axis.text.x=element_text(angle=90)) + 
+   stat_summary(fun.y=mean, geom="point", colour = "red") 
+
+# Boxplot of total fruits vs new variable (population x nutrient x clipping)
+ggplot(data = dat.tf, aes(factor(x = pna),y = log(total.fruits + 1))) +
+  geom_boxplot(colour = "skyblue2", outlier.shape = 21, outlier.colour = "skyblue2") + 
+  theme_bw() + theme(axis.text.x=element_text(angle=90)) + 
+  stat_summary(fun.y=mean, geom="point", colour = "red") 
+```
+
+![](images/workshp_6_glmm_boxplot.png){.align-center width="750"}
+![](images//workshop_6_glmm_boxplot_popu.png){.align-center width="750"}
+
+As illustrated above, there is a large amount of heterogeneity among the
+group variances even when the response variable is transformed. We also
+note that some groups have a mean and variance of zero.
+
+To determine [which distribution family to use]{.underline}, we can run
+a diagnostic plot of the group variances vs their respective means. We
+provide an example below for the genotype x nutrient x clipping
+grouping.
+
+1.  If we observe a linear relationship between the variance and the
+    mean with a slope = 1, then the **Poisson** family is appropriate,
+2.  If we observe a linear mean-variance relationship with a slope \> 1
+    (i.e. Var = φµ where φ \> 1), then the **quasi-Poisson** family (as
+    introduced above) should be applied,
+3.  Finally, a quadratic relationship between the variance and the mean
+    (i.e. Var = µ(1 + α
+
+) or µ(1 + µ/k)), is characteristic of overdispersed data that is driven
+by an underlying heterogeneity among samples. In this case, the
+**negative binomial** (Poisson-gamma) would be more appropriate.
+![](images/worksp_6_error_dist.png){.align-center width="450"}
+
+From the plot above we note that a linear quasi-Poisson may be better
+than the negative binomial, but additional modelling is needed.
+
+## Poisson GLMM
+
+Let's build a GLMM using the `glmer` function of the *lme4* package.
+This model has a random intercept for all genotype and population
+treatments. We include the nuisance variables (rack and germination
+method) as fixed effects. Given the mean-variance relationship from
+above, we most likely will need a model with overdispersion, but let's
+start with a Poisson model.
+
+```{r, echo = TRUE, eval = FALSE}
+
+mp1 <- glmer(total.fruits ~ nutrient*amd + rack + status +
+               (1|popu)+
+               (1|gen),
+             data=dat.tf, family="poisson")
+```
+
+We can check for overdispersion using a function `overdisp_fun` provided
+by [Bolker et al.
+(2011)](http://www.cell.com/cms/attachment/601623/4742452/mmc1.pdf)
+which divides the Pearson residuals by the residual degrees of freedom
+and tests whether these values differ significantly (i.e., whether the
+ratio of residual deviance to residual df is significantly different
+from 1). A low p-value indicates that the data are over dispersed (i.e.,
+ratio is significantly different from 1).
+
+```{r, echo = TRUE, eval = FALSE}
+# Overdispersion?
+overdisp_fun(mp1)
+
+# Or as above, we can approximate this by dividing the residual deviance by the residual df
+summary(mp1)
+# residual deviance = 18253.7 and resid df = 616
+```
+
+The ratio is significantly greater than unity, so as expected, we need
+to try a different distribution where the variance increases more
+rapidly than the mean, such as the negative binomial.
+
+## Negative binomial (Poisson-gamma) GLMM
+
+Recall that the negative binomial (or Poisson-gamma) distribution meets
+the assumption that the variance is **proportional to the square of the
+mean**.
+
+```{r, echo = TRUE, eval = FALSE}
+# Note: This model converges well if you are running R version 3.0.2, but may not converge with later 
+# versions. If you are having convergence issues, please try with version 3.0.2.
+
+mnb1 <- glmer.nb(total.fruits ~ nutrient*amd + rack + status + 
+               (1|popu)+
+               (1|gen),
+             data=dat.tf, control=glmerControl(optimizer="bobyqa"))
+# Although beyond the scope of this workshop, the new "control" argument specifies the way we
+# optimize the parameter values (i.e. by taking the derivative of a function or proceeding by iteration). 
+# When taking the derivative is not possible, an iterative algorithm such as bobyqa (Bound Optimization
+# BY Quadratic Approximation) is used.
+
+# Overdispersion?
+overdisp_fun(mnb1)
+```
+
+The ratio is now much closer to unity (although the p-value is still
+less than 0.05).
+
+## Poisson-lognormal GLMM
+
+Another option that we have not yet seen is to use a Poisson-lognormal
+distribution. This approach deals with overdispersion by implementing an
+observation-level random effects (OLRE; see [Harrison
+(2014)](https://peerj.com/articles/616.pdf)), which model the
+extra-Poisson variation in the response variable using a random effect
+with a unique level for every data point.
+
+A Poisson-lognormal model effectively places a lognormal prior on ε~i~.
+A Poisson-lognormal distribution with mean µ and lognormal prior
+variance σ^2^ has variance:
+
+var(y) = µ + µ^2^ \[exp(σ^2^) - 1\]
+
+In contrast, for the negative binomial, we saw that the distribution was
+given by:
+
+var(y) = µ + µ^2^/k
+
+More generally, the variance term σ^2^ in the Poisson-lognormal
+distribution will depend on the grouping level we select (e.g., at the
+individual, genotype or population level). That is, the
+Poisson-lognormal model can allow for a more flexible approach to
+assigning the observed aggregation to different sources of
+heterogeneity. Here, to implement the observation-level random effect,
+we will evaluate it at the individual level.
+
+```{r, echo = TRUE, eval = FALSE}
+mpl1 <- glmer(total.fruits ~ nutrient*amd + rack + status + 
+               (1|X) +
+               (1|popu)+
+               (1|gen),
+             data=dat.tf, family="poisson", control=glmerControl(optimizer="bobyqa"))
+
+overdisp_fun(mpl1)
+```
+
+We did it! The ratio between residual deviance and residual df now meets
+our criterion (in fact, it is even *smaller* 1).
+
