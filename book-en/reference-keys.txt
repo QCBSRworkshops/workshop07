@@ -37,4 +37,6 @@ random-slopes
 final-model
 summary
 additional-resources
+lmm-textbooks
+glmm-resources
 references
