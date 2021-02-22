@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapitre 7 Quantifier la (dis)similarité des données | Atelier 9 : Analyses multivariées en R</title>
+  <meta name="description" content="Analyses multivariées en R" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapitre 7 Quantifier la (dis)similarité des données | Atelier 9 : Analyses multivariées en R" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://github.com/qcbsRworkshops/" />
+  <meta property="og:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
+  <meta property="og:description" content="Analyses multivariées en R" />
+  <meta name="github-repo" content="qcbsRworkshops/workshop09" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapitre 7 Quantifier la (dis)similarité des données | Atelier 9 : Analyses multivariées en R" />
+  
+  <meta name="twitter:description" content="Analyses multivariées en R" />
+  <meta name="twitter:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
+
+<meta name="author" content="Développé et entretenu par les contributeurs et les contributrices de la Série d’ateliers R du CSBQ." />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
+<link rel="prev" href="la-dissimilarité-des-données.html"/>
+<link rel="next" href="groupement.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="assets/qcbs-style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="toc-logo"><a href="./"><img src="assets/images/csbq_logo_gray_accueil.png"></a></li>
+<link rel="icon" type="image/png" href="assets/images/favicon.ico"/>
+
+<li class="divider"></li>
+<li class="part"><span><b>Série d’ateliers R du CSBQ</b></span></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Préface</a><ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#code-de-conduite"><i class="fa fa-check"></i><b>0.1</b> Code de conduite</a><ul>
+<li class="chapter" data-level="0.1.1" data-path="index.html"><a href="index.html#comportement-attendu"><i class="fa fa-check"></i><b>0.1.1</b> Comportement attendu</a></li>
+<li class="chapter" data-level="0.1.2" data-path="index.html"><a href="index.html#comportements-inacceptables"><i class="fa fa-check"></i><b>0.1.2</b> Comportements inacceptables</a></li>
+</ul></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#contributeurs-et-contributrices"><i class="fa fa-check"></i><b>0.2</b> Contributeurs et contributrices</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#contribuez-à-la-série"><i class="fa fa-check"></i><b>0.3</b> Contribuez à la série!</a></li>
+</ul></li>
+<li class="part"><span><b>Analyses multivariées en <code>R</code></b></span></li>
+<li class="chapter" data-level="1" data-path="objectifs-dapprentissage.html"><a href="objectifs-dapprentissage.html"><i class="fa fa-check"></i><b>1</b> Objectifs d’apprentissage</a></li>
+<li class="chapter" data-level="2" data-path="préparez-vous-pour-cet-atelier.html"><a href="préparez-vous-pour-cet-atelier.html"><i class="fa fa-check"></i><b>2</b> Préparez-vous pour cet atelier</a></li>
+<li class="chapter" data-level="3" data-path="quest-ce-que-lordination.html"><a href="quest-ce-que-lordination.html"><i class="fa fa-check"></i><b>3</b> Qu’est-ce que l’ordination?</a></li>
+<li class="chapter" data-level="4" data-path="introduction-aux-données.html"><a href="introduction-aux-données.html"><i class="fa fa-check"></i><b>4</b> Introduction aux données</a></li>
+<li class="chapter" data-level="5" data-path="exploration-des-données.html"><a href="exploration-des-données.html"><i class="fa fa-check"></i><b>5</b> 1. Exploration des données</a><ul>
+<li class="chapter" data-level="5.1" data-path="exploration-des-données.html"><a href="exploration-des-données.html#données-sur-les-espèces"><i class="fa fa-check"></i><b>5.1</b> 1.1 Données sur les espèces</a></li>
+<li class="chapter" data-level="5.2" data-path="exploration-des-données.html"><a href="exploration-des-données.html#données-sur-lenvironnement"><i class="fa fa-check"></i><b>5.2</b> 1.2 Données sur l’environnement</a></li>
+</ul></li>
+<li class="part"><span><b>Mesures d’association</b></span></li>
+<li class="chapter" data-level="6" data-path="la-dissimilarité-des-données.html"><a href="la-dissimilarité-des-données.html"><i class="fa fa-check"></i><b>6</b> La (dis)similarité des données</a></li>
+<li class="chapter" data-level="7" data-path="quantifier-la-dissimilarité-des-données.html"><a href="quantifier-la-dissimilarité-des-données.html"><i class="fa fa-check"></i><b>7</b> Quantifier la (dis)similarité des données</a><ul>
+<li class="chapter" data-level="7.1" data-path="quantifier-la-dissimilarité-des-données.html"><a href="quantifier-la-dissimilarité-des-données.html#transformations-des-données-de-composition-des-communautés"><i class="fa fa-check"></i><b>7.1</b> Transformations des données de composition des communautés</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="groupement.html"><a href="groupement.html"><i class="fa fa-check"></i><b>8</b> Groupement</a></li>
+<li class="part"><span><b>L’Ordination sans contrainte</b></span></li>
+<li class="chapter" data-level="9" data-path="le-significat-de-lordination-sans-contrainte.html"><a href="le-significat-de-lordination-sans-contrainte.html"><i class="fa fa-check"></i><b>9</b> Le significat de l’ordination “sans contrainte”</a></li>
+<li class="chapter" data-level="10" data-path="analyses-en-composantes-principales.html"><a href="analyses-en-composantes-principales.html"><i class="fa fa-check"></i><b>10</b> Analyses en Composantes Principales</a></li>
+<li class="chapter" data-level="11" data-path="analyse-des-correpondances.html"><a href="analyse-des-correpondances.html"><i class="fa fa-check"></i><b>11</b> Analyse des Correpondances</a></li>
+<li class="chapter" data-level="12" data-path="analyse-en-coordonnées-principales.html"><a href="analyse-en-coordonnées-principales.html"><i class="fa fa-check"></i><b>12</b> Analyse en coordonnées principales</a></li>
+<li class="chapter" data-level="13" data-path="positionnement-multidimensionnel-non-métrique.html"><a href="positionnement-multidimensionnel-non-métrique.html"><i class="fa fa-check"></i><b>13</b> Positionnement multidimensionnel non-métrique</a></li>
+<li class="part"><span><b>Considérations finales</b></span></li>
+<li class="chapter" data-level="14" data-path="sommaire.html"><a href="sommaire.html"><i class="fa fa-check"></i><b>14</b> Sommaire</a></li>
+<li class="chapter" data-level="15" data-path="resources-additionnels.html"><a href="resources-additionnels.html"><i class="fa fa-check"></i><b>15</b> Resources additionnels</a></li>
+<li class="chapter" data-level="16" data-path="réferences.html"><a href="réferences.html"><i class="fa fa-check"></i><b>16</b> Réferences</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/qcbsRworkshops" target="blank">QCBS R Workshop Series</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Atelier 9 : Analyses multivariées en <code>R</code></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<!------------------------ Hero Image Container --------------------------> 
+
+<head>
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=10.0,initial-scale=1.0">
+  <script src="https://kit.fontawesome.com/6a26f47516.js"></script>
+  <script src="assets/qcbs-hideOutput.js"></script>
+  <link href="assets/qcbs-style.css" rel="stylesheet">
+</head>
+
+
+
+<div class="hero-image-container"> 
+  <img class= "hero-image" src="assets/images/jean-philippe-delberghe-75xPHEQBmvA-unsplash_hero_image.jpg">
+</div>
+<div id="quantifier-la-dissimilarité-des-données" class="section level1">
+<h1><span class="header-section-number">Chapitre 7</span> Quantifier la (dis)similarité des données</h1>
+<p><strong>Les données quantitatives des espèces</strong> Nous pouvons utiliser la
+fonction vegdist () pour calculer des indices de dissimilarité sur des
+données de composition de la communauté. Ceux-ci peuvent ensuite être
+visualisés sous forme de matrice si désiré.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="quantifier-la-dissimilarité-des-données.html#cb11-1"></a>spe.db &lt;-<span class="st"> </span><span class="kw">vegdist</span>(spe, <span class="dt">method =</span> <span class="st">&quot;bray&quot;</span>)  <span class="co"># distance de Bray (avec des données de présence-absence, correspond à Sorensen)  </span></span>
+<span id="cb11-2"><a href="quantifier-la-dissimilarité-des-données.html#cb11-2"></a>spe.dj &lt;-<span class="st"> </span><span class="kw">vegdist</span>(spe, <span class="dt">method =</span> <span class="st">&quot;jac&quot;</span>)  <span class="co"># distance de Jaccard </span></span>
+<span id="cb11-3"><a href="quantifier-la-dissimilarité-des-données.html#cb11-3"></a>spe.dg &lt;-<span class="st"> </span><span class="kw">vegdist</span>(spe, <span class="dt">method =</span> <span class="st">&quot;gower&quot;</span>)  <span class="co"># distance de Gower  </span></span>
+<span id="cb11-4"><a href="quantifier-la-dissimilarité-des-données.html#cb11-4"></a>spe.db &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(spe.db)  <span class="co"># réarranger en format matrice (pour visualisation, ou pour exporter en .csv)</span></span></code></pre></div>
+<p>Une version condensée de la matrice spe.db représentant la distance
+entre les trois premières espèces de DoubsSpe ressemblerait à ceci:</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="left">Espèce 1</th>
+<th align="left">Espèce 2</th>
+<th align="left">Espèce 3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Espèce 1</td>
+<td align="left">0.0</td>
+<td align="left">0.6</td>
+<td align="left">0.68</td>
+</tr>
+<tr class="even">
+<td>Espèce 2</td>
+<td align="left">0.6</td>
+<td align="left">0.0</td>
+<td align="left">0.14</td>
+</tr>
+<tr class="odd">
+<td>Espèce 3</td>
+<td align="left">0.68</td>
+<td align="left">0.14</td>
+<td align="left">0.0</td>
+</tr>
+</tbody>
+</table>
+<p>Vous pouvez voir que lorsque l’on compare une espèce à elle-même (par
+exemple, Espèce 1 à Espèce 1), la distance est de 0 puisque les espèces
+sont identiques.</p>
+<p>Ces mêmes mesures de distance peuvent être calculées à partir des
+données de présence-absence par l’utilisation de l’argument
+binary=TRUE dans la fonction vegdist(). Cela donnera des mesures de
+distance légèrement différentes.</p>
+<p>Vous pouvez également créer des représentations graphiques de ces
+matrices d’association en utilisant la fonction coldiss.
+Cette fonction peut être sourcée à partir du script coldiss.R:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="quantifier-la-dissimilarité-des-données.html#cb12-1"></a><span class="kw">windows</span>()</span>
+<span id="cb12-2"><a href="quantifier-la-dissimilarité-des-données.html#cb12-2"></a><span class="kw">coldiss</span>(spe.db, <span class="dt">byrank =</span> <span class="ot">FALSE</span>, <span class="dt">diag =</span> <span class="ot">TRUE</span>)  <span class="co"># Carte des points chauds Bray-Curtis </span></span>
+<span id="cb12-3"><a href="quantifier-la-dissimilarité-des-données.html#cb12-3"></a><span class="kw">windows</span>()</span>
+<span id="cb12-4"><a href="quantifier-la-dissimilarité-des-données.html#cb12-4"></a><span class="kw">coldiss</span>(spe.dj, <span class="dt">byrank =</span> <span class="ot">FALSE</span>, <span class="dt">diag =</span> <span class="ot">TRUE</span>)  <span class="co"># Carte des points chauds Jaccard </span></span>
+<span id="cb12-5"><a href="quantifier-la-dissimilarité-des-données.html#cb12-5"></a><span class="kw">windows</span>()</span>
+<span id="cb12-6"><a href="quantifier-la-dissimilarité-des-données.html#cb12-6"></a><span class="kw">coldiss</span>(spe.dg, <span class="dt">byrank =</span> <span class="ot">FALSE</span>, <span class="dt">diag =</span> <span class="ot">TRUE</span>)  <span class="co"># Carte des points chauds Gower </span></span></code></pre></div>
+<p><img src="images//coldiss_Bray.png" width="800" /></p>
+<p>La figure montre une matrice de dissimilarité dont les couleurs
+reflètent la mesure de distance. La couleur violet est associée aux
+zones de fortes dissimilarités.</p>
+<p><strong>Données environnementales quantitatives</strong> Regardons <em>les associations</em>
+entre les variables environnementales (aussi appelée mode Q):</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="quantifier-la-dissimilarité-des-données.html#cb13-1"></a>env.de &lt;-<span class="st"> </span><span class="kw">dist</span>(env.z, <span class="dt">method =</span> <span class="st">&quot;euclidean&quot;</span>)  <span class="co"># matrice de distances euclidiennes des données env. standardisées</span></span>
+<span id="cb13-2"><a href="quantifier-la-dissimilarité-des-données.html#cb13-2"></a><span class="kw">windows</span>()  <span class="co"># crée une nouvelle fenêtre graphique</span></span>
+<span id="cb13-3"><a href="quantifier-la-dissimilarité-des-données.html#cb13-3"></a><span class="kw">coldiss</span>(env.de, <span class="dt">diag =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<p>Nous pouvons ensuite regarder <em>la dépendance</em> entre les variables
+environnementales (aussi appelée mode R):</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="quantifier-la-dissimilarité-des-données.html#cb14-1"></a>(env.pearson &lt;-<span class="st"> </span><span class="kw">cor</span>(env))  <span class="co"># coefficient r de corrélation de Pearson</span></span>
+<span id="cb14-2"><a href="quantifier-la-dissimilarité-des-données.html#cb14-2"></a><span class="kw">round</span>(env.pearson, <span class="dv">2</span>)  <span class="co"># arrondit les coefficients à deux décimales</span></span>
+<span id="cb14-3"><a href="quantifier-la-dissimilarité-des-données.html#cb14-3"></a>(env.ken &lt;-<span class="st"> </span><span class="kw">cor</span>(env, <span class="dt">method =</span> <span class="st">&quot;kendall&quot;</span>))  <span class="co"># coefficient tau de corrélation de rang de Kendall </span></span>
+<span id="cb14-4"><a href="quantifier-la-dissimilarité-des-données.html#cb14-4"></a><span class="kw">round</span>(env.ken, <span class="dv">2</span>)</span></code></pre></div>
+<p>La corrélation de Pearson mesure la corrélation linéaire entre deux
+variables. La corrélation de Kendall est une corrélation de rang qui
+quantifie la relation entre deux descripteurs ou deux variables lorsque
+les données sont ordonnées au sein de chaque variable.</p>
+<p>Dans certains cas, il peut y avoir des types mixtes de variables
+environnementales. Le mode Q peut alors être utilisé pour trouver des
+associations entre variables environnementales. C’est ce que nous
+allons faire avec l’exemple fictif suivant:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="quantifier-la-dissimilarité-des-données.html#cb15-1"></a>var.g1 &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">30</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb15-2"><a href="quantifier-la-dissimilarité-des-données.html#cb15-2"></a>var.g2 &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">30</span>, <span class="dv">0</span>, <span class="dv">5</span>)</span>
+<span id="cb15-3"><a href="quantifier-la-dissimilarité-des-données.html#cb15-3"></a>var.g3 &lt;-<span class="st"> </span><span class="kw">gl</span>(<span class="dv">3</span>, <span class="dv">10</span>)</span>
+<span id="cb15-4"><a href="quantifier-la-dissimilarité-des-données.html#cb15-4"></a>var.g4 &lt;-<span class="st"> </span><span class="kw">gl</span>(<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">30</span>)</span>
+<span id="cb15-5"><a href="quantifier-la-dissimilarité-des-données.html#cb15-5"></a>(dat2 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(var.g1, var.g2, var.g3, var.g4))</span>
+<span id="cb15-6"><a href="quantifier-la-dissimilarité-des-données.html#cb15-6"></a><span class="kw">str</span>(dat2)</span>
+<span id="cb15-7"><a href="quantifier-la-dissimilarité-des-données.html#cb15-7"></a><span class="kw">summary</span>(dat2)</span></code></pre></div>
+<p>Une matrice de dissimilarité peut être générée pour ces variables mixtes
+en utilisant la distance de Gower:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="quantifier-la-dissimilarité-des-données.html#cb16-1"></a><span class="st">`</span><span class="dt">?</span><span class="st">`</span>(daisy  <span class="co">#Cette fonction peut gérer la présence de NA dans les données</span></span>
+<span id="cb16-2"><a href="quantifier-la-dissimilarité-des-données.html#cb16-2"></a>)</span>
+<span id="cb16-3"><a href="quantifier-la-dissimilarité-des-données.html#cb16-3"></a>(dat2.dg &lt;-<span class="st"> </span><span class="kw">daisy</span>(dat2, <span class="dt">metric =</span> <span class="st">&quot;gower&quot;</span>))</span>
+<span id="cb16-4"><a href="quantifier-la-dissimilarité-des-données.html#cb16-4"></a><span class="kw">coldiss</span>(dat2.dg)</span></code></pre></div>
+<p><strong>Défi 1 - Niveau intermédiaire</strong> Discutez avec votre voisin: Comment
+pouvons-nous dire si des objets sont similaires avec un jeu de données
+multivariées? Faites une liste de toutes vos suggestions.</p>
+<p><strong>Défi 1 - Solution</strong> Discussion avec le groupe.</p>
+<p><strong>Défi 1 - Niveau avancé</strong> Calculer à la mitaine // sans utiliser la
+fonction decostand () // les distances de Bray-Curtis et de Gower pour
+l’abondance des espèces CHA, TRU et VAI dans les sites 1, 2 et 3.</p>
+<p><strong>Défi 1 - Solution</strong></p>
+<p>Formule pour calculer la distance de Bray-Curtis: d<span class="math display">\[jk\]</span> = (sum
+abs(x<span class="math display">\[ij\]</span>-x<span class="math display">\[ik\]</span>))/(sum (x<span class="math display">\[ij\]</span>+x<span class="math display">\[ik\]</span>))</p>
+<p>Réduisez le jeu de données aux espèces CHA, TRU et VAI et aux sites 1, 2
+et 3</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="quantifier-la-dissimilarité-des-données.html#cb17-1"></a>spe.challenge &lt;-<span class="st"> </span>spe[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]  <span class="co"># les 3 premières lignes et 3 premières espèces (colonnes)</span></span></code></pre></div>
+<p>Déterminer l’abondance totale des espèces pour chaque site d’intérêt
+(somme des trois lignes) qui correspondra au dénominateur de la distance
+de Bray-Curtis.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="quantifier-la-dissimilarité-des-données.html#cb18-1"></a>(Abund.s1 &lt;-<span class="st"> </span><span class="kw">sum</span>(spe.challenge[<span class="dv">1</span>, ]))</span>
+<span id="cb18-2"><a href="quantifier-la-dissimilarité-des-données.html#cb18-2"></a>(Abund.s2 &lt;-<span class="st"> </span><span class="kw">sum</span>(spe.challenge[<span class="dv">2</span>, ]))</span>
+<span id="cb18-3"><a href="quantifier-la-dissimilarité-des-données.html#cb18-3"></a>(Abund.s3 &lt;-<span class="st"> </span><span class="kw">sum</span>(spe.challenge[<span class="dv">3</span>, ]))</span></code></pre></div>
+<p>Maintenant, calculez la différence de l’abondance des espèces pour
+chaque paire de sites. Par exemple, quelle est la différence entre
+l’abondance de CHA et TRU dans le site 1? Vous devez calculer les
+différences suivantes: CHA et TRU site 1 CHA et VAI site 1 TRU et VAI
+site 1 CHA et TRU site 2 CHA et VAI site 2 TRU et VAI site 2 CHA et TRU
+site 3 CHA et VAI site 3 TRU et VAI site 3</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="quantifier-la-dissimilarité-des-données.html#cb19-1"></a>Spec.s1s2 &lt;-<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb19-2"><a href="quantifier-la-dissimilarité-des-données.html#cb19-2"></a>Spec.s1s3 &lt;-<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb19-3"><a href="quantifier-la-dissimilarité-des-données.html#cb19-3"></a>Spec.s2s3 &lt;-<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb19-4"><a href="quantifier-la-dissimilarité-des-données.html#cb19-4"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>) {</span>
+<span id="cb19-5"><a href="quantifier-la-dissimilarité-des-données.html#cb19-5"></a>    Spec.s1s2 &lt;-<span class="st"> </span>Spec.s1s2 <span class="op">+</span><span class="st"> </span><span class="kw">abs</span>(<span class="kw">sum</span>(spe.challenge[<span class="dv">1</span>, i] <span class="op">-</span><span class="st"> </span>spe.challenge[<span class="dv">2</span>, </span>
+<span id="cb19-6"><a href="quantifier-la-dissimilarité-des-données.html#cb19-6"></a>        i]))</span>
+<span id="cb19-7"><a href="quantifier-la-dissimilarité-des-données.html#cb19-7"></a>    Spec.s1s3 &lt;-<span class="st"> </span>Spec.s1s3 <span class="op">+</span><span class="st"> </span><span class="kw">abs</span>(<span class="kw">sum</span>(spe.challenge[<span class="dv">1</span>, i] <span class="op">-</span><span class="st"> </span>spe.challenge[<span class="dv">3</span>, </span>
+<span id="cb19-8"><a href="quantifier-la-dissimilarité-des-données.html#cb19-8"></a>        i]))</span>
+<span id="cb19-9"><a href="quantifier-la-dissimilarité-des-données.html#cb19-9"></a>    Spec.s2s3 &lt;-<span class="st"> </span>Spec.s2s3 <span class="op">+</span><span class="st"> </span><span class="kw">abs</span>(<span class="kw">sum</span>(spe.challenge[<span class="dv">2</span>, i] <span class="op">-</span><span class="st"> </span>spe.challenge[<span class="dv">3</span>, </span>
+<span id="cb19-10"><a href="quantifier-la-dissimilarité-des-données.html#cb19-10"></a>        i]))</span>
+<span id="cb19-11"><a href="quantifier-la-dissimilarité-des-données.html#cb19-11"></a>}</span></code></pre></div>
+<p>Maintenant, utilisez les différences calculées comme numérateur et
+l’abondance totale de l’espèce comme dénominateur pour retrouver
+l’équation de la distance de Bray-Curtis.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="quantifier-la-dissimilarité-des-données.html#cb20-1"></a>(db.s1s2 &lt;-<span class="st"> </span>Spec.s1s2<span class="op">/</span>(Abund.s1 <span class="op">+</span><span class="st"> </span>Abund.s2))  <span class="co">#1 comparé à 2</span></span>
+<span id="cb20-2"><a href="quantifier-la-dissimilarité-des-données.html#cb20-2"></a>(db.s1s3 &lt;-<span class="st"> </span>Spec.s1s3<span class="op">/</span>(Abund.s1 <span class="op">+</span><span class="st"> </span>Abund.s3))  <span class="co">#1 comparé à 3</span></span>
+<span id="cb20-3"><a href="quantifier-la-dissimilarité-des-données.html#cb20-3"></a>(db.s2s3 &lt;-<span class="st"> </span>Spec.s2s3<span class="op">/</span>(Abund.s2 <span class="op">+</span><span class="st"> </span>Abund.s3))  <span class="co">#2 comparé à 3 </span></span></code></pre></div>
+<p>Vérifiez vos résultats en utilisant la fonction vegdist () :</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="quantifier-la-dissimilarité-des-données.html#cb21-1"></a>(spe.db.challenge &lt;-<span class="st"> </span><span class="kw">vegdist</span>(spe.challenge, <span class="dt">method =</span> <span class="st">&quot;bray&quot;</span>))</span></code></pre></div>
+<p>Une matrice comme celle-ci est calculée et devrait être correspondre à
+vos calculs manuels:</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="left">Site 1</th>
+<th align="left">Site 2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Site 2</td>
+<td align="left">0.5</td>
+<td align="left">--</td>
+</tr>
+<tr class="even">
+<td>Site 3</td>
+<td align="left">0.538</td>
+<td align="left">0.0526</td>
+</tr>
+</tbody>
+</table>
+<p>Pour la distance de Gower, procédez de la même façon, mais utiliser
+l’équation appropriée: Distance de Gower: d<span class="math display">\[jk\]</span> = (1/M)
+sum(abs(x<span class="math display">\[ij\]</span>-x<span class="math display">\[ik\]</span>)/(max(x<span class="math display">\[i\]</span>)-min(x<span class="math display">\[i\]</span>)))</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="quantifier-la-dissimilarité-des-données.html#cb22-1"></a><span class="co"># Calculer le nombre de colonnes</span></span>
+<span id="cb22-2"><a href="quantifier-la-dissimilarité-des-données.html#cb22-2"></a>M &lt;-<span class="st"> </span><span class="kw">ncol</span>(spe.challenge)</span>
+<span id="cb22-3"><a href="quantifier-la-dissimilarité-des-données.html#cb22-3"></a></span>
+<span id="cb22-4"><a href="quantifier-la-dissimilarité-des-données.html#cb22-4"></a><span class="co"># Calculer les différences d&#39;abondance de chaque espèce entre</span></span>
+<span id="cb22-5"><a href="quantifier-la-dissimilarité-des-données.html#cb22-5"></a><span class="co"># paires de sites</span></span>
+<span id="cb22-6"><a href="quantifier-la-dissimilarité-des-données.html#cb22-6"></a>Spe1.s1s2 &lt;-<span class="st"> </span><span class="kw">abs</span>(spe.challenge[<span class="dv">1</span>, <span class="dv">1</span>] <span class="op">-</span><span class="st"> </span>spe.challenge[<span class="dv">2</span>, <span class="dv">1</span>])</span>
+<span id="cb22-7"><a href="quantifier-la-dissimilarité-des-données.html#cb22-7"></a>Spe2.s1s2 &lt;-<span class="st"> </span><span class="kw">abs</span>(spe.challenge[<span class="dv">1</span>, <span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>spe.challenge[<span class="dv">2</span>, <span class="dv">2</span>])</span>
+<span id="cb22-8"><a href="quantifier-la-dissimilarité-des-données.html#cb22-8"></a>Spe3.s1s2 &lt;-<span class="st"> </span><span class="kw">abs</span>(spe.challenge[<span class="dv">1</span>, <span class="dv">3</span>] <span class="op">-</span><span class="st"> </span>spe.challenge[<span class="dv">2</span>, <span class="dv">3</span>])</span>
+<span id="cb22-9"><a href="quantifier-la-dissimilarité-des-données.html#cb22-9"></a>Spe1.s1s3 &lt;-<span class="st"> </span><span class="kw">abs</span>(spe.challenge[<span class="dv">1</span>, <span class="dv">1</span>] <span class="op">-</span><span class="st"> </span>spe.challenge[<span class="dv">3</span>, <span class="dv">1</span>])</span>
+<span id="cb22-10"><a href="quantifier-la-dissimilarité-des-données.html#cb22-10"></a>Spe2.s1s3 &lt;-<span class="st"> </span><span class="kw">abs</span>(spe.challenge[<span class="dv">1</span>, <span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>spe.challenge[<span class="dv">3</span>, <span class="dv">2</span>])</span>
+<span id="cb22-11"><a href="quantifier-la-dissimilarité-des-données.html#cb22-11"></a>Spe3.s1s3 &lt;-<span class="st"> </span><span class="kw">abs</span>(spe.challenge[<span class="dv">1</span>, <span class="dv">3</span>] <span class="op">-</span><span class="st"> </span>spe.challenge[<span class="dv">3</span>, <span class="dv">3</span>])</span>
+<span id="cb22-12"><a href="quantifier-la-dissimilarité-des-données.html#cb22-12"></a>Spe1.s2s3 &lt;-<span class="st"> </span><span class="kw">abs</span>(spe.challenge[<span class="dv">2</span>, <span class="dv">1</span>] <span class="op">-</span><span class="st"> </span>spe.challenge[<span class="dv">3</span>, <span class="dv">1</span>])</span>
+<span id="cb22-13"><a href="quantifier-la-dissimilarité-des-données.html#cb22-13"></a>Spe2.s2s3 &lt;-<span class="st"> </span><span class="kw">abs</span>(spe.challenge[<span class="dv">2</span>, <span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>spe.challenge[<span class="dv">3</span>, <span class="dv">2</span>])</span>
+<span id="cb22-14"><a href="quantifier-la-dissimilarité-des-données.html#cb22-14"></a>Spe3.s2s3 &lt;-<span class="st"> </span><span class="kw">abs</span>(spe.challenge[<span class="dv">2</span>, <span class="dv">3</span>] <span class="op">-</span><span class="st"> </span>spe.challenge[<span class="dv">3</span>, <span class="dv">3</span>])</span>
+<span id="cb22-15"><a href="quantifier-la-dissimilarité-des-données.html#cb22-15"></a></span>
+<span id="cb22-16"><a href="quantifier-la-dissimilarité-des-données.html#cb22-16"></a><span class="co"># Calculer l&#39;étendue d&#39;abondance de chaque espèces parmi les</span></span>
+<span id="cb22-17"><a href="quantifier-la-dissimilarité-des-données.html#cb22-17"></a><span class="co"># sites</span></span>
+<span id="cb22-18"><a href="quantifier-la-dissimilarité-des-données.html#cb22-18"></a>Range.spe1 &lt;-<span class="st"> </span><span class="kw">max</span>(spe.challenge[, <span class="dv">1</span>]) <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(spe.challenge[, <span class="dv">1</span>])</span>
+<span id="cb22-19"><a href="quantifier-la-dissimilarité-des-données.html#cb22-19"></a>Range.spe2 &lt;-<span class="st"> </span><span class="kw">max</span>(spe.challenge[, <span class="dv">2</span>]) <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(spe.challenge[, <span class="dv">2</span>])</span>
+<span id="cb22-20"><a href="quantifier-la-dissimilarité-des-données.html#cb22-20"></a>Range.spe3 &lt;-<span class="st"> </span><span class="kw">max</span>(spe.challenge[, <span class="dv">3</span>]) <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(spe.challenge[, <span class="dv">3</span>])</span>
+<span id="cb22-21"><a href="quantifier-la-dissimilarité-des-données.html#cb22-21"></a></span>
+<span id="cb22-22"><a href="quantifier-la-dissimilarité-des-données.html#cb22-22"></a><span class="co"># Calculer la distance de Gower</span></span>
+<span id="cb22-23"><a href="quantifier-la-dissimilarité-des-données.html#cb22-23"></a>(dg.s1s2 &lt;-<span class="st"> </span>(<span class="dv">1</span><span class="op">/</span>M) <span class="op">*</span><span class="st"> </span>((Spe2.s1s2<span class="op">/</span>Range.spe2) <span class="op">+</span><span class="st"> </span>(Spe3.s1s2<span class="op">/</span>Range.spe3)))</span>
+<span id="cb22-24"><a href="quantifier-la-dissimilarité-des-données.html#cb22-24"></a>(dg.s1s3 &lt;-<span class="st"> </span>(<span class="dv">1</span><span class="op">/</span>M) <span class="op">*</span><span class="st"> </span>((Spe2.s1s3<span class="op">/</span>Range.spe2) <span class="op">+</span><span class="st"> </span>(Spe3.s1s3<span class="op">/</span>Range.spe3)))</span>
+<span id="cb22-25"><a href="quantifier-la-dissimilarité-des-données.html#cb22-25"></a>(dg.s2s3 &lt;-<span class="st"> </span>(<span class="dv">1</span><span class="op">/</span>M) <span class="op">*</span><span class="st"> </span>((Spe2.s2s3<span class="op">/</span>Range.spe2) <span class="op">+</span><span class="st"> </span>(Spe3.s2s3<span class="op">/</span>Range.spe3)))</span>
+<span id="cb22-26"><a href="quantifier-la-dissimilarité-des-données.html#cb22-26"></a></span>
+<span id="cb22-27"><a href="quantifier-la-dissimilarité-des-données.html#cb22-27"></a><span class="co"># Vérifier vos résultats</span></span>
+<span id="cb22-28"><a href="quantifier-la-dissimilarité-des-données.html#cb22-28"></a>(spe.db.challenge &lt;-<span class="st"> </span><span class="kw">vegdist</span>(spe.challenge, <span class="dt">method =</span> <span class="st">&quot;gower&quot;</span>))</span></code></pre></div>
+<div id="transformations-des-données-de-composition-des-communautés" class="section level2">
+<h2><span class="header-section-number">7.1</span> Transformations des données de composition des communautés</h2>
+<p>Les données de composition des communautés peuvent également être
+standardisées ou transformées. La fonction decostand () de vegan fournit
+des options de standardisation et de transformation de ce type de
+données</p>
+<p>Transformer les abondances en données de présence-absence:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="quantifier-la-dissimilarité-des-données.html#cb23-1"></a>spe.pa &lt;-<span class="st"> </span><span class="kw">decostand</span>(spe, <span class="dt">method =</span> <span class="st">&quot;pa&quot;</span>)</span></code></pre></div>
+<p>D’autres transformations peuvent être utilisées pour corriger
+l’influence d’espèces rares, par exemple, la transformation de
+Hellinger:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="quantifier-la-dissimilarité-des-données.html#cb24-1"></a><span class="co"># La transformation Hellinger</span></span>
+<span id="cb24-2"><a href="quantifier-la-dissimilarité-des-données.html#cb24-2"></a>spe.hel &lt;-<span class="st"> </span><span class="kw">decostand</span>(spe, <span class="dt">method =</span> <span class="st">&quot;hellinger&quot;</span>)  <span class="co"># vous pouvez aussi simplement écrire &#39;hel&#39;</span></span>
+<span id="cb24-3"><a href="quantifier-la-dissimilarité-des-données.html#cb24-3"></a></span>
+<span id="cb24-4"><a href="quantifier-la-dissimilarité-des-données.html#cb24-4"></a><span class="co"># Transformation de chi-carré</span></span>
+<span id="cb24-5"><a href="quantifier-la-dissimilarité-des-données.html#cb24-5"></a>spe.chi &lt;-<span class="st"> </span><span class="kw">decostand</span>(spe, <span class="dt">method =</span> <span class="st">&quot;chi.square&quot;</span>)</span></code></pre></div>
+<p><strong>Défi option 2 - Niveau avancé</strong> Calculez les distances de Hellinger et
+de Chi-carré sur les données "spe" sans utiliser decostand ().</p>
+<p><strong>Défi option 2 - Solution</strong> La transformation de Hellinger
+est une transformation qui diminue l’importance accordée aux espèces
+rares.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="quantifier-la-dissimilarité-des-données.html#cb25-1"></a><span class="co"># Hellinger Calculer l&#39;abondance des espèces par site</span></span>
+<span id="cb25-2"><a href="quantifier-la-dissimilarité-des-données.html#cb25-2"></a>(<span class="dt">site.totals =</span> <span class="kw">apply</span>(spe, <span class="dv">1</span>, sum))</span>
+<span id="cb25-3"><a href="quantifier-la-dissimilarité-des-données.html#cb25-3"></a></span>
+<span id="cb25-4"><a href="quantifier-la-dissimilarité-des-données.html#cb25-4"></a><span class="co"># Réduire les abondances d&#39;espèces en les divisant par les</span></span>
+<span id="cb25-5"><a href="quantifier-la-dissimilarité-des-données.html#cb25-5"></a><span class="co"># totaux par sites</span></span>
+<span id="cb25-6"><a href="quantifier-la-dissimilarité-des-données.html#cb25-6"></a>(scale.spe &lt;-<span class="st"> </span>spe<span class="op">/</span>site.totals)</span>
+<span id="cb25-7"><a href="quantifier-la-dissimilarité-des-données.html#cb25-7"></a></span>
+<span id="cb25-8"><a href="quantifier-la-dissimilarité-des-données.html#cb25-8"></a><span class="co"># Calculer la racine carrée des abondances d&#39;espèces réduites</span></span>
+<span id="cb25-9"><a href="quantifier-la-dissimilarité-des-données.html#cb25-9"></a>(sqrt.scale.spe &lt;-<span class="st"> </span><span class="kw">sqrt</span>(scale.spe))</span>
+<span id="cb25-10"><a href="quantifier-la-dissimilarité-des-données.html#cb25-10"></a></span>
+<span id="cb25-11"><a href="quantifier-la-dissimilarité-des-données.html#cb25-11"></a><span class="co"># Comparer les résultats</span></span>
+<span id="cb25-12"><a href="quantifier-la-dissimilarité-des-données.html#cb25-12"></a>sqrt.scale.spe</span>
+<span id="cb25-13"><a href="quantifier-la-dissimilarité-des-données.html#cb25-13"></a>spe.hel</span>
+<span id="cb25-14"><a href="quantifier-la-dissimilarité-des-données.html#cb25-14"></a>sqrt.scale.spe <span class="op">-</span><span class="st"> </span>spe.hel  <span class="co"># ou: sqrt.scale.spe/spe.hel</span></span>
+<span id="cb25-15"><a href="quantifier-la-dissimilarité-des-données.html#cb25-15"></a></span>
+<span id="cb25-16"><a href="quantifier-la-dissimilarité-des-données.html#cb25-16"></a><span class="co"># Chi-carré Premièrement calculer le total des abondances</span></span>
+<span id="cb25-17"><a href="quantifier-la-dissimilarité-des-données.html#cb25-17"></a><span class="co"># d&#39;espèces par site</span></span>
+<span id="cb25-18"><a href="quantifier-la-dissimilarité-des-données.html#cb25-18"></a>(site.totals &lt;-<span class="st"> </span><span class="kw">apply</span>(spe, <span class="dv">1</span>, sum))</span>
+<span id="cb25-19"><a href="quantifier-la-dissimilarité-des-données.html#cb25-19"></a></span>
+<span id="cb25-20"><a href="quantifier-la-dissimilarité-des-données.html#cb25-20"></a><span class="co"># Ensuite calculer la racine carrée du total des abondances</span></span>
+<span id="cb25-21"><a href="quantifier-la-dissimilarité-des-données.html#cb25-21"></a><span class="co"># d&#39;espèces</span></span>
+<span id="cb25-22"><a href="quantifier-la-dissimilarité-des-données.html#cb25-22"></a>(sqrt.spe.totals &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">apply</span>(spe, <span class="dv">2</span>, sum)))</span>
+<span id="cb25-23"><a href="quantifier-la-dissimilarité-des-données.html#cb25-23"></a></span>
+<span id="cb25-24"><a href="quantifier-la-dissimilarité-des-données.html#cb25-24"></a><span class="co"># Réduire les abondances d&#39;espèces en les divisant par les</span></span>
+<span id="cb25-25"><a href="quantifier-la-dissimilarité-des-données.html#cb25-25"></a><span class="co"># totaux par sites et les totaux par espèces</span></span>
+<span id="cb25-26"><a href="quantifier-la-dissimilarité-des-données.html#cb25-26"></a>scale.spe2 &lt;-<span class="st"> </span>spe</span>
+<span id="cb25-27"><a href="quantifier-la-dissimilarité-des-données.html#cb25-27"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(spe)) {</span>
+<span id="cb25-28"><a href="quantifier-la-dissimilarité-des-données.html#cb25-28"></a>    <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(spe)) {</span>
+<span id="cb25-29"><a href="quantifier-la-dissimilarité-des-données.html#cb25-29"></a>        (scale.spe2[i, j] =<span class="st"> </span>scale.spe2[i, j]<span class="op">/</span>(site.totals[i] <span class="op">*</span><span class="st"> </span></span>
+<span id="cb25-30"><a href="quantifier-la-dissimilarité-des-données.html#cb25-30"></a><span class="st">            </span>sqrt.spe.totals[j]))</span>
+<span id="cb25-31"><a href="quantifier-la-dissimilarité-des-données.html#cb25-31"></a>    }</span>
+<span id="cb25-32"><a href="quantifier-la-dissimilarité-des-données.html#cb25-32"></a>}</span>
+<span id="cb25-33"><a href="quantifier-la-dissimilarité-des-données.html#cb25-33"></a></span>
+<span id="cb25-34"><a href="quantifier-la-dissimilarité-des-données.html#cb25-34"></a><span class="co"># Ajuster les abondances en les multipliant par la racine</span></span>
+<span id="cb25-35"><a href="quantifier-la-dissimilarité-des-données.html#cb25-35"></a><span class="co"># carrée du total de la matrice des espèces</span></span>
+<span id="cb25-36"><a href="quantifier-la-dissimilarité-des-données.html#cb25-36"></a>(adjust.scale.spe2 &lt;-<span class="st"> </span>scale.spe2 <span class="op">*</span><span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">sum</span>(<span class="kw">rowSums</span>(spe))))</span>
+<span id="cb25-37"><a href="quantifier-la-dissimilarité-des-données.html#cb25-37"></a></span>
+<span id="cb25-38"><a href="quantifier-la-dissimilarité-des-données.html#cb25-38"></a><span class="co"># Vérifier les résultats</span></span>
+<span id="cb25-39"><a href="quantifier-la-dissimilarité-des-données.html#cb25-39"></a>adjust.scale.spe2</span>
+<span id="cb25-40"><a href="quantifier-la-dissimilarité-des-données.html#cb25-40"></a>spe.chi</span>
+<span id="cb25-41"><a href="quantifier-la-dissimilarité-des-données.html#cb25-41"></a>adjust.scale.spe2 <span class="op">-</span><span class="st"> </span>spe.chi  <span class="co"># or: adjust.scale.spe2/spe.chi</span></span></code></pre></div>
+</div>
+</div>
+<hr>
+<center> 
+  <div class="footer">
+      All the content of the workshop series is under a <a href="https://creativecommons.org/licenses/by-nc/2.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+  </div>
+</center>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="la-dissimilarité-des-données.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="groupement.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": false
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

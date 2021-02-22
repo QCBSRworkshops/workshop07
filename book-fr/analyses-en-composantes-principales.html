@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapitre 10 Analyses en Composantes Principales | Atelier 9 : Analyses multivariées en R</title>
+  <meta name="description" content="Analyses multivariées en R" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapitre 10 Analyses en Composantes Principales | Atelier 9 : Analyses multivariées en R" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://github.com/qcbsRworkshops/" />
+  <meta property="og:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
+  <meta property="og:description" content="Analyses multivariées en R" />
+  <meta name="github-repo" content="qcbsRworkshops/workshop09" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapitre 10 Analyses en Composantes Principales | Atelier 9 : Analyses multivariées en R" />
+  
+  <meta name="twitter:description" content="Analyses multivariées en R" />
+  <meta name="twitter:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
+
+<meta name="author" content="Développé et entretenu par les contributeurs et les contributrices de la Série d’ateliers R du CSBQ." />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
+<link rel="prev" href="le-significat-de-lordination-sans-contrainte.html"/>
+<link rel="next" href="analyse-des-correpondances.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="assets/qcbs-style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="toc-logo"><a href="./"><img src="assets/images/csbq_logo_gray_accueil.png"></a></li>
+<link rel="icon" type="image/png" href="assets/images/favicon.ico"/>
+
+<li class="divider"></li>
+<li class="part"><span><b>Série d’ateliers R du CSBQ</b></span></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Préface</a><ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#code-de-conduite"><i class="fa fa-check"></i><b>0.1</b> Code de conduite</a><ul>
+<li class="chapter" data-level="0.1.1" data-path="index.html"><a href="index.html#comportement-attendu"><i class="fa fa-check"></i><b>0.1.1</b> Comportement attendu</a></li>
+<li class="chapter" data-level="0.1.2" data-path="index.html"><a href="index.html#comportements-inacceptables"><i class="fa fa-check"></i><b>0.1.2</b> Comportements inacceptables</a></li>
+</ul></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#contributeurs-et-contributrices"><i class="fa fa-check"></i><b>0.2</b> Contributeurs et contributrices</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#contribuez-à-la-série"><i class="fa fa-check"></i><b>0.3</b> Contribuez à la série!</a></li>
+</ul></li>
+<li class="part"><span><b>Analyses multivariées en <code>R</code></b></span></li>
+<li class="chapter" data-level="1" data-path="objectifs-dapprentissage.html"><a href="objectifs-dapprentissage.html"><i class="fa fa-check"></i><b>1</b> Objectifs d’apprentissage</a></li>
+<li class="chapter" data-level="2" data-path="préparez-vous-pour-cet-atelier.html"><a href="préparez-vous-pour-cet-atelier.html"><i class="fa fa-check"></i><b>2</b> Préparez-vous pour cet atelier</a></li>
+<li class="chapter" data-level="3" data-path="quest-ce-que-lordination.html"><a href="quest-ce-que-lordination.html"><i class="fa fa-check"></i><b>3</b> Qu’est-ce que l’ordination?</a></li>
+<li class="chapter" data-level="4" data-path="introduction-aux-données.html"><a href="introduction-aux-données.html"><i class="fa fa-check"></i><b>4</b> Introduction aux données</a></li>
+<li class="chapter" data-level="5" data-path="exploration-des-données.html"><a href="exploration-des-données.html"><i class="fa fa-check"></i><b>5</b> 1. Exploration des données</a><ul>
+<li class="chapter" data-level="5.1" data-path="exploration-des-données.html"><a href="exploration-des-données.html#données-sur-les-espèces"><i class="fa fa-check"></i><b>5.1</b> 1.1 Données sur les espèces</a></li>
+<li class="chapter" data-level="5.2" data-path="exploration-des-données.html"><a href="exploration-des-données.html#données-sur-lenvironnement"><i class="fa fa-check"></i><b>5.2</b> 1.2 Données sur l’environnement</a></li>
+</ul></li>
+<li class="part"><span><b>Mesures d’association</b></span></li>
+<li class="chapter" data-level="6" data-path="la-dissimilarité-des-données.html"><a href="la-dissimilarité-des-données.html"><i class="fa fa-check"></i><b>6</b> La (dis)similarité des données</a></li>
+<li class="chapter" data-level="7" data-path="quantifier-la-dissimilarité-des-données.html"><a href="quantifier-la-dissimilarité-des-données.html"><i class="fa fa-check"></i><b>7</b> Quantifier la (dis)similarité des données</a><ul>
+<li class="chapter" data-level="7.1" data-path="quantifier-la-dissimilarité-des-données.html"><a href="quantifier-la-dissimilarité-des-données.html#transformations-des-données-de-composition-des-communautés"><i class="fa fa-check"></i><b>7.1</b> Transformations des données de composition des communautés</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="groupement.html"><a href="groupement.html"><i class="fa fa-check"></i><b>8</b> Groupement</a></li>
+<li class="part"><span><b>L’Ordination sans contrainte</b></span></li>
+<li class="chapter" data-level="9" data-path="le-significat-de-lordination-sans-contrainte.html"><a href="le-significat-de-lordination-sans-contrainte.html"><i class="fa fa-check"></i><b>9</b> Le significat de l’ordination “sans contrainte”</a></li>
+<li class="chapter" data-level="10" data-path="analyses-en-composantes-principales.html"><a href="analyses-en-composantes-principales.html"><i class="fa fa-check"></i><b>10</b> Analyses en Composantes Principales</a></li>
+<li class="chapter" data-level="11" data-path="analyse-des-correpondances.html"><a href="analyse-des-correpondances.html"><i class="fa fa-check"></i><b>11</b> Analyse des Correpondances</a></li>
+<li class="chapter" data-level="12" data-path="analyse-en-coordonnées-principales.html"><a href="analyse-en-coordonnées-principales.html"><i class="fa fa-check"></i><b>12</b> Analyse en coordonnées principales</a></li>
+<li class="chapter" data-level="13" data-path="positionnement-multidimensionnel-non-métrique.html"><a href="positionnement-multidimensionnel-non-métrique.html"><i class="fa fa-check"></i><b>13</b> Positionnement multidimensionnel non-métrique</a></li>
+<li class="part"><span><b>Considérations finales</b></span></li>
+<li class="chapter" data-level="14" data-path="sommaire.html"><a href="sommaire.html"><i class="fa fa-check"></i><b>14</b> Sommaire</a></li>
+<li class="chapter" data-level="15" data-path="resources-additionnels.html"><a href="resources-additionnels.html"><i class="fa fa-check"></i><b>15</b> Resources additionnels</a></li>
+<li class="chapter" data-level="16" data-path="réferences.html"><a href="réferences.html"><i class="fa fa-check"></i><b>16</b> Réferences</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/qcbsRworkshops" target="blank">QCBS R Workshop Series</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Atelier 9 : Analyses multivariées en <code>R</code></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<!------------------------ Hero Image Container --------------------------> 
+
+<head>
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=10.0,initial-scale=1.0">
+  <script src="https://kit.fontawesome.com/6a26f47516.js"></script>
+  <script src="assets/qcbs-hideOutput.js"></script>
+  <link href="assets/qcbs-style.css" rel="stylesheet">
+</head>
+
+
+
+<div class="hero-image-container"> 
+  <img class= "hero-image" src="assets/images/jean-philippe-delberghe-75xPHEQBmvA-unsplash_hero_image.jpg">
+</div>
+<div id="analyses-en-composantes-principales" class="section level1">
+<h1><span class="header-section-number">Chapitre 10</span> Analyses en Composantes Principales</h1>
+<p>L’Analyse en Composantes Principales (ou PCA) fur originellement
+décrite par Pearson (1901) bien qu’elle soit le plus souvent attribué à
+Hotelling (1933) qui l’a proposé indépendamment. Cette méthode ainsi
+que nombre de ces implications sont pour l’analyse de données sont
+présentées dans l’article fondateur de Rao (1964). La PCA est utilisée
+pour générer, à partir d’un large jeu de données, un nombre restreint
+de variables clefs qui permettent de représenter au maximum la variation
+présente dans le jeu de données. En d’autres termes, la PCA est
+utilisée pour générer des combinaisons de variables à partir d’un
+ensemble plus grand de variables tout en conservant la majorité de
+variation de l’ensemble des données. La PCA est une technique
+d’analyse puissante pour l’analyse dans descripteurs quantitatifs
+(tels que les abondances d’espèces), mais ne peut pas être appliquée
+aux données binaires (telles que l’absence/présence des espèces).</p>
+<p>À partir d’un jeu de données contenant des variables à distribution
+normale, le premier axe de PCA (ou axe de composante principale)
+correspond à la droite qui traverse la plus grande dimension de
+l’ellipsoïde décrivant la distribution multi-normale des données. Les
+axes suivants traversent de façon similaire cet ellipsoïde selon
+l’ordre décroissant de ces dimensions. Ainsi, il est possible
+d’obtenir un maximum de p axes principaux à partir d’un jeu de données
+contenant p variables.</p>
+<p>Pour cela, la PCA effectue un rotation du système d’axes originels
+défini par les variables de façon à ce que les axes d’ordination
+successifs soient orthogonaux entre eux et correspondent aux dimensions
+successives du maximum de variance observée dans le nuage de points
+(voir ci-dessus). Les nouvelles variables produites par la PCA sont
+non-corrélées entre elles (les axes d’ordination étant orthogonaux) et
+peuvent alors être utilisés dans d’autres types d’analyse telles que
+des régressions multiples (Gotelli et Ellison, 2004). Les composantes
+principales situent la position des objets dans le nouveau système de
+coordonnées calculé par la PCA. La PCA s’effectue sur une matrice
+d’association entre variables, et a pour caractéristique de préserver
+les distances euclidiennes et de détecter des relations linéaires,
+uniquement. En conséquence, les abondances brutes des espèces doivent
+être soumises à une pré-transformation (comme une transformation
+d’Hellinger) avant de réaliser une PCA.</p>
+<p><em>Pour faire une PCA, vous avez besoin :</em> - Un ensemble de variables
+(sans distinction entre les variables indépendantes ou dépendantes,
+c-est-à-dire un ensemble d’espèces OU un ensemble de variables
+environnementales). - De sites (objets, échantillons) dans lesquels sont
+mesurés les mêmes variables. - En général, il est préférable d’avoir un
+plus grand nombre de sites que de variables dans le jeu de données (plus
+de lignes que de colonnes).</p>
+<p>La PCA est particulièrement utile pour des matrices de données contenant
+plus de deux variables, mais il est plus facile de décrire son
+fonctionnement avec un exemple bidimensionnel. Dans l’exemple suivant
+(d’après Clarke et Warwick 2001), la matrice contient les données
+d’abondance de deux espèces dans neuf sites:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Site</th>
+<th align="left">Espèce 1</th>
+<th align="left">Espèce 2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">A</td>
+<td align="left">6</td>
+<td align="left">2</td>
+</tr>
+<tr class="even">
+<td align="left">B</td>
+<td align="left">0</td>
+<td align="left">0</td>
+</tr>
+<tr class="odd">
+<td align="left">C</td>
+<td align="left">5</td>
+<td align="left">8</td>
+</tr>
+<tr class="even">
+<td align="left">D</td>
+<td align="left">7</td>
+<td align="left">6</td>
+</tr>
+<tr class="odd">
+<td align="left">E</td>
+<td align="left">11</td>
+<td align="left">6</td>
+</tr>
+<tr class="even">
+<td align="left">F</td>
+<td align="left">10</td>
+<td align="left">10</td>
+</tr>
+<tr class="odd">
+<td align="left">G</td>
+<td align="left">15</td>
+<td align="left">8</td>
+</tr>
+<tr class="even">
+<td align="left">H</td>
+<td align="left">18</td>
+<td align="left">14</td>
+</tr>
+<tr class="odd">
+<td align="left">I</td>
+<td align="left">14</td>
+<td align="left">14</td>
+</tr>
+</tbody>
+</table>
+<p>La représentation des sites en deux dimensions devrait ressembler à
+ceci: <img src="images//pcaex_1.png" width="500" /></p>
+<p>Ce nuage de points est une ordination. Il présente la distribution des
+espèces entre les sites, mais vous pouvez imaginer qu’il est plus
+difficile de visualiser un tel graphique en présence de plus de deux
+espèces. Dans ce cas, l’objectif est de réduire le nombre de variables
+en composantes principales. Pour réduire les données bidimensionnelles
+précédentes à une dimension, une PCA peut être effectuée :</p>
+<p><img src="images//pcaex_2.png" width="500" /></p>
+<p>Dans ce cas, la première composante principale est orientée dans le sens
+de la plus grande variation dans les points, ces points étant
+perpendiculaires à la ligne.</p>
+<p>Une seconde composante principale est alors ajoutée perpendiculairement
+à la première:</p>
+<p><img src="images//pcaex_3.png" width="500" /></p>
+<p>Dans le diagramme final, les deux axes de PCA sont pivotés et les axes
+sont maintenant les composantes principales (et non plus les espèces):</p>
+<p><img src="images//pcaex_4.png" width="500" /></p>
+<p>Pour les PCA avec plus de deux variables, les composantes principales
+sont ajoutées de la façon suivante (Clarke et Warwick 2001):</p>
+<p>PC1 = axe qui maximise la variance des points qui sont projetées
+perpendiculairement à l’axe. PC2 = axe perpendiculaire à PC1, mais dont
+la direction est à nouveau celle maximisant la variance lorsque les
+points y sont projetés perpendiculairement. PC3 et ainsi de suite:
+perpendiculaire aux deux premiers axes dont la direction est à nouveau
+celle maximisant la variance lorsque les points y sont projetés
+perpendiculairement.</p>
+<p>Lorsqu’il y a plus de deux dimensions, la PCA produit un nouvel espace
+dans lequel tous les axes de PCA sont orthogonaux (ce qui signifie que
+la corrélation entre chaque combinaison de deux axes est nulle), et où
+les axes de PCA sont ordonnés selon la proportion de variance des
+données d’origine qu’ils expliquent.</p>
+<p>Les données "spe" comprennent 27 espèces de poissons. Pour simplifier
+cette diversité à un petit nombre de variables ou pour identifier
+différents groupes de sites associés à des espèces particulières, une
+PCA peut être effectuée.</p>
+<p>Exécuter une PCA sur les données d’abondance d’espèces soumises à la
+transformation d’Hellinger :</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="analyses-en-composantes-principales.html#cb29-1"></a><span class="co"># Exécuter la PCA avec la fonction rda()- cette fonction</span></span>
+<span id="cb29-2"><a href="analyses-en-composantes-principales.html#cb29-2"></a><span class="co"># calcule à la fois des PCA et des RDA</span></span>
+<span id="cb29-3"><a href="analyses-en-composantes-principales.html#cb29-3"></a>spe.h.pca &lt;-<span class="st"> </span><span class="kw">rda</span>(spe.hel)</span>
+<span id="cb29-4"><a href="analyses-en-composantes-principales.html#cb29-4"></a></span>
+<span id="cb29-5"><a href="analyses-en-composantes-principales.html#cb29-5"></a><span class="co"># Extraire les résultats</span></span>
+<span id="cb29-6"><a href="analyses-en-composantes-principales.html#cb29-6"></a><span class="kw">summary</span>(spe.h.pca)</span></code></pre></div>
+<p>Résultats:</p>
+<p><img src="images//pca_outputfr_1.png" width="800" />
+<img src="images//pca_outputfr_2.png" width="800" />
+<img src="images//pca_outputfr_3.png" width="800" /></p>
+<p><strong>Interprétation des résultats de PCA</strong> Cette sortie R contient les
+valeurs propres ou «eigenvalue» de la PCA. La valeur propre est la
+valeur de la variation ramenée à la longueur d’un vecteur, et
+correspond à la quantité de variation expliquée par chaque axe
+d’ordination de la PCA. Comme vous pouvez le voir, la fonction summary
+fournit de nombreuses informations. Parmi les résultats, la proportion
+de variance des données expliquée par les variables sans contraintes est
+une information importante. Dans cet exemple, la variance totale des
+sites expliquée par les espèces est de 0,5 (50%). Le résumé vous indique
+également quelle proportion de la variance totale expliquée est répartie
+entre chaque composantes principales de la PCA: le premier axe de PCA
+explique 51.33% de la variation tandis que le second axe explique
+12.78%. Vous pouvez également extraire certaines parties des résultats:</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="analyses-en-composantes-principales.html#cb30-1"></a><span class="kw">summary</span>(spe.h.pca, <span class="dt">display =</span> <span class="ot">NULL</span>)  <span class="co"># seulement les valeurs propres</span></span>
+<span id="cb30-2"><a href="analyses-en-composantes-principales.html#cb30-2"></a><span class="kw">eigen</span>(<span class="kw">cov</span>(spe.hel))  <span class="co"># vous pouvez aussi trouver les valeurs propres par cette ligne de code</span></span></code></pre></div>
+<p>Les scores (c’est-à-dire les coordonnées) des sites ou des espèces
+peuvent également être extraits d’une PCA. Ces scores permettent, par
+exemple, d’utiliser une composante principale comme une variable dans
+une autre analyse, ou de faire des graphiques supplémentaires. Par
+exemple, vous pouvez obtenir par PCA une variable unique issue du jeu de
+données "spe" puis l’utiliser pour la corréler par régression à une
+autre variable, ou déterminer un gradient spatial. Pour extraire les
+scores d’une PCA, utiliser la fonction scores ():</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="analyses-en-composantes-principales.html#cb31-1"></a>spe.scores &lt;-<span class="st"> </span><span class="kw">scores</span>(spe.h.pca, <span class="dt">display =</span> <span class="st">&quot;species&quot;</span>, <span class="dt">choices =</span> <span class="kw">c</span>(<span class="dv">1</span>, </span>
+<span id="cb31-2"><a href="analyses-en-composantes-principales.html#cb31-2"></a>    <span class="dv">2</span>))  <span class="co"># scores des espèces selon les premier et deuxième axes </span></span>
+<span id="cb31-3"><a href="analyses-en-composantes-principales.html#cb31-3"></a>site.scores &lt;-<span class="st"> </span><span class="kw">scores</span>(spe.h.pca, <span class="dt">display =</span> <span class="st">&quot;sites&quot;</span>, <span class="dt">choices =</span> <span class="kw">c</span>(<span class="dv">1</span>, </span>
+<span id="cb31-4"><a href="analyses-en-composantes-principales.html#cb31-4"></a>    <span class="dv">2</span>))  <span class="co"># scores des sites selon les premier et deuxième axes </span></span>
+<span id="cb31-5"><a href="analyses-en-composantes-principales.html#cb31-5"></a><span class="co"># Remarque: si vous ne spécifiez pas le nombre de composantes</span></span>
+<span id="cb31-6"><a href="analyses-en-composantes-principales.html#cb31-6"></a><span class="co"># principales à l&#39;aide de choices = c (1,2) (ou choices = c</span></span>
+<span id="cb31-7"><a href="analyses-en-composantes-principales.html#cb31-7"></a><span class="co"># (1: 2)), les scores selon toutes les composantes</span></span>
+<span id="cb31-8"><a href="analyses-en-composantes-principales.html#cb31-8"></a><span class="co"># principales seront extraits.</span></span></code></pre></div>
+<p>La PCA des données d’abondances de poissons produit autant de
+composantes principales qu’il y d’espèces (i.e. de colonnes dans le
+jeu de données), soit 27 composantes principales. Le nombre de variables
+à traiter n’est donc pas directement réduit par la PCA. Pour réduire le
+nombre de variables, il est alors nécessaire de déterminer quelles
+composantes principales sont significatives et doivent être conservées,
+par exemple à l’aide du critère de Kaiser-Guttman. Ce critère compare
+la variance expliquée par chaque composante principale à la moyenne de
+la variance expliquée par l’ensemble des composantes principales. Un
+histogramme illustrant la significativité des différentes composantes
+principale peut ensuite être tracé à l’aide du code ci-dessous :</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="analyses-en-composantes-principales.html#cb32-1"></a><span class="co"># Identification des axes significatifs de la PCA à l&#39;aide du</span></span>
+<span id="cb32-2"><a href="analyses-en-composantes-principales.html#cb32-2"></a><span class="co"># critère de Kaiser-Guttman</span></span>
+<span id="cb32-3"><a href="analyses-en-composantes-principales.html#cb32-3"></a>ev &lt;-<span class="st"> </span>spe.h.pca<span class="op">$</span>CA<span class="op">$</span>eig</span>
+<span id="cb32-4"><a href="analyses-en-composantes-principales.html#cb32-4"></a>ev[ev <span class="op">&gt;</span><span class="st"> </span><span class="kw">mean</span>(ev)]</span>
+<span id="cb32-5"><a href="analyses-en-composantes-principales.html#cb32-5"></a>n &lt;-<span class="st"> </span><span class="kw">length</span>(ev)</span>
+<span id="cb32-6"><a href="analyses-en-composantes-principales.html#cb32-6"></a>bsm &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">j =</span> <span class="kw">seq</span>(<span class="dv">1</span><span class="op">:</span>n), <span class="dt">p =</span> <span class="dv">0</span>)</span>
+<span id="cb32-7"><a href="analyses-en-composantes-principales.html#cb32-7"></a>bsm<span class="op">$</span>p[<span class="dv">1</span>] =<span class="st"> </span><span class="dv">1</span><span class="op">/</span>n</span>
+<span id="cb32-8"><a href="analyses-en-composantes-principales.html#cb32-8"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span>n) {</span>
+<span id="cb32-9"><a href="analyses-en-composantes-principales.html#cb32-9"></a>    bsm<span class="op">$</span>p[i] =<span class="st"> </span>bsm<span class="op">$</span>p[i <span class="op">-</span><span class="st"> </span><span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">/</span>(<span class="dt">n =</span> <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>i))</span>
+<span id="cb32-10"><a href="analyses-en-composantes-principales.html#cb32-10"></a>}</span>
+<span id="cb32-11"><a href="analyses-en-composantes-principales.html#cb32-11"></a>bsm<span class="op">$</span>p =<span class="st"> </span><span class="dv">100</span> <span class="op">*</span><span class="st"> </span>bsm<span class="op">$</span>p<span class="op">/</span>n</span>
+<span id="cb32-12"><a href="analyses-en-composantes-principales.html#cb32-12"></a>bsm</span>
+<span id="cb32-13"><a href="analyses-en-composantes-principales.html#cb32-13"></a><span class="kw">barplot</span>(ev, <span class="dt">main =</span> <span class="st">&quot;valeurs propres&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>, <span class="dt">las =</span> <span class="dv">2</span>)</span>
+<span id="cb32-14"><a href="analyses-en-composantes-principales.html#cb32-14"></a><span class="kw">abline</span>(<span class="dt">h =</span> <span class="kw">mean</span>(ev), <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</span>
+<span id="cb32-15"><a href="analyses-en-composantes-principales.html#cb32-15"></a><span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="st">&quot;moyenne des valeurs propres&quot;</span>, <span class="dt">lwd =</span> <span class="dv">1</span>, <span class="dt">col =</span> <span class="dv">2</span>, </span>
+<span id="cb32-16"><a href="analyses-en-composantes-principales.html#cb32-16"></a>    <span class="dt">bty =</span> <span class="st">&quot;n&quot;</span>)</span></code></pre></div>
+<p><img src="images//pca_sigaxes_sp.png" width="500" /></p>
+<p>Cet histogramme montre que la proportion de la variance expliquée par
+chaque composante chute en-dessous de la proportion moyenne expliquée
+par l’ensemble des composantes après le sixième axe d"ordination PC6.
+En consultant le résumé de nouveau, on peut constater que la proportion
+cumulée de la variance expliquée par les cinq premières composantes
+principales est de 85%.</p>
+<p>La PCA n’est pas seulement appropriée pour les données de composition
+d’espèces, mais peut également être exécutée sur des variables
+environnementales standardisées:</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="analyses-en-composantes-principales.html#cb33-1"></a><span class="co"># Exécuter la PCA</span></span>
+<span id="cb33-2"><a href="analyses-en-composantes-principales.html#cb33-2"></a>env.pca &lt;-<span class="st"> </span><span class="kw">rda</span>(env.z)  <span class="co"># ou rda(env, scale=TRUE)</span></span>
+<span id="cb33-3"><a href="analyses-en-composantes-principales.html#cb33-3"></a></span>
+<span id="cb33-4"><a href="analyses-en-composantes-principales.html#cb33-4"></a><span class="co"># Extraction des résultats</span></span>
+<span id="cb33-5"><a href="analyses-en-composantes-principales.html#cb33-5"></a><span class="kw">summary</span>(env.pca)</span>
+<span id="cb33-6"><a href="analyses-en-composantes-principales.html#cb33-6"></a><span class="kw">summary</span>(env.pca, <span class="dt">scaling =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p>«Scaling» réfère à quelle portion de la PCA est redimensionnée aux
+valeurs propres. Scaling = 2 signifie que les scores des espèces sont
+mises à l’échelle des valeurs propres, alors que scaling = 1 signifie
+que les scores des sites sont mises à l’échelle des valeurs propres.
+Scaling = 3 signifie qu’à la fois les scores des espèces et des sites
+sont mis symétriquement à l’échelle de la racine carrée des valeurs
+propres. En scaling = 1,les distances euclidiennes entre les sites
+(lignes de la matrice de données) sont conservées tandis qu’en scaling
+= 2 les corrélations entre espèces (les colonnes de la matrice de
+données) sont conservées. Cela implique que lorsque vous regardez un
+biplot de PCA en Scaling = 2, l’angle entre les descripteurs représente
+leur corrélation.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="analyses-en-composantes-principales.html#cb34-1"></a>ev &lt;-<span class="st"> </span>env.pca<span class="op">$</span>CA<span class="op">$</span>eig</span>
+<span id="cb34-2"><a href="analyses-en-composantes-principales.html#cb34-2"></a>ev[ev <span class="op">&gt;</span><span class="st"> </span><span class="kw">mean</span>(ev)]</span>
+<span id="cb34-3"><a href="analyses-en-composantes-principales.html#cb34-3"></a>n &lt;-<span class="st"> </span><span class="kw">length</span>(ev)</span>
+<span id="cb34-4"><a href="analyses-en-composantes-principales.html#cb34-4"></a>bsm &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">j =</span> <span class="kw">seq</span>(<span class="dv">1</span><span class="op">:</span>n), <span class="dt">p =</span> <span class="dv">0</span>)</span>
+<span id="cb34-5"><a href="analyses-en-composantes-principales.html#cb34-5"></a>bsm<span class="op">$</span>p[<span class="dv">1</span>] =<span class="st"> </span><span class="dv">1</span><span class="op">/</span>n</span>
+<span id="cb34-6"><a href="analyses-en-composantes-principales.html#cb34-6"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span>n) {</span>
+<span id="cb34-7"><a href="analyses-en-composantes-principales.html#cb34-7"></a>    bsm<span class="op">$</span>p[i] =<span class="st"> </span>bsm<span class="op">$</span>p[i <span class="op">-</span><span class="st"> </span><span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">/</span>(<span class="dt">n =</span> <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>i))</span>
+<span id="cb34-8"><a href="analyses-en-composantes-principales.html#cb34-8"></a>}</span>
+<span id="cb34-9"><a href="analyses-en-composantes-principales.html#cb34-9"></a>bsm<span class="op">$</span>p =<span class="st"> </span><span class="dv">100</span> <span class="op">*</span><span class="st"> </span>bsm<span class="op">$</span>p<span class="op">/</span>n</span>
+<span id="cb34-10"><a href="analyses-en-composantes-principales.html#cb34-10"></a>bsm</span>
+<span id="cb34-11"><a href="analyses-en-composantes-principales.html#cb34-11"></a><span class="kw">barplot</span>(ev, <span class="dt">main =</span> <span class="st">&quot;valeurs propres&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>, <span class="dt">las =</span> <span class="dv">2</span>)</span>
+<span id="cb34-12"><a href="analyses-en-composantes-principales.html#cb34-12"></a><span class="kw">abline</span>(<span class="dt">h =</span> <span class="kw">mean</span>(ev), <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</span>
+<span id="cb34-13"><a href="analyses-en-composantes-principales.html#cb34-13"></a><span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="st">&quot;moyenne des valeurs propres&quot;</span>, <span class="dt">lwd =</span> <span class="dv">1</span>, <span class="dt">col =</span> <span class="dv">2</span>, </span>
+<span id="cb34-14"><a href="analyses-en-composantes-principales.html#cb34-14"></a>    <span class="dt">bty =</span> <span class="st">&quot;n&quot;</span>)</span></code></pre></div>
+<p>Comparer cet histogramme de valeurs propres avec celui que vous avez
+créé pour la PCA sur les abondances d’espèces.</p>
+<p>Bien que beaucoup d’informations puissent être extraites d’une PCA par
+la fonction summary de la PCA, l’interpétation et la communication des
+résultats est souvent facilitée en traçant un biplot. Sur un biplot de
+PCA, l’axe des x correspond à la première composante principale et
+l’axe des y à la deuxième composante principale.</p>
+<p>La fonction plot () permet de tracer des biplot sur lequels les sites
+figurent en chiffres noirs et les espèces sont représentées en rouge. Le
+biplot de la <em>PCA des abondances d’espèces</em> peut être appelé comme
+suit:</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="analyses-en-composantes-principales.html#cb35-1"></a><span class="kw">plot</span>(spe.h.pca)</span></code></pre></div>
+<p><img src="images//spe_PCA1.png" width="800" /></p>
+<p>La construction de biplots de PCA s’articule en trois étapes:</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="analyses-en-composantes-principales.html#cb36-1"></a><span class="kw">plot</span>(spe.h.pca, <span class="dt">type=</span>”n”) <span class="co"># Produit une figure vierge</span></span>
+<span id="cb36-2"><a href="analyses-en-composantes-principales.html#cb36-2"></a><span class="kw">points</span>(spe.h.pca, <span class="dt">dis=</span>”sp”, <span class="dt">col=</span>”blue”) <span class="co"># ajoute les points correspondant aux espèces</span></span>
+<span id="cb36-3"><a href="analyses-en-composantes-principales.html#cb36-3"></a><span class="co">#utilizer text() plutôt que points() si vous préférez que les codes des espèces s&#39;affichent (nom des colonnes)</span></span>
+<span id="cb36-4"><a href="analyses-en-composantes-principales.html#cb36-4"></a><span class="kw">points</span>(spe.h.pca, <span class="dt">dis=</span>”sites”, <span class="dt">col=</span>”red”) <span class="co"># ajoute les points correspondant aux sites </span></span></code></pre></div>
+<p><img src="images//spe_PCA2.png" width="800" /></p>
+<p>Pour créer de plus beaux biplots, essayez ce code:</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="analyses-en-composantes-principales.html#cb37-1"></a><span class="co"># Scaling 1</span></span>
+<span id="cb37-2"><a href="analyses-en-composantes-principales.html#cb37-2"></a><span class="kw">windows</span>()</span>
+<span id="cb37-3"><a href="analyses-en-composantes-principales.html#cb37-3"></a><span class="kw">plot</span>(spe.h.pca)</span>
+<span id="cb37-4"><a href="analyses-en-composantes-principales.html#cb37-4"></a><span class="kw">windows</span>()</span>
+<span id="cb37-5"><a href="analyses-en-composantes-principales.html#cb37-5"></a><span class="kw">biplot</span>(spe.h.pca)</span>
+<span id="cb37-6"><a href="analyses-en-composantes-principales.html#cb37-6"></a><span class="kw">windows</span>()</span>
+<span id="cb37-7"><a href="analyses-en-composantes-principales.html#cb37-7"></a><span class="co"># scaling 1 = distance biplot : distances entre les objets</span></span>
+<span id="cb37-8"><a href="analyses-en-composantes-principales.html#cb37-8"></a><span class="co"># est une approximation de leur distance euclidienne les</span></span>
+<span id="cb37-9"><a href="analyses-en-composantes-principales.html#cb37-9"></a><span class="co"># angles entre les descripteurs ne réflètent PAS leur</span></span>
+<span id="cb37-10"><a href="analyses-en-composantes-principales.html#cb37-10"></a><span class="co"># corrélation</span></span>
+<span id="cb37-11"><a href="analyses-en-composantes-principales.html#cb37-11"></a><span class="kw">plot</span>(spe.h.pca, <span class="dt">scaling =</span> <span class="dv">1</span>, <span class="dt">type =</span> <span class="st">&quot;none&quot;</span>, xlab &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;PC1 (%)&quot;</span>, </span>
+<span id="cb37-12"><a href="analyses-en-composantes-principales.html#cb37-12"></a>    <span class="kw">round</span>((spe.h.pca<span class="op">$</span>CA<span class="op">$</span>eig[<span class="dv">1</span>]<span class="op">/</span><span class="kw">sum</span>(spe.h.pca<span class="op">$</span>CA<span class="op">$</span>eig)) <span class="op">*</span><span class="st"> </span><span class="dv">100</span>, </span>
+<span id="cb37-13"><a href="analyses-en-composantes-principales.html#cb37-13"></a>        <span class="dv">2</span>)), ylab &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;PC2 (%)&quot;</span>, <span class="kw">round</span>((spe.h.pca<span class="op">$</span>CA<span class="op">$</span>eig[<span class="dv">2</span>]<span class="op">/</span><span class="kw">sum</span>(spe.h.pca<span class="op">$</span>CA<span class="op">$</span>eig)) <span class="op">*</span><span class="st"> </span></span>
+<span id="cb37-14"><a href="analyses-en-composantes-principales.html#cb37-14"></a><span class="st">    </span><span class="dv">100</span>, <span class="dv">2</span>)))</span>
+<span id="cb37-15"><a href="analyses-en-composantes-principales.html#cb37-15"></a><span class="kw">points</span>(<span class="kw">scores</span>(spe.h.pca, <span class="dt">display =</span> <span class="st">&quot;sites&quot;</span>, <span class="dt">choices =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), </span>
+<span id="cb37-16"><a href="analyses-en-composantes-principales.html#cb37-16"></a>    <span class="dt">scaling =</span> <span class="dv">1</span>), <span class="dt">pch =</span> <span class="dv">21</span>, <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">bg =</span> <span class="st">&quot;steelblue&quot;</span>, </span>
+<span id="cb37-17"><a href="analyses-en-composantes-principales.html#cb37-17"></a>    <span class="dt">cex =</span> <span class="fl">1.2</span>)</span>
+<span id="cb37-18"><a href="analyses-en-composantes-principales.html#cb37-18"></a><span class="kw">text</span>(<span class="kw">scores</span>(spe.h.pca, <span class="dt">display =</span> <span class="st">&quot;species&quot;</span>, <span class="dt">choices =</span> <span class="kw">c</span>(<span class="dv">1</span>), <span class="dt">scaling =</span> <span class="dv">1</span>), </span>
+<span id="cb37-19"><a href="analyses-en-composantes-principales.html#cb37-19"></a>    <span class="kw">scores</span>(spe.h.pca, <span class="dt">display =</span> <span class="st">&quot;species&quot;</span>, <span class="dt">choices =</span> <span class="kw">c</span>(<span class="dv">2</span>), <span class="dt">scaling =</span> <span class="dv">1</span>), </span>
+<span id="cb37-20"><a href="analyses-en-composantes-principales.html#cb37-20"></a>    <span class="dt">labels =</span> <span class="kw">rownames</span>(<span class="kw">scores</span>(spe.h.pca, <span class="dt">display =</span> <span class="st">&quot;species&quot;</span>, </span>
+<span id="cb37-21"><a href="analyses-en-composantes-principales.html#cb37-21"></a>        <span class="dt">scaling =</span> <span class="dv">1</span>)), <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">cex =</span> <span class="fl">0.8</span>)</span></code></pre></div>
+<p>Le code ci-dessus a produit trois biplots mais le dernier est le plus
+attrayant : <img src="images//spe_PCA3.png" width="800" /></p>
+<p>Sur ce graphique, les sites scores sont indiqués par des points bleus et
+les noms d’espèces sont en rouge. Il est également possible de
+représenter les sites par leurs noms.</p>
+<p>Comment interpréter ce type de graphique ? Ce biplot permet d’observer
+qu’il existe certains groupes de sites homogènes du point de vue de la
+composition de leur communautés de poissons. On y voit également que
+l’espèce «ABL» n’a pas la même prévalence dans la majorité des sites
+que les autres espèces plus proches du centre du graphique.</p>
+<p>Les biplots ne doivent pas seulement être interprétés en termes de
+proximité, mais également d’angles. Deux variables séparées d’un angle
+de 90 degrés ne sont pas corrélées. Deux variables très rapprochés sont
+fortement corrélées. Deux variables aux directions opposées sont
+corrélées négativement.</p>
+<p>Maintenant regardons le biplot de la <em>PCA environnement</em>:</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="analyses-en-composantes-principales.html#cb38-1"></a><span class="co"># Scaling 2</span></span>
+<span id="cb38-2"><a href="analyses-en-composantes-principales.html#cb38-2"></a><span class="kw">windows</span>()</span>
+<span id="cb38-3"><a href="analyses-en-composantes-principales.html#cb38-3"></a><span class="kw">plot</span>(env.pca)</span>
+<span id="cb38-4"><a href="analyses-en-composantes-principales.html#cb38-4"></a><span class="kw">windows</span>()</span>
+<span id="cb38-5"><a href="analyses-en-composantes-principales.html#cb38-5"></a><span class="co"># scaling 2 = graphique de corrélations : les distances entre</span></span>
+<span id="cb38-6"><a href="analyses-en-composantes-principales.html#cb38-6"></a><span class="co"># les objets ne sont PAS des approximations de leur distance</span></span>
+<span id="cb38-7"><a href="analyses-en-composantes-principales.html#cb38-7"></a><span class="co"># euclidienne les angles entres les descripteurs reflètent</span></span>
+<span id="cb38-8"><a href="analyses-en-composantes-principales.html#cb38-8"></a><span class="co"># leur corrélation</span></span>
+<span id="cb38-9"><a href="analyses-en-composantes-principales.html#cb38-9"></a><span class="kw">plot</span>(env.pca, <span class="dt">scaling =</span> <span class="dv">2</span>, <span class="dt">type =</span> <span class="st">&quot;none&quot;</span>, xlab &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;PC1 (%)&quot;</span>, </span>
+<span id="cb38-10"><a href="analyses-en-composantes-principales.html#cb38-10"></a>    <span class="kw">round</span>((env.pca<span class="op">$</span>CA<span class="op">$</span>eig[<span class="dv">1</span>]<span class="op">/</span><span class="kw">sum</span>(env.pca<span class="op">$</span>CA<span class="op">$</span>eig)) <span class="op">*</span><span class="st"> </span><span class="dv">100</span>, <span class="dv">2</span>)), </span>
+<span id="cb38-11"><a href="analyses-en-composantes-principales.html#cb38-11"></a>    ylab &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;PC2 (%)&quot;</span>, <span class="kw">round</span>((env.pca<span class="op">$</span>CA<span class="op">$</span>eig[<span class="dv">2</span>]<span class="op">/</span><span class="kw">sum</span>(env.pca<span class="op">$</span>CA<span class="op">$</span>eig)) <span class="op">*</span><span class="st"> </span></span>
+<span id="cb38-12"><a href="analyses-en-composantes-principales.html#cb38-12"></a><span class="st">        </span><span class="dv">100</span>, <span class="dv">2</span>)), xlim &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb38-13"><a href="analyses-en-composantes-principales.html#cb38-13"></a><span class="kw">points</span>(<span class="kw">scores</span>(env.pca, <span class="dt">display =</span> <span class="st">&quot;sites&quot;</span>, <span class="dt">choices =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), </span>
+<span id="cb38-14"><a href="analyses-en-composantes-principales.html#cb38-14"></a>    <span class="dt">scaling =</span> <span class="dv">2</span>), <span class="dt">pch =</span> <span class="dv">21</span>, <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">bg =</span> <span class="st">&quot;darkgreen&quot;</span>, </span>
+<span id="cb38-15"><a href="analyses-en-composantes-principales.html#cb38-15"></a>    <span class="dt">cex =</span> <span class="fl">1.2</span>)</span>
+<span id="cb38-16"><a href="analyses-en-composantes-principales.html#cb38-16"></a><span class="kw">text</span>(<span class="kw">scores</span>(env.pca, <span class="dt">display =</span> <span class="st">&quot;species&quot;</span>, <span class="dt">choices =</span> <span class="kw">c</span>(<span class="dv">1</span>), <span class="dt">scaling =</span> <span class="dv">2</span>), </span>
+<span id="cb38-17"><a href="analyses-en-composantes-principales.html#cb38-17"></a>    <span class="kw">scores</span>(env.pca, <span class="dt">display =</span> <span class="st">&quot;species&quot;</span>, <span class="dt">choices =</span> <span class="kw">c</span>(<span class="dv">2</span>), <span class="dt">scaling =</span> <span class="dv">2</span>), </span>
+<span id="cb38-18"><a href="analyses-en-composantes-principales.html#cb38-18"></a>    labels &lt;-<span class="st"> </span><span class="kw">rownames</span>(<span class="kw">scores</span>(env.pca, <span class="dt">display =</span> <span class="st">&quot;species&quot;</span>, <span class="dt">scaling =</span> <span class="dv">2</span>)), </span>
+<span id="cb38-19"><a href="analyses-en-composantes-principales.html#cb38-19"></a>    <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">cex =</span> <span class="fl">0.8</span>)</span></code></pre></div>
+<p><img src="images//env_PCA1.png" width="800" /></p>
+<p>Rappelez-vous qu’un biplot de PCA est en fait un nuage de points dans
+lequel les axes sont des combinaisons linéaires des variables
+d’origine. Il existe donc beaucoup de façons différentes de tracer un
+biplot. Par exemple, vous pouvez utiliser la fonction ggplot () et les
+compétences acquises de l’atelier 3 pour tracer votre graphique
+d’ordination dans ggplot.</p>
+<p><strong>Utilisation des axes de PCA comme variable explicative composite</strong></p>
+<p>Dans certains cas, l’utilisateur cherche à réduire un grand nombre de
+variables environnementales en un plus faible nombre de variables
+composites. Lorsque les axes de PCA représentent des gradients
+écologiques (i.e. lorsue les variables environnementales sont corrélées
+de façon cohérente avec les axes de PCA), l’utlisateur peut utiliser
+les scores des sites le long axes de PCA dans de nouvelles analyses (au
+lieu d’utiliser les variables environnementales brutes). En d’autres
+termes, étant donné que les scores des sites le long des axes de PCA
+représentent des combinaisons linéaires des descripteurs, ils peuvent
+être utilisés comme proxy des conditions écologiques dans de nouvelles
+analyses.</p>
+<p>Dans l’exemple ci-dessus, le premier axe de PCA peut être identifié
+comme un gradient écologique allant des sites oligotrophes riches en
+oxygène aux sites eutrophes pauvres en oxygène: de gauche à droite, le
+premier groupe de sites montrent les plus hautes altitudes (alt) et
+pente (slope), et les plus faibles débit (deb) et distance à la source
+(das). Le second groupe de sites possède les plus hautes valeurs de
+concentration en oxygène (oxy) et les plus faibles concentrations en
+nitrates (nit). Un troisième groupe de sites montrent des valeurs
+intermédiaire pour l’ensemble de ces variables.</p>
+<p>Dans ce cas, si l’objectif est d’identifier si une espèce particulière
+est associée au gradient oligotrophe-eutrophe, il est possible de
+corréler l’abondance de cette espèce aux scores des sites le long du
+premier axe de PCA. Par exemple, si l’utilisateur veut identifier si
+l’espèce TRU est associée à des eaux oligotrophes ou eutrophes, il lui
+est possible d’utiliser le modèle linéaire suivant:</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="analyses-en-composantes-principales.html#cb39-1"></a>Sites_scores_Env_Axis1 &lt;-<span class="st"> </span><span class="kw">scores</span>(env.pca, <span class="dt">display =</span> <span class="st">&quot;sites&quot;</span>, </span>
+<span id="cb39-2"><a href="analyses-en-composantes-principales.html#cb39-2"></a>    <span class="dt">choices =</span> <span class="kw">c</span>(<span class="dv">1</span>), <span class="dt">scaling =</span> <span class="dv">2</span>)</span>
+<span id="cb39-3"><a href="analyses-en-composantes-principales.html#cb39-3"></a>spe<span class="op">$</span>ANG</span>
+<span id="cb39-4"><a href="analyses-en-composantes-principales.html#cb39-4"></a><span class="kw">plot</span>(Sites_scores_Env_Axis1, spe<span class="op">$</span>TRU)</span>
+<span id="cb39-5"><a href="analyses-en-composantes-principales.html#cb39-5"></a><span class="kw">summary</span>(<span class="kw">lm</span>(spe<span class="op">$</span>TRU <span class="op">~</span><span class="st"> </span>Sites_scores_Env_Axis1))</span>
+<span id="cb39-6"><a href="analyses-en-composantes-principales.html#cb39-6"></a><span class="kw">abline</span>(<span class="kw">lm</span>(spe<span class="op">$</span>TRU <span class="op">~</span><span class="st"> </span>Sites_scores_Env_Axis1))</span></code></pre></div>
+<p>Ce modèle simple montre que l’abondance de l’espèce TRU est
+significativement liée aux scores des sites le long du premier axe de
+PCA (t = -5.30, p = 1.35e-05, adj-R2 = 49.22%), c’est-à-dire qu’elle
+dépend d’un gradient oligotrophe-eutrophe. dans ce cas l’espèce TRU
+préfère donc les eaux oligotrophes.</p>
+<p><strong>Défi 3</strong> Exécuter une PCA sur l’abondance des espèces de mites. Quels
+sont les axes significatifs ? Quels sont groupes de sites pouvez-vous
+identifier? Quelles espèces sont liées à chaque groupe de sites?</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="analyses-en-composantes-principales.html#cb40-1"></a>mite.spe &lt;-<span class="st"> </span><span class="kw">data</span>(mite)  <span class="co"># données disponibles dans vegan</span></span></code></pre></div>
+<p><strong>Défi - Solution</strong> Votre code ressemble certainement à
+celui-ci:</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="analyses-en-composantes-principales.html#cb41-1"></a><span class="co"># Transformation de Hellinger</span></span>
+<span id="cb41-2"><a href="analyses-en-composantes-principales.html#cb41-2"></a>mite.spe.hel &lt;-<span class="st"> </span><span class="kw">decostand</span>(mite.spe, <span class="dt">method =</span> <span class="st">&quot;hellinger&quot;</span>)</span>
+<span id="cb41-3"><a href="analyses-en-composantes-principales.html#cb41-3"></a>mite.spe.h.pca &lt;-<span class="st"> </span><span class="kw">rda</span>(mite.spe.hel)</span>
+<span id="cb41-4"><a href="analyses-en-composantes-principales.html#cb41-4"></a></span>
+<span id="cb41-5"><a href="analyses-en-composantes-principales.html#cb41-5"></a><span class="co"># Quels sont les axes significatifs?</span></span>
+<span id="cb41-6"><a href="analyses-en-composantes-principales.html#cb41-6"></a>ev &lt;-<span class="st"> </span>mite.spe.h.pca<span class="op">$</span>CA<span class="op">$</span>eig</span>
+<span id="cb41-7"><a href="analyses-en-composantes-principales.html#cb41-7"></a>ev[ev <span class="op">&gt;</span><span class="st"> </span><span class="kw">mean</span>(ev)]</span>
+<span id="cb41-8"><a href="analyses-en-composantes-principales.html#cb41-8"></a>n &lt;-<span class="st"> </span><span class="kw">length</span>(ev)</span>
+<span id="cb41-9"><a href="analyses-en-composantes-principales.html#cb41-9"></a>bsm &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">j =</span> <span class="kw">seq</span>(<span class="dv">1</span><span class="op">:</span>n), <span class="dt">p =</span> <span class="dv">0</span>)</span>
+<span id="cb41-10"><a href="analyses-en-composantes-principales.html#cb41-10"></a>bsm<span class="op">$</span>p[<span class="dv">1</span>] =<span class="st"> </span><span class="dv">1</span><span class="op">/</span>n</span>
+<span id="cb41-11"><a href="analyses-en-composantes-principales.html#cb41-11"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span>n) {</span>
+<span id="cb41-12"><a href="analyses-en-composantes-principales.html#cb41-12"></a>    bsm<span class="op">$</span>p[i] =<span class="st"> </span>bsm<span class="op">$</span>p[i <span class="op">-</span><span class="st"> </span><span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">/</span>(<span class="dt">n =</span> <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>i))</span>
+<span id="cb41-13"><a href="analyses-en-composantes-principales.html#cb41-13"></a>}</span>
+<span id="cb41-14"><a href="analyses-en-composantes-principales.html#cb41-14"></a>bsm<span class="op">$</span>p =<span class="st"> </span><span class="dv">100</span> <span class="op">*</span><span class="st"> </span>bsm<span class="op">$</span>p<span class="op">/</span>n</span>
+<span id="cb41-15"><a href="analyses-en-composantes-principales.html#cb41-15"></a>bsm</span>
+<span id="cb41-16"><a href="analyses-en-composantes-principales.html#cb41-16"></a><span class="kw">barplot</span>(ev, <span class="dt">main =</span> <span class="st">&quot;Valeurs propres&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>, <span class="dt">las =</span> <span class="dv">2</span>)</span>
+<span id="cb41-17"><a href="analyses-en-composantes-principales.html#cb41-17"></a><span class="kw">abline</span>(<span class="dt">h =</span> <span class="kw">mean</span>(ev), <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</span>
+<span id="cb41-18"><a href="analyses-en-composantes-principales.html#cb41-18"></a><span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="st">&quot;Moyenne des valeurs propres&quot;</span>, <span class="dt">lwd =</span> <span class="dv">1</span>, <span class="dt">col =</span> <span class="dv">2</span>, </span>
+<span id="cb41-19"><a href="analyses-en-composantes-principales.html#cb41-19"></a>    <span class="dt">bty =</span> <span class="st">&quot;n&quot;</span>)</span>
+<span id="cb41-20"><a href="analyses-en-composantes-principales.html#cb41-20"></a></span>
+<span id="cb41-21"><a href="analyses-en-composantes-principales.html#cb41-21"></a><span class="co"># Résultats</span></span>
+<span id="cb41-22"><a href="analyses-en-composantes-principales.html#cb41-22"></a><span class="kw">summary</span>(mite.spe.h.pca, <span class="dt">display =</span> <span class="ot">NULL</span>)</span>
+<span id="cb41-23"><a href="analyses-en-composantes-principales.html#cb41-23"></a><span class="kw">windows</span>()</span>
+<span id="cb41-24"><a href="analyses-en-composantes-principales.html#cb41-24"></a></span>
+<span id="cb41-25"><a href="analyses-en-composantes-principales.html#cb41-25"></a><span class="co"># Représentation graphique de la PCA</span></span>
+<span id="cb41-26"><a href="analyses-en-composantes-principales.html#cb41-26"></a><span class="kw">plot</span>(mite.spe.h.pca, <span class="dt">scaling =</span> <span class="dv">1</span>, <span class="dt">type =</span> <span class="st">&quot;none&quot;</span>, <span class="dt">xlab =</span> <span class="kw">c</span>(<span class="st">&quot;PC1 (%)&quot;</span>, </span>
+<span id="cb41-27"><a href="analyses-en-composantes-principales.html#cb41-27"></a>    <span class="kw">round</span>((mite.spe.h.pca<span class="op">$</span>CA<span class="op">$</span>eig[<span class="dv">1</span>]<span class="op">/</span><span class="kw">sum</span>(mite.spe.h.pca<span class="op">$</span>CA<span class="op">$</span>eig)) <span class="op">*</span><span class="st"> </span></span>
+<span id="cb41-28"><a href="analyses-en-composantes-principales.html#cb41-28"></a><span class="st">        </span><span class="dv">100</span>, <span class="dv">2</span>)), <span class="dt">ylab =</span> <span class="kw">c</span>(<span class="st">&quot;PC2 (%)&quot;</span>, <span class="kw">round</span>((mite.spe.h.pca<span class="op">$</span>CA<span class="op">$</span>eig[<span class="dv">2</span>]<span class="op">/</span><span class="kw">sum</span>(mite.spe.h.pca<span class="op">$</span>CA<span class="op">$</span>eig)) <span class="op">*</span><span class="st"> </span></span>
+<span id="cb41-29"><a href="analyses-en-composantes-principales.html#cb41-29"></a><span class="st">    </span><span class="dv">100</span>, <span class="dv">2</span>)))</span>
+<span id="cb41-30"><a href="analyses-en-composantes-principales.html#cb41-30"></a><span class="kw">points</span>(<span class="kw">scores</span>(mite.spe.h.pca, <span class="dt">display =</span> <span class="st">&quot;sites&quot;</span>, <span class="dt">choices =</span> <span class="kw">c</span>(<span class="dv">1</span>, </span>
+<span id="cb41-31"><a href="analyses-en-composantes-principales.html#cb41-31"></a>    <span class="dv">2</span>), <span class="dt">scaling =</span> <span class="dv">1</span>), <span class="dt">pch =</span> <span class="dv">21</span>, <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">bg =</span> <span class="st">&quot;steelblue&quot;</span>, </span>
+<span id="cb41-32"><a href="analyses-en-composantes-principales.html#cb41-32"></a>    <span class="dt">cex =</span> <span class="fl">1.2</span>)</span>
+<span id="cb41-33"><a href="analyses-en-composantes-principales.html#cb41-33"></a><span class="kw">text</span>(<span class="kw">scores</span>(mite.spe.h.pca, <span class="dt">display =</span> <span class="st">&quot;species&quot;</span>, <span class="dt">choices =</span> <span class="kw">c</span>(<span class="dv">1</span>), </span>
+<span id="cb41-34"><a href="analyses-en-composantes-principales.html#cb41-34"></a>    <span class="dt">scaling =</span> <span class="dv">1</span>), <span class="kw">scores</span>(mite.spe.h.pca, <span class="dt">display =</span> <span class="st">&quot;species&quot;</span>, </span>
+<span id="cb41-35"><a href="analyses-en-composantes-principales.html#cb41-35"></a>    <span class="dt">choices =</span> <span class="kw">c</span>(<span class="dv">2</span>), <span class="dt">scaling =</span> <span class="dv">1</span>), <span class="dt">labels =</span> <span class="kw">rownames</span>(<span class="kw">scores</span>(mite.spe.h.pca, </span>
+<span id="cb41-36"><a href="analyses-en-composantes-principales.html#cb41-36"></a>    <span class="dt">display =</span> <span class="st">&quot;species&quot;</span>, <span class="dt">scaling =</span> <span class="dv">1</span>)), <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">cex =</span> <span class="fl">0.8</span>)</span></code></pre></div>
+<p>Votre graphique ressemblera à ceci. <img src="images//mite_pca.png" width="800" /></p>
+<p>Bien que les sites soient tous de composition semblable (aucun groupe
+distinct de sites n’apparait sur le biplot), certaines espèces semblent
+souvent être présentes ensemble, par exemple Spec 01, Spec 10, Spec 14
+et Spec 15.</p>
+
+</div>
+<hr>
+<center> 
+  <div class="footer">
+      All the content of the workshop series is under a <a href="https://creativecommons.org/licenses/by-nc/2.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+  </div>
+</center>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="le-significat-de-lordination-sans-contrainte.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="analyse-des-correpondances.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": false
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

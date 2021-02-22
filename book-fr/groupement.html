@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Atelier 9 : Analyses multivariées en R</title>
+  <title>Chapitre 8 Groupement | Atelier 9 : Analyses multivariées en R</title>
   <meta name="description" content="Analyses multivariées en R" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Atelier 9 : Analyses multivariées en R" />
+  <meta property="og:title" content="Chapitre 8 Groupement | Atelier 9 : Analyses multivariées en R" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://github.com/qcbsRworkshops/" />
   <meta property="og:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="qcbsRworkshops/workshop09" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Atelier 9 : Analyses multivariées en R" />
+  <meta name="twitter:title" content="Chapitre 8 Groupement | Atelier 9 : Analyses multivariées en R" />
   
   <meta name="twitter:description" content="Analyses multivariées en R" />
   <meta name="twitter:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
-
-<link rel="next" href="objectifs-dapprentissage.html"/>
+<link rel="prev" href="quantifier-la-dissimilarité-des-données.html"/>
+<link rel="next" href="le-significat-de-lordination-sans-contrainte.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -201,75 +201,121 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div class="hero-image-container"> 
   <img class= "hero-image" src="assets/images/jean-philippe-delberghe-75xPHEQBmvA-unsplash_hero_image.jpg">
 </div>
-<div id="header">
-<h1 class="title">Atelier 9 : Analyses multivariées en <code>R</code></h1>
-<h2 class="subtitle"><em>Série d’ateliers R du CSBQ</em></h2>
-<p class="author"><em>Développé et entretenu par les contributeurs et les contributrices de la Série d’ateliers R du CSBQ<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</em></p>
-<p class="date"><em>2021-02-22 22:46:01</em></p>
-</div>
-<div id="préface" class="section level1 unnumbered">
-<h1>Préface</h1>
-<p>La <strong>Série d’ateliers R du CSBQ</strong> est une série de 10 ateliers qui guide les participants à travers les étapes nécessaires à l’utilisation de R pour un large éventail d’analyses statistiques pertinentes pour la recherche en biologie et en écologie. Ces ateliers en accès libre ont été créés par des membres du CSBQ, à la fois pour les membres du CSBQ et pour la communauté au sens large.</p>
-<p>Le contenu de cet atelier a été revu par plusieurs membres du CSBQ. Si vous souhaitez suggérer des modifications, veuillez contacter les coordinateurs de la série actuelle, dont la liste figure sur la page principale de Github</p>
-<div id="code-de-conduite" class="section level2">
-<h2><span class="header-section-number">0.1</span> Code de conduite</h2>
-<p>La Série d’ateliers R du CSBQ et le Symposium R du CSBQ sont des lieux dédiés à fournir un environnement accueillant et favorable à toutes les personnes, indépendamment de leurs origines ou de leur identité.</p>
-<p>Les participants, les présentateurs et les organisateurs de la série d’ateliers et d’autres activités connexes acceptent le présent code de conduite lorsqu’ils assistent à des activités liées aux ateliers.</p>
-<p>Nous ne tolérons pas les comportements irrespectueux ou qui excluent, intimident ou gênent les autres.</p>
-<p>Nous ne tolérons pas la discrimination ou le harcèlement fondés sur des caractéristiques telles que, mais sans s’y limiter, l’identité et l’expression du genre, l’orientation sexuelle, le handicap, l’apparence physique, la taille du corps, la citoyenneté, la nationalité, les origines ethniques ou sociales, la grossesse, le statut familial, les informations génétiques, la religion ou les convictions (ou l’absence de celles-ci), l’appartenance à une minorité nationale, la propriété, l’âge, l’éducation, le statut socio-économique, les choix techniques et le niveau d’expérience.</p>
-<p>Il s’applique à tous les espaces gérés par l’atelier ou affiliés à celui-ci, y compris, mais sans s’y limiter, les ateliers, les listes de diffusion et les forums en ligne tels que GitHub, Slack et Twitter.</p>
-<div id="comportement-attendu" class="section level3">
-<h3><span class="header-section-number">0.1.1</span> Comportement attendu</h3>
-<p>Tous les participants sont tenus de faire preuve de respect et de courtoisie envers les autres. Toutes les interactions doivent être professionnelles, quelle que soit la plateforme utilisée : en ligne ou en personne.</p>
-<p>Afin de favoriser un environnement d’apprentissage positif et professionnel, nous encourageons les types de comportements suivants dans tous les événements et plates-formes des ateliers :</p>
-<ul>
-<li>Utiliser un langage accueillant et inclusif ;</li>
-<li>Respecter les différents points de vue et expériences ;</li>
-<li>Accepter avec grâce les critiques constructives ;</li>
-<li>Se concentrer sur ce qui est le mieux pour la communauté ;</li>
-<li>Faire preuve de courtoisie et de respect envers les autres membres de la communauté.</li>
-</ul>
-</div>
-<div id="comportements-inacceptables" class="section level3">
-<h3><span class="header-section-number">0.1.2</span> Comportements inacceptables</h3>
-<p>Voici quelques exemples de comportements inacceptables de la part des participants à tout événement ou plateforme d’atelier :</p>
-<ul>
-<li>les commentaires écrits ou verbaux qui ont pour effet d’exclure des personnes sur la base de leur appartenance à un groupe spécifique ;</li>
-<li>faire craindre à quelqu’un pour sa sécurité, par exemple en le harcelant ou en l’intimidant ;</li>
-<li>des menaces ou des propos violents dirigés contre une autre personne ;</li>
-<li>l’affichage d’images sexuelles ou violentes ;</li>
-<li>l’attention sexuelle non désirée ;</li>
-<li>les contacts physiques non consensuels ou non désirés ;</li>
-<li>des insultes ou des rabais ;</li>
-<li>les blagues sexistes, racistes, homophobes, transphobes, incapables ou d’exclusion ;</li>
-<li>l’incitation à la violence, au suicide ou à l’automutilation ;</li>
-<li>la poursuite de l’interaction (y compris la photographie ou l’enregistrement) avec une personne après qu’on - lui a demandé d’arrêter ;</li>
-<li>la publication d’une communication privée sans consentement.</li>
-</ul>
-</div>
-</div>
-<div id="contributeurs-et-contributrices" class="section level2">
-<h2><span class="header-section-number">0.2</span> Contributeurs et contributrices</h2>
-<p>Développé à l’origine par :</p>
-<p>A contribué à modifier la présentation :</p>
-<p>Contribution avec des changements à la documentation écrite :</p>
-<p>Contribution en signalant des problèmes et en suggérant des modifications :</p>
-</div>
-<div id="contribuez-à-la-série" class="section level2">
-<h2><span class="header-section-number">0.3</span> Contribuez à la série!</h2>
-<p>En construction.</p>
+<div id="groupement" class="section level1">
+<h1><span class="header-section-number">Chapitre 8</span> Groupement</h1>
+<p>Les matrices d’association nécessaires pour utiliser les méthodes de
+groupement. Le groupement n’est pas une méthode statistique en tant que
+telle puisqu’elle ne teste pas d’hypothèse, mais permet de déceler des
+structures dans les données en partitionnant soit les objets, soit les
+descripteurs. Les objets similaires sont agrégés en sous-groupes ce qui
+permet de mettre en relief des cassures (contrastes) entre les données.
+En tant que biologiste, il peut être intéressant de tenter de séparer
+une série de sites en groupes en fonction de leurs caractéristiques
+environnementales ou de leur composition en espèces.</p>
+<p>Les résultats d’un groupement sont généralement représentés sous forme
+de dendrogramme (arbre), dans lequel les objets sont agrégés en groupes.
+Il y a plusieurs familles de méthodes de groupements, mais nous
+présenterons uniquement un aperçu de trois méthodes : le groupement
+agglomératif hiérarchique à liens simples, le groupement agglomératif
+hiérarchique à liens complets et la méthode de Ward. Pour plus de
+détails sur les différentes familles de méthodes de groupement,
+consulter Legendre et Legendre 2012 (chapitre 8).</p>
+<p>Dans les méthodes hiérarchiques, les éléments des petits ensembles se
+regroupent en groupes plus vastes de rang supérieur, et ainsi de suite
+(par exemple : espèces, genres, familles, ordre). Avant de faire le
+groupement, il faut créer une matrice d’association entre les objets.
+Une matrice de distances est le choix par défaut des fonctions de
+groupement dans R. La matrice d’association est premièrement classée en
+ordre croissant de distances. Ensuite, les groupes sont formés de
+manière hiérarchique selon les critères spécifiques à chaque méthode.</p>
+<p>Prenons un exemple tout simple d’une matrice de distances euclidiennes
+entre 5 objets dont on a ordonné les distances en ordre croissant.</p>
+<p><img src="images//groupement.exemple.png" class="align-center" /></p>
+<p>Pour le groupement agglomératif à liens simples, les deux objets les
+plus proches se regroupent en premier. Ensuite, un deuxième groupe est
+formé à partir des deux objets les plus proches suivant (il se peut que
+ce soit deux objets différents, ou bien un objet et le groupe formé
+précédemment), et ainsi de suite. Cette méthode forme généralement de
+longues chaînes de groupes (dans l’exemple ci-haut, les objets 1 à 5 se
+regroupent successivement). À l’inverse, pour le groupement agglomératif
+à liens complet, un objet se regroupe à un autre objet/groupe seulement
+lorsqu’il est aussi lié à l’élément le plus éloigné de ce groupe. Ainsi,
+quand deux groupes fusionnent, tous les éléments des deux groupes sont
+liés à la distance considérée (ci-haut, le groupe 3-4 ne se lie au
+groupe 1-2 qu’à la distance à laquelle tous les autres éléments sont
+déjà liés). C’est pour cette raison que le groupement à liens complets
+forme généralement plusieurs petits groupes séparés et qu’elle peut être
+plus appropriée pour relever des contrastes ou des discontinuités dans
+les données.</p>
+<p>Comparons ces deux méthodes en utilisant les données d’abondances de
+poissons de la rivière Doubs. Les données d’abondances ont été au
+préalable transformées par la méthode Hellinger. Puisque les fonctions
+de groupement requièrent une matrice de distances, la première étape
+sera de générer une matrice de distances Hellinger.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="groupement.html#cb26-1"></a>spe.dhel &lt;-<span class="st"> </span><span class="kw">vegdist</span>(spe.hel, <span class="dt">method =</span> <span class="st">&quot;euclidean&quot;</span>)  <span class="co">#crée une matrice de distances Hellinger à partir des données d’abondance transformées</span></span>
+<span id="cb26-2"><a href="groupement.html#cb26-2"></a></span>
+<span id="cb26-3"><a href="groupement.html#cb26-3"></a><span class="co"># Pour voir la différence entre les deux types d’objets</span></span>
+<span id="cb26-4"><a href="groupement.html#cb26-4"></a><span class="kw">head</span>(spe.hel)  <span class="co"># données d’abondances transformées Hellingerhead(spe.dhel)# matrice de distances de Hellinger entre les sites</span></span></code></pre></div>
+<p>La plupart des méthodes de groupement sont disponible dans la fonction
+hclust() de la librairie stats</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="groupement.html#cb27-1"></a><span class="co"># Faire le groupement à liens simples</span></span>
+<span id="cb27-2"><a href="groupement.html#cb27-2"></a>spe.dhel.single &lt;-<span class="st"> </span><span class="kw">hclust</span>(spe.dhel, <span class="dt">method =</span> <span class="st">&quot;single&quot;</span>)</span>
+<span id="cb27-3"><a href="groupement.html#cb27-3"></a><span class="kw">plot</span>(spe.dhel.single)</span>
+<span id="cb27-4"><a href="groupement.html#cb27-4"></a></span>
+<span id="cb27-5"><a href="groupement.html#cb27-5"></a><span class="co"># Faire le groupement à liens complet</span></span>
+<span id="cb27-6"><a href="groupement.html#cb27-6"></a>spe.dhel.complete &lt;-<span class="st"> </span><span class="kw">hclust</span>(spe.dhel, <span class="dt">method =</span> <span class="st">&quot;complete&quot;</span>)</span>
+<span id="cb27-7"><a href="groupement.html#cb27-7"></a><span class="kw">plot</span>(spe.dhel.complete)</span></code></pre></div>
+<p><img src="images//clust_single.png" class="align-center" /><img src="images//clust_complete.png" class="align-center" /></p>
+<p>Est-ce que les deux dendrogrammes sont très différents?</p>
+<p>On remarque que pour le groupement à liens simple, plusieurs objets
+s’enchaînent (par exemple les sites 19, 29, 30, 20, 26, etc.) alors que
+des groupes plus distincts peuvent être observés dans le groupement à
+liens complets.</p>
+<p>La méthode de Ward diffère légèrement des deux méthodes précédentes. Le
+critère utilisé est la méthode des moindres carrés (comme dans les
+modèles linéaires). Ainsi, des objets/groupes fusionnent de façon à
+minimise la variance intragroupes. Pour débuter, chaque objet est
+considéré comme un groupe. À chaque étape, la paire de groupes à
+fusionner est celle qui résulte à la plus petite augmentation de la
+somme des carrés des écarts intra-groupes.</p>
+<p>La méthode de Ward est également disponible sous la fonction hclust().
+Par contre, le dendrogramme produit par défaut montre les distances au
+carré. Afin de comparer ce dendrogramme à celui du groupement à liens
+simples et à liens complets, il faut calculer la racine carrée des
+distances.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="groupement.html#cb28-1"></a><span class="co"># Faire le groupement de Ward</span></span>
+<span id="cb28-2"><a href="groupement.html#cb28-2"></a>spe.dhel.ward &lt;-<span class="st"> </span><span class="kw">hclust</span>(spe.dhel, <span class="dt">method =</span> <span class="st">&quot;ward.D2&quot;</span>)</span>
+<span id="cb28-3"><a href="groupement.html#cb28-3"></a><span class="kw">plot</span>(spe.dhel.ward)</span>
+<span id="cb28-4"><a href="groupement.html#cb28-4"></a></span>
+<span id="cb28-5"><a href="groupement.html#cb28-5"></a><span class="co"># Refaire le dendrogramme en utilisant la racine carrée des</span></span>
+<span id="cb28-6"><a href="groupement.html#cb28-6"></a><span class="co"># distances</span></span>
+<span id="cb28-7"><a href="groupement.html#cb28-7"></a>spe.dhel.ward<span class="op">$</span>height &lt;-<span class="st"> </span><span class="kw">sqrt</span>(spe.dhel.ward<span class="op">$</span>height)</span>
+<span id="cb28-8"><a href="groupement.html#cb28-8"></a><span class="kw">plot</span>(spe.dhel.ward)</span>
+<span id="cb28-9"><a href="groupement.html#cb28-9"></a><span class="kw">plot</span>(spe.dhel.ward, <span class="dt">hang =</span> <span class="dv">-1</span>)  <span class="co"># hang=-1 permet d’afficher les objets sur la même ligne</span></span></code></pre></div>
+<p><img src="images//clust_ward.png" class="align-center" />
+<img src="images//clust_wardfinal.png" class="align-center" /></p>
+<p>Les groupements générés par la méthode de Ward ont tendance à être plus
+sphériques et à contenir des quantités plus similaires d’objets.</p>
+<p>Quelle méthode choisir?</p>
+<p>Le choix de la bonne mesure d’association et de la bonne méthode de
+groupement dépend de l’objectif. Qu’est-ce qu’il est plus intéressant de
+démontrer : des gradients? des contrastes? Il est également important de
+tenir en compte les propriétés de la méthode utilisée dans
+l’interprétation des résultats. Si plus d’une méthode semble adéquate
+pour répondre à une question biologique, comparer les dendrogrammes
+serait une bonne option. Encore une fois, le groupement n’est pas une
+analyse statistique, mais il est possible de tester les résultats et
+d’identifier des partitions ayant un sens biologique. Il est également
+possible de déterminer le nombre de groupes optimal et de performer des
+tests statistiques sur les résultats. Les méthodes de groupement peuvent
+aussi être combinées à une ordination pour distinguer des groupes de
+sites. Ces avenues ne seront pas explorées dans cet atelier. Pour aller
+plus loin, consulter Borcard et al. 2011.</p>
 
 </div>
-</div>
 
 
 
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p>La Série d’ateliers R du CSBQ fait partie du <a href="https://www.qcbs.ca">Centre de la science de la biodiversité du Québec</a>, et est maintenue par les coordonnateurs et les coordonnatrices de la série, et les membres étudiants diplômés, postdoctoraux et professionnels de la recherche. <strong>La liste des contributeurs et des contributrices de cet atelier sont accessibles<a href="lien">ici</a></strong><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
-</ol>
-</div>
 <hr>
 <center> 
   <div class="footer">
@@ -281,8 +327,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-
-<a href="objectifs-dapprentissage.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="quantifier-la-dissimilarité-des-données.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="le-significat-de-lordination-sans-contrainte.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
