@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Workshop 9: Multivariate Analyses in R</title>
+  <title>Chapter 12 Random intercepts | Workshop 9: Multivariate Analyses in R</title>
   <meta name="description" content="Multivariate Analyses in R" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Workshop 9: Multivariate Analyses in R" />
+  <meta property="og:title" content="Chapter 12 Random intercepts | Workshop 9: Multivariate Analyses in R" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://github.com/qcbsRworkshops/" />
   <meta property="og:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="qcbsRworkshops/workshop09" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Workshop 9: Multivariate Analyses in R" />
+  <meta name="twitter:title" content="Chapter 12 Random intercepts | Workshop 9: Multivariate Analyses in R" />
   
   <meta name="twitter:description" content="Multivariate Analyses in R" />
   <meta name="twitter:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
-
-<link rel="next" href="learning-objectives.html"/>
+<link rel="prev" href="structure-in-dataset.html"/>
+<link rel="next" href="final-model.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -221,73 +221,145 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div class="hero-image-container"> 
   <img class= "hero-image" src="assets/images/jean-philippe-delberghe-75xPHEQBmvA-unsplash_hero_image.jpg">
 </div>
-<div id="header">
-<h1 class="title">Workshop 9: Multivariate Analyses in <code>R</code></h1>
-<h2 class="subtitle"><em>QCBS R Workshop Series</em></h2>
-<p class="author"><em>Developed and maintained by the contributors of the QCBS R Workshop Series<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></em></p>
-<p class="date"><em>2021-02-22 22:45:38</em></p>
-</div>
-<div id="preface" class="section level1 unnumbered">
-<h1>Preface</h1>
-<p>The <strong>QCBS R Workshop Series</strong> is a series of 10 workshops that walks participants through the steps required to use R for a wide array of statistical analyses relevant to research in biology and ecology. These open-access workshops were created by members of the QCBS both for members of the QCBS and the larger community.</p>
-<p>The content of this workshop has been peer-reviewed by several QCBS members. If you would like to suggest modifications, please contact the current series coordinators, listed on the main Github page.</p>
-<div id="code-of-conduct" class="section level2">
-<h2><span class="header-section-number">0.1</span> Code of conduct</h2>
-<p>The QCBS R Workshop Series and the QCBS R Symposium are venues dedicated to providing a welcoming and supportive environment for all people, regardless of background or identity.</p>
-<p>Participants, presenters and organizers of the workshop series and other related activities accept this Code of Conduct when being present at any workshop-related activities.</p>
-<p>We do not tolerate behaviour that is disrespectful or that excludes, intimidates, or causes discomfort to others.</p>
-<p>We do not tolerate discrimination or harassment based on characteristics that include, but are not limited to, gender identity and expression, sexual orientation, disability, physical appearance, body size, citizenship, nationality, ethnic or social origin, pregnancy, familial status, genetic information, religion or belief (or lack thereof), membership of a national minority, property, age, education, socio-economic status, technical choices, and experience level.</p>
-<p>It applies to all spaces managed by or affiliated with the workshop, including, but not limited to, workshops, email lists, and online forums such as GitHub, Slack and Twitter.</p>
-<div id="expected-behaviour" class="section level3">
-<h3><span class="header-section-number">0.1.1</span> Expected behaviour</h3>
-<p>All participants are expected to show respect and courtesy to others. All interactions should be professional regardless of platform: either online or in-person. In order to foster a positive and professional learning environment we encourage the following kinds of behaviours in all workshop events and platforms:</p>
-<ul>
-<li>Use welcoming and inclusive language</li>
-<li>Be respectful of different viewpoints and experiences</li>
-<li>Gracefully accept constructive criticism</li>
-<li>Focus on what is best for the community</li>
-<li>Show courtesy and respect towards other community members</li>
-</ul>
-</div>
-<div id="unacceptable-behaviour" class="section level3">
-<h3><span class="header-section-number">0.1.2</span> Unacceptable behaviour</h3>
-<p>Examples of unacceptable behaviour by participants at any workshop event/platform include:</p>
-<ul>
-<li>written or verbal comments which have the effect of excluding people on the - basis of membership of any specific group;</li>
-<li>causing someone to fear for their safety, such as through stalking or intimidation;</li>
-<li>violent threats or language directed against another person;</li>
-<li>the display of sexual or violent images;</li>
-<li>unwelcome sexual attention;</li>
-<li>nonconsensual or unwelcome physical contact;</li>
-<li>insults or put-downs;</li>
-<li>sexist, racist, homophobic, transphobic, ableist, or exclusionary jokes;</li>
-<li>incitement to violence, suicide, or self-harm;</li>
-<li>continuing to initiate interaction (including photography or recording) with - someone after being asked to stop;</li>
-<li>publication of private communication without consent.</li>
-</ul>
-</div>
-</div>
-<div id="contributors" class="section level2">
-<h2><span class="header-section-number">0.2</span> Contributors</h2>
-<p>Originally developed by:</p>
-<p>Contributed with changes to the presentation:</p>
-<p>Contributed with changes to the written material:</p>
-<p>Contributed by reporting issues and suggesting modifications:</p>
-</div>
-<div id="contributing" class="section level2">
-<h2><span class="header-section-number">0.3</span> Contributing</h2>
-<p>Under construction.</p>
-
-</div>
-</div>
-
-
-
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p>The QCBS R Workshop Series is part of the <a href="https://www.qcbs.ca">Québec Centre for Biodiversity Science</a>, and is maintained by the series coordinators and graduent student, postdoctoral, and research professional members. <strong>The contributors for this workshop can be accessed <a href="link">here</a></strong>.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<div id="random-intercepts" class="section level1">
+<h1><span class="header-section-number">Chapter 12</span> Random intercepts</h1>
+<p>Now that we have the appropriate error distribution, we can test the
+importance of the random intercepts (for <em>population</em> and <em>genotype</em>) by
+comparing nested models with and without the random effects of interest
+using either:</p>
+<ol style="list-style-type: decimal">
+<li>an <span class="underline">information theoretic approach</span> (such as, Akaike
+Information Criterion; AIC), which as we saw in <a href="r_workshop6#coding_potential_models_and_model_selection">Workshop
+6</a> examines
+several competing hypotheses (models) simultaneously to identify the
+model with the highest predictive power given the data. As before,
+we will use the AICc to correct for small sample sizes. Or,</li>
+<li>a <span class="underline">frequentist approach</span> (traditional null hypothesis
+testing or drop1 approach), where the significance of each term is
+evaluated in turn (by comparing nested models together using the
+<code>anova()</code> function and the significance of the likelihood ratio
+test; LRT). It’s important to keep in mind that with this approach
+we are testing a null hypothesis of zero variance for the random
+effects, but given that we cannot have negative variance, we are
+testing the parameter on the boundary of its feasible region.
+Therefore, the reported p value is approximately twice what it
+should be (i.e., we’ve truncated half of the possible values that
+fall below 0).</li>
 </ol>
+<pre class="{.rsplus|}"><code>summary(mpl1)$varcor
+
+# popu only
+mpl1.popu &lt;- glmer(total.fruits ~ nutrient*amd + rack + status + 
+                     (1|X) +
+                     (1|popu), 
+                     data=dat.tf, family=&quot;poisson&quot;, control=glmerControl(optimizer=&quot;bobyqa&quot;))
+
+# gen only
+mpl1.gen &lt;-glmer(total.fruits ~ nutrient*amd + rack + status + 
+                   (1|X) +
+                   (1|gen), 
+                   data=dat.tf, family=&quot;poisson&quot;, control=glmerControl(optimizer=&quot;bobyqa&quot;))
+
+# IC approach using AICc
+ICtab(mpl1, mpl1.popu, mpl1.gen, type = c(&quot;AICc&quot;))
+#            dAICc df
+# mpl1       0.0   10
+# mpl1.popu  2.0   9 
+# mpl1.gen   16.1  9 
+
+# Frequentist approach using LRT
+anova(mpl1,mpl1.popu)
+# Data: dat.tf
+# Df         AIC  BIC      logLik  deviance  Chisq   Chi    Df    Pr(&gt;Chisq)  
+# mpl1.popu  9    5017.4   5057.4  -2499.7   4999.4                           
+# mpl1       10   5015.4   5059.8  -2497.7   4995.4  4.0639  1    0.04381 *
+#   ---
+#   Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+anova(mpl1,mpl1.gen)
+# Df        AIC  BIC     logLik deviance  Chisq    Chi     Df   Pr(&gt;Chisq)    
+# mpl1.gen  9    5031.5  5071.5 -2506.8   5013.5                             
+# mpl1      10   5015.4  5059.8 -2497.7   4995.4   18.177  1   2.014e-05 ***
+#   ---
+#   Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</code></pre>
+<p>The model without the random intercept for <em>genotype</em> is within 2 AICc
+units of the full model, which indicates that they are equally plausible
+(i.e., little evidence for including a random intercept for genotype).
+However, when using the Likelihood approach, and keeping in mind the
+boundary effect (p-values are inflated by a factor of 2), we note that p
+&lt;&lt; 0.05 in both anova tests. Thus the model with both random terms
+(mpl1) is selected.</p>
+<div id="parameter-plots" class="section level2">
+<h2><span class="header-section-number">12.1</span> Parameter plots</h2>
+<p>A graphical representation of the model parameters can be obtained using
+the <code>coefplot2</code> function. For example, to view the variance terms of our
+three random intercepts:</p>
+<pre class="{.rsplus|}"><code># Variance terms
+coefplot2(mpl1,ptype=&quot;vcov&quot;,intercept=TRUE,main=&quot;Random effect variance&quot;)
+
+# Fixed effects
+coefplot2(mpl1,intercept=TRUE,main=&quot;Fixed effect coefficient&quot;)</code></pre>
+<p><img src="images//glmm_coefplot_int.png" width="450" />
+<img src="images//glmm_coefplot_pars.png" width="400" /></p>
+<p>Note that the error bars are only shown for the fixed effects because
+<code>glmer</code> doesn’t give us information on the uncertainty of the variance
+terms.</p>
+</div>
+<div id="random-intercept-plots" class="section level2">
+<h2><span class="header-section-number">12.2</span> Random intercept plots</h2>
+<p>We can also extract the random effect (or group-level) deviations from
+the fixed intercept using the <code>ranef</code> function. This will tell us how
+much the intercept is shifted up or down in particular <em>populations</em> or
+<em>genotypes</em> relative to the fixed intercept. The deviations can then be
+plotted using <code>dotplot</code>, which will return a two-facetted plot for each
+random effect (i.e., popu and gen). Note: the <code>grid.arrange</code> function
+was used to omit the observation-level random effect (i.e. (1|X)).</p>
+<pre class="{.rsplus|}"><code>pp &lt;- list(layout.widths=list(left.padding=0, right.padding=0),
+           layout.heights=list(top.padding=0, bottom.padding=0))
+r2 &lt;- ranef(mpl1,condVar=TRUE)
+d2 &lt;- dotplot(r2, par.settings=pp)
+grid.arrange(d2$gen,d2$popu,nrow=1)</code></pre>
+<p><img src="images//glmm_dtoplot.png" class="align-center" width="450" /></p>
+<p>From this plot we can see a hint of regional variability among
+populations where the Spanish populations (SP) have larger values than
+Swedish (SW) and Dutch (NL) populations. The difference among genotypes
+seems to be largely driven by genotype 34.</p>
+<p>As seen in Workshop 5, we could have also used the <code>coef()</code> function to
+plot the random effect predictions or "estimates", where the sum of
+random intercept deviation (obtained from <code>ranef()</code>) and the fixed
+effect (obtained from <code>fixef()</code>) is equal to the parameter estimate
+obtained from <code>coef()</code>.</p>
+</div>
+<div id="random-slopes" class="section level2">
+<h2><span class="header-section-number">12.3</span> Random slopes</h2>
+<p>++++ Bonus Section: Random slopes|</p>
+<p><strong>NB</strong>: We cannot test for random slopes in this dataset because
+whenever random slopes for the fixed effects are included in the model,
+we obtain a strong correlation between the random intercepts and slopes.
+These perfect correlations may result from our model being
+over-parametrized. Thus, while there could very well be some variation
+in the nutrient or clipping e ffect at the genotype or population
+levels, and while this variation may be what we are most interested in,
+there is simply not enough data to test these e ffects with confidence.</p>
+<p>Let’s have a look at an example of this by testing the random slope
+terms for clipping:</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="random-intercepts.html#cb43-1"></a><span class="co"># Poisson-lognormal with random slopes for popu and amd</span></span>
+<span id="cb43-2"><a href="random-intercepts.html#cb43-2"></a>mpl2 &lt;-<span class="st"> </span><span class="kw">glmer</span>(total.fruits <span class="op">~</span><span class="st"> </span>nutrient <span class="op">*</span><span class="st"> </span>amd <span class="op">+</span><span class="st"> </span>rack <span class="op">+</span><span class="st"> </span>status <span class="op">+</span><span class="st"> </span></span>
+<span id="cb43-3"><a href="random-intercepts.html#cb43-3"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>X) <span class="op">+</span><span class="st"> </span>(amd <span class="op">|</span><span class="st"> </span>popu) <span class="op">+</span><span class="st"> </span>(amd <span class="op">|</span><span class="st"> </span>gen), <span class="dt">data =</span> dat.tf, <span class="dt">family =</span> <span class="st">&quot;poisson&quot;</span>, </span>
+<span id="cb43-4"><a href="random-intercepts.html#cb43-4"></a>    <span class="dt">control =</span> <span class="kw">glmerControl</span>(<span class="dt">optimizer =</span> <span class="st">&quot;bobyqa&quot;</span>))</span></code></pre></div>
+<p>We can examine the variance components using the model <code>summary</code>.
+Alternatively, we could examine the correlation matrix among the random
+clipping intercepts and slopes. A third option is to use the <code>printvc</code>
+function that prints the variance-covariance matrices along with an
+equals sign ( = ) next to any covariance component with a nearly perfect
+correlation.</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="random-intercepts.html#cb44-1"></a><span class="kw">summary</span>(mpl2)  <span class="co"># option 1</span></span>
+<span id="cb44-2"><a href="random-intercepts.html#cb44-2"></a><span class="kw">attr</span>(<span class="kw">VarCorr</span>(mpl2)<span class="op">$</span>gen, <span class="st">&quot;correlation&quot;</span>)  <span class="co"># option 2</span></span>
+<span id="cb44-3"><a href="random-intercepts.html#cb44-3"></a><span class="kw">printvc</span>(mpl2)  <span class="co"># option 3</span></span></code></pre></div>
+<p>Notice the perfect correlation between (Intercept) and amdclipped
+(slope). ++++</p>
+
+</div>
 </div>
 <hr>
 <center> 
@@ -300,8 +372,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-
-<a href="learning-objectives.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="structure-in-dataset.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="final-model.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

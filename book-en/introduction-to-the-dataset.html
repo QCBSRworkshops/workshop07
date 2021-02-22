@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Workshop 9: Multivariate Analyses in R</title>
+  <title>Chapter 5 Introduction to the dataset | Workshop 9: Multivariate Analyses in R</title>
   <meta name="description" content="Multivariate Analyses in R" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Workshop 9: Multivariate Analyses in R" />
+  <meta property="og:title" content="Chapter 5 Introduction to the dataset | Workshop 9: Multivariate Analyses in R" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://github.com/qcbsRworkshops/" />
   <meta property="og:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="qcbsRworkshops/workshop09" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Workshop 9: Multivariate Analyses in R" />
+  <meta name="twitter:title" content="Chapter 5 Introduction to the dataset | Workshop 9: Multivariate Analyses in R" />
   
   <meta name="twitter:description" content="Multivariate Analyses in R" />
   <meta name="twitter:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
-
-<link rel="next" href="learning-objectives.html"/>
+<link rel="prev" href="what-is-a-lmm-and-why-should-i-care.html"/>
+<link rel="next" href="how-do-i-analyze-this-dataset.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -221,73 +221,88 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div class="hero-image-container"> 
   <img class= "hero-image" src="assets/images/jean-philippe-delberghe-75xPHEQBmvA-unsplash_hero_image.jpg">
 </div>
-<div id="header">
-<h1 class="title">Workshop 9: Multivariate Analyses in <code>R</code></h1>
-<h2 class="subtitle"><em>QCBS R Workshop Series</em></h2>
-<p class="author"><em>Developed and maintained by the contributors of the QCBS R Workshop Series<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></em></p>
-<p class="date"><em>2021-02-22 22:45:38</em></p>
-</div>
-<div id="preface" class="section level1 unnumbered">
-<h1>Preface</h1>
-<p>The <strong>QCBS R Workshop Series</strong> is a series of 10 workshops that walks participants through the steps required to use R for a wide array of statistical analyses relevant to research in biology and ecology. These open-access workshops were created by members of the QCBS both for members of the QCBS and the larger community.</p>
-<p>The content of this workshop has been peer-reviewed by several QCBS members. If you would like to suggest modifications, please contact the current series coordinators, listed on the main Github page.</p>
-<div id="code-of-conduct" class="section level2">
-<h2><span class="header-section-number">0.1</span> Code of conduct</h2>
-<p>The QCBS R Workshop Series and the QCBS R Symposium are venues dedicated to providing a welcoming and supportive environment for all people, regardless of background or identity.</p>
-<p>Participants, presenters and organizers of the workshop series and other related activities accept this Code of Conduct when being present at any workshop-related activities.</p>
-<p>We do not tolerate behaviour that is disrespectful or that excludes, intimidates, or causes discomfort to others.</p>
-<p>We do not tolerate discrimination or harassment based on characteristics that include, but are not limited to, gender identity and expression, sexual orientation, disability, physical appearance, body size, citizenship, nationality, ethnic or social origin, pregnancy, familial status, genetic information, religion or belief (or lack thereof), membership of a national minority, property, age, education, socio-economic status, technical choices, and experience level.</p>
-<p>It applies to all spaces managed by or affiliated with the workshop, including, but not limited to, workshops, email lists, and online forums such as GitHub, Slack and Twitter.</p>
-<div id="expected-behaviour" class="section level3">
-<h3><span class="header-section-number">0.1.1</span> Expected behaviour</h3>
-<p>All participants are expected to show respect and courtesy to others. All interactions should be professional regardless of platform: either online or in-person. In order to foster a positive and professional learning environment we encourage the following kinds of behaviours in all workshop events and platforms:</p>
-<ul>
-<li>Use welcoming and inclusive language</li>
-<li>Be respectful of different viewpoints and experiences</li>
-<li>Gracefully accept constructive criticism</li>
-<li>Focus on what is best for the community</li>
-<li>Show courtesy and respect towards other community members</li>
-</ul>
-</div>
-<div id="unacceptable-behaviour" class="section level3">
-<h3><span class="header-section-number">0.1.2</span> Unacceptable behaviour</h3>
-<p>Examples of unacceptable behaviour by participants at any workshop event/platform include:</p>
-<ul>
-<li>written or verbal comments which have the effect of excluding people on the - basis of membership of any specific group;</li>
-<li>causing someone to fear for their safety, such as through stalking or intimidation;</li>
-<li>violent threats or language directed against another person;</li>
-<li>the display of sexual or violent images;</li>
-<li>unwelcome sexual attention;</li>
-<li>nonconsensual or unwelcome physical contact;</li>
-<li>insults or put-downs;</li>
-<li>sexist, racist, homophobic, transphobic, ableist, or exclusionary jokes;</li>
-<li>incitement to violence, suicide, or self-harm;</li>
-<li>continuing to initiate interaction (including photography or recording) with - someone after being asked to stop;</li>
-<li>publication of private communication without consent.</li>
-</ul>
-</div>
-</div>
-<div id="contributors" class="section level2">
-<h2><span class="header-section-number">0.2</span> Contributors</h2>
-<p>Originally developed by:</p>
-<p>Contributed with changes to the presentation:</p>
-<p>Contributed with changes to the written material:</p>
-<p>Contributed by reporting issues and suggesting modifications:</p>
-</div>
-<div id="contributing" class="section level2">
-<h2><span class="header-section-number">0.3</span> Contributing</h2>
-<p>Under construction.</p>
-
-</div>
-</div>
-
-
-
-<div class="footnotes">
+<div id="introduction-to-the-dataset" class="section level1">
+<h1><span class="header-section-number">Chapter 5</span> Introduction to the dataset</h1>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="introduction-to-the-dataset.html#cb2-1"></a><span class="co"># Remove prior commands in R</span></span>
+<span id="cb2-2"><a href="introduction-to-the-dataset.html#cb2-2"></a><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())</span>
+<span id="cb2-3"><a href="introduction-to-the-dataset.html#cb2-3"></a></span>
+<span id="cb2-4"><a href="introduction-to-the-dataset.html#cb2-4"></a><span class="co"># Place all workshop material in one folder on your computer</span></span>
+<span id="cb2-5"><a href="introduction-to-the-dataset.html#cb2-5"></a><span class="co"># Run the following line of code and use the browsing window</span></span>
+<span id="cb2-6"><a href="introduction-to-the-dataset.html#cb2-6"></a><span class="co"># to choose the QCBS_W6_Data.csv file in the folder that</span></span>
+<span id="cb2-7"><a href="introduction-to-the-dataset.html#cb2-7"></a><span class="co"># contains the workshop material</span></span>
+<span id="cb2-8"><a href="introduction-to-the-dataset.html#cb2-8"></a><span class="kw">file.choose</span>()</span>
+<span id="cb2-9"><a href="introduction-to-the-dataset.html#cb2-9"></a></span>
+<span id="cb2-10"><a href="introduction-to-the-dataset.html#cb2-10"></a><span class="co"># Set the working directory to the folder which contains the</span></span>
+<span id="cb2-11"><a href="introduction-to-the-dataset.html#cb2-11"></a><span class="co"># lab material by copy and pasting all but the R file name</span></span>
+<span id="cb2-12"><a href="introduction-to-the-dataset.html#cb2-12"></a><span class="co"># from the output of the file.choose() command into the set</span></span>
+<span id="cb2-13"><a href="introduction-to-the-dataset.html#cb2-13"></a><span class="co"># working directory command.</span></span>
+<span id="cb2-14"><a href="introduction-to-the-dataset.html#cb2-14"></a></span>
+<span id="cb2-15"><a href="introduction-to-the-dataset.html#cb2-15"></a><span class="co"># For example paste &#39;/Users/ziegljac/Documents/QCBS_R/&#39; -&gt;</span></span>
+<span id="cb2-16"><a href="introduction-to-the-dataset.html#cb2-16"></a><span class="co"># include the quotations NOT</span></span>
+<span id="cb2-17"><a href="introduction-to-the-dataset.html#cb2-17"></a><span class="co"># &#39;/Users/ziegljac/Documents/QCBS_R/Get_Data_Func.R&#39; -&gt;</span></span>
+<span id="cb2-18"><a href="introduction-to-the-dataset.html#cb2-18"></a><span class="co"># include the quotations</span></span>
+<span id="cb2-19"><a href="introduction-to-the-dataset.html#cb2-19"></a><span class="kw">setwd</span>()</span>
+<span id="cb2-20"><a href="introduction-to-the-dataset.html#cb2-20"></a></span>
+<span id="cb2-21"><a href="introduction-to-the-dataset.html#cb2-21"></a><span class="co"># Load useful libraries and data If you have never loaded</span></span>
+<span id="cb2-22"><a href="introduction-to-the-dataset.html#cb2-22"></a><span class="co"># these libraries before you will have to use The</span></span>
+<span id="cb2-23"><a href="introduction-to-the-dataset.html#cb2-23"></a><span class="co"># install.packages() function before the library() function</span></span>
+<span id="cb2-24"><a href="introduction-to-the-dataset.html#cb2-24"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb2-25"><a href="introduction-to-the-dataset.html#cb2-25"></a><span class="kw">library</span>(lme4)</span>
+<span id="cb2-26"><a href="introduction-to-the-dataset.html#cb2-26"></a><span class="kw">library</span>(arm)</span>
+<span id="cb2-27"><a href="introduction-to-the-dataset.html#cb2-27"></a><span class="kw">library</span>(AICcmodavg)</span>
+<span id="cb2-28"><a href="introduction-to-the-dataset.html#cb2-28"></a></span>
+<span id="cb2-29"><a href="introduction-to-the-dataset.html#cb2-29"></a>data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;QCBS_W6_Data.csv&quot;</span>)</span></code></pre></div>
+<p>The dataset we will be using deals with fish trophic positions.
+Individuals were sampled over a range of body lengths that come from
+three different fish species caught in six different lakes. Here is a
+visual representation to help wrap your head around all of this! Note:
+only three sizes of fish are shown within each species but in reality
+there are 10 individuals per species.</p>
+<p><img src="images/fig_1_qcbs_wiki.png" width="800" /></p>
+<p>A simple question you might answer with this dataset is <strong>does fish
+trophic position increase with fish size for all three fish species</strong>?
+This will be our motivating question for this workshop.</p>
 <hr />
-<ol start="1">
-<li id="fn1"><p>The QCBS R Workshop Series is part of the <a href="https://www.qcbs.ca">Québec Centre for Biodiversity Science</a>, and is maintained by the series coordinators and graduent student, postdoctoral, and research professional members. <strong>The contributors for this workshop can be accessed <a href="link">here</a></strong>.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
-</ol>
+<p><strong>CHALLENGE 1</strong></p>
+<p>For your fist challenge, reproduce the plots 1-3 from the
+<em>QCBS_W5_LMM.R</em> code. Observe the plots and try to get a sense of what
+is occurring. Two key questions to ask yourself are:</p>
+<pre><code>-Do I expect all species to increase in trophic position with length? In the exact same way?
+-Do I expect these relationships to be the same across lakes? What might differ?</code></pre>
+<p>++++ Challenge 1 Answer |</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="introduction-to-the-dataset.html#cb4-1"></a><span class="co"># Used to strip down figures to make them simpler</span></span>
+<span id="cb4-2"><a href="introduction-to-the-dataset.html#cb4-2"></a>fig &lt;-<span class="st"> </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(), </span>
+<span id="cb4-3"><a href="introduction-to-the-dataset.html#cb4-3"></a>    <span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), <span class="dt">panel.background =</span> <span class="kw">element_blank</span>()) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb4-4"><a href="introduction-to-the-dataset.html#cb4-4"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">strip.background =</span> <span class="kw">element_blank</span>(), <span class="dt">strip.text.y =</span> <span class="kw">element_text</span>()) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb4-5"><a href="introduction-to-the-dataset.html#cb4-5"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">legend.background =</span> <span class="kw">element_blank</span>()) <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">legend.key =</span> <span class="kw">element_blank</span>()) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb4-6"><a href="introduction-to-the-dataset.html#cb4-6"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">panel.border =</span> <span class="kw">element_rect</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill =</span> <span class="ot">NA</span>))</span>
+<span id="cb4-7"><a href="introduction-to-the-dataset.html#cb4-7"></a></span>
+<span id="cb4-8"><a href="introduction-to-the-dataset.html#cb4-8"></a><span class="co"># Make the followoing three plots to explore the data</span></span>
+<span id="cb4-9"><a href="introduction-to-the-dataset.html#cb4-9"></a>plot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Fish_Length, Trophic_Pos), <span class="dt">data =</span> data)</span>
+<span id="cb4-10"><a href="introduction-to-the-dataset.html#cb4-10"></a></span>
+<span id="cb4-11"><a href="introduction-to-the-dataset.html#cb4-11"></a><span class="co"># Plot 1 - All Data</span></span>
+<span id="cb4-12"><a href="introduction-to-the-dataset.html#cb4-12"></a>plot <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Length (mm)&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Trophic Position&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb4-13"><a href="introduction-to-the-dataset.html#cb4-13"></a><span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;All Data&quot;</span>) <span class="op">+</span><span class="st"> </span>fig</span>
+<span id="cb4-14"><a href="introduction-to-the-dataset.html#cb4-14"></a></span>
+<span id="cb4-15"><a href="introduction-to-the-dataset.html#cb4-15"></a><span class="co"># Plot 2 - By Speceis</span></span>
+<span id="cb4-16"><a href="introduction-to-the-dataset.html#cb4-16"></a>plot <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">facet_wrap</span>(<span class="op">~</span>Fish_Species) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Length (mm)&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb4-17"><a href="introduction-to-the-dataset.html#cb4-17"></a><span class="st">    </span><span class="kw">ylab</span>(<span class="st">&quot;Trophic Position&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;By Species&quot;</span>) <span class="op">+</span><span class="st"> </span>fig</span>
+<span id="cb4-18"><a href="introduction-to-the-dataset.html#cb4-18"></a></span>
+<span id="cb4-19"><a href="introduction-to-the-dataset.html#cb4-19"></a><span class="co"># Plot 3 - By Lake</span></span>
+<span id="cb4-20"><a href="introduction-to-the-dataset.html#cb4-20"></a>plot <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">facet_wrap</span>(<span class="op">~</span>Lake) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Length (mm)&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb4-21"><a href="introduction-to-the-dataset.html#cb4-21"></a><span class="st">    </span><span class="kw">ylab</span>(<span class="st">&quot;Trophic Position&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;By Lake&quot;</span>) <span class="op">+</span><span class="st"> </span>fig</span></code></pre></div>
+<p><strong>OUTPUT</strong><br />
+<strong>Plot 1</strong> <img src="images/fig_2_w5.png" width="300" /> <strong>Plot 2</strong>
+<img src="images/fig_3_w5.png" width="300" /></p>
+<p><strong>Plot 3</strong> <img src="images/plot3.png" width="300" /></p>
+<p>Do I expect all species to increase in trophic position with length? In
+the exact same way? All species seem to increase in trophic position
+with length, but the slope might be different across species</p>
+<p>Do I expect these relationships to be the same across lakes? What might
+differ? Some parameters specific to one particular lake might change the
+relationship, such as the primary productivity of the system</p>
+<p>++++</p>
+
 </div>
 <hr>
 <center> 
@@ -300,8 +315,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-
-<a href="learning-objectives.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="what-is-a-lmm-and-why-should-i-care.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="how-do-i-analyze-this-dataset.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

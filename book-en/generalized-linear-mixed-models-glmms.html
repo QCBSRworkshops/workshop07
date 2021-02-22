@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Workshop 9: Multivariate Analyses in R</title>
+  <title>Chapter 10 Generalized linear mixed models (GLMMs) | Workshop 9: Multivariate Analyses in R</title>
   <meta name="description" content="Multivariate Analyses in R" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Workshop 9: Multivariate Analyses in R" />
+  <meta property="og:title" content="Chapter 10 Generalized linear mixed models (GLMMs) | Workshop 9: Multivariate Analyses in R" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://github.com/qcbsRworkshops/" />
   <meta property="og:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="qcbsRworkshops/workshop09" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Workshop 9: Multivariate Analyses in R" />
+  <meta name="twitter:title" content="Chapter 10 Generalized linear mixed models (GLMMs) | Workshop 9: Multivariate Analyses in R" />
   
   <meta name="twitter:description" content="Multivariate Analyses in R" />
   <meta name="twitter:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
-
-<link rel="next" href="learning-objectives.html"/>
+<link rel="prev" href="how-do-i-implement-lmms-in-r.html"/>
+<link rel="next" href="structure-in-dataset.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -221,73 +221,107 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div class="hero-image-container"> 
   <img class= "hero-image" src="assets/images/jean-philippe-delberghe-75xPHEQBmvA-unsplash_hero_image.jpg">
 </div>
-<div id="header">
-<h1 class="title">Workshop 9: Multivariate Analyses in <code>R</code></h1>
-<h2 class="subtitle"><em>QCBS R Workshop Series</em></h2>
-<p class="author"><em>Developed and maintained by the contributors of the QCBS R Workshop Series<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></em></p>
-<p class="date"><em>2021-02-22 22:45:38</em></p>
-</div>
-<div id="preface" class="section level1 unnumbered">
-<h1>Preface</h1>
-<p>The <strong>QCBS R Workshop Series</strong> is a series of 10 workshops that walks participants through the steps required to use R for a wide array of statistical analyses relevant to research in biology and ecology. These open-access workshops were created by members of the QCBS both for members of the QCBS and the larger community.</p>
-<p>The content of this workshop has been peer-reviewed by several QCBS members. If you would like to suggest modifications, please contact the current series coordinators, listed on the main Github page.</p>
-<div id="code-of-conduct" class="section level2">
-<h2><span class="header-section-number">0.1</span> Code of conduct</h2>
-<p>The QCBS R Workshop Series and the QCBS R Symposium are venues dedicated to providing a welcoming and supportive environment for all people, regardless of background or identity.</p>
-<p>Participants, presenters and organizers of the workshop series and other related activities accept this Code of Conduct when being present at any workshop-related activities.</p>
-<p>We do not tolerate behaviour that is disrespectful or that excludes, intimidates, or causes discomfort to others.</p>
-<p>We do not tolerate discrimination or harassment based on characteristics that include, but are not limited to, gender identity and expression, sexual orientation, disability, physical appearance, body size, citizenship, nationality, ethnic or social origin, pregnancy, familial status, genetic information, religion or belief (or lack thereof), membership of a national minority, property, age, education, socio-economic status, technical choices, and experience level.</p>
-<p>It applies to all spaces managed by or affiliated with the workshop, including, but not limited to, workshops, email lists, and online forums such as GitHub, Slack and Twitter.</p>
-<div id="expected-behaviour" class="section level3">
-<h3><span class="header-section-number">0.1.1</span> Expected behaviour</h3>
-<p>All participants are expected to show respect and courtesy to others. All interactions should be professional regardless of platform: either online or in-person. In order to foster a positive and professional learning environment we encourage the following kinds of behaviours in all workshop events and platforms:</p>
-<ul>
-<li>Use welcoming and inclusive language</li>
-<li>Be respectful of different viewpoints and experiences</li>
-<li>Gracefully accept constructive criticism</li>
-<li>Focus on what is best for the community</li>
-<li>Show courtesy and respect towards other community members</li>
-</ul>
-</div>
-<div id="unacceptable-behaviour" class="section level3">
-<h3><span class="header-section-number">0.1.2</span> Unacceptable behaviour</h3>
-<p>Examples of unacceptable behaviour by participants at any workshop event/platform include:</p>
-<ul>
-<li>written or verbal comments which have the effect of excluding people on the - basis of membership of any specific group;</li>
-<li>causing someone to fear for their safety, such as through stalking or intimidation;</li>
-<li>violent threats or language directed against another person;</li>
-<li>the display of sexual or violent images;</li>
-<li>unwelcome sexual attention;</li>
-<li>nonconsensual or unwelcome physical contact;</li>
-<li>insults or put-downs;</li>
-<li>sexist, racist, homophobic, transphobic, ableist, or exclusionary jokes;</li>
-<li>incitement to violence, suicide, or self-harm;</li>
-<li>continuing to initiate interaction (including photography or recording) with - someone after being asked to stop;</li>
-<li>publication of private communication without consent.</li>
-</ul>
-</div>
-</div>
-<div id="contributors" class="section level2">
-<h2><span class="header-section-number">0.2</span> Contributors</h2>
-<p>Originally developed by:</p>
-<p>Contributed with changes to the presentation:</p>
-<p>Contributed with changes to the written material:</p>
-<p>Contributed by reporting issues and suggesting modifications:</p>
-</div>
-<div id="contributing" class="section level2">
-<h2><span class="header-section-number">0.3</span> Contributing</h2>
-<p>Under construction.</p>
+<div id="generalized-linear-mixed-models-glmms" class="section level1">
+<h1><span class="header-section-number">Chapter 10</span> Generalized linear mixed models (GLMMs)</h1>
+<p>As seen above, heterogeneous response distributions can be accurately
+modelled by relaxing the assumptions of normally distributed errors and
+letting the errors take on different distribution families (e.g.,
+Poisson or negative binomial). What happens if there is a structure in
+the dataset such that observations sampled in certain sites are more
+similar (correlated) than observations sampled in different sites? As we
+saw in <a href="r_workshop6">Workshop 6</a>, we can account for this lack of
+independence by adding random effects in the model. Recall that
+intercepts and/or slopes are allowed to vary among grouping factors
+(random effects) and the variability in slopes/ intercepts among groups
+is assumed to follow a normal distribution. Random effects are also
+referred to as shrinkage estimates because they represent a weighted
+average of the group-level and the overall fit (fixed effect). The
+amount of shrinking towards the overall fit is more severe if the
+within-group variability is large compared to the among-group
+variability (i.e., when we have less confidence in the random estimate
+due to low sample size or high within-group variability, the estimate is
+‘pulled’ towards the fixed effect).</p>
+<p>The properties of Linear Mixed Models (Workshop 5) which incorporate
+random effects and those of Generalized Linear Models (seen above) which
+handle non-normal data can be combined to effectively model such
+instances in a Generalized Linear Mixed Model framework. The extension
+of GLMs to account for this additional structure follows similar steps
+introduced in the mixed modelling workshop.<br />
+</p>
+<p>To provide a brief overview of GLMMs, we will visit a case study
+presented by <a href="http://www.facecouncil.org/puf/wp-content/uploads/2009/10/Generalized-linear-mixed-models.pdf">Bolker et al.
+(2009)</a>
+and later by <a href="http://www.cell.com/cms/attachment/601623/4742452/mmc1.pdf">Bolker et al.
+(2011)</a>
+where the structure (or lack of independence) in the dataset was due to
+observations being measured across different populations. The authors
+evaluated the extent to which the response of <em>Arabidopsis thaliana</em>
+(mouse-ear cress) to its environmental drivers (nutrient availability
+and herbivory) varied as a result of the population and/or genotype they
+belonged to.<br />
+Using the <em>Arabidopsis</em> dataset and detailed analysis presented by
+Bolker and colleagues, we will explore the eff ects of nutrient levels,
+herbivory and their interaction ( fixed effects) on the production
+<em>Arabidopsis thaliana</em> and the across-population and/or across-genotype
+variability in these relationships (random eff ects).</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="generalized-linear-mixed-models-glmms.html#cb33-1"></a><span class="co"># First load and view the dataset</span></span>
+<span id="cb33-2"><a href="generalized-linear-mixed-models-glmms.html#cb33-2"></a>dat.tf &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;Banta_TotalFruits.csv&quot;</span>)</span>
+<span id="cb33-3"><a href="generalized-linear-mixed-models-glmms.html#cb33-3"></a><span class="kw">str</span>(dat.tf)</span>
+<span id="cb33-4"><a href="generalized-linear-mixed-models-glmms.html#cb33-4"></a></span>
+<span id="cb33-5"><a href="generalized-linear-mixed-models-glmms.html#cb33-5"></a><span class="co"># X observation number reg factor for one of three regions;</span></span>
+<span id="cb33-6"><a href="generalized-linear-mixed-models-glmms.html#cb33-6"></a><span class="co"># Netherlands, Spain or Sweden popu factor with a level for</span></span>
+<span id="cb33-7"><a href="generalized-linear-mixed-models-glmms.html#cb33-7"></a><span class="co"># each population (random effect) gen factor with a level for</span></span>
+<span id="cb33-8"><a href="generalized-linear-mixed-models-glmms.html#cb33-8"></a><span class="co"># each genotype (random effect) rack nuisance factor for one</span></span>
+<span id="cb33-9"><a href="generalized-linear-mixed-models-glmms.html#cb33-9"></a><span class="co"># of two greenhouse racks nutrient factor with levels for low</span></span>
+<span id="cb33-10"><a href="generalized-linear-mixed-models-glmms.html#cb33-10"></a><span class="co"># (value = 1) or high (value = 8) nutrients (fixed effect)</span></span>
+<span id="cb33-11"><a href="generalized-linear-mixed-models-glmms.html#cb33-11"></a><span class="co"># amd factor with levels for no damage or simulated herbivory</span></span>
+<span id="cb33-12"><a href="generalized-linear-mixed-models-glmms.html#cb33-12"></a><span class="co"># (apical meristem damage) (fixed effect) status nuisance</span></span>
+<span id="cb33-13"><a href="generalized-linear-mixed-models-glmms.html#cb33-13"></a><span class="co"># factor for germination method total.fruits the response</span></span>
+<span id="cb33-14"><a href="generalized-linear-mixed-models-glmms.html#cb33-14"></a><span class="co"># variable; an integer indicating the number of fruits per</span></span>
+<span id="cb33-15"><a href="generalized-linear-mixed-models-glmms.html#cb33-15"></a><span class="co"># plant</span></span>
+<span id="cb33-16"><a href="generalized-linear-mixed-models-glmms.html#cb33-16"></a></span>
+<span id="cb33-17"><a href="generalized-linear-mixed-models-glmms.html#cb33-17"></a><span class="co"># 2-3 genotypes nested within each of the 9 populations</span></span>
+<span id="cb33-18"><a href="generalized-linear-mixed-models-glmms.html#cb33-18"></a><span class="kw">table</span>(dat.tf<span class="op">$</span>popu, dat.tf<span class="op">$</span>gen)</span>
+<span id="cb33-19"><a href="generalized-linear-mixed-models-glmms.html#cb33-19"></a></span>
+<span id="cb33-20"><a href="generalized-linear-mixed-models-glmms.html#cb33-20"></a><span class="co"># Housekeeping: make integers into factors, relevel clipping</span></span>
+<span id="cb33-21"><a href="generalized-linear-mixed-models-glmms.html#cb33-21"></a><span class="co"># (amd) and rename nutrient levels</span></span>
+<span id="cb33-22"><a href="generalized-linear-mixed-models-glmms.html#cb33-22"></a>dat.tf &lt;-<span class="st"> </span><span class="kw">transform</span>(dat.tf, <span class="dt">X =</span> <span class="kw">factor</span>(X), <span class="dt">gen =</span> <span class="kw">factor</span>(gen), </span>
+<span id="cb33-23"><a href="generalized-linear-mixed-models-glmms.html#cb33-23"></a>    <span class="dt">rack =</span> <span class="kw">factor</span>(rack), <span class="dt">amd =</span> <span class="kw">factor</span>(amd, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;unclipped&quot;</span>, </span>
+<span id="cb33-24"><a href="generalized-linear-mixed-models-glmms.html#cb33-24"></a>        <span class="st">&quot;clipped&quot;</span>)), <span class="dt">nutrient =</span> <span class="kw">factor</span>(nutrient, <span class="dt">label =</span> <span class="kw">c</span>(<span class="st">&quot;Low&quot;</span>, </span>
+<span id="cb33-25"><a href="generalized-linear-mixed-models-glmms.html#cb33-25"></a>        <span class="st">&quot;High&quot;</span>)))</span>
+<span id="cb33-26"><a href="generalized-linear-mixed-models-glmms.html#cb33-26"></a></span>
+<span id="cb33-27"><a href="generalized-linear-mixed-models-glmms.html#cb33-27"></a><span class="co"># Install/load packages</span></span>
+<span id="cb33-28"><a href="generalized-linear-mixed-models-glmms.html#cb33-28"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(lme4)) {</span>
+<span id="cb33-29"><a href="generalized-linear-mixed-models-glmms.html#cb33-29"></a>    <span class="kw">install.packages</span>(<span class="st">&quot;lme4&quot;</span>)</span>
+<span id="cb33-30"><a href="generalized-linear-mixed-models-glmms.html#cb33-30"></a>}</span>
+<span id="cb33-31"><a href="generalized-linear-mixed-models-glmms.html#cb33-31"></a><span class="kw">require</span>(lme4)</span>
+<span id="cb33-32"><a href="generalized-linear-mixed-models-glmms.html#cb33-32"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(coefplot2)) {</span>
+<span id="cb33-33"><a href="generalized-linear-mixed-models-glmms.html#cb33-33"></a>    <span class="kw">install.packages</span>(<span class="st">&quot;coefplot2&quot;</span>, <span class="dt">repos =</span> <span class="st">&quot;http://www.math.mcmaster.ca/bolker/R&quot;</span>, </span>
+<span id="cb33-34"><a href="generalized-linear-mixed-models-glmms.html#cb33-34"></a>        <span class="dt">type =</span> <span class="st">&quot;source&quot;</span>)</span>
+<span id="cb33-35"><a href="generalized-linear-mixed-models-glmms.html#cb33-35"></a>}</span>
+<span id="cb33-36"><a href="generalized-linear-mixed-models-glmms.html#cb33-36"></a><span class="kw">require</span>(coefplot2)</span>
+<span id="cb33-37"><a href="generalized-linear-mixed-models-glmms.html#cb33-37"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(reshape)) {</span>
+<span id="cb33-38"><a href="generalized-linear-mixed-models-glmms.html#cb33-38"></a>    <span class="kw">install.packages</span>(<span class="st">&quot;reshape&quot;</span>)</span>
+<span id="cb33-39"><a href="generalized-linear-mixed-models-glmms.html#cb33-39"></a>}</span>
+<span id="cb33-40"><a href="generalized-linear-mixed-models-glmms.html#cb33-40"></a><span class="kw">require</span>(reshape)</span>
+<span id="cb33-41"><a href="generalized-linear-mixed-models-glmms.html#cb33-41"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(ggplot2)) {</span>
+<span id="cb33-42"><a href="generalized-linear-mixed-models-glmms.html#cb33-42"></a>    <span class="kw">install.packages</span>(<span class="st">&quot;ggplot2&quot;</span>)</span>
+<span id="cb33-43"><a href="generalized-linear-mixed-models-glmms.html#cb33-43"></a>}</span>
+<span id="cb33-44"><a href="generalized-linear-mixed-models-glmms.html#cb33-44"></a><span class="kw">require</span>(ggplot2)</span>
+<span id="cb33-45"><a href="generalized-linear-mixed-models-glmms.html#cb33-45"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(plyr)) {</span>
+<span id="cb33-46"><a href="generalized-linear-mixed-models-glmms.html#cb33-46"></a>    <span class="kw">install.packages</span>(<span class="st">&quot;plyr&quot;</span>)</span>
+<span id="cb33-47"><a href="generalized-linear-mixed-models-glmms.html#cb33-47"></a>}</span>
+<span id="cb33-48"><a href="generalized-linear-mixed-models-glmms.html#cb33-48"></a><span class="kw">require</span>(plyr)</span>
+<span id="cb33-49"><a href="generalized-linear-mixed-models-glmms.html#cb33-49"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(gridExtra)) {</span>
+<span id="cb33-50"><a href="generalized-linear-mixed-models-glmms.html#cb33-50"></a>    <span class="kw">install.packages</span>(<span class="st">&quot;gridExtra&quot;</span>)</span>
+<span id="cb33-51"><a href="generalized-linear-mixed-models-glmms.html#cb33-51"></a>}</span>
+<span id="cb33-52"><a href="generalized-linear-mixed-models-glmms.html#cb33-52"></a><span class="kw">require</span>(gridExtra)</span>
+<span id="cb33-53"><a href="generalized-linear-mixed-models-glmms.html#cb33-53"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(emdbook)) {</span>
+<span id="cb33-54"><a href="generalized-linear-mixed-models-glmms.html#cb33-54"></a>    <span class="kw">install.packages</span>(<span class="st">&quot;emdbook&quot;</span>)</span>
+<span id="cb33-55"><a href="generalized-linear-mixed-models-glmms.html#cb33-55"></a>}</span>
+<span id="cb33-56"><a href="generalized-linear-mixed-models-glmms.html#cb33-56"></a><span class="kw">require</span>(emdbook)</span>
+<span id="cb33-57"><a href="generalized-linear-mixed-models-glmms.html#cb33-57"></a><span class="kw">source</span>(<span class="st">&quot;glmm_funs.R&quot;</span>)</span></code></pre></div>
 
-</div>
-</div>
-
-
-
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p>The QCBS R Workshop Series is part of the <a href="https://www.qcbs.ca">Québec Centre for Biodiversity Science</a>, and is maintained by the series coordinators and graduent student, postdoctoral, and research professional members. <strong>The contributors for this workshop can be accessed <a href="link">here</a></strong>.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
-</ol>
 </div>
 <hr>
 <center> 
@@ -300,8 +334,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-
-<a href="learning-objectives.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="how-do-i-implement-lmms-in-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="structure-in-dataset.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
