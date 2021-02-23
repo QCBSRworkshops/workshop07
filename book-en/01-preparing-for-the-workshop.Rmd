@@ -1,4 +1,4 @@
-# (PART\*) Introduction {-}
+# (PART\*) Preparation for the workshop {-}
 
 # Learning objectives
 
