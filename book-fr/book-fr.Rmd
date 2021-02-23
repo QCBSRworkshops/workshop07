@@ -1,0 +1,205 @@
+--- 
+title: "Atelier 9 : Analyses multivariées en `R`"
+subtitle: "Série d'ateliers R du CSBQ"
+author:
+- Développé et entretenu par les contributeurs et les contributrices de la Série d'ateliers R du CSBQ^[La Série d'ateliers R du CSBQ fait partie du [Centre de la science de la biodiversité du Québec](https://www.qcbs.ca), et est maintenue par les coordonnateurs et les coordonnatrices de la série, et les membres étudiants diplômés, postdoctoraux et professionnels de la recherche. **La liste des contributeurs et des contributrices de cet atelier sont accessibles[ici](lien)**].
+date: "`r Sys.time()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: ["references.bib"]
+biblio-style: apalike
+link-citations: yes
+cover-image: assets/images/logo/csbq_logo_accueil.png
+github-repo: "qcbsRworkshops/workshop09"
+description: "Analyses multivariées en `R`"
+favicon: "assets/images/favicon.ico"
+always_allow_html: yes
+url: 'https\://github.com/qcbsRworkshops/'
+config:
+  edit:
+    link: https://github.com/qcbsRworkshops/workshop09/edit/main/book-fr/%s
+    text: "Suggest changes"
+---
+
+# (PART\*) Série d'ateliers R du CSBQ {-}
+# Préface {-}
+
+Placeholder
+
+
+## Code de conduite
+### Comportement attendu
+### Comportements inacceptables
+## Contributeurs et contributrices
+## Contribuez à la série!
+
+<!--chapter:end:index.Rmd-->
+
+# (PART\*) Preparation pour l'atelier {-}
+
+# Objectifs d'apprentissage
+
+**Résumé:** Les modèles à effets mixtes permettent aux écologistes de
+surmonter un certain nombre de limitations liées aux modèles linéaires
+traditionnels. Dans cet atelier, vous apprendrez à déterminer si vous
+devez utiliser un modèle à effets mixtes pour analyser vos données. Nous
+allons vous guider à travers les étapes nécessaires pour utiliser un
+modèle linéaire mixte, vérifier les suppositions de base et présenter
+les résultats de votre modèle dans R. Nous allons également nous baser
+sur ce qui a été appris durant le dernier cours afin d'introduire les
+modèles linéaires généralisés avec effets mixtes.
+
+**Objectifs d'apprentissage**
+
+-    Qu'est-ce qu'un modèle linéaire à effets mixtes (MLM) et pourquoi est-ce important?
+-    Comment appliquer des MLMs dans R?
+      - Construction et exploration a priori des modèles et données
+      - Codage et sélection des modèles potentiels 
+      - Validation des modèles
+      - Interprétation des résultats et visualisation du modèle
+-   Comment utiliser les MLM quand les suppositions de normailité et d'homogénéité de la variance ne sont pas respectées (GLMMs).
+.
+
+# Préparez-vous pour cet atelier
+
+**Téléchargez le script R et les données pour cet atelier:**
+
+-    [R Script](http://qcbs.ca/wiki/_media/lmm_e.r)
+-    [Fish data](http://qcbs.ca/wiki/_media/qcbs_w6_data.csv)
+-    [Arabidopsis data](http://qcbs.ca/wiki/_media/banta_totalfruits.csv)
+-    [Inverts data](http://qcbs.ca/wiki/_media/inverts.csv)
+-    [GLMM Script](http://qcbs.ca/wiki/_media/glmm_e.r) 
+-    [glmm_funs](http://qcbs.ca/wiki/_media/glmm_funs.r) 
+
+**Télechargez les paquets R pour cet atelier:**
+
+-    [ggplot2](http://cran.r-project.org/web/packages/ggplot2/index.html)
+-    [lm4](http://cran.r-project.org/web/packages/lme4/index.html)
+-    [AICcmodavg](http://cran.r-project.org/web/packages/AICcmodavg/index.html)
+-    [MASS](http://cran.r-project.org/web/packages/MASS/index.html)
+-    [vcdExtra](http://cran.r-project.org/web/packages/vcdExtra/index.html)
+-    [bbmle](http://cran.r-project.org/web/packages/bbmle/index.html)
+-    [DescTools](http://cran.r-project.org/web/packages/DescTools/index.html)
+
+
+```{r, echo = TRUE, eval = FALSE}
+install.packages("ggplot2")
+install.packages("lme4")
+install.packages("AICcmodavg")
+install.packages("MASS")
+install.packages("vcdExtra")
+install.packages("bbmle")
+install.packages("DescTools")
+
+library(ggplot2)
+library(lme4)
+library(AICcmodavg)
+library(MASS)
+library(vcdExtra)
+library(bbmle)
+library(DescTools)
+```
+
+<!--chapter:end:01-preparation-pour-l-atelier.Rmd-->
+
+
+# (PART\*) Les mod�les lin�aires � effets mixtes (MLM) {-}
+# Aper�u 
+
+Placeholder
+
+
+
+<!--chapter:end:02-introduction-des-MLMs.Rmd-->
+
+
+# Comment pourrions-nous analyser ces données?
+
+Placeholder
+
+
+## Nombreuses analyses séparées
+## Une analyse groupée
+## Construire un MLM
+## Effet fixe
+## Effet aléatoire
+## Permettre aux intercepts et/ou pentes de varier selon le lac et l'espèce
+## Les intercepts, pentes, et intervalles de confiance associés sont ajustés pour tenir compte de la structure des données
+
+<!--chapter:end:03-exploration-des-donnees.Rmd-->
+
+
+# Comment implémenter un MLM dans R?
+
+Placeholder
+
+
+## Le protocole des modèles mixtes dans R:
+## Construction du modèle a priori et exploration des données
+## Coder les modèles potentiels et sélectionner le meilleur modèle
+## Validation du modèle
+## Interpréter les résultats et les visualiser graphiquement
+
+<!--chapter:end:04-implement-les-MLMs.Rmd-->
+
+
+# (PART\*) Les modèles linéaires généralisés mixtes (GLMM) {-}
+# Les modèles linéaires généralisés mixtes (GLMM)
+
+Placeholder
+
+
+
+<!--chapter:end:05-introduction-des-GLMM.Rmd-->
+
+
+# La structure du jeu de données
+
+Placeholder
+
+
+## Un GLMM avec une distribution de Poisson
+## Un GLMM avec un distribution binomiale négative
+## Un GLMM avec une distribution \"Poisson-lognormal\"
+
+<!--chapter:end:06-distributions-de-donnees.Rmd-->
+
+
+# Intercepts aléatoires
+
+Placeholder
+
+
+## Représentation graphique des paramètres du modèle
+## Graphiques des intercepts aléatoires
+## Pentes aléatoires
+
+<!--chapter:end:07-intercepts-aléatoires.Rmd-->
+
+
+# Modèle final
+
+Placeholder
+
+
+
+<!--chapter:end:08-modèle-final.Rmd-->
+
+
+# (PART\*) Final considerations {-}
+# Summary
+
+Placeholder
+
+
+## Livres de référence pour les MLMs
+## Ressources pour les GLMMs
+
+<!--chapter:end:09-considerations-finales.Rmd-->
+
+`r if (knitr::is_html_output()) '
+# References
+'`
+
+<!--chapter:end:10-references.Rmd-->
+
