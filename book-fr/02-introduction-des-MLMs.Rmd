@@ -1,6 +1,6 @@
-# (PART\*) Les mod�les lin�aires � effets mixtes (MLM) {-}
+# (PART\*) Les modèles linéaires à effets mixtes (MLM) {-}
 
-# Aper�u 
+# Aperçu 
 
 Les données écologiques et biologiques peuvent être complexes et
 désordonnées. Il existe généralement une structure particulière dans les
