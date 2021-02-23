@@ -39,7 +39,6 @@ les lacs en raison de variables environnementales non mesurées. Nous
 voulons simplement prendre en compte cette variation dans le modèle
 (parfois désignée effets aléatoires).
 
-
 ## Construire un MLM
 
 Les MLMs sont un compromis entre séparer et regrouper. Ils:

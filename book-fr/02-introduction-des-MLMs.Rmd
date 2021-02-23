@@ -1,6 +1,7 @@
 # (PART\*) Les mod�les lin�aires � effets mixtes (MLM) {-}
 
-# Aperçu 
+# Aper�u 
+
 Les données écologiques et biologiques peuvent être complexes et
 désordonnées. Il existe généralement une structure particulière dans les
 données (*i.e.* les observations individuelles ne sont pas toujours
