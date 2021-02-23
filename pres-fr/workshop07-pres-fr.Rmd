@@ -503,7 +503,7 @@ Des déviations majeures pourraient causer des problèmes d'hétéroscédasticit
 
 Le problème avec les prédicteurs colinéaires est simplement qu'ils expliquent la même chose, alors leur effet sur la variable réponse sera confondu dans le modèle.
 
-Dans cet exemple, il n’y a pas de risque de colinéarité avec seulement une variable continue. Si vous aviez une autre variable continue (Var2), une façon simple de vérifier la colinéarité est:
+Dans cet exemple, il n’y a pas de risque de colinéarité avec seulement une variable continue. Si vous aviez une autre variable continue (`Var2`), une façon simple de vérifier la colinéarité est:
 
 ```{r, eval = FALSE}
 plot(data)
@@ -512,7 +512,7 @@ cor(var1, var2)
 ```
 
 ---
-# Question / défi ![:cube]()
+# Défi 2 ![:cube]()
 
 Quelles mesures supplémentaires aurions-nous pu prendre sur le terrain et qui auraient pu être fortement corrélées avec la longueur corporelle?
 
@@ -547,11 +547,12 @@ $$z = \frac{(x-\bar{x})}{\text{écart-type}(x)}$$
 * Parce que nos données ont des échelles très différentes, on applique la **correction Z**
 
 ```{r}
-#Longueur corrigée, ""à la main"
-fish.data$Z_Length <- (fish.data$Fish_Length-mean(fish.data$Fish_Length))/sd(fish.data$Fish_Length)
+# Longueur corrigée, "à la main"
+fish.data$Z_Length <- (fish.data$Fish_Length - mean(fish.data$Fish_Length)) / 
+                      sd(fish.data$Fish_Length)
 
-#Position trophique corrigée, avec scale
-fish.data$Z_TP<- scale(fish.data$Trophic_Pos)
+# Position trophique corrigée, avec la fonction scale
+fish.data$Z_TP     <- scale(fish.data$Trophic_Pos)
 ```
 
 ---
@@ -712,7 +713,7 @@ lmer(Z_TP ~ Z_Length + (1 + Z_Length | Lake) + (1 + Z_Length | Fish_Species),
 ```
 
 ---
-# Étape 2 - coder et sélectionner le meilleur modèle
+# Étape 2 - sélectionner le meilleur modèle
 
 * Pour déterminer si vous avez construit le meilleur modèle mixte basé sur vos connaissances a priori, vous devez comparer ce modèle aux autres modèles alternatifs,
 
@@ -749,7 +750,8 @@ Par contre, pour comparer ce modèle aux MLMs, il est important de .alert[change
 # Modele linéaire de base
 M0 <- lm(Z_TP ~ Z_Length, data = fish.data)
 # modèle complet avec variation des intercepts
-M1 <- lmer(Z_TP ~ Z_Length + (1 | Fish_Species) + (1 | Lake), data = fish.data, REML = FALSE)
+M1 <- lmer(Z_TP ~ Z_Length + (1 | Fish_Species) + (1 | Lake), 
+           data = fish.data, REML = FALSE)
 # modèle complet avec variation des intercepts et de pentes
 M2 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 + Z_Length | Lake),
            data = fish.data, REML = FALSE)
@@ -758,7 +760,8 @@ M3 <- lmer(Z_TP ~ Z_Length + (1 | Fish_Species), data = fish.data, REML = FALSE)
 # Pas d'effet espèces, les intercepts varient par lac
 M4 <- lmer(Z_TP ~ Z_Length + (1 | Lake), data = fish.data, REML = FALSE)
 # Pas d'effet de lac, les intercepts et les pentes varient par espèces
-M5 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species), data = fish.data, REML = FALSE)
+M5 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species), 
+           data = fish.data, REML = FALSE)
 # Pas d'effet de l'espèces, les intercepts et les pentes varient par lac
 M6 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Lake), data = fish.data, REML = FALSE)
 # modèle complet, variation d'intercept et pente par lac
@@ -769,10 +772,13 @@ M8 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake),
            data = fish.data, REML = FALSE)
 ```
 
-![:faic](question) `boundary (singular) fit: see ?isSingular`, voir [cette discussion ![:faic](stack-exchange)]( https://stats.stackexchange.com/questions/185360/t-value-associated-with-nlme-lme4)
+---
+# Solution
+
+![:faic](question) `boundary (singular) fit: see ?isSingular`, voir [cette discussion ![:faic](stack-exchange)](https://stats.stackexchange.com/questions/378939/dealing-with-singular-fit-in-mixed-models)
 
 ---
-# Étape 2 - Coder et sélectionner le meilleur modèle
+# Étape 2 - sélectionner le meilleur modèle
 
 * Maintenant que nous avons une liste de modèles potentiels, nous voulons les comparer entre eux pour sélectionner celui(ceux) qui a(ont) le plus de pouvoir prédictif
 
@@ -780,10 +786,10 @@ M8 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake),
 
 * Le critère d'information Akaike (AIC) est une **mesure de qualité du modèle** pouvant être utilisée pour comparer les modèles
 
-* `AICc` corrige pour le biais créé par les faibles tailles d'échantillon
+* AICc corrige pour le biais créé par les faibles tailles d'échantillon
 
 ---
-# Étape 2 - Coder et sélectionner le meilleur modèle
+# Étape 2 - sélectionner le meilleur modèle
 
 Pour trouver la valeur AICc d'un modèle, utilisez :
 
@@ -793,30 +799,33 @@ AICcmodavg::AICc(M1)
 ```
 
 ---
-# Étape 2 - Coder et sélectionner le meilleur modèle
+# Étape 2 - sélectionner le meilleur modèle
 
 Pour regrouper toutes les valeurs d'AICc dans un seul tableau, utilisez :
 
 ```{r}
-AIC.table <- data.frame(Model = c(AICcmodavg::AICc(M0), 
-                                  AICcmodavg::AICc(M1), 
-                                  AICcmodavg::AICc(M2), 
-                                  AICcmodavg::AICc(M3),
-                                  AICcmodavg::AICc(M4), 
-                                  AICcmodavg::AICc(M5), 
-                                  AICcmodavg::AICc(M6),
-                                  AICcmodavg::AICc(M7), 
-                                  AICcmodavg::AICc(M8)), 
-                        AICc = c("M0", "M1", 
-                                 "M2", "M3", 
-                                 "M4", "M5", 
-                                 "M6", "M7", 
-                                 "M8"))
+AIC.table <- data.frame(Model = c("M0", "M1", "M2", "M3", 
+                                  "M4", "M5", "M6", "M7", "M8"),
+                        AICc = c(AICcmodavg::AICc(M0), 
+                                 AICcmodavg::AICc(M1), 
+                                 AICcmodavg::AICc(M2), 
+                                 AICcmodavg::AICc(M3),
+                                 AICcmodavg::AICc(M4), 
+                                 AICcmodavg::AICc(M5), 
+                                 AICcmodavg::AICc(M6),
+                                 AICcmodavg::AICc(M7), 
+                                 AICcmodavg::AICc(M8)))
+
+# ordonner la table en ordre croissant d'AICc
+AIC.table <- AIC.table[order(AIC.table$AICc), ]
+
+# rajouter la différence d'AICc avec la valeur d'AICc la plus petite (delta AICc)
+AIC.table$delta_AICc <- AIC.table$AICc - AIC.table$AICc[1]
 
 ```
 
 ---
-# Étape 2 - Coder et sélectionner le meilleur modèle
+# Étape 2 - sélectionner le meilleur modèle
 
 Que signifient ces valeurs d'AICc ?
 
@@ -828,10 +837,8 @@ Le modèle avec le plus petit AICc a le plus grand pouvoir prédictif.
 
 Souvent on considère que deux modèles à +/- 2 unités d'AICc de différence ont un pouvoir prédictif équivalent.
 
-Regardons de plus près M8 et M2. On peut exclure les autres car ils ont des AICc tellement plus élevés.
-
 ---
-# Étape 2 - Coder et sélectionner le meilleur modèle
+# Étape 2 - sélectionner le meilleur modèle
 
 Quelle est la structure du meilleur modèle?
 
@@ -846,20 +853,18 @@ L'intercept et l'effet de la longueur sur la position trophique peut varier selo
 .pull-right[![](images/fig_8_w5.png)]
 
 ---
-# Étape 2 - Coder et sélectionner le meilleur modèle
+# Étape 2 - sélectionner le meilleur modèle
 
-Une fois que les meilleurs modèles sont sélectionnés il faut remettre la méthode d'estimation a `REML=TRUE`
+Une fois que le meilleur modèle est sélectionné il faut remettre la méthode d'estimation a `REML=TRUE`
 
 ```{r}
 M8 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake),
            data = fish.data, REML = TRUE)
-
-M2 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 + Z_Length | Lake),
-           data = fish.data, REML = TRUE)
 ```
 
-
 ---
+exclude: true
+
 # Défi 5 ![:cube]()
 
 Prenez 2 minutes avec votre voisin pour étudier la structure du modèle M2.
@@ -877,11 +882,14 @@ M2 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 + Z_Length | Lak
 ```
 
 ---
+exclude: true
+
 # Solution
 
 **Discussion de groupe...**
 
 --
+exclude: true
 
 .alert[M2] La position trophique est en fonction de la longueur. L'intercept et l'effet de la longueur sur la position trophique peuvent varier selon l'espèce de poissons et le lac.
 
@@ -1031,24 +1039,36 @@ hist(resid(M8))
 
 ###### **Étape 4:** Interprétation et visualisation des résultats
 
-
 ---
 # Étape 4 - interprétation et visualisation
 
-```{r, eval = FALSE}
+```{r eval=TRUE, echo=TRUE}
 summ_M8 <- summary(M8)
-summ_M8
 ```
 
----
-# Étape 4 - interprétation et visualisation
-
-
-```{r, echo = FALSE}
-summ_M8 <- summary(M8)
-summary(M8)
-```
-
+--
+    # Linear mixed model fit by REML ['lmerMod']
+    # Formula: Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake)
+    #    Data: fish.data
+    # 
+    # REML criterion at convergence: 21.7
+    # 
+    # Scaled residuals: 
+    #      Min       1Q   Median       3Q      Max 
+    # -2.77186 -0.60166  0.05589  0.64239  2.27775 
+    # 
+    # Random effects:
+    #  Groups       Name        Variance Std.Dev. Corr
+    #  Lake         (Intercept) 0.20502  0.4528       
+    #  Fish_Species (Intercept) 0.86707  0.9312       
+    #               Z_Length    0.02466  0.1570   1.00
+    #  Residual                 0.05039  0.2245       
+    # Number of obs: 180, groups:  Lake, 6; Fish_Species, 3
+    # 
+    # Fixed effects:
+    #               Estimate Std. Error t value
+    # (Intercept) -0.0009059  0.5687462  -0.002
+    # Z_Length     0.4222697  0.0922075   4.580
 
 ---
 # Étape 4 - interprétation et visualisation
@@ -1078,7 +1098,7 @@ summary(M8)
 
 Cette partie présente l'estimation des effets fixes. Une valeur de la statistique T (test de Student)](https://en.wikipedia.org/wiki/T-statistic) est retournée **sans p-value** (c'est un choix des auteurs du package, voir pourquoi dans [cette discussion](https://stats.stackexchange.com/questions/185360/t-value-associated-with-nlme-lme4)).
 
-Cette statistique peut-être utilisée telle quelle. Vous pouvez aussi calculer
+Cette statistique peut être utilisée telle quelle. Vous pouvez aussi calculer
 l’intervalle de confiance (IC) à 95% avec cette table en utilisant
 
 $$ IC = Estimate \pm 1.96Std.Error $$
@@ -1347,6 +1367,8 @@ Regardez [cette réponse sur ![:faic](stack-exchange)](https://stats.stackexchan
 
 
 ---
+exclude: true
+
 # Défi 9 ![:cube]()
 
 **Situation:**
@@ -1360,6 +1382,8 @@ Regardez [cette réponse sur ![:faic](stack-exchange)](https://stats.stackexchan
 .alert[Quel modèle mixte pourriez-vous utiliser pour ce jeu de données?]
 
 ---
+exclude: true
+
 # Solution!![:cube]()
 
 ```{r, eval = FALSE}
@@ -1367,6 +1391,8 @@ lmer(Mercure ~ Longueur * Habitat + (1 | Site))
 ```
 
 ---
+exclude: true
+
 # Défi 10![:cube]()
 
 * Discutez du jeu de données sur lequel vous travaillez avec votre voisin et déterminez si un modèle mixte serait approprié.
@@ -1374,7 +1400,6 @@ lmer(Mercure ~ Longueur * Habitat + (1 | Site))
 * Si oui, travaillez ensemble pour écrire le code que vous utiliseriez pour faire ce modèle dans R.
 
 * Si non, imaginez un jeu de données fictif pour lequel un modèle mixte serait approprié et codez ce modèle.
-
 
 ---
 # Modèles Linéaires Généralisés Mixtes (GLMMs)
