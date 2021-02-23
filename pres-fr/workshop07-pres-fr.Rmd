@@ -490,7 +490,7 @@ Ce jeu de données est parfaitement équilibré, mais les **modèles mixtes peuv
 
 ```{r, fig.width=10, fig.height=4}
 par(mfrow=c(1,2), mar = c(4,4,1,1))
-hist(fish.data$Fish_Length, xlab = "Length", main = "")
+hist(fish.data$Fish_Length, xlab = "Length (mm)", main = "")
 hist(fish.data$Trophic_Pos, xlab = "Trophic position", main = "")
 ```
 
@@ -512,7 +512,7 @@ cor(var1, var2)
 ```
 
 ---
-# Défi 2 ![:cube]()
+# Défi 3 ![:cube]()
 
 Quelles mesures supplémentaires aurions-nous pu prendre sur le terrain et qui auraient pu être fortement corrélées avec la longueur corporelle?
 
@@ -527,9 +527,9 @@ Quelles mesures supplémentaires aurions-nous pu prendre sur le terrain et qui a
 
 * Si deux variables dans un même modèle ont des échelles très différentes, il est probable que le modèle indique un problème de convergence en essayant de calculer les paramètres.
 
-* La <a href="https://fr.wikipedia.org/wiki/Cote_Z_(statistiques)">correction Z</a> standardise les variables et résout ce problème (fonction `scale()` dans R) :
+* La <a href="https://fr.wikipedia.org/wiki/Cote_Z_(statistiques)">correction Z</a> standardise les variables et résout ce problème (fonction `scale()` dans `R`) :
 
-$$z = \frac{(x-\bar{x})}{\text{écart-type}(x)}$$
+$$z = \frac{x-moyenne(x)}{écart.type(x)}$$
 ---
 # Étape 1 - exploration des données
 
@@ -544,7 +544,7 @@ $$z = \frac{(x-\bar{x})}{\text{écart-type}(x)}$$
 
 **Considérez l'échelle de vos données**
 
-* Parce que nos données ont des échelles très différentes, on applique la **correction Z**
+Parce que nos données ont des échelles très différentes, on applique la **correction Z**
 
 ```{r}
 # Longueur corrigée, "à la main"
@@ -571,13 +571,12 @@ Nous pouvons le faire en :
 ---
 # Étape 1 - exploration des données
 
-
-1. Créer un modèle linéaire sans les facteurs
+Créer un modèle linéaire sans les facteurs
 ```{r}
 lm.test <- lm(Z_TP ~ Z_Length, data = fish.data)
 ```
 
-2. Calculer les résidus de ce modèle linéaire
+Calculer les résidus de ce modèle linéaire
 ```{r}
 lm.test.resid <- rstandard(lm.test)
 ```
@@ -602,7 +601,7 @@ abline(0, 0, lty = 2)
 ```
 
 ---
-# Exploration des données
+# Étape 1 - Exploration des données
 
 Représentez graphiquement la valeur des résidus en fonction des niveaux des facteurs
 
@@ -688,14 +687,14 @@ On devrait utiliser:
 **Plus généralement**
 
 - `(1 | Lake)` effet aléatoire par lac à l'intercept
-- `(1 + Z_Length | Lake)` effet aléatoire par lac à l'intercept et la pente (NB: (`Z_Length | Lake)` donne le même résultat)
+- `(1 + Z_Length | Lake)` effet aléatoire par lac à l'intercept et la pente en réponse à la longueur corporelle (NB: (`Z_Length | Lake)` donne le même résultat)
 - `(-1 + Z_Length | Lake)` pour avoir uniquement l'effet aléatoire sur la pente
 - `(1 | Lake) + (1 | Species)`  pour des effets aléatoires croisés
 - `(1 | Lake:Fish_Species)` pour utiliser l'interaction entre 2 facteurs groupant
 - si votre jeu de données inclus des effets imbriqués, vous pouvez utiliser `/` pour les déclarer, e.g. `(1 | facteur1 / facteur2)` si `facteur2` est imbriqué dans `facteur1` ([voir ![:faic](stack-exchange)](https://stats.stackexchange.com/questions/228800/crossed-vs-nested-random-effects-how-do-they-differ-and-how-are-they-specified))
 
 ---
-# Défi 3 ![:cube]()
+# Défi 4 ![:cube]()
 
 Réécrivez le code suivant de façon à ce que les **pentes** de la relation position trophique en fonction de longueur corporelle **varient par lac et par espèces**:
 
@@ -715,12 +714,12 @@ lmer(Z_TP ~ Z_Length + (1 + Z_Length | Lake) + (1 + Z_Length | Fish_Species),
 ---
 # Étape 2 - sélectionner le meilleur modèle
 
-* Pour déterminer si vous avez construit le meilleur modèle mixte basé sur vos connaissances a priori, vous devez comparer ce modèle aux autres modèles alternatifs,
+* Pour déterminer si vous avez construit le meilleur modèle mixte basé sur vos connaissances a priori, vous devez comparer ce modèle aux autres modèles alternatifs.
 
 * Avec le jeu de données sur lequel vous travaillez, il y a plusieurs modèles alternatifs qui pourraient mieux correspondre à vos données.
 
 ---
-# Défi 4 ![:cube]()
+# Défi 5 ![:cube]()
 
 Faites une liste de 7 modèles alternatifs qui pourraient être comparés à celui-ci:
 
@@ -740,8 +739,7 @@ Nous allons aussi construire le **modèle linéaire de base** `lm()` parce qu'il
 M0 <- lm(Z_TP ~ Z_Length, data = fish.data)
 ```
 
-Par contre, pour comparer ce modèle aux MLMs, il est important de .alert[changer la méthode d'estimation à ML (REML=FALSE)] parce que `lm()` n'utilise pas la même méthode d'estimation que `lmer()`
-  - Démontrer que les résultats de la méthode des moindres carrés (least squares) est équivalente aux résultats de la méthode ML pour les modèles linéaires de bases!
+Par contre, pour comparer ce modèle aux MLMs, il est important de .alert[changer la méthode d'estimation à ML (`REML=FALSE`)] parce que `lm()` n'utilise pas la même méthode d'estimation que `lmer()`.
 
 ---
 # Solution
@@ -780,13 +778,13 @@ M8 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake),
 ---
 # Étape 2 - sélectionner le meilleur modèle
 
-* Maintenant que nous avons une liste de modèles potentiels, nous voulons les comparer entre eux pour sélectionner celui(ceux) qui a(ont) le plus de pouvoir prédictif
+* Maintenant que nous avons une liste de modèles potentiels, nous voulons les comparer entre eux pour sélectionner celui(ceux) qui a(ont) le plus de pouvoir prédictif.
 
-* Les modèles peuvent être comparés en utilisant la fonction `AICc` provenant du package `AICcmodavg`
+* Les modèles peuvent être comparés en utilisant la fonction `AICc` provenant du package `AICcmodavg`.
 
-* Le critère d'information Akaike (AIC) est une **mesure de qualité du modèle** pouvant être utilisée pour comparer les modèles
+* Le critère d'information Akaike (AIC) est une **mesure de qualité du modèle** pouvant être utilisée pour comparer les modèles.
 
-* AICc corrige pour le biais créé par les faibles tailles d'échantillon
+* AICc corrige pour le biais créé par les faibles tailles d'.
 
 ---
 # Étape 2 - sélectionner le meilleur modèle
@@ -921,7 +919,6 @@ exclude: true
 ---
 # Étape 3 - validation du modèle
 
-
 Vous devez vérifier que le modèle respecte toutes les suppositions de base:
 
 1. Vérifier l'homogénéité de la variance
@@ -1042,33 +1039,9 @@ hist(resid(M8))
 ---
 # Étape 4 - interprétation et visualisation
 
-```{r eval=TRUE, echo=TRUE}
-summ_M8 <- summary(M8)
+```{r}
+(summ_M8 <- summary(M8))
 ```
-
---
-    # Linear mixed model fit by REML ['lmerMod']
-    # Formula: Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake)
-    #    Data: fish.data
-    # 
-    # REML criterion at convergence: 21.7
-    # 
-    # Scaled residuals: 
-    #      Min       1Q   Median       3Q      Max 
-    # -2.77186 -0.60166  0.05589  0.64239  2.27775 
-    # 
-    # Random effects:
-    #  Groups       Name        Variance Std.Dev. Corr
-    #  Lake         (Intercept) 0.20502  0.4528       
-    #  Fish_Species (Intercept) 0.86707  0.9312       
-    #               Z_Length    0.02466  0.1570   1.00
-    #  Residual                 0.05039  0.2245       
-    # Number of obs: 180, groups:  Lake, 6; Fish_Species, 3
-    # 
-    # Fixed effects:
-    #               Estimate Std. Error t value
-    # (Intercept) -0.0009059  0.5687462  -0.002
-    # Z_Length     0.4222697  0.0922075   4.580
 
 ---
 # Étape 4 - interprétation et visualisation
@@ -1087,7 +1060,6 @@ summ_M8 <- summary(M8)
 - `Variance` la variance estimée de l'effet (`Std.Dev.` est l'écart type de cette valeur)
 - `Corr` indique la corrélation entre la pente aléatoire et l'ordonnée à l'origine aléatoire pour un groupement donné (voir [cette discussion ![:faic](stack-exchange)](https://stats.stackexchange.com/questions/320978/understanding-and-coding-random-intercept-correlation-lmer))
 
-
 ---
 # Étape 4 - interprétation et visualisation
 
@@ -1096,13 +1068,12 @@ summ_M8 <- summary(M8)
     # (Intercept) -0.000906   0.568493  -0.002
     # Z_Length     0.422270   0.092170   4.581
 
-Cette partie présente l'estimation des effets fixes. Une valeur de la statistique T (test de Student)](https://en.wikipedia.org/wiki/T-statistic) est retournée **sans p-value** (c'est un choix des auteurs du package, voir pourquoi dans [cette discussion](https://stats.stackexchange.com/questions/185360/t-value-associated-with-nlme-lme4)).
+Cette partie présente l'estimation des effets fixes. Une valeur de la statistique T [(test de Student)](https://en.wikipedia.org/wiki/T-statistic) est retournée **sans p-value** (c'est un choix des auteurs du package, voir pourquoi dans [cette discussion](https://stats.stackexchange.com/questions/185360/t-value-associated-with-nlme-lme4)).
 
 Cette statistique peut être utilisée telle quelle. Vous pouvez aussi calculer
 l’intervalle de confiance (IC) à 95% avec cette table en utilisant
 
-$$ IC = Estimate \pm 1.96Std.Error $$
-
+$$ IC = Estimate \pm 1.96*Std.Error $$
 Si 0 est dans cet interval, alors le paramètre n’est pas significativement
 différente de zéro au seuil $\alpha$ = 0.05.
 
@@ -1265,9 +1236,9 @@ Plot_BySpecies +
 b) Figure par espèce
 
 ```{r, echo = F, fig.width=8}
-Lake.coef <- as.data.frame(coef(M8)$Lake)
-colnames(Lake.coef) <- c("Intercept", "Slope")
-Species.coef <- as.data.frame(coef(M8)$Fish_Species)
+Lake.coef              <- as.data.frame(coef(M8)$Lake)
+colnames(Lake.coef)    <- c("Intercept", "Slope")
+Species.coef           <- as.data.frame(coef(M8)$Fish_Species)
 colnames(Species.coef) <- c("Intercept", "Slope")
 
 Plot_BySpecies<-plot + geom_point(aes(colour = factor(Fish_Species)), size = 4) +
@@ -1362,8 +1333,8 @@ lmer(Biodiv ~ Productivite + (1 | Foret / Site))
 ```
 
 Ici les effets aléatoires sont imbriqués (i.e. Sites dans forêt) et non croisés.
-Pourquoi utiliser `(1 | Foret / Site)` plutôt que `(1 | Foret) + (1 | Site)` ?
-Regardez [cette réponse sur ![:faic](stack-exchange)](https://stats.stackexchange.com/questions/228800/crossed-vs-nested-random-effects-how-do-they-differ-and-how-are-they-specified)!
+
+Pourquoi utiliser `(1 | Foret / Site)` plutôt que `(1 | Foret) + (1 | Site)` ? Regardez [cette réponse sur ![:faic](stack-exchange)](https://stats.stackexchange.com/questions/228800/crossed-vs-nested-random-effects-how-do-they-differ-and-how-are-they-specified)!
 
 
 ---
