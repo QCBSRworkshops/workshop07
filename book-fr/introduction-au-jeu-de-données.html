@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapitre 2 Préparez-vous pour cet atelier | Atelier 9 : Analyses multivariées en R</title>
+  <title>Chapitre 5 Introduction au jeu de données | Atelier 9 : Analyses multivariées en R</title>
   <meta name="description" content="Analyses multivariées en R" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapitre 2 Préparez-vous pour cet atelier | Atelier 9 : Analyses multivariées en R" />
+  <meta property="og:title" content="Chapitre 5 Introduction au jeu de données | Atelier 9 : Analyses multivariées en R" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://github.com/qcbsRworkshops/" />
   <meta property="og:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="qcbsRworkshops/workshop09" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapitre 2 Préparez-vous pour cet atelier | Atelier 9 : Analyses multivariées en R" />
+  <meta name="twitter:title" content="Chapitre 5 Introduction au jeu de données | Atelier 9 : Analyses multivariées en R" />
   
   <meta name="twitter:description" content="Analyses multivariées en R" />
   <meta name="twitter:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
-<link rel="prev" href="objectifs-dapprentissage.html"/>
-<link rel="next" href="aperçu.html"/>
+<link rel="prev" href="quest-ce-quun-mlm-et-pourquoi-est-ce-important.html"/>
+<link rel="next" href="comment-pourrions-nous-analyser-ces-données.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -224,47 +224,98 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div class="hero-image-container"> 
   <img class= "hero-image" src="assets/images/jean-philippe-delberghe-75xPHEQBmvA-unsplash_hero_image.jpg">
 </div>
-<div id="préparez-vous-pour-cet-atelier" class="section level1">
-<h1><span class="header-section-number">Chapitre 2</span> Préparez-vous pour cet atelier</h1>
-<p><strong>Téléchargez le script R et les données pour cet atelier:</strong></p>
-<ul>
-<li><a href="http://qcbs.ca/wiki/_media/lmm_e.r">R Script</a></li>
-<li><a href="http://qcbs.ca/wiki/_media/qcbs_w6_data.csv">Fish data</a></li>
-<li><a href="http://qcbs.ca/wiki/_media/banta_totalfruits.csv">Arabidopsis data</a></li>
-<li><a href="http://qcbs.ca/wiki/_media/inverts.csv">Inverts data</a></li>
-<li><a href="http://qcbs.ca/wiki/_media/glmm_e.r">GLMM Script</a></li>
-<li><a href="http://qcbs.ca/wiki/_media/glmm_funs.r">glmm_funs</a></li>
-</ul>
-<p><strong>Télechargez les paquets R pour cet atelier:</strong></p>
-<ul>
-<li><a href="http://cran.r-project.org/web/packages/ggplot2/index.html">ggplot2</a></li>
-<li><a href="http://cran.r-project.org/web/packages/lme4/index.html">lm4</a></li>
-<li><a href="http://cran.r-project.org/web/packages/AICcmodavg/index.html">AICcmodavg</a></li>
-<li><a href="http://cran.r-project.org/web/packages/MASS/index.html">MASS</a></li>
-<li><a href="http://cran.r-project.org/web/packages/vcdExtra/index.html">vcdExtra</a></li>
-<li><a href="http://cran.r-project.org/web/packages/bbmle/index.html">bbmle</a></li>
-<li><a href="http://cran.r-project.org/web/packages/DescTools/index.html">DescTools</a></li>
-</ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="préparez-vous-pour-cet-atelier.html#cb1-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;ggplot2&quot;</span>)</span>
-<span id="cb1-2"><a href="préparez-vous-pour-cet-atelier.html#cb1-2"></a><span class="kw">install.packages</span>(<span class="st">&quot;lme4&quot;</span>)</span>
-<span id="cb1-3"><a href="préparez-vous-pour-cet-atelier.html#cb1-3"></a><span class="kw">install.packages</span>(<span class="st">&quot;AICcmodavg&quot;</span>)</span>
-<span id="cb1-4"><a href="préparez-vous-pour-cet-atelier.html#cb1-4"></a><span class="kw">install.packages</span>(<span class="st">&quot;MASS&quot;</span>)</span>
-<span id="cb1-5"><a href="préparez-vous-pour-cet-atelier.html#cb1-5"></a><span class="kw">install.packages</span>(<span class="st">&quot;vcdExtra&quot;</span>)</span>
-<span id="cb1-6"><a href="préparez-vous-pour-cet-atelier.html#cb1-6"></a><span class="kw">install.packages</span>(<span class="st">&quot;bbmle&quot;</span>)</span>
-<span id="cb1-7"><a href="préparez-vous-pour-cet-atelier.html#cb1-7"></a><span class="kw">install.packages</span>(<span class="st">&quot;DescTools&quot;</span>)</span>
-<span id="cb1-8"><a href="préparez-vous-pour-cet-atelier.html#cb1-8"></a></span>
-<span id="cb1-9"><a href="préparez-vous-pour-cet-atelier.html#cb1-9"></a><span class="kw">library</span>(ggplot2)</span>
-<span id="cb1-10"><a href="préparez-vous-pour-cet-atelier.html#cb1-10"></a><span class="kw">library</span>(lme4)</span>
-<span id="cb1-11"><a href="préparez-vous-pour-cet-atelier.html#cb1-11"></a><span class="kw">library</span>(AICcmodavg)</span>
-<span id="cb1-12"><a href="préparez-vous-pour-cet-atelier.html#cb1-12"></a><span class="kw">library</span>(MASS)</span>
-<span id="cb1-13"><a href="préparez-vous-pour-cet-atelier.html#cb1-13"></a><span class="kw">library</span>(vcdExtra)</span>
-<span id="cb1-14"><a href="préparez-vous-pour-cet-atelier.html#cb1-14"></a><span class="kw">library</span>(bbmle)</span>
-<span id="cb1-15"><a href="préparez-vous-pour-cet-atelier.html#cb1-15"></a><span class="kw">library</span>(DescTools)</span></code></pre></div>
+<div id="introduction-au-jeu-de-données" class="section level1">
+<h1><span class="header-section-number">Chapitre 5</span> Introduction au jeu de données</h1>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="introduction-au-jeu-de-données.html#cb2-1"></a><span class="co"># Supprimer commandes antérieures en R</span></span>
+<span id="cb2-2"><a href="introduction-au-jeu-de-données.html#cb2-2"></a><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())</span>
+<span id="cb2-3"><a href="introduction-au-jeu-de-données.html#cb2-3"></a></span>
+<span id="cb2-4"><a href="introduction-au-jeu-de-données.html#cb2-4"></a><span class="co"># Placez tout le matériel de l&#39;atelier dans un même dossier</span></span>
+<span id="cb2-5"><a href="introduction-au-jeu-de-données.html#cb2-5"></a><span class="co"># sur votre ordinateur Exécutez la ligne de code suivante et</span></span>
+<span id="cb2-6"><a href="introduction-au-jeu-de-données.html#cb2-6"></a><span class="co"># utilisez la fenêtre de navigation pour sélectionner</span></span>
+<span id="cb2-7"><a href="introduction-au-jeu-de-données.html#cb2-7"></a><span class="co"># QCBS_W6_Data.csv le fichier dans le dossier qui contient le</span></span>
+<span id="cb2-8"><a href="introduction-au-jeu-de-données.html#cb2-8"></a><span class="co"># matériel de l&#39;atelier</span></span>
+<span id="cb2-9"><a href="introduction-au-jeu-de-données.html#cb2-9"></a><span class="kw">file.choose</span>()</span>
+<span id="cb2-10"><a href="introduction-au-jeu-de-données.html#cb2-10"></a></span>
+<span id="cb2-11"><a href="introduction-au-jeu-de-données.html#cb2-11"></a><span class="co"># Réglez le répertoire de travail vers le dossier qui</span></span>
+<span id="cb2-12"><a href="introduction-au-jeu-de-données.html#cb2-12"></a><span class="co"># contient les fichiers en copiant toute la sortie de la</span></span>
+<span id="cb2-13"><a href="introduction-au-jeu-de-données.html#cb2-13"></a><span class="co"># commande file.choose (), à l&#39;exception du nom de fichier R,</span></span>
+<span id="cb2-14"><a href="introduction-au-jeu-de-données.html#cb2-14"></a><span class="co"># et collez le tout dans setwd().</span></span>
+<span id="cb2-15"><a href="introduction-au-jeu-de-données.html#cb2-15"></a></span>
+<span id="cb2-16"><a href="introduction-au-jeu-de-données.html#cb2-16"></a><span class="co"># Par exemple collez &#39;/Users/ziegljac/Documents/QCBS_R/&#39; -&gt;</span></span>
+<span id="cb2-17"><a href="introduction-au-jeu-de-données.html#cb2-17"></a><span class="co"># incluez les guillemets NON</span></span>
+<span id="cb2-18"><a href="introduction-au-jeu-de-données.html#cb2-18"></a><span class="co"># &#39;/Users/ziegljac/Documents/QCBS_R/Get_Data_Func.R&#39; -&gt;</span></span>
+<span id="cb2-19"><a href="introduction-au-jeu-de-données.html#cb2-19"></a><span class="co"># incluez les guillemets</span></span>
+<span id="cb2-20"><a href="introduction-au-jeu-de-données.html#cb2-20"></a><span class="kw">setwd</span>()</span>
+<span id="cb2-21"><a href="introduction-au-jeu-de-données.html#cb2-21"></a></span>
+<span id="cb2-22"><a href="introduction-au-jeu-de-données.html#cb2-22"></a><span class="co"># Chargez les bibliothèques et les données utiles Si vous</span></span>
+<span id="cb2-23"><a href="introduction-au-jeu-de-données.html#cb2-23"></a><span class="co"># n’avez jamais chargé ces bibliothèques avant, vous devrez</span></span>
+<span id="cb2-24"><a href="introduction-au-jeu-de-données.html#cb2-24"></a><span class="co"># utiliser la fonction install.packages() avant la fonction</span></span>
+<span id="cb2-25"><a href="introduction-au-jeu-de-données.html#cb2-25"></a><span class="co"># library()</span></span>
+<span id="cb2-26"><a href="introduction-au-jeu-de-données.html#cb2-26"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb2-27"><a href="introduction-au-jeu-de-données.html#cb2-27"></a><span class="kw">library</span>(lme4)</span>
+<span id="cb2-28"><a href="introduction-au-jeu-de-données.html#cb2-28"></a><span class="kw">library</span>(arm)</span>
+<span id="cb2-29"><a href="introduction-au-jeu-de-données.html#cb2-29"></a><span class="kw">library</span>(AICcmodavg)</span>
+<span id="cb2-30"><a href="introduction-au-jeu-de-données.html#cb2-30"></a></span>
+<span id="cb2-31"><a href="introduction-au-jeu-de-données.html#cb2-31"></a>data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;QCBS_W6_Data.csv&quot;</span>)</span></code></pre></div>
+<p>Le jeu de données que nous utiliserons porte sur les positions
+trophiques de poissons. Trois espèces ont été sélectionnées pour
+l’étude et dix individus par espèce ont été mesurés (longueur
+corporelle) dans six lacs différents. Voici une représentation visuelle
+pour vous aider à comprendre tout cela ! Notez : seulement trois
+individus sont montrés par espèce, mais en réalité il y a 10 individus
+par espèce.</p>
+<p><img src="images/fig_1_qcbs_wiki.png" width="800" /></p>
+<p>Une simple question à laquelle vous pourriez répondre avec ce jeu de
+données est : "<strong>est-ce que la position trophique des poissons augmente
+avec leur taille</strong>" ? Au cours de l’atelier, on tentera de répondre à
+cette question.</p>
+<hr />
+<p><strong>DÉFI 1</strong></p>
+<p>Pour votre premier défi, vous devez reproduire les graphiques 1 à 3 du
+code <em>QCBS_W5_LMM.R</em>. Regardez les graphiques et essayez d’obtenir
+une idée de ce qui se passe. Deux questions clés à se poser sont :</p>
+<pre><code>-Est-ce qu&#39;on s&#39;attend à ce que, pour toutes les espèces, la
+position trophique augmente avec la longueur corporelle? Exactement
+de la même façon?
+-S&#39;attend-on à ce que ces relations soient pareilles entre les lacs? Comment pourraient-elles différer ?</code></pre>
+<p>++++ Réponse au défi 1 |</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="introduction-au-jeu-de-données.html#cb4-1"></a><span class="co"># Utilisé pour simplifier les figures</span></span>
+<span id="cb4-2"><a href="introduction-au-jeu-de-données.html#cb4-2"></a>fig &lt;-<span class="st"> </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(), </span>
+<span id="cb4-3"><a href="introduction-au-jeu-de-données.html#cb4-3"></a>    <span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), <span class="dt">panel.background =</span> <span class="kw">element_blank</span>()) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb4-4"><a href="introduction-au-jeu-de-données.html#cb4-4"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">strip.background =</span> <span class="kw">element_blank</span>(), <span class="dt">strip.text.y =</span> <span class="kw">element_text</span>()) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb4-5"><a href="introduction-au-jeu-de-données.html#cb4-5"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">legend.background =</span> <span class="kw">element_blank</span>()) <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">legend.key =</span> <span class="kw">element_blank</span>()) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb4-6"><a href="introduction-au-jeu-de-données.html#cb4-6"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">panel.border =</span> <span class="kw">element_rect</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill =</span> <span class="ot">NA</span>))</span>
+<span id="cb4-7"><a href="introduction-au-jeu-de-données.html#cb4-7"></a></span>
+<span id="cb4-8"><a href="introduction-au-jeu-de-données.html#cb4-8"></a><span class="co"># Faites les trois graphiques suivants pour explorer les</span></span>
+<span id="cb4-9"><a href="introduction-au-jeu-de-données.html#cb4-9"></a><span class="co"># données</span></span>
+<span id="cb4-10"><a href="introduction-au-jeu-de-données.html#cb4-10"></a>plot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Fish_Length, Trophic_Pos), <span class="dt">data =</span> data)</span>
+<span id="cb4-11"><a href="introduction-au-jeu-de-données.html#cb4-11"></a></span>
+<span id="cb4-12"><a href="introduction-au-jeu-de-données.html#cb4-12"></a><span class="co"># Graphique 1 - Toutes les données</span></span>
+<span id="cb4-13"><a href="introduction-au-jeu-de-données.html#cb4-13"></a>plot <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Length (mm)&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Trophic Position&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb4-14"><a href="introduction-au-jeu-de-données.html#cb4-14"></a><span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;All Data&quot;</span>) <span class="op">+</span><span class="st"> </span>fig</span>
+<span id="cb4-15"><a href="introduction-au-jeu-de-données.html#cb4-15"></a></span>
+<span id="cb4-16"><a href="introduction-au-jeu-de-données.html#cb4-16"></a><span class="co"># Graphique 2 - Par espèce</span></span>
+<span id="cb4-17"><a href="introduction-au-jeu-de-données.html#cb4-17"></a>plot <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">facet_wrap</span>(<span class="op">~</span>Fish_Species) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Length (mm)&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb4-18"><a href="introduction-au-jeu-de-données.html#cb4-18"></a><span class="st">    </span><span class="kw">ylab</span>(<span class="st">&quot;Trophic Position&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;By Species&quot;</span>) <span class="op">+</span><span class="st"> </span>fig</span>
+<span id="cb4-19"><a href="introduction-au-jeu-de-données.html#cb4-19"></a></span>
+<span id="cb4-20"><a href="introduction-au-jeu-de-données.html#cb4-20"></a><span class="co"># Graphique 3 – Par lac</span></span>
+<span id="cb4-21"><a href="introduction-au-jeu-de-données.html#cb4-21"></a>plot <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">facet_wrap</span>(<span class="op">~</span>Lake) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Length (mm)&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb4-22"><a href="introduction-au-jeu-de-données.html#cb4-22"></a><span class="st">    </span><span class="kw">ylab</span>(<span class="st">&quot;Trophic Position&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;By Lake&quot;</span>) <span class="op">+</span><span class="st"> </span>fig</span></code></pre></div>
+<p><strong>SORTIE</strong><br />
+<strong>Graphique 1</strong> <img src="images/fig_2_w5.png" width="300" /> <strong>Graphique 2</strong>
+<img src="images/fig_3_w5.png" width="300" /></p>
+<p><strong>Graphique 3</strong> <img src="images/plot3.png" width="300" /></p>
+<p>Est-ce qu’on s’attend à ce que, pour toutes les espèces, la position
+trophique augmente avec la longueur corporelle? Exactement de la même
+façon? Toutes les espèces semblent augmenter en position trophique avec
+la longueur, mais la pente peut être différente selon les espèces.</p>
+<p>S’attend-on à ce que ces relations soient pareilles entre les lacs?
+Comment pourraient-elles différer? Certains paramètres spécifiques à un
+lac en particulier peuvent modifier la relation, tels que la
+productivité primaire du système.</p>
+<p>++++</p>
 
 </div>
-
-
-
 <hr>
 <center> 
   <div class="footer">
@@ -276,8 +327,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="objectifs-dapprentissage.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="aperçu.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="quest-ce-quun-mlm-et-pourquoi-est-ce-important.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="comment-pourrions-nous-analyser-ces-données.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

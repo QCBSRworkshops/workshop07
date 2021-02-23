@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapitre 13 Modèle final | Atelier 9 : Analyses multivariées en R</title>
+  <meta name="description" content="Analyses multivariées en R" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapitre 13 Modèle final | Atelier 9 : Analyses multivariées en R" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://github.com/qcbsRworkshops/" />
+  <meta property="og:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
+  <meta property="og:description" content="Analyses multivariées en R" />
+  <meta name="github-repo" content="qcbsRworkshops/workshop09" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapitre 13 Modèle final | Atelier 9 : Analyses multivariées en R" />
+  
+  <meta name="twitter:description" content="Analyses multivariées en R" />
+  <meta name="twitter:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
+
+<meta name="author" content="Développé et entretenu par les contributeurs et les contributrices de la Série d’ateliers R du CSBQ." />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
+<link rel="prev" href="intercepts-aléatoires.html"/>
+<link rel="next" href="summary.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="assets/qcbs-style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="toc-logo"><a href="./"><img src="assets/images/csbq_logo_gray_accueil.png"></a></li>
+<link rel="icon" type="image/png" href="assets/images/favicon.ico"/>
+
+<li class="divider"></li>
+<li class="part"><span><b>Série d’ateliers R du CSBQ</b></span></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Préface</a><ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#code-de-conduite"><i class="fa fa-check"></i><b>0.1</b> Code de conduite</a><ul>
+<li class="chapter" data-level="0.1.1" data-path="index.html"><a href="index.html#comportement-attendu"><i class="fa fa-check"></i><b>0.1.1</b> Comportement attendu</a></li>
+<li class="chapter" data-level="0.1.2" data-path="index.html"><a href="index.html#comportements-inacceptables"><i class="fa fa-check"></i><b>0.1.2</b> Comportements inacceptables</a></li>
+</ul></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#contributeurs-et-contributrices"><i class="fa fa-check"></i><b>0.2</b> Contributeurs et contributrices</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#contribuez-à-la-série"><i class="fa fa-check"></i><b>0.3</b> Contribuez à la série!</a></li>
+</ul></li>
+<li class="part"><span><b>Preparation pour l’atelier</b></span></li>
+<li class="chapter" data-level="1" data-path="objectifs-dapprentissage.html"><a href="objectifs-dapprentissage.html"><i class="fa fa-check"></i><b>1</b> Objectifs d’apprentissage</a></li>
+<li class="chapter" data-level="2" data-path="préparez-vous-pour-cet-atelier.html"><a href="préparez-vous-pour-cet-atelier.html"><i class="fa fa-check"></i><b>2</b> Préparez-vous pour cet atelier</a></li>
+<li class="part"><span><b>Les modèles linéaires à effets mixtes (MLM)</b></span></li>
+<li class="chapter" data-level="3" data-path="aperçu.html"><a href="aperçu.html"><i class="fa fa-check"></i><b>3</b> Aperçu</a></li>
+<li class="chapter" data-level="4" data-path="quest-ce-quun-mlm-et-pourquoi-est-ce-important.html"><a href="quest-ce-quun-mlm-et-pourquoi-est-ce-important.html"><i class="fa fa-check"></i><b>4</b> Qu’est-ce qu’un MLM et pourquoi est-ce important?</a></li>
+<li class="chapter" data-level="5" data-path="introduction-au-jeu-de-données.html"><a href="introduction-au-jeu-de-données.html"><i class="fa fa-check"></i><b>5</b> Introduction au jeu de données</a></li>
+<li class="chapter" data-level="6" data-path="comment-pourrions-nous-analyser-ces-données.html"><a href="comment-pourrions-nous-analyser-ces-données.html"><i class="fa fa-check"></i><b>6</b> Comment pourrions-nous analyser ces données?</a><ul>
+<li class="chapter" data-level="6.1" data-path="comment-pourrions-nous-analyser-ces-données.html"><a href="comment-pourrions-nous-analyser-ces-données.html#nombreuses-analyses-séparées"><i class="fa fa-check"></i><b>6.1</b> Nombreuses analyses séparées</a></li>
+<li class="chapter" data-level="6.2" data-path="comment-pourrions-nous-analyser-ces-données.html"><a href="comment-pourrions-nous-analyser-ces-données.html#une-analyse-groupée"><i class="fa fa-check"></i><b>6.2</b> Une analyse groupée</a></li>
+<li class="chapter" data-level="6.3" data-path="comment-pourrions-nous-analyser-ces-données.html"><a href="comment-pourrions-nous-analyser-ces-données.html#construire-un-mlm"><i class="fa fa-check"></i><b>6.3</b> Construire un MLM</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="effets-fixes-et-aléatoires.html"><a href="effets-fixes-et-aléatoires.html"><i class="fa fa-check"></i><b>7</b> Effets fixes et aléatoires</a><ul>
+<li class="chapter" data-level="7.1" data-path="effets-fixes-et-aléatoires.html"><a href="effets-fixes-et-aléatoires.html#effet-fixe"><i class="fa fa-check"></i><b>7.1</b> Effet fixe</a></li>
+<li class="chapter" data-level="7.2" data-path="effets-fixes-et-aléatoires.html"><a href="effets-fixes-et-aléatoires.html#effet-aléatoire"><i class="fa fa-check"></i><b>7.2</b> Effet aléatoire</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="comment-fonctionnent-les-mlms.html"><a href="comment-fonctionnent-les-mlms.html"><i class="fa fa-check"></i><b>8</b> Comment fonctionnent les MLMs?</a><ul>
+<li class="chapter" data-level="8.1" data-path="comment-fonctionnent-les-mlms.html"><a href="comment-fonctionnent-les-mlms.html#permettre-aux-intercepts-etou-pentes-de-varier-selon-le-lac-et-lespèce"><i class="fa fa-check"></i><b>8.1</b> Permettre aux intercepts et/ou pentes de varier selon le lac et l’espèce</a></li>
+<li class="chapter" data-level="8.2" data-path="comment-fonctionnent-les-mlms.html"><a href="comment-fonctionnent-les-mlms.html#les-intercepts-pentes-et-intervalles-de-confiance-associés-sont-ajustés-pour-tenir-compte-de-la-structure-des-données"><i class="fa fa-check"></i><b>8.2</b> Les intercepts, pentes, et intervalles de confiance associés sont ajustés pour tenir compte de la structure des données</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="comment-implémenter-un-mlm-dans-r.html"><a href="comment-implémenter-un-mlm-dans-r.html"><i class="fa fa-check"></i><b>9</b> Comment implémenter un MLM dans R?</a><ul>
+<li class="chapter" data-level="9.1" data-path="comment-implémenter-un-mlm-dans-r.html"><a href="comment-implémenter-un-mlm-dans-r.html#le-protocole-des-modèles-mixtes-dans-r"><i class="fa fa-check"></i><b>9.1</b> Le protocole des modèles mixtes dans R:</a></li>
+<li class="chapter" data-level="9.2" data-path="comment-implémenter-un-mlm-dans-r.html"><a href="comment-implémenter-un-mlm-dans-r.html#construction-du-modèle-a-priori-et-exploration-des-données"><i class="fa fa-check"></i><b>9.2</b> Construction du modèle a priori et exploration des données</a></li>
+<li class="chapter" data-level="9.3" data-path="comment-implémenter-un-mlm-dans-r.html"><a href="comment-implémenter-un-mlm-dans-r.html#coder-les-modèles-potentiels-et-sélectionner-le-meilleur-modèle"><i class="fa fa-check"></i><b>9.3</b> Coder les modèles potentiels et sélectionner le meilleur modèle</a></li>
+<li class="chapter" data-level="9.4" data-path="comment-implémenter-un-mlm-dans-r.html"><a href="comment-implémenter-un-mlm-dans-r.html#validation-du-modèle"><i class="fa fa-check"></i><b>9.4</b> Validation du modèle</a></li>
+<li class="chapter" data-level="9.5" data-path="comment-implémenter-un-mlm-dans-r.html"><a href="comment-implémenter-un-mlm-dans-r.html#interpréter-les-résultats-et-les-visualiser-graphiquement"><i class="fa fa-check"></i><b>9.5</b> Interpréter les résultats et les visualiser graphiquement</a></li>
+<li class="chapter" data-level="9.6" data-path="comment-implémenter-un-mlm-dans-r.html"><a href="comment-implémenter-un-mlm-dans-r.html#exercice-de-réflexion"><i class="fa fa-check"></i><b>9.6</b> Exercice de réflexion</a></li>
+</ul></li>
+<li class="part"><span><b>Les modèles linéaires généralisés mixtes (GLMM)</b></span></li>
+<li class="chapter" data-level="10" data-path="les-modèles-linéaires-généralisés-mixtes-glmm.html"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html"><i class="fa fa-check"></i><b>10</b> Les modèles linéaires généralisés mixtes (GLMM)</a></li>
+<li class="chapter" data-level="11" data-path="la-structure-du-jeu-de-données.html"><a href="la-structure-du-jeu-de-données.html"><i class="fa fa-check"></i><b>11</b> La structure du jeu de données</a><ul>
+<li class="chapter" data-level="11.1" data-path="la-structure-du-jeu-de-données.html"><a href="la-structure-du-jeu-de-données.html#un-glmm-avec-une-distribution-de-poisson"><i class="fa fa-check"></i><b>11.1</b> Un GLMM avec une distribution de Poisson</a></li>
+<li class="chapter" data-level="11.2" data-path="la-structure-du-jeu-de-données.html"><a href="la-structure-du-jeu-de-données.html#un-glmm-avec-un-distribution-binomiale-négative"><i class="fa fa-check"></i><b>11.2</b> Un GLMM avec un distribution binomiale négative</a></li>
+<li class="chapter" data-level="11.3" data-path="la-structure-du-jeu-de-données.html"><a href="la-structure-du-jeu-de-données.html#un-glmm-avec-une-distribution-poisson-lognormal"><i class="fa fa-check"></i><b>11.3</b> Un GLMM avec une distribution "Poisson-lognormal"</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="intercepts-aléatoires.html"><a href="intercepts-aléatoires.html"><i class="fa fa-check"></i><b>12</b> Intercepts aléatoires</a><ul>
+<li class="chapter" data-level="12.1" data-path="intercepts-aléatoires.html"><a href="intercepts-aléatoires.html#représentation-graphique-des-paramètres-du-modèle"><i class="fa fa-check"></i><b>12.1</b> Représentation graphique des paramètres du modèle</a></li>
+<li class="chapter" data-level="12.2" data-path="intercepts-aléatoires.html"><a href="intercepts-aléatoires.html#graphiques-des-intercepts-aléatoires"><i class="fa fa-check"></i><b>12.2</b> Graphiques des intercepts aléatoires</a></li>
+<li class="chapter" data-level="12.3" data-path="intercepts-aléatoires.html"><a href="intercepts-aléatoires.html#pentes-aléatoires"><i class="fa fa-check"></i><b>12.3</b> Pentes aléatoires</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="modèle-final.html"><a href="modèle-final.html"><i class="fa fa-check"></i><b>13</b> Modèle final</a></li>
+<li class="part"><span><b>Final considerations</b></span></li>
+<li class="chapter" data-level="14" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>14</b> Summary</a></li>
+<li class="chapter" data-level="15" data-path="ressources-additionnelles.html"><a href="ressources-additionnelles.html"><i class="fa fa-check"></i><b>15</b> Ressources additionnelles</a><ul>
+<li class="chapter" data-level="15.1" data-path="ressources-additionnelles.html"><a href="ressources-additionnelles.html#livres-de-référence-pour-les-mlms"><i class="fa fa-check"></i><b>15.1</b> Livres de référence pour les MLMs</a></li>
+<li class="chapter" data-level="15.2" data-path="ressources-additionnelles.html"><a href="ressources-additionnelles.html#ressources-pour-les-glmms"><i class="fa fa-check"></i><b>15.2</b> Ressources pour les GLMMs</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>16</b> References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/qcbsRworkshops" target="blank">QCBS R Workshop Series</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Atelier 9 : Analyses multivariées en <code>R</code></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<!------------------------ Hero Image Container --------------------------> 
+
+<head>
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=10.0,initial-scale=1.0">
+  <script src="https://kit.fontawesome.com/6a26f47516.js"></script>
+  <script src="assets/qcbs-hideOutput.js"></script>
+  <link href="assets/qcbs-style.css" rel="stylesheet">
+</head>
+
+
+
+<div class="hero-image-container"> 
+  <img class= "hero-image" src="assets/images/jean-philippe-delberghe-75xPHEQBmvA-unsplash_hero_image.jpg">
+</div>
+<div id="modèle-final" class="section level1">
+<h1><span class="header-section-number">Chapitre 13</span> Modèle final</h1>
+<p>Nous terminons cette section sur les GLMMs avec l’évaluation des effets
+fixes. Nous décrivons d’abord les modèles potentiels et les comparons
+en utilisant AICc.</p>
+<pre class="{.rsplus|}"><code>mpl2 &lt;- update(mpl1, . ~ . - rack) # modèle sans rack
+mpl3 &lt;- update(mpl1, . ~ . - status) # modèle sans status
+mpl4 &lt;- update(mpl1, . ~ . - amd:nutrient) # modèle sans l’ interaction amd:nutrient 
+ICtab(mpl1,mpl2,mpl3,mpl4, type = c(&quot;AICc&quot;))</code></pre>
+<p>Nous pouvons aussi utiliser les fonctions <code>drop1</code> et <code>dfun</code>, où dfun
+convertit les valeurs AIC retournées par drop1 en valeurs ΔAIC
+(produisant un tableau comparable à <code>ICtab</code> ci-dessus).</p>
+<pre class="{.rsplus|}"><code>(dd_LRT &lt;- drop1(mpl1,test=&quot;Chisq&quot;))
+# Model:
+#   total.fruits ~ nutrient * amd + rack + status + (1 | X) + (1 | popu) + (1 | gen)
+#              Df    AIC   LRT   Pr(Chi)    
+# &lt;none&gt;          5015.4                     
+# rack          1 5070.5 57.083 4.179e-14 ***
+# status        2 5017.0  5.612   0.06044 .  
+# nutrient:amd  1 5016.8  3.444   0.06349 .  
+# ---
+#   Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(dd_AIC &lt;- dfun(drop1(mpl1)))
+#               Df   dAIC
+# &lt;none&gt;           0.000
+# rack          1 55.083
+# status        2  1.612
+# nutrient:amd  1  1.444</code></pre>
+<p>Il y a un fort effet de rack (un changement de AIC de 55 si on enlève
+cette variable), alors que les effets de « status » et de l’interaction
+sont faibles (différence AIC moins de 2). Nous pouvons donc commencer
+par enlever l’interaction non significative afin de tester les effets
+principaux de nutriments et d’herviborie (<em>clipping</em>).</p>
+<pre class="{.rsplus|}"><code>mpl2 &lt;- update(mpl1, . ~ . - and:nutrient)
+
+# Avec AICc:
+mpl3 &lt;- update(mpl2, . ~ . - rack) # modèle sans rack ou l’interaction
+mpl4 &lt;- update(mpl2, . ~ . - status) # modèle sans status ou l’interaction
+mpl5 &lt;- update(mpl2, . ~ . - nutrient) # modèle sans nutrient ou l’interaction
+mpl6 &lt;- update(mpl2, . ~ . - amd) # modèle sans clipping ou l’interaction
+ICtab(mpl2,mpl3,mpl4,mpl5,mpl6, type = c(&quot;AICc&quot;))
+#        dAICc  df
+# mpl2   0.0    9 
+# mpl4   1.2    7 
+# mpl6   10.2   8 
+# mpl3   54.2   8 
+# mpl5   135.6  8 
+
+# Ou, avec drop1:
+(dd_LRT2 &lt;- drop1(mpl2,test=&quot;Chisq&quot;))
+# Model:
+#   total.fruits ~ nutrient + amd + rack + status + (1 | X) + (1 | popu) + (1 | gen)
+#            Df    AIC     LRT   Pr(Chi)    
+#   &lt;none&gt;      5016.8                      
+#   nutrient  1 5152.5 137.688 &lt; 2.2e-16 ***
+#   amd       1 5027.0  12.218 0.0004734 ***
+#   rack      1 5071.0  56.231 6.443e-14 ***
+#   status    2 5018.1   5.286 0.0711639 .  
+# ---
+#   Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(dd_AIC2 &lt;- dfun(drop1(mpl2)))
+#           Df    dAIC
+# &lt;none&gt;        0.000
+# nutrient  1 135.688
+# amd       1  10.218
+# rack      1  54.231
+# status    2   1.286
+
+summary(mpl2)</code></pre>
+<p>Les effets de nutriments et d’herbivorie sont forts (grand changement
+d’AIC de 135,6 (mpl5) et 10,2 (mpl6) si nutriments ou <em>clipping</em> sont
+supprimés respectivement). Notre modèle final inclut l’effet fixe des
+nutriments (fortement positif) et l’effet fixe d’herbivorie (négatifs),
+la variable nuisance de rack, l’effet aléatoire au niveau de
+l’observation (1 | X) pour tenir compte de la surdispersion et la
+variation de fruits par <em>population</em> et // génotype //.</p>
+<p>** DÉFI 10 **</p>
+<p>En utilisant l’ensemble de données <em>inverts</em> (temps de développement
+larvaire (PLD) de 74 espèces d’invertébrés et vertébrés marins élevés à
+différentes températures et temps), répondez aux questions suivantes:</p>
+<pre><code> - Quel est l&#39;effet du type d&#39;alimentation et du climat (effets fixes) sur PLD (variable réponse)?
+ - Est-ce que cette relation varie selon les taxons (effets aléatoires)?
+ - Quelle est la meilleure famille de distribution pour ces données?
+ - Une fois que vous avez déterminé la meilleure famille de distribution, réévaluez vos effets aléatoires et fixes.</code></pre>
+<p>++++ Défi 10: Solution 1|</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="modèle-final.html#cb47-1"></a><span class="co"># Charger les données</span></span>
+<span id="cb47-2"><a href="modèle-final.html#cb47-2"></a>inverts &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;inverts.csv&quot;</span>)</span>
+<span id="cb47-3"><a href="modèle-final.html#cb47-3"></a><span class="kw">str</span>(inverts)</span>
+<span id="cb47-4"><a href="modèle-final.html#cb47-4"></a></span>
+<span id="cb47-5"><a href="modèle-final.html#cb47-5"></a>mlm1 &lt;-<span class="st"> </span><span class="kw">lm</span>(PLD <span class="op">~</span><span class="st"> </span>temp <span class="op">*</span><span class="st"> </span>feeding.type, <span class="dt">data =</span> inverts)</span>
+<span id="cb47-6"><a href="modèle-final.html#cb47-6"></a><span class="kw">anova</span>(mlm1)  <span class="co"># toutes les variables sont significatives</span></span></code></pre></div>
+<p>++++</p>
+<p>++++ Défi 10: Solution 2|</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="modèle-final.html#cb48-1"></a><span class="co"># Réponse vs effets fixes</span></span>
+<span id="cb48-2"><a href="modèle-final.html#cb48-2"></a><span class="kw">ggplot</span>(inverts,<span class="kw">aes</span>(<span class="dt">x=</span>temp,<span class="dt">y=</span><span class="kw">log</span>(PLD<span class="op">+</span><span class="dv">1</span>),<span class="dt">colour=</span>feeding.type)) <span class="op">+</span></span>
+<span id="cb48-3"><a href="modèle-final.html#cb48-3"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
+<span id="cb48-4"><a href="modèle-final.html#cb48-4"></a><span class="st">  </span><span class="kw">stat_summary</span>(<span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">as.numeric</span>(temp)),<span class="dt">fun.y=</span>mean,<span class="dt">geom=</span><span class="st">&quot;line&quot;</span>) <span class="op">+</span></span>
+<span id="cb48-5"><a href="modèle-final.html#cb48-5"></a><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span></span>
+<span id="cb48-6"><a href="modèle-final.html#cb48-6"></a><span class="st">  </span><span class="kw">scale_color_manual</span>(<span class="dt">values=</span><span class="kw">c</span>(<span class="st">&quot;#3B9AB2&quot;</span>,<span class="st">&quot;#F21A00&quot;</span>)) <span class="op">+</span><span class="st"> </span><span class="co"># from Wes Anderson Zissou palette</span></span>
+<span id="cb48-7"><a href="modèle-final.html#cb48-7"></a><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>taxon)</span>
+<span id="cb48-8"><a href="modèle-final.html#cb48-8"></a></span>
+<span id="cb48-9"><a href="modèle-final.html#cb48-9"></a><span class="co"># Créer de nouvelles variables qui représentent toutes les combinaisons de feeding type x temp x taxa </span></span>
+<span id="cb48-10"><a href="modèle-final.html#cb48-10"></a><span class="co"># (effets aléatoires)</span></span>
+<span id="cb48-11"><a href="modèle-final.html#cb48-11"></a>inverts &lt;-<span class="st"> </span><span class="kw">within</span>(inverts,</span>
+<span id="cb48-12"><a href="modèle-final.html#cb48-12"></a>{</span>
+<span id="cb48-13"><a href="modèle-final.html#cb48-13"></a>  <span class="co"># taxon x feeding.type</span></span>
+<span id="cb48-14"><a href="modèle-final.html#cb48-14"></a>  tft &lt;-<span class="st"> </span><span class="kw">interaction</span>(taxon,feeding.type,temp)</span>
+<span id="cb48-15"><a href="modèle-final.html#cb48-15"></a>  tft &lt;-<span class="st"> </span><span class="kw">reorder</span>(tft, PLD, mean)</span>
+<span id="cb48-16"><a href="modèle-final.html#cb48-16"></a>})</span>
+<span id="cb48-17"><a href="modèle-final.html#cb48-17"></a></span>
+<span id="cb48-18"><a href="modèle-final.html#cb48-18"></a><span class="co"># Boîte à moustaches total des fruits vs nouvelle variable (feeding type x temp x taxa)</span></span>
+<span id="cb48-19"><a href="modèle-final.html#cb48-19"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> inverts, <span class="kw">aes</span>(<span class="kw">factor</span>(<span class="dt">x =</span> tft),<span class="dt">y =</span> <span class="kw">log</span>(PLD))) <span class="op">+</span></span>
+<span id="cb48-20"><a href="modèle-final.html#cb48-20"></a><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">colour =</span> <span class="st">&quot;skyblue2&quot;</span>, <span class="dt">outlier.shape =</span> <span class="dv">21</span>, <span class="dt">outlier.colour =</span> <span class="st">&quot;skyblue2&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb48-21"><a href="modèle-final.html#cb48-21"></a><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">axis.text.x=</span><span class="kw">element_text</span>(<span class="dt">angle=</span><span class="dv">90</span>)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb48-22"><a href="modèle-final.html#cb48-22"></a><span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun.y=</span>mean, <span class="dt">geom=</span><span class="st">&quot;point&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>) </span></code></pre></div>
+<p>++++</p>
+<p>++++ Défi 10: Solution 3|</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="modèle-final.html#cb49-1"></a>grpVars &lt;-<span class="st"> </span><span class="kw">tapply</span>(inverts<span class="op">$</span>PLD, inverts<span class="op">$</span>tft, var)</span>
+<span id="cb49-2"><a href="modèle-final.html#cb49-2"></a><span class="kw">summary</span>(grpVars)</span>
+<span id="cb49-3"><a href="modèle-final.html#cb49-3"></a></span>
+<span id="cb49-4"><a href="modèle-final.html#cb49-4"></a>grpMeans &lt;-<span class="st"> </span><span class="kw">tapply</span>(inverts<span class="op">$</span>PLD, inverts<span class="op">$</span>tft, mean)</span>
+<span id="cb49-5"><a href="modèle-final.html#cb49-5"></a><span class="kw">summary</span>(grpMeans)</span>
+<span id="cb49-6"><a href="modèle-final.html#cb49-6"></a></span>
+<span id="cb49-7"><a href="modèle-final.html#cb49-7"></a><span class="co"># Quasi-Poisson</span></span>
+<span id="cb49-8"><a href="modèle-final.html#cb49-8"></a>lm1 &lt;-<span class="st"> </span><span class="kw">lm</span>(grpVars <span class="op">~</span><span class="st"> </span>grpMeans <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</span>
+<span id="cb49-9"><a href="modèle-final.html#cb49-9"></a>phi.fit &lt;-<span class="st"> </span><span class="kw">coef</span>(lm1)</span>
+<span id="cb49-10"><a href="modèle-final.html#cb49-10"></a><span class="co"># Le -1 spécifie un modèle avec l&#39;intercept fixer à zéro</span></span>
+<span id="cb49-11"><a href="modèle-final.html#cb49-11"></a></span>
+<span id="cb49-12"><a href="modèle-final.html#cb49-12"></a><span class="co"># Binomial négative</span></span>
+<span id="cb49-13"><a href="modèle-final.html#cb49-13"></a>lm2 &lt;-<span class="st"> </span><span class="kw">lm</span>(grpVars <span class="op">~</span><span class="st"> </span><span class="kw">I</span>(grpMeans<span class="op">^</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span><span class="kw">offset</span>(grpMeans) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</span>
+<span id="cb49-14"><a href="modèle-final.html#cb49-14"></a>k.fit &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">/</span><span class="kw">coef</span>(lm2)</span>
+<span id="cb49-15"><a href="modèle-final.html#cb49-15"></a><span class="co"># Offset () est utilisé pour fixer la moyenne de chaque</span></span>
+<span id="cb49-16"><a href="modèle-final.html#cb49-16"></a><span class="co"># groupe à 1</span></span>
+<span id="cb49-17"><a href="modèle-final.html#cb49-17"></a></span>
+<span id="cb49-18"><a href="modèle-final.html#cb49-18"></a><span class="co"># Ajustement Loess non-paramétrique</span></span>
+<span id="cb49-19"><a href="modèle-final.html#cb49-19"></a>Lfit &lt;-<span class="st"> </span><span class="kw">loess</span>(grpVars <span class="op">~</span><span class="st"> </span>grpMeans)</span>
+<span id="cb49-20"><a href="modèle-final.html#cb49-20"></a></span>
+<span id="cb49-21"><a href="modèle-final.html#cb49-21"></a><span class="kw">plot</span>(grpVars <span class="op">~</span><span class="st"> </span>grpMeans, <span class="dt">xlab =</span> <span class="st">&quot;group means&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;group variances&quot;</span>)</span>
+<span id="cb49-22"><a href="modèle-final.html#cb49-22"></a><span class="kw">abline</span>(<span class="dt">a =</span> <span class="dv">0</span>, <span class="dt">b =</span> <span class="dv">1</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb49-23"><a href="modèle-final.html#cb49-23"></a><span class="kw">text</span>(<span class="dv">60</span>, <span class="dv">200</span>, <span class="st">&quot;Poisson&quot;</span>)</span>
+<span id="cb49-24"><a href="modèle-final.html#cb49-24"></a><span class="kw">curve</span>(phi.fit <span class="op">*</span><span class="st"> </span>x, <span class="dt">col =</span> <span class="dv">2</span>, <span class="dt">add =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb49-25"><a href="modèle-final.html#cb49-25"></a><span class="co"># bquote()est utilisé pour remplacer des valeurs numériques</span></span>
+<span id="cb49-26"><a href="modèle-final.html#cb49-26"></a><span class="co"># dans les équations avec des symboles</span></span>
+<span id="cb49-27"><a href="modèle-final.html#cb49-27"></a><span class="kw">text</span>(<span class="dv">60</span>, <span class="dv">800</span>, <span class="kw">bquote</span>(<span class="kw">paste</span>(<span class="st">&quot;QP: &quot;</span>, sigma<span class="op">^</span><span class="dv">2</span> <span class="op">==</span><span class="st"> </span>.(<span class="kw">round</span>(phi.fit, </span>
+<span id="cb49-28"><a href="modèle-final.html#cb49-28"></a>    <span class="dv">1</span>)) <span class="op">*</span><span class="st"> </span>mu)), <span class="dt">col =</span> <span class="dv">2</span>)</span>
+<span id="cb49-29"><a href="modèle-final.html#cb49-29"></a><span class="kw">curve</span>(x <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>x<span class="op">/</span>k.fit), <span class="dt">col =</span> <span class="dv">4</span>, <span class="dt">add =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb49-30"><a href="modèle-final.html#cb49-30"></a><span class="kw">text</span>(<span class="dv">60</span>, <span class="dv">1600</span>, <span class="kw">paste</span>(<span class="st">&quot;NB: k=&quot;</span>, <span class="kw">round</span>(k.fit, <span class="dv">1</span>), <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>), <span class="dt">col =</span> <span class="dv">4</span>)</span>
+<span id="cb49-31"><a href="modèle-final.html#cb49-31"></a>mvec &lt;-<span class="st"> </span><span class="dv">0</span><span class="op">:</span><span class="dv">120</span></span>
+<span id="cb49-32"><a href="modèle-final.html#cb49-32"></a><span class="kw">lines</span>(mvec, <span class="kw">predict</span>(Lfit, mvec), <span class="dt">col =</span> <span class="dv">5</span>)</span>
+<span id="cb49-33"><a href="modèle-final.html#cb49-33"></a><span class="kw">text</span>(<span class="dv">50</span>, <span class="dv">1300</span>, <span class="st">&quot;loess&quot;</span>, <span class="dt">col =</span> <span class="dv">5</span>)</span>
+<span id="cb49-34"><a href="modèle-final.html#cb49-34"></a></span>
+<span id="cb49-35"><a href="modèle-final.html#cb49-35"></a><span class="co"># Poisson GLMM</span></span>
+<span id="cb49-36"><a href="modèle-final.html#cb49-36"></a>mp1 &lt;-<span class="st"> </span><span class="kw">glmer</span>(PLD <span class="op">~</span><span class="st"> </span>temp <span class="op">*</span><span class="st"> </span>feeding.type <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>taxon), <span class="dt">data =</span> inverts, </span>
+<span id="cb49-37"><a href="modèle-final.html#cb49-37"></a>    <span class="dt">family =</span> <span class="st">&quot;poisson&quot;</span>)</span>
+<span id="cb49-38"><a href="modèle-final.html#cb49-38"></a><span class="kw">overdisp_fun</span>(mp1)</span>
+<span id="cb49-39"><a href="modèle-final.html#cb49-39"></a><span class="co"># rapport est significativement &gt; 1</span></span>
+<span id="cb49-40"><a href="modèle-final.html#cb49-40"></a></span>
+<span id="cb49-41"><a href="modèle-final.html#cb49-41"></a><span class="co"># NB GLMM</span></span>
+<span id="cb49-42"><a href="modèle-final.html#cb49-42"></a>mnb1 &lt;-<span class="st"> </span><span class="kw">glmer.nb</span>(PLD <span class="op">~</span><span class="st"> </span>temp <span class="op">*</span><span class="st"> </span>feeding.type <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>taxon), <span class="dt">data =</span> inverts)</span>
+<span id="cb49-43"><a href="modèle-final.html#cb49-43"></a><span class="kw">overdisp_fun</span>(mnb1)</span>
+<span id="cb49-44"><a href="modèle-final.html#cb49-44"></a><span class="co"># Semble bon!</span></span></code></pre></div>
+<p>++++</p>
+<p>++++ Défi 10: Solution 4|</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="modèle-final.html#cb50-1"></a><span class="co"># Re-évaluer les intercepts aléatoires</span></span>
+<span id="cb50-2"><a href="modèle-final.html#cb50-2"></a><span class="kw">summary</span>(mnb1)<span class="op">$</span>varcor</span>
+<span id="cb50-3"><a href="modèle-final.html#cb50-3"></a></span>
+<span id="cb50-4"><a href="modèle-final.html#cb50-4"></a>mnb1.taxless &lt;-<span class="st"> </span><span class="kw">glm.nb</span>(PLD <span class="op">~</span><span class="st"> </span>temp <span class="op">*</span><span class="st"> </span>feeding.type, <span class="dt">data =</span> inverts)</span>
+<span id="cb50-5"><a href="modèle-final.html#cb50-5"></a></span>
+<span id="cb50-6"><a href="modèle-final.html#cb50-6"></a><span class="co"># Ici, parce que nous comparons un glmer avec un glm, nous</span></span>
+<span id="cb50-7"><a href="modèle-final.html#cb50-7"></a><span class="co"># devons faire quelque chose de différent que anova(). Pour</span></span>
+<span id="cb50-8"><a href="modèle-final.html#cb50-8"></a><span class="co"># tester l&#39;importance de l’intercept aléatoire, nous allons</span></span>
+<span id="cb50-9"><a href="modèle-final.html#cb50-9"></a><span class="co"># comparer la vraisemblance de chaque modèle :</span></span>
+<span id="cb50-10"><a href="modèle-final.html#cb50-10"></a>NL1 &lt;-<span class="st"> </span><span class="op">-</span><span class="kw">logLik</span>(mnb1)</span>
+<span id="cb50-11"><a href="modèle-final.html#cb50-11"></a>NL0 &lt;-<span class="st"> </span><span class="op">-</span><span class="kw">logLik</span>(mnb1.taxless)</span>
+<span id="cb50-12"><a href="modèle-final.html#cb50-12"></a>devdiff &lt;-<span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>(NL0 <span class="op">-</span><span class="st"> </span>NL1)</span>
+<span id="cb50-13"><a href="modèle-final.html#cb50-13"></a>dfdiff &lt;-<span class="st"> </span><span class="kw">attr</span>(NL1, <span class="st">&quot;df&quot;</span>) <span class="op">-</span><span class="st"> </span><span class="kw">attr</span>(NL0, <span class="st">&quot;df&quot;</span>)</span>
+<span id="cb50-14"><a href="modèle-final.html#cb50-14"></a><span class="kw">pchisq</span>(devdiff, dfdiff, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb50-15"><a href="modèle-final.html#cb50-15"></a></span>
+<span id="cb50-16"><a href="modèle-final.html#cb50-16"></a><span class="co"># Nous pourrions aussi comparer l&#39;AIC du modèle avec (mnb1)</span></span>
+<span id="cb50-17"><a href="modèle-final.html#cb50-17"></a><span class="co"># et sans (mnb1.taxless) effets aléatoires avec la fonction</span></span>
+<span id="cb50-18"><a href="modèle-final.html#cb50-18"></a><span class="co"># AICtab()</span></span>
+<span id="cb50-19"><a href="modèle-final.html#cb50-19"></a><span class="kw">AICtab</span>(mnb1, mnb1.taxless)</span>
+<span id="cb50-20"><a href="modèle-final.html#cb50-20"></a><span class="co"># Changement important du AIC si nous supprimons l’intercept</span></span>
+<span id="cb50-21"><a href="modèle-final.html#cb50-21"></a><span class="co"># aléatoire. Donc, ça vaut la peine de garder cet effet.</span></span>
+<span id="cb50-22"><a href="modèle-final.html#cb50-22"></a></span>
+<span id="cb50-23"><a href="modèle-final.html#cb50-23"></a><span class="co"># Graphique diagnostic</span></span>
+<span id="cb50-24"><a href="modèle-final.html#cb50-24"></a><span class="kw">locscaleplot</span>(mnb1)</span>
+<span id="cb50-25"><a href="modèle-final.html#cb50-25"></a></span>
+<span id="cb50-26"><a href="modèle-final.html#cb50-26"></a><span class="co"># Graphique des paramètres de variance</span></span>
+<span id="cb50-27"><a href="modèle-final.html#cb50-27"></a><span class="kw">coefplot2</span>(mnb1, <span class="dt">ptype =</span> <span class="st">&quot;vcov&quot;</span>, <span class="dt">intercept =</span> <span class="ot">TRUE</span>, <span class="dt">main =</span> <span class="st">&quot;Random effect variance&quot;</span>)</span>
+<span id="cb50-28"><a href="modèle-final.html#cb50-28"></a></span>
+<span id="cb50-29"><a href="modèle-final.html#cb50-29"></a><span class="co"># Graphique des effets fixes</span></span>
+<span id="cb50-30"><a href="modèle-final.html#cb50-30"></a><span class="kw">coefplot2</span>(mnb1, <span class="dt">intercept =</span> <span class="ot">TRUE</span>, <span class="dt">main =</span> <span class="st">&quot;Fixed effect coefficient&quot;</span>)</span>
+<span id="cb50-31"><a href="modèle-final.html#cb50-31"></a></span>
+<span id="cb50-32"><a href="modèle-final.html#cb50-32"></a><span class="co"># Graphique des intercepts aléatoires</span></span>
+<span id="cb50-33"><a href="modèle-final.html#cb50-33"></a>pp &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">layout.widths =</span> <span class="kw">list</span>(<span class="dt">left.padding =</span> <span class="dv">0</span>, <span class="dt">right.padding =</span> <span class="dv">0</span>))</span>
+<span id="cb50-34"><a href="modèle-final.html#cb50-34"></a>r2 &lt;-<span class="st"> </span><span class="kw">ranef</span>(mnb1, <span class="dt">condVar =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb50-35"><a href="modèle-final.html#cb50-35"></a>d2 &lt;-<span class="st"> </span><span class="kw">dotplot</span>(r2, <span class="dt">par.settings =</span> pp)</span>
+<span id="cb50-36"><a href="modèle-final.html#cb50-36"></a><span class="kw">grid.arrange</span>(d2<span class="op">$</span>taxon, <span class="dt">nrow =</span> <span class="dv">1</span>)</span>
+<span id="cb50-37"><a href="modèle-final.html#cb50-37"></a></span>
+<span id="cb50-38"><a href="modèle-final.html#cb50-38"></a><span class="co"># Évaluer pentes aléatoires</span></span>
+<span id="cb50-39"><a href="modèle-final.html#cb50-39"></a>mnb2 &lt;-<span class="st"> </span><span class="kw">glmer.nb</span>(PLD <span class="op">~</span><span class="st"> </span>temp <span class="op">*</span><span class="st"> </span>feeding.type <span class="op">+</span><span class="st"> </span>(PLD <span class="op">|</span><span class="st"> </span>taxon), <span class="dt">data =</span> inverts)</span>
+<span id="cb50-40"><a href="modèle-final.html#cb50-40"></a></span>
+<span id="cb50-41"><a href="modèle-final.html#cb50-41"></a><span class="co"># Examiner composant de variance-covariance</span></span>
+<span id="cb50-42"><a href="modèle-final.html#cb50-42"></a><span class="kw">summary</span>(mnb2)  <span class="co"># option 1</span></span>
+<span id="cb50-43"><a href="modèle-final.html#cb50-43"></a><span class="kw">attr</span>(<span class="kw">VarCorr</span>(mnb2)<span class="op">$</span>taxon, <span class="st">&quot;correlation&quot;</span>)  <span class="co"># option 2</span></span>
+<span id="cb50-44"><a href="modèle-final.html#cb50-44"></a><span class="kw">printvc</span>(mnb2)  <span class="co"># option 3</span></span>
+<span id="cb50-45"><a href="modèle-final.html#cb50-45"></a><span class="co"># Forte corrélation entre les effets aléatoires -&gt; pas assez</span></span>
+<span id="cb50-46"><a href="modèle-final.html#cb50-46"></a><span class="co"># de puissance pour tester pentes aléatoires</span></span>
+<span id="cb50-47"><a href="modèle-final.html#cb50-47"></a></span>
+<span id="cb50-48"><a href="modèle-final.html#cb50-48"></a><span class="co"># Re-évaluer les effets fixes Remarque : pour utiliser la</span></span>
+<span id="cb50-49"><a href="modèle-final.html#cb50-49"></a><span class="co"># fonction de drop1 nous devons spécifier le paramètre thêta</span></span>
+<span id="cb50-50"><a href="modèle-final.html#cb50-50"></a><span class="co"># et exécuter le modèle NB avec glmer :</span></span>
+<span id="cb50-51"><a href="modèle-final.html#cb50-51"></a>theta.mnb1 &lt;-<span class="st"> </span><span class="kw">theta.md</span>(inverts<span class="op">$</span>PLD, <span class="kw">fitted</span>(mnb1), <span class="dt">dfr =</span> <span class="kw">df.residual</span>(mnb1))</span>
+<span id="cb50-52"><a href="modèle-final.html#cb50-52"></a>mnb1 &lt;-<span class="st"> </span><span class="kw">glmer</span>(PLD <span class="op">~</span><span class="st"> </span>temp <span class="op">*</span><span class="st"> </span>feeding.type <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>taxon), <span class="dt">data =</span> inverts, </span>
+<span id="cb50-53"><a href="modèle-final.html#cb50-53"></a>    <span class="dt">family =</span> <span class="kw">negative.binomial</span>(<span class="dt">theta =</span> theta.mnb1))</span>
+<span id="cb50-54"><a href="modèle-final.html#cb50-54"></a></span>
+<span id="cb50-55"><a href="modèle-final.html#cb50-55"></a>(dd_LRT &lt;-<span class="st"> </span><span class="kw">drop1</span>(mnb1, <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>))</span>
+<span id="cb50-56"><a href="modèle-final.html#cb50-56"></a>(dd_AIC &lt;-<span class="st"> </span><span class="kw">dfun</span>(<span class="kw">drop1</span>(mnb1)))</span>
+<span id="cb50-57"><a href="modèle-final.html#cb50-57"></a><span class="co"># Lorsque l’interaction feeding.type x température est</span></span>
+<span id="cb50-58"><a href="modèle-final.html#cb50-58"></a><span class="co"># supprimée, dAIC change de plus de 2 unité → suggère de</span></span>
+<span id="cb50-59"><a href="modèle-final.html#cb50-59"></a><span class="co"># garder l&#39;interaction dans le modèle</span></span></code></pre></div>
+<p>++++</p>
+
+</div>
+
+
+
+<hr>
+<center> 
+  <div class="footer">
+      All the content of the workshop series is under a <a href="https://creativecommons.org/licenses/by-nc/2.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+  </div>
+</center>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="intercepts-aléatoires.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="summary.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": false
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

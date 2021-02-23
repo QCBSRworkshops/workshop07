@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapitre 2 Préparez-vous pour cet atelier | Atelier 9 : Analyses multivariées en R</title>
+  <title>Chapitre 6 Comment pourrions-nous analyser ces données? | Atelier 9 : Analyses multivariées en R</title>
   <meta name="description" content="Analyses multivariées en R" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapitre 2 Préparez-vous pour cet atelier | Atelier 9 : Analyses multivariées en R" />
+  <meta property="og:title" content="Chapitre 6 Comment pourrions-nous analyser ces données? | Atelier 9 : Analyses multivariées en R" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://github.com/qcbsRworkshops/" />
   <meta property="og:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="qcbsRworkshops/workshop09" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapitre 2 Préparez-vous pour cet atelier | Atelier 9 : Analyses multivariées en R" />
+  <meta name="twitter:title" content="Chapitre 6 Comment pourrions-nous analyser ces données? | Atelier 9 : Analyses multivariées en R" />
   
   <meta name="twitter:description" content="Analyses multivariées en R" />
   <meta name="twitter:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
-<link rel="prev" href="objectifs-dapprentissage.html"/>
-<link rel="next" href="aperçu.html"/>
+<link rel="prev" href="introduction-au-jeu-de-données.html"/>
+<link rel="next" href="effets-fixes-et-aléatoires.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -224,47 +224,49 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div class="hero-image-container"> 
   <img class= "hero-image" src="assets/images/jean-philippe-delberghe-75xPHEQBmvA-unsplash_hero_image.jpg">
 </div>
-<div id="préparez-vous-pour-cet-atelier" class="section level1">
-<h1><span class="header-section-number">Chapitre 2</span> Préparez-vous pour cet atelier</h1>
-<p><strong>Téléchargez le script R et les données pour cet atelier:</strong></p>
-<ul>
-<li><a href="http://qcbs.ca/wiki/_media/lmm_e.r">R Script</a></li>
-<li><a href="http://qcbs.ca/wiki/_media/qcbs_w6_data.csv">Fish data</a></li>
-<li><a href="http://qcbs.ca/wiki/_media/banta_totalfruits.csv">Arabidopsis data</a></li>
-<li><a href="http://qcbs.ca/wiki/_media/inverts.csv">Inverts data</a></li>
-<li><a href="http://qcbs.ca/wiki/_media/glmm_e.r">GLMM Script</a></li>
-<li><a href="http://qcbs.ca/wiki/_media/glmm_funs.r">glmm_funs</a></li>
-</ul>
-<p><strong>Télechargez les paquets R pour cet atelier:</strong></p>
-<ul>
-<li><a href="http://cran.r-project.org/web/packages/ggplot2/index.html">ggplot2</a></li>
-<li><a href="http://cran.r-project.org/web/packages/lme4/index.html">lm4</a></li>
-<li><a href="http://cran.r-project.org/web/packages/AICcmodavg/index.html">AICcmodavg</a></li>
-<li><a href="http://cran.r-project.org/web/packages/MASS/index.html">MASS</a></li>
-<li><a href="http://cran.r-project.org/web/packages/vcdExtra/index.html">vcdExtra</a></li>
-<li><a href="http://cran.r-project.org/web/packages/bbmle/index.html">bbmle</a></li>
-<li><a href="http://cran.r-project.org/web/packages/DescTools/index.html">DescTools</a></li>
-</ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="préparez-vous-pour-cet-atelier.html#cb1-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;ggplot2&quot;</span>)</span>
-<span id="cb1-2"><a href="préparez-vous-pour-cet-atelier.html#cb1-2"></a><span class="kw">install.packages</span>(<span class="st">&quot;lme4&quot;</span>)</span>
-<span id="cb1-3"><a href="préparez-vous-pour-cet-atelier.html#cb1-3"></a><span class="kw">install.packages</span>(<span class="st">&quot;AICcmodavg&quot;</span>)</span>
-<span id="cb1-4"><a href="préparez-vous-pour-cet-atelier.html#cb1-4"></a><span class="kw">install.packages</span>(<span class="st">&quot;MASS&quot;</span>)</span>
-<span id="cb1-5"><a href="préparez-vous-pour-cet-atelier.html#cb1-5"></a><span class="kw">install.packages</span>(<span class="st">&quot;vcdExtra&quot;</span>)</span>
-<span id="cb1-6"><a href="préparez-vous-pour-cet-atelier.html#cb1-6"></a><span class="kw">install.packages</span>(<span class="st">&quot;bbmle&quot;</span>)</span>
-<span id="cb1-7"><a href="préparez-vous-pour-cet-atelier.html#cb1-7"></a><span class="kw">install.packages</span>(<span class="st">&quot;DescTools&quot;</span>)</span>
-<span id="cb1-8"><a href="préparez-vous-pour-cet-atelier.html#cb1-8"></a></span>
-<span id="cb1-9"><a href="préparez-vous-pour-cet-atelier.html#cb1-9"></a><span class="kw">library</span>(ggplot2)</span>
-<span id="cb1-10"><a href="préparez-vous-pour-cet-atelier.html#cb1-10"></a><span class="kw">library</span>(lme4)</span>
-<span id="cb1-11"><a href="préparez-vous-pour-cet-atelier.html#cb1-11"></a><span class="kw">library</span>(AICcmodavg)</span>
-<span id="cb1-12"><a href="préparez-vous-pour-cet-atelier.html#cb1-12"></a><span class="kw">library</span>(MASS)</span>
-<span id="cb1-13"><a href="préparez-vous-pour-cet-atelier.html#cb1-13"></a><span class="kw">library</span>(vcdExtra)</span>
-<span id="cb1-14"><a href="préparez-vous-pour-cet-atelier.html#cb1-14"></a><span class="kw">library</span>(bbmle)</span>
-<span id="cb1-15"><a href="préparez-vous-pour-cet-atelier.html#cb1-15"></a><span class="kw">library</span>(DescTools)</span></code></pre></div>
-
+<div id="comment-pourrions-nous-analyser-ces-données" class="section level1">
+<h1><span class="header-section-number">Chapitre 6</span> Comment pourrions-nous analyser ces données?</h1>
+<div id="nombreuses-analyses-séparées" class="section level2">
+<h2><span class="header-section-number">6.1</span> Nombreuses analyses séparées</h2>
+<p>Une façon d’analyser ces données est de faire une analyse séparée pour
+chaque espèce et chaque lac. Voici le graphique de la position trophique
+en fonction de la taille pour l’espèces 1 dans le lac 1 :</p>
+<p><img src="images/fig_5_w5.png" width="400" /></p>
+<p>Remarquez que vous devez estimer une ordonnée à l’origine et une pente
+pour chaque régression (2 paramètres x 3 espèces X 6 lacs = 36
+paramètres estimés) et la taille d’échantillon pour chaque analyse est
+de 10. Il y a peu de chances de détecter un effet à cause de la faible
+taille d’échantillon et un taux d’erreur augmenté en raison de
+comparaisons multiples.</p>
 </div>
-
-
-
+<div id="une-analyse-groupée" class="section level2">
+<h2><span class="header-section-number">6.2</span> Une analyse groupée</h2>
+<p>Une autre façon d’analyser ces données est de faire une seule analyse
+en ignorant les variables espèce et lac. Encore une fois, voici le
+graphique de toutes les données :</p>
+<p><img src="images/fig_6_w5.png" width="400" /></p>
+<p>Notez que vous avez maintenant une énorme taille d’échantillon et
+beaucoup moins de paramètres à estimer. Mais qu’en est-il de la
+pseudoréplication? Les poissons d’un même lac et d’une même espèce
+sont plus similaires entre-eux que les poissons de lacs et d’espèces
+différentes. De plus, regardez tout ce bruit dans les données ! Une
+partie doit être due aux effets de l’espèce et du lac.</p>
+<p>Pour notre question, on veut seulement savoir s’il y a un effet général
+de la longueur corporelle sur la position trophique. On ne cherche pas
+directement à savoir si cet effet pourrait varier faiblement par espèce
+en raison de processus biologiques que nous n’avons pas mesurés ou parmi
+les lacs en raison de variables environnementales non mesurées. Nous
+voulons simplement prendre en compte cette variation dans le modèle
+(parfois désignée effets aléatoires).</p>
+</div>
+<div id="construire-un-mlm" class="section level2">
+<h2><span class="header-section-number">6.3</span> Construire un MLM</h2>
+<p>Les MLMs sont un compromis entre séparer et regrouper. Ils:</p>
+<pre><code>- Estiment une pente et une ordonnée à l&#39;origine pour chaque espèce et chaque lac (séparer), mais en calculant moins de paramètres
+qu&#39;une régression classique.  
+- Utilisent toutes les données disponibles (regrouper) tout en contrôlant les différences entre les lacs et les espèces (pseudo-réplication).</code></pre>
+</div>
+</div>
 <hr>
 <center> 
   <div class="footer">
@@ -276,8 +278,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="objectifs-dapprentissage.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="aperçu.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="introduction-au-jeu-de-données.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="effets-fixes-et-aléatoires.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
