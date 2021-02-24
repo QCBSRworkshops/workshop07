@@ -247,6 +247,7 @@ plot + geom_point() + facet_wrap(~ Lake) + xlab("Longueur (mm)") + ylab("Positio
 .pull-right[
 **Option 1. Séparer** 
 <br>
+
 On pourrait faire une analyse pour chaque espèce:
 * Estimer 6 ordonnées à l'origine et 6 pentes pour chaque espèce (car 6 lacs)
 
