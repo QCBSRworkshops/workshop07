@@ -329,10 +329,9 @@ On souhaite émettre des conclusions à propos des niveaux du facteur ou de la r
 <br>
 
 <img style = "float: left; width:50%;margin: 1%" src = "images/fig_7_w5.png">
-<img style= "float = right; width:50%;margin: 1%" src = "images/fig_9_w5.png">
+<img style = "float: right; width:50%;margin: 1%" src = "images/fig_9_w5.png">
 
 * On suppose que les ordonnées à l'origine et/ou les pentes proviennent d'une distribution normale. 
-
 * Le modèle estime une ordonnée à l'origine et/ou une pente moyenne + l'écart type de l'effet aléatoire (distribution normale) 
 
 <br><br>
