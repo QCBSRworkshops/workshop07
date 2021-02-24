@@ -95,15 +95,15 @@ install.packages(c("ggplot2",
 
 # Objectifs d'apprentissage
 
-1. Décrire les modèles (généralisés) à effets mixtes ;
+1. Décrire les modèles (généralisés) à effets mixtes
 
-2. Identifier les situations dans lesquelles l'utilisation d'effets mixtes est appropriée ;
+2. Identifier les situations dans lesquelles l'utilisation d'effets mixtes est appropriée
 
-3. Mettre en œuvre des modèles linéaires mixtes de base avec `R` ;
+3. Mettre en œuvre des modèles linéaires mixtes de base avec `R`
 
-4. Exécuter des modèles linéaires généralisés mixtes de base avec `R` ;
+4. Exécuter des modèles linéaires généralisés mixtes de base avec `R`
 
-5. Valider, interpréter et visualiser les modèles mixtes avec `R`.
+5. Valider, interpréter et visualiser les modèles mixtes avec `R`
 
 
 ---
@@ -122,11 +122,11 @@ Pour répondre, 3 espèces ont été sélectionnées et dix individus par espèc
 # Familiarisez-vous avec le jeu de données
 <br>
 
-1. Ouvrez le jeu de données,
+1. Ouvrez le jeu de données
 
-2. Ouvrez le script de l'atelier dans R,
+2. Ouvrez le script de l'atelier dans `R`
 
-3. Visualisez la relation entre taille et position trophique.
+3. Visualisez la relation entre taille et position trophique
 
 --
 
@@ -228,15 +228,15 @@ plot + geom_point() + facet_wrap(~ Lake) + xlab("Longueur (mm)") + ylab("Positio
 
 <br>
 
-**Option 1. Séparer**:
+**Option 1. Séparer**
 
-- Faire une analyse séparée pour chaque espèces et chaque lac
+- Faire une analyse séparée pour chaque espèces et chaque lac.
 
 <br>
 
-**Option 2. Regrouper**:
+**Option 2. Regrouper**
 
-- Faire une seule analyse en ignorant les variables espèces et lac
+- Faire une seule analyse en ignorant les variables espèces et lac.
 
 
 ---
@@ -248,7 +248,7 @@ plot + geom_point() + facet_wrap(~ Lake) + xlab("Longueur (mm)") + ylab("Positio
 **Option 1. Séparer** 
 <br>
 
-On pourrait faire une analyse pour chaque espèce:
+On pourrait faire une analyse pour chaque espèce :
 * Estimer 6 ordonnées à l'origine et 6 pentes pour chaque espèce (car 6 lacs)
 
 * Taille d'échantillon *n* = 10 pour chaque analyse (i.e. 10 poissons/espèce/lac)
@@ -265,9 +265,9 @@ On pourrait faire une analyse pour chaque espèce:
 **Option 2. Regrouper**
 * Très grande taille d'échantillon!
 
-* Et la pseudoreplication? (les poissons d'un même lac et d'une même espèce sont corrélés).
+* Et la pseudoreplication? (les poissons d'un même lac et d'une même espèce sont corrélés)
 
-* Beaucoup de bruit = Une partie pourrait être due aux **effets** de **l'espèce** et du **lac**.
+* Beaucoup de bruit = Une partie pourrait être due aux **effets** de **l'espèce** et du **lac**
 ]
 
 ---
