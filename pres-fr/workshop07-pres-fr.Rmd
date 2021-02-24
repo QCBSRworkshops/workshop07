@@ -156,7 +156,7 @@ fig <- theme_bw() + theme(panel.grid.minor = element_blank(),
 plot <- ggplot(aes(Fish_Length,Trophic_Pos),data = fish.data)
 
 # Graphique 1 - Toutes les données
-plot + geom_point() + xlab("Length (mm)") + ylab("Trophic Position") + labs(title = "All Data") + fig
+plot + geom_point() + xlab("Longueur (mm)") + ylab("Position Trophique") + labs(title = "Toutes les données") + fig
 ```
 
 
@@ -178,7 +178,7 @@ fig <- theme_bw() + theme(panel.grid.minor = element_blank(), panel.grid.major =
 plot <- ggplot(aes(Fish_Length,Trophic_Pos),data = fish.data)
 
 # Graphique 1 - Toutes les données
-plot + geom_point() + xlab("Length (mm)") + ylab("Trophic Position") + labs(title = "All Data") + fig
+plot + geom_point() + xlab("Longueur (mm)") + ylab("Position Trophique") + labs(title = "Toutes les données") + fig
 ```
 
 
@@ -187,8 +187,8 @@ plot + geom_point() + xlab("Length (mm)") + ylab("Trophic Position") + labs(titl
 
 ```{r}
 # Graphique 2 - Par espèce
-plot + geom_point() + facet_wrap(~ Fish_Species) + xlab("Length (mm)") + ylab("Trophic Position") +
-   labs(title = "By Species") + fig
+plot + geom_point() + facet_wrap(~ Fish_Species) + xlab("Longueur (mm)") + ylab("Position Trophique") +
+   labs(title = "Par espèce") + fig
 ```
 
 ---
@@ -196,8 +196,8 @@ plot + geom_point() + facet_wrap(~ Fish_Species) + xlab("Length (mm)") + ylab("T
 
 ```{r}
 # Graphique 3 – Par lac
-plot + geom_point() + facet_wrap(~ Lake) + xlab("Length (mm)") + ylab("Trophic Position") +
-   labs(title = "By Lake") + fig
+plot + geom_point() + facet_wrap(~ Lake) + xlab("Longueur (mm)") + ylab("Position Trophique") +
+   labs(title = "Par lac") + fig
 ```
 
 
