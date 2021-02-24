@@ -328,8 +328,8 @@ On souhaite émettre des conclusions à propos des niveaux du facteur ou de la r
 # Effet aléatoire : faire varier les ordonnées à l'origine et/ou les pentes
 <br>
 
-<img style="float: left; width:50%;margin: 1%" src="images/fig_7_w5.png">
-<img style="float: right; width:50%;margin: 1%" src="images/fig_9_w5.png">
+.pull-left[<img style = "width:50%;margin: 1%" src = "images/fig_7_w5.png">]
+.pull-right[<img style= "width:50%;margin: 1%" src = "images/fig_9_w5.png">]
 On suppose que les ordonnées à l'origine et/ou les pentes proviennent d'une distribution normale. 
 
 On a seulement besoin d'estimer la moyenne (ordonnée à l'origine générale) et l'écart type de la distribution normale (effet aléatoire) au lieu d'estimer une ordonnée à l'origine par espèce (ce qui ajouterait 2 paramètres).
