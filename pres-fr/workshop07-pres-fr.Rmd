@@ -288,7 +288,7 @@ Les MLMs permettent de **séparer et regrouper** l'analyse. Ils:
 ---
 # Pourquoi choisir un MLM?
 
-#### Effet fixe VS effet aléatoire
+#### Effet fixe vs effet aléatoire
 
 Dans la littérature des MLMs, vous rencontrerez souvent ces termes. Il existe plusieurs façons de les décrire et nous vous présenterons ici celles que nous trouvons les plus faciles à appliquer.
 
@@ -296,9 +296,11 @@ Dans la littérature des MLMs, vous rencontrerez souvent ces termes. Il existe p
 
 ##### Effet fixe : processus déterministes
 
-* Les données proviennent de tous les niveaux possibles d'un facteur (variable qualitative) où d'un prédicteur (variable quantitative).
+Les données proviennent de : 
+* tous les niveaux possibles d'un facteur (variable qualitative) 
+* d'un prédicteur (variable quantitative).
 
-* On souhaite émettre des conclusions à propos des niveaux du facteur d'où les données proviennent ou de la relation entre le prédicteur et la variable réponse.
+On souhaite émettre des conclusions à propos des niveaux du facteur ou de la relation entre le prédicteur et la variable réponse.
 
 --
 
