@@ -1,5 +1,5 @@
 ---
-title: "Atelier 7: Modèles (generalisés) à effets mixtes"
+title: "Atelier 7: Modèles linéaires (generalisés) à effets mixtes"
 subtitle: "Série d'ateliers R du CSBQ"
 author: "Centre de la science de la biodiversité du Québec"
 output:
@@ -143,27 +143,6 @@ head(fish.data)
 
 <br>
 
-```{r, echo= FALSE}
-library(ggplot2)
-fish.data <- read.csv('data/qcbs_w6_data.csv')
-
-# thème simplifié
-fig <- theme_bw() + theme(panel.grid.minor = element_blank(), panel.grid.major = element_blank(), panel.background = element_blank()) +
-  theme(strip.background = element_blank(), strip.text.y = element_text()) + theme(legend.background = element_blank()) +
-  theme(legend.key = element_blank()) + theme(panel.border = element_rect(colour = "black", fill = NA))
-
-# Faites les trois graphiques suivants pour explorer les données
-plot <- ggplot(aes(Fish_Length,Trophic_Pos),data = fish.data)
-
-# Graphique 1 - Toutes les données
-plot + geom_point() + xlab("Length (mm)") + ylab("Trophic Position") + labs(title = "All Data") + fig
-```
-
----
-# Visualisation de l'ensemble des données
-
-<br>
-
 ```{r, eval= FALSE}
 # thème simplifié
 fig <- theme_bw() + theme(panel.grid.minor = element_blank(),
@@ -172,6 +151,28 @@ fig <- theme_bw() + theme(panel.grid.minor = element_blank(),
     theme(legend.background = element_blank()) +
     theme(legend.key = element_blank()) +
     theme(panel.border = element_rect(colour = "black", fill = NA))
+
+# Faites les trois graphiques suivants pour explorer les données
+plot <- ggplot(aes(Fish_Length,Trophic_Pos),data = fish.data)
+
+# Graphique 1 - Toutes les données
+plot + geom_point() + xlab("Length (mm)") + ylab("Trophic Position") + labs(title = "All Data") + fig
+```
+
+
+---
+# Visualisation de l'ensemble des données
+
+<br>
+
+```{r, echo= FALSE}
+library(ggplot2)
+fish.data <- read.csv('data/qcbs_w6_data.csv')
+
+# thème simplifié
+fig <- theme_bw() + theme(panel.grid.minor = element_blank(), panel.grid.major = element_blank(), panel.background = element_blank()) +
+  theme(strip.background = element_blank(), strip.text.y = element_text()) + theme(legend.background = element_blank()) +
+  theme(legend.key = element_blank()) + theme(panel.border = element_rect(colour = "black", fill = NA))
 
 # Faites les trois graphiques suivants pour explorer les données
 plot <- ggplot(aes(Fish_Length,Trophic_Pos),data = fish.data)
@@ -314,7 +315,7 @@ Dans la littérature des MLMs, vous rencontrerez souvent ces termes. Il existe p
 #### Comment fonctionnent les MLMs?
 <br>
 
-**A.** Permet aux ordonnées à l'origine et/ou aux pentes d'être considérés comme propres (c.-à.d. de varier) à une population donnée (**effet aléatoire**), e.g. par lac et/ou par espèce
+**A.** Permet aux ordonnées à l'origine et/ou aux pentes d'être considérés comme propres (c.-à.-d. de varier) à une population donnée (**effet aléatoire**), e.g. par lac et/ou par espèce
 
 <br>
 
