@@ -246,6 +246,7 @@ plot + geom_point() + facet_wrap(~ Lake) + xlab("Longueur (mm)") + ylab("Positio
 
 .pull-right[
 **Option 1. Séparer**
+On pourrait faire une analyse pour chaque espèce:
 * Estimer 6 ordonnées à l'origine et 6 pentes pour chaque espèce (car 6 lacs)
 
 * Taille d'échantillon *n* = 10 pour chaque analyse (i.e. 10 poissons/espèce/lac)
@@ -259,12 +260,12 @@ plot + geom_point() + facet_wrap(~ Lake) + xlab("Longueur (mm)") + ylab("Positio
 .pull-left[![](images/fig_6_w5.png)]
 
 .pull-right[
-**Option 2. Regrouper:**
+**Option 2. Regrouper**
 * Très grande taille d'échantillon!
 
 * Et la pseudoreplication? (les poissons d'un même lac et d'une même espèce sont corrélés).
 
-* Beaucoup de bruit! Une partie doit être due aux effets de l'espèce et du lac.
+* Beaucoup de bruit = Une partie pourrait être due aux **effets** de **l'espèce** et du **lac**.
 ]
 
 ---
@@ -296,8 +297,8 @@ Dans la littérature des MLMs, vous rencontrerez souvent ces termes. Il existe p
 
 ##### Effet fixe : processus déterministes
 
-Les données proviennent de : 
-* tous les niveaux possibles d'un facteur (variable qualitative) 
+Les données proviennent : 
+* de tous les niveaux possibles d'un facteur (variable qualitative) 
 * d'un prédicteur (variable quantitative).
 
 On souhaite émettre des conclusions à propos des niveaux du facteur ou de la relation entre le prédicteur et la variable réponse.
