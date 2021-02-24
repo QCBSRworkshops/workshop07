@@ -325,6 +325,22 @@ On souhaite émettre des conclusions à propos des niveaux du facteur ou de la r
 
 
 ---
+# Effet aléatoire : faire varier les ordonnées à l'origine et/ou les pentes
+<br>
+
+<img style="float: left; width:50%;margin: 1%" src="images/fig_7_w5.png">
+<img style="float: right; width:50%;margin: 1%" src="images/fig_9_w5.png">
+On suppose que les ordonnées à l'origine et/ou les pentes proviennent d'une distribution normale. 
+
+On a seulement besoin d'estimer la moyenne (ordonnée à l'origine générale) et l'écart type de la distribution normale (effet aléatoire) au lieu d'estimer une ordonnée à l'origine par espèce (ce qui ajouterait 2 paramètres).
+
+<br><br>
+
+Au lieu d'estimer d'estimer une ordonnée à l'origine par espèce (3 paramètres), on en estime une générale ainsi qu'un effet aléatoire (2 paramètres). Avec $n$ espèce, dans le premier cas on estime $n-1$ paramètres alors qu'on reste à 2 paramètres dans le second cas!
+
+
+---
+exclude: true
 # Effet aléatoire sur l'ordonnée à l'origine
 <br>
 
@@ -344,6 +360,7 @@ Note: (MFF) Cette diapo est difficile à comprendre. Je me demande si il y aurai
 
 
 ---
+exclude: true
 # Effet aléatoire sur l'ordonnée à l'origine
 <br><br>
 
@@ -357,6 +374,7 @@ Cela **économise des degrés de liberté** (moins d’estimation de paramètres
 
 
 ---
+exclude: true
 # Effet aléatoire sur la pente
 <br><br>
 
