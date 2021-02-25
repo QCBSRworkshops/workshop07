@@ -95,15 +95,15 @@ install.packages(c("ggplot2",
 
 # Objectifs d'apprentissage
 
-1. Décrire les modèles (généralisés) à effets mixtes
+**1.** Décrire les modèles (généralisés) à effets mixtes
 
-2. Identifier les situations dans lesquelles l'utilisation d'effets mixtes est appropriée
+**2.** Identifier les situations dans lesquelles l'utilisation d'effets mixtes est appropriée
 
-3. Mettre en œuvre des modèles linéaires mixtes de base avec `R`
+**3.** Mettre en œuvre des modèles linéaires mixtes de base avec `R`
 
-4. Exécuter des modèles linéaires généralisés mixtes de base avec `R`
+**4.** Exécuter des modèles linéaires généralisés mixtes de base avec `R`
 
-5. Valider, interpréter et visualiser les modèles mixtes avec `R`
+**5.** Valider, interpréter et visualiser les modèles mixtes avec `R`
 
 
 ---
@@ -122,11 +122,11 @@ Pour répondre, 3 espèces ont été sélectionnées et dix individus par espèc
 # Familiarisez-vous avec le jeu de données
 <br>
 
-1. Ouvrez le jeu de données
+**1.** Ouvrez le jeu de données
 
-2. Ouvrez le script de l'atelier dans `R`
+**2.** Ouvrez le script de l'atelier dans `R`
 
-3. Visualisez la relation entre taille et position trophique
+**3.** Visualisez la relation entre taille et position trophique
 
 --
 
@@ -307,7 +307,7 @@ Dans la littérature des MLMs, vous rencontrerez souvent ces termes. Il existe p
 
 Les données proviennent : 
 * de tous les niveaux possibles d'un facteur (**variable qualitative**) 
-* d'un prédicteur (**variable quantitative**).
+* d'un prédicteur (**variable quantitative**)
 
 On souhaite émettre des conclusions à propos des niveaux du facteur ou de la relation entre le prédicteur et la variable réponse.
 
@@ -315,9 +315,9 @@ On souhaite émettre des conclusions à propos des niveaux du facteur ou de la r
 
 ##### Effet aléatoire : processus stochastiques
 
-* Seulement des **variables qualitatives** = facteur aléatoire;
+* Seulement des **variables qualitatives** = facteur aléatoire
 
-* Permet de structurer le processus d'erreur.
+* Permet de structurer le processus d'erreur
 
 ---
 # Pourquoi choisir un MLM?
@@ -1485,15 +1485,16 @@ lmer(Mercure ~ Longueur * Habitat + (1 | Site))
 ---
 # Modèles Linéaires Généralisés Mixtes (GLMMs)
 
-Extension des GLMs tenant compte de structures supplémentaires dans les données
+**Extension des GLMs tenant compte de structures supplémentaires dans les données**
 
-Suivre les étapes similaires à celles introduites lors de l'atelier sur les LMMs:
+Suivent les étapes similaires à celles introduites lors de la section sur les LMMs:
 
-1. LMMs incorporent les effets aléatoires
-2. GLMs peuvent gérer des données non-normales (en laissant les erreurs prendre différentes familles de distribution - e.g Poisson ou binomial négatif)
+**1.** Ils incorporent les effets aléatoires (comme les LMMs)
+
+**2.** Permettent de gérer des données non-normales (en laissant les erreurs prendre différentes familles de distribution - e.g Poisson ou binomial négatif) (comme les GLMs)
 
 ---
-# Comment modéliser un GLM sous R
+# Comment modéliser un GLMM sous R
 
 Chargez les données `Arabidopsis` `banta_totalfruits.csv` dans R.
 
@@ -1553,15 +1554,15 @@ dat.tf <- within(dat.tf,
 ```{r, fig.height=3.5, fig.width=8}
 # Boxplot du total des fruits vs interaction génotype x nutriment x herbivorie
 library(ggplot2)
-ggplot(data = dat.tf, aes(factor(x = gna),y = log(total.fruits + 1))) +
+ggplot(data = dat.tf, aes(factor(x = gna), y = log(total.fruits + 1))) +
   geom_boxplot(colour = "skyblue2", outlier.shape = 21,
   outlier.colour = "skyblue2") +
-  theme_bw() + theme(axis.text.x=element_blank()) +
-  stat_summary(fun.y=mean, geom="point", colour = "red")
+  theme_bw() + theme(axis.text.x = element_blank()) +
+  stat_summary(fun = mean, geom = "point", colour = "red")
 ```
 ]
 
-.comment[De même, la boîte à moustaches total des fruits vs population x nutriments x herbivorie montre une grande quantité d'hétérogénéité entre les populations.]
+.comment[De même, la variance du total de fruits montre une grande hétérogénéité entre les populations (population x nutriments x herbivorie).]
 
 
 ---
@@ -1590,11 +1591,11 @@ Si nous représentons graphiquement les **écarts vs moyennes par groupes** (gé
 ---
 # GLMM Poisson
 
-Compte tenu de la relation moyenne-variance, nous avons besoin d'un modèle avec surdispersion.
+**Compte tenu de la relation moyenne-variance, nous avons besoin d'un modèle avec surdispersion.**
 
-- Mais commençons avec un modèle de Poisson :
+Mais commençons avec un modèle de Poisson :
 
-Pour lancer un GLMM dans R, nous faisons appel à la fonction `glmer()`, du paquet lme4
+Pour lancer un GLMM dans `R`, nous faisons appel à la fonction `glmer()` de la librarie lme4.
 
 ```{r}
 library(lme4)
@@ -1604,22 +1605,23 @@ mp1 <- glmer(total.fruits ~ nutrient*amd + rack + status +
              data = dat.tf, family = "poisson")
 ```
 
-**Effets aléatoires** : `(1|popu)` contient un intercept aléatoire partagé par les mesures qui ont la même valeur pour `popu`
+**Effets aléatoires** : `(1|popu)` et `(1|gen)`. Nous faisons varier les ordonnées à l'origine pour les différentes populations (`popu`) et génotypes (`gen`).
 
 ---
-# Vérification de la surdispersion
+# GLMM Poisson - Vérification de la surdispersion
 
-Nous pouvons vérifier la surdispersion en utilisant la fonction `overdisp_fun()` (Bolker *et al*. 2011) qui divise la déviance des résidus (résidus de Pearson) par les degrés de liberté des résidus et teste si le rapport est plus grand que 1
+On vérifie la surdispersion en utilisant la fonction `overdisp_fun()` (Bolker *et al*. 2011) qui divise la déviance des résidus (de Pearson) par les degrés de liberté des résidus et teste si le rapport est plus grand que 1.
 
 ```{r}
 # Téléchargez le code glmm_funs.R de la page wiki et sourcez le pour exécuter la fonction dans R
-source(file="data/glmm_funs.R")
+source(file = "data/glmm_funs.R")
 # Surdispersion?
 overdisp_fun(mp1)
 ```
+<br>
 
-- Ratio est significativement $>>$ 1
-- Comme on s'y attendait, nous devons modéliser une distribution différente où la variance augmente plus rapidement que la moyenne
+- Ratio est **significativement $>$ 1**
+- Comme on s'y attendait, nous devons modéliser une **distribution différente** où la variance augmente plus rapidement que la moyenne
 
 ---
 # GLMM binomiale negative .small[(Poisson-gamma)]
@@ -1628,21 +1630,19 @@ La distribution binomiale négative satisfait la supposition que la **variance e
 
 ```{R}
 mnb1 <- glmer.nb(total.fruits ~ nutrient*amd + rack + status +
-                 (1|popu)+
+                 (1|popu) +
                  (1|gen),
-                 data=dat.tf, control=glmerControl(optimizer="bobyqa"))
+                 data = dat.tf, control = glmerControl(optimizer = "bobyqa"))
 # Control spécifie la façon dont nous optimisons les valeurs des paramètres
 ```
 
-.pull-left[
-```r
+On teste à nouveau pour la présence de surdispersion :
+```{R}
 # Surdispersion?
 overdisp_fun(mnb1)
 ```
-]
-.pull-right[
-![:faic](arrow-left).small[.alert[Le rapport est maintenant beaucoup plus près de 1 mais la valeur de p < 0.05]]
-]
+
+.alert[Le rapport est maintenant beaucoup plus près de 1 mais la valeur de p < 0.05]
 
 ---
 # GLMM Poisson-lognormal
