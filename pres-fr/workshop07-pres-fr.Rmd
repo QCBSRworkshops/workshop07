@@ -1673,11 +1673,13 @@ overdisp_fun(mpl1)
 ---
 # GLMM Poisson-lognormale
 
-**Représentons graphiquement les paramètres du modèle**: peut être obtenu en utilisant la fonction `coefplot2()`de la librarie `coefplot2` :
+**Représentons graphiquement les paramètres du modèle** 
 
+Peut être obtenu en utilisant la fonction `coefplot2()`de la librarie `coefplot2` :
+<br><br>
 --
 
-.alert[![:faic](warning) Cette librarie n'est pas sur le CRAN! On utilise la librarie remotes pour l'installer depuis GitHub]
+.alert[![:faic](warning) Cette librarie n'est pas sur le CRAN! On utilise la librarie remotes pour l'installer à partir de GitHub]
 
 ```{R install_coefplot2}
 if (!require("coefplot2"))
