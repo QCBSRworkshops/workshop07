@@ -35,6 +35,7 @@ master.zip
 
 # RStudio files
 .Rproj.user/
+*.Rproj
 
 # Example code in package build process
 *-Ex.R
