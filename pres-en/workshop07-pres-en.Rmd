@@ -1327,7 +1327,7 @@ lmer(Biodiv ~ Productivity + (1 | Forest / Site))
 
 Here the random effects are nested (i.e. Sites within forest) and not crossed.
 
-Why using `(1 | Foret / Site)` rather than `(1 | Foret) + (1 | Site)`? See [the answer in ![:faic](stack-exchange)](https://stats.stackexchange.com/questions/228800/crossed-vs-nested-random-effects-how-do-they-differ-and-how-are-they-specified)!
+Why use `(1 | Forest / Site)` rather than `(1 | Forest) + (1 | Site)`? See [the answer in ![:faic](stack-exchange)](https://stats.stackexchange.com/questions/228800/crossed-vs-nested-random-effects-how-do-they-differ-and-how-are-they-specified)!
 
 ---
 exclude: true

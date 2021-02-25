@@ -939,7 +939,7 @@ Vous devez vérifier que le modèle respecte toutes les suppositions de base:
 ```{r, fig.width=4.5, fig.height=4.5, echo = -1}
 par(mar=c(4,4,.5,.5))
 plot(resid(M8) ~ fitted(M8), 
-     xlab = 'Valeurs pérdites', 
+     xlab = 'Valeurs prédites', 
      ylab = 'Résidus normalisés')
 abline(h = 0, lty = 2)
 ```
