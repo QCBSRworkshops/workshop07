@@ -230,13 +230,13 @@ plot + geom_point() + facet_wrap(~ Lake) + xlab("Longueur (mm)") + ylab("Positio
 
 **Option 1. Séparer**
 
-- Faire une analyse séparée pour chaque espèces et chaque lac.
+- Faire une analyse séparée pour chaque espèce et chaque lac
 
 <br>
 
 **Option 2. Regrouper**
 
-- Faire une seule analyse en ignorant les variables espèces et lac.
+- Faire une seule analyse en ignorant les variables espèce et lac
 
 
 ---
@@ -272,11 +272,17 @@ On pourrait faire une analyse pour chaque espèce :
 
 ---
 # Pourquoi choisir un MLM?
+<br>
 
+Pour **notre question**, on veut seulement savoir s'il y a un **effet général de la longueur corporelle sur la position trophique**.
+<br>
+<br>
 
-* Pour **notre question**, on veut seulement savoir s'il y a un **effet général de la longueur corporelle sur la position trophique**,
+Par contre :
 
-* Ceci pourrait varier par espèce à cause de différents taux de croissance et/ou par lac à cause de différences dans la disponibilité de nourriture. **On ne s'intéresse pas directement à ces facteurs non mesurés, mais on doit contrôler leur effet dans le modèle**.
+* **Cette relation pourrait varier** par **espèce** à cause de différents taux de croissance et/ou par **lac** à cause de différences dans la disponibilité de nourriture 
+
+* **On doit contrôler** pour ces effets potentiels dans le modèle
 
 --
 
@@ -284,9 +290,9 @@ On pourrait faire une analyse pour chaque espèce :
 
 Les MLMs permettent de **séparer et regrouper** l'analyse. Ils:
 
-1. Prennent en compte la variabilité spécifique à chaque espèce et chaque lac (**séparer**) tout en calculant moins de paramètres;
+1. Prennent en compte la variabilité spécifique à chaque espèce et chaque lac (**séparer**) tout en calculant moins de paramètres
 
-2. Utilisent toutes les données disponibles (**regrouper**) tout en contrôlant les différences entre les lacs et les espèces (pseudo-replication).
+2. Utilisent toutes les données disponibles (**regrouper**) tout en contrôlant les différences entre les lacs et les espèces (pseudo-replication)
 
 ---
 # Pourquoi choisir un MLM?
@@ -300,8 +306,8 @@ Dans la littérature des MLMs, vous rencontrerez souvent ces termes. Il existe p
 ##### Effet fixe : processus déterministes
 
 Les données proviennent : 
-* de tous les niveaux possibles d'un facteur (variable qualitative) 
-* d'un prédicteur (variable quantitative).
+* de tous les niveaux possibles d'un facteur (**variable qualitative**) 
+* d'un prédicteur (**variable quantitative**).
 
 On souhaite émettre des conclusions à propos des niveaux du facteur ou de la relation entre le prédicteur et la variable réponse.
 
@@ -309,7 +315,7 @@ On souhaite émettre des conclusions à propos des niveaux du facteur ou de la r
 
 ##### Effet aléatoire : processus stochastiques
 
-* Seulement des variables qualitatives = facteur aléatoire;
+* Seulement des **variables qualitatives** = facteur aléatoire;
 
 * Permet de structurer le processus d'erreur.
 
@@ -320,7 +326,7 @@ On souhaite émettre des conclusions à propos des niveaux du facteur ou de la r
 #### Comment fonctionnent les MLMs?
 <br>
 
-**A.** Permet aux ordonnées à l'origine et/ou aux pentes d'être considérés comme propres (c.-à.-d. de varier) à une population donnée (**effet aléatoire**), e.g. par lac et/ou par espèce
+**A.** Permet aux ordonnées à l'origine et/ou aux pentes d'être considérés comme propres (c.-à.-d. de varier) à une population donnée (**effet aléatoire**), e.g. par lac et/ou par espèce.
 
 <br>
 
@@ -334,11 +340,11 @@ On souhaite émettre des conclusions à propos des niveaux du facteur ou de la r
 .pull-right[![](images/fig_9_w5.png)]
 <br>
 
-* On suppose que les ordonnées à l'origine et/ou les pentes proviennent d'une distribution normale. 
+* On suppose que les ordonnées à l'origine et/ou les pentes proviennent d'une distribution normale
 * Le modèle estime une ordonnée à l'origine et/ou une pente moyenne ainsi que l'écart type de l'effet aléatoire (distribution normale) 
 <br><br>
 
-Évite d'estimer une ordonnée à l'origine et une pente par espèce (+2 paramètres par espèce) = **Économise des degrés de liberté** (moins de paramètres estimés)
+Évite d'estimer une ordonnée à l'origine et une pente par espèce (+2 paramètres par espèce) = **Économise des degrés de liberté** (moins de paramètres estimés).
 
 ---
 exclude: true
@@ -387,8 +393,11 @@ Comme pour les ordonnées à l'origine, seuls la moyenne et l’écart-type des 
 ---
 # Tenir compte de la structure des données
 <br>
+**Qu'arrive-t-il si j'ai peu d'échantillons (faible $n$) pour un niveau des facteurs?**
 
-Si une certaine espèce ou un lac est peu représenté (faible $n$) dans les données, le modèle va accorder plus d'importance au modèle groupé pour estimer l'ordonnée à l'origine et la pente de cette espèce ou de ce lac.
+Si une espèce ou un lac est peu représenté dans les données, le modèle va accorder plus d'importance au modèle groupé pour estimer l'ordonnée à l'origine et la pente de cette espèce ou de ce lac (Processus de « shrinkage »).
+
+Idéalement, avoir un minimum de $n$=3 par niveau d'un facteur.
 
 .center[![:scale 60%](images/fig_12_w5.png) ]
 
@@ -396,7 +405,7 @@ Si une certaine espèce ou un lac est peu représenté (faible $n$) dans les don
 # Tenir compte de la structure des données
 <br><br>
 
-* Les intervalles de confiance des ordonnées à l'origine et des pentes sont ajustés pour tenir compte de la pseudo-replication basée sur le **coefficient de corrélation intra-classe (CCI)**.
+* Les intervalles de confiance des ordonnées à l'origine et des pentes sont ajustés pour tenir compte de la pseudo-replication basée sur le **coefficient de corrélation intra-classe (CCI)**
 
 * Combien de variation y a-t-il dans chaque groupe VS entre les groupes?
 
@@ -410,7 +419,7 @@ Si une certaine espèce ou un lac est peu représenté (faible $n$) dans les don
 
 ![](images/fig_10_w5.png)
 
-les points provenant d'un même lac sont traités comme une seule observation car très corrélés
+Les points provenant d'un même lac sont traités comme une seule observation car **très corrélés**.
 
 ![:faic](arrow-right) petite taille effective de l'échantillon et grands intervalles de confiance pour la pente et l'ordonnée à l'origine.
 ]
@@ -420,7 +429,7 @@ les points provenant d'un même lac sont traités comme une seule observation ca
 
 ![](images/fig_11_w5.png)
 
-les points provenant d'un même lac sont traités indépendamment car peu corrélés
+Les points provenant d'un même lac sont traités indépendamment car **peu corrélés**.
 
 ![:faic](arrow-right) grande taille effective de l'échantillon et petits intervalles de confiance pour la pente et l'ordonnée à l'origine.
 ]
@@ -443,7 +452,7 @@ les points provenant d'un même lac sont traités indépendamment car peu corré
 
 <br>
 
-**Q1.** La position trophique ne varie pas entre les lacs?
+**Q1.** Les positions trophiques des poissons ne varient pas entre les lacs
 
 .alert[R1. CCI faible, petits intervalles de confiances]
 
@@ -451,7 +460,7 @@ les points provenant d'un même lac sont traités indépendamment car peu corré
 
 --
 
-**Q2.** La position trophique est similaire dans un lac mais différente entre les lacs?
+**Q2.** Les positions trophiques des poissons sont similaires dans les lacs mais différentes entre les lacs
 
 .alert[R2. CCI élevé, grands intervalles de confiance]
 
