@@ -404,11 +404,22 @@ Idéalement, avoir un minimum de $n$=3 par niveau d'un facteur.
 ---
 # Tenir compte de la structure des données
 <br><br>
+**Comment évaluer l'impact d'un effet aléatoire sur le modèle?**
 
 * Les intervalles de confiance des ordonnées à l'origine et des pentes sont ajustés pour tenir compte de la pseudo-replication basée sur le **coefficient de corrélation intra-classe (CCI)**
 
-* Combien de variation y a-t-il dans chaque groupe VS entre les groupes?
+* Permet d'estimer le % de variation dans la variable réponse qui est expliqué par l'effet aléatoire
 
+* Combien de variation y a-t-il dans chaque groupe VS entre les groupes?
+<br><br><br><br>
+
+--
+
+Pour plus de détails sur le CCI : <br>
+Nakagawa et Schielzeth (2013)
+https://doi.org/10.1111/j.1469-185X.2010.00141.x
+Nakagawa et al. (2017) 
+https://doi.org/10.1098/rsif.2017.0213
 
 ---
 # Tenir compte de la structure des données
