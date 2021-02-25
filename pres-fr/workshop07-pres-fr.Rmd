@@ -406,11 +406,11 @@ Idéalement, avoir un minimum de $n$=3 par niveau d'un facteur.
 <br><br>
 **Comment évaluer l'impact d'un effet aléatoire sur le modèle?**
 
-* Les intervalles de confiance des ordonnées à l'origine et des pentes sont ajustés pour tenir compte de la pseudo-replication basée sur le **coefficient de corrélation intra-classe (CCI)**
+* Les intervalles de confiance des ordonnées à l'origine et des pentes **générales** sont ajustés pour tenir compte de la pseudo-replication basée sur le **coefficient de corrélation intra-classe (CCI)**
 
-* Permet d'estimer le % de variation dans la variable réponse qui est expliqué par l'effet aléatoire
+* Le CCI permet de savoir le % de variation dans la variable réponse qui est expliqué par l'effet aléatoire
 
-* Combien de variation y a-t-il dans chaque groupe VS entre les groupes?
+* Combien de variation y a-t-il dans chaque groupe vs entre les groupes?
 <br><br><br><br>
 
 
@@ -473,7 +473,7 @@ Les points provenant d'un même lac sont traités indépendamment car **peu corr
 **Pour plus de détails sur le CCI** : <br>
 Nakagawa et Schielzeth (2013)
 https://doi.org/10.1111/j.1469-185X.2010.00141.x
-Nakagawa et al. (2017) 
+Nakagawa *et al.* (2017) 
 https://doi.org/10.1098/rsif.2017.0213
 
 
@@ -1016,8 +1016,8 @@ Vous devez vérifier que le modèle respecte toutes les suppositions de base:
   - Faire un graphique des valeurs prédites en fonction des valeurs résiduelles
 
 2. Vérifier l'indépendance des résidus
-  - Graphique des résidus VS chaque covariable du modèle
-  - Graphique des résidus VS chaque covariable non incluse du modèle
+  - Graphique des résidus vs chaque covariable du modèle
+  - Graphique des résidus vs chaque covariable non incluse du modèle
 
 <img style="float: right; width:32%;margin: 1%" src="images/lego.jpg">
 3. Vérifier la normalité
@@ -1088,7 +1088,7 @@ abline(h = 0, lty = 2)
 
 2- Vérifier l'indépendance des résidus avec chaque covariable
 
-- Graphique des résidus VS chaque covariable non incluse du modèle
+- Graphique des résidus vs chaque covariable non incluse du modèle
 
   - Si vous observez des patrons dans ce graphique, vous saurez qu'il y a de la variation dans votre jeu de données qui pourrait être expliquée par ces covariables. Vous devriez considérer d'inclure ces variables dans votre modèle.
 
@@ -1494,7 +1494,7 @@ Suivent les étapes similaires à celles introduites lors de la section sur les 
 **2.** Permettent de gérer des données non-normales (en laissant les erreurs prendre différentes familles de distribution - e.g Poisson ou binomial négatif) (comme les GLMs)
 
 ---
-# Comment modéliser un GLMM sous R
+# Comment modéliser un GLMM avec R
 
 Chargez les données `Arabidopsis` `banta_totalfruits.csv` dans R.
 
@@ -1531,7 +1531,7 @@ Cependant, comme nous le verrons, la variance de chaque groupe augmente beaucoup
 ---
 # Exploration de la variance
 
-Pour illustrer l'hétérogénéité de la variance, nous allons d'abord créer des boîtes à moustaches (boxplots) de la variable réponse par rapport aux différents facteurs environnementaux
+Pour illustrer l'hétérogénéité de la variance, nous allons créer des boîtes à moustaches (boxplots) de la variable réponse par rapport aux différents facteurs environnementaux
 
 Créons de nouvelles variables qui représentent toutes les combinaisons de **nutriments** x **herbivorie** x **facteur aléatoire**
 
@@ -1568,9 +1568,9 @@ ggplot(data = dat.tf, aes(factor(x = gna), y = log(total.fruits + 1))) +
 ---
 # Choisir la distribution des erreurs
 
-Comme nous venons de le voir, il existe une importante hétérogénéité parmi la variance de chaque groupe, même lorsque la variable réponse est transformée
+Comme nous venons de le voir, il existe une importante hétérogénéité parmi la variance de chaque groupe, même lorsque la variable réponse est transformée.
 
-Si nous représentons graphiquement les **écarts vs moyennes par groupes** (génotypes x nutriment x herbivorie), on voit que la distribution de Poisson est la moins appropriée (i.e. écart augmentent beaucoup plus vite que la moyenne)
+Si nous représentons graphiquement les **écarts vs moyennes par groupes** (génotypes x nutriment x herbivorie), on voit que la distribution de Poisson est la moins appropriée (i.e. écart augmentent beaucoup plus vite que la moyenne).
 
 .small[.pull-left[
 ![](images/errDist.png)
@@ -1591,7 +1591,7 @@ Si nous représentons graphiquement les **écarts vs moyennes par groupes** (gé
 ---
 # GLMM Poisson
 
-**Compte tenu de la relation moyenne-variance, nous avons besoin d'un modèle avec surdispersion.**
+**Compte tenu de la relation moyenne-variance, nous avons besoin d'un modèle qui tient compte de la surdispersion.**
 
 Mais commençons avec un modèle de Poisson :
 
@@ -1610,7 +1610,7 @@ mp1 <- glmer(total.fruits ~ nutrient*amd + rack + status +
 ---
 # GLMM Poisson - Vérification de la surdispersion
 
-On vérifie la surdispersion en utilisant la fonction `overdisp_fun()` (Bolker *et al*. 2011) qui divise la déviance des résidus (de Pearson) par les degrés de liberté des résidus et teste si le rapport est plus grand que 1.
+On vérifie la surdispersion en utilisant la fonction `overdisp_fun()` (Bolker *et al*. 2011) qui divise la déviance des résidus (de Pearson) par les degrés de liberté des résidus et teste si le **rapport est plus grand que 1**.
 
 ```{r}
 # Téléchargez le code glmm_funs.R de la page wiki et sourcez le pour exécuter la fonction dans R
@@ -1618,15 +1618,16 @@ source(file = "data/glmm_funs.R")
 # Surdispersion?
 overdisp_fun(mp1)
 ```
-<br>
 
-- Ratio est **significativement $>$ 1**
-- Comme on s'y attendait, nous devons modéliser une **distribution différente** où la variance augmente plus rapidement que la moyenne
+.alert[Le rapport est significativement > 1]
+<br><br><br>
+
+Comme on s'y attendait, nous devons modéliser une **distribution différente** où la variance augmente plus rapidement que la moyenne.
 
 ---
 # GLMM binomiale negative .small[(Poisson-gamma)]
 
-La distribution binomiale négative satisfait la supposition que la **variance est proportionnelle au carré de la moyenne**
+**Option 1.** La distribution **binomiale négative** satisfait la supposition que la variance est proportionnelle au carré de la moyenne
 
 ```{R}
 mnb1 <- glmer.nb(total.fruits ~ nutrient*amd + rack + status +
@@ -1642,40 +1643,41 @@ On teste à nouveau pour la présence de surdispersion :
 overdisp_fun(mnb1)
 ```
 
-.alert[Le rapport est maintenant beaucoup plus près de 1 mais la valeur de p < 0.05]
+.alert[Le rapport est beaucoup plus près de 1 mais la valeur de p < 0.05]
 
 ---
-# GLMM Poisson-lognormal
+# GLMM Poisson-lognormale
 
-- Un autre option est la distribution **Poisson-lognormal**.
-- Cela peut être réalisé simplement en plaçant un effet aléatoire de niveau d'observation dans la formule.
+**Option 2.** La distribution **Poisson-lognormale**
+
+Cela est réalisé en ajoutant un **effet aléatoire de niveau d'observation** dans le modèle (voir Harrison (2014)  https://doi.org/10.7717/peerj.616).
+
+On traite la surdispersion en ajoutant l'effet `(1|X)` dans la formule :
 .small[
 ```{r}
 mpl1 <- glmer(total.fruits ~ nutrient*amd + rack + status +
               (1|X) +
-              (1|popu)+
+              (1|popu) +
               (1|gen),
-data=dat.tf, family="poisson",
+data = dat.tf, family = "poisson",
 control = glmerControl(optimizer = "bobyqa"))
 ```
-
-`(1|X)` traite de la surdispersion en ajoutant des **effets aléatoires au niveau de l'observation**
 
 ```{r}
 overdisp_fun(mpl1)
 ```
 
-.alert[Rapport maintenant conforme avec notre critère]
+.alert[Le rapport est maintenant conforme avec notre critère, soit < 1]
 ]
 
 ---
-# GLMM Poisson-lognormal
+# GLMM Poisson-lognormale
 
-**Représentation graphique des paramètres du modèle**: Une représentation graphique des paramètres du modèle peut être obtenue en utilisant la fonction `coefplot2()`du paquet `coefplot2`:
+**Représentons graphiquement les paramètres du modèle**: peut être obtenu en utilisant la fonction `coefplot2()`de la librarie `coefplot2` :
 
 --
 
-.alert[![:faic](warning) Ce paquet n'est pas sur le CRAN! On utilise le package remotes pour l'installer depuis GitHub]
+.alert[![:faic](warning) Cette librarie n'est pas sur le CRAN! On utilise la librarie remotes pour l'installer depuis GitHub]
 
 ```{R install_coefplot2}
 if (!require("coefplot2"))
@@ -1684,7 +1686,7 @@ library(coefplot2)
 ```
 
 ---
-# GLMM Poisson-lognormal
+# GLMM Poisson-lognormale
 
 
 .pull-left[
@@ -1702,7 +1704,7 @@ coefplot2(mpl1, intercept = TRUE)
 ```
 ]
 
-.alert[Note]: barres d'erreur visibles seulement pour les effets fixes parce que glmer ne nous donne pas d'informations sur l'incertitude des effets aléatoires.
+.alert[Note]: Barres d'erreur visibles seulement pour les effets fixes parce que `glmer()` ne nous donne pas d'information sur l'incertitude des effets aléatoires.
 
 ---
 # Visualisation des effets aléatoires
