@@ -1533,15 +1533,15 @@ Cependant, comme nous le verrons, la variance de chaque groupe augmente beaucoup
 ---
 # Exploration de la variance
 
-Pour illustrer l'hétérogénéité de la variance, nous allons créer des boîtes à moustaches (boxplots) du nombre total de fruits (**variable réponse**) par rapport aux différents facteurs environnementaux.
+Pour illustrer l'hétérogénéité de la variance, nous allons créer des boîtes à moustaches (boxplots) du **log** du nombre total de fruits (**variable réponse**) par rapport aux différents facteurs environnementaux.
 
-Créons de nouvelles variables qui représentent toutes les combinaisons de **nutriments** x **herbivorie** x **facteur aléatoire**.
+Créons d'abord de nouvelles variables qui représentent toutes les combinaisons de **nutriments** x **herbivorie** x **facteur aléatoire**.
 
 ```{r}
 dat.tf <- within(dat.tf,
 {
   # génotype x nutriment x herbivorie
-  gna <- interaction(gen,nutrient, amd)
+  gna <- interaction(gen, nutrient, amd)
   gna <- reorder(gna, total.fruits, mean)
   # population x nutriment x herbivorie
   pna <- interaction(popu, nutrient, amd)
@@ -1621,9 +1621,11 @@ text(118, 2000, "loess", col = 5)
 
 **Compte tenu de la relation moyenne-variance, nous avons besoin d'un modèle qui tient compte de la surdispersion.**
 
-Mais commençons avec un modèle de Poisson :
+Pour comprendre pourquoi, commençons avec un modèle avec une distribution de Poisson.
 
-Pour lancer un GLMM dans `R`, nous faisons appel à la fonction `glmer()` de la librairie lme4.
+--
+
+Pour lancer un GLMM dans `R`, nous faisons appel à la fonction `glmer()` de la librairie `lme4` :
 
 ```{r}
 library(lme4)
@@ -1643,16 +1645,19 @@ On vérifie la surdispersion en utilisant la fonction `overdisp_fun()` (Bolker *
 
 La fonction teste si le **rapport est plus grand que 1**.
 
+--
+
+Effectuons ce test :
 ```{r}
 # Téléchargez le code glmm_funs.R de la page wiki et sourcez le pour exécuter la fonction dans R
 source(file = "data/glmm_funs.R")
 # Surdispersion?
 overdisp_fun(mp1)
 ```
-
-.alert[Le rapport est significativement > 1]
-<br><br><br>
 --
+.alert[Le rapport est significativement > 1]
+<br><br>
+
 Comme on s'y attendait, nous devons modéliser une **distribution différente** où la variance augmente plus rapidement que la moyenne.
 
 
@@ -1671,7 +1676,7 @@ mnb1 <- glmer.nb(total.fruits ~ nutrient*amd + rack + status +
                  data = dat.tf, control = glmerControl(optimizer = "bobyqa"))
 # Control spécifie la façon dont nous optimisons les valeurs des paramètres
 ```
-
+--
 On teste à nouveau pour la présence de surdispersion :
 ```{R}
 # Surdispersion?
@@ -1729,7 +1734,7 @@ overdisp_fun(mpl1)
 
 Peut être obtenu en utilisant la fonction `coefplot2()`de la librairie `coefplot2` :
 <br><br>
---
+
 
 .alert[![:faic](warning) Cette librairie n'est pas sur le CRAN! On utilise la librairie remotes pour l'installer à partir de GitHub]
 
@@ -1746,7 +1751,7 @@ library(coefplot2)
 
 .pull-left[
 ```{r, fig.height = 5, fig.width = 6, echo = -1}
-par(cex = 1.4)
+par(cex = 1.4) # seems the same size as the other plot when using 1.4
 # Effets aléatoires
 coefplot2(mpl1, ptype = "vcov", intercept = TRUE, main = "Variance des effets aléatoires")
 ```
@@ -1842,32 +1847,27 @@ Nous pouvons aussi utiliser les fonctions `drop1()` et `dfun()` pour évaluer no
 
 .small[
 ```{r}
-dd_LRT <- drop1(mpl1,test="Chisq")
+dd_LRT <- drop1(mpl1, test = "Chisq")
 (dd_AIC <- dfun(drop1(mpl1)))
 ```
 ]
 
----
-# Sélection du modèle
-.small[
-```{r}
-dd_LRT <- drop1(mpl1,test="Chisq")
-(dd_AIC <- dfun(drop1(mpl1)))
-```
-]
+--
 
 - Fort effet de **rack** (dAIC = 55.08 si on enlève cette variable)
 - Effets de **status** et de l'**interaction** sont faibles (dAIC < 2)
-- Commençons par **enlever l'interaction non significative** afin de tester les effets principaux de nutriments et d'herbivorie
+
 
 ---
 # Sélection du modèle
+Commençons par **enlever l'interaction non significative** afin de tester les effets principaux de nutriments et d'herbivorie.
 
 <br>
 
+Utilisez la méthode de votre choix parmi celles vues dans l'atelier :
 .pull-left2[
 ```{r}
-mpl2 <- update(mpl1, . ~ . - and:nutrient)
+mpl2 <- update(mpl1, . ~ . - amd:nutrient)
 # Utiliser AIC
 mpl3 <- update(mpl2, . ~ . - rack) # pas de rack ou interaction
 mpl4 <- update(mpl2, . ~ . - status) # pas de status ou interaction
@@ -1877,7 +1877,7 @@ mpl6 <- update(mpl2, . ~ . - amd) # pas d'herbivorie ou interaction
 #              type = c("AICc"))
 
 # Ou utiliser drop1
-dd_LRT2 <- drop1(mpl2,test="Chisq")
+dd_LRT2 <- drop1(mpl2, test = "Chisq")
 dd_AIC2 <- dfun(drop1(mpl2))
 ```
 ]
@@ -1893,10 +1893,24 @@ ICtab(mpl2, mpl3 ,mpl4,
 
 ---
 # Sélection du modèle
+**Quels sont nos constats ?**
 <br>
 
-- Fort effets de **nutriments** et d'**herbivorie** (grand changement d'AIC de $135.6$ (`mpl5`) et $10.2$ (`mpl6`) si l'un ou l'autre sont supprimés, respectivement).
-- Notre modèle final inclut l'effet fixe de nutriments, d'herbivorie, la variable nuisance de rack, l'effet aléatoire au niveau de l'observation `(1|X)` et la variation de fruits par populations et génotypes.
+Les **nutriments** et l'**herbivorie** ont un effet important (grand changement d'AIC de $135.6$ (`mpl5`) et $10.2$ (`mpl6`) si l'un ou l'autre sont supprimés, respectivement)
+
+<br>
+
+**Notre modèle final inclut donc :**
+
+Effets fixes
+* nutriments, 
+* herbivorie
+* la variable nuisance de rack. 
+
+Effets aléatoires 
+* effet du niveau d'observation `(1|X)` 
+* populations `(1|popu)` 
+* génotypes `(1|gen)`
 
 
 ---
