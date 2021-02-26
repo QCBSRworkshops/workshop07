@@ -106,7 +106,7 @@ install.packages(c("ggplot2",
 5. Validade, interprete and visualized mixed models in `R`.
 
 ---
-## 1. Why choose mixed models?
+# 1. Why choose mixed models?
 
 Ecological and biological data can be complex!
 
@@ -118,7 +118,7 @@ Ecological and biological data can be complex!
 
 ---
 
-## 1. Why choose mixed models?
+# 1. Why choose mixed models?
 
 Introduction to the example dataset
 
@@ -129,7 +129,7 @@ Introduction to the example dataset
 
 
 ---
-## 1. Why choose mixed models?
+# 1. Why choose mixed models?
 
 <br>
 
@@ -145,7 +145,7 @@ Throughout this workshop, there will be a series of **challenges** that you can 
 
 
 ---
-## Challenge 1 ![:cube]()
+# Challenge 1 ![:cube]()
 
 * Introduction to the example dataset
 
@@ -154,7 +154,7 @@ Throughout this workshop, there will be a series of **challenges** that you can 
 * Reproduce the plots 1 to 3 from the script. Observe the plots and try to get a sense of what you see.
 
 ---
-## Solution ![:cube]()
+# Solution ![:cube]()
 
 <br>
 
@@ -175,7 +175,7 @@ plot + geom_point() + xlab("Length (mm)") + ylab("Trophic Position") + labs(titl
 
 
 ---
-## Solution ![:cube]()
+# Solution ![:cube]()
 
 <br>
 
@@ -186,7 +186,7 @@ plot + geom_point() + facet_wrap(~ Fish_Species) + xlab("Length (mm)") + ylab("T
 ```
 
 ---
-## Solution ![:cube]()
+# Solution ![:cube]()
 
 <br>
 
@@ -198,7 +198,7 @@ plot + geom_point() + facet_wrap(~ Lake) + xlab("Length (mm)") + ylab("Trophic P
 
 
 ---
-## 1. Why choose mixed models?
+# 1. Why choose mixed models?
 
 **Group discussion**
 
@@ -216,7 +216,7 @@ plot + geom_point() + facet_wrap(~ Lake) + xlab("Length (mm)") + ylab("Trophic P
 
 
 ---
-## 1. Why choose mixed models?
+# 1. Why choose mixed models?
 
 How might we analyze these data?
 
@@ -235,7 +235,7 @@ You can:
 - Run one analysis ignoring lake and species
 
 ---
-## 1. Why choose mixed models?
+# 1. Why choose mixed models?
 
 .pull-left[![](images/fig_5_w5.png) ]
 
@@ -249,7 +249,7 @@ You can:
 ]
 
 ---
-## 1. Why choose mixed models?
+# 1. Why choose mixed models?
 
 .pull-left[![](images/fig_6_w5.png)]
 
@@ -263,18 +263,16 @@ You can:
 ]
 
 ---
-## 1. Why choose mixed models?
+# 1. Why choose mixed models?
 
 
-* For our question, we only want to know if there is a .alert[general effect of length on the trophic position]
+* For **our question**, we only want to know if there is a **general effect of length on the trophic position**.
 
-* this relationship might differ slightly among species due to unmeasured biological processes (e.g. growth rate) or among lakes due to unmeasured environmental variables. But don't really care about these unmeasured factors we just want to control for them.
+* this relationship might differ slightly among species due to unmeasured biological processes (e.g. growth rate) or among lakes due to unmeasured environmental variables. **But we don't really care about these unmeasured factors we just want to control for them**.
 
+--
 
----
-## 1. Why choose mixed models?
-
-LMM are a balance between separating and lumping. They:
+LMM are a **balance between separating and lumping**. They:
 
 1. Estimate slope and intercept parameters for each species and lake (separating) but estimate fewer parameters than classical regression.
 
@@ -282,7 +280,7 @@ LMM are a balance between separating and lumping. They:
 
 
 ---
-## 1. Why choose mixed models?
+# 1. Why choose mixed models?
 
 **Fixed vs Random Effects**
 
@@ -291,7 +289,7 @@ In the literature on LMM, we will meet those terms frequently.
 There are many possible way to introduce them and we chose to present those we think are easier to apply when doing your analyses.
 
 ---
-## 1. Why choose mixed models?
+# 1. Why choose mixed models?
 
 ### Fixed effect
 
@@ -300,7 +298,7 @@ There are many possible way to introduce them and we chose to present those we t
 * We wish to make conclusions about the levels of the factor from which the data come from
 
 ---
-## 1. Why choose mixed models?
+# 1. Why choose mixed models?
 
 ### Random effect
 
@@ -311,7 +309,7 @@ There are many possible way to introduce them and we chose to present those we t
 * Often grouping factors
 
 ---
-## 1. Why choose mixed models?
+# 1. Why choose mixed models?
 
 **How do LMMs work?**
 
@@ -320,7 +318,7 @@ There are many possible way to introduce them and we chose to present those we t
 **B.** Intercepts, slopes and their confidence interval are adjusted to **take into account the data structure**
 
 ---
-## Random intercept
+# Random intercept
 
 <br>
 
@@ -336,7 +334,7 @@ Only need to estimate the mean and standard deviation of the normal distribution
 .comment[Note that the more levels your factor has, the more accurately the mean and standard deviation of the normal distribution will be estimated. Three levels may be a little low, but easier to visualize!]
 
 ---
-## Random intercept
+# Random intercept
 
 <br>
 
@@ -351,7 +349,7 @@ This saves degrees of freedom (less parameter estimation is needed)
 
 
 ---
-## Random slope
+# Random slope
 
 
 <br>
@@ -364,23 +362,23 @@ As for intercepts, only the mean and standard deviation of the slopes are estima
 </p>
 
 ---
-## Taking into account the data structure
+# Taking into account the data structure
 
 If a certain species or lake is poorly represented (low *n*) in the data, the model will give more weight to the pooled model to estimate the intercept and slope of that species or lake.
 
 .center[![: scale 50%](images/fig_12_w5.png) ]
 
 ---
-## Taking into account the data structure
+# Taking into account the data structure
 
 * The confidence intervals for the intercepts and slopes are adjusted to take account of the pseudo-replication-based on the **intraclass correlation coefficient (ICC)**
 
 
-* How much variation is there in each VS group between groups?
+* How much variation is there in each vs group between groups?
 
 
 ---
-## Taking into account the data structure
+# Taking into account the data structure
 
 
 .pull-left[
@@ -511,6 +509,8 @@ plot(fish.data)
 
 cor(var1, var2)
 ```
+
+Here an [example of collinearity](https://yetanotheriteration.netlify.app/2018/01/high-collinearity-effect-in-regressions/).
 
 ---
 # Challenge 3 ![:cube]()
@@ -956,8 +956,8 @@ You must verify that the model follows all the basic assumptions:
 1. Check the homogeneity of the variance
   - Plot predicted values vs residual values
 2. Check the independence of the model residuals
-  - Plot residuals VS each covariate of the model
-  - Plot residuals VS each covariate not included in the model
+  - Plot residuals vs each covariate of the model
+  - Plot residuals vs each covariate not included in the model
 3. Check the normality of the model residuals
   - Histogram of residuals
 
@@ -1030,7 +1030,7 @@ Note: The clusters are due to the data structure, where fish of only 5 size clas
 
 2- Check the independence of the model residuals with each covariate
 
-- Plot residuals VS each covariate not included in the model
+- Plot residuals vs each covariate not included in the model
 
   - If you observe patterns in these plots, you will know that there is variation in your dataset that could be explained by these covariates. You should consider including them in your model.
 

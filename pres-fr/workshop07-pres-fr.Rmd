@@ -288,7 +288,7 @@ Les MLMs sont un **compromis entre séparer et regrouper**. Ils:
 ---
 # Pourquoi choisir un MLM?
 
-#### Effet fixe VS effet aléatoire
+#### Effet fixe vs effet aléatoire
 
 Dans la littérature des MLMs, vous rencontrerez souvent ces termes souvent. Il existe plusieurs façon de les présenter et nous vous présenterons ici celles que nous trouvons les plus faciles à appliquer.
 
@@ -374,7 +374,7 @@ Si une certaine espèce ou un lac est peu représenté (faible $n$) dans les don
 
 * Les intervalles de confiance des intercepts et pentes sont ajustés pour tenir compte de la pseudo-replication basée sur le **coefficient de corrélation intra-classe (CCI)**.
 
-* Combien de variation y a-t-il dans chaque groupe VS entre les groupes ?
+* Combien de variation y a-t-il dans chaque groupe vs entre les groupes ?
 
 
 ---
@@ -510,6 +510,8 @@ plot(data)
 
 cor(var1, var2)
 ```
+
+Voici un [exemple de colinéarité](https://yetanotheriteration.netlify.app/2018/01/high-collinearity-effect-in-regressions/).
 
 ---
 # Défi 3 ![:cube]()
@@ -951,8 +953,8 @@ Vous devez vérifier que le modèle respecte toutes les suppositions de base:
   - Faire un graphique des valeurs prédites en fonction des valeurs résiduelles
 
 2. Vérifier l'indépendance des résidus
-  - Graphique des résidus VS chaque covariable du modèle
-  - Graphique des résidus VS chaque covariable non incluse du modèle
+  - Graphique des résidus vs chaque covariable du modèle
+  - Graphique des résidus vs chaque covariable non incluse du modèle
 
 3. Vérifier la normalité
   - Histogramme
@@ -1026,7 +1028,7 @@ Note: Les regroupements de données sont dus à la structure des données, où d
 
 2- Vérifier l'indépendance des résidus avec chaque covariable
 
-- Graphique des résidus VS chaque covariable non incluse du modèle
+- Graphique des résidus vs chaque covariable non incluse du modèle
 
   - Si vous observez des patrons dans ce graphique, vous saurez qu'il y a de la variation dans votre jeu de données qui pourrait être expliquée par ces covariables. Vous devriez considérer d'inclure ces variables dans votre modèle.
 
