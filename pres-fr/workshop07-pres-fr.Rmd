@@ -784,7 +784,13 @@ M8 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake),
 ---
 # Solution
 
-![:faic](question) `boundary (singular) fit: see ?isSingular`, voir [cette discussion ![:faic](stack-exchange)](https://stats.stackexchange.com/questions/378939/dealing-with-singular-fit-in-mixed-models)
+Lorsqu'on ajuste des MLM avec `lmer()`, il est possible de faire face à certaines erreurs our avertissements comme: 
+
+* `boundary (singular) fit: see ?isSingular`, voir [cette discussion ![:faic](stack-exchange)](https://stats.stackexchange.com/questions/378939/dealing-with-singular-fit-in-mixed-models)
+
+* `Model failed to converge with max|grad| ...`, voir [cette discussion ![:faic](stack-exchange)](https://stats.stackexchange.com/questions/242109/model-failed-to-converge-warning-in-lmer)
+
+Voici une [liste](https://rdrr.io/cran/lme4/man/troubleshooting.html) de problèmes possibles et comment les résoudre. 
 
 ---
 # Étape 2 - sélectionner le meilleur modèle
