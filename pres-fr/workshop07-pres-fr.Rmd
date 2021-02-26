@@ -27,9 +27,9 @@ knitr::opts_chunk$set(
   fig.align = 'center'
 )
 
-options(repos=structure(c(CRAN="http://cran.r-project.org")))
+options(repos=structure(c(CRAN = "http://cran.r-project.org")))
 
-mypar = list(mar = c(3,3,1,0.5), mgp = c(1.6, 0.3, 0), tck = -.02)
+mypar = list(mar = c(3, 3, 1, 0.5), mgp = c(1.6, 0.3, 0), tck = -.02)
 ```
 
 class: inverse, center, middle
@@ -143,7 +143,7 @@ head(fish.data)
 
 <br>
 
-```{r, eval= FALSE}
+```{r, eval = FALSE}
 # thème simplifié
 fig <- theme_bw() + theme(panel.grid.minor = element_blank(),
     panel.grid.major = element_blank(), panel.background = element_blank()) +
@@ -165,7 +165,7 @@ plot + geom_point() + xlab("Longueur (mm)") + ylab("Position Trophique") + labs(
 
 <br>
 
-```{r, echo= FALSE}
+```{r, echo = FALSE}
 library(ggplot2)
 fish.data <- read.csv('data/qcbs_w6_data.csv')
 
@@ -1493,12 +1493,13 @@ Suivent les étapes similaires à celles introduites lors de la section sur les 
 
 **2.** Permettent de gérer des données non-normales (en laissant les erreurs prendre différentes familles de distribution - e.g Poisson ou binomial négatif) (comme les GLMs)
 
+
 ---
 # Comment modéliser un GLMM avec R
 
 Chargez les données `Arabidopsis` `banta_totalfruits.csv` dans R.
 
-```{r, echo=FALSE}
+```{r, echo = FALSE}
 dat.tf <- read.csv("data/banta_totalfruits.csv")
 ```
 
@@ -1513,7 +1514,7 @@ dat.tf <- read.csv("banta_totalfruits.csv")
 # total.fruits nombre entier indiquant le nombre de fruits par plante
 ```
 
-L'effet de la disponibilité de nutriments et d'herbivorie (**effets fixes**) sur la production de fruits d'*Arabidopsis thaliana* (arabette des dames) a été évalué en mesurant 625 plantes à travers neuf populations différentes, constituées chacune de 2 à 3 génotypes (**effets aléatoires**)
+L'effet de la disponibilité de nutriments et d'herbivorie (**effets fixes**) sur la production de fruits d'*Arabidopsis thaliana* (**variable réponse**) a été évalué en mesurant 625 plantes à travers neuf populations différentes, constituées chacune de 2 à 3 génotypes (**effets aléatoires**)
 
 
 ---
@@ -1521,19 +1522,20 @@ L'effet de la disponibilité de nutriments et d'herbivorie (**effets fixes**) su
 
 La variable réponse constitue des données d'abondance, donc nous devons choisir une **distribution de Poisson** (i.e variance égale à la moyenne)
 
-```{r,echo=F, fig.height=5, fig.width=6}
+```{r, echo = F, fig.height = 5, fig.width = 6}
 par(mypar);par(cex = 1.4)
 hist(dat.tf$total.fruits, breaks = 50, col = 'blue', main = '',
      xlab = 'Fruits totaux', ylab = 'Compte')
 ```
 Cependant, comme nous le verrons, la variance de chaque groupe augmente beaucoup plus rapidement que prévu...
 
+
 ---
 # Exploration de la variance
 
-Pour illustrer l'hétérogénéité de la variance, nous allons créer des boîtes à moustaches (boxplots) de la variable réponse par rapport aux différents facteurs environnementaux
+Pour illustrer l'hétérogénéité de la variance, nous allons créer des boîtes à moustaches (boxplots) du nombre total de fruits (**variable réponse**) par rapport aux différents facteurs environnementaux.
 
-Créons de nouvelles variables qui représentent toutes les combinaisons de **nutriments** x **herbivorie** x **facteur aléatoire**
+Créons de nouvelles variables qui représentent toutes les combinaisons de **nutriments** x **herbivorie** x **facteur aléatoire**.
 
 ```{r}
 dat.tf <- within(dat.tf,
@@ -1547,6 +1549,7 @@ dat.tf <- within(dat.tf,
 })
 ```
 
+
 ---
 # Exploration de la variance
 
@@ -1557,6 +1560,8 @@ library(ggplot2)
 ggplot(data = dat.tf, aes(factor(x = gna), y = log(total.fruits + 1))) +
   geom_boxplot(colour = "skyblue2", outlier.shape = 21,
   outlier.colour = "skyblue2") +
+  ylab("log (Fruits totaux)\n") + # \n créé un espace après le titre
+  xlab("\nGénotype x nutriment x herbivorie") + # espace avant le titre
   theme_bw() + theme(axis.text.x = element_blank()) +
   stat_summary(fun = mean, geom = "point", colour = "red")
 ```
@@ -1570,18 +1575,16 @@ ggplot(data = dat.tf, aes(factor(x = gna), y = log(total.fruits + 1))) +
 
 Comme nous venons de le voir, il existe une importante hétérogénéité parmi la variance de chaque groupe, même lorsque la variable réponse est transformée.
 
-Si nous représentons graphiquement les **écarts vs moyennes par groupes** (génotypes x nutriment x herbivorie), on voit que la distribution de Poisson est la moins appropriée (i.e. écart augmentent beaucoup plus vite que la moyenne).
+Si nous représentons graphiquement les **écarts vs moyennes par groupes** (génotypes x nutriment x herbivorie), on voit que la distribution de Poisson est la moins appropriée (i.e. car les écarts augmentent beaucoup plus vite que la moyenne).
 
-```{r, fig.height = 3.5, fig.width = 8}
+```{r, echo = F, fig.height = 5.3, fig.width = 8, fig.align = 'center'}
 # Code used to produce the plot : https://github.com/QCBSRworkshops/workshop07/blob/main/pres-fr/data/glmm_e.r
 
 # Substantial variation among the sample variances on the transformed data
 # For example, among genotypes:
 grpVars <- tapply(dat.tf$total.fruits, dat.tf$gna, var)
-summary(grpVars)
 
 grpMeans <- tapply(dat.tf$total.fruits,dat.tf$gna, mean)
-summary(grpMeans)
 
 # Quasi-Poisson
 lm1 <- lm(grpVars~grpMeans-1) 
@@ -1596,7 +1599,9 @@ k.fit <- 1/coef(lm2)
 # Non-parametric loess fit
 Lfit <- loess(grpVars~grpMeans)
 
-plot(grpVars ~ grpMeans, xlab = "group means", ylab = "group variances" )
+# The plot
+par(mypar);par(cex = 1.2)
+plot(grpVars ~ grpMeans, xlab = "Moyennes des groupes", ylab = "Variances des groupes" )
 abline(a = 0, b = 1, lty = 2)
 text(105,500,"Poisson")
 curve(phi.fit*x, col = 2, add = TRUE)
@@ -1608,34 +1613,7 @@ text(104,7200,paste("NB: k = ",round(k.fit, 1), sep = ""), col = 4)
 mvec <- 0:120
 lines(mvec, predict(Lfit, mvec), col = 5)
 text(118, 2000, "loess", col = 5)
-
-ggplot(data.frame(grpMeans,grpVars),
-       aes(x=grpMeans,y=grpVars)) + geom_point() +
-  geom_smooth(colour="blue",fill="blue") +
-  geom_smooth(method="lm",formula=y~x-1,colour="red",fill="red") +
-  geom_smooth(method="lm",formula=y~I(x^2)+offset(x)-1,
-              colour="purple",fill="purple")
-
 ```
-
-
-
-
-
-.small[.pull-left[
-![](images/errDist.png)
-]
-.pull-right[
-
-<font color="blue">NB = negative binomial</font>
-
-<br>
-
-<font color="red">QP = quasi-Poisson</font>
-
-<br>
-<font color="LightBlue">loess = Locally weighted regression smoothing</font>
-]]
 
 
 ---
@@ -1645,7 +1623,7 @@ ggplot(data.frame(grpMeans,grpVars),
 
 Mais commençons avec un modèle de Poisson :
 
-Pour lancer un GLMM dans `R`, nous faisons appel à la fonction `glmer()` de la librarie lme4.
+Pour lancer un GLMM dans `R`, nous faisons appel à la fonction `glmer()` de la librairie lme4.
 
 ```{r}
 library(lme4)
@@ -1657,10 +1635,13 @@ mp1 <- glmer(total.fruits ~ nutrient*amd + rack + status +
 
 **Effets aléatoires** : `(1|popu)` et `(1|gen)`. Nous faisons varier les ordonnées à l'origine pour les différentes populations (`popu`) et génotypes (`gen`).
 
----
-# GLMM Poisson - Vérification de la surdispersion
 
-On vérifie la surdispersion en utilisant la fonction `overdisp_fun()` (Bolker *et al*. 2011) qui divise la déviance des résidus (de Pearson) par les degrés de liberté des résidus et teste si le **rapport est plus grand que 1**.
+---
+# Vérification de la surdispersion
+
+On vérifie la surdispersion en utilisant la fonction `overdisp_fun()` (Bolker *et al*. 2011) qui divise la déviance des résidus (de Pearson) par leurs degrés de liberté.
+
+La fonction teste si le **rapport est plus grand que 1**.
 
 ```{r}
 # Téléchargez le code glmm_funs.R de la page wiki et sourcez le pour exécuter la fonction dans R
@@ -1671,14 +1652,18 @@ overdisp_fun(mp1)
 
 .alert[Le rapport est significativement > 1]
 <br><br><br>
-
+--
 Comme on s'y attendait, nous devons modéliser une **distribution différente** où la variance augmente plus rapidement que la moyenne.
+
 
 ---
 # GLMM binomiale negative .small[(Poisson-gamma)]
 
 **Option 1.** La distribution **binomiale négative** satisfait la supposition que la variance est proportionnelle au carré de la moyenne
 
+<br>
+--
+On peut modéliser cette distribution avec la fonction `glmer.nb()` :
 ```{R}
 mnb1 <- glmer.nb(total.fruits ~ nutrient*amd + rack + status +
                  (1|popu) +
@@ -1695,15 +1680,26 @@ overdisp_fun(mnb1)
 
 .alert[Le rapport est beaucoup plus près de 1 mais la valeur de p < 0.05]
 
+
 ---
 # GLMM Poisson-lognormale
 
 **Option 2.** La distribution **Poisson-lognormale**
+<br>
 
-Cela est réalisé en ajoutant un **effet aléatoire de niveau d'observation** dans le modèle (voir Harrison (2014)  https://doi.org/10.7717/peerj.616).
+On réalise cette distribution en ajoutant un **effet aléatoire de niveau d'observation** dans le modèle.
+
+Voir Harrison (2014) pour plus de détails https://doi.org/10.7717/peerj.616.
+
+<br>
+--
+Pour ce faire, nous créons tout d'abord une variable nommée `X` :
+```{r}
+# Cette variable est déjà dans vos données "dat.tf", mais voici comment la créer.
+dat.tf$X <- 1:nrow(dat.tf)
+```
 
 On traite la surdispersion en ajoutant l'effet `(1|X)` dans la formule :
-.small[
 ```{r}
 mpl1 <- glmer(total.fruits ~ nutrient*amd + rack + status +
               (1|X) +
@@ -1713,23 +1709,29 @@ data = dat.tf, family = "poisson",
 control = glmerControl(optimizer = "bobyqa"))
 ```
 
+
+---
+# GLMM Poisson-lognormale
+<br><br><br>
+
+On teste finalement pour la présence de surdispersion :
 ```{r}
 overdisp_fun(mpl1)
 ```
 
 .alert[Le rapport est maintenant conforme avec notre critère, soit < 1]
-]
+
 
 ---
 # GLMM Poisson-lognormale
 
 **Représentons graphiquement les paramètres du modèle** 
 
-Peut être obtenu en utilisant la fonction `coefplot2()`de la librarie `coefplot2` :
+Peut être obtenu en utilisant la fonction `coefplot2()`de la librairie `coefplot2` :
 <br><br>
 --
 
-.alert[![:faic](warning) Cette librarie n'est pas sur le CRAN! On utilise la librarie remotes pour l'installer à partir de GitHub]
+.alert[![:faic](warning) Cette librairie n'est pas sur le CRAN! On utilise la librairie remotes pour l'installer à partir de GitHub]
 
 ```{R install_coefplot2}
 if (!require("coefplot2"))
@@ -1737,61 +1739,69 @@ if (!require("coefplot2"))
 library(coefplot2)
 ```
 
+
 ---
 # GLMM Poisson-lognormale
 
 
 .pull-left[
-```{r, fig.height=5, fig.width=6, echo=-1}
-par(mypar);par(cex = 1.4)
-# Paramètres de la variance
-coefplot2(mpl1, ptype = "vcov", intercept = TRUE)
+```{r, fig.height = 5, fig.width = 6, echo = -1}
+par(cex = 1.4)
+# Effets aléatoires
+coefplot2(mpl1, ptype = "vcov", intercept = TRUE, main = "Variance des effets aléatoires")
 ```
 ]
 .pull-right[
-```{r, fig.height=5, fig.width=6,echo=-1}
-par(mypar);par(cex = 1.4)
+```{r, fig.height = 5, fig.width = 6, echo = -1}
+par(cex = 1.3)
 # Effets fixes
-coefplot2(mpl1, intercept = TRUE)
+coefplot2(mpl1, intercept = TRUE, main = "Coefficients des effets fixes")
 ```
 ]
 
-.alert[Note]: Barres d'erreur visibles seulement pour les effets fixes parce que `glmer()` ne nous donne pas d'information sur l'incertitude des effets aléatoires.
+.alert[Note]: Barres d'erreur visibles seulement pour les effets fixes car `glmer()` ne modélise pas d'incertitude pour les effets aléatoires.
 
 ---
-# Visualisation des effets aléatoires
+# GLMM Poisson-lognormale
 
-Vous pouvez aussi extraire les effets aléatoires en utilisant la fonction `ranef()` et les tracer en utilisant un `dotplot()` du paquet `lattice`
+**Visualisation des effets aléatoires**
 
-Il y a une variabilité régionale parmi les populations :
+Vous pouvez extraire les effets aléatoires en utilisant la fonction `ranef()` et les tracer en utilisant un `dotplot()` de la librairie `lattice`.
+
+<br>
+--
+On constate une variation **inter-population** :
 
 - Les populations espagnoles (SP) ont des valeurs plus élevées que les populations suédoises (SW) et néerlandaises (NL)
 
-La différence entre les génotypes semble largement induite par génotype 34
+On constate une faible variation **inter-génotype** :
+- Les différences entre les génotypes semblent induites par le génotype 34
 
 ```r
 library(gridExtra)
 library(lattice)
 # dotplot code
-pp <- list(layout.widths=list(left.padding=0, right.padding=0),
-           layout.heights=list(top.padding=0, bottom.padding=0))
+pp <- list(layout.widths = list(left.padding = 0, right.padding = 0),
+           layout.heights = list(top.padding = 0, bottom.padding = 0))
 r2 <- ranef(mpl1, condVar = TRUE)
 d2 <- dotplot(r2, par.settings = pp)
 grid.arrange(d2$gen, d2$popu, nrow = 1)
 ```
 
 ---
-# Visualisation des effets aléatoires
+# GLMM Poisson-lognormale
+
+**Visualisation des effets aléatoires**
 
 <br>
 
-```{r, echo= FALSE, fig.width=9}
+```{r, echo = FALSE, fig.width = 9}
 library(gridExtra)
 library(lattice)
-pp <- list(layout.widths=list(left.padding=0, right.padding=0),
-           layout.heights=list(top.padding=0, bottom.padding=0))
+pp <- list(layout.widths = list(left.padding = 0, right.padding = 0),
+           layout.heights = list(top.padding = 0, bottom.padding = 0))
 r2 <- ranef(mpl1, condVar = TRUE)
-d2 <- dotplot(r2, par.settings = pp, scales=list(x=list(cex=1.4),y=list(cex=1.3)))
+d2 <- dotplot(r2, par.settings = pp, scales = list(x = list(cex = 1.4), y = list(cex = 1.3)))
 grid.arrange(d2$gen, d2$popu, nrow = 1)
 ```
 
@@ -1799,16 +1809,20 @@ grid.arrange(d2$gen, d2$popu, nrow = 1)
 ---
 # Sélection du modèle
 
-Les même méthodes peuvent être utilisées avec un glmm ou lmm pour choisir entre des modèles avec différents intercepts aléatoires et/ou des pentes aléatoires et pour choisir les effets fixes à conserver dans le modèle final.
+Les même méthodes peuvent être utilisées avec un glmm ou lmm pour choisir entre des modèles avec différentes ordonnées à l'origine et/ou pentes aléatoires ainsi que pour choisir les effets fixes à conserver dans le modèle final.
+
+<br>
+
+En voici deux :
 
 - une **approche de la théorie de l'information** (e.g., AICc - Atelier 5)
-- une **approche fréquentiste** (où l'importance de chaque terme est évaluée en utilisant `anova()` et le test de rapport de vraisemblance; LRT)
+- une **approche fréquentiste** (où l'importance de chaque terme est évaluée en faisant un test de rapport de vraisemblance; LRT, avec la fonction `anova()`)
 
 
 ---
 # Sélection du modèle
 
-Nous dérivons d'abord les modèles potentiels et les comparons en utilisant AICc.comment[*]:
+Nous dérivons d'abord les modèles potentiels et les comparons en utilisant l'AICc.comment[*] :
 
 ```{r}
 mpl2 <- update(mpl1, . ~ . - rack) # modèle sans rack
@@ -1817,7 +1831,7 @@ mpl4 <- update(mpl1, . ~ . - amd:nutrient) # modèle sans interaction amd:nutrie
 bbmle::ICtab(mpl1, mpl2, mpl3, mpl4, type = c("AICc"))
 ```
 
-.comment[*NB: Nous ne couvrons pas tous les modèles possibles ci-dessus, cependant, l'interaction `amd:nutriments` ne peut être évaluée que si amd et nutriments sont présents dans le modèle.
+.comment[*NB: Nous ne couvrons pas tous les modèles possibles ci-dessus, cependant, l'interaction `amd:nutriments` ne peut être évaluée que si les effets additifs de amd et de nutriments sont présents dans le modèle.
 ]
 
 
