@@ -37,7 +37,13 @@ class: inverse, center, middle
 ```{r install_pkgs, message=FALSE, warning=FALSE, include=FALSE, results=0}
 # Standard procedure to check and install packages and their dependencies, if needed.
 
-list.of.packages <- c("ggplot2", "lme4", "AICcmodavg", 'MASS', 'vcdExtra', 'bbmle', 'DescTools')
+list.of.packages <- c("ggplot2", 
+                      "lme4", 
+                      "MuMIn", 
+                      "MASS", 
+                      "vcdExtra", 
+                      "bbmle", 
+                      "DescTools")
 
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 
@@ -66,7 +72,7 @@ lapply(list.of.packages, require, character.only = TRUE, quietly = TRUE)
 
 * [ggplot2](https://cran.r-project.org/package=ggplot2)
 * [lme4](https://cran.r-project.org/package=lme4)
-* [AICcmodavg](https://cran.r-project.org/package=AICcmodavg)
+* [MuMIn](https://cran.r-project.org/package=MuMIn)
 * [MASS](https://cran.r-project.org/package=MASS)
 * [vcdExtra](https://cran.r-project.org/package=vcdExtra)
 * [bbmle](https://cran.r-project.org/package=bbmle)
@@ -78,7 +84,7 @@ To install them from CRAN, do:
 ```{r eval = FALSE}
 install.packages(c("ggplot2", 
                    "lme4", 
-                   "AICcmodavg", 
+                   "MuMIn", 
                    'MASS', 
                    'vcdExtra', 
                    'bbmle', 
@@ -661,15 +667,24 @@ lmer(Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species),
 ---
 # Note on estimation methods
 
-REML (Restricted Maximum Likelihood) is the default method in `lmer` (see `?lmer`).
+REML (*Restricted Maximum Likelihood*) is the default method in `lmer` (see `?lmer`).
 
-Note that the standard deviation estimator in the Maximum Likelihood (ML) is biased by a factor of $(n-2)/n$. The REML method corrects this bias.
+The *Maximum Likelihood* (ML) method underestimate model variances by a factor of $(n-k)/n$, where $k$ is the number of fixed effects. 
 
-We should use: 
+The REML method corrects for this bias.
 
-* **REML** to compare **nested random effect models**
+See this [article](https://towardsdatascience.com/maximum-likelihood-ml-vs-reml-78cf79bef2cf) for more information on the difference between ML and REML. 
 
-* and **ML** to compare **nested fixed effect models**
+---
+# Note on estimation methods
+
+Remember that you should use: 
+
+* **REML** to compare models with **nested random effects** and the same fixed effect structure
+
+* **ML** to compare models with **nested fixed effects** and the same random effect structure
+
+* **ML** to compare models **with and without random effects**
 
 ---
 # Step 2: Code potential models
@@ -727,12 +742,12 @@ lmer(Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species),
      data = fish.data, REML = TRUE)
 ```
 
-Note: If we had different fixed effects between the models, we would have to specify `REML = FALSE` to compare with likelihood methods like AIC. Here, you must report the estimates of the "best" model parameters using `REML = TRUE`.
+Note: If we had different fixed effects between the models or a model without random effects, we would have to specify `REML = FALSE` to compare with likelihood methods like AIC.
 
 ---
 # Solution ![:cube]()
 
-We will also build the **basic linear model** `lm()` because it is always useful to see the variation in the AICc values.
+We first will also build the **basic linear model** `lm()` because it is always useful to see the variation in the AICc values.
 
 ```{r}
 M0 <- lm(Z_TP ~ Z_Length, data = fish.data)
@@ -779,7 +794,7 @@ M8 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake),
 
 * Now that we have a list of potential models, we want to compare them to each other to select the one(s) with the highest predictive power given the data.
 
-* Models can be compared by using the `AICc` function from the` AICcmodavg` package.
+* Models can be compared by using the `AICc` function from the` MuMIn` package.
 
 * The Akaike Information Criterion (AIC) is a **measure of model quality** that can be used to compare models.
 
@@ -791,8 +806,8 @@ M8 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake),
 To find the AICc value of a model, use:
 
 ```{r}
-library(AICcmodavg)
-AICcmodavg::AICc(M1)
+library(MuMIn)
+MuMIn::AICc(M1)
 ```
 
 ---
@@ -800,24 +815,15 @@ AICcmodavg::AICc(M1)
 
 To group all AICc values into a single table, use:
 ```{r}
-AIC.table <- data.frame(Model = c("M0", "M1", "M2", "M3", 
-                                  "M4", "M5", "M6", "M7", "M8"),
-                        AICc = c(AICcmodavg::AICc(M0), 
-                                 AICcmodavg::AICc(M1), 
-                                 AICcmodavg::AICc(M2), 
-                                 AICcmodavg::AICc(M3),
-                                 AICcmodavg::AICc(M4), 
-                                 AICcmodavg::AICc(M5), 
-                                 AICcmodavg::AICc(M6),
-                                 AICcmodavg::AICc(M7), 
-                                 AICcmodavg::AICc(M8)))
-
-# order the table from low to high values of AICc
-AIC.table <- AIC.table[order(AIC.table$AICc), ]
-
-# add the difference between AICc values and the smallest one (delta AICc)
-AIC.table$delta_AICc <- AIC.table$AICc - AIC.table$AICc[1]
+AIC.table  <- MuMIn::model.sel(M0, M1, M2, M3, M4, M5, M6, M7, M8)
+(AIC.table <- AIC.table[ , c("df", "logLik", "AICc", "delta")])
 ```
+
+* `df` is the degree of freedom
+* `logLik` is the loglikelihood
+* `delta` is the AICc difference with the lowest value
+
+We only displayed part of the results returned by the function `model.sel()`, see `?model.sel` for more information.
 
 ---
 # Step 2: Model selection
@@ -826,11 +832,31 @@ What do these AICc values mean?
 
 ```{r}
 AIC.table 
+
 ```
 
-The model with the smallest AICc has the highest predictive power
+* The model with the smallest AICc has the highest predictive power.
 
-Some suggest that if models are within 2 AICc units of each other then they are equally plausible.
+* Some suggest that if models are within 2 AICc units of each other then they are equally plausible.
+
+* Let's take a closer look at M8 and M2. We can exclude other model because they have such higher AICc.
+
+---
+# Step 2: Model selection
+
+```{r}
+M8 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake),
+           data = fish.data, REML = TRUE)
+
+M2 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 + Z_Length | Lake),
+           data = fish.data, REML = TRUE)
+
+MuMIn::model.sel(M2,M8)[ , c("df", "logLik", "AICc", "delta")]
+```
+
+Model `M8` seems to be the best among all models that we tested.
+
+Note that we use now REML (i.e. `REML=TRUE`) as we are comparing two models with nested random effects and the same fixed effect structure.
 
 ---
 # Step 2: Model selection

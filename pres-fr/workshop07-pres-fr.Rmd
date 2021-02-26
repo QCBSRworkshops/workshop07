@@ -39,7 +39,7 @@ class: inverse, center, middle
 
 list.of.packages <- c("ggplot2", 
                    "lme4", 
-                   "AICcmodavg", 
+                   "MuMIn", 
                    'MASS', 
                    'vcdExtra', 
                    'bbmle', 
@@ -72,7 +72,7 @@ lapply(list.of.packages, require, character.only = TRUE, quietly = TRUE)
 
 * [ggplot2](https://cran.r-project.org/package=ggplot2)
 * [lme4](https://cran.r-project.org/package=lme4)
-* [AICcmodavg](https://cran.r-project.org/package=AICcmodavg)
+* [MuMIn](https://cran.r-project.org/package=MuMIn)
 * [MASS](https://cran.r-project.org/package=MASS)
 * [vcdExtra](https://cran.r-project.org/package=vcdExtra)
 * [bbmle](https://cran.r-project.org/package=bbmle)
@@ -84,7 +84,7 @@ lapply(list.of.packages, require, character.only = TRUE, quietly = TRUE)
 ```{r eval = FALSE}
 install.packages(c("ggplot2", 
                    "lme4", 
-                   "AICcmodavg", 
+                   "MuMIn", 
                    'MASS', 
                    'vcdExtra', 
                    'bbmle', 
@@ -662,15 +662,26 @@ lmer(Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species),
 * `REML = TRUE` ![:faic](arrow-right) méthode d'estimation
 
 ---
-# Note à propos de la méthode d'estimation
+# Note sur les méthodes d'estimation
 
-REML (Restricted Maximum Likelihood) est la méthode par défaut dans la fonction `lmer` (voir `?lmer`).
+REML (*Restricted Maximum Likelihood*) est la méthode par défaut dans la fonction `lmer` (voir `?lmer`).
 
-Notez que l'estimateur de l’écart-type du maximum de vraisemblance (ML, pour Maximum Likelihood) est biaisé d’un facteur $(n-2) / n$. La méthode REML corrige ce biais.
+La méthode de maximum de vraisemblance (ML, pour *Maximum Likelihood*) sous-estime les variances du modèle par un facteur $(n-k) / n$, ou $k$ est le nombre d'effes fixes. 
+
+La méthode REML corrige pour ce biais.
+
+Consultez cet [article](https://towardsdatascience.com/maximum-likelihood-ml-vs-reml-78cf79bef2cf) pour plus d'information sur la différence entre ML et REML.
+
+---
+# Note sur les méthodes d'estimation
 
 On devrait utiliser:
-- **REML** pour comparer des modèles avec des **effets aléatoires imbriqués** 
-- et **ML** pour comparer des modèles avec des **effets fixes imbriqués**.
+
+* **REML** pour comparer des modèles avec des **effets aléatoires nichés** et la même structure d'effets fixes
+
+* **ML** pour comparer des modèles avec des **effets fixes nichés** et la même structure d'effets aléatoires
+
+* **ML** pour comparer des modèles **avec et sans effets aléatoires**
 
 ---
 # Étape 2 - coder le modèle
@@ -691,7 +702,7 @@ On devrait utiliser:
 - `(-1 + Z_Length | Lake)` pour avoir uniquement l'effet aléatoire sur la pente
 - `(1 | Lake) + (1 | Species)`  pour des effets aléatoires croisés
 - `(1 | Lake:Fish_Species)` pour utiliser l'interaction entre 2 facteurs groupant
-- si votre jeu de données inclus des effets imbriqués, vous pouvez utiliser `/` pour les déclarer, e.g. `(1 | facteur1 / facteur2)` si `facteur2` est imbriqué dans `facteur1` ([voir ![:faic](stack-exchange)](https://stats.stackexchange.com/questions/228800/crossed-vs-nested-random-effects-how-do-they-differ-and-how-are-they-specified))
+- si votre jeu de données inclus des effets nichés, vous pouvez utiliser `/` pour les déclarer, e.g. `(1 | facteur1 / facteur2)` si `facteur2` est niché dans `facteur1` ([voir ![:faic](stack-exchange)](https://stats.stackexchange.com/questions/228800/crossed-vs-nested-random-effects-how-do-they-differ-and-how-are-they-specified))
 
 ---
 # Défi 4 ![:cube]()
@@ -728,7 +739,7 @@ lmer(Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species),
      data = fish.data, REML = TRUE)
 ```
 
-Note: Si nous avions différents effets fixes entre les modèles, nous aurions dû indiquer `REML=FALSE` pour les comparer avec une méthode de vraisemblance comme l'AIC. Ici, vous devez rapporter les estimations des paramètres du "meilleur" modèle en utilisant `REML=TRUE`.
+Note: Si nous avions différents effets fixes entre les modèles ou un modèle sans effects aléatoires, nous aurions dû indiquer `REML=FALSE` pour les comparer avec une méthode de vraisemblance comme l'AIC.
 
 ---
 # Solution ![:cube]()
@@ -780,11 +791,11 @@ M8 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake),
 
 * Maintenant que nous avons une liste de modèles potentiels, nous voulons les comparer entre eux pour sélectionner celui(ceux) qui a(ont) le plus de pouvoir prédictif.
 
-* Les modèles peuvent être comparés en utilisant la fonction `AICc` provenant du package `AICcmodavg`.
+* Les modèles peuvent être comparés en utilisant la fonction `AICc` provenant du package `MuMIn`.
 
 * Le critère d'information Akaike (AIC) est une **mesure de qualité du modèle** pouvant être utilisée pour comparer les modèles.
 
-* AICc corrige pour le biais créé par les faibles tailles d'.
+* AICc corrige pour le biais créé par les faibles tailles d'échantillon.
 
 ---
 # Étape 2 - sélectionner le meilleur modèle
@@ -792,8 +803,8 @@ M8 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake),
 Pour trouver la valeur AICc d'un modèle, utilisez :
 
 ```{r}
-library(AICcmodavg)
-AICcmodavg::AICc(M1)
+library(MuMIn)
+MuMIn::AICc(M1)
 ```
 
 ---
@@ -802,25 +813,15 @@ AICcmodavg::AICc(M1)
 Pour regrouper toutes les valeurs d'AICc dans un seul tableau, utilisez :
 
 ```{r}
-AIC.table <- data.frame(Model = c("M0", "M1", "M2", "M3", 
-                                  "M4", "M5", "M6", "M7", "M8"),
-                        AICc = c(AICcmodavg::AICc(M0), 
-                                 AICcmodavg::AICc(M1), 
-                                 AICcmodavg::AICc(M2), 
-                                 AICcmodavg::AICc(M3),
-                                 AICcmodavg::AICc(M4), 
-                                 AICcmodavg::AICc(M5), 
-                                 AICcmodavg::AICc(M6),
-                                 AICcmodavg::AICc(M7), 
-                                 AICcmodavg::AICc(M8)))
-
-# ordonner la table en ordre croissant d'AICc
-AIC.table <- AIC.table[order(AIC.table$AICc), ]
-
-# rajouter la différence d'AICc avec la valeur d'AICc la plus petite (delta AICc)
-AIC.table$delta_AICc <- AIC.table$AICc - AIC.table$AICc[1]
-
+AIC.table  <- MuMIn::model.sel(M0, M1, M2, M3, M4, M5, M6, M7, M8)
+(AIC.table <- AIC.table[ , c("df", "logLik", "AICc", "delta")])
 ```
+
+* `df` est le degré de liberté
+* `logLik` est le log de la vraisemblance
+* `delta` est la différence d'AICc avec la valeur la plus petite
+
+Nous avons seulement affiché une partie des résultats retourné par la fonction `model.sel()`, voir `?model.sel` pour plus d'information.
 
 ---
 # Étape 2 - sélectionner le meilleur modèle
@@ -831,9 +832,28 @@ Que signifient ces valeurs d'AICc ?
 AIC.table
 ```
 
-Le modèle avec le plus petit AICc a le plus grand pouvoir prédictif.
+* Le modèle avec le plus petit AICc a le plus grand pouvoir prédictif.
 
-Souvent on considère que deux modèles à +/- 2 unités d'AICc de différence ont un pouvoir prédictif équivalent.
+* Souvent on considère que deux modèles à +/- 2 unités d'AICc de différence ont un pouvoir prédictif équivalent.
+
+* Examinons de plus proche M8 and M2. On peut exclure les autres modèles car ils ont des AICc beaucoup plus élevés.
+
+---
+# Étape 2 - sélectionner le meilleur modèle
+
+```{r}
+M8 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake),
+           data = fish.data, REML = TRUE)
+
+M2 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 + Z_Length | Lake),
+           data = fish.data, REML = TRUE)
+
+MuMIn::model.sel(M2,M8)[ , c("df", "logLik", "AICc", "delta")]
+```
+
+Le modèle `M8` semble être le meilleur modèle parmi ceux qu'on a testé.
+
+Notez qu'on utilise maintenant REML (i.e. `REML=TRUE`) vu qu'on compare deux modèles avec des effets aléatoires nichés et avec la même structure d'effets fixes. 
 
 ---
 # Étape 2 - sélectionner le meilleur modèle
@@ -842,7 +862,7 @@ Quelle est la structure du meilleur modèle?
 
 ```{r, eval = FALSE}
 M8 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake),
-           data = fish.data, REML = FALSE)
+           data = fish.data, REML = TRUE)
 ```
 
 L'intercept et l'effet de la longueur sur la position trophique peut varier selon l'espèce de poissons, mais seulement l'intercept peut varier par lac
@@ -1332,7 +1352,7 @@ Les modèles mixtes sont très utiles pour prendre en compte la structure comple
 lmer(Biodiv ~ Productivite + (1 | Foret / Site))
 ```
 
-Ici les effets aléatoires sont imbriqués (i.e. Sites dans forêt) et non croisés.
+Ici les effets aléatoires sont nichés (i.e. Sites dans forêt) et non croisés.
 
 Pourquoi utiliser `(1 | Foret / Site)` plutôt que `(1 | Foret) + (1 | Site)` ? Regardez [cette réponse sur ![:faic](stack-exchange)](https://stats.stackexchange.com/questions/228800/crossed-vs-nested-random-effects-how-do-they-differ-and-how-are-they-specified)!
 
