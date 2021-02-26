@@ -153,7 +153,7 @@ fig <- theme_bw() + theme(panel.grid.minor = element_blank(),
     theme(panel.border = element_rect(colour = "black", fill = NA))
 
 # Faites les trois graphiques suivants pour explorer les données
-plot <- ggplot(aes(Fish_Length,Trophic_Pos),data = fish.data)
+plot <- ggplot(aes(Fish_Length, Trophic_Pos), data = fish.data)
 
 # Graphique 1 - Toutes les données
 plot + geom_point() + xlab("Longueur (mm)") + ylab("Position Trophique") + labs(title = "Toutes les données") + fig
@@ -1539,10 +1539,10 @@ Créons de nouvelles variables qui représentent toutes les combinaisons de **nu
 dat.tf <- within(dat.tf,
 {
   # génotype x nutriment x herbivorie
-  gna <- interaction(gen,nutrient,amd)
+  gna <- interaction(gen,nutrient, amd)
   gna <- reorder(gna, total.fruits, mean)
   # population x nutriment x herbivorie
-  pna <- interaction(popu,nutrient,amd)
+  pna <- interaction(popu, nutrient, amd)
   pna <- reorder(pna, total.fruits, mean)
 })
 ```
@@ -1551,7 +1551,7 @@ dat.tf <- within(dat.tf,
 # Exploration de la variance
 
 .small[
-```{r, fig.height=3.5, fig.width=8}
+```{r, fig.height = 3.5, fig.width = 8}
 # Boxplot du total des fruits vs interaction génotype x nutriment x herbivorie
 library(ggplot2)
 ggplot(data = dat.tf, aes(factor(x = gna), y = log(total.fruits + 1))) +
@@ -1571,6 +1571,56 @@ ggplot(data = dat.tf, aes(factor(x = gna), y = log(total.fruits + 1))) +
 Comme nous venons de le voir, il existe une importante hétérogénéité parmi la variance de chaque groupe, même lorsque la variable réponse est transformée.
 
 Si nous représentons graphiquement les **écarts vs moyennes par groupes** (génotypes x nutriment x herbivorie), on voit que la distribution de Poisson est la moins appropriée (i.e. écart augmentent beaucoup plus vite que la moyenne).
+
+```{r, fig.height = 3.5, fig.width = 8}
+# Code used to produce the plot : https://github.com/QCBSRworkshops/workshop07/blob/main/pres-fr/data/glmm_e.r
+
+# Substantial variation among the sample variances on the transformed data
+# For example, among genotypes:
+grpVars <- tapply(dat.tf$total.fruits, dat.tf$gna, var)
+summary(grpVars)
+
+grpMeans <- tapply(dat.tf$total.fruits,dat.tf$gna, mean)
+summary(grpMeans)
+
+# Quasi-Poisson
+lm1 <- lm(grpVars~grpMeans-1) 
+phi.fit <- coef(lm1)
+# The -1 specifies a model with the intercept set to zero
+
+# Negative binomial
+lm2 <- lm(grpVars ~ I(grpMeans^2) + offset(grpMeans)-1)
+k.fit <- 1/coef(lm2)
+# The offset() is used to specify that we want the group means added as a term with its coefficient fixed to 1
+
+# Non-parametric loess fit
+Lfit <- loess(grpVars~grpMeans)
+
+plot(grpVars ~ grpMeans, xlab = "group means", ylab = "group variances" )
+abline(a = 0, b = 1, lty = 2)
+text(105,500,"Poisson")
+curve(phi.fit*x, col = 2, add = TRUE)
+# bquote() is used to substitute numeric values in equations with symbols
+text(110,3900,
+     bquote(paste("QP: ", sigma^2==.(round(phi.fit,1))*mu)), col = 2)
+curve(x*(1+x/k.fit), col = 4, add = TRUE)
+text(104,7200,paste("NB: k = ",round(k.fit, 1), sep = ""), col = 4)
+mvec <- 0:120
+lines(mvec, predict(Lfit, mvec), col = 5)
+text(118, 2000, "loess", col = 5)
+
+ggplot(data.frame(grpMeans,grpVars),
+       aes(x=grpMeans,y=grpVars)) + geom_point() +
+  geom_smooth(colour="blue",fill="blue") +
+  geom_smooth(method="lm",formula=y~x-1,colour="red",fill="red") +
+  geom_smooth(method="lm",formula=y~I(x^2)+offset(x)-1,
+              colour="purple",fill="purple")
+
+```
+
+
+
+
 
 .small[.pull-left[
 ![](images/errDist.png)
