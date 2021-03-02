@@ -403,18 +403,50 @@ Idéalement, avoir un minimum de $n$=3 par niveau d'un facteur.
 
 ---
 # Tenir compte de la structure des données
-<br><br>
+<br>
 **Comment évaluer l'impact d'un effet aléatoire sur le modèle?**
 
 * Les intervalles de confiance des ordonnées à l'origine et des pentes **générales** sont ajustés pour tenir compte de la pseudo-replication basée sur le **coefficient de corrélation intra-classe (CCI)**
 
-* Le CCI permet de savoir le % de variation dans la variable réponse qui est expliqué par l'effet aléatoire
+* Le CCI permet de savoir le % de variation dans la variable réponse qui est expliqué par l'effet aléatoire, tel que :
 
-Le CCI nous informe donc si la position trophique moyenne (les ordonnées à l'origine) varie entre les différentes espèces ou entre les différents lacs.
-<br><br><br><br>
+$$ICC = \frac{\sigma_{\alpha}^2}{\sigma_{\alpha}^2 + \sigma_{\varepsilon}^2}$$
+Le CCI correspond au **ratio** entre la variance d'un effet aléatoire (ex. ordonnées à l'origine des espèces) et la variance totale.
+
+Le CCI nous informe donc **à quel point** la position trophique moyenne de chaque espèce ou de chaque lac (c.-à-d. les ordonnées à l'origine) **varie**.
+
+???
+
+Note: _Dire que différentes notations sont possibles selon le livre/article et comment l'équation du modèle est écrite._
 
 
 ---
+# Tenir compte de la structure des données
+
+
+.pull-left[
+**CCI élevé**
+
+![:scale 90%](images/CCIplot2_qcbs.png)
+
+Le % de variance (CCI) est élevé car **les espèces diffèrent fortement** dans leur position trophique moyenne.
+
+Les intervalles de confiance pour la pente et l'ordonnée à l'origine générale sont grands.
+]
+
+.pull-right[
+**CCI faible**
+
+![:scale 85%](images/CCIplot_qcbs.png)
+
+Le % de variance (CCI) est faible car **les espèces diffèrent peu** dans leur position trophique moyenne.
+
+Les intervalles de confiance pour la pente et l'ordonnée à l'origine générale sont petits.
+]
+
+
+---
+exclude: true
 # Tenir compte de la structure des données
 
 
