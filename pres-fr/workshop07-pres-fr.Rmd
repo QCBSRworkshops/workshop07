@@ -410,7 +410,7 @@ Idéalement, avoir un minimum de $n$=3 par niveau d'un facteur.
 
 * Le CCI permet de savoir le % de variation dans la variable réponse qui est expliqué par l'effet aléatoire
 
-* Combien de variation y a-t-il dans chaque groupe vs entre les groupes?
+Le CCI nous informe donc si la position trophique moyenne (les ordonnées à l'origine) varie entre les différentes espèces ou entre les différents lacs.
 <br><br><br><br>
 
 
@@ -1967,15 +1967,24 @@ abline(a=0, b =1, lty =2 )
 ---
 # Ressources additionnelles
 
-* Différences entre `nlme` et `lme4`
-
 .center[
-![:scale 25%](images/book1.jpg) ![:scale 28%](images/book2.jpg)
+![:scale 16%](images/book1.jpg) ![:scale 18%](images/book2.jpg) ![:scale 16%](images/book3.jpg)
 ]
 
-* [Harrison et al. (2018), PeerJ, DOI 10.7717/peerj.4794
-](http://dx.doi.org/10.7717/peerj.4794)
+**Libraries connues pour des (G)LMM** 
 
+* Fréquentiste : `nlme`, `lme4`, `glmmTMB`
+* Bayésien : `brms`, `rstan`, `rstanarm`, `MCMCglmm`
+
+**Articles**
+* [Harrison *et al.* (2018), *PeerJ*, DOI 10.7717/peerj.4794
+](http://dx.doi.org/10.7717/peerj.4794)
+* [Silk *et al.* (2020), *PeerJ*,  DOI 10.7717/peerj.9522
+](https://doi.org/10.7717/peerj.9522)
+* [Schielzeth *et al.* (2020), *Methods Ecol Evol.*,  DOI: 10.1111/2041-210X.13434
+]( https://doi.org/10.1111/2041-210X.13434)
+* [Zuur & Ieno (2016), *Methods Ecol Evol.*,  DOI: 10.1111/2041-210X.12577
+]( https://doi.org/10.1111/2041-210X.12577)
 
 ---
 class: inverse, center, bottom
