@@ -1,5 +1,5 @@
 ---
-title: "Workshop 7: General and Generalized Linear Mixed Models (LMM and GLMM)"
+title: "Workshop 7: (Generalized) Linear Mixed Models"
 subtitle: "QCBS R Workshop Series"
 author: "Québec Centre for Biodiversity Science"
 output:
@@ -66,7 +66,25 @@ lapply(list.of.packages, require, character.only = TRUE, quietly = TRUE)
 [![badge](https://img.shields.io/static/v1?style=for-the-badge&label=Slides&message=07&color=red&logo=adobe-acrobat-reader)](https://qcbsrworkshops.github.io/workshop07/workshop07-en/workshop07-en.pdf)
 [![badge](https://img.shields.io/static/v1?style=for-the-badge&label=script&message=07&color=2a50b8&logo=r)](https://qcbsrworkshops.github.io/workshop07/workshop07-en/workshop07-en.R)
 
+
 ---
+
+# About this workshop
+
+<br>
+
+Throughout this workshop, there will be a series of **challenges** that you can recognize by this rubix cube
+
+.center[
+![:scale 25%](images/rubicub.png)
+]
+
+<br>
+
+**During these challenges, don't hesitate to collaborate!**
+
+---
+
 
 # Required packages
 
@@ -95,29 +113,30 @@ install.packages(c("ggplot2",
 
 # Learning objectives
 
-1. Describe what are mixed effects models;
+**1.** Describe what are mixed effects models;
 
-2. Identify situations in which the use of mixed effects is appropriate;
+**2.** Identify situations in which the use of mixed effects is appropriate;
 
-3. Implement basic linear mixed models (LMM) in `R`;
+**3.** Implement basic linear mixed models (LMM) with `R`;
 
-4. Execute basic generalized linear mixed models (GLMM) in `R`;
+**4.** Execute basic generalized linear mixed models (GLMM) with `R`;
 
-5. Validade, interprete and visualized mixed models in `R`.
+**5.** Validade, interprete and visualized mixed models with `R`.
 
----
-# 1. Why choose mixed models?
-
-Ecological and biological data can be complex!
-
-* Inherent structure to data
-
-* Many covariates and grouping factors
-
-* Small sample size
 
 ---
+# Research question
 
+.alert[**Does fish trophic position increase with fish size?**
+]
+
+To answer this question, we use a dataset where body lenght was measured in 3 different fish species with 10 individuals sampled per species across 6 different lakes.
+
+.center[ ![:scale 75%](images/fig_1_qcbs_wiki.png) ]
+
+
+---
+exclude: true
 # 1. Why choose mixed models?
 
 Introduction to the example dataset
@@ -126,22 +145,6 @@ Introduction to the example dataset
 
 .comment[**Q: Does fish trophic position increase with fish size for all three fish species?**
 ]
-
-
----
-# 1. Why choose mixed models?
-
-<br>
-
-Throughout this workshop, there will be a series of **challenges** that you can recognize by this rubix cube
-
-.center[
-![:scale 25%](images/rubicub.png)
-]
-
-<br>
-
-**During these challenges, collaborate with your neighbors!**
 
 
 ---
@@ -213,6 +216,33 @@ plot + geom_point() + facet_wrap(~ Lake) + xlab("Length (mm)") + ylab("Trophic P
 *Do you expect these relationships to be the same across lakes?
 
   * What might differ?
+
+
+---
+# 1. Why choose mixed models?
+
+Ecological and biological data can be complex!
+
+* Inherent structure to data
+
+* Many covariates and grouping factors
+
+
+---
+exclude: true
+# 1. Why choose mixed models?
+
+Ecological and biological data can be complex!
+
+* Inherent structure to data
+
+* Many covariates and grouping factors
+
+* Small sample size
+
+???
+
+Note: _MFF: Not sure that mixed models help when the sample size is small_
 
 
 ---

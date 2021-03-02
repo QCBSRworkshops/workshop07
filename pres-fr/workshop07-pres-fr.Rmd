@@ -66,6 +66,23 @@ lapply(list.of.packages, require, character.only = TRUE, quietly = TRUE)
 [![badge](https://img.shields.io/static/v1?style=for-the-badge&label=diapos&message=07&color=red&logo=adobe-acrobat-reader)](https://qcbsrworkshops.github.io/workshop07/workshop07-fr/workshop07-fr.pdf)
 [![badge](https://img.shields.io/static/v1?style=for-the-badge&label=script&message=07&color=2a50b8&logo=r)](https://qcbsrworkshops.github.io/workshop07/workshop07-fr/workshop07-fr.R)
 
+
+---
+# À propos de cet atelier
+
+<br>
+
+Vous verrez à travers l'atelier une série de  **défis** que vous reconnaitrez avec ce cube rubik
+
+.center[
+![:scale 25%](images/rubicub.png)
+]
+
+<br>
+
+**N'hésitez-pas à collaborer pour résoudre ces défis!**
+
+
 ---
 
 # Librairies requises
@@ -107,12 +124,12 @@ install.packages(c("ggplot2",
 
 
 ---
-# Question
+# Question de recherche
 
 .alert[**Est-ce que la position trophique des poissons augmente avec leur taille?**
 ]
 
-Pour répondre, 3 espèces ont été sélectionnées et dix individus par espèce ont été mesurés (longueur corporelle) dans six lacs différents.
+Pour répondre, nous utiliserons un jeu de données où la longueur corporelle de 3 espèces de poissons (10 individus par espèce) a été mesurée dans 6 lacs différents.
 
 .center[ ![:scale 75%](images/fig_1_qcbs_wiki.png) ]
 
