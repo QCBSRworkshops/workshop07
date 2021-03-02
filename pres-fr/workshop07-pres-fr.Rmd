@@ -107,7 +107,7 @@ install.packages(c("ggplot2",
 
 
 ---
-# Question
+# Défi 1
 
 .alert[**Est-ce que la position trophique des poissons augmente avec leur taille?**
 ]
@@ -408,7 +408,7 @@ Idéalement, avoir un minimum de $n$=3 par niveau d'un facteur.
 
 * Les intervalles de confiance des ordonnées à l'origine et des pentes **générales** sont ajustés pour tenir compte de la pseudo-replication basée sur le **coefficient de corrélation intra-classe (CCI)**
 
-* Le CCI permet de savoir le % de variation dans la variable réponse qui est expliqué par l'effet aléatoire, tel que :
+* Le CCI permet de savoir la proportion de variation dans la variable réponse qui est expliqué par l'effet aléatoire, tel que :
 
 $$ICC = \frac{\sigma_{\alpha}^2}{\sigma_{\alpha}^2 + \sigma_{\varepsilon}^2}$$
 Le CCI correspond au **ratio** entre la variance d'un effet aléatoire (ex. ordonnées à l'origine des espèces) et la variance totale.
@@ -471,7 +471,7 @@ Les points provenant d'un même lac sont traités indépendamment car **peu corr
 ]
 
 ---
-# Question / défi ![:cube]()
+# Défi 2 ![:cube]()
 
 <br>
 
@@ -484,7 +484,7 @@ Les points provenant d'un même lac sont traités indépendamment car **peu corr
 **Q2.** Les positions trophiques des poissons sont similaires dans les lacs mais différentes entre les lacs
 
 ---
-# Solution ![:cube]()
+# Solution 2 ![:cube]()
 
 <br>
 
