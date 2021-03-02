@@ -107,7 +107,7 @@ install.packages(c("ggplot2",
 
 
 ---
-# Défi 1
+# Question
 
 .alert[**Est-ce que la position trophique des poissons augmente avec leur taille?**
 ]
@@ -471,7 +471,7 @@ Les points provenant d'un même lac sont traités indépendamment car **peu corr
 ]
 
 ---
-# Défi 2 ![:cube]()
+# Défi 1 ![:cube]()
 
 <br>
 
@@ -484,7 +484,7 @@ Les points provenant d'un même lac sont traités indépendamment car **peu corr
 **Q2.** Les positions trophiques des poissons sont similaires dans les lacs mais différentes entre les lacs
 
 ---
-# Solution 2 ![:cube]()
+# Solution ![:cube]()
 
 <br>
 
@@ -592,7 +592,7 @@ cor(var1, var2)
 Voici un [exemple de colinéarité](https://yetanotheriteration.netlify.app/2018/01/high-collinearity-effect-in-regressions/).
 
 ---
-# Défi 3 ![:cube]()
+# Défi 2 ![:cube]()
 
 Quelles mesures supplémentaires aurions-nous pu prendre sur le terrain et qui auraient pu être fortement corrélées avec la longueur corporelle?
 
@@ -785,7 +785,7 @@ On devrait utiliser:
 - si votre jeu de données inclus des effets nichés, vous pouvez utiliser `/` pour les déclarer, e.g. `(1 | facteur1 / facteur2)` si `facteur2` est niché dans `facteur1` ([voir ![:faic](stack-exchange)](https://stats.stackexchange.com/questions/228800/crossed-vs-nested-random-effects-how-do-they-differ-and-how-are-they-specified))
 
 ---
-# Défi 4 ![:cube]()
+# Défi 3 ![:cube]()
 
 Réécrivez le code suivant de façon à ce que les **pentes** de la relation position trophique en fonction de longueur corporelle **varient par lac et par espèces**:
 
@@ -810,7 +810,7 @@ lmer(Z_TP ~ Z_Length + (1 + Z_Length | Lake) + (1 + Z_Length | Fish_Species),
 * Avec le jeu de données sur lequel vous travaillez, il y a plusieurs modèles alternatifs qui pourraient mieux correspondre à vos données.
 
 ---
-# Défi 5 ![:cube]()
+# Défi 4 ![:cube]()
 
 Faites une liste de 7 modèles alternatifs qui pourraient être comparés à celui-ci:
 
@@ -1199,7 +1199,7 @@ différente de zéro au seuil $\alpha$ = 0.05.
 - `residuals(M8)` retourne les résidus
 
 ---
-# Défi 6 ![:cube]()
+# Défi 5 ![:cube]()
 
 1. Quelle est la pente et son intervalle de confiance de la variable Z_Length dans le modèle M8?
 
@@ -1223,7 +1223,7 @@ différente de zéro au seuil $\alpha$ = 0.05.
 
 
 ---
-# Défi 7 ![:cube]()
+# Défi 6 ![:cube]()
 
 Il est possible de visualiser graphiquement les différentes intercepts et pentes du modèle pour mieux interpréter les résultats
 
@@ -1419,7 +1419,7 @@ Les modèles mixtes sont très utiles pour prendre en compte la structure comple
 
 
 ---
-# Défi 8 ![:cube]()
+# Défi 7 ![:cube]()
 
 **Situation:**
 
@@ -1432,7 +1432,7 @@ Les modèles mixtes sont très utiles pour prendre en compte la structure comple
 .alert[Quel modèle mixte pourriez-vous utiliser pour ce jeu de données?]
 
 ---
-# Solution! ![:cube]()
+# Solution ![:cube]()
 
 ```{r, eval = FALSE}
 lmer(Biodiv ~ Productivite + (1 | Foret / Site))
@@ -1446,7 +1446,7 @@ Pourquoi utiliser `(1 | Foret / Site)` plutôt que `(1 | Foret) + (1 | Site)` ? 
 ---
 exclude: true
 
-# Défi 9 ![:cube]()
+# Défi 8 ![:cube]()
 
 **Situation:**
 
@@ -1910,7 +1910,7 @@ Effets aléatoires
 
 
 ---
-# Prêt pour un défi? ![:cube]()
+# Défi 9 ![:cube]()
 
 En utilisant l'ensemble de données `inverts` (temps de développement larvaire (`PLD`) de 74 espèces d'invertébrés et vertébrés marins élevés à différentes températures et temps), répondez aux questions suivantes:
 
