@@ -1,7 +1,7 @@
 ---
 title: "Atelier 7: Modèles linéaires (generalisés) à effets mixtes"
 subtitle: "Série d'ateliers R du CSBQ"
-author: "Centre de la science de la biodiversité du Québec"
+author: "Centre de la Science de la Biodiversité du Québec"
 output:
   xaringan::moon_reader:
     includes:
@@ -72,7 +72,7 @@ lapply(list.of.packages, require, character.only = TRUE, quietly = TRUE)
 
 <br>
 
-Vous verrez à travers l'atelier une série de  **défis** que vous reconnaitrez avec ce cube rubik
+Vous verrez à travers l'atelier une série de  **défis** que vous reconnaitrez avec ce cube rubik.
 
 .center[
 ![:scale 25%](images/rubicub.png)
@@ -134,19 +134,31 @@ Pour répondre, nous utiliserons un jeu de données où la longueur corporelle d
 .center[ ![:scale 75%](images/fig_1_qcbs_wiki.png) ]
 
 
+---
+# Défi 1 ![:cube]()
+
+**Familiarisez-vous avec le jeu de données**
+
+**1.** Ouvrez le script de l'atelier dans `R`
+
+**2** Ouvrez le jeu de données dans `R`
+
+**3** Reproduisez les graphiques 1 à 3 (dans le script) de la relation entre la position trophique et la taille. Observez les graphiques puis evaluez ce que vous observez.
+
 
 ---
+exclude: true
 # Familiarisez-vous avec le jeu de données
 <br>
 
-**1.** Ouvrez le jeu de données
+**1.** Ouvrez le script de l'atelier dans `R`
 
-**2.** Ouvrez le script de l'atelier dans `R`
+**2.** Ouvrez le jeu de données dans `R`
 
 **3.** Visualisez la relation entre taille et position trophique
 
 --
-
+exclude: true
 <br>
 
 ```{r, eval = TRUE}
@@ -156,18 +168,22 @@ head(fish.data)
 
 
 ---
-# Visualisation de l'ensemble des données
+# Solution ![:cube]()
 
 <br>
 
-```{r, eval = FALSE}
+```{r, echo = FALSE}
+fish.data <- read.csv('data/qcbs_w7_data.csv', stringsAsFactors = TRUE)
+
 # thème simplifié
 fig <- theme_bw() + theme(panel.grid.minor = element_blank(),
-    panel.grid.major = element_blank(), panel.background = element_blank()) +
-    theme(strip.background = element_blank(), strip.text.y = element_text()) +
-    theme(legend.background = element_blank()) +
-    theme(legend.key = element_blank()) +
-    theme(panel.border = element_rect(colour = "black", fill = NA))
+                          panel.grid.major = element_blank(), 
+                          panel.background = element_blank()) +
+                    theme(strip.background = element_blank(),
+                          strip.text.y = element_text()) +
+                    theme(legend.background = element_blank()) +
+                    theme(legend.key = element_blank()) +
+                    theme(panel.border = element_rect(colour = "black", fill = NA))
 
 # Faites les trois graphiques suivants pour explorer les données
 plot <- ggplot(aes(Fish_Length, Trophic_Pos), data = fish.data)
@@ -178,40 +194,23 @@ plot + geom_point() + xlab("Longueur (mm)") + ylab("Position Trophique") + labs(
 
 
 ---
-# Visualisation de l'ensemble des données
+# Solution ![:cube]()
 
 <br>
 
 ```{r, echo = FALSE}
-library(ggplot2)
-fish.data <- read.csv('data/qcbs_w7_data.csv')
-
-# thème simplifié
-fig <- theme_bw() + theme(panel.grid.minor = element_blank(), panel.grid.major = element_blank(), panel.background = element_blank()) +
-  theme(strip.background = element_blank(), strip.text.y = element_text()) + theme(legend.background = element_blank()) +
-  theme(legend.key = element_blank()) + theme(panel.border = element_rect(colour = "black", fill = NA))
-
-# Faites les trois graphiques suivants pour explorer les données
-plot <- ggplot(aes(Fish_Length,Trophic_Pos),data = fish.data)
-
-# Graphique 1 - Toutes les données
-plot + geom_point() + xlab("Longueur (mm)") + ylab("Position Trophique") + labs(title = "Toutes les données") + fig
-```
-
-
----
-# Visualisation par espèce
-
-```{r}
 # Graphique 2 - Par espèce
 plot + geom_point() + facet_wrap(~ Fish_Species) + xlab("Longueur (mm)") + ylab("Position Trophique") +
    labs(title = "Par espèce") + fig
 ```
 
----
-# Visualisation par Lac
 
-```{r}
+---
+# Solution ![:cube]()
+
+<br>
+
+```{r, echo = FALSE}
 # Graphique 3 – Par lac
 plot + geom_point() + facet_wrap(~ Lake) + xlab("Longueur (mm)") + ylab("Position Trophique") +
    labs(title = "Par lac") + fig
@@ -219,20 +218,32 @@ plot + geom_point() + facet_wrap(~ Lake) + xlab("Longueur (mm)") + ylab("Positio
 
 
 ---
-# Pourquoi choisir un MLM?
+# Discussion de groupe ![:cube]()
 
-**Discussion de groupe**
 
-* Est-ce qu'on s'attend à ce que la position trophique augmente avec la longueur corporelle exactement de la même façon?
+**Est-ce qu'on s'attend à ce que la position trophique augmente avec la longueur corporelle exactement de la même façon pour : **
 
-    * Pour toutes les espèces?
-    * Pour tous les lacs?
+* toutes les espèces?
+* tous les lacs?
 
 <br>
 
 --
 
-* Comment ces relations pourraient-elles différer?
+**Comment ces relations pourraient-elles différer?**
+
+
+---
+# Pourquoi choisir un MLM?
+
+**Les données biologiques et écologiques peuvent être complexes!**
+
+* Peuvent contenir une structure hiérarchique
+
+* Plusieurs covariables et facteurs
+
+* Échantillons non équilibrés
+
 
 ---
 # Pourquoi choisir un MLM?
@@ -273,6 +284,7 @@ On pourrait faire une analyse pour chaque espèce :
 * Peu de chances de détecter un effet a cause de la faible taille d’échantillon *n*
 ]
 
+
 ---
 # Pourquoi choisir un MLM?
 
@@ -286,6 +298,7 @@ On pourrait faire une analyse pour chaque espèce :
 
 * Beaucoup de bruit = Une partie pourrait être due aux **effets** de **l'espèce** et du **lac**
 ]
+
 
 ---
 # Pourquoi choisir un MLM?
@@ -311,16 +324,21 @@ Les MLMs permettent de **séparer et regrouper** l'analyse. Ils:
 
 2. Utilisent toutes les données disponibles (**regrouper**) tout en contrôlant les différences entre les lacs et les espèces (pseudo-replication)
 
+
 ---
 # Pourquoi choisir un MLM?
 
-#### Effet fixe vs effet aléatoire
+### Effet fixe vs effet aléatoire
 
-Dans la littérature des MLMs, vous rencontrerez souvent ces termes. Il existe plusieurs façons de les décrire et nous vous présenterons ici celles que nous trouvons les plus faciles à appliquer.
+Dans la littérature des MLMs, vous rencontrerez souvent ces termes. 
 
---
+Il existe plusieurs façons de les décrire et nous vous présenterons ici celles que nous trouvons les plus faciles à appliquer.
 
-##### Effet fixe : processus déterministes
+
+---
+# Pourquoi choisir un MLM?
+
+### Effet fixe : processus déterministes
 
 Les données proviennent : 
 * de tous les niveaux possibles d'un facteur (**variable qualitative**) 
@@ -330,17 +348,17 @@ On souhaite émettre des conclusions à propos des niveaux du facteur ou de la r
 
 --
 
-##### Effet aléatoire : processus stochastiques
+### Effet aléatoire : processus stochastiques
 
 * Seulement des **variables qualitatives** = facteur aléatoire
 
 * Permet de structurer le processus d'erreur
 
+
 ---
 # Pourquoi choisir un MLM?
-<br>
 
-#### Comment fonctionnent les MLMs?
+### Comment fonctionnent les MLMs?
 <br>
 
 **A.** Permet aux ordonnées à l'origine et/ou aux pentes d'être considérés comme propres (c.-à.-d. de varier) à une population donnée (**effet aléatoire**), e.g. par lac et/ou par espèce.
@@ -361,7 +379,7 @@ On souhaite émettre des conclusions à propos des niveaux du facteur ou de la r
 * Le modèle estime une ordonnée à l'origine et/ou une pente moyenne ainsi que l'écart type de l'effet aléatoire (distribution normale) 
 <br><br>
 
-Évite d'estimer une ordonnée à l'origine et une pente par espèce (+2 paramètres par espèce) = **Économise des degrés de liberté** (moins de paramètres estimés).
+Évite d'estimer une ordonnée à l'origine et une pente par espèce (+2 paramètres par espèce) = **économise des degrés de liberté** (moins de paramètres estimés).
 
 ---
 exclude: true
