@@ -506,7 +506,7 @@ Les points provenant d'un même lac sont traités indépendamment car **peu corr
 
 
 ---
-# Défi 1 ![:cube]()
+# Défi 2 ![:cube]()
 
 <br>
 
@@ -627,7 +627,7 @@ cor(var1, var2)
 Voici un [exemple de colinéarité](https://yetanotheriteration.netlify.app/2018/01/high-collinearity-effect-in-regressions/).
 
 ---
-# Défi 2 ![:cube]()
+# Défi 3 ![:cube]()
 
 Quelles mesures supplémentaires aurions-nous pu prendre sur le terrain et qui auraient pu être fortement corrélées avec la longueur corporelle?
 
@@ -820,7 +820,7 @@ On devrait utiliser:
 - si votre jeu de données inclus des effets nichés, vous pouvez utiliser `/` pour les déclarer, e.g. `(1 | facteur1 / facteur2)` si `facteur2` est niché dans `facteur1` ([voir ![:faic](stack-exchange)](https://stats.stackexchange.com/questions/228800/crossed-vs-nested-random-effects-how-do-they-differ-and-how-are-they-specified))
 
 ---
-# Défi 3 ![:cube]()
+# Défi 4 ![:cube]()
 
 Réécrivez le code suivant de façon à ce que les **pentes** de la relation position trophique en fonction de longueur corporelle **varient par lac et par espèces**:
 
@@ -844,8 +844,9 @@ lmer(Z_TP ~ Z_Length + (1 + Z_Length | Lake) + (1 + Z_Length | Fish_Species),
 
 * Avec le jeu de données sur lequel vous travaillez, il y a plusieurs modèles alternatifs qui pourraient mieux correspondre à vos données.
 
+
 ---
-# Défi 4 ![:cube]()
+# Défi 5 ![:cube]()
 
 Faites une liste de 7 modèles alternatifs qui pourraient être comparés à celui-ci:
 
@@ -855,6 +856,7 @@ lmer(Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species),
 ```
 
 Note: Si nous avions différents effets fixes entre les modèles ou un modèle sans effects aléatoires, nous aurions dû indiquer `REML=FALSE` pour les comparer avec une méthode de vraisemblance comme l'AIC.
+
 
 ---
 # Solution ![:cube]()
@@ -867,8 +869,9 @@ M0 <- lm(Z_TP ~ Z_Length, data = fish.data)
 
 Par contre, pour comparer ce modèle aux MLMs, il est important de .alert[changer la méthode d'estimation à ML (`REML=FALSE`)] parce que `lm()` n'utilise pas la même méthode d'estimation que `lmer()`.
 
+
 ---
-# Solution
+# Solution ![:cube]()
 
 ```{r}
 # Modele linéaire de base
@@ -896,8 +899,9 @@ M8 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake),
            data = fish.data, REML = FALSE)
 ```
 
+
 ---
-# Solution
+# Solution ![:cube]()
 
 Lorsqu'on ajuste des MLM avec `lmer()`, il est possible de faire face à certaines erreurs our avertissements comme: 
 
@@ -906,6 +910,7 @@ Lorsqu'on ajuste des MLM avec `lmer()`, il est possible de faire face à certain
 * `Model failed to converge with max|grad| ...`, voir [cette discussion ![:faic](stack-exchange)](https://stats.stackexchange.com/questions/242109/model-failed-to-converge-warning-in-lmer)
 
 Voici une [liste](https://rdrr.io/cran/lme4/man/troubleshooting.html) de problèmes possibles et comment les résoudre. 
+
 
 ---
 # Étape 2 - sélectionner le meilleur modèle
@@ -918,6 +923,7 @@ Voici une [liste](https://rdrr.io/cran/lme4/man/troubleshooting.html) de problè
 
 * AICc corrige pour le biais créé par les faibles tailles d'échantillon.
 
+
 ---
 # Étape 2 - sélectionner le meilleur modèle
 
@@ -927,6 +933,7 @@ Pour trouver la valeur AICc d'un modèle, utilisez :
 library(MuMIn)
 MuMIn::AICc(M1)
 ```
+
 
 ---
 # Étape 2 - sélectionner le meilleur modèle
@@ -944,6 +951,7 @@ AIC.table  <- MuMIn::model.sel(M0, M1, M2, M3, M4, M5, M6, M7, M8)
 
 Nous avons seulement affiché une partie des résultats retourné par la fonction `model.sel()`, voir `?model.sel` pour plus d'information.
 
+
 ---
 # Étape 2 - sélectionner le meilleur modèle
 
@@ -958,6 +966,7 @@ AIC.table
 * Souvent on considère que deux modèles à +/- 2 unités d'AICc de différence ont un pouvoir prédictif équivalent.
 
 * Examinons de plus proche M8 and M2. On peut exclure les autres modèles car ils ont des AICc beaucoup plus élevés.
+
 
 ---
 # Étape 2 - sélectionner le meilleur modèle
@@ -976,6 +985,7 @@ Le modèle `M8` semble être le meilleur modèle parmi ceux qu'on a testé.
 
 Notez qu'on utilise maintenant REML (i.e. `REML=TRUE`) vu qu'on compare deux modèles avec des effets aléatoires nichés et avec la même structure d'effets fixes. 
 
+
 ---
 # Étape 2 - sélectionner le meilleur modèle
 
@@ -991,6 +1001,7 @@ L'intercept et l'effet de la longueur sur la position trophique peut varier selo
 .pull-left[![](images/fig_9_w5.png)]
 .pull-right[![](images/fig_8_w5.png)]
 
+
 ---
 # Étape 2 - sélectionner le meilleur modèle
 
@@ -1000,6 +1011,7 @@ Une fois que le meilleur modèle est sélectionné il faut remettre la méthode 
 M8 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake),
            data = fish.data, REML = TRUE)
 ```
+
 
 ---
 exclude: true
@@ -1020,10 +1032,11 @@ M2 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 + Z_Length | Lak
            data = fish.data, REML = TRUE)
 ```
 
+
 ---
 exclude: true
 
-# Solution
+# Solution ![:cube]()
 
 **Discussion de groupe...**
 
@@ -1037,6 +1050,7 @@ exclude: true
 .alert[M8] La position trophique est en fonction de la longueur. L'intercept et l'effet de la longueur sur la position trophique peut varier selon l’espèce de poissons, mais seulement l'intercept peut varier par lac.
 
 * .small[seulement les facteurs intrinsèques des espèces sont responsables des différentes relations (i.e. pentes) et en moyenne, les positions trophiques pourraient être supérieures ou inférieures d’un lac à l’autre (e.g. intercepts).]
+
 
 ---
 # Comment implémenter un MLM dans R ?
@@ -1057,6 +1071,7 @@ exclude: true
 
 **Étape 4:** Interprétation et visualisation des résultats
 
+
 ---
 # Étape 3 - validation du modèle
 
@@ -1071,6 +1086,7 @@ Vous devez vérifier que le modèle respecte toutes les suppositions de base:
 
 3. Vérifier la normalité
   - Histogramme
+
 
 ---
 # Étape 3 - validation du modèle
@@ -1087,6 +1103,7 @@ abline(h = 0, lty = 2)
 
 Étendue homogène des résidus ![:faic](arrow-right) la supposition est respectée!
 
+
 ---
 # Étape 3 - validation du modèle
 
@@ -1095,6 +1112,7 @@ abline(h = 0, lty = 2)
 .center[
 ![](images/resid-plots.gif)
 ]
+
 
 ---
 # Étape 3 - validation du modèle
@@ -1117,6 +1135,7 @@ boxplot(resid(M8) ~ Lake, data = fish.data,
 abline(h = 0, lty = 2)
 ```
 
+
 ---
 # Étape 3 - validation du modèle
 
@@ -1136,6 +1155,7 @@ abline(h = 0, lty = 2)
 
 Note: Les regroupements de données sont dus à la structure des données, où des poissons de seulement 5 classes de taille  (grand, petit, et trois groupes entre les deux) étaient capturés.
 
+
 ---
 # Étape 3 - validation du modèle
 
@@ -1147,6 +1167,7 @@ Note: Les regroupements de données sont dus à la structure des données, où d
 
   - Puisque dans notre cas, nous avons inclus toutes les variables mesurées dans notre modèle, nous ne pouvons pas faire cette étape.
 
+
 ---
 # Étape 3 - validation du modèle
 
@@ -1157,6 +1178,7 @@ Note: Les regroupements de données sont dus à la structure des données, où d
 ```{r, fig.height=5, fig.width=5}
 hist(resid(M8))
 ```
+
 
 ---
 # Comment implémenter un MLM dans R ?
@@ -1177,12 +1199,14 @@ hist(resid(M8))
 
 ###### **Étape 4:** Interprétation et visualisation des résultats
 
+
 ---
 # Étape 4 - interprétation et visualisation
 
 ```{r}
 (summ_M8 <- summary(M8))
 ```
+
 
 ---
 # Étape 4 - interprétation et visualisation
@@ -1201,6 +1225,7 @@ hist(resid(M8))
 - `Variance` la variance estimée de l'effet (`Std.Dev.` est l'écart type de cette valeur)
 - `Corr` indique la corrélation entre la pente aléatoire et l'ordonnée à l'origine aléatoire pour un groupement donné (voir [cette discussion ![:faic](stack-exchange)](https://stats.stackexchange.com/questions/320978/understanding-and-coding-random-intercept-correlation-lmer))
 
+
 ---
 # Étape 4 - interprétation et visualisation
 
@@ -1218,6 +1243,7 @@ $$ IC = Estimate \pm 1.96*Std.Error $$
 Si 0 est dans cet interval, alors le paramètre n’est pas significativement
 différente de zéro au seuil $\alpha$ = 0.05.
 
+
 ---
 # Étape 4 - interprétation et visualisation
 
@@ -1233,8 +1259,9 @@ différente de zéro au seuil $\alpha$ = 0.05.
 
 - `residuals(M8)` retourne les résidus
 
+
 ---
-# Défi 5 ![:cube]()
+# Défi 6 ![:cube]()
 
 1. Quelle est la pente et son intervalle de confiance de la variable Z_Length dans le modèle M8?
 
@@ -1258,7 +1285,7 @@ différente de zéro au seuil $\alpha$ = 0.05.
 
 
 ---
-# Défi 6 ![:cube]()
+# Défi 7 ![:cube]()
 
 Il est possible de visualiser graphiquement les différentes intercepts et pentes du modèle pour mieux interpréter les résultats
 
@@ -1275,6 +1302,7 @@ a) Figure avec toutes les données regroupées
 b) Figure par espèce
 
 c) Figure par lac
+
 
 ---
 # Solution ![:cube]()
@@ -1301,6 +1329,7 @@ Pour faire ces figures, il nous faut:
 ```{r}
 coef(M8)
 ```
+
 
 ---
 # Solution ![:cube]()
@@ -1330,6 +1359,7 @@ Plot_AllData + geom_abline(intercept = summ_M8$coefficients[1,1],
                            slope     = summ_M8$coefficients[2,1])
 ```
 
+
 ---
 # Solution ![:cube]()
 
@@ -1342,6 +1372,7 @@ Plot_AllData <- plot + geom_point() +
 
 Plot_AllData + geom_abline(intercept = summ_M8$coefficients[1,1], slope = summ_M8$coefficients[2,1])
 ```
+
 
 ---
 # Solution ![:cube]()
@@ -1371,6 +1402,7 @@ Plot_BySpecies +
 
 ```
 
+
 ---
 # Solution ![:cube]()
 
@@ -1393,6 +1425,7 @@ Plot_BySpecies +
   geom_abline(intercept = Species.coef[3,1], slope = Species.coef[3,2], col = "blue1")
 
 ```
+
 
 ---
 # Solution ![:cube]()
@@ -1421,6 +1454,7 @@ Plot_ByLake +
               slope     = Lake.coef[6,2], col = "magenta3")
 
 ```
+
 
 ---
 # Solution ![:cube]()
@@ -1454,7 +1488,7 @@ Les modèles mixtes sont très utiles pour prendre en compte la structure comple
 
 
 ---
-# Défi 7 ![:cube]()
+# Défi 8 ![:cube]()
 
 **Situation:**
 
@@ -1465,6 +1499,7 @@ Les modèles mixtes sont très utiles pour prendre en compte la structure comple
 * Vous désirez savoir si la productivité est un bon prédicteur de biodiversité
 
 .alert[Quel modèle mixte pourriez-vous utiliser pour ce jeu de données?]
+
 
 ---
 # Solution ![:cube]()
@@ -1496,7 +1531,7 @@ exclude: true
 ---
 exclude: true
 
-# Solution!![:cube]()
+# Solution ![:cube]()
 
 ```{r, eval = FALSE}
 lmer(Mercure ~ Longueur * Habitat + (1 | Site))
@@ -1505,7 +1540,7 @@ lmer(Mercure ~ Longueur * Habitat + (1 | Site))
 ---
 exclude: true
 
-# Défi 10![:cube]()
+# Défi 9 ![:cube]()
 
 * Discutez du jeu de données sur lequel vous travaillez avec votre voisin et déterminez si un modèle mixte serait approprié.
 
@@ -1525,7 +1560,7 @@ class: inverse, center, middle
 
 **Extension des GLMs tenant compte de structures supplémentaires dans les données**
 
-Suivent les étapes similaires à celles introduites lors de la section sur les LMMs:
+Suivent les étapes similaires à celles introduites lors de la section sur les LMMs :
 
 **1.** Ils incorporent les effets aléatoires (comme les LMMs)
 
@@ -1964,7 +1999,7 @@ En utilisant l'ensemble de données `inverts` (temps de développement larvaire 
 
 
 ---
-# Solution
+# Solution ![:cube]()
 
 ```{R, eval = FALSE}
 # inverts <- read.csv('data/inverts.csv', header = TRUE)
@@ -1999,8 +2034,7 @@ En utilisant l'ensemble de données `inverts` (temps de développement larvaire 
 ```
 
 plot(aggregate(PLD ~ taxon, FUN=var, data = inverts)[,2],aggregate(PLD ~ taxon, FUN=mean, data = inverts)[,2])
-abline(a=0, b =1, lty =2 )
-
+abline(a = 0, b = 1, lty =2 )
 
 
 ---
