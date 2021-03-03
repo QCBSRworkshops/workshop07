@@ -300,7 +300,6 @@ On pourrait faire une analyse pour chaque espèce :
 
 ---
 # Pourquoi choisir un MLM?
-<br>
 
 Pour **notre question**, on veut seulement savoir s'il y a un **effet général de la longueur corporelle sur la position trophique**.
 <br>
@@ -1865,6 +1864,7 @@ r2 <- ranef(mpl1, condVar = TRUE)
 d2 <- dotplot(r2, par.settings = pp)
 grid.arrange(d2$gen, d2$popu, nrow = 1)
 ```
+
 
 ---
 # GLMM Poisson-lognormale

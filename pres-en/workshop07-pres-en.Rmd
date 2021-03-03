@@ -299,7 +299,6 @@ Note: _MFF: Not sure that mixed models help when the sample size is small. Also,
 
 ---
 # Why choose mixed models?
-<br>
 
 For **our question**, we only want to know if there is a **general effect of length on the trophic position**.
 <br>
