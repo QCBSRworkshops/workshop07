@@ -1228,6 +1228,21 @@ $$ CI = Estimate \pm 1.96*Std.Error $$
 If 0 is in the interval, then the parameter is not significantly different from zero at a threshold of $\alpha$ = 0.05.
 
 ---
+# Step 4: Interpretation and visualization
+
+**Some useful functions**
+
+- `coef(M8)` and `ranef(M8)` return random effects of model M8
+
+- `coef(summary(M8))` returns fixed effects
+
+- `sigma(M8)` returns standard deviation of residuals
+
+- `fitted(M8)` returns predicted values by the model
+
+- `residuals(M8)` returns residuals
+
+---
 exclude: true
 
 # Step 4: Interpretation and visualization
@@ -1253,7 +1268,7 @@ If the 95% confidence interval of the slope ($slope ± SE * 1.96$) includes zero
 2. Is the slope of Z_Length significantly different from 0?
 
 ---
-## Solution ![:cube]()
+# Solution ![:cube]()
 
 1. What is the slope and confidence interval of the Z_Length variable in the M8 model?
 
@@ -1450,6 +1465,9 @@ Plot_ByLake +
 ```
 
 ---
+
+exclude: true
+
 # Mixed model and ecological data
 
 Mixed models are very useful for taking into account the complex structure of ecological data while not loosing too many degrees of freedom

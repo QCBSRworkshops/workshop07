@@ -1217,7 +1217,7 @@ hist(resid(M8))
     #               Z_Length    0.02464  0.1570   1.00
     #  Residual                 0.05040  0.2245
 
-- `Groups`: facteurs groupant,
+- `Groups`: facteurs de regroupement,
 - `Name`:
   - `(Intercept)` pour l'ordonnée à l'origine,
   - ou le nom de la variable sur lequel porte l'effet mixe dans le cas d'une pente aléatoire, (`Z_length` dans notre exemple)
@@ -1246,7 +1246,7 @@ différente de zéro au seuil $\alpha$ = 0.05.
 ---
 # Étape 4 - interprétation et visualisation
 
-##### Quelques fonctions utiles
+**Quelques fonctions utiles**
 
 - `coef(M8)` et `ranef(M8)` retournent les effets aléatoires du modèle M8
 
@@ -1477,6 +1477,9 @@ Plot_ByLake +
 
 
 ---
+
+exclude: true
+
 # Modèle mixtes et données en écologie
 
 Les modèles mixtes sont très utiles pour prendre en compte la structure complexe des données en écologie tout en permettant de ne pas perdre beaucoup de degrés de liberté
