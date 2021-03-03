@@ -98,6 +98,8 @@ Vous verrez à travers l'atelier une série de  **défis** que vous reconnaitrez
 
 <br>
 
+Pour les installer à partir du CRAN, faire :
+
 ```{r eval = FALSE}
 install.packages(c("ggplot2", 
                    "lme4", 
@@ -341,9 +343,12 @@ Les données proviennent :
 * de tous les niveaux possibles d'un facteur (**variable qualitative**) 
 * d'un prédicteur (**variable quantitative**)
 
+<br>
+
 On souhaite émettre des conclusions à propos des niveaux du facteur ou de la relation entre le prédicteur et la variable réponse.
 
---
+---
+# Pourquoi choisir un MLM?
 
 ### Effet aléatoire : processus stochastiques
 
@@ -548,22 +553,22 @@ https://doi.org/10.1098/rsif.2017.0213
 
 <img style="float:right; width:32%; margin:1%" src="images/lego.jpg">
 
-###### **Étape 1:** Construction du modèle *a priori* et exploration des données
+###### **Étape 1.** Construction du modèle *a priori* et exploration des données
 
 <br>
 
-**Étape 2:** Coder les modèles potentiels et sélection du meilleur modèle
+**Étape 2.** Coder les modèles potentiels et sélection du meilleur modèle
 
 <br>
 
-**Étape 3:** Validation du modèle
+**Étape 3.** Validation du modèle
 
 <br>
 
-**Étape 4:** Interprétation et visualisation des résultats
+**Étape 4.** Interprétation et visualisation des résultats
 
 ---
-# Étape 1 - construction du modèle *a priori*
+# Étape 1. construction du modèle *a priori*
 
 **Modèle basé sur connaissance *a priori*:**
 
@@ -573,7 +578,7 @@ https://doi.org/10.1098/rsif.2017.0213
 
 $$PT_{ijk} \sim Longueur_i + Lac_j + Espèce_k + \varepsilon_{ijk}$$
 ---
-# Étape 1 - exploration des données
+# Étape 1. exploration des données
 
 **Les données ont-elles la bonne structure?**
 
@@ -585,7 +590,7 @@ str(fish.data)
 Il est recommandé de faire le ménage de votre espace de travail (`rm.list()`) avant de construire un modèle.
 
 ---
-# Étape 1 - exploration des données
+# Étape 1. exploration des données
 
 **Regardez la distribution des échantillons pour chaque facteur:**
 
@@ -596,7 +601,7 @@ table(fish.data[ , c("Lake", "Fish_Species")])
 Ce jeu de données est parfaitement équilibré, mais les **modèles mixtes peuvent analyser des designs expérimentaux non équilibrés**, comme c'est souvent le cas en écologie!
 
 ---
-# Étape 1 - exploration des données
+# Étape 1. exploration des données
 
 **Regardez la distribution des variables continues**
 
@@ -609,7 +614,7 @@ hist(fish.data$Trophic_Pos, xlab = "Trophic position", main = "")
 Des déviations majeures pourraient causer des problèmes d'hétéroscédasticité. Si nécessaire, faites des transformations. Dans ce cas-ci, **les données semblent correctes**.
 
 ---
-# Étape 1 - exploration des données
+# Étape 1. exploration des données
 
 **Vérifier la colinéarité entre vos variables explicatives**
 
@@ -635,7 +640,7 @@ Quelles mesures supplémentaires aurions-nous pu prendre sur le terrain et qui a
 > Un exemple est la masse du poisson – c’est une variable fortement corrélée avec la longueur du poisson. Par conséquent, nous ne voulons pas inclure ces deux variables dans le même modèle.
 
 ---
-# Étape 1 - exploration des données
+# Étape 1. exploration des données
 
 **Considérez l'échelle de vos données**
 
@@ -645,7 +650,7 @@ Quelles mesures supplémentaires aurions-nous pu prendre sur le terrain et qui a
 
 $$z = \frac{x-moyenne(x)}{écart.type(x)}$$
 ---
-# Étape 1 - exploration des données
+# Étape 1. exploration des données
 
 **Considérez l'échelle de vos données**
 
@@ -654,7 +659,7 @@ $$z = \frac{x-moyenne(x)}{écart.type(x)}$$
 * Position trophique ![:faic](arrow-right) Courte échelle
 
 ---
-# Étape 1 - exploration des données
+# Étape 1. exploration des données
 
 **Considérez l'échelle de vos données**
 
@@ -670,11 +675,11 @@ fish.data$Z_TP     <- scale(fish.data$Trophic_Pos)
 ```
 
 ---
-# Étape 1 - exploration des données
+# Étape 1. exploration des données
 
 Pour savoir si un modèle mixte est nécessaire pour vos données, vous devez déterminer s'il est important de prendre en compte l'effet aléatoire de facteurs qui pourraient influencer la relation qui vous intéresse (dans notre cas, lac et espèce)
 
-Nous pouvons le faire en :
+**Nous pouvons le faire en :**
 
 1. Créant un modèle linéaire sans les facteurs qui pourraient avoir un effet aléatoire
 
@@ -683,7 +688,7 @@ Nous pouvons le faire en :
 3. Produisant un graphique de la valeur des résidus en fonction des niveaux des facteurs potentiellement aléatoires
 
 ---
-# Étape 1 - exploration des données
+# Étape 1. exploration des données
 
 Créer un modèle linéaire sans les facteurs
 ```{r}
@@ -696,7 +701,7 @@ lm.test.resid <- rstandard(lm.test)
 ```
 
 ---
-# Étape 1 - exploration des données
+# Étape 1. exploration des données
 
 Représentez graphiquement la valeur des résidus en fonction des niveaux des facteurs
 
@@ -715,7 +720,7 @@ abline(0, 0, lty = 2)
 ```
 
 ---
-# Étape 1 - Exploration des données
+# Étape 1. Exploration des données
 
 Représentez graphiquement la valeur des résidus en fonction des niveaux des facteurs
 
@@ -736,22 +741,22 @@ abline(0, 0, lty = 2)
 
 <img style="float: right; width:32%;margin: 1%" src="images/lego.jpg">
 
-**Étape 1:** Construction du modèle *a priori* et exploration des données
+**Étape 1.** Construction du modèle *a priori* et exploration des données
 
 <br>
 
-###### **Étape 2:** Coder les modèles potentiels et sélection du meilleur modèle
+###### **Étape 2.** Coder les modèles potentiels et sélection du meilleur modèle
 
 <br>
 
-**Étape 3:** Validation du modèle
+**Étape 3.** Validation du modèle
 
 <br>
 
-**Étape 4:** Interprétation et visualisation des résultats
+**Étape 4.** Interprétation et visualisation des résultats
 
 ---
-# Étape 2 - coder le modèle
+# Étape 2. coder le modèle
 
 **Traduisons notre modèle...**
 
@@ -789,7 +794,7 @@ Consultez cet [article](https://towardsdatascience.com/maximum-likelihood-ml-vs-
 ---
 # Note sur les méthodes d'estimation
 
-On devrait utiliser:
+**On devrait utiliser :**
 
 * **REML** pour comparer des modèles avec des **effets aléatoires nichés** et la même structure d'effets fixes
 
@@ -798,7 +803,7 @@ On devrait utiliser:
 * **ML** pour comparer des modèles **avec et sans effets aléatoires**
 
 ---
-# Étape 2 - coder le modèle
+# Étape 2. coder le modèle
 
 **Comment faire si on souhaite que la pente puisse varier ?**
 
@@ -807,9 +812,9 @@ On devrait utiliser:
 ]
 
 ---
-# Étape 2 - coder le modèle
+# Étape 2. coder le modèle
 
-**Plus généralement**
+**Différentes structures pour le modèle :**
 
 - `(1 | Lake)` effet aléatoire par lac à l'intercept
 - `(1 + Z_Length | Lake)` effet aléatoire par lac à l'intercept et la pente en réponse à la longueur corporelle (NB: (`Z_Length | Lake)` donne le même résultat)
@@ -837,7 +842,7 @@ lmer(Z_TP ~ Z_Length + (1 + Z_Length | Lake) + (1 + Z_Length | Fish_Species),
 ```
 
 ---
-# Étape 2 - sélectionner le meilleur modèle
+# Étape 2. sélectionner le meilleur modèle
 
 * Pour déterminer si vous avez construit le meilleur modèle mixte basé sur vos connaissances a priori, vous devez comparer ce modèle aux autres modèles alternatifs.
 
@@ -854,7 +859,7 @@ lmer(Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species),
      data = fish.data, REML = TRUE)
 ```
 
-Note: Si nous avions différents effets fixes entre les modèles ou un modèle sans effects aléatoires, nous aurions dû indiquer `REML=FALSE` pour les comparer avec une méthode de vraisemblance comme l'AIC.
+.comment[Note : si nous avions différents effets fixes entre les modèles ou un modèle sans effects aléatoires, nous aurions dû indiquer `REML = FALSE` pour les comparer avec une méthode de vraisemblance comme l'AIC.]
 
 
 ---
@@ -912,7 +917,7 @@ Voici une [liste](https://rdrr.io/cran/lme4/man/troubleshooting.html) de problè
 
 
 ---
-# Étape 2 - sélectionner le meilleur modèle
+# Étape 2. sélectionner le meilleur modèle
 
 * Maintenant que nous avons une liste de modèles potentiels, nous voulons les comparer entre eux pour sélectionner celui(ceux) qui a(ont) le plus de pouvoir prédictif.
 
@@ -924,7 +929,7 @@ Voici une [liste](https://rdrr.io/cran/lme4/man/troubleshooting.html) de problè
 
 
 ---
-# Étape 2 - sélectionner le meilleur modèle
+# Étape 2. sélectionner le meilleur modèle
 
 Pour trouver la valeur AICc d'un modèle, utilisez :
 
@@ -935,7 +940,7 @@ MuMIn::AICc(M1)
 
 
 ---
-# Étape 2 - sélectionner le meilleur modèle
+# Étape 2. sélectionner le meilleur modèle
 
 Pour regrouper toutes les valeurs d'AICc dans un seul tableau, utilisez :
 
@@ -952,7 +957,7 @@ Nous avons seulement affiché une partie des résultats retourné par la fonctio
 
 
 ---
-# Étape 2 - sélectionner le meilleur modèle
+# Étape 2. sélectionner le meilleur modèle
 
 Que signifient ces valeurs d'AICc ?
 
@@ -968,7 +973,7 @@ AIC.table
 
 
 ---
-# Étape 2 - sélectionner le meilleur modèle
+# Étape 2. sélectionner le meilleur modèle
 
 ```{r}
 M8 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake),
@@ -986,7 +991,7 @@ Notez qu'on utilise maintenant REML (i.e. `REML=TRUE`) vu qu'on compare deux mod
 
 
 ---
-# Étape 2 - sélectionner le meilleur modèle
+# Étape 2. sélectionner le meilleur modèle
 
 Quelle est la structure du meilleur modèle?
 
@@ -1002,9 +1007,9 @@ L'intercept et l'effet de la longueur sur la position trophique peut varier selo
 
 
 ---
-# Étape 2 - sélectionner le meilleur modèle
+# Étape 2. sélectionner le meilleur modèle
 
-Une fois que le meilleur modèle est sélectionné il faut remettre la méthode d'estimation a `REML=TRUE`
+Une fois que le meilleur modèle est sélectionné il faut remettre la méthode d'estimation a `REML = TRUE`
 
 ```{r}
 M8 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake),
@@ -1054,43 +1059,49 @@ exclude: true
 ---
 # Comment implémenter un MLM dans R ?
 
-<img style="float: right; width:32%;margin: 1%" src="images/lego.jpg">
+<img style = "float: right; width:32%;margin: 1%" src = "images/lego.jpg">
 
-**Étape 1:** Construction du modèle *a priori* et exploration des données
-
-<br>
-
-**Étape 2:** Coder les modèles potentiels et sélection du meilleur modèle
+**Étape 1.** Construction du modèle *a priori* et exploration des données
 
 <br>
 
-###### **Étape 3:** Validation du modèle
+**Étape 2.** Coder les modèles potentiels et sélection du meilleur modèle
 
 <br>
 
-**Étape 4:** Interprétation et visualisation des résultats
+###### **Étape 3.** Validation du modèle
+
+<br>
+
+**Étape 4.** Interprétation et visualisation des résultats
 
 
 ---
-# Étape 3 - validation du modèle
+# Étape 3. validation du modèle
 
-Vous devez vérifier que le modèle respecte toutes les suppositions de base:
+**Vous devez vérifier que le modèle respecte toutes les suppositions de base :**
 
-1. Vérifier l'homogénéité de la variance
+<br>
+
+**3.1 Vérifier l'homogénéité de la variance**
   - Faire un graphique des valeurs prédites en fonction des valeurs résiduelles
 
-2. Vérifier l'indépendance des résidus
+<br>
+
+**3.2 Vérifier l'indépendance des résidus**
   - Graphique des résidus vs chaque covariable du modèle
   - Graphique des résidus vs chaque covariable non incluse du modèle
 
-3. Vérifier la normalité
+<br>
+
+**3.3 Vérifier la normalité**
   - Histogramme
 
 
 ---
-# Étape 3 - validation du modèle
+# Étape 3. validation du modèle
 
-1- Vérifier l'homogénéité de la variance
+**3.1 Vérifier l'homogénéité de la variance**
 
 ```{r, fig.width=4.5, fig.height=4.5, echo = -1}
 par(mar=c(4,4,.5,.5))
@@ -1104,9 +1115,9 @@ abline(h = 0, lty = 2)
 
 
 ---
-# Étape 3 - validation du modèle
+# Étape 3. validation du modèle
 
-1- Vérifier l'homogénéité de la variance
+**3.1 Vérifier l'homogénéité de la variance**
 
 .center[
 ![](images/resid-plots.gif)
@@ -1114,9 +1125,9 @@ abline(h = 0, lty = 2)
 
 
 ---
-# Étape 3 - validation du modèle
+# Étape 3. validation du modèle
 
-2- Vérifier l'indépendance des résidus avec chaque covariable
+**3.2 Vérifier l'indépendance des résidus avec chaque covariable**
 
 ```{r, fig.width=11, fig.height=4.5, eval = FALSE}
 par(mfrow = c(1,3), mar=c(4,4,.5,.5))
@@ -1136,9 +1147,9 @@ abline(h = 0, lty = 2)
 
 
 ---
-# Étape 3 - validation du modèle
+# Étape 3. validation du modèle
 
-2- Vérifier l'indépendance des résidus avec chaque covariable
+**3.2 Vérifier l'indépendance des résidus avec chaque covariable**
 
 ```{r, fig.width=12, fig.height=4.5, echo = FALSE}
 par(mfrow = c(1,3), mar=c(4,4,.5,.5), cex.lab = 1.5)
@@ -1152,13 +1163,13 @@ abline(h = 0, lty = 2)
 
 Étendue homogène des résidus autour de 0 ![:faic](arrow-right) pas de patron des résidus en fonction de la variable, la supposition est respectée!
 
-Note: Les regroupements de données sont dus à la structure des données, où des poissons de seulement 5 classes de taille  (grand, petit, et trois groupes entre les deux) étaient capturés.
+.comment[Note : les regroupements de données sont dus à la structure des données, où des poissons de seulement 5 classes de taille  (grand, petit, et trois groupes entre les deux) étaient capturés.]
 
 
 ---
-# Étape 3 - validation du modèle
+# Étape 3. validation du modèle
 
-2- Vérifier l'indépendance des résidus avec chaque covariable
+**3.2 Vérifier l'indépendance des résidus avec chaque covariable**
 
 - Graphique des résidus vs chaque covariable non incluse du modèle
 
@@ -1168,9 +1179,9 @@ Note: Les regroupements de données sont dus à la structure des données, où d
 
 
 ---
-# Étape 3 - validation du modèle
+# Étape 3. validation du modèle
 
-3- Vérifier la normalité des résidus
+**3.3 Vérifier la normalité des résidus**
 
 * Des résidus suivant une distribution normale indiquent que le modèle n'est pas biaisé
 
@@ -1184,23 +1195,23 @@ hist(resid(M8))
 
 <img style="float: right; width:32%;margin: 1%" src="images/lego.jpg">
 
-**Étape 1:** Construction du modèle *a priori* et exploration des données
+**Étape 1.** Construction du modèle *a priori* et exploration des données
 
 <br>
 
-**Étape 2:** Coder les modèles potentiels et sélection du meilleur modèle
+**Étape 2.** Coder les modèles potentiels et sélection du meilleur modèle
 
 <br>
 
-**Étape 3:** Validation du modèle
+**Étape 3.** Validation du modèle
 
 <br>
 
-###### **Étape 4:** Interprétation et visualisation des résultats
+###### **Étape 4.** Interprétation et visualisation des résultats
 
 
 ---
-# Étape 4 - interprétation et visualisation
+# Étape 4. interprétation et visualisation
 
 ```{r}
 (summ_M8 <- summary(M8))
@@ -1208,7 +1219,7 @@ hist(resid(M8))
 
 
 ---
-# Étape 4 - interprétation et visualisation
+# Étape 4. interprétation et visualisation
 
     # Random effects:
     #  Groups       Name        Variance Std.Dev. Corr
@@ -1226,7 +1237,7 @@ hist(resid(M8))
 
 
 ---
-# Étape 4 - interprétation et visualisation
+# Étape 4. interprétation et visualisation
 
     # Fixed effects:
     #              Estimate Std. Error t value
@@ -1244,7 +1255,7 @@ différente de zéro au seuil $\alpha$ = 0.05.
 
 
 ---
-# Étape 4 - interprétation et visualisation
+# Étape 4. interprétation et visualisation
 
 **Quelques fonctions utiles**
 
@@ -1651,7 +1662,7 @@ Comme nous venons de le voir, il existe une importante hétérogénéité parmi 
 
 Si nous représentons graphiquement les **écarts vs moyennes par groupes** (génotypes x nutriment x herbivorie), on voit que la distribution de Poisson est la moins appropriée (i.e. car les écarts augmentent beaucoup plus vite que la moyenne).
 
-```{r, echo = F, fig.height = 5.3, fig.width = 8, fig.align = 'center'}
+```{r, echo = F, fig.height = 4.9, fig.width = 8, fig.align = 'center'}
 # Code used to produce the plot : https://github.com/QCBSRworkshops/workshop07/blob/main/pres-fr/data/glmm_e.r
 
 # Substantial variation among the sample variances on the transformed data
@@ -1838,7 +1849,7 @@ coefplot2(mpl1, intercept = TRUE, main = "Coefficients des effets fixes")
 ```
 ]
 
-.alert[Note]: Barres d'erreur visibles seulement pour les effets fixes car `glmer()` ne modélise pas d'incertitude pour les effets aléatoires.
+.comment[Note : barres d'erreur visibles seulement pour les effets fixes car `glmer()` ne modélise pas d'incertitude pour les effets aléatoires.]
 
 
 ---
@@ -1909,7 +1920,9 @@ Nous dérivons d'abord les modèles potentiels et les comparons en utilisant l'A
 mpl2 <- update(mpl1, . ~ . - rack) # modèle sans rack
 mpl3 <- update(mpl1, . ~ . - status) # modèle sans status
 mpl4 <- update(mpl1, . ~ . - amd:nutrient) # modèle sans interaction amd:nutrient
-bbmle::ICtab(mpl1, mpl2, mpl3, mpl4, type = c("AICc"))
+
+aic_tab  <- MuMIn::model.sel(mpl1, mpl2, mpl3, mpl4)
+(round(aic_table <- aic_tab[ , c("AICc", "delta", "df")], digits = 2))
 ```
 
 .comment[*NB: Nous ne couvrons pas tous les modèles possibles ci-dessus, cependant, l'interaction `amd:nutriments` ne peut être évaluée que si les effets additifs de amd et de nutriments sont présents dans le modèle.
@@ -1937,32 +1950,26 @@ dd_LRT <- drop1(mpl1, test = "Chisq")
 ---
 # Sélection du modèle
 Commençons par **enlever l'interaction non significative** afin de tester les effets principaux de nutriments et d'herbivorie.
-
-<br>
-
-Utilisez la méthode de votre choix parmi celles vues dans l'atelier :
-.pull-left2[
 ```{r}
 mpl2 <- update(mpl1, . ~ . - amd:nutrient)
-# Utiliser AIC
-mpl3 <- update(mpl2, . ~ . - rack) # pas de rack ou interaction
-mpl4 <- update(mpl2, . ~ . - status) # pas de status ou interaction
-mpl5 <- update(mpl2, . ~ . - nutrient) # pas de nutrient ou interaction
-mpl6 <- update(mpl2, . ~ . - amd) # pas d'herbivorie ou interaction
-# bbmle::ICtab(mpl2, mpl3, mpl4, mpl5, mpl6,
-#              type = c("AICc"))
 
-# Ou utiliser drop1
-dd_LRT2 <- drop1(mpl2, test = "Chisq")
-dd_AIC2 <- dfun(drop1(mpl2))
+mpl3 <- update(mpl2, . ~ . - rack) # pas de rack ou d'interaction
+mpl4 <- update(mpl2, . ~ . - status) # pas de status ou d'interaction
+mpl5 <- update(mpl2, . ~ . - nutrient) # pas de nutrient ou d'interaction
+mpl6 <- update(mpl2, . ~ . - amd) # pas d'herbivorie ou d'interaction
+```
+
+Sélectionnez le meilleur modèle avec la méthode de votre choix :
+.pull-left2[ Méthode par AICc
+```{r}
+aic_tab2  <- MuMIn::model.sel(mpl2, mpl3, mpl4, mpl5, mpl6)
+(round(aic_table2 <- aic_tab2[ , c("AICc", "delta", "df")], digits = 2))
 ```
 ]
-.pull-right2[
+.pull-right2[ Méthode avec `drop1()`
 ```{r}
-library(bbmle)
-ICtab(mpl2, mpl3 ,mpl4,
-      mpl5, mpl6,
-      type = c("AICc"))
+dd_LRT2 <- drop1(mpl2, test = "Chisq")
+dd_AIC2 <- dfun(drop1(mpl2))
 ```
 ]
 
@@ -2027,8 +2034,8 @@ En utilisant l'ensemble de données `inverts` (temps de développement larvaire 
 # d2 <- dotplot(r2, par.settings = pp)
 #
 #
-# plot(aggregate(PLD ~ taxon, FUN=mean, data = inverts)[,2],aggregate(PLD ~ taxon, FUN=var, data = inverts)[,2], pch = 19)
-# abline(a=0, b = 1, lty =2)
+# plot(aggregate(PLD ~ taxon, FUN = mean, data = inverts)[,2], aggregate(PLD ~ taxon, FUN = var, data = inverts)[,2], pch = 19)
+# abline(a = 0, b = 1, lty = 2)
 #
 # mod.glmer <- glmer.nb(PLD ~ temp + feeding.type + (1|taxon), data = inverts)
 # mod.glm <- glm.nb(PLD ~ temp + feeding.type, family = poisson(), data = inverts)
