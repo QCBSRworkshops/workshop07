@@ -73,7 +73,7 @@ lapply(list.of.packages, require, character.only = TRUE, quietly = TRUE)
 
 <br>
 
-Throughout this workshop, there will be a series of **challenges** that you can recognize by this rubix cube
+Throughout this workshop, there will be a series of **challenges** that you can recognize by this rubix cube.
 
 .center[
 ![:scale 25%](images/rubicub.png)
@@ -222,7 +222,7 @@ plot + geom_point() + facet_wrap(~ Lake) + xlab("Length (mm)") + ylab("Trophic P
 ---
 # Why choose mixed models?
 
-**Ecological and biological data can be complex!**
+### Ecological and biological data can be complex!
 
 * Hierarchical structure in the data
 
@@ -251,9 +251,7 @@ Note: _MFF: Not sure that mixed models help when the sample size is small. Also,
 ---
 # Why choose mixed models?
 
-<br>
-
-.large[**How could we analyze this data?**]
+### How could we analyze this data?
 
 --
 
@@ -345,7 +343,7 @@ Data comes from :
 
 <br>
 
-We wish to make conclusions about the levels of the factor from which the data come from.
+We wish to make conclusions about the levels of the factor or about the relationship between the response variable and the predictor.
 
 
 ---
@@ -368,7 +366,7 @@ We wish to make conclusions about the levels of the factor from which the data c
 
 **A.** Intercepts and/or slopes are allowed to vary according to a given factor (**random effect**) (e.g. by lake and/or species)
 
-**B.** Intercepts, slopes and their confidence interval are adjusted to **take the data structure into account**
+**B.** Intercepts, slopes and their confidence intervals are adjusted to **take the data structure into account**
 
 
 ---
@@ -1513,7 +1511,9 @@ class: inverse, center, middle
 
 # GLMMs
 
+
 ---
+exclude: true
 # Review: Linear Mixed Models
 
 **Review of LMM Workshop**:
@@ -1531,7 +1531,9 @@ class: inverse, center, middle
 - Parameter is reproducible, i.e. would be the same across studies
 - Explain the mean of the response variable
 
+
 ---
+exclude: true
 # Review: Linear Mixed Models
 
 .pull-left[
@@ -1548,27 +1550,30 @@ class: inverse, center, middle
 
 
 ---
-# Generalized Linear Mixed Models
+# Generalized Linear Mixed Models (GLMMs)
 
-Extension of GLMs to account for additional structure in dataset
+**Extension of GLMs to account for additional structure in dataset**
 
-Follows similar steps introduced in LMM Workshop
+Follows similar steps introduced in LMM Workshop :
 
-1. LMMs incorporate random effects
-2. GLMs handle non-normal data (letting errors take on different distribution families - e.g. Poisson or negative binomial)
+**1.** Incorporate random effects (like LMMs)
+
+**2.** Handle non-normal data (letting errors take on different distribution families - e.g. Poisson or negative binomial) (like GLMs)
 
 
 ---
+exclude: true
 # Review: Generalized Linear Models (GLM)
 
 _Include 2-3 slides recalling GLM_
 
+
 ---
-# Implementing GLMM in R
+# Implementing GLMMs in R
 
-Import the `Arabidopsis` dataset `banta_totalfruits.csv` into R.
+Import the `Arabidopsis` dataset `banta_totalfruits.csv` into `R`.
 
-```{r, echo=F}
+```{r, echo = F}
 dat.tf <- read.csv("data/banta_totalfruits.csv")
 ```
 
@@ -1583,28 +1588,29 @@ dat.tf <- read.csv("banta_totalfruits.csv")
 # total.fruits integer indicating the number of fruits per plant
 ```
 
-The effect of nutrient availability and herbivory (**fixed effects**) on the fruit production of the mouse-ear cress (Arabidopsis thaliana) was evaluated by measuring 625 plants across 9 different populations, each comprised of 2 to 3 different genotypes (**random effects**)
+The effect of nutrient availability and herbivory (**fixed effects**) on the fruit production (**response variable**) of Arabidopsis thaliana was evaluated by measuring 625 plants across 9 different populations, each comprised of 2 to 3 different genotypes (**random effects**)
+
 
 ---
-# Choosing error distribution
+# Choosing an error distribution
 
-The response variable is count data which suggests to that a **Poisson distribution** should be used (i.e. the variance is equal to the mean)
+The response variable is count data which suggests we need a **Poisson distribution** (i.e. the variance is equal to the mean)
 
-```{r,echo=F, fig.height=5, fig.width=6}
+```{r, echo = F, fig.height = 5, fig.width = 6}
 par(mypar);par(cex = 1.4)
 hist(dat.tf$total.fruits, breaks = 50, col = 'blue', main = '',
      xlab = 'Total fruits', ylab = 'Count')
 ```
 
-However, as we will soon see, the variance increases with the mean much more rapidly than expected under the Poisson distribution
+However, as we will soon see, the variance increases with the mean much more rapidly than expected under the Poisson distribution...
 
 
 ---
 # Exploring variance
 
-To illustrate heterogeneity in variance we will first create boxplots of the response variable versus different environmental factors
+To illustrate heterogeneity in variance we will first create boxplots of the **log** of total fruit production (**response variable**) versus different environmental factors.
 
-Let's create new variables that represents every combination of **nutrient** x **clipping** x **random factor**
+Let's create new variables that represent every combination of **nutrient** x **clipping** x **random factor**
 
 ```{r}
 dat.tf <- within(dat.tf,
@@ -1618,23 +1624,26 @@ dat.tf <- within(dat.tf,
 })
 ```
 
+
 ---
 # Exploring variance
 
 .small[
-```{r, fig.height=4, fig.width=8}
+```{r, fig.height =  3.5, fig.width = 8}
 # Boxplot of total fruits vs genotype x nutrient x clipping interaction
 library(ggplot2)
 
-ggplot(data = dat.tf, aes(factor(x = gna),y = log(total.fruits + 1))) +
+ggplot(data = dat.tf, aes(factor(x = gna), y = log(total.fruits + 1))) +
   geom_boxplot(colour = "skyblue2", outlier.shape = 21,
   outlier.colour = "skyblue2") +
-  theme_bw() + theme(axis.text.x=element_blank()) +
-  stat_summary(fun.y=mean, geom="point", colour = "red")
+  ylab("log (Total fruits)\n") + # \n creates a space after the title
+  xlab("\nGenotype x nutrient x clipping") + # space before the title
+  theme_bw() + theme(axis.text.x = element_blank()) +
+  stat_summary(fun = mean, geom = "point", colour = "red")
 ```
 ]
 
-.comment[Similarly, the boxplot of total fruits vs population x nutrient x clipping interaction shows a large amount of heterogeneity among populations.]
+.comment[Similarly, the variance of total fruits shows a large amount of heterogeneity among populations (population x nutrient x clipping interaction).]
 
 
 ---

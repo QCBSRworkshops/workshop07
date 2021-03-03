@@ -141,9 +141,9 @@ Pour répondre, nous utiliserons un jeu de données où la longueur corporelle d
 
 **1.** Ouvrez le script de l'atelier dans `R`
 
-**2** Ouvrez le jeu de données dans `R`
+**2.** Ouvrez le jeu de données dans `R`
 
-**3** Reproduisez les graphiques 1 à 3 (dans le script) de la relation entre la position trophique et la taille. Observez les graphiques puis evaluez ce que vous observez.
+**3.** Reproduisez les graphiques 1 à 3 (dans le script) de la relation entre la position trophique et la taille. Observez les graphiques puis evaluez ce que vous observez.
 
 
 ---
@@ -151,9 +151,9 @@ exclude: true
 # Familiarisez-vous avec le jeu de données
 <br>
 
-**1.** Ouvrez le script de l'atelier dans `R`
+**1.** Ouvrez le jeu de données dans `R`
 
-**2.** Ouvrez le jeu de données dans `R`
+**2.** Ouvrez le script de l'atelier dans `R`
 
 **3.** Visualisez la relation entre taille et position trophique
 
@@ -236,7 +236,7 @@ plot + geom_point() + facet_wrap(~ Lake) + xlab("Longueur (mm)") + ylab("Positio
 ---
 # Pourquoi choisir un MLM?
 
-**Les données biologiques et écologiques peuvent être complexes!**
+### Les données biologiques et écologiques peuvent être complexes!
 
 * Peuvent contenir une structure hiérarchique
 
@@ -248,9 +248,7 @@ plot + geom_point() + facet_wrap(~ Lake) + xlab("Longueur (mm)") + ylab("Positio
 ---
 # Pourquoi choisir un MLM?
 
-<br>
-
-.large[**Comment pourrions-nous analyser ces données?**]
+### Comment pourrions-nous analyser ces données?
 
 --
 
@@ -444,7 +442,7 @@ Idéalement, avoir un minimum de $n$=3 par niveau d'un facteur.
 
 * Les intervalles de confiance des ordonnées à l'origine et des pentes **générales** sont ajustés pour tenir compte de la pseudo-replication basée sur le **coefficient de corrélation intra-classe (CCI)**
 
-* Le CCI permet de savoir la proportion de variation dans la variable réponse qui est expliqué par l'effet aléatoire, tel que :
+* Le CCI permet de savoir la proportion de variation dans la variable réponse qui est expliquée par l'effet aléatoire, tel que :
 
 $$CCI = \frac{\sigma_{\alpha}^2}{\sigma_{\alpha}^2 + \sigma_{\varepsilon}^2}$$
 Le CCI correspond au **ratio** entre la variance d'un effet aléatoire (e.g. ordonnées à l'origine des espèces) et la variance totale.
@@ -1515,6 +1513,13 @@ exclude: true
 
 * Si non, imaginez un jeu de données fictif pour lequel un modèle mixte serait approprié et codez ce modèle.
 
+
+---
+class: inverse, center, middle
+
+# GLMMs
+
+
 ---
 # Modèles Linéaires Généralisés Mixtes (GLMMs)
 
@@ -1530,7 +1535,7 @@ Suivent les étapes similaires à celles introduites lors de la section sur les 
 ---
 # Comment modéliser un GLMM avec R
 
-Chargez les données `Arabidopsis` `banta_totalfruits.csv` dans R.
+Chargez les données `Arabidopsis` `banta_totalfruits.csv` dans `R`.
 
 ```{r, echo = FALSE}
 dat.tf <- read.csv("data/banta_totalfruits.csv")
@@ -1590,6 +1595,7 @@ dat.tf <- within(dat.tf,
 ```{r, fig.height = 3.5, fig.width = 8}
 # Boxplot du total des fruits vs interaction génotype x nutriment x herbivorie
 library(ggplot2)
+
 ggplot(data = dat.tf, aes(factor(x = gna), y = log(total.fruits + 1))) +
   geom_boxplot(colour = "skyblue2", outlier.shape = 21,
   outlier.colour = "skyblue2") +
