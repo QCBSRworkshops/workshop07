@@ -1590,7 +1590,7 @@ dat.tf <- read.csv("banta_totalfruits.csv")
 # total.fruits nombre entier indiquant le nombre de fruits par plante
 ```
 
-L'effet de la disponibilité de nutriments et d'herbivorie (**effets fixes**) sur la production de fruits d'*Arabidopsis thaliana* (**variable réponse**) a été évalué en mesurant 625 plantes à travers neuf populations différentes, constituées chacune de 2 à 3 génotypes (**effets aléatoires**)
+L'effet de la disponibilité de nutriments et d'herbivorie (**effets fixes**) sur la production de fruits d'*Arabidopsis thaliana* (**variable réponse**) a été évalué en mesurant 625 plantes à travers neuf populations différentes, constituées chacune de 2 à 3 génotypes (**effets aléatoires**).
 
 
 ---
@@ -1632,8 +1632,6 @@ dat.tf <- within(dat.tf,
 .small[
 ```{r, fig.height = 3.5, fig.width = 8}
 # Boxplot du total des fruits vs interaction génotype x nutriment x herbivorie
-library(ggplot2)
-
 ggplot(data = dat.tf, aes(factor(x = gna), y = log(total.fruits + 1))) +
   geom_boxplot(colour = "skyblue2", outlier.shape = 21,
   outlier.colour = "skyblue2") +
@@ -1650,7 +1648,7 @@ ggplot(data = dat.tf, aes(factor(x = gna), y = log(total.fruits + 1))) +
 ---
 # Choisir la distribution des erreurs
 
-Comme nous venons de le voir, il existe une importante hétérogénéité parmi la variance de chaque groupe, même lorsque la variable réponse est transformée.
+Comme nous venons de le voir, il existe une importante hétérogénéité parmi la variance de chaque groupe, même lorsque la variable réponse est transformée (i.e. log).
 
 Si nous représentons graphiquement les **écarts vs moyennes par groupes** (génotypes x nutriment x herbivorie), on voit que la distribution de Poisson est la moins appropriée (i.e. car les écarts augmentent beaucoup plus vite que la moyenne).
 
@@ -1686,7 +1684,7 @@ curve(phi.fit*x, col = 2, add = TRUE)
 text(110,3900,
      bquote(paste("QP: ", sigma^2==.(round(phi.fit,1))*mu)), col = 2)
 curve(x*(1+x/k.fit), col = 4, add = TRUE)
-text(104,7200,paste("NB: k = ",round(k.fit, 1), sep = ""), col = 4)
+text(104, 7200, paste("NB: k = ", round(k.fit, 1), sep = ""), col = 4)
 mvec <- 0:120
 lines(mvec, predict(Lfit, mvec), col = 5)
 text(118, 2000, "loess", col = 5)
@@ -1842,6 +1840,7 @@ coefplot2(mpl1, intercept = TRUE, main = "Coefficients des effets fixes")
 ]
 
 .alert[Note]: Barres d'erreur visibles seulement pour les effets fixes car `glmer()` ne modélise pas d'incertitude pour les effets aléatoires.
+
 
 ---
 # GLMM Poisson-lognormale
