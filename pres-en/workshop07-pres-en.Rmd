@@ -154,7 +154,7 @@ Introduction to the example dataset
 
 **2.** Open the example dataset in `R`
 
-**3.** Reproduce the plots 1 to 3 from the script. Observe the plots and try to get a sense of what you see.
+**3.** Reproduce the plots 1 to 3 from the script. Observe the plots and try to get a sense of what you see
 
 ---
 # Solution ![:cube]()
@@ -311,7 +311,7 @@ However :
 
 * **this relationship might differ** slightly among **species** due to unmeasured biological processes (e.g. growth rate) or among **lakes** due to unmeasured environmental variables
 
-* We need to control for these potential effects
+* We need to **control** for these potential effects
 
 --
 
@@ -321,27 +321,29 @@ LMMs enable us to **lump and separate the analysis**. They :
 
 1. Estimate slope and intercept parameters for each species and lake (**separating**) but estimate fewer parameters than classical regression.
 
-2. Use all the data available (lumping) while accounting for pseudoreplication by controlling for differences among lakes and species.
+2. Use all the data available (**lumping**) while accounting for pseudoreplication by controlling for differences among lakes and species.
 
 
 ---
 # Why choose mixed models?
 
-#### Fixed vs Random Effects
+### Fixed vs Random Effects
 
-In the literature on LMM, we will meet those terms frequently.
+In the literature on LMMs, we meet these terms frequently.
 
-There are many possible way to introduce them and we chose to present those we think are easier to apply when doing your analyses.
+There are many possible ways to introduce them and we chose to present those we think are easier to apply when doing your analyses.
 
 
 ---
 # Why choose mixed models?
 
-### Fixed effect : deterministic processes
+### Fixed effects : deterministic processes
 
 Data comes from : 
 * all possible levels of a factor (**qualitative variable**)
 * a predictor (**quantitative variable**)
+
+<br>
 
 We wish to make conclusions about the levels of the factor from which the data come from.
 
@@ -349,7 +351,7 @@ We wish to make conclusions about the levels of the factor from which the data c
 ---
 # Why choose mixed models?
 
-### Random effect : stochastic processes
+### Random effects : stochastic processes
 
 * Only **qualitative variables** = random factor
 
@@ -366,7 +368,7 @@ We wish to make conclusions about the levels of the factor from which the data c
 
 **A.** Intercepts and/or slopes are allowed to vary according to a given factor (**random effect**) (e.g. by lake and/or species)
 
-**B.** Intercepts, slopes and their confidence interval are adjusted to **take into account the data structure**
+**B.** Intercepts, slopes and their confidence interval are adjusted to **take the data structure into account**
 
 
 ---
@@ -380,7 +382,7 @@ We wish to make conclusions about the levels of the factor from which the data c
 * The model estimates a general intercept and/or slope with a standard deviation for each random effect (i.e. the normal distribution)
 <br><br>
 
-This avoids to estimate an intercept and a slope for each species (+2 parameters per specie) = **saves degrees of freedom** (less parameter estimation is needed)
+This avoids estimating an intercept and a slope for each species (+2 parameters per specie) = **saves degrees of freedom** (less parameter estimation is needed)
 
 
 ---
@@ -432,28 +434,65 @@ As for intercepts, only the mean and standard deviation of the slopes are estima
 
 
 ---
-# Taking into account the data structure
+# Taking the data structure into account
 <br>
-**What happens if the sample size for a specific factor level is small? (e.g. low *n* for a specific specie)**
+**What happens if the sample size for a specific factor level is small? (e.g. low $n$ for a specific specie)**
 
 If a certain species or lake is poorly represented in the data, the model will give more weight to the pooled model to estimate the intercept and/or slope of that species or lake (i.e. shrinkage).
 
 Ideally, you should have a minimum of $n$=3 for any specific factor level.
 
-.center[![: scale 50%](images/fig_12_w5.png) ]
+.center[![:scale 50%](images/fig_12_w5.png) ]
 
 
 ---
-# Taking into account the data structure
+# Taking the data structure into account
+<br>
+**How to assess the impact of a random effect on the model?**
 
-* The confidence intervals for the intercepts and slopes are adjusted to take account of the pseudo-replication-based on the **intraclass correlation coefficient (ICC)**
+* The confidence intervals for the **general** intercepts and slopes are adjusted to account for pseudo-replication based on the **intraclass correlation coefficient (ICC)**
 
+* The ICC describes the proportion of variance in the response variable that is attributed to a specific random effect :
 
-* How much variation is there in each vs group between groups?
+$$ICC = \frac{\sigma_{\alpha}^2}{\sigma_{\alpha}^2 + \sigma_{\varepsilon}^2}$$
+
+The ICC is calculated as the **ratio** of variance between the random effect (ex. ordonnées à l'origine des espèces) and the total variance.
+
+Thus, the ICC informs us on the **extent** to which the average trophic position (i.e. intercepts) **varies** among species or lakes.
+
+???
+
+Note: _Tell the audience that mathematical notations may vary according to the article/book and according to how the model equation was written._
 
 
 ---
-# Taking into account the data structure
+# Taking the data structure into account
+
+
+.pull-left[
+**High ICC**
+
+![:scale 90%](images/CCIplot2_qcbs.png)
+
+The % of variance (ICC) is high because **species differ strongly** in their average trophic position.
+
+The confidence intervals for the general intercept and slope are high.
+]
+
+.pull-right[
+**Low ICC**
+
+![:scale 85%](images/CCIplot_qcbs.png)
+
+The % of variance (ICC) is low because **species differ poorly** in their average trophic position.
+
+The confidence intervals for the general intercept and slope are small.
+]
+
+
+---
+exclude: true
+# Taking the data structure into account
 
 
 .pull-left[
@@ -482,7 +521,7 @@ the points coming from the same lake are treated independently because little co
 
 <br>
 
-How will the ICC and the confidence intervals be affected in these two scenarios?
+**How will the ICC and the confidence intervals be affected in these two scenarios?**
 
 **Q1.** Fish trophic positions do not vary among lakes
 
@@ -504,6 +543,15 @@ How will the ICC and the confidence intervals be affected in these two scenarios
 **Q2.** Fish trophic positions are similar within lakes but different among lakes
 
 .alert[A2. High ICC, large confidence intervals]
+<br><br><br><br><br>
+--
+
+**For more details on the ICC** : <br>
+Nakagawa and Schielzeth (2013)
+https://doi.org/10.1111/j.1469-185X.2010.00141.x
+Nakagawa *et al.* (2017) 
+https://doi.org/10.1098/rsif.2017.0213
+
 
 ---
 # How to implement mixed models in R?

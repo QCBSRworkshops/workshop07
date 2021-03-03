@@ -414,7 +414,6 @@ Estime 2 paramètres (moyenne et écart-type) au lieu de 6 ordonnées à l'origi
 Cela **économise des degrés de liberté** (moins d’estimation de paramètres sont nécessaires)
 
 
-
 ---
 exclude: true
 # Effet aléatoire sur la pente
@@ -424,6 +423,7 @@ exclude: true
 Le même principe s’applique aux pentes qui varient selon un facteur donné.
 
 Comme pour les ordonnées à l'origine, seuls la moyenne et l’écart-type des pentes sont estimés au lieu de trois pentes distinctes.
+
 
 ---
 # Tenir compte de la structure des données
@@ -436,6 +436,7 @@ Idéalement, avoir un minimum de $n$=3 par niveau d'un facteur.
 
 .center[![:scale 60%](images/fig_12_w5.png) ]
 
+
 ---
 # Tenir compte de la structure des données
 <br>
@@ -445,10 +446,10 @@ Idéalement, avoir un minimum de $n$=3 par niveau d'un facteur.
 
 * Le CCI permet de savoir la proportion de variation dans la variable réponse qui est expliqué par l'effet aléatoire, tel que :
 
-$$ICC = \frac{\sigma_{\alpha}^2}{\sigma_{\alpha}^2 + \sigma_{\varepsilon}^2}$$
-Le CCI correspond au **ratio** entre la variance d'un effet aléatoire (ex. ordonnées à l'origine des espèces) et la variance totale.
+$$CCI = \frac{\sigma_{\alpha}^2}{\sigma_{\alpha}^2 + \sigma_{\varepsilon}^2}$$
+Le CCI correspond au **ratio** entre la variance d'un effet aléatoire (e.g. ordonnées à l'origine des espèces) et la variance totale.
 
-Le CCI nous informe donc **à quel point** la position trophique moyenne de chaque espèce ou de chaque lac (c.-à-d. les ordonnées à l'origine) **varie**.
+Le CCI nous informe donc **à quel point** la position trophique moyenne entre chaque espèce ou chaque lac (c.-à-d. les ordonnées à l'origine) **varie**.
 
 ???
 
@@ -504,6 +505,7 @@ Les points provenant d'un même lac sont traités indépendamment car **peu corr
 
 ![:faic](arrow-right) grande taille effective de l'échantillon et petits intervalles de confiance pour la pente et l'ordonnée à l'origine.
 ]
+
 
 ---
 # Défi 1 ![:cube]()
