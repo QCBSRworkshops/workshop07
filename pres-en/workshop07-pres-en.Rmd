@@ -472,7 +472,7 @@ Note: _Tell the audience that mathematical notations may vary according to the a
 .pull-left[
 **High ICC**
 
-![:scale 90%](images/CCIplot2_qcbs.png)
+![:scale 90%](images/ICCplot2_qcbs.png)
 
 The % of variance (ICC) is high because **species differ strongly** in their average trophic position.
 
@@ -482,7 +482,7 @@ The confidence intervals for the general intercept and slope are high.
 .pull-right[
 **Low ICC**
 
-![:scale 85%](images/CCIplot_qcbs.png)
+![:scale 85%](images/ICCplot_qcbs.png)
 
 The % of variance (ICC) is low because **species differ poorly** in their average trophic position.
 
