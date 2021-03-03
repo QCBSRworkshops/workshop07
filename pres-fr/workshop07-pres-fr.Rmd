@@ -720,7 +720,7 @@ abline(0, 0, lty = 2)
 ```
 
 ---
-# Étape 1. Exploration des données
+# Étape 1. exploration des données
 
 Représentez graphiquement la valeur des résidus en fonction des niveaux des facteurs
 
@@ -805,7 +805,7 @@ Consultez cet [article](https://towardsdatascience.com/maximum-likelihood-ml-vs-
 ---
 # Étape 2. coder le modèle
 
-**Comment faire si on souhaite que la pente puisse varier ?**
+**Comment faire si on souhaite que la pente puisse varier?**
 
 .center[
 ![](images/fig_22_w5.png)
@@ -2014,36 +2014,37 @@ En utilisant l'ensemble de données `inverts` (temps de développement larvaire 
 # inverts <- read.csv('data/inverts.csv', header = TRUE)
 # head(inverts)
 # table(inverts$temp, inverts$feeding.type)
-#
+
 # mod.glm <- glm(PLD ~ temp + feeding.type, family = poisson(), data = inverts)
 # summary(mod.glm)
 # drop1(mod.glm, test = "Chisq")
-#
+
 # boxplot(PLD ~ temp,  data = inverts)
 # boxplot(PLD ~ feeding.type ,  data = inverts)
-#
+
 # boxplot(predict(mod.glm, type = "response")~inverts$temp)
-#
+
 # plot()
-#
+
 # modglm <- glm(PLD ~ temp + feeding.type, family = poisson(), data = inverts)
+```
 
 
-#
+---
+# Solution ![:cube]()
+```{R, eval = FALSE}
 # r2 <- ranef(mpl1, condVar = TRUE)
 # d2 <- dotplot(r2, par.settings = pp)
-#
-#
+
 # plot(aggregate(PLD ~ taxon, FUN = mean, data = inverts)[,2], aggregate(PLD ~ taxon, FUN = var, data = inverts)[,2], pch = 19)
 # abline(a = 0, b = 1, lty = 2)
-#
+
 # mod.glmer <- glmer.nb(PLD ~ temp + feeding.type + (1|taxon), data = inverts)
 # mod.glm <- glm.nb(PLD ~ temp + feeding.type, family = poisson(), data = inverts)
 
+# plot(aggregate(PLD ~ taxon, FUN = var, data = inverts)[,2], aggregate(PLD ~ taxon, FUN = mean, data = inverts)[,2])
+# abline(a = 0, b = 1, lty = 2 )
 ```
-
-plot(aggregate(PLD ~ taxon, FUN=var, data = inverts)[,2],aggregate(PLD ~ taxon, FUN=mean, data = inverts)[,2])
-abline(a = 0, b = 1, lty =2 )
 
 
 ---
@@ -2067,6 +2068,7 @@ abline(a = 0, b = 1, lty =2 )
 ]( https://doi.org/10.1111/2041-210X.13434)
 * [Zuur & Ieno (2016), *Methods Ecol Evol.*,  DOI: 10.1111/2041-210X.12577
 ]( https://doi.org/10.1111/2041-210X.12577)
+
 
 ---
 class: inverse, center, bottom

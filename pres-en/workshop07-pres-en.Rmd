@@ -277,6 +277,7 @@ Note: _MFF: Not sure that mixed models help when the sample size is small. Also,
 
 .pull-right[
 **Option 1. Separate**
+
 We could run seprate analyses for each species :
 
 * Estimate 6 intercepts and 6 slopes for each species (i.e. 6 lakes)
@@ -330,7 +331,7 @@ LMMs enable us to **lump and separate the analysis**. They :
 
 ### Fixed vs Random Effects
 
-In the literature on LMMs, we meet these terms frequently.
+We frequently encounter the terms 'fixed' and 'random' effects in the LMM literature.
 
 There are many possible ways to introduce them and we chose to present those we think are easier to apply when doing your analyses.
 
@@ -805,7 +806,7 @@ See this [article](https://towardsdatascience.com/maximum-likelihood-ml-vs-reml-
 ---
 # Note on estimation methods
 
-Remember that you should use: 
+**Remember that you should use :** 
 
 * **REML** to compare models with **nested random effects** and the same fixed effect structure
 
@@ -885,7 +886,7 @@ M0 <- lm(Z_TP ~ Z_Length, data = fish.data)
 However, to compare this model to the LMMs, it is important to .alert[change the estimation method to ML (`REML=FALSE`)] because `lm()` does not use the same estimation method as `lmer()`.
 
 ---
-# Solution
+# Solution ![:cube]()
 
 ```{r}
 # Linear model with no random effects
@@ -914,7 +915,7 @@ M8 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake),
 ```
 
 ---
-# Solution
+# Solution ![:cube]()
 
 When fitting LMMs with `lmer()`, you may encounter some errors or warnings such as: 
 
@@ -2043,38 +2044,37 @@ Use the `inverts` dataset (larval development times (`PLD`) of 74 marine inverte
 # inverts <- read.csv('data/inverts.csv', header = TRUE)
 # head(inverts)
 # table(inverts$temp, inverts$feeding.type)
-#
+
 # mod.glm <- glm(PLD ~ temp + feeding.type, family = poisson(), data = inverts)
 # summary(mod.glm)
 # drop1(mod.glm, test = "Chisq")
-#
+
 # boxplot(PLD ~ temp,  data = inverts)
 # boxplot(PLD ~ feeding.type,  data = inverts)
-#
+
 # boxplot(predict(mod.glm, type = "response")~inverts$temp)
-#
+
 # plot()
-#
+
 # modglm <- glm(PLD ~ temp + feeding.type, family = poisson(), data = inverts)
+```
 
 
-
+---
+# Solution ![:cube]()
+```{R, eval = FALSE}
 # r2 <- ranef(mpl1, condVar = TRUE)
 # d2 <- dotplot(r2, par.settings = pp)
-#
-#
+
 # plot(aggregate(PLD ~ taxon, FUN = mean, data = inverts)[,2], aggregate(PLD ~ taxon, FUN = var, data = inverts)[,2], pch = 19)
 # abline(a = 0, b = 1, lty = 2)
-#
+
 # mod.glmer <- glmer.nb(PLD ~ temp + feeding.type + (1|taxon), data = inverts)
 # mod.glm <- glm.nb(PLD ~ temp + feeding.type, family = poisson(), data = inverts)
 
+# plot(aggregate(PLD ~ taxon, FUN = var, data = inverts)[,2], aggregate(PLD ~ taxon, FUN = mean, data = inverts)[,2])
+# abline(a = 0, b = 1, lty = 2 )
 ```
-
-plot(aggregate(PLD ~ taxon, FUN=var, data = inverts)[,2],aggregate(PLD ~ taxon, FUN=mean, data = inverts)[,2])
-abline(a = 0, b = 1, lty =2 )
-
-
 
 
 ---
@@ -2083,14 +2083,28 @@ exclude: true
 
 Do you have believe that you have a question that requires the use of a mixed model?
 
----
-## Additional ressources
 
-* Difference between `nlme` et `lme4`
+---
+# Additional ressources
 
 .center[
-![:scale 40%](images/book1.jpg) ![:scale 44%](images/book2.jpg)
+![:scale 16%](images/book1.jpg) ![:scale 18%](images/book2.jpg) ![:scale 16%](images/book3.jpg)
 ]
+
+**Popular libraries for (G)LMMs** 
+
+* Frequentist : `nlme`, `lme4`, `glmmTMB`
+* Bayesian : `brms`, `rstan`, `rstanarm`, `MCMCglmm`
+
+**Papers**
+* [Harrison *et al.* (2018), *PeerJ*, DOI 10.7717/peerj.4794
+](http://dx.doi.org/10.7717/peerj.4794)
+* [Silk *et al.* (2020), *PeerJ*,  DOI 10.7717/peerj.9522
+](https://doi.org/10.7717/peerj.9522)
+* [Schielzeth *et al.* (2020), *Methods Ecol Evol.*,  DOI: 10.1111/2041-210X.13434
+]( https://doi.org/10.1111/2041-210X.13434)
+* [Zuur & Ieno (2016), *Methods Ecol Evol.*,  DOI: 10.1111/2041-210X.12577
+]( https://doi.org/10.1111/2041-210X.12577)
 
 
 ---
