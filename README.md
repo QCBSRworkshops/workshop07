@@ -10,11 +10,11 @@ Cette série de 10 ateliers guide les participants à travers les étapes requis
 
 Le contenu de cet atelier a été révisé par plusieurs membres du CSBQ. Si vous souhaitez y apporter des modifications, veuillez SVP contacter les coordonnateurs actuels de la série, listés [ici](https://wiki.qcbs.ca/r) ou ouvrez un pull request (voir les instructions <https://qcbsrworkshops.github.io/presenter-developer-protocol/developper-fr.html>).
 
-# Workshop 7: General and generalized linear mixed effects models
+# Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)
 
 Mixed effects models allow ecologists to overcome a number of limitations associated with traditional linear models. In this workshop, you will learn when it is important to use a mixed effects model to analyze your data. We will walk you through the steps to conduct a linear mixed model analysis, check its assumptions, report results, and visually represent your model in R.
 
-# Atelier 7: Modèles generales et generalisées linéaires à effets mixtes
+# Atelier 7: Modèles linéaires et généralisés linéaires mixtes
 
 Les modèles à effets mixtes permettent aux écologistes de surmonter un certain nombre de limitations liées aux modèles linéaires traditionnels. Dans cet atelier, vous apprendrez à déterminer si vous devez utiliser un modèle à effets mixtes pour analyser vos données. Nous allons vous guider à travers les étapes nécessaires pour utiliser un modèle linéaire mixte, vérifier les suppositions de base et présenter les résultats de votre modèle dans R.
 
