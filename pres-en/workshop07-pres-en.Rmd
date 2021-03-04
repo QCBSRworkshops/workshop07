@@ -1,5 +1,5 @@
 ---
-title: "Workshop 7: Linear and Generalized Linear Mixed Models (LMM and GLMM)"
+title: "Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)"
 subtitle: "QCBS R Workshop Series"
 author: "Québec Centre for Biodiversity Science"
 output:
