@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Atelier 7: Modèles generales et generalisés à effets mixtes</title>
+    <title>Atelier 7: Modèles linéaires et généralisés linéaires mixtes</title>
     <meta charset="utf-8" />
     <meta name="author" content="Centre de la science de la biodiversité du Québec" />
     <link href="assets/remark-css-0.0.1/default.css" rel="stylesheet" />
@@ -14,7 +14,7 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# Atelier 7: Modèles generales et generalisés à effets mixtes
+# Atelier 7: Modèles linéaires et généralisés linéaires mixtes
 ## Série d’ateliers R du CSBQ
 ### Centre de la science de la biodiversité du Québec
 
@@ -1560,7 +1560,7 @@ source(file="data/glmm_funs.R")
 # Surdispersion?
 overdisp_fun(mp1)
 #       chisq       ratio           p        logp 
-# 15755.86833    25.57771     0.00000 -6578.47027
+# 15755.86829    25.57771     0.00000 -6578.47025
 ```
 
 - Ratio est significativement `\(&gt;&gt;\)` 1
@@ -1612,7 +1612,7 @@ control = glmerControl(optimizer = "bobyqa"))
 ```r
 overdisp_fun(mpl1)
 #         chisq         ratio             p          logp 
-#  1.775362e+02  2.886767e-01  1.000000e+00 -3.755507e-73
+#  1.775360e+02  2.886764e-01  1.000000e+00 -3.754681e-73
 ```
 
 .alert[Rapport maintenant conforme avec notre critère]
