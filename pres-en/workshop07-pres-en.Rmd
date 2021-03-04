@@ -1,5 +1,5 @@
 ---
-title: "Workshop 7: General and Generalized Linear Mixed Models (LMM and GLMM)"
+title: "Workshop 7: Linear and Generalized Linear Mixed Models (LMM and GLMM)"
 subtitle: "QCBS R Workshop Series"
 author: "Québec Centre for Biodiversity Science"
 output:
@@ -97,7 +97,7 @@ install.packages(c("ggplot2",
 
 4. Execute basic generalized linear mixed models (GLMM) in `R`;
 
-5. Validade, interprete and visualized mixed models in `R`.
+5. Validate, interprete and visualized mixed models in `R`.
 
 ---
 ## 1. Why choose mixed models?
