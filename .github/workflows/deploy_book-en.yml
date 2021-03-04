@@ -63,6 +63,9 @@ jobs:
           if(length(new.packages) == 0) {
           print("All packages have been previously installed and fetched from cache.")}'
           
+      - name: ???? Install stringi from source
+        run: Rscript -e 'install.packages("stringi", type="source")'
+          
       - name: 🧶 Render the book using bookdown
         run: Rscript -e 'bookdown::render_book("index.Rmd")'
         
