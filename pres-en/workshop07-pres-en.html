@@ -30,31 +30,49 @@ class: inverse, center, middle
 # About this workshop
 
 [![badge](https://img.shields.io/static/v1?style=for-the-badge&amp;label=repo&amp;message=dev&amp;color=6f42c1&amp;logo=github)](https://github.com/QCBSRworkshops/workshop07)
-[![badge](https://img.shields.io/static/v1?style=for-the-badge&amp;label=wiki&amp;message=07&amp;logo=wikipedia)](https://wiki.qcbs.ca/r_workshop7)
+[![badge](https://img.shields.io/static/v1?style=for-the-badge&amp;label=wiki&amp;message=07&amp;logo=wikipedia)](https://wiki.qcbs.ca/r_workshop6)
 [![badge](https://img.shields.io/static/v1?style=for-the-badge&amp;label=Slides&amp;message=07&amp;color=red&amp;logo=html5)](https://qcbsrworkshops.github.io/workshop07/workshop07-en/workshop07-en.html)
 [![badge](https://img.shields.io/static/v1?style=for-the-badge&amp;label=Slides&amp;message=07&amp;color=red&amp;logo=adobe-acrobat-reader)](https://qcbsrworkshops.github.io/workshop07/workshop07-en/workshop07-en.pdf)
 [![badge](https://img.shields.io/static/v1?style=for-the-badge&amp;label=script&amp;message=07&amp;color=2a50b8&amp;logo=r)](https://qcbsrworkshops.github.io/workshop07/workshop07-en/workshop07-en.R)
 
+
 ---
+
+# About this workshop
+
+&lt;br&gt;
+
+Throughout this workshop, there will be a series of **challenges** that you can recognize by this rubix cube.
+
+.center[
+![:scale 25%](images/rubicub.png)
+]
+
+&lt;br&gt;
+
+**During these challenges, don't hesitate to collaborate!**
+
+---
+
 
 # Required packages
 
 * [ggplot2](https://cran.r-project.org/package=ggplot2)
 * [lme4](https://cran.r-project.org/package=lme4)
-* [AICcmodavg](https://cran.r-project.org/package=AICcmodavg)
+* [MuMIn](https://cran.r-project.org/package=MuMIn)
 * [MASS](https://cran.r-project.org/package=MASS)
 * [vcdExtra](https://cran.r-project.org/package=vcdExtra)
 * [bbmle](https://cran.r-project.org/package=bbmle)
 * [DescTools](https://cran.r-project.org/package=DescTools)
 
 &lt;br&gt;
-To install them from CRAN, do:
+To install them from CRAN, do :
 
 
 ```r
 install.packages(c("ggplot2", 
                    "lme4", 
-                   "AICcmodavg", 
+                   "MuMIn", 
                    'MASS', 
                    'vcdExtra', 
                    'bbmle', 
@@ -65,30 +83,30 @@ install.packages(c("ggplot2",
 
 # Learning objectives
 
-1. Describe what are mixed effects models;
+**1.** Describe what are (generalized) mixed effects models
 
-2. Identify situations in which the use of mixed effects is appropriate;
+**2.** Identify situations in which the use of mixed effects is appropriate
 
-3. Implement basic linear mixed models (LMM) in `R`;
+**3.** Implement basic linear mixed models (LMM) with `R`
 
-4. Execute basic generalized linear mixed models (GLMM) in `R`;
+**4.** Execute basic generalized linear mixed models (GLMM) with `R`
 
-5. Validate, interprete and visualized mixed models in `R`.
-
----
-## 1. Why choose mixed models?
-
-Ecological and biological data can be complex!
-
-* Inherent structure to data
-
-* Many covariates and grouping factors
-
-* Small sample size
+**5.** Validate, interpret and visualize mixed models with `R`
 
 ---
+# Research question
 
-## 1. Why choose mixed models?
+.alert[**Does fish trophic position increase with fish size?**
+]
+
+To answer this question, we use a dataset where body lenght was measured in 3 different fish species with 10 individuals sampled per species across 6 different lakes.
+
+.center[ ![:scale 75%](images/fig_1_qcbs_wiki.png) ]
+
+
+---
+exclude: true
+# 1. Why choose mixed models?
 
 Introduction to the example dataset
 
@@ -99,32 +117,18 @@ Introduction to the example dataset
 
 
 ---
-## 1. Why choose mixed models?
+# Challenge 1 ![:cube]()
 
-&lt;br&gt;
+**Get acquainted with the dataset**
 
-Throughout this workshop, there will be a series of **challenges** that you can recognize by this rubix cube
+**1.** Open the workshop script in `R`
 
-.center[
-![:scale 25%](images/rubicub.png)
-]
+**2.** Open the example dataset in `R`
 
-&lt;br&gt;
-
-**During these challenges, collaborate with your neighbors!**
-
+**3.** Reproduce the plots 1 to 3 from the script. Observe the plots and try to get a sense of what you see
 
 ---
-## Challenge 1 ![:cube]()
-
-* Introduction to the example dataset
-
-* Open the workshop script in `R`
-
-* Reproduce the plots 1 to 3 from the script. Observe the plots and try to get a sense of what you see.
-
----
-## Solution ![:cube]()
+# Solution ![:cube]()
 
 &lt;br&gt;
 
@@ -132,14 +136,14 @@ Throughout this workshop, there will be a series of **challenges** that you can 
 
 
 ---
-## Solution ![:cube]()
+# Solution ![:cube]()
 
 &lt;br&gt;
 
 &lt;img src="workshop07-pres-en_files/figure-html/unnamed-chunk-3-1.png" width="432" style="display: block; margin: auto;" /&gt;
 
 ---
-## Solution ![:cube]()
+# Solution ![:cube]()
 
 &lt;br&gt;
 
@@ -147,49 +151,78 @@ Throughout this workshop, there will be a series of **challenges** that you can 
 
 
 ---
-## 1. Why choose mixed models?
+# Group discussion ![:cube]()
 
-**Group discussion**
-
-* Do you expect all species to increase in trophic position with length?
-
-  * In the exact same way?
+**Do we expect an increase in trophic position with length in the exact same way for : **
+* all species?
+* all lakes?
 
 &lt;br&gt;
 
 --
 
-*Do you expect these relationships to be the same across lakes?
-
-  * What might differ?
+**How might these relationships differ?**
 
 
 ---
-## 1. Why choose mixed models?
+# Why choose mixed models?
 
-How might we analyze these data?
+### Ecological and biological data can be complex!
+
+* Hierarchical structure in the data
+
+* Many covariates and grouping factors
+
+* Unbalanced study/experimental design
+
+
+---
+exclude: true
+# 1. Why choose mixed models?
+
+Ecological and biological data can be complex!
+
+* Inherent structure to data
+
+* Many covariates and grouping factors
+
+* Small sample size
+
+???
+
+Note: _MFF: Not sure that mixed models help when the sample size is small. Also, I think that saying the data has a hierarchical structure makes more sense in the context of mixed models_
+
+
+---
+# Why choose mixed models?
+
+### How could we analyze this data?
+
+--
 
 &lt;br&gt;
 
-You can:
-
-&lt;br&gt;
-
-**Option 1. Separate**:
+**Option 1. Separate**
 
 - Run separate analyses for each species in each lake
 
-**Option 2. Lump**:
+&lt;br&gt;
+
+**Option 2. Lump**
 
 - Run one analysis ignoring lake and species
 
+
 ---
-## 1. Why choose mixed models?
+# Why choose mixed models?
 
 .pull-left[![](images/fig_5_w5.png) ]
 
 .pull-right[
 **Option 1. Separate**
+
+We could run seprate analyses for each species :
+
 * Estimate 6 intercepts and 6 slopes for each species (i.e. 6 lakes)
 
 * Sample size *n* = 10 for each analysis (i.e. 10 fish/species/lake)
@@ -197,8 +230,9 @@ You can:
 * Low chance of detecting an effect due to small *n*
 ]
 
+
 ---
-## 1. Why choose mixed models?
+# Why choose mixed models?
 
 .pull-left[![](images/fig_6_w5.png)]
 
@@ -206,70 +240,101 @@ You can:
 **Option 2. Lump**
 * Big sample size!
 
-* What about pseudoreplication? (fish within a lake and within a species might be correlated).
+* What about pseudoreplication? (fish within a lake and within a species might be correlated)
 
-* A lot of noise in the data! Some of it might be due to difference among species and lake...
+* A lot of noise in the data! Some of it might be due to **differences** among **species** and **lakes**
 ]
 
 ---
-## 1. Why choose mixed models?
+# Why choose mixed models?
 
+For **our question**, we only want to know if there is a **general effect of body length on the trophic position**.
+&lt;br&gt;
+&lt;br&gt;
 
-* For our question, we only want to know if there is a .alert[general effect of length on the trophic position]
+However :
 
-* this relationship might differ slightly among species due to unmeasured biological processes (e.g. growth rate) or among lakes due to unmeasured environmental variables. But don't really care about these unmeasured factors we just want to control for them.
+* **this relationship might differ** slightly among **species** due to unmeasured biological processes (e.g. growth rate) or among **lakes** due to unmeasured environmental variables
+
+* We need to **control** for these potential effects
+
+--
+
+&lt;br&gt;
+
+LMMs enable us to **lump and separate the analysis**. They :
+
+1. Estimate slope and intercept parameters for each species and lake (**separating**) but estimate fewer parameters than classical regression.
+
+2. Use all the data available (**lumping**) while accounting for pseudoreplication by controlling for differences among lakes and species.
 
 
 ---
-## 1. Why choose mixed models?
+# Why choose mixed models?
 
-LMM are a balance between separating and lumping. They:
+### Fixed vs Random Effects
 
-1. Estimate slope and intercept parameters for each species and lake (separating) but estimate fewer parameters than classical regression.
+We frequently encounter the terms 'fixed' and 'random' effects in the LMM literature.
 
-2. Use all the data available (lumping) while accounting for pseudoreplication and controlling for differences among lakes and species.
+There are many possible ways to introduce them and we chose to present those we think are easier to apply when doing your analyses.
+
+
+---
+# Why choose mixed models?
+
+### Fixed effects : deterministic processes
+
+Data comes from : 
+* all possible levels of a factor (**qualitative variable**)
+* a predictor (**quantitative variable**)
+
+&lt;br&gt;
+
+We wish to make conclusions about the levels of the factor or about the relationship between the response variable and the predictor.
 
 
 ---
-## 1. Why choose mixed models?
+# Why choose mixed models?
 
-**Fixed vs Random Effects**
+### Random effects : stochastic processes
 
-In the literature on LMM, we will meet those terms frequently.
-
-There are many possible way to introduce them and we chose to present those we think are easier to apply when doing your analyses.
-
----
-## 1. Why choose mixed models?
-
-### Fixed effect
-
-* Data comes from all possible levels of a factor (qualitative variable)
-
-* We wish to make conclusions about the levels of the factor from which the data come from
-
----
-## 1. Why choose mixed models?
-
-### Random effect
-
-* Only qualitative variables = random factor
+* Only **qualitative variables** = random factor
 
 * Data includes only a random sample of all possible factor levels, all of interest
 
-* Often grouping factors
+* Enable us to structure the error process
+
 
 ---
-## 1. Why choose mixed models?
+# Why choose mixed models?
 
-**How do LMMs work?**
+### How do LMMs work?
+&lt;br&gt;
 
-**A.** Intercepts and/or slopes are allowed to vary according to a given factor (**effet aléatoire**), e.g. by lake and/or species.
+**A.** Intercepts and/or slopes are allowed to vary according to a given factor (**random effect**) (e.g. by lake and/or species)
 
-**B.** Intercepts, slopes and their confidence interval are adjusted to **take into account the data structure**
+&lt;br&gt;
+
+**B.** Intercepts, slopes and their confidence intervals are adjusted to **take the data structure into account**
+
 
 ---
-## Random intercept
+# Random effects : enabling differences in intercepts and/or slopes among grouping levels
+
+.pull-left[![](images/fig_7_w5.png)]
+.pull-right[![](images/fig_9_w5.png)]
+&lt;br&gt;
+
+* It is assumed that the intercepts/slopes come from a normal distribution
+* The model estimates a general intercept and/or slope with a standard deviation for each random effect (i.e. the normal distribution)
+&lt;br&gt;&lt;br&gt;
+
+This avoids estimating an intercept and a slope for each species (+2 parameters per specie) = **saves degrees of freedom** (less parameter estimation is needed)
+
+
+---
+exclude: true
+# Random intercept
 
 &lt;br&gt;
 
@@ -285,7 +350,8 @@ Only need to estimate the mean and standard deviation of the normal distribution
 .comment[Note that the more levels your factor has, the more accurately the mean and standard deviation of the normal distribution will be estimated. Three levels may be a little low, but easier to visualize!]
 
 ---
-## Random intercept
+exclude:true
+# Random intercept
 
 &lt;br&gt;
 
@@ -300,7 +366,8 @@ This saves degrees of freedom (less parameter estimation is needed)
 
 
 ---
-## Random slope
+exclude: true
+# Random slope
 
 
 &lt;br&gt;
@@ -312,24 +379,67 @@ The same principle applies to slopes that vary according to a given factor, just
 As for intercepts, only the mean and standard deviation of the slopes are estimated instead of three distinct slopes.
 &lt;/p&gt;
 
----
-## Taking into account the data structure
-
-If a certain species or lake is poorly represented (low *n*) in the data, the model will give more weight to the pooled model to estimate the intercept and slope of that species or lake.
-
-.center[![: scale 50%](images/fig_12_w5.png) ]
 
 ---
-## Taking into account the data structure
+# Taking the data structure into account
+&lt;br&gt;
+**What happens if the sample size for a specific factor level is small? (e.g. low `\(n\)` for a specific specie)**
 
-* The confidence intervals for the intercepts and slopes are adjusted to take account of the pseudo-replication-based on the **intraclass correlation coefficient (ICC)**
+If a certain species or lake is poorly represented in the data, the model will give more weight to the pooled model to estimate the intercept and/or slope of that species or lake (i.e. shrinkage).
 
+Ideally, you should have a minimum of `\(n\)`=3 for any specific factor level.
 
-* How much variation is there in each VS group between groups?
+.center[![:scale 50%](images/fig_12_w5.png) ]
 
 
 ---
-## Taking into account the data structure
+# Taking the data structure into account
+&lt;br&gt;
+**How to assess the impact of a random effect on the model?**
+
+* The confidence intervals for the **general** intercepts and slopes are adjusted to account for pseudo-replication based on the **intraclass correlation coefficient (ICC)**
+
+* The ICC describes the proportion of variance in the response variable that is attributed to a specific random effect :
+
+`$$ICC = \frac{\sigma_{\alpha}^2}{\sigma_{\alpha}^2 + \sigma_{\varepsilon}^2}$$`
+
+The ICC is calculated as the **ratio** of variance between the random effect (ex. ordonnées à l'origine des espèces) and the total variance.
+
+Thus, the ICC informs us on the **extent** to which the average trophic position (i.e. intercepts) **varies** among species or lakes.
+
+???
+
+Note: _Tell the audience that mathematical notations may vary according to the article/book and according to how the model equation was written._
+
+
+---
+# Taking the data structure into account
+
+
+.pull-left[
+**High ICC**
+
+![:scale 90%](images/ICCplot2_qcbs.png)
+
+The % of variance (ICC) is high because **species differ strongly** in their average trophic position.
+
+The confidence intervals for the general intercept and slope are high.
+]
+
+.pull-right[
+**Low ICC**
+
+![:scale 85%](images/ICCplot_qcbs.png)
+
+The % of variance (ICC) is low because **species differ poorly** in their average trophic position.
+
+The confidence intervals for the general intercept and slope are small.
+]
+
+
+---
+exclude: true
+# Taking the data structure into account
 
 
 .pull-left[
@@ -352,12 +462,13 @@ the points coming from the same lake are treated independently because little co
 ![:faic](arrow-right) large effective sample size and small confidence intervals for slope and intercept.
 ]
 
+
 ---
 # Challenge 2 ![:cube]()
 
 &lt;br&gt;
 
-How will the ICC and the confidence intervals be affected in these two scenarios?
+**How will the ICC and the confidence intervals be affected in these two scenarios?**
 
 **Q1.** Fish trophic positions do not vary among lakes
 
@@ -379,28 +490,37 @@ How will the ICC and the confidence intervals be affected in these two scenarios
 **Q2.** Fish trophic positions are similar within lakes but different among lakes
 
 .alert[A2. High ICC, large confidence intervals]
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+--
+
+**For more details on the ICC** : &lt;br&gt;
+Nakagawa and Schielzeth (2013)
+https://doi.org/10.1111/j.1469-185X.2010.00141.x
+Nakagawa *et al.* (2017) 
+https://doi.org/10.1098/rsif.2017.0213
+
 
 ---
 # How to implement mixed models in R?
 
 &lt;img style="float: right; width:40%;margin: 1%" src="images/lego.jpg"&gt;
 
-###### **Step 1:** *A priori* model building and data exploration
+###### **Step 1.** *A priori* model building and data exploration
 
 &lt;br&gt;
 
-**Step 2:** Code potential models and model selection
+**Step 2.** Code potential models and model selection
 
 &lt;br&gt;
 
-**Step 3:** Model validation
+**Step 3.** Model validation
 
 &lt;br&gt;
 
-**Step 4:** Model interpretation and visualization
+**Step 4.** Model interpretation and visualization
 
 ---
-# Step 1: *A priori* model building
+# Step 1. *A priori* model building
 
 **What we know *a priori*:**
 
@@ -411,7 +531,7 @@ How will the ICC and the confidence intervals be affected in these two scenarios
 `$$PT_{ijk} \sim Length_i + Lake_j + Species_k + \epsilon_{ijk}$$`
 
 ---
-# Step 1: Data exploration
+# Step 1. Data exploration
 
 **Does the data have the right structure?**
 
@@ -429,7 +549,7 @@ str(fish.data)
 It is recommended to clean up your working space (`rm.list()`) before building a model.
 
 ---
-# Step 1: Data exploration
+# Step 1. Data exploration
 
 **Look at the distribution of samples for each factor:**
 
@@ -449,7 +569,7 @@ table(fish.data[ , c("Lake", "Fish_Species")])
 This dataset is perfectly balanced, but **mixed models can be used to analyze unbalanced experimental plans**, as it is often the case in ecology!
 
 ---
-# Step 1: Data exploration
+# Step 1. Data exploration
 
 **Look at the distribution of continuous variables:**
 
@@ -465,7 +585,7 @@ hist(fish.data$Trophic_Pos, xlab = "Trophic position", main = "")
 Major deviations could cause heteroscedasticity problems. If necessary, make transformations. In this case, **the data seems OK**.
 
 ---
-# Step 1: Data exploration
+# Step 1. Data exploration
 
 **Check for collinearity between your explanatory variables**
 
@@ -480,6 +600,8 @@ plot(fish.data)
 cor(var1, var2)
 ```
 
+Here an [example of collinearity](https://yetanotheriteration.netlify.app/2018/01/high-collinearity-effect-in-regressions/).
+
 ---
 # Challenge 3 ![:cube]()
 
@@ -491,7 +613,7 @@ What additional measures could we have taken in the field that could have been s
 
 
 ---
-# Step 1: Data exploration
+# Step 1. Data exploration
 
 **Consider the scale of your data**
 
@@ -501,7 +623,7 @@ What additional measures could we have taken in the field that could have been s
 
 `$$z = \frac{x-mean(x)}{standard.deviation(x)}$$`
 ---
-# Step 1: Data exploration
+# Step 1.  Data exploration
 
 **Consider the scale of your data**
 
@@ -510,7 +632,7 @@ What additional measures could we have taken in the field that could have been s
 * Trophic position ![:faic](arrow-right) Short scale
 
 ---
-# Step 1: Data exploration
+# Step 1.  Data exploration
 
 **Consider the scale of your data**
 
@@ -527,11 +649,11 @@ fish.data$Z_TP     &lt;- scale(fish.data$Trophic_Pos)
 ```
 
 ---
-# Step 1: Data exploration
+# Step 1.  Data exploration
 
 To find out if a mixed model is needed for your data, you need to determine whether it is important to consider the random effects that might influence the relationship you are interested in (in our case, lake and species)
 
-We can do it by:
+**We can do it by :**
 
 1. Creating a linear model without random effect
 
@@ -540,7 +662,7 @@ We can do it by:
 3. Plot the residuals against the levels of the potential random factors
 
 ---
-# Step 1: Data exploration
+# Step 1. Data exploration
 
 Create a linear model without random effects
 
@@ -555,13 +677,13 @@ lm.test.resid &lt;- rstandard(lm.test)
 ```
 
 ---
-# Step 1: Data exploration
+# Step 1. Data exploration
 
 Plot the residuals against the levels of the potential random factors
 
 
 ```r
-par(mfrow=c(1,2))
+par(mfrow = c(1, 2))
 
 plot(lm.test.resid ~ as.factor(fish.data$Fish_Species),
      xlab = "Species", ylab = "Standardized residuals")
@@ -575,7 +697,7 @@ abline(0, 0, lty = 2)
 ```
 
 ---
-# Step 1: Data exploration
+# Step 1. Data exploration
 
 Plot the residuals against the levels of the potential random factors
 
@@ -586,24 +708,24 @@ Plot the residuals against the levels of the potential random factors
 ---
 # How to implement an LMM in R?
 
-&lt;img style="float: right; width:40%;margin: 1%" src="images/lego.jpg"&gt;
+&lt;img style = "float: right; width:40%;margin: 1%" src = "images/lego.jpg"&gt;
 
-**Step 1:** *A priori* model building and data exploration
-
-&lt;br&gt;
-
-###### **Step 2:** Code potential models and model selection
+**Step 1. ** *A priori* model building and data exploration
 
 &lt;br&gt;
 
-**Step 3:** Model validation
+###### **Step 2.** Code potential models and model selection
 
 &lt;br&gt;
 
-**Step 4:** Model interpretation and visualization
+**Step 3.** Model validation
+
+&lt;br&gt;
+
+**Step 4 -** Model interpretation and visualization
 
 ---
-# Step 2: Code potential models
+# Step 2. Code potential models
 
 **Translate this model...**
 
@@ -629,18 +751,27 @@ lmer(Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species),
 ---
 # Note on estimation methods
 
-REML (Restricted Maximum Likelihood) is the default method in `lmer` (see `?lmer`).
+REML (*Restricted Maximum Likelihood*) is the default method in `lmer` (see `?lmer`).
 
-Note that the standard deviation estimator in the Maximum Likelihood (ML) is biased by a factor of `\((n-2)/n\)`. The REML method corrects this bias.
+The *Maximum Likelihood* (ML) method underestimate model variances by a factor of `\((n-k)/n\)`, where `\(k\)` is the number of fixed effects. 
 
-We should use: 
+The REML method corrects for this bias.
 
-* **REML** to compare **nested random effect models**
-
-* and **ML** to compare **nested fixed effect models**
+See this [article](https://towardsdatascience.com/maximum-likelihood-ml-vs-reml-78cf79bef2cf) for more information on the difference between ML and REML. 
 
 ---
-# Step 2: Code potential models
+# Note on estimation methods
+
+**Remember that you should use :** 
+
+* **REML** to compare models with **nested random effects** and the same fixed effect structure
+
+* **ML** to compare models with **nested fixed effects** and the same random effect structure
+
+* **ML** to compare models **with and without random effects**
+
+---
+# Step 2. Code potential models
 
 **What if we want the slopes to vary?**
 
@@ -649,7 +780,9 @@ We should use:
 ]
 
 ---
-# Step 2: Code potential models
+# Step 2. Code potential models
+
+**Different structures for the model :**
 
 - `(1 | Lake)` random effect by lake at the intrecept
 - `(1 + Z_Length | Lake)` random effect by lake at the intercept and slope in response to the body length (NB: (`Z_Length | Lake)` gives the same random structure)
@@ -711,7 +844,7 @@ lmer(Z_TP ~ Z_Length + (1 + Z_Length | Lake) + (1 + Z_Length | Fish_Species),
 
 
 ---
-# Step 2: Model selection
+# Step 2. Model selection
 
 * To determine if you have built the best mixed model based on your prior knowledge, you should compare this *a priori* model to other alternative models.
 
@@ -728,12 +861,12 @@ lmer(Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species),
      data = fish.data, REML = TRUE)
 ```
 
-Note: If we had different fixed effects between the models, we would have to specify `REML = FALSE` to compare with likelihood methods like AIC. Here, you must report the estimates of the "best" model parameters using `REML = TRUE`.
+.comment[Note: If we had different fixed effects between the models or a model without random effects, we would have to specify `REML = FALSE` to compare with likelihood methods like AIC.]
 
 ---
 # Solution ![:cube]()
 
-We will also build the **basic linear model** `lm()` because it is always useful to see the variation in the AICc values.
+We first will also build the **basic linear model** `lm()` because it is always useful to see the variation in the AICc values.
 
 
 ```r
@@ -743,7 +876,7 @@ M0 &lt;- lm(Z_TP ~ Z_Length, data = fish.data)
 However, to compare this model to the LMMs, it is important to .alert[change the estimation method to ML (`REML=FALSE`)] because `lm()` does not use the same estimation method as `lmer()`.
 
 ---
-# Solution
+# Solution ![:cube]()
 
 
 ```r
@@ -773,84 +906,114 @@ M8 &lt;- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake),
 ```
 
 ---
-# Solution
+# Solution ![:cube]()
 
-![:faic](question) `boundary (singular) fit: see ?isSingular`, see [this discussion ![:faic](stack-exchange)](https://stats.stackexchange.com/questions/378939/dealing-with-singular-fit-in-mixed-models)
+When fitting LMMs with `lmer()`, you may encounter some errors or warnings such as: 
+
+* `boundary (singular) fit: see ?isSingular`, see [this discussion ![:faic](stack-exchange)](https://stats.stackexchange.com/questions/378939/dealing-with-singular-fit-in-mixed-models)
+
+* `Model failed to converge with max|grad| ...`, see [this discussion ![:faic](stack-exchange)](https://stats.stackexchange.com/questions/242109/model-failed-to-converge-warning-in-lmer)
+
+Here a [list](https://rdrr.io/cran/lme4/man/troubleshooting.html) of possible problems and how to troubleshoot them.
 
 ---
-# Step 2: Model selection
+# Step 2. Model selection
 
 * Now that we have a list of potential models, we want to compare them to each other to select the one(s) with the highest predictive power given the data.
 
-* Models can be compared by using the `AICc` function from the` AICcmodavg` package.
+* Models can be compared by using the `AICc` function from the` MuMIn` package.
 
 * The Akaike Information Criterion (AIC) is a **measure of model quality** that can be used to compare models.
 
 * `AICc` corrects for bias created by small sample sizes.
 
 ---
-# Step 2: Model selection
+# Step 2. Model selection
 
 To find the AICc value of a model, use:
 
 
 ```r
-library(AICcmodavg)
-AICcmodavg::AICc(M1)
+library(MuMIn)
+MuMIn::AICc(M1)
 # [1] 77.30499
 ```
 
 ---
-# Step 2: Model selection
+# Step 2. Model selection
 
 To group all AICc values into a single table, use:
 
 ```r
-AIC.table &lt;- data.frame(Model = c("M0", "M1", "M2", "M3", 
-                                  "M4", "M5", "M6", "M7", "M8"),
-                        AICc = c(AICcmodavg::AICc(M0), 
-                                 AICcmodavg::AICc(M1), 
-                                 AICcmodavg::AICc(M2), 
-                                 AICcmodavg::AICc(M3),
-                                 AICcmodavg::AICc(M4), 
-                                 AICcmodavg::AICc(M5), 
-                                 AICcmodavg::AICc(M6),
-                                 AICcmodavg::AICc(M7), 
-                                 AICcmodavg::AICc(M8)))
-
-# order the table from low to high values of AICc
-AIC.table &lt;- AIC.table[order(AIC.table$AICc), ]
-
-# add the difference between AICc values and the smallest one (delta AICc)
-AIC.table$delta_AICc &lt;- AIC.table$AICc - AIC.table$AICc[1]
+AIC.table  &lt;- MuMIn::model.sel(M0, M1, M2, M3, M4, M5, M6, M7, M8)
+(AIC.table &lt;- AIC.table[ , c("df", "logLik", "AICc", "delta")])
+#    df      logLik      AICc      delta
+# M8  7   -8.597929  31.84702   0.000000
+# M2  9   -8.216019  35.49086   3.643839
+# M1  5  -33.480080  77.30499  45.457965
+# M7  7  -33.186374  81.02391  49.176890
+# M5  6 -128.310995 269.10754 237.260517
+# M3  4 -134.532965 277.29450 245.447480
+# M4  4 -224.715763 457.66010 425.813076
+# M6  6 -224.671201 461.82795 429.980930
+# M0  3 -236.861362 479.85909 448.012065
 ```
 
+* `df` is the degree of freedom
+* `logLik` is the loglikelihood
+* `delta` is the AICc difference with the lowest value
+
+We only displayed part of the results returned by the function `model.sel()`, see `?model.sel` for more information.
+
 ---
-# Step 2: Model selection
+# Step 2. Model selection
 
 What do these AICc values mean?
 
 
 ```r
 AIC.table 
-#   Model      AICc delta_AICc
-# 9    M8  31.84702   0.000000
-# 3    M2  35.49086   3.643839
-# 2    M1  77.30499  45.457965
-# 8    M7  81.02391  49.176890
-# 6    M5 269.10754 237.260517
-# 4    M3 277.29450 245.447480
-# 5    M4 457.66010 425.813076
-# 7    M6 461.82795 429.980930
-# 1    M0 479.85909 448.012065
+#    df      logLik      AICc      delta
+# M8  7   -8.597929  31.84702   0.000000
+# M2  9   -8.216019  35.49086   3.643839
+# M1  5  -33.480080  77.30499  45.457965
+# M7  7  -33.186374  81.02391  49.176890
+# M5  6 -128.310995 269.10754 237.260517
+# M3  4 -134.532965 277.29450 245.447480
+# M4  4 -224.715763 457.66010 425.813076
+# M6  6 -224.671201 461.82795 429.980930
+# M0  3 -236.861362 479.85909 448.012065
 ```
 
-The model with the smallest AICc has the highest predictive power
+* The model with the smallest AICc has the highest predictive power.
 
-Some suggest that if models are within 2 AICc units of each other then they are equally plausible.
+* Some suggest that if models are within 2 AICc units of each other then they are equally plausible.
+
+* Let's take a closer look at M8 and M2. We can exclude other model because they have such higher AICc.
 
 ---
-# Step 2: Model selection
+# Step 2. Model selection
+
+
+```r
+M8 &lt;- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake),
+           data = fish.data, REML = TRUE)
+
+M2 &lt;- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 + Z_Length | Lake),
+           data = fish.data, REML = TRUE)
+
+MuMIn::model.sel(M2,M8)[ , c("df", "logLik", "AICc", "delta")]
+#    df    logLik     AICc    delta
+# M8  7 -10.84011 36.33137 0.000000
+# M2  9 -10.28932 39.63747 3.306098
+```
+
+Model `M8` seems to be the best among all models that we tested.
+
+Note that we use now REML (i.e. `REML = TRUE`) as we are comparing two models with nested random effects and the same fixed effect structure.
+
+---
+# Step 2. Model selection
 
 What is the structure of the best model?
 
@@ -866,7 +1029,7 @@ Both the intercepts and slopes of the relationship between trophic position and 
 .pull-right[![](images/fig_8_w5.png)]
 
 ---
-# Step 2: Model selection
+# Step 2. Model selection
 
 Once the best model is selected, the estimation method must be reset to `REML = TRUE`.
 
@@ -922,37 +1085,46 @@ exclude: true
 
 &lt;img style="float: right; width:40%;margin: 1%" src="images/lego.jpg"&gt;
 
-**Step 1:** *A priori* model building and data exploration
+**Step 1. ** *A priori* model building and data exploration
 
 &lt;br&gt;
 
-**Step 2:** Code potential models and model selection
+**Step 2.** Code potential models and model selection
 
 &lt;br&gt;
 
-###### **Step 3:** Model validation
+###### **Step 3.** Model validation
 
 &lt;br&gt;
 
-**Step 4:** Model interpretation and visualization
+**Step 4 -** Model interpretation and visualization
 
 ---
-# Step 3: Model validation
+# Step 3. Model validation
 
-You must verify that the model follows all the basic assumptions:
+**You must verify that the model follows all the basic assumptions :**
 
-1. Check the homogeneity of the variance
+&lt;br&gt;
+
+**3.1 Check the homogeneity of the variance**
   - Plot predicted values vs residual values
-2. Check the independence of the model residuals
-  - Plot residuals VS each covariate of the model
-  - Plot residuals VS each covariate not included in the model
-3. Check the normality of the model residuals
+
+&lt;br&gt;
+
+**3.2 Check the independence of the model residuals**
+  - Plot residuals vs each covariate of the model
+  - Plot residuals vs each covariate not included in the model
+
+&lt;br&gt;
+
+**3.3 Check the normality of the model residuals**
   - Histogram of residuals
 
----
-# Step 3: Model validation
 
-1- Check the homogeneity of the variance
+---
+# Step 3. Model validation
+
+**3.1 Check the homogeneity of the variance**
 
 
 ```r
@@ -962,23 +1134,23 @@ plot(resid(M8) ~ fitted(M8),
 abline(h = 0, lty = 2)
 ```
 
-&lt;img src="workshop07-pres-en_files/figure-html/unnamed-chunk-27-1.png" width="324" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop07-pres-en_files/figure-html/unnamed-chunk-28-1.png" width="324" style="display: block; margin: auto;" /&gt;
 
 Homogeneous dispersion of the residuals ![:faic](arrow-right) the assumption is respected!
 
 ---
-# Step 3: Model validation
+# Step 3. Model validation
 
-1- Check the homogeneity of the variance
+**3.1 Check the homogeneity of the variance**
 
 .center[
 ![](images/resid-plots.gif)
 ]
 
 ---
-# Step 3: Model validation
+# Step 3. Model validation
 
-2- Check the independence of the model residuals with each covariate
+**3.2 Check the independence of the model residuals with each covariate**
 
 
 ```r
@@ -998,31 +1170,31 @@ abline(h = 0, lty = 2)
 ```
 
 ---
-# Step 3: Model validation
+# Step 3. Model validation
 
-2- Check the independence of the model residuals with each covariate
+**3.2 Check the independence of the model residuals with each covariate**
 
-&lt;img src="workshop07-pres-en_files/figure-html/unnamed-chunk-29-1.png" width="864" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop07-pres-en_files/figure-html/unnamed-chunk-30-1.png" width="864" style="display: block; margin: auto;" /&gt;
 
 Homogeneous dispersion of the residuals around 0 ![:faic](arrow-right) no pattern of residuals depending on the variable, the assumption is respected!
 
-Note: The clusters are due to the data structure, where fish of only 5 size classes (large, small, and three groups in between) were captured.
+.comment[Note: The clusters are due to the data structure, where fish of only 5 size classes (large, small, and three groups in between) were captured.]
 
 ---
-# Step 3: Model validation
+# Step 3. Model validation
 
-2- Check the independence of the model residuals with each covariate
+**3.2 Check the independence of the model residuals with each covariate**
 
-- Plot residuals VS each covariate not included in the model
+- Plot residuals vs each covariate not included in the model
 
   - If you observe patterns in these plots, you will know that there is variation in your dataset that could be explained by these covariates. You should consider including them in your model.
 
   - Because we have included all the measured variables in our model, we can not do this step.
 
 ---
-# Step 3: Model validation
+# Step 3. Model validation
 
-3- Check the normality of the model residuals
+**3.3 Check the normality of the model residuals**
 
 * Residuals following a normal distribution indicate that the model is not biased
 
@@ -1031,7 +1203,7 @@ Note: The clusters are due to the data structure, where fish of only 5 size clas
 hist(resid(M8))
 ```
 
-&lt;img src="workshop07-pres-en_files/figure-html/unnamed-chunk-30-1.png" width="360" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop07-pres-en_files/figure-html/unnamed-chunk-31-1.png" width="360" style="display: block; margin: auto;" /&gt;
 
 ---
 # How to implement an LMM in R?
@@ -1053,7 +1225,7 @@ hist(resid(M8))
 ###### **Step 4:** Model interpretation and visualization
 
 ---
-# Step 4: Interpretation and visualization
+# Step 4. Interpretation and visualization
 
 
 ```r
@@ -1089,7 +1261,7 @@ hist(resid(M8))
 ```
 
 ---
-# Step 4: Interpretation and visualization
+# Step 4. Interpretation and visualization
 
     # Random effects:
     #  Groups       Name        Variance Std.Dev. Corr
@@ -1106,7 +1278,7 @@ hist(resid(M8))
 - `Corr` the correlation between the random interpet and the random slope for a given grouping factor (see [this dicussion ![:faic](stack-exchange)](https://stats.stackexchange.com/questions/320978/understanding-and-coding-random-intercept-correlation-lmer))
 
 ---
-# Step 4: Interpretation and visualization
+# Step 4. Interpretation and visualization
 
     # Fixed effects:
     #              Estimate Std. Error t value
@@ -1122,9 +1294,24 @@ $$ CI = Estimate \pm 1.96*Std.Error $$
 If 0 is in the interval, then the parameter is not significantly different from zero at a threshold of `\(\alpha\)` = 0.05.
 
 ---
+# Step 4. Interpretation and visualization
+
+**Some useful functions**
+
+- `coef(M8)` and `ranef(M8)` return random effects of model M8
+
+- `coef(summary(M8))` returns fixed effects
+
+- `sigma(M8)` returns standard deviation of residuals
+
+- `fitted(M8)` returns predicted values by the model
+
+- `residuals(M8)` returns residuals
+
+---
 exclude: true
 
-# Step 4: Interpretation and visualization
+# Step 4. Interpretation and visualization
 
 .center[
 ![](images/fig_30_w5.png)
@@ -1147,7 +1334,7 @@ If the 95% confidence interval of the slope ($slope ± SE * 1.96$) includes zero
 2. Is the slope of Z_Length significantly different from 0?
 
 ---
-## Solution ![:cube]()
+# Solution ![:cube]()
 
 1. What is the slope and confidence interval of the Z_Length variable in the M8 model?
 
@@ -1258,7 +1445,7 @@ Plot_AllData + geom_abline(intercept = summ_M8$coefficients[1,1],
 # Solution ![:cube]()
 
 a) Figure with all data grouped
-&lt;img src="workshop07-pres-en_files/figure-html/unnamed-chunk-35-1.png" width="432" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop07-pres-en_files/figure-html/unnamed-chunk-36-1.png" width="432" style="display: block; margin: auto;" /&gt;
 
 ---
 # Solution ![:cube]()
@@ -1294,7 +1481,7 @@ Plot_BySpecies +
 
 b) Figure by species
 
-&lt;img src="workshop07-pres-en_files/figure-html/unnamed-chunk-37-1.png" width="576" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop07-pres-en_files/figure-html/unnamed-chunk-38-1.png" width="576" style="display: block; margin: auto;" /&gt;
 
 ---
 # Solution ![:cube]()
@@ -1329,9 +1516,12 @@ Plot_ByLake +
 # Solution ![:cube]()
 
 c) Figure by lake
-&lt;img src="workshop07-pres-en_files/figure-html/unnamed-chunk-39-1.png" width="576" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop07-pres-en_files/figure-html/unnamed-chunk-40-1.png" width="576" style="display: block; margin: auto;" /&gt;
 
 ---
+
+exclude: true
+
 # Mixed model and ecological data
 
 Mixed models are very useful for taking into account the complex structure of ecological data while not loosing too many degrees of freedom
@@ -1394,7 +1584,9 @@ class: inverse, center, middle
 
 # GLMMs
 
+
 ---
+exclude: true
 # Review: Linear Mixed Models
 
 **Review of LMM Workshop**:
@@ -1412,7 +1604,9 @@ class: inverse, center, middle
 - Parameter is reproducible, i.e. would be the same across studies
 - Explain the mean of the response variable
 
+
 ---
+exclude: true
 # Review: Linear Mixed Models
 
 .pull-left[
@@ -1429,25 +1623,28 @@ class: inverse, center, middle
 
 
 ---
-# Generalized Linear Mixed Models
+# Generalized Linear Mixed Models (GLMMs)
 
-Extension of GLMs to account for additional structure in dataset
+**Extension of GLMs to account for additional structure in dataset**
 
-Follows similar steps introduced in LMM Workshop
+Follows similar steps introduced in LMM Workshop :
 
-1. LMMs incorporate random effects
-2. GLMs handle non-normal data (letting errors take on different distribution families - e.g. Poisson or negative binomial)
+**1.** Incorporate random effects (like LMMs)
+
+**2.** Handle non-normal data (letting errors take on different distribution families - e.g. Poisson or negative binomial) (like GLMs)
 
 
 ---
+exclude: true
 # Review: Generalized Linear Models (GLM)
 
 _Include 2-3 slides recalling GLM_
 
----
-# Implementing GLMM in R
 
-Import the `Arabidopsis` dataset `banta_totalfruits.csv` into R.
+---
+# Implementing GLMMs in R
+
+Import the `Arabidopsis` dataset `banta_totalfruits.csv` into `R`.
 
 
 
@@ -1462,24 +1659,25 @@ dat.tf &lt;- read.csv("banta_totalfruits.csv")
 # total.fruits integer indicating the number of fruits per plant
 ```
 
-The effect of nutrient availability and herbivory (**fixed effects**) on the fruit production of the mouse-ear cress (Arabidopsis thaliana) was evaluated by measuring 625 plants across 9 different populations, each comprised of 2 to 3 different genotypes (**random effects**)
+The effect of nutrient availability and herbivory (**fixed effects**) on the fruit production (**response variable**) of Arabidopsis thaliana was evaluated by measuring 625 plants across 9 different populations, each comprised of 2 to 3 different genotypes (**random effects**)
+
 
 ---
-# Choosing error distribution
+# Choosing an error distribution
 
-The response variable is count data which suggests to that a **Poisson distribution** should be used (i.e. the variance is equal to the mean)
+The response variable is count data which suggests we need a **Poisson distribution** (i.e. the variance is equal to the mean)
 
-&lt;img src="workshop07-pres-en_files/figure-html/unnamed-chunk-43-1.png" width="432" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop07-pres-en_files/figure-html/unnamed-chunk-44-1.png" width="432" style="display: block; margin: auto;" /&gt;
 
-However, as we will soon see, the variance increases with the mean much more rapidly than expected under the Poisson distribution
+However, as we will soon see, the variance increases with the mean much more rapidly than expected under the Poisson distribution...
 
 
 ---
 # Exploring variance
 
-To illustrate heterogeneity in variance we will first create boxplots of the response variable versus different environmental factors
+To illustrate heterogeneity in variance we will first create boxplots of the **log** of total fruit production (**response variable**) versus different environmental factors.
 
-Let's create new variables that represents every combination of **nutrient** x **clipping** x **random factor**
+Let's create new variables that represent every combination of **nutrient** x **clipping** x **random factor**
 
 
 ```r
@@ -1494,6 +1692,7 @@ dat.tf &lt;- within(dat.tf,
 })
 ```
 
+
 ---
 # Exploring variance
 
@@ -1501,52 +1700,41 @@ dat.tf &lt;- within(dat.tf,
 
 ```r
 # Boxplot of total fruits vs genotype x nutrient x clipping interaction
-library(ggplot2)
-
-ggplot(data = dat.tf, aes(factor(x = gna),y = log(total.fruits + 1))) +
+ggplot(data = dat.tf, aes(factor(x = gna), y = log(total.fruits + 1))) +
   geom_boxplot(colour = "skyblue2", outlier.shape = 21,
   outlier.colour = "skyblue2") +
-  theme_bw() + theme(axis.text.x=element_blank()) +
-  stat_summary(fun.y=mean, geom="point", colour = "red")
+  ylab("log (Total fruits)\n") + # \n creates a space after the title
+  xlab("\nGenotype x nutrient x clipping") + # space before the title
+  theme_bw() + theme(axis.text.x = element_blank()) +
+  stat_summary(fun = mean, geom = "point", colour = "red")
 ```
 
-&lt;img src="workshop07-pres-en_files/figure-html/unnamed-chunk-45-1.png" width="576" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop07-pres-en_files/figure-html/unnamed-chunk-46-1.png" width="576" style="display: block; margin: auto;" /&gt;
 ]
 
-.comment[Similarly, the boxplot of total fruits vs population x nutrient x clipping interaction shows a large amount of heterogeneity among populations.]
+.comment[Similarly, the variance of total fruits shows a large amount of heterogeneity among populations (population x nutrient x clipping interaction).]
 
 
 ---
 # Choosing error distribution
 
-As we just saw, there is a large amount of heterogeneity among group variances even when the response variable is transformed
+As we just saw, there is a large amount of heterogeneity among group variances even when the response variable is transformed (i.e. log).
 
-If we plot the **group variances vs group means** (example with genotype x nutrient x clipping grouping shown here), we can appreciate that the Poisson family is the least appropriate distribution (i.e. variances increase much faster than the means)
+If we plot the **group variances vs group means** (genotype x nutrient x clipping grouping), we can appreciate that the Poisson family is the least appropriate distribution (i.e. variances increase much faster than the means).
 
-.small[.pull-left[
-![](images/errDist.png)
-]
-.pull-right[
-
-&lt;font color="blue"&gt;NB = negative binomial&lt;/font&gt;
-
-&lt;br&gt;
-
-&lt;font color="red"&gt;QP = quasi-Poisson&lt;/font&gt;
-
-&lt;br&gt;
-&lt;font color="LightBlue"&gt;loess = Locally weighted regression smoothing&lt;/font&gt;
-]]
+&lt;img src="workshop07-pres-en_files/figure-html/unnamed-chunk-47-1.png" width="576" style="display: block; margin: auto;" /&gt;
 
 
 ---
 # Poisson GLMM
 
-Given the mean-variance relationship, we will most likely need a model with overdispersion
+**Given the mean-variance relationship, we will most likely need a model with overdispersion.**
 
-- but let's start with a Poisson model:
+To understand why, let's start with a Poisson model.
 
-To run a GLMM in R we simply need to use the `glmer()` function of the lme4 package
+--
+
+To run a GLMM in `R` we will use the `glmer()` function from the `lme4` package :
 
 
 ```r
@@ -1557,71 +1745,103 @@ mp1 &lt;- glmer(total.fruits ~ nutrient*amd + rack + status +
              data = dat.tf, family = "poisson")
 ```
 
-**Random effects**: `(1|popu)` contains a random intercept shared by measures that have the same value for `popu`
+**Random effects**: `(1|popu)` and `(1|gen)`. We model random intercepts for both factors so that total fruit production can vary among populations (`popu`) and genotypes (`gen`).
+
 
 ---
 # Overdispersion check
 
-We can check for overdispersion using the `overdisp_fun()` function (Bolker *et al*. 2011) which divides the Pearson residuals by the residual degrees of freedom and tests whether ratio is greater than unity
+We can check for overdispersion using the `overdisp_fun()` function (Bolker *et al*. 2011) which divides the Pearson residuals by the residual degrees of freedom. 
 
+The function tests whether **the ratio is greater than 1**.
+
+--
+
+Let's run the test :
 
 ```r
 # Download the glmm_funs.R code from the wiki page and source it to run the function
-source(file="data/glmm_funs.R")
+source(file = "data/glmm_funs.R")
 # Overdispersion?
 overdisp_fun(mp1)
 #       chisq       ratio           p        logp 
 # 15755.86829    25.57771     0.00000 -6578.47025
 ```
+--
+.alert[Ratio is significantly &gt; 1]
+&lt;br&gt;&lt;br&gt;
 
-- Ratio is significantly `\(&gt;&gt;\)` 1
-- As expected, we need to try a different distribution where the variance increase more rapidly than the mean
+As expected, we need to model a **different distribution** where the variance increases more rapidly than the mean.
 
 
 ---
 # Negative binomial GLMM .small[(Poisson-gamma)]
 
-Recall that the negative binomial (or Poisson-gamma) distribution meets the assumption that the **variance is proportional to the square of the mean**
+**Option 1.** Recall that the **negative binomial** (or Poisson-gamma) distribution meets the assumption that the variance is proportional to the square of the mean
 
+&lt;br&gt;
+--
+We model this distribution using the function `glmer.nb()` :
 
 ```r
 mnb1 &lt;- glmer.nb(total.fruits ~ nutrient*amd + rack + status +
                  (1|popu)+
                  (1|gen),
-                 data=dat.tf,
-                 control=glmerControl(optimizer="bobyqa"))
+                 data = dat.tf,
+                 control = glmerControl(optimizer = "bobyqa"))
 # Control argument specifies the way we optimize the parameter values
 ```
 
-.pull-left[
+--
+We test again for overdispersion :
+
 ```r
 # Overdispersion?
 overdisp_fun(mnb1)
+#         chisq         ratio             p          logp 
+# 721.034466390   1.170510497   0.002143424  -6.145350714
 ```
-]
-.pull-right[
-![:faic](arrow-left).small[.alert[Ratio is now much closer to 1 although p-value is still less than 0.05]]
-]
+
+.alert[Ratio is now much closer to 1 although p &lt; 0.05]
+
 
 ---
 # Poisson-lognormal GLMM
 
-- Another option is the **Poisson-lognormal** distribution.
-- This can be achieved simply by placing an observation-level random effect in the formula.
+**Option 2.** The **Poisson-lognormal** distribution
+&lt;br&gt;
 
-.small[
+This can be achieved simply by placing an **observation-level random effect** in the model formula.
+
+See Harrison (2014) for further details https://doi.org/10.7717/peerj.616.
+
+&lt;br&gt;
+--
+To do so, we first create a variable named `X` :
+
+```r
+# This variable is already in your data "dat.tf", but here is how we create it :
+dat.tf$X &lt;- 1:nrow(dat.tf)
+```
+
+
+We take overdispersion into account by adding the random effect `(1|X)` in the formula :
 
 ```r
 mpl1 &lt;- glmer(total.fruits ~ nutrient*amd + rack + status +
               (1|X) +
               (1|popu)+
               (1|gen),
-data=dat.tf, family="poisson",
+data = dat.tf, family = "poisson",
 control = glmerControl(optimizer = "bobyqa"))
 ```
 
-`(1|X)` deals with overdisp. by adding **observation-level random effects**
 
+---
+# GLMM Poisson-lognormale
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+Finally, we test for overdispersion :
 
 ```r
 overdisp_fun(mpl1)
@@ -1629,16 +1849,17 @@ overdisp_fun(mpl1)
 #  1.775360e+02  2.886764e-01  1.000000e+00 -3.754681e-73
 ```
 
-.alert[Ratio now meets our criterion]
-]
+.alert[Ratio now meets our criterion, thus, &lt; 1]
 
 
 ---
 # Poisson-lognormal GLMM
 
-**Visualization the model parameters**: A graphical representation of the model parameters can be obtained using the `coefplot2()` function from the `coefplot2` package:
+**Let's visualize the model parameters**
 
---
+Can be obtained using the `coefplot2()` function from the `coefplot2` package :
+&lt;br&gt;&lt;br&gt;
+
 
 .alert[![:faic](warning) This package is not on CRAN! We install it from GittHub using the remotes package.]
 
@@ -1649,6 +1870,7 @@ if (!require("coefplot2"))
 library(coefplot2)
 ```
 
+
 ---
 # Poisson-lognormal GLMM
 
@@ -1656,41 +1878,48 @@ library(coefplot2)
 
 ```r
 # Variance terms
-coefplot2(mpl1, ptype = "vcov", intercept = TRUE)
+coefplot2(mpl1, ptype = "vcov", intercept = TRUE, main = "Random effect variance")
 ```
 
-&lt;img src="workshop07-pres-en_files/figure-html/unnamed-chunk-51-1.png" width="432" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop07-pres-en_files/figure-html/unnamed-chunk-55-1.png" width="432" style="display: block; margin: auto;" /&gt;
 ]
 .pull-right[
 
 ```r
 # Fixed effects
-coefplot2(mpl1, intercept = TRUE)
+coefplot2(mpl1, intercept = TRUE, main = "Fixed effect coefficient")
 ```
 
-&lt;img src="workshop07-pres-en_files/figure-html/unnamed-chunk-52-1.png" width="432" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop07-pres-en_files/figure-html/unnamed-chunk-56-1.png" width="432" style="display: block; margin: auto;" /&gt;
 ]
 
-.alert[Note]: error bars are only shown for the fixed effects because glmer doesn't provide information on uncertainty of variance .
+.comment[Note : error bars are only shown for the fixed effects because `glmer()` doesn't model uncertainty for random effects.]
 
 
 ---
-# Visualization the random effects
+# Poisson-lognormal GLMM
 
-You can extract the random effect predictions using `ranef()` and plot them using a `dotplot()` from the `lattice` package
+**Let's visualize the random effects**
 
-Regional variability among populations:
+You can extract the random effect predictions using `ranef()` and plot them using a `dotplot()` from the `lattice` package.
 
-- Spanish populations (SP) larger values than Swedish (SW) or Dutch (NL)
+&lt;br&gt;
+--
 
-Difference among genotypes largely driven by genotype 34
+We observe differences **among population** :
+
+- Spanish populations (SP) have larger values than Swedish (SW) or Dutch (NL) populations
+
+We observe mild differences **among genotypes** :
+
+- Difference among genotypes largely driven by genotype 34
 
 ```r
 library(gridExtra)
 library(lattice)
 # dotplot code
-pp &lt;- list(layout.widths=list(left.padding=0, right.padding=0),
-           layout.heights=list(top.padding=0, bottom.padding=0))
+pp &lt;- list(layout.widths = list(left.padding = 0, right.padding = 0),
+           layout.heights = list(top.padding = 0, bottom.padding = 0))
 r2 &lt;- ranef(mpl1, condVar = TRUE)
 d2 &lt;- dotplot(r2, par.settings = pp)
 
@@ -1699,11 +1928,13 @@ grid.arrange(d2$gen, d2$popu, nrow = 1)
 
 
 ---
-# Visualization the random effects
+# Poisson-lognormal GLMM
+
+**Let's visualize the random effects**
 
 &lt;br&gt;
 
-&lt;img src="workshop07-pres-en_files/figure-html/unnamed-chunk-53-1.png" width="648" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop07-pres-en_files/figure-html/unnamed-chunk-57-1.png" width="648" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -1711,8 +1942,12 @@ grid.arrange(d2$gen, d2$popu, nrow = 1)
 
 The same methods can be used with a glmm or lmm to choose between models with various random intercepts and/or random slopes and to choose fixed effects to keep in final model.
 
+&lt;br&gt;
+
+Here are two approaches :
+
 - an **information theoretic approach** (e.g., AICc - Workshop 5)
-- a **frequentist approach** (where the significance of each term is evaluated using `anova()` and the likelihood ratio test; LRT)
+- a **frequentist approach** (where the significance of each term is evaluated using a likelihood ratio test; LRT, with the `anova()` function)
 
 
 ---
@@ -1725,12 +1960,14 @@ We first code potential models and compare them using AICc.comment[*]:
 mpl2 &lt;- update(mpl1, . ~ . - rack) # model without rack
 mpl3 &lt;- update(mpl1, . ~ . - status) # model without status
 mpl4 &lt;- update(mpl1, . ~ . - amd:nutrient) # without amd:nutrient interaction
-bbmle::ICtab(mpl1, mpl2, mpl3, mpl4, type = c("AICc"))
-#      dAICc df
-# mpl1  0.0  10
-# mpl4  1.4  9 
-# mpl3  1.5  8 
-# mpl2 55.0  9
+
+aic_tab  &lt;- MuMIn::model.sel(mpl1, mpl2, mpl3, mpl4)
+(round(aic_table &lt;- aic_tab[ , c("AICc", "delta", "df")], digits = 2))
+#         AICc delta df
+# mpl1 5015.73  0.00 10
+# mpl4 5017.11  1.38  9
+# mpl3 5017.22  1.49  8
+# mpl2 5070.75 55.02  9
 ```
 
 .comment[*NB: We do not cover all possible models above, however, the interaction `amd:nutrient` can only be evaluated if both amd and nutrient (i.e., the main effects) are included in the model.
@@ -1745,7 +1982,7 @@ Alternatively, we can use `drop1()` and `dfun()` functions to evaluate our fixed
 .small[
 
 ```r
-dd_LRT &lt;- drop1(mpl1,test="Chisq")
+dd_LRT &lt;- drop1(mpl1, test = "Chisq")
 (dd_AIC &lt;- dfun(drop1(mpl1)))
 # Single term deletions
 # 
@@ -1760,80 +1997,151 @@ dd_LRT &lt;- drop1(mpl1,test="Chisq")
 ```
 ]
 
+--
+
 - Strong **rack** effect (dAIC = 55.08 if we remove this variable)
 - Effects of **status** and **interaction** term are weak (dAIC &lt; 2)
-- Start by **removing the non-significant interaction** term to test main effects of nutrient and clipping
 
 
 ---
 # Model selection
-
-.small[
+Let's start by **removing the non-significant interaction** term to test main effects of nutrient and clipping
 
 ```r
-mpl2 &lt;- update(mpl1, . ~ . - and:nutrient)
-# Use AIC
-mpl3 &lt;- update(mpl2, . ~ . - rack) # no rack or interaction
-mpl4 &lt;- update(mpl2, . ~ . - status) # no status or interaction
-mpl5 &lt;- update(mpl2, . ~ . - nutrient) # no nutrient or interaction
-mpl6 &lt;- update(mpl2, . ~ . - amd) # no clipping or interactio
+mpl2 &lt;- update(mpl1, . ~ . - amd:nutrient)
+
+mpl3 &lt;- update(mpl2, . ~ . - rack) # pas de rack ou d'interaction
+mpl4 &lt;- update(mpl2, . ~ . - status) # pas de status ou d'interaction
+mpl5 &lt;- update(mpl2, . ~ . - nutrient) # pas de nutrient ou d'interaction
+mpl6 &lt;- update(mpl2, . ~ . - amd) # pas d'herbivorie ou d'interaction
 ```
 
-
-.pull-left3[
+Choose the method you want to select the best model :
+.pull-left2[ Method with AICc
 
 ```r
-dd_LRT2 &lt;- drop1(mpl2, test="Chisq")
+aic_tab2  &lt;- MuMIn::model.sel(mpl2, mpl3, mpl4, mpl5, mpl6)
+(round(aic_table2 &lt;- aic_tab2[ , c("AICc", "delta", "df")], digits = 2))
+#         AICc  delta df
+# mpl2 5017.11   0.00  9
+# mpl4 5018.28   1.17  7
+# mpl6 5027.27  10.16  8
+# mpl3 5071.28  54.17  8
+# mpl5 5152.74 135.63  8
+```
+]
+.pull-right2[ Method with `drop1()`
+
+```r
+dd_LRT2 &lt;- drop1(mpl2, test = "Chisq")
 dd_AIC2 &lt;- dfun(drop1(mpl2))
 ```
 ]
 
-.pull-right3[
 
-```r
-bbmle::ICtab(mpl2, mpl3, 
-             mpl4,mpl5, mpl6,
-             type = c("AICc"))
-#      dAICc df
-# mpl2  0.0  10
-# mpl5  0.0  10
-# mpl4  1.5  8 
-# mpl6 10.6  9 
-# mpl3 55.0  9
-```
-]
-]
+---
+# Model selection
+**What are our conclusions ?**
+&lt;br&gt;
 
-&lt;br&gt;&lt;br&gt;&lt;br&gt;
+Both the main effects of **nutrient** and **clipping** are strong (large change in AIC of `\(135.6\)` (`mpl5`) and `\(10.2\)` (`mpl6`) if either nutrient or clipping are dropped, respectively).
 
-- Both the main effects of **nutrient** and **clipping** are strong (large change in AIC of `\(135.6\)` (`mpl5`) and `\(10.2\)` (`mpl6`) if either nutrient or clipping are dropped, respectively).
-- Final model includes the fixed nutrient and clipping effects, rack, and observation-level random e ffects `(1|X)` to account for over-dispersion
+&lt;br&gt;
+
+**Our final model includes :**
+
+Fixed effects
+* nutrients
+* clipping
+* rack
+
+Random effects
+* observation-level random effect `(1|X)` 
+* populations `(1|popu)` 
+* genotypes `(1|gen)`
 
 
 ---
-# Up for a challenge? ![:cube]()
+# Challenge 9 ![:cube]()
 
 Use the `inverts` dataset (larval development times (`PLD`) of 74 marine invertebrate and vertebrate species reared at different temperatures and time), answer the following questions:
 
-- What is the effect of feeding type and climate (fixed effects) on `PLD`?
-- Does this relationship vary among taxa (random effects)?
-- What is the best distribution family for this count data?
+- What is the effect of feeding type and climate (**fixed effects**) on `PLD`?
+- Does this relationship vary among taxa (**random effects**)?
+- What is the **best distribution family** for this count data?
 - Finally, once you determined the best distribution family, re-evaluate your random and fixed effects.
 
 
 ---
+# Solution ![:cube]()
+
+
+```r
+# inverts &lt;- read.csv('data/inverts.csv', header = TRUE)
+# head(inverts)
+# table(inverts$temp, inverts$feeding.type)
+
+# mod.glm &lt;- glm(PLD ~ temp + feeding.type, family = poisson(), data = inverts)
+# summary(mod.glm)
+# drop1(mod.glm, test = "Chisq")
+
+# boxplot(PLD ~ temp,  data = inverts)
+# boxplot(PLD ~ feeding.type,  data = inverts)
+
+# boxplot(predict(mod.glm, type = "response")~inverts$temp)
+
+# plot()
+
+# modglm &lt;- glm(PLD ~ temp + feeding.type, family = poisson(), data = inverts)
+```
+
+
+---
+# Solution ![:cube]()
+
+```r
+# r2 &lt;- ranef(mpl1, condVar = TRUE)
+# d2 &lt;- dotplot(r2, par.settings = pp)
+
+# plot(aggregate(PLD ~ taxon, FUN = mean, data = inverts)[,2], aggregate(PLD ~ taxon, FUN = var, data = inverts)[,2], pch = 19)
+# abline(a = 0, b = 1, lty = 2)
+
+# mod.glmer &lt;- glmer.nb(PLD ~ temp + feeding.type + (1|taxon), data = inverts)
+# mod.glm &lt;- glm.nb(PLD ~ temp + feeding.type, family = poisson(), data = inverts)
+
+# plot(aggregate(PLD ~ taxon, FUN = var, data = inverts)[,2], aggregate(PLD ~ taxon, FUN = mean, data = inverts)[,2])
+# abline(a = 0, b = 1, lty = 2 )
+```
+
+
+---
+exclude: true
 ## Group discussion [:cube]()
 
 Do you have believe that you have a question that requires the use of a mixed model?
 
----
-## Additional ressources
 
-* Difference between `nlme` et `lme4`
+---
+# Additional ressources
 
 .center[
-![:scale 40%](images/book1.jpg) ![:scale 44%](images/book2.jpg)
+![:scale 16%](images/book1.jpg) ![:scale 18%](images/book2.jpg) ![:scale 16%](images/book3.jpg)
 ]
+
+**Popular libraries for (G)LMMs** 
+
+* Frequentist : `nlme`, `lme4`, `glmmTMB`
+* Bayesian : `brms`, `rstan`, `rstanarm`, `MCMCglmm`
+
+**Papers**
+* [Harrison *et al.* (2018), *PeerJ*, DOI 10.7717/peerj.4794
+](http://dx.doi.org/10.7717/peerj.4794)
+* [Silk *et al.* (2020), *PeerJ*,  DOI 10.7717/peerj.9522
+](https://doi.org/10.7717/peerj.9522)
+* [Schielzeth *et al.* (2020), *Methods Ecol Evol.*,  DOI: 10.1111/2041-210X.13434
+]( https://doi.org/10.1111/2041-210X.13434)
+* [Zuur &amp; Ieno (2016), *Methods Ecol Evol.*,  DOI: 10.1111/2041-210X.12577
+]( https://doi.org/10.1111/2041-210X.12577)
 
 
 ---
