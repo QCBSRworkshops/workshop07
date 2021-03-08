@@ -3,7 +3,7 @@
   <head>
     <title>Atelier 7: Modèles linéaires et généralisés linéaires mixtes</title>
     <meta charset="utf-8" />
-    <meta name="author" content="Centre de la science de la biodiversité du Québec" />
+    <meta name="author" content="Centre de la Science de la Biodiversité du Québec" />
     <link href="assets/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css">
@@ -16,7 +16,7 @@ class: center, middle, inverse, title-slide
 
 # Atelier 7: Modèles linéaires et généralisés linéaires mixtes
 ## Série d’ateliers R du CSBQ
-### Centre de la science de la biodiversité du Québec
+### Centre de la Science de la Biodiversité du Québec
 
 ---
 
@@ -30,18 +30,35 @@ class: inverse, center, middle
 # À propos de cet atelier
 
 [![badge](https://img.shields.io/static/v1?style=for-the-badge&amp;label=repo&amp;message=dev&amp;color=6f42c1&amp;logo=github)](https://github.com/QCBSRworkshops/workshop07)
-[![badge](https://img.shields.io/static/v1?style=for-the-badge&amp;label=wiki&amp;message=07&amp;logo=wikipedia)](https://wiki.qcbs.ca/r_atelier7)
+[![badge](https://img.shields.io/static/v1?style=for-the-badge&amp;label=wiki&amp;message=07&amp;logo=wikipedia)](https://wiki.qcbs.ca/r_atelier6)
 [![badge](https://img.shields.io/static/v1?style=for-the-badge&amp;label=diapos&amp;message=07&amp;color=red&amp;logo=html5)](https://qcbsrworkshops.github.io/workshop07/pres-fr/workshop07-pres-fr.html)
 [![badge](https://img.shields.io/static/v1?style=for-the-badge&amp;label=diapos&amp;message=07&amp;color=red&amp;logo=adobe-acrobat-reader)](https://qcbsrworkshops.github.io/workshop07/workshop07-fr/workshop07-fr.pdf)
 [![badge](https://img.shields.io/static/v1?style=for-the-badge&amp;label=script&amp;message=07&amp;color=2a50b8&amp;logo=r)](https://qcbsrworkshops.github.io/workshop07/workshop07-fr/workshop07-fr.R)
 
+
+---
+# À propos de cet atelier
+
+&lt;br&gt;
+
+Vous verrez à travers l'atelier une série de  **défis** que vous reconnaitrez avec ce cube rubik.
+
+.center[
+![:scale 25%](images/rubicub.png)
+]
+
+&lt;br&gt;
+
+**N'hésitez-pas à collaborer pour résoudre ces défis!**
+
+
 ---
 
-# Packages requis
+# Librairies requises
 
 * [ggplot2](https://cran.r-project.org/package=ggplot2)
 * [lme4](https://cran.r-project.org/package=lme4)
-* [AICcmodavg](https://cran.r-project.org/package=AICcmodavg)
+* [MuMIn](https://cran.r-project.org/package=MuMIn)
 * [MASS](https://cran.r-project.org/package=MASS)
 * [vcdExtra](https://cran.r-project.org/package=vcdExtra)
 * [bbmle](https://cran.r-project.org/package=bbmle)
@@ -50,11 +67,13 @@ class: inverse, center, middle
 
 &lt;br&gt;
 
+Pour les installer à partir du CRAN, faire :
+
 
 ```r
 install.packages(c("ggplot2", 
                    "lme4", 
-                   "AICcmodavg", 
+                   "MuMIn", 
                    'MASS', 
                    'vcdExtra', 
                    'bbmle', 
@@ -65,41 +84,53 @@ install.packages(c("ggplot2",
 
 # Objectifs d'apprentissage
 
-1. Décrivez ce que sont les modèles à effets mixtes ;
+**1.** Décrire les modèles (généralisés) à effets mixtes
 
-2. Identifier les situations dans lesquelles l'utilisation d'effets mixtes est appropriée ;
+**2.** Identifier les situations dans lesquelles l'utilisation d'effets mixtes est appropriée
 
-3. Mettre en œuvre les modèles mixtes linéaires de base en `R` ;
+**3.** Mettre en œuvre des modèles linéaires mixtes de base avec `R`
 
-4. Exécuter les modèles linéaires mixtes généralisés de base dans `R` ;
+**4.** Exécuter des modèles linéaires généralisés mixtes de base avec `R`
 
-5. Valider, interpréter et visualiser les modèles mixtes dans  `R`.
+**5.** Valider, interpréter et visualiser les modèles mixtes avec `R`
 
 
 ---
-# Question
+# Question de recherche
 
 .alert[**Est-ce que la position trophique des poissons augmente avec leur taille?**
 ]
 
-Pour répondre, 3 espèces ont été sélectionnées et dix individus par espèce ont été mesurés (longueur corporelle) dans six lacs différents.
+Pour répondre, nous utiliserons un jeu de données où la longueur corporelle de 3 espèces de poissons (10 individus par espèce) a été mesurée dans 6 lacs différents.
 
 .center[ ![:scale 75%](images/fig_1_qcbs_wiki.png) ]
 
 
+---
+# Défi 1 ![:cube]()
+
+**Familiarisez-vous avec le jeu de données**
+
+**1.** Ouvrez le script de l'atelier dans `R`
+
+**2.** Ouvrez le jeu de données dans `R`
+
+**3.** Reproduisez les graphiques 1 à 3 (dans le script) de la relation entre la position trophique et la taille. Observez les graphiques puis evaluez ce que vous observez.
+
 
 ---
-# Familiarisez vous avec le jeu de données
+exclude: true
+# Familiarisez-vous avec le jeu de données
 &lt;br&gt;
 
-1. Ouvrez le jeu de données,
+**1.** Ouvrez le jeu de données dans `R`
 
-2. Ouvrez le script de l'atelier dans R,
+**2.** Ouvrez le script de l'atelier dans `R`
 
-3. Visualisez la relation entre taille et position trophique.
+**3.** Visualisez la relation entre taille et position trophique
 
 --
-
+exclude: true
 &lt;br&gt;
 
 
@@ -117,97 +148,75 @@ head(fish.data)
 
 
 ---
-# Visualisation avec toutes les données
+# Solution ![:cube]()
 
 &lt;br&gt;
 
 &lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-3-1.png" width="432" style="display: block; margin: auto;" /&gt;
 
+
 ---
-# Visualisation de l'ensemble des données
+# Solution ![:cube]()
 
 &lt;br&gt;
 
-
-```r
-# thème simplifié
-fig &lt;- theme_bw() + theme(panel.grid.minor=element_blank(),
-    panel.grid.major=element_blank(), panel.background=element_blank()) +
-    theme(strip.background=element_blank(), strip.text.y = element_text()) +
-    theme(legend.background=element_blank()) +
-    theme(legend.key=element_blank()) +
-    theme(panel.border = element_rect(colour="black", fill=NA))
-
-# Faites les trois graphiques suivants pour explorer les données
-plot &lt;- ggplot(aes(Fish_Length,Trophic_Pos),data = fish.data)
-
-# Graphique 1 - Toutes les données
-plot + geom_point() + xlab("Length (mm)") + ylab("Trophic Position") + labs(title="All Data") + fig
-```
+&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-4-1.png" width="432" style="display: block; margin: auto;" /&gt;
 
 
 ---
-# Visualisation par espèce
+# Solution ![:cube]()
 
-
-```r
-# Graphique 2 - Par espèce
-plot + geom_point() + facet_wrap(~ Fish_Species) + xlab("Length (mm)") + ylab("Trophic Position") +
-   labs(title="By Species") + fig
-```
+&lt;br&gt;
 
 &lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-5-1.png" width="432" style="display: block; margin: auto;" /&gt;
 
----
-# Visualisation par Lake
-
-
-```r
-# Graphique 3 – Par lac
-plot + geom_point() + facet_wrap(~ Lake) + xlab("Length (mm)") + ylab("Trophic Position") +
-   labs(title="By Lake") + fig
-```
-
-&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-6-1.png" width="432" style="display: block; margin: auto;" /&gt;
-
 
 ---
-# Pourquoi choisir un MLM?
+# Discussion de groupe ![:cube]()
 
-**Discussion de groupe**
 
-* Est-ce qu'on s'attend à ce que, pour toutes les espèces, la position trophique augmente avec la longueur corporelle?
+**Est-ce qu'on s'attend à ce que la position trophique augmente avec la longueur corporelle exactement de la même façon pour : **
 
-    * Exactement de la même façon?
+* toutes les espèces?
+* tous les lacs?
 
 &lt;br&gt;
 
 --
 
-* Est-ce qu'on s'attend à ce que ces relations soient pareilles entre les lacs?
+**Comment ces relations pourraient-elles différer?**
 
-    * Comment pourraient-elles différer?
 
 ---
 # Pourquoi choisir un MLM?
 
-&lt;br&gt;
+### Les données biologiques et écologiques peuvent être complexes!
 
-.large[**Comment pourrions-nous analyser ces données?**]
+* Peuvent contenir une structure hiérarchique
+
+* Plusieurs covariables et facteurs
+
+* Échantillons non équilibrés
+
+
+---
+# Pourquoi choisir un MLM?
+
+### Comment pourrions-nous analyser ces données?
 
 --
 
 &lt;br&gt;
 
-**Option 1. Séparer**:
+**Option 1. Séparer**
 
-- Faire une analyse séparée pour chaque espèces et chaque lac
+- Faire une analyse séparée pour chaque espèce et chaque lac
 
 &lt;br&gt;
 
-**Option 2. Regrouper**:
+**Option 2. Regrouper**
 
-- Faire une seule analyse en ignorant les variables espèces et lac
+- Faire une seule analyse en ignorant les variables espèce et lac
 
 
 ---
@@ -216,13 +225,17 @@ plot + geom_point() + facet_wrap(~ Lake) + xlab("Length (mm)") + ylab("Trophic P
 .pull-left[![](images/fig_5_w5.png) ]
 
 .pull-right[
-**Option 1. Séparer**
-* Estime 6 intercepts et 6 pentes pour chaque espèces (i.e. 6 lacs)
+**Option 1. Séparer** 
+&lt;br&gt;
 
-* Taille d'échantillon *n* = 10 pour chaque analyse (i.e. 10 poissons/espèces/lac)
+On pourrait faire une analyse pour chaque espèce :
+* Estimer 6 ordonnées à l'origine et 6 pentes pour chaque espèce (car 6 lacs)
+
+* Taille d'échantillon *n* = 10 pour chaque analyse (i.e. 10 poissons/espèce/lac)
 
 * Peu de chances de détecter un effet a cause de la faible taille d’échantillon *n*
 ]
+
 
 ---
 # Pourquoi choisir un MLM?
@@ -230,122 +243,171 @@ plot + geom_point() + facet_wrap(~ Lake) + xlab("Length (mm)") + ylab("Trophic P
 .pull-left[![](images/fig_6_w5.png)]
 
 .pull-right[
-**Option 2. Regrouper:**
+**Option 2. Regrouper**
 * Très grande taille d'échantillon!
 
-* Et la pseudoreplication? (les poissons d'un même lac et d'une même espèce sont corrélés).
+* Et la pseudoreplication? (les poissons d'un même lac et d'une même espèce sont corrélés)
 
-* Beaucoup de bruit! Une partie doit être due aux effets de l'espèce et du lac.
+* Beaucoup de bruit = Une partie pourrait être due aux **effets** de **l'espèce** et du **lac**
 ]
 
+
 ---
 # Pourquoi choisir un MLM?
 
+Pour **notre question**, on veut seulement savoir s'il y a un **effet général de la longueur corporelle sur la position trophique**.
+&lt;br&gt;
+&lt;br&gt;
 
-* Pour **notre question**, on veut seulement savoir s'il y a un **effet général de la longueur corporelle sur la position trophique**,
+Par contre :
 
-* Ceci pourrait varier faiblement par espèce à cause de différents taux de croissance et/ou par lac à cause de différences dans la disponibilité de nourriture. **On ne s'intéresse pas directement à ces facteurs non mesurés, mais on doit contrôler leur effet dans le modèle**.
+* **Cette relation pourrait varier** par **espèce** à cause de différents taux de croissance et/ou par **lac** à cause de différences dans la disponibilité de nourriture 
+
+* **On doit contrôler** pour ces effets potentiels dans le modèle
 
 --
 
 &lt;br&gt;
 
-Les MLMs sont un **compromis entre séparer et regrouper**. Ils:
+Les MLMs permettent de **séparer et regrouper** l'analyse. Ils:
 
-1. Prendre entre compte de la variabilité spécifique pour chaque espèce et chaque lac (séparer) mais en calculant moins de paramètres;
+1. Prennent en compte la variabilité spécifique à chaque espèce et chaque lac (**séparer**) tout en calculant moins de paramètres
 
-2. Utilisent toutes les données disponibles (regrouper) tout en contrôlant les différences entre les lacs et les espèces (pseudo-replication).
+2. Utilisent toutes les données disponibles (**regrouper**) tout en contrôlant les différences entre les lacs et les espèces (pseudo-replication)
+
 
 ---
 # Pourquoi choisir un MLM?
 
-#### Effet fixe VS effet aléatoire
+### Effet fixe vs effet aléatoire
 
-Dans la littérature des MLMs, vous rencontrerez souvent ces termes souvent. Il existe plusieurs façon de les présenter et nous vous présenterons ici celles que nous trouvons les plus faciles à appliquer.
+Dans la littérature des MLMs, vous rencontrerez souvent ces termes. 
 
---
+Il existe plusieurs façons de les décrire et nous vous présenterons ici celles que nous trouvons les plus faciles à appliquer.
 
-##### Effet fixe
-
-* Les données proviennent de tous les niveaux possibles d'un facteur (variable qualitative),
-
-* On souhaite émettre des conclusions à propos des niveaux du facteur d'où les données proviennent.
-
---
-
-##### Effet aléatoire
-
-* Seulement des variables qualitatives = facteur aléatoire;
-
-* Permet de structurer le processus d'erreur.
 
 ---
 # Pourquoi choisir un MLM?
+
+### Effet fixe : processus déterministes
+
+Les données proviennent : 
+* de tous les niveaux possibles d'un facteur (**variable qualitative**) 
+* d'un prédicteur (**variable quantitative**)
+
 &lt;br&gt;
 
-#### Comment fonctionnent les MLMs?
-&lt;br&gt;
+On souhaite émettre des conclusions à propos des niveaux du facteur ou de la relation entre le prédicteur et la variable réponse.
 
-**A.** Permet aux intercepts et/ou aux pentes d'être considérés comme propre à une population donnée (**effet aléatoire**), e.g. par lac et/ou par espèce
+---
+# Pourquoi choisir un MLM?
 
-&lt;br&gt;
+### Effet aléatoire : processus stochastiques
 
-**B.** Les intercepts, les pentes et leur intervalle de confiance sont ajustés pour **prendre en compte la structure des données**.
+* Seulement des **variables qualitatives** = facteur aléatoire
+
+* Permet de structurer le processus d'erreur
 
 
 ---
-# Effet aléatoire sur l'intercept
+# Pourquoi choisir un MLM?
+
+### Comment fonctionnent les MLMs?
+&lt;br&gt;
+
+**A.** Permet aux ordonnées à l'origine et/ou aux pentes d'être considérés comme propres (c.-à.-d. de varier) à une population donnée (**effet aléatoire**), e.g. par lac et/ou par espèce.
+
+&lt;br&gt;
+
+**B.** Les ordonnées à l'origine, les pentes et leur intervalle de confiance sont ajustés pour **prendre en compte la structure des données**.
+
+
+---
+# Effet aléatoire : faire varier les ordonnées à l'origine et/ou les pentes
+
+.pull-left[![](images/fig_7_w5.png)]
+.pull-right[![](images/fig_9_w5.png)]
+&lt;br&gt;
+
+* On suppose que les ordonnées à l'origine et/ou les pentes proviennent d'une distribution normale
+* Le modèle estime une ordonnée à l'origine et/ou une pente moyenne ainsi que l'écart type de l'effet aléatoire (distribution normale) 
+&lt;br&gt;&lt;br&gt;
+
+Évite d'estimer une ordonnée à l'origine et une pente par espèce (+2 paramètres par espèce) = **économise des degrés de liberté** (moins de paramètres estimés).
+
+---
+exclude: true
+# Effet aléatoire sur l'ordonnée à l'origine
 &lt;br&gt;
 
 &lt;img style="float: right; width:50%;margin: 1%" src="images/fig_7_w5.png"&gt;
 
-On fait la supposition que les intercepts proviennent d'une distribution normale et on a seulement besoin d'estimer la moyenne (intercept général) et l'écart type de la distribution normale (effet aléatoire) au lieu d'estimer un intercept par espèce (ce qui rajoute 2 paramètres).
+On fait la supposition que les ordonnées à l'origine proviennent d'une distribution normale. 
+
+On a seulement besoin d'estimer la moyenne (ordonnée à l'origine générale) et l'écart type de la distribution normale (effet aléatoire) au lieu d'estimer une ordonnée à l'origine par espèce (ce qui ajouterait 2 paramètres).
 
 &lt;br&gt;&lt;br&gt;
 
-Au lieu d'estimer d'estimer un intercept par espèce (trois paramètres pour 3 espèces) on estime un intercept générale et un effet aléatoire soit 2 paramètres. Avec `\(n\)` espèce, dans le premier cas on estime `\(n-1\)` paramètres
-alors qu'on reste à 2 paramètres dans le second cas!
+Au lieu d'estimer d'estimer une ordonnée à l'origine par espèce (3 paramètres), on en estime une générale ainsi qu'un effet aléatoire (2 paramètres). Avec `\(n\)` espèce, dans le premier cas on estime `\(n-1\)` paramètres alors qu'on reste à 2 paramètres dans le second cas!
 
+???
 
+Note: (MFF) Cette diapo est difficile à comprendre. Je me demande si il y aurait une façon de mieux décrire le second paragraphe.
 
 
 ---
-# Effet aléatoire sur l'intercept
+exclude: true
+# Effet aléatoire sur l'ordonnée à l'origine
 &lt;br&gt;&lt;br&gt;
 
 &lt;img style="float: right; width:50%;margin: 1%" src="images/fig_8_w5.png"&gt;
 Même principe pour les lacs
 
-Estime 2 paramètres (moyenne et écart-type) au lieu de 6 intercepts.
+Estime 2 paramètres (moyenne et écart-type) au lieu de 6 ordonnées à l'origine.
 
-Cela économise des degrés de liberté (moins d’estimation de paramètres sont nécessaires)
-
+Cela **économise des degrés de liberté** (moins d’estimation de paramètres sont nécessaires)
 
 
 ---
+exclude: true
 # Effet aléatoire sur la pente
 &lt;br&gt;&lt;br&gt;
 
 &lt;img style="float: right; width:50%;margin: 1%" src="images/fig_9_w5.png"&gt;
-Le même principe s’applique aux pentes qui varient selon un facteur donné, juste plus difficile à visualiser.
+Le même principe s’applique aux pentes qui varient selon un facteur donné.
 
-Comme pour les intercepts, seuls la moyenne et l’écart-type des pentes sont estimés au lieu de trois pentes distinctes.
+Comme pour les ordonnées à l'origine, seuls la moyenne et l’écart-type des pentes sont estimés au lieu de trois pentes distinctes.
+
 
 ---
 # Tenir compte de la structure des données
 &lt;br&gt;
+**Qu'arrive-t-il si j'ai peu d'échantillons (faible `\(n\)`) pour un niveau des facteurs?**
 
-Si une certaine espèce ou un lac est peu représenté (faible `\(n\)`) dans les données, le modèle va accorder plus d'importance au modèle groupé pour estimer l'intercept et la pente de cette espèce ou de ce lac.
+Si une espèce ou un lac est peu représenté dans les données, le modèle va accorder plus d'importance au modèle groupé pour estimer l'ordonnée à l'origine et la pente de cette espèce ou de ce lac (Processus de « shrinkage »).
+
+Idéalement, avoir un minimum de `\(n\)`=3 par niveau d'un facteur.
 
 .center[![:scale 60%](images/fig_12_w5.png) ]
 
+
 ---
 # Tenir compte de la structure des données
-&lt;br&gt;&lt;br&gt;
+&lt;br&gt;
+**Comment évaluer l'impact d'un effet aléatoire sur le modèle?**
 
-* Les intervalles de confiance des intercepts et pentes sont ajustés pour tenir compte de la pseudo-replication basée sur le **coefficient de corrélation intra-classe (CCI)**.
+* Les intervalles de confiance des ordonnées à l'origine et des pentes **générales** sont ajustés pour tenir compte de la pseudo-replication basée sur le **coefficient de corrélation intra-classe (CCI)**
 
-* Combien de variation y a-t-il dans chaque groupe VS entre les groupes ?
+* Le CCI permet de savoir la proportion de variation dans la variable réponse qui est expliquée par l'effet aléatoire, tel que :
+
+`$$CCI = \frac{\sigma_{\alpha}^2}{\sigma_{\alpha}^2 + \sigma_{\varepsilon}^2}$$`
+Le CCI correspond au **ratio** entre la variance d'un effet aléatoire (e.g. ordonnées à l'origine des espèces) et la variance totale.
+
+Le CCI nous informe donc **à quel point** la position trophique moyenne entre chaque espèce ou chaque lac (c.-à-d. les ordonnées à l'origine) **varie**.
+
+???
+
+Note: _Dire que différentes notations sont possibles selon le livre/article et comment l'équation du modèle est écrite._
 
 
 ---
@@ -353,31 +415,58 @@ Si une certaine espèce ou un lac est peu représenté (faible `\(n\)`) dans les
 
 
 .pull-left[
-**CIC élevé**
+**CCI élevé**
 
-![](images/fig_10_w5.png)
+![:scale 90%](images/CCIplot2_qcbs.png)
 
-les points provenant d'un même lac sont traités comme une seule observation car très corrélés
+Le % de variance (CCI) est élevé car **les espèces diffèrent fortement** dans leur position trophique moyenne.
 
-![:faic](arrow-right) petite taille effective de l'échantillon et grands intervalles de confiance pour la pente et l'intercept.
+Les intervalles de confiance pour la pente et l'ordonnée à l'origine générale sont grands.
 ]
 
 .pull-right[
-**CIC faible**
+**CCI faible**
+
+![:scale 85%](images/CCIplot_qcbs.png)
+
+Le % de variance (CCI) est faible car **les espèces diffèrent peu** dans leur position trophique moyenne.
+
+Les intervalles de confiance pour la pente et l'ordonnée à l'origine générale sont petits.
+]
+
+
+---
+exclude: true
+# Tenir compte de la structure des données
+
+
+.pull-left[
+**CCI élevé**
+
+![](images/fig_10_w5.png)
+
+Les points provenant d'un même lac sont traités comme une seule observation car **très corrélés**.
+
+![:faic](arrow-right) petite taille effective de l'échantillon et grands intervalles de confiance pour la pente et l'ordonnée à l'origine.
+]
+
+.pull-right[
+**CCI faible**
 
 ![](images/fig_11_w5.png)
 
-les points provenant d'un même lac sont traités indépendamment car peu corrélés
+Les points provenant d'un même lac sont traités indépendamment car **peu corrélés**.
 
-![:faic](arrow-right) grande taille effective de l'échantillon et petits intervalles de confiance pour la pente et l'intercept.
+![:faic](arrow-right) grande taille effective de l'échantillon et petits intervalles de confiance pour la pente et l'ordonnée à l'origine.
 ]
 
+
 ---
-# Question / défi ![:cube]()
+# Défi 2 ![:cube]()
 
 &lt;br&gt;
 
-**Comment le CIC et l'intervalle de confiance seront affectés dans ces deux scénarios ?**
+**Comment le CCI et l'intervalle de confiance seront affectés dans ces deux scénarios?**
 
 **Q1.** Les positions trophiques des poissons ne varient pas entre les lacs
 
@@ -390,39 +479,48 @@ les points provenant d'un même lac sont traités indépendamment car peu corré
 
 &lt;br&gt;
 
-**Q1.** La position trophique ne varie pas entre les lacs?
+**Q1.** Les positions trophiques des poissons ne varient pas entre les lacs
 
-.alert[R1. CIC faible, petits intervalles de confiances]
+.alert[R1. CCI faible, petits intervalles de confiances]
 
 &lt;br&gt;
 
 --
 
-**Q2.** La position trophique est similaire dans un lac mais différente entre les lacs ?
+**Q2.** Les positions trophiques des poissons sont similaires dans les lacs mais différentes entre les lacs
 
-.alert[R2. CIC élevé, grands intervalles de confiance]
+.alert[R2. CCI élevé, grands intervalles de confiance]
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+--
+
+**Pour plus de détails sur le CCI** : &lt;br&gt;
+Nakagawa et Schielzeth (2013)
+https://doi.org/10.1111/j.1469-185X.2010.00141.x
+Nakagawa *et al.* (2017) 
+https://doi.org/10.1098/rsif.2017.0213
+
 
 ---
-# Comment implémenter un MLM dans R ?
+# Comment implémenter un MLM avec R?
 
 &lt;img style="float:right; width:32%; margin:1%" src="images/lego.jpg"&gt;
 
-###### **Étape 1:** Construction du modèle *a priori* et exploration des données
+###### **Étape 1.** Construction du modèle *a priori* et exploration des données
 
 &lt;br&gt;
 
-**Étape 2:** Coder les modèles potentiels et sélection du meilleur modèle
+**Étape 2.** Coder les modèles potentiels et sélection du meilleur modèle
 
 &lt;br&gt;
 
-**Étape 3:** Validation du modèle
+**Étape 3.** Validation du modèle
 
 &lt;br&gt;
 
-**Étape 4:** Interprétation et visualisation des résultats
+**Étape 4.** Interprétation et visualisation des résultats
 
 ---
-# Étape 1 - construction du modèle *a priori*
+# Étape 1. construction du modèle *a priori*
 
 **Modèle basé sur connaissance *a priori*:**
 
@@ -432,7 +530,7 @@ les points provenant d'un même lac sont traités indépendamment car peu corré
 
 `$$PT_{ijk} \sim Longueur_i + Lac_j + Espèce_k + \varepsilon_{ijk}$$`
 ---
-# Étape 1 - exploration des données
+# Étape 1. exploration des données
 
 **Les données ont-elles la bonne structure?**
 
@@ -450,7 +548,7 @@ str(fish.data)
 Il est recommandé de faire le ménage de votre espace de travail (`rm.list()`) avant de construire un modèle.
 
 ---
-# Étape 1 - exploration des données
+# Étape 1. exploration des données
 
 **Regardez la distribution des échantillons pour chaque facteur:**
 
@@ -470,7 +568,7 @@ table(fish.data[ , c("Lake", "Fish_Species")])
 Ce jeu de données est parfaitement équilibré, mais les **modèles mixtes peuvent analyser des designs expérimentaux non équilibrés**, comme c'est souvent le cas en écologie!
 
 ---
-# Étape 1 - exploration des données
+# Étape 1. exploration des données
 
 **Regardez la distribution des variables continues**
 
@@ -481,12 +579,12 @@ hist(fish.data$Fish_Length, xlab = "Length (mm)", main = "")
 hist(fish.data$Trophic_Pos, xlab = "Trophic position", main = "")
 ```
 
-&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-9-1.png" width="720" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-8-1.png" width="720" style="display: block; margin: auto;" /&gt;
 
 Des déviations majeures pourraient causer des problèmes d'hétéroscédasticité. Si nécessaire, faites des transformations. Dans ce cas-ci, **les données semblent correctes**.
 
 ---
-# Étape 1 - exploration des données
+# Étape 1. exploration des données
 
 **Vérifier la colinéarité entre vos variables explicatives**
 
@@ -501,6 +599,8 @@ plot(data)
 cor(var1, var2)
 ```
 
+Voici un [exemple de colinéarité](https://yetanotheriteration.netlify.app/2018/01/high-collinearity-effect-in-regressions/).
+
 ---
 # Défi 3 ![:cube]()
 
@@ -511,7 +611,7 @@ Quelles mesures supplémentaires aurions-nous pu prendre sur le terrain et qui a
 &gt; Un exemple est la masse du poisson – c’est une variable fortement corrélée avec la longueur du poisson. Par conséquent, nous ne voulons pas inclure ces deux variables dans le même modèle.
 
 ---
-# Étape 1 - exploration des données
+# Étape 1. exploration des données
 
 **Considérez l'échelle de vos données**
 
@@ -521,7 +621,7 @@ Quelles mesures supplémentaires aurions-nous pu prendre sur le terrain et qui a
 
 `$$z = \frac{x-moyenne(x)}{écart.type(x)}$$`
 ---
-# Étape 1 - exploration des données
+# Étape 1. exploration des données
 
 **Considérez l'échelle de vos données**
 
@@ -530,7 +630,7 @@ Quelles mesures supplémentaires aurions-nous pu prendre sur le terrain et qui a
 * Position trophique ![:faic](arrow-right) Courte échelle
 
 ---
-# Étape 1 - exploration des données
+# Étape 1. exploration des données
 
 **Considérez l'échelle de vos données**
 
@@ -547,11 +647,11 @@ fish.data$Z_TP     &lt;- scale(fish.data$Trophic_Pos)
 ```
 
 ---
-# Étape 1 - exploration des données
+# Étape 1. exploration des données
 
 Pour savoir si un modèle mixte est nécessaire pour vos données, vous devez déterminer s'il est important de prendre en compte l'effet aléatoire de facteurs qui pourraient influencer la relation qui vous intéresse (dans notre cas, lac et espèce)
 
-Nous pouvons le faire en :
+**Nous pouvons le faire en :**
 
 1. Créant un modèle linéaire sans les facteurs qui pourraient avoir un effet aléatoire
 
@@ -560,7 +660,7 @@ Nous pouvons le faire en :
 3. Produisant un graphique de la valeur des résidus en fonction des niveaux des facteurs potentiellement aléatoires
 
 ---
-# Étape 1 - exploration des données
+# Étape 1. exploration des données
 
 Créer un modèle linéaire sans les facteurs
 
@@ -575,7 +675,7 @@ lm.test.resid &lt;- rstandard(lm.test)
 ```
 
 ---
-# Étape 1 - exploration des données
+# Étape 1. exploration des données
 
 Représentez graphiquement la valeur des résidus en fonction des niveaux des facteurs
 
@@ -595,11 +695,11 @@ abline(0, 0, lty = 2)
 ```
 
 ---
-# Étape 1 - Exploration des données
+# Étape 1. exploration des données
 
 Représentez graphiquement la valeur des résidus en fonction des niveaux des facteurs
 
-&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-15-1.png" width="720" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-14-1.png" width="720" style="display: block; margin: auto;" /&gt;
 
 .alert[Ces patrons suggèrent qu'il y a de la variance résiduelle qui pourrait être expliquée par ces facteurs, et ils devraient donc être inclus dans le modèle]
 
@@ -608,22 +708,22 @@ Représentez graphiquement la valeur des résidus en fonction des niveaux des fa
 
 &lt;img style="float: right; width:32%;margin: 1%" src="images/lego.jpg"&gt;
 
-**Étape 1:** Construction du modèle *a priori* et exploration des données
+**Étape 1.** Construction du modèle *a priori* et exploration des données
 
 &lt;br&gt;
 
-###### **Étape 2:** Coder les modèles potentiels et sélection du meilleur modèle
+###### **Étape 2.** Coder les modèles potentiels et sélection du meilleur modèle
 
 &lt;br&gt;
 
-**Étape 3:** Validation du modèle
+**Étape 3.** Validation du modèle
 
 &lt;br&gt;
 
-**Étape 4:** Interprétation et visualisation des résultats
+**Étape 4.** Interprétation et visualisation des résultats
 
 ---
-# Étape 2 - coder le modèle
+# Étape 2. coder le modèle
 
 **Traduisons notre modèle...**
 
@@ -647,36 +747,47 @@ lmer(Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species),
 * `REML = TRUE` ![:faic](arrow-right) méthode d'estimation
 
 ---
-# Note à propos de la méthode d'estimation
+# Note sur les méthodes d'estimation
 
-REML (Restricted Maximum Likelihood) est la méthode par défaut dans la fonction `lmer` (voir `?lmer`).
+REML (*Restricted Maximum Likelihood*) est la méthode par défaut dans la fonction `lmer` (voir `?lmer`).
 
-Notez que l'estimateur de l’écart-type du maximum de vraisemblance (ML, pour Maximum Likelihood) est biaisé d’un facteur `\((n-2) / n\)`. La méthode REML corrige ce biais.
+La méthode de maximum de vraisemblance (ML, pour *Maximum Likelihood*) sous-estime les variances du modèle par un facteur `\((n-k) / n\)`, ou `\(k\)` est le nombre d'effes fixes. 
 
-On devrait utiliser:
-- **REML** pour comparer des modèles avec des **effets aléatoires imbriqués** 
-- et **ML** pour comparer des modèles avec des **effets fixes imbriqués**.
+La méthode REML corrige pour ce biais.
+
+Consultez cet [article](https://towardsdatascience.com/maximum-likelihood-ml-vs-reml-78cf79bef2cf) pour plus d'information sur la différence entre ML et REML.
 
 ---
-# Étape 2 - coder le modèle
+# Note sur les méthodes d'estimation
 
-**Comment faire si on souhaite que la pente puisse varier ?**
+**On devrait utiliser :**
+
+* **REML** pour comparer des modèles avec des **effets aléatoires nichés** et la même structure d'effets fixes
+
+* **ML** pour comparer des modèles avec des **effets fixes nichés** et la même structure d'effets aléatoires
+
+* **ML** pour comparer des modèles **avec et sans effets aléatoires**
+
+---
+# Étape 2. coder le modèle
+
+**Comment faire si on souhaite que la pente puisse varier?**
 
 .center[
 ![](images/fig_22_w5.png)
 ]
 
 ---
-# Étape 2 - coder le modèle
+# Étape 2. coder le modèle
 
-**Plus généralement**
+**Différentes structures pour le modèle :**
 
 - `(1 | Lake)` effet aléatoire par lac à l'intercept
 - `(1 + Z_Length | Lake)` effet aléatoire par lac à l'intercept et la pente en réponse à la longueur corporelle (NB: (`Z_Length | Lake)` donne le même résultat)
 - `(-1 + Z_Length | Lake)` pour avoir uniquement l'effet aléatoire sur la pente
 - `(1 | Lake) + (1 | Species)`  pour des effets aléatoires croisés
 - `(1 | Lake:Fish_Species)` pour utiliser l'interaction entre 2 facteurs groupant
-- si votre jeu de données inclus des effets imbriqués, vous pouvez utiliser `/` pour les déclarer, e.g. `(1 | facteur1 / facteur2)` si `facteur2` est imbriqué dans `facteur1` ([voir ![:faic](stack-exchange)](https://stats.stackexchange.com/questions/228800/crossed-vs-nested-random-effects-how-do-they-differ-and-how-are-they-specified))
+- si votre jeu de données inclus des effets nichés, vous pouvez utiliser `/` pour les déclarer, e.g. `(1 | facteur1 / facteur2)` si `facteur2` est niché dans `facteur1` ([voir ![:faic](stack-exchange)](https://stats.stackexchange.com/questions/228800/crossed-vs-nested-random-effects-how-do-they-differ-and-how-are-they-specified))
 
 ---
 # Défi 4 ![:cube]()
@@ -729,11 +840,12 @@ lmer(Z_TP ~ Z_Length + (1 + Z_Length | Lake) + (1 + Z_Length | Fish_Species),
 ```
 
 ---
-# Étape 2 - sélectionner le meilleur modèle
+# Étape 2. sélectionner le meilleur modèle
 
 * Pour déterminer si vous avez construit le meilleur modèle mixte basé sur vos connaissances a priori, vous devez comparer ce modèle aux autres modèles alternatifs.
 
 * Avec le jeu de données sur lequel vous travaillez, il y a plusieurs modèles alternatifs qui pourraient mieux correspondre à vos données.
+
 
 ---
 # Défi 5 ![:cube]()
@@ -746,7 +858,8 @@ lmer(Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species),
      data = fish.data, REML = TRUE)
 ```
 
-Note: Si nous avions différents effets fixes entre les modèles, nous aurions dû indiquer `REML=FALSE` pour les comparer avec une méthode de vraisemblance comme l'AIC. Ici, vous devez rapporter les estimations des paramètres du "meilleur" modèle en utilisant `REML=TRUE`.
+.comment[Note : si nous avions différents effets fixes entre les modèles ou un modèle sans effects aléatoires, nous aurions dû indiquer `REML = FALSE` pour les comparer avec une méthode de vraisemblance comme l'AIC.]
+
 
 ---
 # Solution ![:cube]()
@@ -760,8 +873,9 @@ M0 &lt;- lm(Z_TP ~ Z_Length, data = fish.data)
 
 Par contre, pour comparer ce modèle aux MLMs, il est important de .alert[changer la méthode d'estimation à ML (`REML=FALSE`)] parce que `lm()` n'utilise pas la même méthode d'estimation que `lmer()`.
 
+
 ---
-# Solution
+# Solution ![:cube]()
 
 
 ```r
@@ -790,93 +904,130 @@ M8 &lt;- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake),
            data = fish.data, REML = FALSE)
 ```
 
----
-# Solution
-
-![:faic](question) `boundary (singular) fit: see ?isSingular`, voir [cette discussion ![:faic](stack-exchange)](https://stats.stackexchange.com/questions/378939/dealing-with-singular-fit-in-mixed-models)
 
 ---
-# Étape 2 - sélectionner le meilleur modèle
+# Solution ![:cube]()
+
+Lorsqu'on ajuste des MLM avec `lmer()`, il est possible de faire face à certaines erreurs our avertissements comme: 
+
+* `boundary (singular) fit: see ?isSingular`, voir [cette discussion ![:faic](stack-exchange)](https://stats.stackexchange.com/questions/378939/dealing-with-singular-fit-in-mixed-models)
+
+* `Model failed to converge with max|grad| ...`, voir [cette discussion ![:faic](stack-exchange)](https://stats.stackexchange.com/questions/242109/model-failed-to-converge-warning-in-lmer)
+
+Voici une [liste](https://rdrr.io/cran/lme4/man/troubleshooting.html) de problèmes possibles et comment les résoudre. 
+
+
+---
+# Étape 2. sélectionner le meilleur modèle
 
 * Maintenant que nous avons une liste de modèles potentiels, nous voulons les comparer entre eux pour sélectionner celui(ceux) qui a(ont) le plus de pouvoir prédictif.
 
-* Les modèles peuvent être comparés en utilisant la fonction `AICc` provenant du package `AICcmodavg`.
+* Les modèles peuvent être comparés en utilisant la fonction `AICc` provenant du package `MuMIn`.
 
 * Le critère d'information Akaike (AIC) est une **mesure de qualité du modèle** pouvant être utilisée pour comparer les modèles.
 
-* AICc corrige pour le biais créé par les faibles tailles d'.
+* AICc corrige pour le biais créé par les faibles tailles d'échantillon.
+
 
 ---
-# Étape 2 - sélectionner le meilleur modèle
+# Étape 2. sélectionner le meilleur modèle
 
 Pour trouver la valeur AICc d'un modèle, utilisez :
 
 
 ```r
-library(AICcmodavg)
-AICcmodavg::AICc(M1)
+library(MuMIn)
+MuMIn::AICc(M1)
 # [1] 77.30499
 ```
 
+
 ---
-# Étape 2 - sélectionner le meilleur modèle
+# Étape 2. sélectionner le meilleur modèle
 
 Pour regrouper toutes les valeurs d'AICc dans un seul tableau, utilisez :
 
 
 ```r
-AIC.table &lt;- data.frame(Model = c("M0", "M1", "M2", "M3", 
-                                  "M4", "M5", "M6", "M7", "M8"),
-                        AICc = c(AICcmodavg::AICc(M0), 
-                                 AICcmodavg::AICc(M1), 
-                                 AICcmodavg::AICc(M2), 
-                                 AICcmodavg::AICc(M3),
-                                 AICcmodavg::AICc(M4), 
-                                 AICcmodavg::AICc(M5), 
-                                 AICcmodavg::AICc(M6),
-                                 AICcmodavg::AICc(M7), 
-                                 AICcmodavg::AICc(M8)))
-
-# ordonner la table en ordre croissant d'AICc
-AIC.table &lt;- AIC.table[order(AIC.table$AICc), ]
-
-# rajouter la différence d'AICc avec la valeur d'AICc la plus petite (delta AICc)
-AIC.table$delta_AICc &lt;- AIC.table$AICc - AIC.table$AICc[1]
+AIC.table  &lt;- MuMIn::model.sel(M0, M1, M2, M3, M4, M5, M6, M7, M8)
+(AIC.table &lt;- AIC.table[ , c("df", "logLik", "AICc", "delta")])
+#    df      logLik      AICc      delta
+# M8  7   -8.597929  31.84702   0.000000
+# M2  9   -8.216019  35.49086   3.643839
+# M1  5  -33.480080  77.30499  45.457965
+# M7  7  -33.186374  81.02391  49.176890
+# M5  6 -128.310995 269.10754 237.260517
+# M3  4 -134.532965 277.29450 245.447480
+# M4  4 -224.715763 457.66010 425.813076
+# M6  6 -224.671201 461.82795 429.980930
+# M0  3 -236.861362 479.85909 448.012065
 ```
 
+* `df` est le degré de liberté
+* `logLik` est le log de la vraisemblance
+* `delta` est la différence d'AICc avec la valeur la plus petite
+
+Nous avons seulement affiché une partie des résultats retourné par la fonction `model.sel()`, voir `?model.sel` pour plus d'information.
+
+
 ---
-# Étape 2 - sélectionner le meilleur modèle
+# Étape 2. sélectionner le meilleur modèle
 
 Que signifient ces valeurs d'AICc ?
 
 
 ```r
 AIC.table
-#   Model      AICc delta_AICc
-# 9    M8  31.84702   0.000000
-# 3    M2  35.49086   3.643839
-# 2    M1  77.30499  45.457965
-# 8    M7  81.02391  49.176890
-# 6    M5 269.10754 237.260517
-# 4    M3 277.29450 245.447480
-# 5    M4 457.66010 425.813076
-# 7    M6 461.82795 429.980930
-# 1    M0 479.85909 448.012065
+#    df      logLik      AICc      delta
+# M8  7   -8.597929  31.84702   0.000000
+# M2  9   -8.216019  35.49086   3.643839
+# M1  5  -33.480080  77.30499  45.457965
+# M7  7  -33.186374  81.02391  49.176890
+# M5  6 -128.310995 269.10754 237.260517
+# M3  4 -134.532965 277.29450 245.447480
+# M4  4 -224.715763 457.66010 425.813076
+# M6  6 -224.671201 461.82795 429.980930
+# M0  3 -236.861362 479.85909 448.012065
 ```
 
-Le modèle avec le plus petit AICc a le plus grand pouvoir prédictif.
+* Le modèle avec le plus petit AICc a le plus grand pouvoir prédictif.
 
-Souvent on considère que deux modèles à +/- 2 unités d'AICc de différence ont un pouvoir prédictif équivalent.
+* Souvent on considère que deux modèles à +/- 2 unités d'AICc de différence ont un pouvoir prédictif équivalent.
+
+* Examinons de plus proche M8 and M2. On peut exclure les autres modèles car ils ont des AICc beaucoup plus élevés.
+
 
 ---
-# Étape 2 - sélectionner le meilleur modèle
+# Étape 2. sélectionner le meilleur modèle
+
+
+```r
+M8 &lt;- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake),
+           data = fish.data, REML = TRUE)
+
+M2 &lt;- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 + Z_Length | Lake),
+           data = fish.data, REML = TRUE)
+
+MuMIn::model.sel(M2,M8)[ , c("df", "logLik", "AICc", "delta")]
+#    df    logLik     AICc    delta
+# M8  7 -10.84011 36.33137 0.000000
+# M2  9 -10.28932 39.63747 3.306098
+```
+
+Le modèle `M8` semble être le meilleur modèle parmi ceux qu'on a testé.
+
+Notez qu'on utilise maintenant REML (i.e. `REML=TRUE`) vu qu'on compare deux modèles avec des effets aléatoires nichés et avec la même structure d'effets fixes. 
+
+
+---
+# Étape 2. sélectionner le meilleur modèle
 
 Quelle est la structure du meilleur modèle?
 
 
 ```r
 M8 &lt;- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake),
-           data = fish.data, REML = FALSE)
+           data = fish.data, REML = TRUE)
 ```
 
 L'intercept et l'effet de la longueur sur la position trophique peut varier selon l'espèce de poissons, mais seulement l'intercept peut varier par lac
@@ -884,16 +1035,18 @@ L'intercept et l'effet de la longueur sur la position trophique peut varier selo
 .pull-left[![](images/fig_9_w5.png)]
 .pull-right[![](images/fig_8_w5.png)]
 
----
-# Étape 2 - sélectionner le meilleur modèle
 
-Une fois que le meilleur modèle est sélectionné il faut remettre la méthode d'estimation a `REML=TRUE`
+---
+# Étape 2. sélectionner le meilleur modèle
+
+Une fois que le meilleur modèle est sélectionné il faut remettre la méthode d'estimation a `REML = TRUE`
 
 
 ```r
 M8 &lt;- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake),
            data = fish.data, REML = TRUE)
 ```
+
 
 ---
 exclude: true
@@ -915,10 +1068,11 @@ M2 &lt;- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 + Z_Length | 
            data = fish.data, REML = TRUE)
 ```
 
+
 ---
 exclude: true
 
-# Solution
+# Solution ![:cube]()
 
 **Discussion de groupe...**
 
@@ -933,44 +1087,53 @@ exclude: true
 
 * .small[seulement les facteurs intrinsèques des espèces sont responsables des différentes relations (i.e. pentes) et en moyenne, les positions trophiques pourraient être supérieures ou inférieures d’un lac à l’autre (e.g. intercepts).]
 
+
 ---
 # Comment implémenter un MLM dans R ?
 
-&lt;img style="float: right; width:32%;margin: 1%" src="images/lego.jpg"&gt;
+&lt;img style = "float: right; width:32%;margin: 1%" src = "images/lego.jpg"&gt;
 
-**Étape 1:** Construction du modèle *a priori* et exploration des données
-
-&lt;br&gt;
-
-**Étape 2:** Coder les modèles potentiels et sélection du meilleur modèle
+**Étape 1.** Construction du modèle *a priori* et exploration des données
 
 &lt;br&gt;
 
-###### **Étape 3:** Validation du modèle
+**Étape 2.** Coder les modèles potentiels et sélection du meilleur modèle
 
 &lt;br&gt;
 
-**Étape 4:** Interprétation et visualisation des résultats
+###### **Étape 3.** Validation du modèle
+
+&lt;br&gt;
+
+**Étape 4.** Interprétation et visualisation des résultats
+
 
 ---
-# Étape 3 - validation du modèle
+# Étape 3. validation du modèle
 
-Vous devez vérifier que le modèle respecte toutes les suppositions de base:
+**Vous devez vérifier que le modèle respecte toutes les suppositions de base :**
 
-1. Vérifier l'homogénéité de la variance
+&lt;br&gt;
+
+**3.1 Vérifier l'homogénéité de la variance**
   - Faire un graphique des valeurs prédites en fonction des valeurs résiduelles
 
-2. Vérifier l'indépendance des résidus
-  - Graphique des résidus VS chaque covariable du modèle
-  - Graphique des résidus VS chaque covariable non incluse du modèle
+&lt;br&gt;
 
-3. Vérifier la normalité
+**3.2 Vérifier l'indépendance des résidus**
+  - Graphique des résidus vs chaque covariable du modèle
+  - Graphique des résidus vs chaque covariable non incluse du modèle
+
+&lt;br&gt;
+
+**3.3 Vérifier la normalité**
   - Histogramme
 
----
-# Étape 3 - validation du modèle
 
-1- Vérifier l'homogénéité de la variance
+---
+# Étape 3. validation du modèle
+
+**3.1 Vérifier l'homogénéité de la variance**
 
 
 ```r
@@ -984,19 +1147,21 @@ abline(h = 0, lty = 2)
 
 Étendue homogène des résidus ![:faic](arrow-right) la supposition est respectée!
 
----
-# Étape 3 - validation du modèle
 
-1- Vérifier l'homogénéité de la variance
+---
+# Étape 3. validation du modèle
+
+**3.1 Vérifier l'homogénéité de la variance**
 
 .center[
 ![](images/resid-plots.gif)
 ]
 
----
-# Étape 3 - validation du modèle
 
-2- Vérifier l'indépendance des résidus avec chaque covariable
+---
+# Étape 3. validation du modèle
+
+**3.2 Vérifier l'indépendance des résidus avec chaque covariable**
 
 
 ```r
@@ -1015,32 +1180,35 @@ boxplot(resid(M8) ~ Lake, data = fish.data,
 abline(h = 0, lty = 2)
 ```
 
----
-# Étape 3 - validation du modèle
 
-2- Vérifier l'indépendance des résidus avec chaque covariable
+---
+# Étape 3. validation du modèle
+
+**3.2 Vérifier l'indépendance des résidus avec chaque covariable**
 
 &lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-31-1.png" width="864" style="display: block; margin: auto;" /&gt;
 
 Étendue homogène des résidus autour de 0 ![:faic](arrow-right) pas de patron des résidus en fonction de la variable, la supposition est respectée!
 
-Note: Les regroupements de données sont dus à la structure des données, où des poissons de seulement 5 classes de taille  (grand, petit, et trois groupes entre les deux) étaient capturés.
+.comment[Note : les regroupements de données sont dus à la structure des données, où des poissons de seulement 5 classes de taille  (grand, petit, et trois groupes entre les deux) étaient capturés.]
+
 
 ---
-# Étape 3 - validation du modèle
+# Étape 3. validation du modèle
 
-2- Vérifier l'indépendance des résidus avec chaque covariable
+**3.2 Vérifier l'indépendance des résidus avec chaque covariable**
 
-- Graphique des résidus VS chaque covariable non incluse du modèle
+- Graphique des résidus vs chaque covariable non incluse du modèle
 
   - Si vous observez des patrons dans ce graphique, vous saurez qu'il y a de la variation dans votre jeu de données qui pourrait être expliquée par ces covariables. Vous devriez considérer d'inclure ces variables dans votre modèle.
 
   - Puisque dans notre cas, nous avons inclus toutes les variables mesurées dans notre modèle, nous ne pouvons pas faire cette étape.
 
----
-# Étape 3 - validation du modèle
 
-3- Vérifier la normalité des résidus
+---
+# Étape 3. validation du modèle
+
+**3.3 Vérifier la normalité des résidus**
 
 * Des résidus suivant une distribution normale indiquent que le modèle n'est pas biaisé
 
@@ -1051,27 +1219,29 @@ hist(resid(M8))
 
 &lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-32-1.png" width="360" style="display: block; margin: auto;" /&gt;
 
+
 ---
 # Comment implémenter un MLM dans R ?
 
 &lt;img style="float: right; width:32%;margin: 1%" src="images/lego.jpg"&gt;
 
-**Étape 1:** Construction du modèle *a priori* et exploration des données
+**Étape 1.** Construction du modèle *a priori* et exploration des données
 
 &lt;br&gt;
 
-**Étape 2:** Coder les modèles potentiels et sélection du meilleur modèle
+**Étape 2.** Coder les modèles potentiels et sélection du meilleur modèle
 
 &lt;br&gt;
 
-**Étape 3:** Validation du modèle
+**Étape 3.** Validation du modèle
 
 &lt;br&gt;
 
-###### **Étape 4:** Interprétation et visualisation des résultats
+###### **Étape 4.** Interprétation et visualisation des résultats
+
 
 ---
-# Étape 4 - interprétation et visualisation
+# Étape 4. interprétation et visualisation
 
 
 ```r
@@ -1106,8 +1276,9 @@ hist(resid(M8))
 # boundary (singular) fit: see ?isSingular
 ```
 
+
 ---
-# Étape 4 - interprétation et visualisation
+# Étape 4. interprétation et visualisation
 
     # Random effects:
     #  Groups       Name        Variance Std.Dev. Corr
@@ -1116,15 +1287,16 @@ hist(resid(M8))
     #               Z_Length    0.02464  0.1570   1.00
     #  Residual                 0.05040  0.2245
 
-- `Groups`: facteurs groupant,
+- `Groups`: facteurs de regroupement,
 - `Name`:
   - `(Intercept)` pour l'ordonnée à l'origine,
   - ou le nom de la variable sur lequel porte l'effet mixe dans le cas d'une pente aléatoire, (`Z_length` dans notre exemple)
 - `Variance` la variance estimée de l'effet (`Std.Dev.` est l'écart type de cette valeur)
 - `Corr` indique la corrélation entre la pente aléatoire et l'ordonnée à l'origine aléatoire pour un groupement donné (voir [cette discussion ![:faic](stack-exchange)](https://stats.stackexchange.com/questions/320978/understanding-and-coding-random-intercept-correlation-lmer))
 
+
 ---
-# Étape 4 - interprétation et visualisation
+# Étape 4. interprétation et visualisation
 
     # Fixed effects:
     #              Estimate Std. Error t value
@@ -1140,10 +1312,11 @@ $$ IC = Estimate \pm 1.96*Std.Error $$
 Si 0 est dans cet interval, alors le paramètre n’est pas significativement
 différente de zéro au seuil `\(\alpha\)` = 0.05.
 
----
-# Étape 4 - interprétation et visualisation
 
-##### Quelques fonctions utiles
+---
+# Étape 4. interprétation et visualisation
+
+**Quelques fonctions utiles**
 
 - `coef(M8)` et `ranef(M8)` retournent les effets aléatoires du modèle M8
 
@@ -1154,6 +1327,7 @@ différente de zéro au seuil `\(\alpha\)` = 0.05.
 - `fitted(M8)` retourne les valeurs prédites par le modèle
 
 - `residuals(M8)` retourne les résidus
+
 
 ---
 # Défi 6 ![:cube]()
@@ -1197,6 +1371,7 @@ a) Figure avec toutes les données regroupées
 b) Figure par espèce
 
 c) Figure par lac
+
 
 ---
 # Solution ![:cube]()
@@ -1246,6 +1421,7 @@ coef(M8)
 # [1] "coef.mer"
 ```
 
+
 ---
 # Solution ![:cube]()
 
@@ -1275,11 +1451,13 @@ Plot_AllData + geom_abline(intercept = summ_M8$coefficients[1,1],
                            slope     = summ_M8$coefficients[2,1])
 ```
 
+
 ---
 # Solution ![:cube]()
 
 a) Figure avec toutes les données regroupées
 &lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-37-1.png" width="432" style="display: block; margin: auto;" /&gt;
+
 
 ---
 # Solution ![:cube]()
@@ -1310,12 +1488,14 @@ Plot_BySpecies +
 
 ```
 
+
 ---
 # Solution ![:cube]()
 
 b) Figure par espèce
 
 &lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-39-1.png" width="576" style="display: block; margin: auto;" /&gt;
+
 
 ---
 # Solution ![:cube]()
@@ -1346,6 +1526,7 @@ Plot_ByLake +
 
 ```
 
+
 ---
 # Solution ![:cube]()
 
@@ -1354,6 +1535,9 @@ c) Figure par lac
 
 
 ---
+
+exclude: true
+
 # Modèle mixtes et données en écologie
 
 Les modèles mixtes sont très utiles pour prendre en compte la structure complexe des données en écologie tout en permettant de ne pas perdre beaucoup de degrés de liberté
@@ -1376,15 +1560,16 @@ Les modèles mixtes sont très utiles pour prendre en compte la structure comple
 
 .alert[Quel modèle mixte pourriez-vous utiliser pour ce jeu de données?]
 
+
 ---
-# Solution! ![:cube]()
+# Solution ![:cube]()
 
 
 ```r
 lmer(Biodiv ~ Productivite + (1 | Foret / Site))
 ```
 
-Ici les effets aléatoires sont imbriqués (i.e. Sites dans forêt) et non croisés.
+Ici les effets aléatoires sont nichés (i.e. Sites dans forêt) et non croisés.
 
 Pourquoi utiliser `(1 | Foret / Site)` plutôt que `(1 | Foret) + (1 | Site)` ? Regardez [cette réponse sur ![:faic](stack-exchange)](https://stats.stackexchange.com/questions/228800/crossed-vs-nested-random-effects-how-do-they-differ-and-how-are-they-specified)!
 
@@ -1392,7 +1577,7 @@ Pourquoi utiliser `(1 | Foret / Site)` plutôt que `(1 | Foret) + (1 | Site)` ? 
 ---
 exclude: true
 
-# Défi 9 ![:cube]()
+# Défi 8 ![:cube]()
 
 **Situation:**
 
@@ -1407,7 +1592,7 @@ exclude: true
 ---
 exclude: true
 
-# Solution!![:cube]()
+# Solution ![:cube]()
 
 
 ```r
@@ -1417,7 +1602,7 @@ lmer(Mercure ~ Longueur * Habitat + (1 | Site))
 ---
 exclude: true
 
-# Défi 10![:cube]()
+# Défi 9 ![:cube]()
 
 * Discutez du jeu de données sur lequel vous travaillez avec votre voisin et déterminez si un modèle mixte serait approprié.
 
@@ -1425,20 +1610,29 @@ exclude: true
 
 * Si non, imaginez un jeu de données fictif pour lequel un modèle mixte serait approprié et codez ce modèle.
 
+
+---
+class: inverse, center, middle
+
+# GLMMs
+
+
 ---
 # Modèles Linéaires Généralisés Mixtes (GLMMs)
 
-Extension des GLMs tenant compte de structures supplémentaires dans les données
+**Extension des GLMs tenant compte de structures supplémentaires dans les données**
 
-Suivre les étapes similaires à celles introduites lors de l'atelier sur les LMMs:
+Suivent les étapes similaires à celles introduites lors de la section sur les LMMs :
 
-1. LMMs incorporent les effets aléatoires
-2. GLMs peuvent gérer des données non-normales (en laissant les erreurs prendre différentes familles de distribution - e.g Poisson ou binomial négatif)
+**1.** Ils incorporent les effets aléatoires (comme les LMMs)
+
+**2.** Permettent de gérer des données non-normales (en laissant les erreurs prendre différentes familles de distribution - e.g Poisson ou binomial négatif) (comme les GLMs)
+
 
 ---
-# Comment modéliser un GLM sous R
+# Comment modéliser un GLMM avec R
 
-Chargez les données `Arabidopsis` `banta_totalfruits.csv` dans R.
+Chargez les données `Arabidopsis` `banta_totalfruits.csv` dans `R`.
 
 
 
@@ -1453,7 +1647,7 @@ dat.tf &lt;- read.csv("banta_totalfruits.csv")
 # total.fruits nombre entier indiquant le nombre de fruits par plante
 ```
 
-L'effet de la disponibilité de nutriments et d'herbivorie (**effets fixes**) sur la production de fruits d'*Arabidopsis thaliana* (arabette des dames) a été évalué en mesurant 625 plantes à travers neuf populations différentes, constituées chacune de 2 à 3 génotypes (**effets aléatoires**)
+L'effet de la disponibilité de nutriments et d'herbivorie (**effets fixes**) sur la production de fruits d'*Arabidopsis thaliana* (**variable réponse**) a été évalué en mesurant 625 plantes à travers neuf populations différentes, constituées chacune de 2 à 3 génotypes (**effets aléatoires**).
 
 
 ---
@@ -1464,25 +1658,27 @@ La variable réponse constitue des données d'abondance, donc nous devons choisi
 &lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-45-1.png" width="432" style="display: block; margin: auto;" /&gt;
 Cependant, comme nous le verrons, la variance de chaque groupe augmente beaucoup plus rapidement que prévu...
 
+
 ---
 # Exploration de la variance
 
-Pour illustrer l'hétérogénéité de la variance, nous allons d'abord créer des boîtes à moustaches (boxplots) de la variable réponse par rapport aux différents facteurs environnementaux
+Pour illustrer l'hétérogénéité de la variance, nous allons créer des boîtes à moustaches (boxplots) du **log** du nombre total de fruits (**variable réponse**) par rapport aux différents facteurs environnementaux.
 
-Créons de nouvelles variables qui représentent toutes les combinaisons de **nutriments** x **herbivorie** x **facteur aléatoire**
+Créons d'abord de nouvelles variables qui représentent toutes les combinaisons de **nutriments** x **herbivorie** x **facteur aléatoire**.
 
 
 ```r
 dat.tf &lt;- within(dat.tf,
 {
   # génotype x nutriment x herbivorie
-  gna &lt;- interaction(gen,nutrient,amd)
+  gna &lt;- interaction(gen, nutrient, amd)
   gna &lt;- reorder(gna, total.fruits, mean)
   # population x nutriment x herbivorie
-  pna &lt;- interaction(popu,nutrient,amd)
+  pna &lt;- interaction(popu, nutrient, amd)
   pna &lt;- reorder(pna, total.fruits, mean)
 })
 ```
+
 
 ---
 # Exploration de la variance
@@ -1491,51 +1687,41 @@ dat.tf &lt;- within(dat.tf,
 
 ```r
 # Boxplot du total des fruits vs interaction génotype x nutriment x herbivorie
-library(ggplot2)
-ggplot(data = dat.tf, aes(factor(x = gna),y = log(total.fruits + 1))) +
+ggplot(data = dat.tf, aes(factor(x = gna), y = log(total.fruits + 1))) +
   geom_boxplot(colour = "skyblue2", outlier.shape = 21,
   outlier.colour = "skyblue2") +
-  theme_bw() + theme(axis.text.x=element_blank()) +
-  stat_summary(fun.y=mean, geom="point", colour = "red")
+  ylab("log (Fruits totaux)\n") + # \n créé un espace après le titre
+  xlab("\nGénotype x nutriment x herbivorie") + # espace avant le titre
+  theme_bw() + theme(axis.text.x = element_blank()) +
+  stat_summary(fun = mean, geom = "point", colour = "red")
 ```
 
 &lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-47-1.png" width="576" style="display: block; margin: auto;" /&gt;
 ]
 
-.comment[De même, la boîte à moustaches total des fruits vs population x nutriments x herbivorie montre une grande quantité d'hétérogénéité entre les populations.]
+.comment[De même, la variance du total de fruits montre une grande hétérogénéité entre les populations (population x nutriments x herbivorie).]
 
 
 ---
 # Choisir la distribution des erreurs
 
-Comme nous venons de le voir, il existe une importante hétérogénéité parmi la variance de chaque groupe, même lorsque la variable réponse est transformée
+Comme nous venons de le voir, il existe une importante hétérogénéité parmi la variance de chaque groupe, même lorsque la variable réponse est transformée (i.e. log).
 
-Si nous représentons graphiquement les **écarts vs moyennes par groupes** (génotypes x nutriment x herbivorie), on voit que la distribution de Poisson est la moins appropriée (i.e. écart augmentent beaucoup plus vite que la moyenne)
+Si nous représentons graphiquement les **écarts vs moyennes par groupes** (génotypes x nutriment x herbivorie), on voit que la distribution de Poisson est la moins appropriée (i.e. car les écarts augmentent beaucoup plus vite que la moyenne).
 
-.small[.pull-left[
-![](images/errDist.png)
-]
-.pull-right[
-
-&lt;font color="blue"&gt;NB = negative binomial&lt;/font&gt;
-
-&lt;br&gt;
-
-&lt;font color="red"&gt;QP = quasi-Poisson&lt;/font&gt;
-
-&lt;br&gt;
-&lt;font color="LightBlue"&gt;loess = Locally weighted regression smoothing&lt;/font&gt;
-]]
+&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-48-1.png" width="576" style="display: block; margin: auto;" /&gt;
 
 
 ---
 # GLMM Poisson
 
-Compte tenu de la relation moyenne-variance, nous avons besoin d'un modèle avec surdispersion.
+**Compte tenu de la relation moyenne-variance, nous avons besoin d'un modèle qui tient compte de la surdispersion.**
 
-- Mais commençons avec un modèle de Poisson :
+Pour comprendre pourquoi, commençons avec un modèle avec une distribution de Poisson.
 
-Pour lancer un GLMM dans R, nous faisons appel à la fonction `glmer()`, du paquet lme4
+--
+
+Pour lancer un GLMM dans `R`, nous faisons appel à la fonction `glmer()` de la librairie `lme4` :
 
 
 ```r
@@ -1546,68 +1732,100 @@ mp1 &lt;- glmer(total.fruits ~ nutrient*amd + rack + status +
              data = dat.tf, family = "poisson")
 ```
 
-**Effets aléatoires** : `(1|popu)` contient un intercept aléatoire partagé par les mesures qui ont la même valeur pour `popu`
+**Effets aléatoires** : `(1|popu)` et `(1|gen)`. Nous faisons varier les ordonnées à l'origine pour les différentes populations (`popu`) et génotypes (`gen`).
+
 
 ---
 # Vérification de la surdispersion
 
-Nous pouvons vérifier la surdispersion en utilisant la fonction `overdisp_fun()` (Bolker *et al*. 2011) qui divise la déviance des résidus (résidus de Pearson) par les degrés de liberté des résidus et teste si le rapport est plus grand que 1
+On vérifie la surdispersion en utilisant la fonction `overdisp_fun()` (Bolker *et al*. 2011) qui divise la déviance des résidus (de Pearson) par leurs degrés de liberté.
 
+La fonction teste si le **rapport est plus grand que 1**.
+
+--
+
+Effectuons ce test :
 
 ```r
 # Téléchargez le code glmm_funs.R de la page wiki et sourcez le pour exécuter la fonction dans R
-source(file="data/glmm_funs.R")
+source(file = "data/glmm_funs.R")
 # Surdispersion?
 overdisp_fun(mp1)
 #       chisq       ratio           p        logp 
 # 15755.86829    25.57771     0.00000 -6578.47025
 ```
+--
+.alert[Le rapport est significativement &gt; 1]
+&lt;br&gt;&lt;br&gt;
 
-- Ratio est significativement `\(&gt;&gt;\)` 1
-- Comme on s'y attendait, nous devons modéliser une distribution différente où la variance augmente plus rapidement que la moyenne
+Comme on s'y attendait, nous devons modéliser une **distribution différente** où la variance augmente plus rapidement que la moyenne.
+
 
 ---
 # GLMM binomiale negative .small[(Poisson-gamma)]
 
-La distribution binomiale négative satisfait la supposition que la **variance est proportionnelle au carré de la moyenne**
+**Option 1.** La distribution **binomiale négative** satisfait la supposition que la variance est proportionnelle au carré de la moyenne
 
+&lt;br&gt;
+--
+On peut modéliser cette distribution avec la fonction `glmer.nb()` :
 
 ```r
 mnb1 &lt;- glmer.nb(total.fruits ~ nutrient*amd + rack + status +
-                 (1|popu)+
+                 (1|popu) +
                  (1|gen),
-                 data=dat.tf, control=glmerControl(optimizer="bobyqa"))
+                 data = dat.tf, control = glmerControl(optimizer = "bobyqa"))
 # Control spécifie la façon dont nous optimisons les valeurs des paramètres
 ```
+--
+On teste à nouveau pour la présence de surdispersion :
 
-.pull-left[
 ```r
 # Surdispersion?
 overdisp_fun(mnb1)
+#         chisq         ratio             p          logp 
+# 721.034466390   1.170510497   0.002143424  -6.145350714
 ```
-]
-.pull-right[
-![:faic](arrow-left).small[.alert[Le rapport est maintenant beaucoup plus près de 1 mais la valeur de p &lt; 0.05]]
-]
+
+.alert[Le rapport est beaucoup plus près de 1 mais la valeur de p &lt; 0.05]
+
 
 ---
-# GLMM Poisson-lognormal
+# GLMM Poisson-lognormale
 
-- Un autre option est la distribution **Poisson-lognormal**.
-- Cela peut être réalisé simplement en plaçant un effet aléatoire de niveau d'observation dans la formule.
-.small[
+**Option 2.** La distribution **Poisson-lognormale**
+&lt;br&gt;
+
+On réalise cette distribution en ajoutant un **effet aléatoire de niveau d'observation** dans le modèle.
+
+Voir Harrison (2014) pour plus de détails https://doi.org/10.7717/peerj.616.
+
+&lt;br&gt;
+--
+Pour ce faire, nous créons tout d'abord une variable nommée `X` :
+
+```r
+# Cette variable est déjà dans vos données "dat.tf", mais voici comment la créer.
+dat.tf$X &lt;- 1:nrow(dat.tf)
+```
+
+On traite la surdispersion en ajoutant l'effet `(1|X)` dans la formule :
 
 ```r
 mpl1 &lt;- glmer(total.fruits ~ nutrient*amd + rack + status +
               (1|X) +
-              (1|popu)+
+              (1|popu) +
               (1|gen),
-data=dat.tf, family="poisson",
+data = dat.tf, family = "poisson",
 control = glmerControl(optimizer = "bobyqa"))
 ```
 
-`(1|X)` traite de la surdispersion en ajoutant des **effets aléatoires au niveau de l'observation**
 
+---
+# GLMM Poisson-lognormale
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+On teste finalement pour la présence de surdispersion :
 
 ```r
 overdisp_fun(mpl1)
@@ -1615,17 +1833,19 @@ overdisp_fun(mpl1)
 #  1.775360e+02  2.886764e-01  1.000000e+00 -3.754681e-73
 ```
 
-.alert[Rapport maintenant conforme avec notre critère]
-]
+.alert[Le rapport est maintenant conforme avec notre critère, soit &lt; 1]
+
 
 ---
-# GLMM Poisson-lognormal
+# GLMM Poisson-lognormale
 
-**Représentation graphique des paramètres du modèle**: Une représentation graphique des paramètres du modèle peut être obtenue en utilisant la fonction `coefplot2()`du paquet `coefplot2`:
+**Représentons graphiquement les paramètres du modèle** 
 
---
+Peut être obtenu en utilisant la fonction `coefplot2()`de la librairie `coefplot2` :
+&lt;br&gt;&lt;br&gt;
 
-.alert[![:faic](warning) Ce paquet n'est pas sur le CRAN! On utilise le package remotes pour l'installer depuis GitHub]
+
+.alert[![:faic](warning) Cette librairie n'est pas sur le CRAN! On utilise la librairie remotes pour l'installer à partir de GitHub]
 
 
 ```r
@@ -1634,89 +1854,105 @@ if (!require("coefplot2"))
 library(coefplot2)
 ```
 
+
 ---
-# GLMM Poisson-lognormal
+# GLMM Poisson-lognormale
 
 
 .pull-left[
 
 ```r
-# Paramètres de la variance
-coefplot2(mpl1, ptype = "vcov", intercept = TRUE)
+# Effets aléatoires
+coefplot2(mpl1, ptype = "vcov", intercept = TRUE, main = "Variance des effets aléatoires")
 ```
 
-&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-53-1.png" width="432" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-56-1.png" width="432" style="display: block; margin: auto;" /&gt;
 ]
 .pull-right[
 
 ```r
 # Effets fixes
-coefplot2(mpl1, intercept = TRUE)
+coefplot2(mpl1, intercept = TRUE, main = "Coefficients des effets fixes")
 ```
 
-&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-54-1.png" width="432" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-57-1.png" width="432" style="display: block; margin: auto;" /&gt;
 ]
 
-.alert[Note]: barres d'erreur visibles seulement pour les effets fixes parce que glmer ne nous donne pas d'informations sur l'incertitude des effets aléatoires.
+.comment[Note : barres d'erreur visibles seulement pour les effets fixes car `glmer()` ne modélise pas d'incertitude pour les effets aléatoires.]
+
 
 ---
-# Visualisation des effets aléatoires
+# GLMM Poisson-lognormale
 
-Vous pouvez aussi extraire les effets aléatoires en utilisant la fonction `ranef()` et les tracer en utilisant un `dotplot()` du paquet `lattice`
+**Visualisation des effets aléatoires**
 
-Il y a une variabilité régionale parmi les populations :
+Vous pouvez extraire les effets aléatoires en utilisant la fonction `ranef()` et les tracer en utilisant un `dotplot()` de la librairie `lattice`.
+
+&lt;br&gt;
+--
+On constate une variation **inter-population** :
 
 - Les populations espagnoles (SP) ont des valeurs plus élevées que les populations suédoises (SW) et néerlandaises (NL)
 
-La différence entre les génotypes semble largement induite par génotype 34
+On constate une faible variation **inter-génotype** :
+- Les différences entre les génotypes semblent induites par le génotype 34
 
 ```r
 library(gridExtra)
 library(lattice)
 # dotplot code
-pp &lt;- list(layout.widths=list(left.padding=0, right.padding=0),
-           layout.heights=list(top.padding=0, bottom.padding=0))
+pp &lt;- list(layout.widths = list(left.padding = 0, right.padding = 0),
+           layout.heights = list(top.padding = 0, bottom.padding = 0))
 r2 &lt;- ranef(mpl1, condVar = TRUE)
 d2 &lt;- dotplot(r2, par.settings = pp)
 grid.arrange(d2$gen, d2$popu, nrow = 1)
 ```
 
+
 ---
-# Visualisation des effets aléatoires
+# GLMM Poisson-lognormale
+
+**Visualisation des effets aléatoires**
 
 &lt;br&gt;
 
-&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-55-1.png" width="648" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-58-1.png" width="648" style="display: block; margin: auto;" /&gt;
 
 
 ---
 # Sélection du modèle
 
-Les même méthodes peuvent être utilisées avec un glmm ou lmm pour choisir entre des modèles avec différents intercepts aléatoires et/ou des pentes aléatoires et pour choisir les effets fixes à conserver dans le modèle final.
+Les même méthodes peuvent être utilisées avec un glmm ou lmm pour choisir entre des modèles avec différentes ordonnées à l'origine et/ou pentes aléatoires ainsi que pour choisir les effets fixes à conserver dans le modèle final.
+
+&lt;br&gt;
+
+En voici deux :
 
 - une **approche de la théorie de l'information** (e.g., AICc - Atelier 5)
-- une **approche fréquentiste** (où l'importance de chaque terme est évaluée en utilisant `anova()` et le test de rapport de vraisemblance; LRT)
+- une **approche fréquentiste** (où l'importance de chaque terme est évaluée en faisant un test de rapport de vraisemblance; LRT, avec la fonction `anova()`)
 
 
 ---
 # Sélection du modèle
 
-Nous dérivons d'abord les modèles potentiels et les comparons en utilisant AICc.comment[*]:
+Nous dérivons d'abord les modèles potentiels et les comparons en utilisant l'AICc.comment[*] :
 
 
 ```r
 mpl2 &lt;- update(mpl1, . ~ . - rack) # modèle sans rack
 mpl3 &lt;- update(mpl1, . ~ . - status) # modèle sans status
 mpl4 &lt;- update(mpl1, . ~ . - amd:nutrient) # modèle sans interaction amd:nutrient
-bbmle::ICtab(mpl1, mpl2, mpl3, mpl4, type = c("AICc"))
-#      dAICc df
-# mpl1  0.0  10
-# mpl4  1.4  9 
-# mpl3  1.5  8 
-# mpl2 55.0  9
+
+aic_tab  &lt;- MuMIn::model.sel(mpl1, mpl2, mpl3, mpl4)
+(round(aic_table &lt;- aic_tab[ , c("AICc", "delta", "df")], digits = 2))
+#         AICc delta df
+# mpl1 5015.73  0.00 10
+# mpl4 5017.11  1.38  9
+# mpl3 5017.22  1.49  8
+# mpl2 5070.75 55.02  9
 ```
 
-.comment[*NB: Nous ne couvrons pas tous les modèles possibles ci-dessus, cependant, l'interaction `amd:nutriments` ne peut être évaluée que si amd et nutriments sont présents dans le modèle.
+.comment[*NB: Nous ne couvrons pas tous les modèles possibles ci-dessus, cependant, l'interaction `amd:nutriments` ne peut être évaluée que si les effets additifs de amd et de nutriments sont présents dans le modèle.
 ]
 
 
@@ -1728,7 +1964,7 @@ Nous pouvons aussi utiliser les fonctions `drop1()` et `dfun()` pour évaluer no
 .small[
 
 ```r
-dd_LRT &lt;- drop1(mpl1,test="Chisq")
+dd_LRT &lt;- drop1(mpl1, test = "Chisq")
 (dd_AIC &lt;- dfun(drop1(mpl1)))
 # Single term deletions
 # 
@@ -1743,79 +1979,72 @@ dd_LRT &lt;- drop1(mpl1,test="Chisq")
 ```
 ]
 
----
-# Sélection du modèle
-.small[
-
-```r
-dd_LRT &lt;- drop1(mpl1,test="Chisq")
-(dd_AIC &lt;- dfun(drop1(mpl1)))
-# Single term deletions
-# 
-# Model:
-# total.fruits ~ nutrient * amd + rack + status + (1 | X) + (1 | 
-#     popu) + (1 | gen)
-#              npar   dAIC
-# &lt;none&gt;             0.000
-# rack            1 55.083
-# status          2  1.612
-# nutrient:amd    1  1.444
-```
-]
+--
 
 - Fort effet de **rack** (dAIC = 55.08 si on enlève cette variable)
 - Effets de **status** et de l'**interaction** sont faibles (dAIC &lt; 2)
-- Commençons par **enlever l'interaction non significative** afin de tester les effets principaux de nutriments et d'herbivorie
+
 
 ---
 # Sélection du modèle
-
-&lt;br&gt;
-
-.pull-left2[
+Commençons par **enlever l'interaction non significative** afin de tester les effets principaux de nutriments et d'herbivorie.
 
 ```r
-mpl2 &lt;- update(mpl1, . ~ . - and:nutrient)
-# Utiliser AIC
-mpl3 &lt;- update(mpl2, . ~ . - rack) # pas de rack ou interaction
-mpl4 &lt;- update(mpl2, . ~ . - status) # pas de status ou interaction
-mpl5 &lt;- update(mpl2, . ~ . - nutrient) # pas de nutrient ou interaction
-mpl6 &lt;- update(mpl2, . ~ . - amd) # pas d'herbivorie ou interaction
-# bbmle::ICtab(mpl2, mpl3, mpl4, mpl5, mpl6,
-#              type = c("AICc"))
+mpl2 &lt;- update(mpl1, . ~ . - amd:nutrient)
 
-# Ou utiliser drop1
-dd_LRT2 &lt;- drop1(mpl2,test="Chisq")
+mpl3 &lt;- update(mpl2, . ~ . - rack) # pas de rack ou d'interaction
+mpl4 &lt;- update(mpl2, . ~ . - status) # pas de status ou d'interaction
+mpl5 &lt;- update(mpl2, . ~ . - nutrient) # pas de nutrient ou d'interaction
+mpl6 &lt;- update(mpl2, . ~ . - amd) # pas d'herbivorie ou d'interaction
+```
+
+Sélectionnez le meilleur modèle avec la méthode de votre choix :
+.pull-left2[ Méthode par AICc
+
+```r
+aic_tab2  &lt;- MuMIn::model.sel(mpl2, mpl3, mpl4, mpl5, mpl6)
+(round(aic_table2 &lt;- aic_tab2[ , c("AICc", "delta", "df")], digits = 2))
+#         AICc  delta df
+# mpl2 5017.11   0.00  9
+# mpl4 5018.28   1.17  7
+# mpl6 5027.27  10.16  8
+# mpl3 5071.28  54.17  8
+# mpl5 5152.74 135.63  8
+```
+]
+.pull-right2[ Méthode avec `drop1()`
+
+```r
+dd_LRT2 &lt;- drop1(mpl2, test = "Chisq")
 dd_AIC2 &lt;- dfun(drop1(mpl2))
 ```
 ]
-.pull-right2[
-
-```r
-library(bbmle)
-ICtab(mpl2, mpl3 ,mpl4,
-      mpl5, mpl6,
-      type = c("AICc"))
-#      dAICc df
-# mpl2  0.0  10
-# mpl5  0.0  10
-# mpl4  1.5  8 
-# mpl6 10.6  9 
-# mpl3 55.0  9
-```
-]
 
 
 ---
 # Sélection du modèle
+**Quels sont nos constats ?**
 &lt;br&gt;
 
-- Fort effets de **nutriments** et d'**herbivorie** (grand changement d'AIC de `\(135.6\)` (`mpl5`) et `\(10.2\)` (`mpl6`) si l'un ou l'autre sont supprimés, respectivement).
-- Notre modèle final inclut l'effet fixe de nutriments, d'herbivorie, la variable nuisance de rack, l'effet aléatoire au niveau de l'observation `(1|X)` et la variation de fruits par populations et génotypes.
+Les **nutriments** et l'**herbivorie** ont un effet important (grand changement d'AIC de `\(135.6\)` (`mpl5`) et `\(10.2\)` (`mpl6`) si l'un ou l'autre sont supprimés, respectivement)
+
+&lt;br&gt;
+
+**Notre modèle final inclut donc :**
+
+Effets fixes
+* nutriments, 
+* herbivorie
+* la variable nuisance de rack. 
+
+Effets aléatoires 
+* effet du niveau d'observation `(1|X)` 
+* populations `(1|popu)` 
+* génotypes `(1|gen)`
 
 
 ---
-# Prêt pour un défi? ![:cube]()
+# Défi 9 ![:cube]()
 
 En utilisant l'ensemble de données `inverts` (temps de développement larvaire (`PLD`) de 74 espèces d'invertébrés et vertébrés marins élevés à différentes températures et temps), répondez aux questions suivantes:
 
@@ -1826,57 +2055,68 @@ En utilisant l'ensemble de données `inverts` (temps de développement larvaire 
 
 
 ---
-# Solution
+# Solution ![:cube]()
 
 
 ```r
 # inverts &lt;- read.csv('data/inverts.csv', header = TRUE)
 # head(inverts)
 # table(inverts$temp, inverts$feeding.type)
-#
+
 # mod.glm &lt;- glm(PLD ~ temp + feeding.type, family = poisson(), data = inverts)
 # summary(mod.glm)
 # drop1(mod.glm, test = "Chisq")
-#
+
 # boxplot(PLD ~ temp,  data = inverts)
 # boxplot(PLD ~ feeding.type ,  data = inverts)
-#
+
 # boxplot(predict(mod.glm, type = "response")~inverts$temp)
-#
+
 # plot()
-#
+
 # modglm &lt;- glm(PLD ~ temp + feeding.type, family = poisson(), data = inverts)
+```
 
 
-#
+---
+# Solution ![:cube]()
+
+```r
 # r2 &lt;- ranef(mpl1, condVar = TRUE)
 # d2 &lt;- dotplot(r2, par.settings = pp)
-#
-#
-# plot(aggregate(PLD ~ taxon, FUN=mean, data = inverts)[,2],aggregate(PLD ~ taxon, FUN=var, data = inverts)[,2], pch = 19)
-# abline(a=0, b = 1, lty =2)
-#
+
+# plot(aggregate(PLD ~ taxon, FUN = mean, data = inverts)[,2], aggregate(PLD ~ taxon, FUN = var, data = inverts)[,2], pch = 19)
+# abline(a = 0, b = 1, lty = 2)
+
 # mod.glmer &lt;- glmer.nb(PLD ~ temp + feeding.type + (1|taxon), data = inverts)
 # mod.glm &lt;- glm.nb(PLD ~ temp + feeding.type, family = poisson(), data = inverts)
 
+# plot(aggregate(PLD ~ taxon, FUN = var, data = inverts)[,2], aggregate(PLD ~ taxon, FUN = mean, data = inverts)[,2])
+# abline(a = 0, b = 1, lty = 2 )
 ```
-
-plot(aggregate(PLD ~ taxon, FUN=var, data = inverts)[,2],aggregate(PLD ~ taxon, FUN=mean, data = inverts)[,2])
-abline(a=0, b =1, lty =2 )
-
 
 
 ---
 # Ressources additionnelles
 
-* Différences entre `nlme` et `lme4`
-
 .center[
-![:scale 25%](images/book1.jpg) ![:scale 28%](images/book2.jpg)
+![:scale 16%](images/book1.jpg) ![:scale 18%](images/book2.jpg) ![:scale 16%](images/book3.jpg)
 ]
 
-* [Harrison et al. (2018), PeerJ, DOI 10.7717/peerj.4794
+**Libraries connues pour des (G)LMM** 
+
+* Fréquentiste : `nlme`, `lme4`, `glmmTMB`
+* Bayésien : `brms`, `rstan`, `rstanarm`, `MCMCglmm`
+
+**Articles**
+* [Harrison *et al.* (2018), *PeerJ*, DOI 10.7717/peerj.4794
 ](http://dx.doi.org/10.7717/peerj.4794)
+* [Silk *et al.* (2020), *PeerJ*,  DOI 10.7717/peerj.9522
+](https://doi.org/10.7717/peerj.9522)
+* [Schielzeth *et al.* (2020), *Methods Ecol Evol.*,  DOI: 10.1111/2041-210X.13434
+]( https://doi.org/10.1111/2041-210X.13434)
+* [Zuur &amp; Ieno (2016), *Methods Ecol Evol.*,  DOI: 10.1111/2041-210X.12577
+]( https://doi.org/10.1111/2041-210X.12577)
 
 
 ---

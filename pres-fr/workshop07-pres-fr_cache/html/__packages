@@ -2,7 +2,7 @@ base
 ggplot2
 Matrix
 lme4
-AICcmodavg
+MuMIn
 MASS
 vcd
 gnm
