@@ -1847,7 +1847,7 @@ Can be obtained using the `coefplot2()` function from the `coefplot2` package :
 <br><br>
 
 
-.alert[![:faic](warning) This package is not on CRAN! We install it from GittHub using the remotes package.]
+.alert[![:faic](warning) This package is not on CRAN! We install it from GitHub using the remotes package.]
 
 ```{R install_coefplot2}
 if (!require("coefplot2"))
