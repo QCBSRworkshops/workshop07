@@ -5,20 +5,20 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapitre 13 Modèle final | Atelier 7: Modèles linéaires et généralisés linéaires mixtes</title>
-  <meta name="description" content="Analyses multivariées en R" />
+  <meta name="description" content="Modèles linéaires et généralisés linéaires mixtes" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapitre 13 Modèle final | Atelier 7: Modèles linéaires et généralisés linéaires mixtes" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://github.com/qcbsRworkshops/" />
   <meta property="og:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
-  <meta property="og:description" content="Analyses multivariées en R" />
+  <meta property="og:description" content="Modèles linéaires et généralisés linéaires mixtes" />
   <meta name="github-repo" content="qcbsRworkshops/workshop09" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapitre 13 Modèle final | Atelier 7: Modèles linéaires et généralisés linéaires mixtes" />
   
-  <meta name="twitter:description" content="Analyses multivariées en R" />
+  <meta name="twitter:description" content="Modèles linéaires et généralisés linéaires mixtes" />
   <meta name="twitter:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
 
 <meta name="author" content="Développé et entretenu par les contributeurs et les contributrices de la Série d’ateliers R du CSBQ." />
@@ -142,7 +142,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#contributeurs-et-contributrices"><i class="fa fa-check"></i><b>0.2</b> Contributeurs et contributrices</a></li>
 <li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#contribuez-à-la-série"><i class="fa fa-check"></i><b>0.3</b> Contribuez à la série!</a></li>
 </ul></li>
-<li class="part"><span><b>Preparation pour l’atelier</b></span></li>
+<li class="part"><span><b>Modèles linéaires mixtes en <code>R</code></b></span></li>
 <li class="chapter" data-level="1" data-path="objectifs-dapprentissage.html"><a href="objectifs-dapprentissage.html"><i class="fa fa-check"></i><b>1</b> Objectifs d’apprentissage</a></li>
 <li class="chapter" data-level="2" data-path="préparez-vous-pour-cet-atelier.html"><a href="préparez-vous-pour-cet-atelier.html"><i class="fa fa-check"></i><b>2</b> Préparez-vous pour cet atelier</a></li>
 <li class="part"><span><b>Les modèles linéaires à effets mixtes (MLM)</b></span></li>
@@ -311,143 +311,143 @@ différentes températures et temps), répondez aux questions suivantes:</p>
  - Quelle est la meilleure famille de distribution pour ces données?
  - Une fois que vous avez déterminé la meilleure famille de distribution, réévaluez vos effets aléatoires et fixes.</code></pre>
 <p>++++ Défi 10: Solution 1|</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="modèle-final.html#cb47-1"></a><span class="co"># Charger les données</span></span>
-<span id="cb47-2"><a href="modèle-final.html#cb47-2"></a>inverts &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;inverts.csv&quot;</span>)</span>
-<span id="cb47-3"><a href="modèle-final.html#cb47-3"></a><span class="kw">str</span>(inverts)</span>
-<span id="cb47-4"><a href="modèle-final.html#cb47-4"></a></span>
-<span id="cb47-5"><a href="modèle-final.html#cb47-5"></a>mlm1 &lt;-<span class="st"> </span><span class="kw">lm</span>(PLD <span class="op">~</span><span class="st"> </span>temp <span class="op">*</span><span class="st"> </span>feeding.type, <span class="dt">data =</span> inverts)</span>
-<span id="cb47-6"><a href="modèle-final.html#cb47-6"></a><span class="kw">anova</span>(mlm1)  <span class="co"># toutes les variables sont significatives</span></span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="modèle-final.html#cb48-1"></a><span class="co"># Charger les données</span></span>
+<span id="cb48-2"><a href="modèle-final.html#cb48-2"></a>inverts &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;inverts.csv&quot;</span>)</span>
+<span id="cb48-3"><a href="modèle-final.html#cb48-3"></a><span class="kw">str</span>(inverts)</span>
+<span id="cb48-4"><a href="modèle-final.html#cb48-4"></a></span>
+<span id="cb48-5"><a href="modèle-final.html#cb48-5"></a>mlm1 &lt;-<span class="st"> </span><span class="kw">lm</span>(PLD <span class="op">~</span><span class="st"> </span>temp <span class="op">*</span><span class="st"> </span>feeding.type, <span class="dt">data =</span> inverts)</span>
+<span id="cb48-6"><a href="modèle-final.html#cb48-6"></a><span class="kw">anova</span>(mlm1)  <span class="co"># toutes les variables sont significatives</span></span></code></pre></div>
 <p>++++</p>
 <p>++++ Défi 10: Solution 2|</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="modèle-final.html#cb48-1"></a><span class="co"># Réponse vs effets fixes</span></span>
-<span id="cb48-2"><a href="modèle-final.html#cb48-2"></a><span class="kw">ggplot</span>(inverts,<span class="kw">aes</span>(<span class="dt">x=</span>temp,<span class="dt">y=</span><span class="kw">log</span>(PLD<span class="op">+</span><span class="dv">1</span>),<span class="dt">colour=</span>feeding.type)) <span class="op">+</span></span>
-<span id="cb48-3"><a href="modèle-final.html#cb48-3"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
-<span id="cb48-4"><a href="modèle-final.html#cb48-4"></a><span class="st">  </span><span class="kw">stat_summary</span>(<span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">as.numeric</span>(temp)),<span class="dt">fun.y=</span>mean,<span class="dt">geom=</span><span class="st">&quot;line&quot;</span>) <span class="op">+</span></span>
-<span id="cb48-5"><a href="modèle-final.html#cb48-5"></a><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span></span>
-<span id="cb48-6"><a href="modèle-final.html#cb48-6"></a><span class="st">  </span><span class="kw">scale_color_manual</span>(<span class="dt">values=</span><span class="kw">c</span>(<span class="st">&quot;#3B9AB2&quot;</span>,<span class="st">&quot;#F21A00&quot;</span>)) <span class="op">+</span><span class="st"> </span><span class="co"># from Wes Anderson Zissou palette</span></span>
-<span id="cb48-7"><a href="modèle-final.html#cb48-7"></a><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>taxon)</span>
-<span id="cb48-8"><a href="modèle-final.html#cb48-8"></a></span>
-<span id="cb48-9"><a href="modèle-final.html#cb48-9"></a><span class="co"># Créer de nouvelles variables qui représentent toutes les combinaisons de feeding type x temp x taxa </span></span>
-<span id="cb48-10"><a href="modèle-final.html#cb48-10"></a><span class="co"># (effets aléatoires)</span></span>
-<span id="cb48-11"><a href="modèle-final.html#cb48-11"></a>inverts &lt;-<span class="st"> </span><span class="kw">within</span>(inverts,</span>
-<span id="cb48-12"><a href="modèle-final.html#cb48-12"></a>{</span>
-<span id="cb48-13"><a href="modèle-final.html#cb48-13"></a>  <span class="co"># taxon x feeding.type</span></span>
-<span id="cb48-14"><a href="modèle-final.html#cb48-14"></a>  tft &lt;-<span class="st"> </span><span class="kw">interaction</span>(taxon,feeding.type,temp)</span>
-<span id="cb48-15"><a href="modèle-final.html#cb48-15"></a>  tft &lt;-<span class="st"> </span><span class="kw">reorder</span>(tft, PLD, mean)</span>
-<span id="cb48-16"><a href="modèle-final.html#cb48-16"></a>})</span>
-<span id="cb48-17"><a href="modèle-final.html#cb48-17"></a></span>
-<span id="cb48-18"><a href="modèle-final.html#cb48-18"></a><span class="co"># Boîte à moustaches total des fruits vs nouvelle variable (feeding type x temp x taxa)</span></span>
-<span id="cb48-19"><a href="modèle-final.html#cb48-19"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> inverts, <span class="kw">aes</span>(<span class="kw">factor</span>(<span class="dt">x =</span> tft),<span class="dt">y =</span> <span class="kw">log</span>(PLD))) <span class="op">+</span></span>
-<span id="cb48-20"><a href="modèle-final.html#cb48-20"></a><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">colour =</span> <span class="st">&quot;skyblue2&quot;</span>, <span class="dt">outlier.shape =</span> <span class="dv">21</span>, <span class="dt">outlier.colour =</span> <span class="st">&quot;skyblue2&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb48-21"><a href="modèle-final.html#cb48-21"></a><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">axis.text.x=</span><span class="kw">element_text</span>(<span class="dt">angle=</span><span class="dv">90</span>)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb48-22"><a href="modèle-final.html#cb48-22"></a><span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun.y=</span>mean, <span class="dt">geom=</span><span class="st">&quot;point&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="modèle-final.html#cb49-1"></a><span class="co"># Réponse vs effets fixes</span></span>
+<span id="cb49-2"><a href="modèle-final.html#cb49-2"></a><span class="kw">ggplot</span>(inverts,<span class="kw">aes</span>(<span class="dt">x=</span>temp,<span class="dt">y=</span><span class="kw">log</span>(PLD<span class="op">+</span><span class="dv">1</span>),<span class="dt">colour=</span>feeding.type)) <span class="op">+</span></span>
+<span id="cb49-3"><a href="modèle-final.html#cb49-3"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
+<span id="cb49-4"><a href="modèle-final.html#cb49-4"></a><span class="st">  </span><span class="kw">stat_summary</span>(<span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">as.numeric</span>(temp)),<span class="dt">fun.y=</span>mean,<span class="dt">geom=</span><span class="st">&quot;line&quot;</span>) <span class="op">+</span></span>
+<span id="cb49-5"><a href="modèle-final.html#cb49-5"></a><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span></span>
+<span id="cb49-6"><a href="modèle-final.html#cb49-6"></a><span class="st">  </span><span class="kw">scale_color_manual</span>(<span class="dt">values=</span><span class="kw">c</span>(<span class="st">&quot;#3B9AB2&quot;</span>,<span class="st">&quot;#F21A00&quot;</span>)) <span class="op">+</span><span class="st"> </span><span class="co"># from Wes Anderson Zissou palette</span></span>
+<span id="cb49-7"><a href="modèle-final.html#cb49-7"></a><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>taxon)</span>
+<span id="cb49-8"><a href="modèle-final.html#cb49-8"></a></span>
+<span id="cb49-9"><a href="modèle-final.html#cb49-9"></a><span class="co"># Créer de nouvelles variables qui représentent toutes les combinaisons de feeding type x temp x taxa </span></span>
+<span id="cb49-10"><a href="modèle-final.html#cb49-10"></a><span class="co"># (effets aléatoires)</span></span>
+<span id="cb49-11"><a href="modèle-final.html#cb49-11"></a>inverts &lt;-<span class="st"> </span><span class="kw">within</span>(inverts,</span>
+<span id="cb49-12"><a href="modèle-final.html#cb49-12"></a>{</span>
+<span id="cb49-13"><a href="modèle-final.html#cb49-13"></a>  <span class="co"># taxon x feeding.type</span></span>
+<span id="cb49-14"><a href="modèle-final.html#cb49-14"></a>  tft &lt;-<span class="st"> </span><span class="kw">interaction</span>(taxon,feeding.type,temp)</span>
+<span id="cb49-15"><a href="modèle-final.html#cb49-15"></a>  tft &lt;-<span class="st"> </span><span class="kw">reorder</span>(tft, PLD, mean)</span>
+<span id="cb49-16"><a href="modèle-final.html#cb49-16"></a>})</span>
+<span id="cb49-17"><a href="modèle-final.html#cb49-17"></a></span>
+<span id="cb49-18"><a href="modèle-final.html#cb49-18"></a><span class="co"># Boîte à moustaches total des fruits vs nouvelle variable (feeding type x temp x taxa)</span></span>
+<span id="cb49-19"><a href="modèle-final.html#cb49-19"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> inverts, <span class="kw">aes</span>(<span class="kw">factor</span>(<span class="dt">x =</span> tft),<span class="dt">y =</span> <span class="kw">log</span>(PLD))) <span class="op">+</span></span>
+<span id="cb49-20"><a href="modèle-final.html#cb49-20"></a><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">colour =</span> <span class="st">&quot;skyblue2&quot;</span>, <span class="dt">outlier.shape =</span> <span class="dv">21</span>, <span class="dt">outlier.colour =</span> <span class="st">&quot;skyblue2&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb49-21"><a href="modèle-final.html#cb49-21"></a><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">axis.text.x=</span><span class="kw">element_text</span>(<span class="dt">angle=</span><span class="dv">90</span>)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb49-22"><a href="modèle-final.html#cb49-22"></a><span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun.y=</span>mean, <span class="dt">geom=</span><span class="st">&quot;point&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>) </span></code></pre></div>
 <p>++++</p>
 <p>++++ Défi 10: Solution 3|</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="modèle-final.html#cb49-1"></a>grpVars &lt;-<span class="st"> </span><span class="kw">tapply</span>(inverts<span class="op">$</span>PLD, inverts<span class="op">$</span>tft, var)</span>
-<span id="cb49-2"><a href="modèle-final.html#cb49-2"></a><span class="kw">summary</span>(grpVars)</span>
-<span id="cb49-3"><a href="modèle-final.html#cb49-3"></a></span>
-<span id="cb49-4"><a href="modèle-final.html#cb49-4"></a>grpMeans &lt;-<span class="st"> </span><span class="kw">tapply</span>(inverts<span class="op">$</span>PLD, inverts<span class="op">$</span>tft, mean)</span>
-<span id="cb49-5"><a href="modèle-final.html#cb49-5"></a><span class="kw">summary</span>(grpMeans)</span>
-<span id="cb49-6"><a href="modèle-final.html#cb49-6"></a></span>
-<span id="cb49-7"><a href="modèle-final.html#cb49-7"></a><span class="co"># Quasi-Poisson</span></span>
-<span id="cb49-8"><a href="modèle-final.html#cb49-8"></a>lm1 &lt;-<span class="st"> </span><span class="kw">lm</span>(grpVars <span class="op">~</span><span class="st"> </span>grpMeans <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</span>
-<span id="cb49-9"><a href="modèle-final.html#cb49-9"></a>phi.fit &lt;-<span class="st"> </span><span class="kw">coef</span>(lm1)</span>
-<span id="cb49-10"><a href="modèle-final.html#cb49-10"></a><span class="co"># Le -1 spécifie un modèle avec l&#39;intercept fixer à zéro</span></span>
-<span id="cb49-11"><a href="modèle-final.html#cb49-11"></a></span>
-<span id="cb49-12"><a href="modèle-final.html#cb49-12"></a><span class="co"># Binomial négative</span></span>
-<span id="cb49-13"><a href="modèle-final.html#cb49-13"></a>lm2 &lt;-<span class="st"> </span><span class="kw">lm</span>(grpVars <span class="op">~</span><span class="st"> </span><span class="kw">I</span>(grpMeans<span class="op">^</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span><span class="kw">offset</span>(grpMeans) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</span>
-<span id="cb49-14"><a href="modèle-final.html#cb49-14"></a>k.fit &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">/</span><span class="kw">coef</span>(lm2)</span>
-<span id="cb49-15"><a href="modèle-final.html#cb49-15"></a><span class="co"># Offset () est utilisé pour fixer la moyenne de chaque</span></span>
-<span id="cb49-16"><a href="modèle-final.html#cb49-16"></a><span class="co"># groupe à 1</span></span>
-<span id="cb49-17"><a href="modèle-final.html#cb49-17"></a></span>
-<span id="cb49-18"><a href="modèle-final.html#cb49-18"></a><span class="co"># Ajustement Loess non-paramétrique</span></span>
-<span id="cb49-19"><a href="modèle-final.html#cb49-19"></a>Lfit &lt;-<span class="st"> </span><span class="kw">loess</span>(grpVars <span class="op">~</span><span class="st"> </span>grpMeans)</span>
-<span id="cb49-20"><a href="modèle-final.html#cb49-20"></a></span>
-<span id="cb49-21"><a href="modèle-final.html#cb49-21"></a><span class="kw">plot</span>(grpVars <span class="op">~</span><span class="st"> </span>grpMeans, <span class="dt">xlab =</span> <span class="st">&quot;group means&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;group variances&quot;</span>)</span>
-<span id="cb49-22"><a href="modèle-final.html#cb49-22"></a><span class="kw">abline</span>(<span class="dt">a =</span> <span class="dv">0</span>, <span class="dt">b =</span> <span class="dv">1</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span>
-<span id="cb49-23"><a href="modèle-final.html#cb49-23"></a><span class="kw">text</span>(<span class="dv">60</span>, <span class="dv">200</span>, <span class="st">&quot;Poisson&quot;</span>)</span>
-<span id="cb49-24"><a href="modèle-final.html#cb49-24"></a><span class="kw">curve</span>(phi.fit <span class="op">*</span><span class="st"> </span>x, <span class="dt">col =</span> <span class="dv">2</span>, <span class="dt">add =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb49-25"><a href="modèle-final.html#cb49-25"></a><span class="co"># bquote()est utilisé pour remplacer des valeurs numériques</span></span>
-<span id="cb49-26"><a href="modèle-final.html#cb49-26"></a><span class="co"># dans les équations avec des symboles</span></span>
-<span id="cb49-27"><a href="modèle-final.html#cb49-27"></a><span class="kw">text</span>(<span class="dv">60</span>, <span class="dv">800</span>, <span class="kw">bquote</span>(<span class="kw">paste</span>(<span class="st">&quot;QP: &quot;</span>, sigma<span class="op">^</span><span class="dv">2</span> <span class="op">==</span><span class="st"> </span>.(<span class="kw">round</span>(phi.fit, </span>
-<span id="cb49-28"><a href="modèle-final.html#cb49-28"></a>    <span class="dv">1</span>)) <span class="op">*</span><span class="st"> </span>mu)), <span class="dt">col =</span> <span class="dv">2</span>)</span>
-<span id="cb49-29"><a href="modèle-final.html#cb49-29"></a><span class="kw">curve</span>(x <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>x<span class="op">/</span>k.fit), <span class="dt">col =</span> <span class="dv">4</span>, <span class="dt">add =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb49-30"><a href="modèle-final.html#cb49-30"></a><span class="kw">text</span>(<span class="dv">60</span>, <span class="dv">1600</span>, <span class="kw">paste</span>(<span class="st">&quot;NB: k=&quot;</span>, <span class="kw">round</span>(k.fit, <span class="dv">1</span>), <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>), <span class="dt">col =</span> <span class="dv">4</span>)</span>
-<span id="cb49-31"><a href="modèle-final.html#cb49-31"></a>mvec &lt;-<span class="st"> </span><span class="dv">0</span><span class="op">:</span><span class="dv">120</span></span>
-<span id="cb49-32"><a href="modèle-final.html#cb49-32"></a><span class="kw">lines</span>(mvec, <span class="kw">predict</span>(Lfit, mvec), <span class="dt">col =</span> <span class="dv">5</span>)</span>
-<span id="cb49-33"><a href="modèle-final.html#cb49-33"></a><span class="kw">text</span>(<span class="dv">50</span>, <span class="dv">1300</span>, <span class="st">&quot;loess&quot;</span>, <span class="dt">col =</span> <span class="dv">5</span>)</span>
-<span id="cb49-34"><a href="modèle-final.html#cb49-34"></a></span>
-<span id="cb49-35"><a href="modèle-final.html#cb49-35"></a><span class="co"># Poisson GLMM</span></span>
-<span id="cb49-36"><a href="modèle-final.html#cb49-36"></a>mp1 &lt;-<span class="st"> </span><span class="kw">glmer</span>(PLD <span class="op">~</span><span class="st"> </span>temp <span class="op">*</span><span class="st"> </span>feeding.type <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>taxon), <span class="dt">data =</span> inverts, </span>
-<span id="cb49-37"><a href="modèle-final.html#cb49-37"></a>    <span class="dt">family =</span> <span class="st">&quot;poisson&quot;</span>)</span>
-<span id="cb49-38"><a href="modèle-final.html#cb49-38"></a><span class="kw">overdisp_fun</span>(mp1)</span>
-<span id="cb49-39"><a href="modèle-final.html#cb49-39"></a><span class="co"># rapport est significativement &gt; 1</span></span>
-<span id="cb49-40"><a href="modèle-final.html#cb49-40"></a></span>
-<span id="cb49-41"><a href="modèle-final.html#cb49-41"></a><span class="co"># NB GLMM</span></span>
-<span id="cb49-42"><a href="modèle-final.html#cb49-42"></a>mnb1 &lt;-<span class="st"> </span><span class="kw">glmer.nb</span>(PLD <span class="op">~</span><span class="st"> </span>temp <span class="op">*</span><span class="st"> </span>feeding.type <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>taxon), <span class="dt">data =</span> inverts)</span>
-<span id="cb49-43"><a href="modèle-final.html#cb49-43"></a><span class="kw">overdisp_fun</span>(mnb1)</span>
-<span id="cb49-44"><a href="modèle-final.html#cb49-44"></a><span class="co"># Semble bon!</span></span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="modèle-final.html#cb50-1"></a>grpVars &lt;-<span class="st"> </span><span class="kw">tapply</span>(inverts<span class="op">$</span>PLD, inverts<span class="op">$</span>tft, var)</span>
+<span id="cb50-2"><a href="modèle-final.html#cb50-2"></a><span class="kw">summary</span>(grpVars)</span>
+<span id="cb50-3"><a href="modèle-final.html#cb50-3"></a></span>
+<span id="cb50-4"><a href="modèle-final.html#cb50-4"></a>grpMeans &lt;-<span class="st"> </span><span class="kw">tapply</span>(inverts<span class="op">$</span>PLD, inverts<span class="op">$</span>tft, mean)</span>
+<span id="cb50-5"><a href="modèle-final.html#cb50-5"></a><span class="kw">summary</span>(grpMeans)</span>
+<span id="cb50-6"><a href="modèle-final.html#cb50-6"></a></span>
+<span id="cb50-7"><a href="modèle-final.html#cb50-7"></a><span class="co"># Quasi-Poisson</span></span>
+<span id="cb50-8"><a href="modèle-final.html#cb50-8"></a>lm1 &lt;-<span class="st"> </span><span class="kw">lm</span>(grpVars <span class="op">~</span><span class="st"> </span>grpMeans <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</span>
+<span id="cb50-9"><a href="modèle-final.html#cb50-9"></a>phi.fit &lt;-<span class="st"> </span><span class="kw">coef</span>(lm1)</span>
+<span id="cb50-10"><a href="modèle-final.html#cb50-10"></a><span class="co"># Le -1 spécifie un modèle avec l&#39;intercept fixer à zéro</span></span>
+<span id="cb50-11"><a href="modèle-final.html#cb50-11"></a></span>
+<span id="cb50-12"><a href="modèle-final.html#cb50-12"></a><span class="co"># Binomial négative</span></span>
+<span id="cb50-13"><a href="modèle-final.html#cb50-13"></a>lm2 &lt;-<span class="st"> </span><span class="kw">lm</span>(grpVars <span class="op">~</span><span class="st"> </span><span class="kw">I</span>(grpMeans<span class="op">^</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span><span class="kw">offset</span>(grpMeans) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</span>
+<span id="cb50-14"><a href="modèle-final.html#cb50-14"></a>k.fit &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">/</span><span class="kw">coef</span>(lm2)</span>
+<span id="cb50-15"><a href="modèle-final.html#cb50-15"></a><span class="co"># Offset () est utilisé pour fixer la moyenne de chaque</span></span>
+<span id="cb50-16"><a href="modèle-final.html#cb50-16"></a><span class="co"># groupe à 1</span></span>
+<span id="cb50-17"><a href="modèle-final.html#cb50-17"></a></span>
+<span id="cb50-18"><a href="modèle-final.html#cb50-18"></a><span class="co"># Ajustement Loess non-paramétrique</span></span>
+<span id="cb50-19"><a href="modèle-final.html#cb50-19"></a>Lfit &lt;-<span class="st"> </span><span class="kw">loess</span>(grpVars <span class="op">~</span><span class="st"> </span>grpMeans)</span>
+<span id="cb50-20"><a href="modèle-final.html#cb50-20"></a></span>
+<span id="cb50-21"><a href="modèle-final.html#cb50-21"></a><span class="kw">plot</span>(grpVars <span class="op">~</span><span class="st"> </span>grpMeans, <span class="dt">xlab =</span> <span class="st">&quot;group means&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;group variances&quot;</span>)</span>
+<span id="cb50-22"><a href="modèle-final.html#cb50-22"></a><span class="kw">abline</span>(<span class="dt">a =</span> <span class="dv">0</span>, <span class="dt">b =</span> <span class="dv">1</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb50-23"><a href="modèle-final.html#cb50-23"></a><span class="kw">text</span>(<span class="dv">60</span>, <span class="dv">200</span>, <span class="st">&quot;Poisson&quot;</span>)</span>
+<span id="cb50-24"><a href="modèle-final.html#cb50-24"></a><span class="kw">curve</span>(phi.fit <span class="op">*</span><span class="st"> </span>x, <span class="dt">col =</span> <span class="dv">2</span>, <span class="dt">add =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb50-25"><a href="modèle-final.html#cb50-25"></a><span class="co"># bquote()est utilisé pour remplacer des valeurs numériques</span></span>
+<span id="cb50-26"><a href="modèle-final.html#cb50-26"></a><span class="co"># dans les équations avec des symboles</span></span>
+<span id="cb50-27"><a href="modèle-final.html#cb50-27"></a><span class="kw">text</span>(<span class="dv">60</span>, <span class="dv">800</span>, <span class="kw">bquote</span>(<span class="kw">paste</span>(<span class="st">&quot;QP: &quot;</span>, sigma<span class="op">^</span><span class="dv">2</span> <span class="op">==</span><span class="st"> </span>.(<span class="kw">round</span>(phi.fit, </span>
+<span id="cb50-28"><a href="modèle-final.html#cb50-28"></a>    <span class="dv">1</span>)) <span class="op">*</span><span class="st"> </span>mu)), <span class="dt">col =</span> <span class="dv">2</span>)</span>
+<span id="cb50-29"><a href="modèle-final.html#cb50-29"></a><span class="kw">curve</span>(x <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>x<span class="op">/</span>k.fit), <span class="dt">col =</span> <span class="dv">4</span>, <span class="dt">add =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb50-30"><a href="modèle-final.html#cb50-30"></a><span class="kw">text</span>(<span class="dv">60</span>, <span class="dv">1600</span>, <span class="kw">paste</span>(<span class="st">&quot;NB: k=&quot;</span>, <span class="kw">round</span>(k.fit, <span class="dv">1</span>), <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>), <span class="dt">col =</span> <span class="dv">4</span>)</span>
+<span id="cb50-31"><a href="modèle-final.html#cb50-31"></a>mvec &lt;-<span class="st"> </span><span class="dv">0</span><span class="op">:</span><span class="dv">120</span></span>
+<span id="cb50-32"><a href="modèle-final.html#cb50-32"></a><span class="kw">lines</span>(mvec, <span class="kw">predict</span>(Lfit, mvec), <span class="dt">col =</span> <span class="dv">5</span>)</span>
+<span id="cb50-33"><a href="modèle-final.html#cb50-33"></a><span class="kw">text</span>(<span class="dv">50</span>, <span class="dv">1300</span>, <span class="st">&quot;loess&quot;</span>, <span class="dt">col =</span> <span class="dv">5</span>)</span>
+<span id="cb50-34"><a href="modèle-final.html#cb50-34"></a></span>
+<span id="cb50-35"><a href="modèle-final.html#cb50-35"></a><span class="co"># Poisson GLMM</span></span>
+<span id="cb50-36"><a href="modèle-final.html#cb50-36"></a>mp1 &lt;-<span class="st"> </span><span class="kw">glmer</span>(PLD <span class="op">~</span><span class="st"> </span>temp <span class="op">*</span><span class="st"> </span>feeding.type <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>taxon), <span class="dt">data =</span> inverts, </span>
+<span id="cb50-37"><a href="modèle-final.html#cb50-37"></a>    <span class="dt">family =</span> <span class="st">&quot;poisson&quot;</span>)</span>
+<span id="cb50-38"><a href="modèle-final.html#cb50-38"></a><span class="kw">overdisp_fun</span>(mp1)</span>
+<span id="cb50-39"><a href="modèle-final.html#cb50-39"></a><span class="co"># rapport est significativement &gt; 1</span></span>
+<span id="cb50-40"><a href="modèle-final.html#cb50-40"></a></span>
+<span id="cb50-41"><a href="modèle-final.html#cb50-41"></a><span class="co"># NB GLMM</span></span>
+<span id="cb50-42"><a href="modèle-final.html#cb50-42"></a>mnb1 &lt;-<span class="st"> </span><span class="kw">glmer.nb</span>(PLD <span class="op">~</span><span class="st"> </span>temp <span class="op">*</span><span class="st"> </span>feeding.type <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>taxon), <span class="dt">data =</span> inverts)</span>
+<span id="cb50-43"><a href="modèle-final.html#cb50-43"></a><span class="kw">overdisp_fun</span>(mnb1)</span>
+<span id="cb50-44"><a href="modèle-final.html#cb50-44"></a><span class="co"># Semble bon!</span></span></code></pre></div>
 <p>++++</p>
 <p>++++ Défi 10: Solution 4|</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="modèle-final.html#cb50-1"></a><span class="co"># Re-évaluer les intercepts aléatoires</span></span>
-<span id="cb50-2"><a href="modèle-final.html#cb50-2"></a><span class="kw">summary</span>(mnb1)<span class="op">$</span>varcor</span>
-<span id="cb50-3"><a href="modèle-final.html#cb50-3"></a></span>
-<span id="cb50-4"><a href="modèle-final.html#cb50-4"></a>mnb1.taxless &lt;-<span class="st"> </span><span class="kw">glm.nb</span>(PLD <span class="op">~</span><span class="st"> </span>temp <span class="op">*</span><span class="st"> </span>feeding.type, <span class="dt">data =</span> inverts)</span>
-<span id="cb50-5"><a href="modèle-final.html#cb50-5"></a></span>
-<span id="cb50-6"><a href="modèle-final.html#cb50-6"></a><span class="co"># Ici, parce que nous comparons un glmer avec un glm, nous</span></span>
-<span id="cb50-7"><a href="modèle-final.html#cb50-7"></a><span class="co"># devons faire quelque chose de différent que anova(). Pour</span></span>
-<span id="cb50-8"><a href="modèle-final.html#cb50-8"></a><span class="co"># tester l&#39;importance de l’intercept aléatoire, nous allons</span></span>
-<span id="cb50-9"><a href="modèle-final.html#cb50-9"></a><span class="co"># comparer la vraisemblance de chaque modèle :</span></span>
-<span id="cb50-10"><a href="modèle-final.html#cb50-10"></a>NL1 &lt;-<span class="st"> </span><span class="op">-</span><span class="kw">logLik</span>(mnb1)</span>
-<span id="cb50-11"><a href="modèle-final.html#cb50-11"></a>NL0 &lt;-<span class="st"> </span><span class="op">-</span><span class="kw">logLik</span>(mnb1.taxless)</span>
-<span id="cb50-12"><a href="modèle-final.html#cb50-12"></a>devdiff &lt;-<span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>(NL0 <span class="op">-</span><span class="st"> </span>NL1)</span>
-<span id="cb50-13"><a href="modèle-final.html#cb50-13"></a>dfdiff &lt;-<span class="st"> </span><span class="kw">attr</span>(NL1, <span class="st">&quot;df&quot;</span>) <span class="op">-</span><span class="st"> </span><span class="kw">attr</span>(NL0, <span class="st">&quot;df&quot;</span>)</span>
-<span id="cb50-14"><a href="modèle-final.html#cb50-14"></a><span class="kw">pchisq</span>(devdiff, dfdiff, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb50-15"><a href="modèle-final.html#cb50-15"></a></span>
-<span id="cb50-16"><a href="modèle-final.html#cb50-16"></a><span class="co"># Nous pourrions aussi comparer l&#39;AIC du modèle avec (mnb1)</span></span>
-<span id="cb50-17"><a href="modèle-final.html#cb50-17"></a><span class="co"># et sans (mnb1.taxless) effets aléatoires avec la fonction</span></span>
-<span id="cb50-18"><a href="modèle-final.html#cb50-18"></a><span class="co"># AICtab()</span></span>
-<span id="cb50-19"><a href="modèle-final.html#cb50-19"></a><span class="kw">AICtab</span>(mnb1, mnb1.taxless)</span>
-<span id="cb50-20"><a href="modèle-final.html#cb50-20"></a><span class="co"># Changement important du AIC si nous supprimons l’intercept</span></span>
-<span id="cb50-21"><a href="modèle-final.html#cb50-21"></a><span class="co"># aléatoire. Donc, ça vaut la peine de garder cet effet.</span></span>
-<span id="cb50-22"><a href="modèle-final.html#cb50-22"></a></span>
-<span id="cb50-23"><a href="modèle-final.html#cb50-23"></a><span class="co"># Graphique diagnostic</span></span>
-<span id="cb50-24"><a href="modèle-final.html#cb50-24"></a><span class="kw">locscaleplot</span>(mnb1)</span>
-<span id="cb50-25"><a href="modèle-final.html#cb50-25"></a></span>
-<span id="cb50-26"><a href="modèle-final.html#cb50-26"></a><span class="co"># Graphique des paramètres de variance</span></span>
-<span id="cb50-27"><a href="modèle-final.html#cb50-27"></a><span class="kw">coefplot2</span>(mnb1, <span class="dt">ptype =</span> <span class="st">&quot;vcov&quot;</span>, <span class="dt">intercept =</span> <span class="ot">TRUE</span>, <span class="dt">main =</span> <span class="st">&quot;Random effect variance&quot;</span>)</span>
-<span id="cb50-28"><a href="modèle-final.html#cb50-28"></a></span>
-<span id="cb50-29"><a href="modèle-final.html#cb50-29"></a><span class="co"># Graphique des effets fixes</span></span>
-<span id="cb50-30"><a href="modèle-final.html#cb50-30"></a><span class="kw">coefplot2</span>(mnb1, <span class="dt">intercept =</span> <span class="ot">TRUE</span>, <span class="dt">main =</span> <span class="st">&quot;Fixed effect coefficient&quot;</span>)</span>
-<span id="cb50-31"><a href="modèle-final.html#cb50-31"></a></span>
-<span id="cb50-32"><a href="modèle-final.html#cb50-32"></a><span class="co"># Graphique des intercepts aléatoires</span></span>
-<span id="cb50-33"><a href="modèle-final.html#cb50-33"></a>pp &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">layout.widths =</span> <span class="kw">list</span>(<span class="dt">left.padding =</span> <span class="dv">0</span>, <span class="dt">right.padding =</span> <span class="dv">0</span>))</span>
-<span id="cb50-34"><a href="modèle-final.html#cb50-34"></a>r2 &lt;-<span class="st"> </span><span class="kw">ranef</span>(mnb1, <span class="dt">condVar =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb50-35"><a href="modèle-final.html#cb50-35"></a>d2 &lt;-<span class="st"> </span><span class="kw">dotplot</span>(r2, <span class="dt">par.settings =</span> pp)</span>
-<span id="cb50-36"><a href="modèle-final.html#cb50-36"></a><span class="kw">grid.arrange</span>(d2<span class="op">$</span>taxon, <span class="dt">nrow =</span> <span class="dv">1</span>)</span>
-<span id="cb50-37"><a href="modèle-final.html#cb50-37"></a></span>
-<span id="cb50-38"><a href="modèle-final.html#cb50-38"></a><span class="co"># Évaluer pentes aléatoires</span></span>
-<span id="cb50-39"><a href="modèle-final.html#cb50-39"></a>mnb2 &lt;-<span class="st"> </span><span class="kw">glmer.nb</span>(PLD <span class="op">~</span><span class="st"> </span>temp <span class="op">*</span><span class="st"> </span>feeding.type <span class="op">+</span><span class="st"> </span>(PLD <span class="op">|</span><span class="st"> </span>taxon), <span class="dt">data =</span> inverts)</span>
-<span id="cb50-40"><a href="modèle-final.html#cb50-40"></a></span>
-<span id="cb50-41"><a href="modèle-final.html#cb50-41"></a><span class="co"># Examiner composant de variance-covariance</span></span>
-<span id="cb50-42"><a href="modèle-final.html#cb50-42"></a><span class="kw">summary</span>(mnb2)  <span class="co"># option 1</span></span>
-<span id="cb50-43"><a href="modèle-final.html#cb50-43"></a><span class="kw">attr</span>(<span class="kw">VarCorr</span>(mnb2)<span class="op">$</span>taxon, <span class="st">&quot;correlation&quot;</span>)  <span class="co"># option 2</span></span>
-<span id="cb50-44"><a href="modèle-final.html#cb50-44"></a><span class="kw">printvc</span>(mnb2)  <span class="co"># option 3</span></span>
-<span id="cb50-45"><a href="modèle-final.html#cb50-45"></a><span class="co"># Forte corrélation entre les effets aléatoires -&gt; pas assez</span></span>
-<span id="cb50-46"><a href="modèle-final.html#cb50-46"></a><span class="co"># de puissance pour tester pentes aléatoires</span></span>
-<span id="cb50-47"><a href="modèle-final.html#cb50-47"></a></span>
-<span id="cb50-48"><a href="modèle-final.html#cb50-48"></a><span class="co"># Re-évaluer les effets fixes Remarque : pour utiliser la</span></span>
-<span id="cb50-49"><a href="modèle-final.html#cb50-49"></a><span class="co"># fonction de drop1 nous devons spécifier le paramètre thêta</span></span>
-<span id="cb50-50"><a href="modèle-final.html#cb50-50"></a><span class="co"># et exécuter le modèle NB avec glmer :</span></span>
-<span id="cb50-51"><a href="modèle-final.html#cb50-51"></a>theta.mnb1 &lt;-<span class="st"> </span><span class="kw">theta.md</span>(inverts<span class="op">$</span>PLD, <span class="kw">fitted</span>(mnb1), <span class="dt">dfr =</span> <span class="kw">df.residual</span>(mnb1))</span>
-<span id="cb50-52"><a href="modèle-final.html#cb50-52"></a>mnb1 &lt;-<span class="st"> </span><span class="kw">glmer</span>(PLD <span class="op">~</span><span class="st"> </span>temp <span class="op">*</span><span class="st"> </span>feeding.type <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>taxon), <span class="dt">data =</span> inverts, </span>
-<span id="cb50-53"><a href="modèle-final.html#cb50-53"></a>    <span class="dt">family =</span> <span class="kw">negative.binomial</span>(<span class="dt">theta =</span> theta.mnb1))</span>
-<span id="cb50-54"><a href="modèle-final.html#cb50-54"></a></span>
-<span id="cb50-55"><a href="modèle-final.html#cb50-55"></a>(dd_LRT &lt;-<span class="st"> </span><span class="kw">drop1</span>(mnb1, <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>))</span>
-<span id="cb50-56"><a href="modèle-final.html#cb50-56"></a>(dd_AIC &lt;-<span class="st"> </span><span class="kw">dfun</span>(<span class="kw">drop1</span>(mnb1)))</span>
-<span id="cb50-57"><a href="modèle-final.html#cb50-57"></a><span class="co"># Lorsque l’interaction feeding.type x température est</span></span>
-<span id="cb50-58"><a href="modèle-final.html#cb50-58"></a><span class="co"># supprimée, dAIC change de plus de 2 unité → suggère de</span></span>
-<span id="cb50-59"><a href="modèle-final.html#cb50-59"></a><span class="co"># garder l&#39;interaction dans le modèle</span></span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="modèle-final.html#cb51-1"></a><span class="co"># Re-évaluer les intercepts aléatoires</span></span>
+<span id="cb51-2"><a href="modèle-final.html#cb51-2"></a><span class="kw">summary</span>(mnb1)<span class="op">$</span>varcor</span>
+<span id="cb51-3"><a href="modèle-final.html#cb51-3"></a></span>
+<span id="cb51-4"><a href="modèle-final.html#cb51-4"></a>mnb1.taxless &lt;-<span class="st"> </span><span class="kw">glm.nb</span>(PLD <span class="op">~</span><span class="st"> </span>temp <span class="op">*</span><span class="st"> </span>feeding.type, <span class="dt">data =</span> inverts)</span>
+<span id="cb51-5"><a href="modèle-final.html#cb51-5"></a></span>
+<span id="cb51-6"><a href="modèle-final.html#cb51-6"></a><span class="co"># Ici, parce que nous comparons un glmer avec un glm, nous</span></span>
+<span id="cb51-7"><a href="modèle-final.html#cb51-7"></a><span class="co"># devons faire quelque chose de différent que anova(). Pour</span></span>
+<span id="cb51-8"><a href="modèle-final.html#cb51-8"></a><span class="co"># tester l&#39;importance de l’intercept aléatoire, nous allons</span></span>
+<span id="cb51-9"><a href="modèle-final.html#cb51-9"></a><span class="co"># comparer la vraisemblance de chaque modèle :</span></span>
+<span id="cb51-10"><a href="modèle-final.html#cb51-10"></a>NL1 &lt;-<span class="st"> </span><span class="op">-</span><span class="kw">logLik</span>(mnb1)</span>
+<span id="cb51-11"><a href="modèle-final.html#cb51-11"></a>NL0 &lt;-<span class="st"> </span><span class="op">-</span><span class="kw">logLik</span>(mnb1.taxless)</span>
+<span id="cb51-12"><a href="modèle-final.html#cb51-12"></a>devdiff &lt;-<span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>(NL0 <span class="op">-</span><span class="st"> </span>NL1)</span>
+<span id="cb51-13"><a href="modèle-final.html#cb51-13"></a>dfdiff &lt;-<span class="st"> </span><span class="kw">attr</span>(NL1, <span class="st">&quot;df&quot;</span>) <span class="op">-</span><span class="st"> </span><span class="kw">attr</span>(NL0, <span class="st">&quot;df&quot;</span>)</span>
+<span id="cb51-14"><a href="modèle-final.html#cb51-14"></a><span class="kw">pchisq</span>(devdiff, dfdiff, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb51-15"><a href="modèle-final.html#cb51-15"></a></span>
+<span id="cb51-16"><a href="modèle-final.html#cb51-16"></a><span class="co"># Nous pourrions aussi comparer l&#39;AIC du modèle avec (mnb1)</span></span>
+<span id="cb51-17"><a href="modèle-final.html#cb51-17"></a><span class="co"># et sans (mnb1.taxless) effets aléatoires avec la fonction</span></span>
+<span id="cb51-18"><a href="modèle-final.html#cb51-18"></a><span class="co"># AICtab()</span></span>
+<span id="cb51-19"><a href="modèle-final.html#cb51-19"></a><span class="kw">AICtab</span>(mnb1, mnb1.taxless)</span>
+<span id="cb51-20"><a href="modèle-final.html#cb51-20"></a><span class="co"># Changement important du AIC si nous supprimons l’intercept</span></span>
+<span id="cb51-21"><a href="modèle-final.html#cb51-21"></a><span class="co"># aléatoire. Donc, ça vaut la peine de garder cet effet.</span></span>
+<span id="cb51-22"><a href="modèle-final.html#cb51-22"></a></span>
+<span id="cb51-23"><a href="modèle-final.html#cb51-23"></a><span class="co"># Graphique diagnostic</span></span>
+<span id="cb51-24"><a href="modèle-final.html#cb51-24"></a><span class="kw">locscaleplot</span>(mnb1)</span>
+<span id="cb51-25"><a href="modèle-final.html#cb51-25"></a></span>
+<span id="cb51-26"><a href="modèle-final.html#cb51-26"></a><span class="co"># Graphique des paramètres de variance</span></span>
+<span id="cb51-27"><a href="modèle-final.html#cb51-27"></a><span class="kw">coefplot2</span>(mnb1, <span class="dt">ptype =</span> <span class="st">&quot;vcov&quot;</span>, <span class="dt">intercept =</span> <span class="ot">TRUE</span>, <span class="dt">main =</span> <span class="st">&quot;Random effect variance&quot;</span>)</span>
+<span id="cb51-28"><a href="modèle-final.html#cb51-28"></a></span>
+<span id="cb51-29"><a href="modèle-final.html#cb51-29"></a><span class="co"># Graphique des effets fixes</span></span>
+<span id="cb51-30"><a href="modèle-final.html#cb51-30"></a><span class="kw">coefplot2</span>(mnb1, <span class="dt">intercept =</span> <span class="ot">TRUE</span>, <span class="dt">main =</span> <span class="st">&quot;Fixed effect coefficient&quot;</span>)</span>
+<span id="cb51-31"><a href="modèle-final.html#cb51-31"></a></span>
+<span id="cb51-32"><a href="modèle-final.html#cb51-32"></a><span class="co"># Graphique des intercepts aléatoires</span></span>
+<span id="cb51-33"><a href="modèle-final.html#cb51-33"></a>pp &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">layout.widths =</span> <span class="kw">list</span>(<span class="dt">left.padding =</span> <span class="dv">0</span>, <span class="dt">right.padding =</span> <span class="dv">0</span>))</span>
+<span id="cb51-34"><a href="modèle-final.html#cb51-34"></a>r2 &lt;-<span class="st"> </span><span class="kw">ranef</span>(mnb1, <span class="dt">condVar =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb51-35"><a href="modèle-final.html#cb51-35"></a>d2 &lt;-<span class="st"> </span><span class="kw">dotplot</span>(r2, <span class="dt">par.settings =</span> pp)</span>
+<span id="cb51-36"><a href="modèle-final.html#cb51-36"></a><span class="kw">grid.arrange</span>(d2<span class="op">$</span>taxon, <span class="dt">nrow =</span> <span class="dv">1</span>)</span>
+<span id="cb51-37"><a href="modèle-final.html#cb51-37"></a></span>
+<span id="cb51-38"><a href="modèle-final.html#cb51-38"></a><span class="co"># Évaluer pentes aléatoires</span></span>
+<span id="cb51-39"><a href="modèle-final.html#cb51-39"></a>mnb2 &lt;-<span class="st"> </span><span class="kw">glmer.nb</span>(PLD <span class="op">~</span><span class="st"> </span>temp <span class="op">*</span><span class="st"> </span>feeding.type <span class="op">+</span><span class="st"> </span>(PLD <span class="op">|</span><span class="st"> </span>taxon), <span class="dt">data =</span> inverts)</span>
+<span id="cb51-40"><a href="modèle-final.html#cb51-40"></a></span>
+<span id="cb51-41"><a href="modèle-final.html#cb51-41"></a><span class="co"># Examiner composant de variance-covariance</span></span>
+<span id="cb51-42"><a href="modèle-final.html#cb51-42"></a><span class="kw">summary</span>(mnb2)  <span class="co"># option 1</span></span>
+<span id="cb51-43"><a href="modèle-final.html#cb51-43"></a><span class="kw">attr</span>(<span class="kw">VarCorr</span>(mnb2)<span class="op">$</span>taxon, <span class="st">&quot;correlation&quot;</span>)  <span class="co"># option 2</span></span>
+<span id="cb51-44"><a href="modèle-final.html#cb51-44"></a><span class="kw">printvc</span>(mnb2)  <span class="co"># option 3</span></span>
+<span id="cb51-45"><a href="modèle-final.html#cb51-45"></a><span class="co"># Forte corrélation entre les effets aléatoires -&gt; pas assez</span></span>
+<span id="cb51-46"><a href="modèle-final.html#cb51-46"></a><span class="co"># de puissance pour tester pentes aléatoires</span></span>
+<span id="cb51-47"><a href="modèle-final.html#cb51-47"></a></span>
+<span id="cb51-48"><a href="modèle-final.html#cb51-48"></a><span class="co"># Re-évaluer les effets fixes Remarque : pour utiliser la</span></span>
+<span id="cb51-49"><a href="modèle-final.html#cb51-49"></a><span class="co"># fonction de drop1 nous devons spécifier le paramètre thêta</span></span>
+<span id="cb51-50"><a href="modèle-final.html#cb51-50"></a><span class="co"># et exécuter le modèle NB avec glmer :</span></span>
+<span id="cb51-51"><a href="modèle-final.html#cb51-51"></a>theta.mnb1 &lt;-<span class="st"> </span><span class="kw">theta.md</span>(inverts<span class="op">$</span>PLD, <span class="kw">fitted</span>(mnb1), <span class="dt">dfr =</span> <span class="kw">df.residual</span>(mnb1))</span>
+<span id="cb51-52"><a href="modèle-final.html#cb51-52"></a>mnb1 &lt;-<span class="st"> </span><span class="kw">glmer</span>(PLD <span class="op">~</span><span class="st"> </span>temp <span class="op">*</span><span class="st"> </span>feeding.type <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>taxon), <span class="dt">data =</span> inverts, </span>
+<span id="cb51-53"><a href="modèle-final.html#cb51-53"></a>    <span class="dt">family =</span> <span class="kw">negative.binomial</span>(<span class="dt">theta =</span> theta.mnb1))</span>
+<span id="cb51-54"><a href="modèle-final.html#cb51-54"></a></span>
+<span id="cb51-55"><a href="modèle-final.html#cb51-55"></a>(dd_LRT &lt;-<span class="st"> </span><span class="kw">drop1</span>(mnb1, <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>))</span>
+<span id="cb51-56"><a href="modèle-final.html#cb51-56"></a>(dd_AIC &lt;-<span class="st"> </span><span class="kw">dfun</span>(<span class="kw">drop1</span>(mnb1)))</span>
+<span id="cb51-57"><a href="modèle-final.html#cb51-57"></a><span class="co"># Lorsque l’interaction feeding.type x température est</span></span>
+<span id="cb51-58"><a href="modèle-final.html#cb51-58"></a><span class="co"># supprimée, dAIC change de plus de 2 unité → suggère de</span></span>
+<span id="cb51-59"><a href="modèle-final.html#cb51-59"></a><span class="co"># garder l&#39;interaction dans le modèle</span></span></code></pre></div>
 <p>++++</p>
 
 </div>

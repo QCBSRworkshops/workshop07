@@ -5,20 +5,20 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapitre 10 Les modèles linéaires généralisés mixtes (GLMM) | Atelier 7: Modèles linéaires et généralisés linéaires mixtes</title>
-  <meta name="description" content="Analyses multivariées en R" />
+  <meta name="description" content="Modèles linéaires et généralisés linéaires mixtes" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapitre 10 Les modèles linéaires généralisés mixtes (GLMM) | Atelier 7: Modèles linéaires et généralisés linéaires mixtes" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://github.com/qcbsRworkshops/" />
   <meta property="og:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
-  <meta property="og:description" content="Analyses multivariées en R" />
+  <meta property="og:description" content="Modèles linéaires et généralisés linéaires mixtes" />
   <meta name="github-repo" content="qcbsRworkshops/workshop09" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapitre 10 Les modèles linéaires généralisés mixtes (GLMM) | Atelier 7: Modèles linéaires et généralisés linéaires mixtes" />
   
-  <meta name="twitter:description" content="Analyses multivariées en R" />
+  <meta name="twitter:description" content="Modèles linéaires et généralisés linéaires mixtes" />
   <meta name="twitter:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
 
 <meta name="author" content="Développé et entretenu par les contributeurs et les contributrices de la Série d’ateliers R du CSBQ." />
@@ -142,7 +142,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#contributeurs-et-contributrices"><i class="fa fa-check"></i><b>0.2</b> Contributeurs et contributrices</a></li>
 <li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#contribuez-à-la-série"><i class="fa fa-check"></i><b>0.3</b> Contribuez à la série!</a></li>
 </ul></li>
-<li class="part"><span><b>Preparation pour l’atelier</b></span></li>
+<li class="part"><span><b>Modèles linéaires mixtes en <code>R</code></b></span></li>
 <li class="chapter" data-level="1" data-path="objectifs-dapprentissage.html"><a href="objectifs-dapprentissage.html"><i class="fa fa-check"></i><b>1</b> Objectifs d’apprentissage</a></li>
 <li class="chapter" data-level="2" data-path="préparez-vous-pour-cet-atelier.html"><a href="préparez-vous-pour-cet-atelier.html"><i class="fa fa-check"></i><b>2</b> Préparez-vous pour cet atelier</a></li>
 <li class="part"><span><b>Les modèles linéaires à effets mixtes (MLM)</b></span></li>
@@ -272,66 +272,66 @@ maintenant examiner l’effet des niveaux de nutriments, d’herbivorie et
 leur interaction (effets fixes) sur la production de fruits
 d’<em>Arabidopsis thaliana</em> et la variabilité de ces relations à travers
 différentes populations et / ou génotypes (effets aléatoires).</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-1"></a><span class="co"># Chargez et affichez le jeu de données</span></span>
-<span id="cb31-2"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-2"></a>dat.tf &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;Banta_TotalFruits.csv&quot;</span>)</span>
-<span id="cb31-3"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-3"></a><span class="kw">str</span>(dat.tf)</span>
-<span id="cb31-4"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-4"></a></span>
-<span id="cb31-5"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-5"></a><span class="co"># X numéro d&#39;observation reg facteur pour l&#39;une des trois</span></span>
-<span id="cb31-6"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-6"></a><span class="co"># régions; Pays-Bas, l&#39;Espagne ou la Suède popu facteur avec</span></span>
-<span id="cb31-7"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-7"></a><span class="co"># un niveau pour chaque population (effet aléatoire) gen</span></span>
-<span id="cb31-8"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-8"></a><span class="co"># facteur avec un niveau pour chaque génotype (effet</span></span>
-<span id="cb31-9"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-9"></a><span class="co"># aléatoire) rack facteur de nuisance pour l&#39;un des deux</span></span>
-<span id="cb31-10"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-10"></a><span class="co"># racks placés dans la serre nutrient facteur à deux niveaux</span></span>
-<span id="cb31-11"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-11"></a><span class="co"># précisant une faible (valeur = 1) ou haute (valeur = 8)</span></span>
-<span id="cb31-12"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-12"></a><span class="co"># concentration de nutriments (effet fixe) amd facteur à deux</span></span>
-<span id="cb31-13"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-13"></a><span class="co"># niveaux précisant l&#39;absence ou la présence d&#39;herbivorie</span></span>
-<span id="cb31-14"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-14"></a><span class="co"># (lésions sur le méristème apical) (effet fixe) status</span></span>
-<span id="cb31-15"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-15"></a><span class="co"># facteur de nuisance pour la méthode de germination</span></span>
-<span id="cb31-16"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-16"></a><span class="co"># total.fruits variable réponse; nombre entier indiquant le</span></span>
-<span id="cb31-17"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-17"></a><span class="co"># nombre de fruits par plante</span></span>
-<span id="cb31-18"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-18"></a></span>
-<span id="cb31-19"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-19"></a><span class="co"># 2-3 génotypes imbriqués dans chacune des neuf populations</span></span>
-<span id="cb31-20"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-20"></a><span class="kw">table</span>(dat.tf<span class="op">$</span>popu, dat.tf<span class="op">$</span>gen)</span>
-<span id="cb31-21"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-21"></a></span>
-<span id="cb31-22"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-22"></a><span class="co"># Entretien : changer nombres entiers en facteurs, rajuster</span></span>
-<span id="cb31-23"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-23"></a><span class="co"># les niveaux d&#39;herbivorie (amd) et renommer les niveaux de</span></span>
-<span id="cb31-24"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-24"></a><span class="co"># nutriments</span></span>
-<span id="cb31-25"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-25"></a>dat.tf &lt;-<span class="st"> </span><span class="kw">transform</span>(dat.tf, <span class="dt">X =</span> <span class="kw">factor</span>(X), <span class="dt">gen =</span> <span class="kw">factor</span>(gen), </span>
-<span id="cb31-26"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-26"></a>    <span class="dt">rack =</span> <span class="kw">factor</span>(rack), <span class="dt">amd =</span> <span class="kw">factor</span>(amd, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;unclipped&quot;</span>, </span>
-<span id="cb31-27"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-27"></a>        <span class="st">&quot;clipped&quot;</span>)), <span class="dt">nutrient =</span> <span class="kw">factor</span>(nutrient, <span class="dt">label =</span> <span class="kw">c</span>(<span class="st">&quot;Low&quot;</span>, </span>
-<span id="cb31-28"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-28"></a>        <span class="st">&quot;High&quot;</span>)))</span>
-<span id="cb31-29"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-29"></a></span>
-<span id="cb31-30"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-30"></a><span class="co"># Installer / charger les librairies</span></span>
-<span id="cb31-31"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-31"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(lme4)) {</span>
-<span id="cb31-32"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-32"></a>    <span class="kw">install.packages</span>(<span class="st">&quot;lme4&quot;</span>)</span>
-<span id="cb31-33"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-33"></a>}</span>
-<span id="cb31-34"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-34"></a><span class="kw">require</span>(lme4)</span>
-<span id="cb31-35"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-35"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(coefplot2)) {</span>
-<span id="cb31-36"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-36"></a>    <span class="kw">install.packages</span>(<span class="st">&quot;coefplot2&quot;</span>, <span class="dt">repos =</span> <span class="st">&quot;http://www.math.mcmaster.ca/bolker/R&quot;</span>, </span>
-<span id="cb31-37"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-37"></a>        <span class="dt">type =</span> <span class="st">&quot;source&quot;</span>)</span>
-<span id="cb31-38"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-38"></a>}</span>
-<span id="cb31-39"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-39"></a><span class="kw">require</span>(coefplot2)</span>
-<span id="cb31-40"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-40"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(reshape)) {</span>
-<span id="cb31-41"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-41"></a>    <span class="kw">install.packages</span>(<span class="st">&quot;reshape&quot;</span>)</span>
-<span id="cb31-42"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-42"></a>}</span>
-<span id="cb31-43"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-43"></a><span class="kw">require</span>(reshape)</span>
-<span id="cb31-44"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-44"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(ggplot2)) {</span>
-<span id="cb31-45"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-45"></a>    <span class="kw">install.packages</span>(<span class="st">&quot;ggplot2&quot;</span>)</span>
-<span id="cb31-46"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-46"></a>}</span>
-<span id="cb31-47"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-47"></a><span class="kw">require</span>(ggplot2)</span>
-<span id="cb31-48"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-48"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(plyr)) {</span>
-<span id="cb31-49"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-49"></a>    <span class="kw">install.packages</span>(<span class="st">&quot;plyr&quot;</span>)</span>
-<span id="cb31-50"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-50"></a>}</span>
-<span id="cb31-51"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-51"></a><span class="kw">require</span>(plyr)</span>
-<span id="cb31-52"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-52"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(gridExtra)) {</span>
-<span id="cb31-53"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-53"></a>    <span class="kw">install.packages</span>(<span class="st">&quot;gridExtra&quot;</span>)</span>
-<span id="cb31-54"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-54"></a>}</span>
-<span id="cb31-55"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-55"></a><span class="kw">require</span>(gridExtra)</span>
-<span id="cb31-56"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-56"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(emdbook)) {</span>
-<span id="cb31-57"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-57"></a>    <span class="kw">install.packages</span>(<span class="st">&quot;emdbook&quot;</span>)</span>
-<span id="cb31-58"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-58"></a>}</span>
-<span id="cb31-59"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-59"></a><span class="kw">require</span>(emdbook)</span>
-<span id="cb31-60"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb31-60"></a><span class="kw">source</span>(<span class="st">&quot;glmm_funs.R&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-1"></a><span class="co"># Chargez et affichez le jeu de données</span></span>
+<span id="cb32-2"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-2"></a>dat.tf &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;Banta_TotalFruits.csv&quot;</span>)</span>
+<span id="cb32-3"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-3"></a><span class="kw">str</span>(dat.tf)</span>
+<span id="cb32-4"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-4"></a></span>
+<span id="cb32-5"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-5"></a><span class="co"># X numéro d&#39;observation reg facteur pour l&#39;une des trois</span></span>
+<span id="cb32-6"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-6"></a><span class="co"># régions; Pays-Bas, l&#39;Espagne ou la Suède popu facteur avec</span></span>
+<span id="cb32-7"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-7"></a><span class="co"># un niveau pour chaque population (effet aléatoire) gen</span></span>
+<span id="cb32-8"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-8"></a><span class="co"># facteur avec un niveau pour chaque génotype (effet</span></span>
+<span id="cb32-9"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-9"></a><span class="co"># aléatoire) rack facteur de nuisance pour l&#39;un des deux</span></span>
+<span id="cb32-10"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-10"></a><span class="co"># racks placés dans la serre nutrient facteur à deux niveaux</span></span>
+<span id="cb32-11"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-11"></a><span class="co"># précisant une faible (valeur = 1) ou haute (valeur = 8)</span></span>
+<span id="cb32-12"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-12"></a><span class="co"># concentration de nutriments (effet fixe) amd facteur à deux</span></span>
+<span id="cb32-13"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-13"></a><span class="co"># niveaux précisant l&#39;absence ou la présence d&#39;herbivorie</span></span>
+<span id="cb32-14"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-14"></a><span class="co"># (lésions sur le méristème apical) (effet fixe) status</span></span>
+<span id="cb32-15"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-15"></a><span class="co"># facteur de nuisance pour la méthode de germination</span></span>
+<span id="cb32-16"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-16"></a><span class="co"># total.fruits variable réponse; nombre entier indiquant le</span></span>
+<span id="cb32-17"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-17"></a><span class="co"># nombre de fruits par plante</span></span>
+<span id="cb32-18"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-18"></a></span>
+<span id="cb32-19"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-19"></a><span class="co"># 2-3 génotypes imbriqués dans chacune des neuf populations</span></span>
+<span id="cb32-20"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-20"></a><span class="kw">table</span>(dat.tf<span class="op">$</span>popu, dat.tf<span class="op">$</span>gen)</span>
+<span id="cb32-21"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-21"></a></span>
+<span id="cb32-22"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-22"></a><span class="co"># Entretien : changer nombres entiers en facteurs, rajuster</span></span>
+<span id="cb32-23"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-23"></a><span class="co"># les niveaux d&#39;herbivorie (amd) et renommer les niveaux de</span></span>
+<span id="cb32-24"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-24"></a><span class="co"># nutriments</span></span>
+<span id="cb32-25"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-25"></a>dat.tf &lt;-<span class="st"> </span><span class="kw">transform</span>(dat.tf, <span class="dt">X =</span> <span class="kw">factor</span>(X), <span class="dt">gen =</span> <span class="kw">factor</span>(gen), </span>
+<span id="cb32-26"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-26"></a>    <span class="dt">rack =</span> <span class="kw">factor</span>(rack), <span class="dt">amd =</span> <span class="kw">factor</span>(amd, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;unclipped&quot;</span>, </span>
+<span id="cb32-27"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-27"></a>        <span class="st">&quot;clipped&quot;</span>)), <span class="dt">nutrient =</span> <span class="kw">factor</span>(nutrient, <span class="dt">label =</span> <span class="kw">c</span>(<span class="st">&quot;Low&quot;</span>, </span>
+<span id="cb32-28"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-28"></a>        <span class="st">&quot;High&quot;</span>)))</span>
+<span id="cb32-29"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-29"></a></span>
+<span id="cb32-30"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-30"></a><span class="co"># Installer / charger les librairies</span></span>
+<span id="cb32-31"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-31"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(lme4)) {</span>
+<span id="cb32-32"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-32"></a>    <span class="kw">install.packages</span>(<span class="st">&quot;lme4&quot;</span>)</span>
+<span id="cb32-33"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-33"></a>}</span>
+<span id="cb32-34"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-34"></a><span class="kw">require</span>(lme4)</span>
+<span id="cb32-35"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-35"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(coefplot2)) {</span>
+<span id="cb32-36"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-36"></a>    <span class="kw">install.packages</span>(<span class="st">&quot;coefplot2&quot;</span>, <span class="dt">repos =</span> <span class="st">&quot;http://www.math.mcmaster.ca/bolker/R&quot;</span>, </span>
+<span id="cb32-37"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-37"></a>        <span class="dt">type =</span> <span class="st">&quot;source&quot;</span>)</span>
+<span id="cb32-38"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-38"></a>}</span>
+<span id="cb32-39"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-39"></a><span class="kw">require</span>(coefplot2)</span>
+<span id="cb32-40"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-40"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(reshape)) {</span>
+<span id="cb32-41"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-41"></a>    <span class="kw">install.packages</span>(<span class="st">&quot;reshape&quot;</span>)</span>
+<span id="cb32-42"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-42"></a>}</span>
+<span id="cb32-43"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-43"></a><span class="kw">require</span>(reshape)</span>
+<span id="cb32-44"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-44"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(ggplot2)) {</span>
+<span id="cb32-45"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-45"></a>    <span class="kw">install.packages</span>(<span class="st">&quot;ggplot2&quot;</span>)</span>
+<span id="cb32-46"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-46"></a>}</span>
+<span id="cb32-47"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-47"></a><span class="kw">require</span>(ggplot2)</span>
+<span id="cb32-48"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-48"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(plyr)) {</span>
+<span id="cb32-49"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-49"></a>    <span class="kw">install.packages</span>(<span class="st">&quot;plyr&quot;</span>)</span>
+<span id="cb32-50"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-50"></a>}</span>
+<span id="cb32-51"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-51"></a><span class="kw">require</span>(plyr)</span>
+<span id="cb32-52"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-52"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(gridExtra)) {</span>
+<span id="cb32-53"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-53"></a>    <span class="kw">install.packages</span>(<span class="st">&quot;gridExtra&quot;</span>)</span>
+<span id="cb32-54"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-54"></a>}</span>
+<span id="cb32-55"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-55"></a><span class="kw">require</span>(gridExtra)</span>
+<span id="cb32-56"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-56"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(emdbook)) {</span>
+<span id="cb32-57"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-57"></a>    <span class="kw">install.packages</span>(<span class="st">&quot;emdbook&quot;</span>)</span>
+<span id="cb32-58"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-58"></a>}</span>
+<span id="cb32-59"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-59"></a><span class="kw">require</span>(emdbook)</span>
+<span id="cb32-60"><a href="les-modèles-linéaires-généralisés-mixtes-glmm.html#cb32-60"></a><span class="kw">source</span>(<span class="st">&quot;glmm_funs.R&quot;</span>)</span></code></pre></div>
 
 </div>
 <hr>
