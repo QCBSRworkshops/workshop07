@@ -1,21 +1,11 @@
-# (PART\*) Les modèles linéaires à effets mixtes (MLM) {-}
+# Pourquoi choisir un MLM?
 
-# Aperçu 
 
-Les données écologiques et biologiques peuvent être complexes et
-désordonnées. Il existe généralement une structure particulière dans les
-données (*i.e.* les observations individuelles ne sont pas toujours
-indépendantes), les relations entre les variables d'intérêt peuvent
-différer en fonction de facteurs de regroupement, telles que les
-espèces, et la plupart du temps de faibles tailles d'échantillons
-rendent l'ajustement de modèles avec de nombreux paramètres difficile.
-Les modèles linéaires à effets mixtes (MLM) ont été développés pour
-aborder ces questions. Ils peuvent être appliqués à un grand nombre de
-questions écologiques et prennent de nombreuses formes différentes. Dans
-cet atelier, nous allons utiliser une simple approche interrogative pour
-apprendre les bases du fonctionnement des MLMs et nous verrons comment
-les ajuster. Nous terminerons par une réflexion sur l'application des
-MLMs à un ensemble de questions plus diversifiées.
+
+Les données écologiques et biologiques peuvent être complexes et désordonnées. Il existe généralement une structure particulière dans les données (*i.e.* les observations individuelles ne sont pas toujours indépendantes), les relations entre les variables d'intérêt peuvent différer en fonction de facteurs de regroupement, telles que les
+espèces, et la plupart du temps de faibles tailles d'échantillons rendent l'ajustement de modèles avec de nombreux paramètres difficile.
+
+Les modèles linéaires à effets mixtes (MLM) ont été développés pour aborder ces questions. Ils peuvent être appliqués à un grand nombre de questions écologiques et prennent de nombreuses formes différentes. Dans cet atelier, nous allons utiliser une simple approche interrogative pour apprendre les bases du fonctionnement des MLMs et nous verrons comment les ajuster. 
 
 # Qu'est-ce qu'un MLM et pourquoi est-ce important?
 

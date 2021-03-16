@@ -21,6 +21,7 @@ In this workshop, you will learn when it is important to use a **mixed effects m
 
 To prepare for this workshop, you must download and install the earliest RStudio and R versions. You must also download the data we will use during this workshop:
 
+-    [R Script](https://qcbsrworkshops.github.io/workshop07/book-en/workshop07-script-en.R)
 -    [Fish data](http://qcbs.ca/wiki/_media/qcbs_w7_data.csv)
 -    [Arabidopsis data](http://qcbs.ca/wiki/_media/banta_totalfruits.csv)
 -    [Inverts data](http://qcbs.ca/wiki/_media/inverts.csv)
