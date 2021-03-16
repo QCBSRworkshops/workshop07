@@ -2,39 +2,32 @@
 
 # Learning objectives
 
-**Summary:** Mixed effects models allow ecologists to overcome a number
-of limitations associated with traditional linear models. In this
-workshop, you will learn when it is important to use a mixed effects
-model to analyze your data. We will walk you through the steps to
-conduct a linear mixed model analysis, check its assumptions, report
-results, and visually represent your model in R. We will also build on
-the previous workshop to combine knowledge on linear mixed models and
-extend it to generalized linear mixed effect models.
+Mixed effects models allow ecologists to overcome a number of limitations associated with traditional linear models. 
 
-**Learning objectives**
+In this workshop, you will learn when it is important to use a **mixed effects model** to analyze your data. Specifically, we will:
 
--    What is a linear mixed effects model (LMM) and why should I care?
--    How do I implement LMM's in R?
-      - A priori model building and data exploration
-      - Coding potential models and model selection
-      - Model validation
-      - Interpreting results and visualizing the model
--    Using LMMs when the assumptions of normality and error distribution are not met (GLMMs).
+**1.** Describe what are (generalized) mixed effects models
+
+**2.** Identify situations in which the use of mixed effects is appropriate
+
+**3.** Implement basic linear mixed models (LMM) with `R`
+
+**4.** Execute basic generalized linear mixed models (GLMM) with `R`
+
+**5.** Validate, interpret and visualize mixed models with `R`
+
 
 # Preparing for the workshop
 
-To prepare for this workshop, you must do the following steps:
+To prepare for this workshop, you must download and install the earliest RStudio and R versions. You must also download the data we will use during this workshop:
 
-Download the R script and data required for this workshop:
-
--    [R Script](http://qcbs.ca/wiki/_media/lmm_e.r)
--    [Fish data](http://qcbs.ca/wiki/_media/qcbs_w6_data.csv)
+-    [Fish data](http://qcbs.ca/wiki/_media/qcbs_w7_data.csv)
 -    [Arabidopsis data](http://qcbs.ca/wiki/_media/banta_totalfruits.csv)
 -    [Inverts data](http://qcbs.ca/wiki/_media/inverts.csv)
--    [GLMM Script](http://qcbs.ca/wiki/_media/glmm_e.r) (this is the script for [[r_workshop7|Workshop 6]] but lines 434-784 cover the GLMM section of this workshop)
--    [glmm_funs](http://qcbs.ca/wiki/_media/glmm_funs.r) (code to download for use in the GLMM section)
+-    [glmm_funs](http://qcbs.ca/wiki/_media/glmm_funs.r) (code for use in the GLMM section)
 
-Make sure to load the following packages (see how in the R script):
+
+This workshop requires the following `R` packages:
 
 -    [ggplot2](http://cran.r-project.org/web/packages/ggplot2/index.html)
 -    [lm4](http://cran.r-project.org/web/packages/lme4/index.html)
@@ -44,6 +37,7 @@ Make sure to load the following packages (see how in the R script):
 -    [bbmle](http://cran.r-project.org/web/packages/bbmle/index.html)
 -    [DescTools](http://cran.r-project.org/web/packages/DescTools/index.html)
 
+To install them from CRAN, run:
 
 ```{r, echo = TRUE, eval = FALSE}
 install.packages("ggplot2")
@@ -53,7 +47,11 @@ install.packages("MASS")
 install.packages("vcdExtra")
 install.packages("bbmle")
 install.packages("DescTools")
+```
 
+To load these packages, run:
+
+```{r, echo = TRUE, eval = FALSE}
 library(ggplot2)
 library(lme4)
 library(AICcmodavg)
@@ -62,3 +60,4 @@ library(vcdExtra)
 library(bbmle)
 library(DescTools)
 ```
+
