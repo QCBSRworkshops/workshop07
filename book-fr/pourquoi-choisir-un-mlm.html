@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapitre 3 Aperçu | Atelier 7: Modèles linéaires et généralisés linéaires mixtes</title>
+  <title>Chapitre 3 Pourquoi choisir un MLM? | Atelier 7: Modèles linéaires et généralisés linéaires mixtes</title>
   <meta name="description" content="Modèles linéaires et généralisés linéaires mixtes" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapitre 3 Aperçu | Atelier 7: Modèles linéaires et généralisés linéaires mixtes" />
+  <meta property="og:title" content="Chapitre 3 Pourquoi choisir un MLM? | Atelier 7: Modèles linéaires et généralisés linéaires mixtes" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://github.com/qcbsRworkshops/" />
   <meta property="og:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="qcbsRworkshops/workshop09" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapitre 3 Aperçu | Atelier 7: Modèles linéaires et généralisés linéaires mixtes" />
+  <meta name="twitter:title" content="Chapitre 3 Pourquoi choisir un MLM? | Atelier 7: Modèles linéaires et généralisés linéaires mixtes" />
   
   <meta name="twitter:description" content="Modèles linéaires et généralisés linéaires mixtes" />
   <meta name="twitter:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
@@ -142,11 +142,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#contributeurs-et-contributrices"><i class="fa fa-check"></i><b>0.2</b> Contributeurs et contributrices</a></li>
 <li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#contribuez-à-la-série"><i class="fa fa-check"></i><b>0.3</b> Contribuez à la série!</a></li>
 </ul></li>
-<li class="part"><span><b>Modèles linéaires mixtes en <code>R</code></b></span></li>
+<li class="part"><span><b>Modèles linéaires mixtes (MLM) en <code>R</code></b></span></li>
 <li class="chapter" data-level="1" data-path="objectifs-dapprentissage.html"><a href="objectifs-dapprentissage.html"><i class="fa fa-check"></i><b>1</b> Objectifs d’apprentissage</a></li>
 <li class="chapter" data-level="2" data-path="préparez-vous-pour-cet-atelier.html"><a href="préparez-vous-pour-cet-atelier.html"><i class="fa fa-check"></i><b>2</b> Préparez-vous pour cet atelier</a></li>
-<li class="part"><span><b>Les modèles linéaires à effets mixtes (MLM)</b></span></li>
-<li class="chapter" data-level="3" data-path="aperçu.html"><a href="aperçu.html"><i class="fa fa-check"></i><b>3</b> Aperçu</a></li>
+<li class="chapter" data-level="3" data-path="pourquoi-choisir-un-mlm.html"><a href="pourquoi-choisir-un-mlm.html"><i class="fa fa-check"></i><b>3</b> Pourquoi choisir un MLM?</a></li>
 <li class="chapter" data-level="4" data-path="quest-ce-quun-mlm-et-pourquoi-est-ce-important.html"><a href="quest-ce-quun-mlm-et-pourquoi-est-ce-important.html"><i class="fa fa-check"></i><b>4</b> Qu’est-ce qu’un MLM et pourquoi est-ce important?</a></li>
 <li class="chapter" data-level="5" data-path="introduction-au-jeu-de-données.html"><a href="introduction-au-jeu-de-données.html"><i class="fa fa-check"></i><b>5</b> Introduction au jeu de données</a></li>
 <li class="chapter" data-level="6" data-path="comment-pourrions-nous-analyser-ces-données.html"><a href="comment-pourrions-nous-analyser-ces-données.html"><i class="fa fa-check"></i><b>6</b> Comment pourrions-nous analyser ces données?</a><ul>
@@ -224,22 +223,11 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div class="hero-image-container"> 
   <img class= "hero-image" src="assets/images/jean-philippe-delberghe-75xPHEQBmvA-unsplash_hero_image.jpg">
 </div>
-<div id="aperçu" class="section level1">
-<h1><span class="header-section-number">Chapitre 3</span> Aperçu</h1>
-<p>Les données écologiques et biologiques peuvent être complexes et
-désordonnées. Il existe généralement une structure particulière dans les
-données (<em>i.e.</em> les observations individuelles ne sont pas toujours
-indépendantes), les relations entre les variables d’intérêt peuvent
-différer en fonction de facteurs de regroupement, telles que les
-espèces, et la plupart du temps de faibles tailles d’échantillons
-rendent l’ajustement de modèles avec de nombreux paramètres difficile.
-Les modèles linéaires à effets mixtes (MLM) ont été développés pour
-aborder ces questions. Ils peuvent être appliqués à un grand nombre de
-questions écologiques et prennent de nombreuses formes différentes. Dans
-cet atelier, nous allons utiliser une simple approche interrogative pour
-apprendre les bases du fonctionnement des MLMs et nous verrons comment
-les ajuster. Nous terminerons par une réflexion sur l’application des
-MLMs à un ensemble de questions plus diversifiées.</p>
+<div id="pourquoi-choisir-un-mlm" class="section level1">
+<h1><span class="header-section-number">Chapitre 3</span> Pourquoi choisir un MLM?</h1>
+<p>Les données écologiques et biologiques peuvent être complexes et désordonnées. Il existe généralement une structure particulière dans les données (<em>i.e.</em> les observations individuelles ne sont pas toujours indépendantes), les relations entre les variables d’intérêt peuvent différer en fonction de facteurs de regroupement, telles que les
+espèces, et la plupart du temps de faibles tailles d’échantillons rendent l’ajustement de modèles avec de nombreux paramètres difficile.</p>
+<p>Les modèles linéaires à effets mixtes (MLM) ont été développés pour aborder ces questions. Ils peuvent être appliqués à un grand nombre de questions écologiques et prennent de nombreuses formes différentes. Dans cet atelier, nous allons utiliser une simple approche interrogative pour apprendre les bases du fonctionnement des MLMs et nous verrons comment les ajuster.</p>
 </div>
 <hr>
 <center> 

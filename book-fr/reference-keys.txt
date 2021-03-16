@@ -5,7 +5,7 @@ contributeurs-et-contributrices
 contribuez-à-la-série
 objectifs-dapprentissage
 préparez-vous-pour-cet-atelier
-aperçu
+pourquoi-choisir-un-mlm
 quest-ce-quun-mlm-et-pourquoi-est-ce-important
 introduction-au-jeu-de-données
 comment-pourrions-nous-analyser-ces-données
