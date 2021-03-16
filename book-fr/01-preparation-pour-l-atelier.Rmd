@@ -1,4 +1,4 @@
-# (PART\*) Modèles linéaires mixtes en `R` {-}
+# (PART\*) Modèles linéaires mixtes (MLM) en `R` {-}
 
 # Objectifs d'apprentissage
 
