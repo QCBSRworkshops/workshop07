@@ -1,0 +1,186 @@
+# Why choose mixed models? 
+
+Biological and ecological data are often messy. Most of the time there is an inherent structure to data (i.e. single observations are not always independent), relationships between variables of interest might differ
+depending on grouping factors like species, and more often than not sample sizes are low, making it difficult to fit models that require many parameters to be estimated. 
+
+Linear mixed effects models (LMM) were developed to deal with these issues. They can be applied to a great
+number of ecological questions and take many different forms. In this workshop we will use a simple question-based approach to learn the basics of how LMM operate and how to fit them. 
+
+
+## Starting with a question
+
+Before we dive in, let's start by considering an example dataset and proposing a research question.
+
+The [dataset](http://qcbs.ca/wiki/_media/qcbs_w7_data.csv) we will be using deals with fish trophic positions. In this dataset, **3** fish species were sampled from **6** different lakes and individuals from each species exhibit variation in their body length and trophic position. 
+
+Here is a visual representation to help wrap your head around all of this! 
+*Note: Only three sizes of fish are shown within each species but in reality
+there are 10 individuals per species.*
+
+ ![:scale 75%](images/fig_1_qcbs_wiki.png)
+
+Let's load the dataset into R Studio so we can take a closer look.
+
+```{r, echo = TRUE, eval = FALSE}
+# Remove prior commands in R
+rm(list=ls()) 
+ 
+# Place all workshop material in one folder on your computer.
+# Run the following command and use the pop-up browsing window to choose the qcbs_w7_data.csv dataset within 
+# the folder you've put the workshop materials in. 
+file.choose() # This will output a filepath to the dataset.
+ 
+# Set the working directory to this folder by copying the filepath output and pasting
+# all but the file name into the set working directory command.
+# For example paste "/Users/ziegljac/Documents/QCBS_R/" -> include the quotations
+# NOT "/Users/ziegljac/Documents/QCBS_R/Get_Data_Func.R" -> include the quotations
+setwd()
+
+# Load fish dataset into R using read.csv now that the working directory has been set to the correct folder.
+data <- read.csv('qcbs_w7_data.csv')
+```
+
+A simple question you could answer with this dataset is **does fish trophic position increase with fish size?**
+This will be our motivating question for this workshop.
+
+
+## Challenge 1
+
+For our first challenge, reproduce plots 1-3 using the script below. Observe each plot and try to get a sense of what is occurring. Two key questions to ask yourself are:
+
+- **1.** Do we expect an increase in trophic position with length in the exact same way for *all species*?
+- **2.** Do we expect an increase in trophic position with length in the exact same way for *all lakes*?
+- **3.** How might these relationships differ?
+
+```{r}
+# Used to strip down figures to make them simpler
+fig <- theme_bw() + theme(panel.grid.minor=element_blank(), panel.grid.major=element_blank(), panel.background=element_blank()) + 
+  theme(strip.background=element_blank(), strip.text.y = element_text()) + theme(legend.background=element_blank()) + 
+  theme(legend.key=element_blank()) + theme(panel.border = element_rect(colour="black", fill=NA))
+
+# Make the followoing three plots to explore the data
+plot <- ggplot(aes(Fish_Length,Trophic_Pos),data=data)
+
+# Plot 1 - All Data
+plot + geom_point() + xlab("Length (mm)") + ylab("Trophic Position") + labs(title="All Data") + fig
+
+# Plot 2 - By Speceis - BG = Bluegill, WY = Walleye, and YP = Yellow Perch
+plot + geom_point() + facet_wrap(~ Fish_Species) + xlab("Length (mm)") + ylab("Trophic Position") + labs(title="By Species") + fig
+
+# Plot 3 - By Lake 
+plot + geom_point() + facet_wrap(~ Lake) + xlab("Length (mm)") + ylab("Trophic Position") + labs(title="By Lake") + fig
+```
+
+### Challenge 1 Solution:
+
+Based on these plots we can draw two initial observations:
+
+- **1.** All species appear to increase in trophic position with length, but the slope might be different across species.
+- **2** Some parameters specific to each particular lake (ex. the primary productivity of the system) may change the observed relationship .
+
+## Analyzing our data
+
+
+
+
+
+
+- Lump
+- Separate
+- Combined with LMMs
+- How does this relate to our fish example?
+
+----- NEW rmd.
+
+# Fixed vs. random effects (Elements of an LMM?)
+
+- Fixed
+- Random
+
+# Accounting for structure
+
+- ICC
+- Challenge 2
+
+--- NEW RMD
+
+# Implementing LMMs in `R` (new header?)
+
+- step 1
+- step 2
+- step 3
+- step 4
+
+--- NEW RMD
+
+# (PART\*) Generalized linear mixed models (GLMM) in `R` {-}
+
+- Intro
+- Implementing
+-etc
+
+
+
+# What is a LMM and why should I care?
+
+LMM's allow you to use all the data you have instead of using means of
+non-independent samples, they account for structure in your data (for
+example, quadrates nested in sites nested in forests), they allow
+relationships to vary by different grouping factors (sometimes referred
+to as random effects), and they require less parameter estimates than
+classical regression which saves you degrees of freedom. But how do they
+do all of this? These questions will hopefully become clear during this
+section. First, Let's start by getting to know the dataset.
+
+
+
+
+
+
+------------------------------------------------------------------------
+
+**CHALLENGE 1**
+
+For your fist challenge, reproduce the plots 1-3 from the
+*QCBS\_W5\_LMM.R* code. Observe the plots and try to get a sense of what
+is occurring. Two key questions to ask yourself are:
+
+    -Do I expect all species to increase in trophic position with length? In the exact same way?
+    -Do I expect these relationships to be the same across lakes? What might differ?
+
+++++ Challenge 1 Answer \|
+
+```{r, echo = TRUE, eval = FALSE}
+# Used to strip down figures to make them simpler
+fig <- theme_bw() + theme(panel.grid.minor=element_blank(), panel.grid.major=element_blank(), panel.background=element_blank()) + 
+  theme(strip.background=element_blank(), strip.text.y = element_text()) + theme(legend.background=element_blank()) + 
+  theme(legend.key=element_blank()) + theme(panel.border = element_rect(colour="black", fill=NA))
+
+# Make the followoing three plots to explore the data
+plot <- ggplot(aes(Fish_Length,Trophic_Pos),data=data)
+
+# Plot 1 - All Data
+plot + geom_point() + xlab("Length (mm)") + ylab("Trophic Position") + labs(title="All Data") + fig
+
+# Plot 2 - By Speceis
+plot + geom_point() + facet_wrap(~ Fish_Species) + xlab("Length (mm)") + ylab("Trophic Position") + labs(title="By Species") + fig
+
+# Plot 3 - By Lake 
+plot + geom_point() + facet_wrap(~ Lake) + xlab("Length (mm)") + ylab("Trophic Position") + labs(title="By Lake") + fig
+```
+
+**OUTPUT**\
+**Plot 1** ![](images/fig_2_w5.png){width="300"} **Plot 2**
+![](images/fig_3_w5.png){width="300"}
+
+**Plot 3** ![](images/plot3.png){width="300"}
+
+Do I expect all species to increase in trophic position with length? In
+the exact same way? All species seem to increase in trophic position
+with length, but the slope might be different across species
+
+Do I expect these relationships to be the same across lakes? What might
+differ? Some parameters specific to one particular lake might change the
+relationship, such as the primary productivity of the system
+
+++++
