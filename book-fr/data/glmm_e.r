@@ -6,8 +6,8 @@
 
 #### Loading data ####
 
-setwd("~/Desktop")
-mites <- read.csv('mites.csv')
+# setwd("~/Desktop")
+mites <- read.csv('data/mites.csv')
 
 head(mites) 
 str(mites)
@@ -65,45 +65,45 @@ abline(lm.pa)
 plot(lm.pa)
 
 # #Code to generate figure that shows the parameters of a normal distribution
-# par(mfrow=c(1,2))
-# plot(0:50, dnorm(0:50,20,5), type='l', lwd=1, xlab='#galumna', ylab='probability',cex.lab=0.8,cex.axis=0.8)
-# lines(0:50, dnorm(0:50,25,5), lwd=1, col='red')
-# lines(0:50, dnorm(0:50,30,5), lwd=1, col='blue')
-# legend(-3,0.08,legend = c(expression(italic(mu) == 20),expression(italic(mu) == 25),expression(italic(mu) == 30)), bty='n', text.col=c('black','red','blue'), cex=0.7)
-# mtext(side=3,line=.5,cex=0.7,expression("varying"~italic(mu)*","~~italic(sigma) == 5))
-# plot(0:50, dnorm(0:50,25,5), type='l', lwd=1, xlab='#galumna', ylab='probability',cex.lab=0.8,cex.axis=0.8)
-# lines(0:50, dnorm(0:50,25,7.5), lwd=1, col='red')
-# lines(0:50, dnorm(0:50,25,10), lwd=1, col='blue')
-# legend(-3,0.08,legend = c(expression(italic(sigma) == 5),expression(italic(sigma) == 7.5),expression(italic(sigma) == 10)), bty='n', text.col=c('black','red','blue'), cex=0.7)
-# mtext(side=3,line=.5,cex=0.7,expression(italic(mu) ==25*","~~"varying"~italic(sigma)))
+par(mfrow=c(1,2))
+plot(0:50, dnorm(0:50,20,5), type='l', lwd=1, xlab='#galumna', ylab='probability',cex.lab=0.8,cex.axis=0.8)
+lines(0:50, dnorm(0:50,25,5), lwd=1, col='red')
+lines(0:50, dnorm(0:50,30,5), lwd=1, col='blue')
+legend(-3,0.08,legend = c(expression(italic(mu) == 20),expression(italic(mu) == 25),expression(italic(mu) == 30)), bty='n', text.col=c('black','red','blue'), cex=0.7)
+mtext(side=3,line=.5,cex=0.7,expression("varying"~italic(mu)*","~~italic(sigma) == 5))
+plot(0:50, dnorm(0:50,25,5), type='l', lwd=1, xlab='#galumna', ylab='probability',cex.lab=0.8,cex.axis=0.8)
+lines(0:50, dnorm(0:50,25,7.5), lwd=1, col='red')
+lines(0:50, dnorm(0:50,25,10), lwd=1, col='blue')
+legend(-3,0.08,legend = c(expression(italic(sigma) == 5),expression(italic(sigma) == 7.5),expression(italic(sigma) == 10)), bty='n', text.col=c('black','red','blue'), cex=0.7)
+mtext(side=3,line=.5,cex=0.7,expression(italic(mu) ==25*","~~"varying"~italic(sigma)))
 
 #coefficient of galumna abundance lm
 coef(lm.abund)
 
 # #Code to generate figure that illustrates assumptions of linear models
-# plot.norm<-function(x,mymodel,mult=1,sd.mult=3,mycol='LightSalmon',howmany=150) {
-#   yvar<-mymodel$model[,1]
-#   xvar<-mymodel$model[,2]
-#   sigma<-summary(mymodel)$sigma
-#   stick.val<-rep(xvar[x],howmany)+mult*dnorm(seq(predict(mymodel)[x]-sd.mult*sigma, predict(mymodel)[x]+sd.mult*sigma, length=howmany), mean=predict(mymodel)[x],sd=sigma)
-#   steps<-seq(predict(mymodel)[x]-sd.mult*sigma,predict(mymodel)[x]+sd.mult*sigma,length=howmany)
-#   polygon(c(stick.val,rep(xvar[x],howmany)),c(sort(steps,decreasing=T),steps),col=mycol,border=NA)
-# }
-# #function adapted from http://www.unc.edu/courses/2010fall/ecol/563/001/notes/lecture4%20Rcode.txt
-# plot(Galumna ~ WatrCont, data = mites,ylim=c(-4,8),cex.axis=1,cex.lab=1,type='n')
-# plot.norm(8,lm.abund,200)
-# plot.norm(11,lm.abund,200)
-# plot.norm(36,lm.abund,200)
-# plot.norm(52,lm.abund,200)
-# abline(h=0,lty=3)
-# points(Galumna ~ WatrCont, data = mites,pch=21)
-# abline(lm.abund,lty=1)
-# abline(v=mites$WatrCont[c(8,11,36,52)],col='red',lty=2)
-# text(x = mites$WatrCont[8]+50,y=7.5,expression(mu == 1.8),cex=1,col='red')
-# text(x = mites$WatrCont[11]+50,y=7.5,expression(mu == 2.6),cex=1,col='red')
-# text(x = mites$WatrCont[36]+50,y=7.5,expression(mu == 0.9),cex=1,col='red')
-# text(x = mites$WatrCont[52]+60,y=7.5,expression(mu == -0.1),cex=1,col='red')
-# text(x = mites$WatrCont[52]+105,y=6.5,expression(sigma == 'always' ~ 1.51),cex=1,col='red')
+plot.norm<-function(x,mymodel,mult=1,sd.mult=3,mycol='LightSalmon',howmany=150) {
+  yvar<-mymodel$model[,1]
+  xvar<-mymodel$model[,2]
+  sigma<-summary(mymodel)$sigma
+  stick.val<-rep(xvar[x],howmany)+mult*dnorm(seq(predict(mymodel)[x]-sd.mult*sigma, predict(mymodel)[x]+sd.mult*sigma, length=howmany), mean=predict(mymodel)[x],sd=sigma)
+  steps<-seq(predict(mymodel)[x]-sd.mult*sigma,predict(mymodel)[x]+sd.mult*sigma,length=howmany)
+  polygon(c(stick.val,rep(xvar[x],howmany)),c(sort(steps,decreasing=T),steps),col=mycol,border=NA)
+}
+#function adapted from http://www.unc.edu/courses/2010fall/ecol/563/001/notes/lecture4%20Rcode.txt
+plot(Galumna ~ WatrCont, data = mites,ylim=c(-4,8),cex.axis=1,cex.lab=1,type='n')
+plot.norm(8,lm.abund,200)
+plot.norm(11,lm.abund,200)
+plot.norm(36,lm.abund,200)
+plot.norm(52,lm.abund,200)
+abline(h=0,lty=3)
+points(Galumna ~ WatrCont, data = mites,pch=21)
+abline(lm.abund,lty=1)
+abline(v=mites$WatrCont[c(8,11,36,52)],col='red',lty=2)
+text(x = mites$WatrCont[8]+50,y=7.5,expression(mu == 1.8),cex=1,col='red')
+text(x = mites$WatrCont[11]+50,y=7.5,expression(mu == 2.6),cex=1,col='red')
+text(x = mites$WatrCont[36]+50,y=7.5,expression(mu == 0.9),cex=1,col='red')
+text(x = mites$WatrCont[52]+60,y=7.5,expression(mu == -0.1),cex=1,col='red')
+text(x = mites$WatrCont[52]+105,y=6.5,expression(sigma == 'always' ~ 1.51),cex=1,col='red')
 
 #calculating sigma for lm.abund:
 summary(lm.abund)$sigma
@@ -118,61 +118,61 @@ hist(mites$pa) #zeros and ones
 sum(mites$pa) / nrow(mites)
 
 # #Code to generate 3 figures that illustrate bernouilli, binomial, and poisson distributions
-# par(mfrow=c(1,3), lend=3)
-# plot(0:1, dbinom(0:1,1,.1), xlim=c(-0.5,1.5), type='h', lwd=15, xaxt='n', xlab='p/a', ylab='probability')
-# axis(1,at=c(0,1),labels=c('absent(0)','present(1)'),tick=F)
-# mtext(side=3,line=.5,cex=0.7,expression(italic(p) ==.1))
-# plot(0:1, dbinom(0:1,1,.5), xlim=c(-0.5,1.5), type='h', lwd=15, xaxt='n', xlab='p/a', ylab='probability')
-# axis(1,at=c(0,1),labels=c('absent(0)','present(1)'),tick=F)
-# mtext(side=3,line=.5,cex=0.7,expression(italic(p) ==.5))
-# plot(0:1, dbinom(0:1,1,.9), xlim=c(-0.5,1.5), type='h', lwd=15, xaxt='n', xlab='p/a', ylab='probability')
-# axis(1,at=c(0,1),labels=c('absent(0)','present(1)'),tick=F)
-# mtext(side=3,line=.5,cex=0.7,expression(italic(p) ==.9))
-# par(mfrow=c(1,1))
-# # 
-# par(mfrow=c(1,3), lend=3)
-# plot(0:50, dbinom(0:50,50,.1), type='h', lwd=1, xlab='#galumna', ylab='probability')
-# mtext(side=3,line=.5,cex=0.7,expression(italic(p) ==.1*","~~italic(n) == 50))
-# plot(0:50, dbinom(0:50,50,.5), type='h', lwd=1, xlab='#galumna', ylab='probability')
-# mtext(side=3,line=.5,cex=0.7,expression(italic(p) ==.5*","~~italic(n) == 50))
-# plot(0:50, dbinom(0:50,50,.9), type='h', lwd=1, xlab='#galumna', ylab='probability')
-# mtext(side=3,line=.5,cex=0.7,expression(italic(p) ==.9*","~~italic(n) == 50))
-# par(mfrow=c(1,1))
-# 
-# par(mfrow=c(1,3), lend=3)
-# plot(0:50, dpois(0:50,1), type='h', lwd=1, xlab='#galumna', ylab='probability')
-# mtext(side=3,line=.5, cex=0.7, expression(lambda==1))
-# plot(0:50, dpois(0:50,10), type='h', lwd=1, xlab='#galumna', ylab='probability')
-# mtext(side=3,line=.5, cex=0.7, expression(lambda==10))
-# plot(0:50, dpois(0:50,30), type='h', lwd=1, xlab='#galumna', ylab='probability')
-# mtext(side=3,line=.5, cex=0.7, expression(lambda==30))
-# par(mfrow=c(1,1))
-# 
-# #Code to generate figure that illustrates a poisson glm
-# glm.pois <- glm(Galumna ~ WatrCont, data = mites, family='poisson')
-# plot.poiss<-function(x,mymodel,mult=1,mycol='LightSalmon') {
-#   yvar<-mymodel$model[,1]
-#   xvar<-mymodel$model[,2]
-#   lambd<-mymodel$fitted[x]
-#   stick.val<-rep(xvar[x],9)+mult*dpois(0:8,lambd=lambd)
-#   segments(rep(xvar[x],9),0:8,stick.val,0:8,col=mycol,lwd=3)
-# }
-# plot(Galumna ~ WatrCont, data = mites,cex.axis=0.7,cex.lab=0.7)
-# points(Galumna ~ WatrCont, data = mites,pch=21)
-# lines(x=seq(min(mites$WatrCont),max(mites$WatrCont),by=1),y=predict(glm.pois,newdata=data.frame('WatrCont' = seq(min(mites$WatrCont),max(mites$WatrCont),by=1)),type='response'))
-# par(lend=3)
-# plot.poiss(8,glm.pois,200)
-# abline(v=mites$WatrCont[8],col='red',lty=2)
-# plot.poiss(11,glm.pois,200)
-# abline(v=mites$WatrCont[11],col='red',lty=2)
-# plot.poiss(36,glm.pois,200)
-# abline(v=mites$WatrCont[36],col='red',lty=2)
-# plot.poiss(52,glm.pois,200)
-# abline(v=mites$WatrCont[52],col='red',lty=2)
-# text(x = mites$WatrCont[8]+50,y=7.5,expression(lambda == 1.7),cex=0.7,col='red')
-# text(x = mites$WatrCont[11]+50,y=7.5,expression(lambda == 4.7),cex=0.7,col='red')
-# text(x = mites$WatrCont[36]+50,y=7.5,expression(lambda == 0.5),cex=0.7,col='red')
-# text(x = mites$WatrCont[52]+50,y=7.5,expression(lambda == 0.1),cex=0.7,col='red')
+par(mfrow=c(1,3), lend=3)
+plot(0:1, dbinom(0:1,1,.1), xlim=c(-0.5,1.5), type='h', lwd=15, xaxt='n', xlab='p/a', ylab='probability')
+axis(1,at=c(0,1),labels=c('absent(0)','present(1)'),tick=F)
+mtext(side=3,line=.5,cex=0.7,expression(italic(p) ==.1))
+plot(0:1, dbinom(0:1,1,.5), xlim=c(-0.5,1.5), type='h', lwd=15, xaxt='n', xlab='p/a', ylab='probability')
+axis(1,at=c(0,1),labels=c('absent(0)','present(1)'),tick=F)
+mtext(side=3,line=.5,cex=0.7,expression(italic(p) ==.5))
+plot(0:1, dbinom(0:1,1,.9), xlim=c(-0.5,1.5), type='h', lwd=15, xaxt='n', xlab='p/a', ylab='probability')
+axis(1,at=c(0,1),labels=c('absent(0)','present(1)'),tick=F)
+mtext(side=3,line=.5,cex=0.7,expression(italic(p) ==.9))
+par(mfrow=c(1,1))
+#
+par(mfrow=c(1,3), lend=3)
+plot(0:50, dbinom(0:50,50,.1), type='h', lwd=1, xlab='#galumna', ylab='probability')
+mtext(side=3,line=.5,cex=0.7,expression(italic(p) ==.1*","~~italic(n) == 50))
+plot(0:50, dbinom(0:50,50,.5), type='h', lwd=1, xlab='#galumna', ylab='probability')
+mtext(side=3,line=.5,cex=0.7,expression(italic(p) ==.5*","~~italic(n) == 50))
+plot(0:50, dbinom(0:50,50,.9), type='h', lwd=1, xlab='#galumna', ylab='probability')
+mtext(side=3,line=.5,cex=0.7,expression(italic(p) ==.9*","~~italic(n) == 50))
+par(mfrow=c(1,1))
+
+par(mfrow=c(1,3), lend=3)
+plot(0:50, dpois(0:50,1), type='h', lwd=1, xlab='#galumna', ylab='probability')
+mtext(side=3,line=.5, cex=0.7, expression(lambda==1))
+plot(0:50, dpois(0:50,10), type='h', lwd=1, xlab='#galumna', ylab='probability')
+mtext(side=3,line=.5, cex=0.7, expression(lambda==10))
+plot(0:50, dpois(0:50,30), type='h', lwd=1, xlab='#galumna', ylab='probability')
+mtext(side=3,line=.5, cex=0.7, expression(lambda==30))
+par(mfrow=c(1,1))
+
+#Code to generate figure that illustrates a poisson glm
+glm.pois <- glm(Galumna ~ WatrCont, data = mites, family='poisson')
+plot.poiss<-function(x,mymodel,mult=1,mycol='LightSalmon') {
+  yvar<-mymodel$model[,1]
+  xvar<-mymodel$model[,2]
+  lambd<-mymodel$fitted[x]
+  stick.val<-rep(xvar[x],9)+mult*dpois(0:8,lambd=lambd)
+  segments(rep(xvar[x],9),0:8,stick.val,0:8,col=mycol,lwd=3)
+}
+plot(Galumna ~ WatrCont, data = mites,cex.axis=0.7,cex.lab=0.7)
+points(Galumna ~ WatrCont, data = mites,pch=21)
+lines(x=seq(min(mites$WatrCont),max(mites$WatrCont),by=1),y=predict(glm.pois,newdata=data.frame('WatrCont' = seq(min(mites$WatrCont),max(mites$WatrCont),by=1)),type='response'))
+par(lend=3)
+plot.poiss(8,glm.pois,200)
+abline(v=mites$WatrCont[8],col='red',lty=2)
+plot.poiss(11,glm.pois,200)
+abline(v=mites$WatrCont[11],col='red',lty=2)
+plot.poiss(36,glm.pois,200)
+abline(v=mites$WatrCont[36],col='red',lty=2)
+plot.poiss(52,glm.pois,200)
+abline(v=mites$WatrCont[52],col='red',lty=2)
+text(x = mites$WatrCont[8]+50,y=7.5,expression(lambda == 1.7),cex=0.7,col='red')
+text(x = mites$WatrCont[11]+50,y=7.5,expression(lambda == 4.7),cex=0.7,col='red')
+text(x = mites$WatrCont[36]+50,y=7.5,expression(lambda == 0.5),cex=0.7,col='red')
+text(x = mites$WatrCont[52]+50,y=7.5,expression(lambda == 0.1),cex=0.7,col='red')
 
 
 #### A GLM with binary variables ####
@@ -318,7 +318,7 @@ summary(prop.reg2)
 #### GLMs with count data ####
 
 # load the faramea dataset
-faramea <- read.csv('faramea.csv', header = TRUE) 
+faramea <- read.csv('data/faramea.csv', header = TRUE) 
 
 # let's look at the data 
 str(faramea)
@@ -434,7 +434,7 @@ anova(glm.qp2, glm.qp, test="Chisq")
 #### GLMM ####
 
 # First load and view the dataset
-dat.tf <- read.csv("Banta_TotalFruits.csv")
+dat.tf <- read.csv("data/Banta_TotalFruits.csv")
 str(dat.tf)
 # 'data.frame':  625 obs. of  9 variables:
 # $ X           : int  1 2 3 4 5 6 7 8 9 10 ...
@@ -475,7 +475,7 @@ if(!require(emdbook)){install.packages("emdbook")}
 require(emdbook)
 if(!require(bbmle)){install.packages("bbmle")}
 require(bbmle)
-source("glmm_funs.R")
+source("data/glmm_funs.R")
 
 # Structure in dataset: Response vs fixed effects
 ggplot(dat.tf,aes(x=amd,y=log(total.fruits+1),colour=nutrient)) +

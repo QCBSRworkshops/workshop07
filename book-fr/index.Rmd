@@ -11,13 +11,13 @@ biblio-style: apalike
 link-citations: yes
 cover-image: assets/images/logo/csbq_logo_accueil.png
 github-repo: "qcbsRworkshops/workshop09"
-description: "Analyses multivariées en `R`"
+description: "Modèles linéaires et généralisés linéaires mixtes"
 favicon: "assets/images/favicon.ico"
 always_allow_html: yes
 url: 'https\://github.com/qcbsRworkshops/'
 config:
   edit:
-    link: https://github.com/qcbsRworkshops/workshop09/edit/main/book-fr/%s
+    link: https://github.com/qcbsRworkshops/workshop07/edit/main/book-fr/%s
     text: "Suggest changes"
 ---
 # (PART\*) Série d'ateliers R du CSBQ {-}

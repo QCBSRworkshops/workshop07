@@ -1,40 +1,33 @@
-# (PART\*) Preparation pour l'atelier {-}
+# (PART\*) Modèles linéaires mixtes en `R` {-}
 
 # Objectifs d'apprentissage
 
-**Résumé:** Les modèles à effets mixtes permettent aux écologistes de
-surmonter un certain nombre de limitations liées aux modèles linéaires
-traditionnels. Dans cet atelier, vous apprendrez à déterminer si vous
-devez utiliser un modèle à effets mixtes pour analyser vos données. Nous
-allons vous guider à travers les étapes nécessaires pour utiliser un
-modèle linéaire mixte, vérifier les suppositions de base et présenter
-les résultats de votre modèle dans R. Nous allons également nous baser
-sur ce qui a été appris durant le dernier cours afin d'introduire les
-modèles linéaires généralisés avec effets mixtes.
+Les modèles à effets mixtes permettent aux écologistes de surmonter un certain nombre de limitations liées aux modèles linéaires traditionnels. 
 
-**Objectifs d'apprentissage**
+Dans cet atelier, vous apprendrez à déterminer si vous devez utiliser un modèle à effets mixtes pour analyser vos données. En particulier, nous allons:
 
--    Qu'est-ce qu'un modèle linéaire à effets mixtes (MLM) et pourquoi est-ce important?
--    Comment appliquer des MLMs dans R?
-      - Construction et exploration a priori des modèles et données
-      - Codage et sélection des modèles potentiels 
-      - Validation des modèles
-      - Interprétation des résultats et visualisation du modèle
--   Comment utiliser les MLM quand les suppositions de normailité et d'homogénéité de la variance ne sont pas respectées (GLMMs).
-.
+**1.** Décrire les modèles (généralisés) à effets mixtes
+
+**2.** Identifier les situations dans lesquelles l'utilisation d'effets mixtes est appropriée
+
+**3.** Mettre en œuvre des modèles linéaires mixtes de base avec `R`
+
+**4.** Exécuter des modèles linéaires généralisés mixtes de base avec `R`
+
+**5.** Valider, interpréter et visualiser les modèles mixtes avec `R`
+
 
 # Préparez-vous pour cet atelier
 
-**Téléchargez le script R et les données pour cet atelier:**
+Pour vous préparer à cet atelier, vous devez télécharger et installer les dernières versions de RStudio et de `R`. Vous devez également télécharger les données que nous utiliserons au cours de cet atelier:
 
--    [R Script](http://qcbs.ca/wiki/_media/lmm_e.r)
 -    [Fish data](http://qcbs.ca/wiki/_media/qcbs_w6_data.csv)
 -    [Arabidopsis data](http://qcbs.ca/wiki/_media/banta_totalfruits.csv)
 -    [Inverts data](http://qcbs.ca/wiki/_media/inverts.csv)
--    [GLMM Script](http://qcbs.ca/wiki/_media/glmm_e.r) 
 -    [glmm_funs](http://qcbs.ca/wiki/_media/glmm_funs.r) 
 
-**Télechargez les paquets R pour cet atelier:**
+
+Cet atelier nécessite les paquets `R` suivants:
 
 -    [ggplot2](http://cran.r-project.org/web/packages/ggplot2/index.html)
 -    [lm4](http://cran.r-project.org/web/packages/lme4/index.html)
@@ -44,6 +37,7 @@ modèles linéaires généralisés avec effets mixtes.
 -    [bbmle](http://cran.r-project.org/web/packages/bbmle/index.html)
 -    [DescTools](http://cran.r-project.org/web/packages/DescTools/index.html)
 
+Pour les installer depuis CRAN, exécutez:
 
 ```{r, echo = TRUE, eval = FALSE}
 install.packages("ggplot2")
@@ -53,7 +47,11 @@ install.packages("MASS")
 install.packages("vcdExtra")
 install.packages("bbmle")
 install.packages("DescTools")
+```
 
+Pour charger ces paquets, exécutez:
+
+```{r, echo = TRUE, eval = FALSE}
 library(ggplot2)
 library(lme4)
 library(AICcmodavg)
@@ -62,3 +60,4 @@ library(vcdExtra)
 library(bbmle)
 library(DescTools)
 ```
+
