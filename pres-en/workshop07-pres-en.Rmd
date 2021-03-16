@@ -129,7 +129,7 @@ install.packages(c("ggplot2",
 .alert[**Does fish trophic position increase with fish size?**
 ]
 
-To answer this question, we use a dataset where body lenght was measured in 3 different fish species with 10 individuals sampled per species across 6 different lakes.
+To answer this question, we use a dataset where body length was measured in 3 different fish species with 10 individuals sampled per species across 6 different lakes.
 
 .center[ ![:scale 75%](images/fig_1_qcbs_wiki.png) ]
 
