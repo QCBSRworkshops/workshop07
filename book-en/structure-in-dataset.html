@@ -5,20 +5,20 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 11 Structure in dataset | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)</title>
-  <meta name="description" content="Multivariate Analyses in R" />
+  <meta name="description" content="Linear and generalized linear mixed models (LMM and GLMM)" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 11 Structure in dataset | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://github.com/qcbsRworkshops/" />
   <meta property="og:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
-  <meta property="og:description" content="Multivariate Analyses in R" />
+  <meta property="og:description" content="Linear and generalized linear mixed models (LMM and GLMM)" />
   <meta name="github-repo" content="qcbsRworkshops/workshop09" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapter 11 Structure in dataset | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)" />
   
-  <meta name="twitter:description" content="Multivariate Analyses in R" />
+  <meta name="twitter:description" content="Linear and generalized linear mixed models (LMM and GLMM)" />
   <meta name="twitter:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
 
 <meta name="author" content="Developed and maintained by the contributors of the QCBS R Workshop Series" />
@@ -142,7 +142,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#contributors"><i class="fa fa-check"></i><b>0.2</b> Contributors</a></li>
 <li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#contributing"><i class="fa fa-check"></i><b>0.3</b> Contributing</a></li>
 </ul></li>
-<li class="part"><span><b>Preparation for the workshop</b></span></li>
+<li class="part"><span><b>Linear mixed models (LMM) in <code>R</code></b></span></li>
 <li class="chapter" data-level="1" data-path="learning-objectives.html"><a href="learning-objectives.html"><i class="fa fa-check"></i><b>1</b> Learning objectives</a></li>
 <li class="chapter" data-level="2" data-path="preparing-for-the-workshop.html"><a href="preparing-for-the-workshop.html"><i class="fa fa-check"></i><b>2</b> Preparing for the workshop</a></li>
 <li class="part"><span><b>Linear mixed models (LMMs)</b></span></li>
@@ -245,31 +245,31 @@ distribution should be used. Recall that an important property of the
 Poisson distribution is that the variance is equal to the mean. However,
 as we will see below, the group variances increase with the mean much
 more rapidly than expected under the Poisson distribution.</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="structure-in-dataset.html#cb35-1"></a><span class="co"># Create new variables that represents every combination</span></span>
-<span id="cb35-2"><a href="structure-in-dataset.html#cb35-2"></a><span class="co"># nutrient x clipping x random factor</span></span>
-<span id="cb35-3"><a href="structure-in-dataset.html#cb35-3"></a>dat.tf &lt;-<span class="st"> </span><span class="kw">within</span>(dat.tf, {</span>
-<span id="cb35-4"><a href="structure-in-dataset.html#cb35-4"></a>    <span class="co"># genotype x nutrient x clipping</span></span>
-<span id="cb35-5"><a href="structure-in-dataset.html#cb35-5"></a>    gna &lt;-<span class="st"> </span><span class="kw">interaction</span>(gen, nutrient, amd)</span>
-<span id="cb35-6"><a href="structure-in-dataset.html#cb35-6"></a>    gna &lt;-<span class="st"> </span><span class="kw">reorder</span>(gna, total.fruits, mean)</span>
-<span id="cb35-7"><a href="structure-in-dataset.html#cb35-7"></a>    <span class="co"># population x nutrient x clipping</span></span>
-<span id="cb35-8"><a href="structure-in-dataset.html#cb35-8"></a>    pna &lt;-<span class="st"> </span><span class="kw">interaction</span>(popu, nutrient, amd)</span>
-<span id="cb35-9"><a href="structure-in-dataset.html#cb35-9"></a>    pna &lt;-<span class="st"> </span><span class="kw">reorder</span>(pna, total.fruits, mean)</span>
-<span id="cb35-10"><a href="structure-in-dataset.html#cb35-10"></a>})</span>
-<span id="cb35-11"><a href="structure-in-dataset.html#cb35-11"></a></span>
-<span id="cb35-12"><a href="structure-in-dataset.html#cb35-12"></a></span>
-<span id="cb35-13"><a href="structure-in-dataset.html#cb35-13"></a><span class="co"># Boxplot of total fruits vs new variable (genotype x</span></span>
-<span id="cb35-14"><a href="structure-in-dataset.html#cb35-14"></a><span class="co"># nutrient x clipping)</span></span>
-<span id="cb35-15"><a href="structure-in-dataset.html#cb35-15"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> dat.tf, <span class="kw">aes</span>(<span class="kw">factor</span>(<span class="dt">x =</span> gna), <span class="dt">y =</span> <span class="kw">log</span>(total.fruits <span class="op">+</span><span class="st"> </span></span>
-<span id="cb35-16"><a href="structure-in-dataset.html#cb35-16"></a><span class="st">    </span><span class="dv">1</span>))) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>(<span class="dt">colour =</span> <span class="st">&quot;skyblue2&quot;</span>, <span class="dt">outlier.shape =</span> <span class="dv">21</span>, </span>
-<span id="cb35-17"><a href="structure-in-dataset.html#cb35-17"></a>    <span class="dt">outlier.colour =</span> <span class="st">&quot;skyblue2&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb35-18"><a href="structure-in-dataset.html#cb35-18"></a><span class="st">    </span><span class="kw">stat_summary</span>(<span class="dt">fun.y =</span> mean, <span class="dt">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>)</span>
-<span id="cb35-19"><a href="structure-in-dataset.html#cb35-19"></a></span>
-<span id="cb35-20"><a href="structure-in-dataset.html#cb35-20"></a><span class="co"># Boxplot of total fruits vs new variable (population x</span></span>
-<span id="cb35-21"><a href="structure-in-dataset.html#cb35-21"></a><span class="co"># nutrient x clipping)</span></span>
-<span id="cb35-22"><a href="structure-in-dataset.html#cb35-22"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> dat.tf, <span class="kw">aes</span>(<span class="kw">factor</span>(<span class="dt">x =</span> pna), <span class="dt">y =</span> <span class="kw">log</span>(total.fruits <span class="op">+</span><span class="st"> </span></span>
-<span id="cb35-23"><a href="structure-in-dataset.html#cb35-23"></a><span class="st">    </span><span class="dv">1</span>))) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>(<span class="dt">colour =</span> <span class="st">&quot;skyblue2&quot;</span>, <span class="dt">outlier.shape =</span> <span class="dv">21</span>, </span>
-<span id="cb35-24"><a href="structure-in-dataset.html#cb35-24"></a>    <span class="dt">outlier.colour =</span> <span class="st">&quot;skyblue2&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb35-25"><a href="structure-in-dataset.html#cb35-25"></a><span class="st">    </span><span class="kw">stat_summary</span>(<span class="dt">fun.y =</span> mean, <span class="dt">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="structure-in-dataset.html#cb36-1"></a><span class="co"># Create new variables that represents every combination</span></span>
+<span id="cb36-2"><a href="structure-in-dataset.html#cb36-2"></a><span class="co"># nutrient x clipping x random factor</span></span>
+<span id="cb36-3"><a href="structure-in-dataset.html#cb36-3"></a>dat.tf &lt;-<span class="st"> </span><span class="kw">within</span>(dat.tf, {</span>
+<span id="cb36-4"><a href="structure-in-dataset.html#cb36-4"></a>    <span class="co"># genotype x nutrient x clipping</span></span>
+<span id="cb36-5"><a href="structure-in-dataset.html#cb36-5"></a>    gna &lt;-<span class="st"> </span><span class="kw">interaction</span>(gen, nutrient, amd)</span>
+<span id="cb36-6"><a href="structure-in-dataset.html#cb36-6"></a>    gna &lt;-<span class="st"> </span><span class="kw">reorder</span>(gna, total.fruits, mean)</span>
+<span id="cb36-7"><a href="structure-in-dataset.html#cb36-7"></a>    <span class="co"># population x nutrient x clipping</span></span>
+<span id="cb36-8"><a href="structure-in-dataset.html#cb36-8"></a>    pna &lt;-<span class="st"> </span><span class="kw">interaction</span>(popu, nutrient, amd)</span>
+<span id="cb36-9"><a href="structure-in-dataset.html#cb36-9"></a>    pna &lt;-<span class="st"> </span><span class="kw">reorder</span>(pna, total.fruits, mean)</span>
+<span id="cb36-10"><a href="structure-in-dataset.html#cb36-10"></a>})</span>
+<span id="cb36-11"><a href="structure-in-dataset.html#cb36-11"></a></span>
+<span id="cb36-12"><a href="structure-in-dataset.html#cb36-12"></a></span>
+<span id="cb36-13"><a href="structure-in-dataset.html#cb36-13"></a><span class="co"># Boxplot of total fruits vs new variable (genotype x</span></span>
+<span id="cb36-14"><a href="structure-in-dataset.html#cb36-14"></a><span class="co"># nutrient x clipping)</span></span>
+<span id="cb36-15"><a href="structure-in-dataset.html#cb36-15"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> dat.tf, <span class="kw">aes</span>(<span class="kw">factor</span>(<span class="dt">x =</span> gna), <span class="dt">y =</span> <span class="kw">log</span>(total.fruits <span class="op">+</span><span class="st"> </span></span>
+<span id="cb36-16"><a href="structure-in-dataset.html#cb36-16"></a><span class="st">    </span><span class="dv">1</span>))) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>(<span class="dt">colour =</span> <span class="st">&quot;skyblue2&quot;</span>, <span class="dt">outlier.shape =</span> <span class="dv">21</span>, </span>
+<span id="cb36-17"><a href="structure-in-dataset.html#cb36-17"></a>    <span class="dt">outlier.colour =</span> <span class="st">&quot;skyblue2&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb36-18"><a href="structure-in-dataset.html#cb36-18"></a><span class="st">    </span><span class="kw">stat_summary</span>(<span class="dt">fun.y =</span> mean, <span class="dt">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>)</span>
+<span id="cb36-19"><a href="structure-in-dataset.html#cb36-19"></a></span>
+<span id="cb36-20"><a href="structure-in-dataset.html#cb36-20"></a><span class="co"># Boxplot of total fruits vs new variable (population x</span></span>
+<span id="cb36-21"><a href="structure-in-dataset.html#cb36-21"></a><span class="co"># nutrient x clipping)</span></span>
+<span id="cb36-22"><a href="structure-in-dataset.html#cb36-22"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> dat.tf, <span class="kw">aes</span>(<span class="kw">factor</span>(<span class="dt">x =</span> pna), <span class="dt">y =</span> <span class="kw">log</span>(total.fruits <span class="op">+</span><span class="st"> </span></span>
+<span id="cb36-23"><a href="structure-in-dataset.html#cb36-23"></a><span class="st">    </span><span class="dv">1</span>))) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>(<span class="dt">colour =</span> <span class="st">&quot;skyblue2&quot;</span>, <span class="dt">outlier.shape =</span> <span class="dv">21</span>, </span>
+<span id="cb36-24"><a href="structure-in-dataset.html#cb36-24"></a>    <span class="dt">outlier.colour =</span> <span class="st">&quot;skyblue2&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb36-25"><a href="structure-in-dataset.html#cb36-25"></a><span class="st">    </span><span class="kw">stat_summary</span>(<span class="dt">fun.y =</span> mean, <span class="dt">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
 <p><img src="images/workshp_6_glmm_boxplot.png" class="align-center" width="750" />
 <img src="images//workshop_6_glmm_boxplot_popu.png" class="align-center" width="750" /></p>
 <p>As illustrated above, there is a large amount of heterogeneity among the
@@ -302,8 +302,8 @@ treatments. We include the nuisance variables (rack and germination
 method) as fixed effects. Given the mean-variance relationship from
 above, we most likely will need a model with overdispersion, but let’s
 start with a Poisson model.</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="structure-in-dataset.html#cb36-1"></a>mp1 &lt;-<span class="st"> </span><span class="kw">glmer</span>(total.fruits <span class="op">~</span><span class="st"> </span>nutrient <span class="op">*</span><span class="st"> </span>amd <span class="op">+</span><span class="st"> </span>rack <span class="op">+</span><span class="st"> </span>status <span class="op">+</span><span class="st"> </span></span>
-<span id="cb36-2"><a href="structure-in-dataset.html#cb36-2"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>popu) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>gen), <span class="dt">data =</span> dat.tf, <span class="dt">family =</span> <span class="st">&quot;poisson&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="structure-in-dataset.html#cb37-1"></a>mp1 &lt;-<span class="st"> </span><span class="kw">glmer</span>(total.fruits <span class="op">~</span><span class="st"> </span>nutrient <span class="op">*</span><span class="st"> </span>amd <span class="op">+</span><span class="st"> </span>rack <span class="op">+</span><span class="st"> </span>status <span class="op">+</span><span class="st"> </span></span>
+<span id="cb37-2"><a href="structure-in-dataset.html#cb37-2"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>popu) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>gen), <span class="dt">data =</span> dat.tf, <span class="dt">family =</span> <span class="st">&quot;poisson&quot;</span>)</span></code></pre></div>
 <p>We can check for overdispersion using a function <code>overdisp_fun</code> provided
 by <a href="http://www.cell.com/cms/attachment/601623/4742452/mmc1.pdf">Bolker et al.
 (2011)</a>
@@ -312,13 +312,13 @@ and tests whether these values differ significantly (i.e., whether the
 ratio of residual deviance to residual df is significantly different
 from 1). A low p-value indicates that the data are over dispersed (i.e.,
 ratio is significantly different from 1).</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="structure-in-dataset.html#cb37-1"></a><span class="co"># Overdispersion?</span></span>
-<span id="cb37-2"><a href="structure-in-dataset.html#cb37-2"></a><span class="kw">overdisp_fun</span>(mp1)</span>
-<span id="cb37-3"><a href="structure-in-dataset.html#cb37-3"></a></span>
-<span id="cb37-4"><a href="structure-in-dataset.html#cb37-4"></a><span class="co"># Or as above, we can approximate this by dividing the</span></span>
-<span id="cb37-5"><a href="structure-in-dataset.html#cb37-5"></a><span class="co"># residual deviance by the residual df</span></span>
-<span id="cb37-6"><a href="structure-in-dataset.html#cb37-6"></a><span class="kw">summary</span>(mp1)</span>
-<span id="cb37-7"><a href="structure-in-dataset.html#cb37-7"></a><span class="co"># residual deviance = 18253.7 and resid df = 616</span></span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="structure-in-dataset.html#cb38-1"></a><span class="co"># Overdispersion?</span></span>
+<span id="cb38-2"><a href="structure-in-dataset.html#cb38-2"></a><span class="kw">overdisp_fun</span>(mp1)</span>
+<span id="cb38-3"><a href="structure-in-dataset.html#cb38-3"></a></span>
+<span id="cb38-4"><a href="structure-in-dataset.html#cb38-4"></a><span class="co"># Or as above, we can approximate this by dividing the</span></span>
+<span id="cb38-5"><a href="structure-in-dataset.html#cb38-5"></a><span class="co"># residual deviance by the residual df</span></span>
+<span id="cb38-6"><a href="structure-in-dataset.html#cb38-6"></a><span class="kw">summary</span>(mp1)</span>
+<span id="cb38-7"><a href="structure-in-dataset.html#cb38-7"></a><span class="co"># residual deviance = 18253.7 and resid df = 616</span></span></code></pre></div>
 <p>The ratio is significantly greater than unity, so as expected, we need
 to try a different distribution where the variance increases more
 rapidly than the mean, such as the negative binomial.</p>
@@ -328,23 +328,23 @@ rapidly than the mean, such as the negative binomial.</p>
 <p>Recall that the negative binomial (or Poisson-gamma) distribution meets
 the assumption that the variance is <strong>proportional to the square of the
 mean</strong>.</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="structure-in-dataset.html#cb38-1"></a><span class="co"># Note: This model converges well if you are running R</span></span>
-<span id="cb38-2"><a href="structure-in-dataset.html#cb38-2"></a><span class="co"># version 3.0.2, but may not converge with later versions. If</span></span>
-<span id="cb38-3"><a href="structure-in-dataset.html#cb38-3"></a><span class="co"># you are having convergence issues, please try with version</span></span>
-<span id="cb38-4"><a href="structure-in-dataset.html#cb38-4"></a><span class="co"># 3.0.2.</span></span>
-<span id="cb38-5"><a href="structure-in-dataset.html#cb38-5"></a></span>
-<span id="cb38-6"><a href="structure-in-dataset.html#cb38-6"></a>mnb1 &lt;-<span class="st"> </span><span class="kw">glmer.nb</span>(total.fruits <span class="op">~</span><span class="st"> </span>nutrient <span class="op">*</span><span class="st"> </span>amd <span class="op">+</span><span class="st"> </span>rack <span class="op">+</span><span class="st"> </span>status <span class="op">+</span><span class="st"> </span></span>
-<span id="cb38-7"><a href="structure-in-dataset.html#cb38-7"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>popu) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>gen), <span class="dt">data =</span> dat.tf, <span class="dt">control =</span> <span class="kw">glmerControl</span>(<span class="dt">optimizer =</span> <span class="st">&quot;bobyqa&quot;</span>))</span>
-<span id="cb38-8"><a href="structure-in-dataset.html#cb38-8"></a><span class="co"># Although beyond the scope of this workshop, the new</span></span>
-<span id="cb38-9"><a href="structure-in-dataset.html#cb38-9"></a><span class="co"># &#39;control&#39; argument specifies the way we optimize the</span></span>
-<span id="cb38-10"><a href="structure-in-dataset.html#cb38-10"></a><span class="co"># parameter values (i.e. by taking the derivative of a</span></span>
-<span id="cb38-11"><a href="structure-in-dataset.html#cb38-11"></a><span class="co"># function or proceeding by iteration).  When taking the</span></span>
-<span id="cb38-12"><a href="structure-in-dataset.html#cb38-12"></a><span class="co"># derivative is not possible, an iterative algorithm such as</span></span>
-<span id="cb38-13"><a href="structure-in-dataset.html#cb38-13"></a><span class="co"># bobyqa (Bound Optimization BY Quadratic Approximation) is</span></span>
-<span id="cb38-14"><a href="structure-in-dataset.html#cb38-14"></a><span class="co"># used.</span></span>
-<span id="cb38-15"><a href="structure-in-dataset.html#cb38-15"></a></span>
-<span id="cb38-16"><a href="structure-in-dataset.html#cb38-16"></a><span class="co"># Overdispersion?</span></span>
-<span id="cb38-17"><a href="structure-in-dataset.html#cb38-17"></a><span class="kw">overdisp_fun</span>(mnb1)</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="structure-in-dataset.html#cb39-1"></a><span class="co"># Note: This model converges well if you are running R</span></span>
+<span id="cb39-2"><a href="structure-in-dataset.html#cb39-2"></a><span class="co"># version 3.0.2, but may not converge with later versions. If</span></span>
+<span id="cb39-3"><a href="structure-in-dataset.html#cb39-3"></a><span class="co"># you are having convergence issues, please try with version</span></span>
+<span id="cb39-4"><a href="structure-in-dataset.html#cb39-4"></a><span class="co"># 3.0.2.</span></span>
+<span id="cb39-5"><a href="structure-in-dataset.html#cb39-5"></a></span>
+<span id="cb39-6"><a href="structure-in-dataset.html#cb39-6"></a>mnb1 &lt;-<span class="st"> </span><span class="kw">glmer.nb</span>(total.fruits <span class="op">~</span><span class="st"> </span>nutrient <span class="op">*</span><span class="st"> </span>amd <span class="op">+</span><span class="st"> </span>rack <span class="op">+</span><span class="st"> </span>status <span class="op">+</span><span class="st"> </span></span>
+<span id="cb39-7"><a href="structure-in-dataset.html#cb39-7"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>popu) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>gen), <span class="dt">data =</span> dat.tf, <span class="dt">control =</span> <span class="kw">glmerControl</span>(<span class="dt">optimizer =</span> <span class="st">&quot;bobyqa&quot;</span>))</span>
+<span id="cb39-8"><a href="structure-in-dataset.html#cb39-8"></a><span class="co"># Although beyond the scope of this workshop, the new</span></span>
+<span id="cb39-9"><a href="structure-in-dataset.html#cb39-9"></a><span class="co"># &#39;control&#39; argument specifies the way we optimize the</span></span>
+<span id="cb39-10"><a href="structure-in-dataset.html#cb39-10"></a><span class="co"># parameter values (i.e. by taking the derivative of a</span></span>
+<span id="cb39-11"><a href="structure-in-dataset.html#cb39-11"></a><span class="co"># function or proceeding by iteration).  When taking the</span></span>
+<span id="cb39-12"><a href="structure-in-dataset.html#cb39-12"></a><span class="co"># derivative is not possible, an iterative algorithm such as</span></span>
+<span id="cb39-13"><a href="structure-in-dataset.html#cb39-13"></a><span class="co"># bobyqa (Bound Optimization BY Quadratic Approximation) is</span></span>
+<span id="cb39-14"><a href="structure-in-dataset.html#cb39-14"></a><span class="co"># used.</span></span>
+<span id="cb39-15"><a href="structure-in-dataset.html#cb39-15"></a></span>
+<span id="cb39-16"><a href="structure-in-dataset.html#cb39-16"></a><span class="co"># Overdispersion?</span></span>
+<span id="cb39-17"><a href="structure-in-dataset.html#cb39-17"></a><span class="kw">overdisp_fun</span>(mnb1)</span></code></pre></div>
 <p>The ratio is now much closer to unity (although the p-value is still
 less than 0.05).</p>
 </div>
@@ -370,11 +370,11 @@ Poisson-lognormal model can allow for a more flexible approach to
 assigning the observed aggregation to different sources of
 heterogeneity. Here, to implement the observation-level random effect,
 we will evaluate it at the individual level.</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="structure-in-dataset.html#cb39-1"></a>mpl1 &lt;-<span class="st"> </span><span class="kw">glmer</span>(total.fruits <span class="op">~</span><span class="st"> </span>nutrient <span class="op">*</span><span class="st"> </span>amd <span class="op">+</span><span class="st"> </span>rack <span class="op">+</span><span class="st"> </span>status <span class="op">+</span><span class="st"> </span></span>
-<span id="cb39-2"><a href="structure-in-dataset.html#cb39-2"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>X) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>popu) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>gen), <span class="dt">data =</span> dat.tf, <span class="dt">family =</span> <span class="st">&quot;poisson&quot;</span>, </span>
-<span id="cb39-3"><a href="structure-in-dataset.html#cb39-3"></a>    <span class="dt">control =</span> <span class="kw">glmerControl</span>(<span class="dt">optimizer =</span> <span class="st">&quot;bobyqa&quot;</span>))</span>
-<span id="cb39-4"><a href="structure-in-dataset.html#cb39-4"></a></span>
-<span id="cb39-5"><a href="structure-in-dataset.html#cb39-5"></a><span class="kw">overdisp_fun</span>(mpl1)</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="structure-in-dataset.html#cb40-1"></a>mpl1 &lt;-<span class="st"> </span><span class="kw">glmer</span>(total.fruits <span class="op">~</span><span class="st"> </span>nutrient <span class="op">*</span><span class="st"> </span>amd <span class="op">+</span><span class="st"> </span>rack <span class="op">+</span><span class="st"> </span>status <span class="op">+</span><span class="st"> </span></span>
+<span id="cb40-2"><a href="structure-in-dataset.html#cb40-2"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>X) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>popu) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>gen), <span class="dt">data =</span> dat.tf, <span class="dt">family =</span> <span class="st">&quot;poisson&quot;</span>, </span>
+<span id="cb40-3"><a href="structure-in-dataset.html#cb40-3"></a>    <span class="dt">control =</span> <span class="kw">glmerControl</span>(<span class="dt">optimizer =</span> <span class="st">&quot;bobyqa&quot;</span>))</span>
+<span id="cb40-4"><a href="structure-in-dataset.html#cb40-4"></a></span>
+<span id="cb40-5"><a href="structure-in-dataset.html#cb40-5"></a><span class="kw">overdisp_fun</span>(mpl1)</span></code></pre></div>
 <p>We did it! The ratio between residual deviance and residual df now meets
 our criterion (in fact, it is even <em>smaller</em> 1).</p>
 

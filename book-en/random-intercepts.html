@@ -5,20 +5,20 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 12 Random intercepts | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)</title>
-  <meta name="description" content="Multivariate Analyses in R" />
+  <meta name="description" content="Linear and generalized linear mixed models (LMM and GLMM)" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 12 Random intercepts | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://github.com/qcbsRworkshops/" />
   <meta property="og:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
-  <meta property="og:description" content="Multivariate Analyses in R" />
+  <meta property="og:description" content="Linear and generalized linear mixed models (LMM and GLMM)" />
   <meta name="github-repo" content="qcbsRworkshops/workshop09" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapter 12 Random intercepts | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)" />
   
-  <meta name="twitter:description" content="Multivariate Analyses in R" />
+  <meta name="twitter:description" content="Linear and generalized linear mixed models (LMM and GLMM)" />
   <meta name="twitter:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
 
 <meta name="author" content="Developed and maintained by the contributors of the QCBS R Workshop Series" />
@@ -142,7 +142,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#contributors"><i class="fa fa-check"></i><b>0.2</b> Contributors</a></li>
 <li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#contributing"><i class="fa fa-check"></i><b>0.3</b> Contributing</a></li>
 </ul></li>
-<li class="part"><span><b>Preparation for the workshop</b></span></li>
+<li class="part"><span><b>Linear mixed models (LMM) in <code>R</code></b></span></li>
 <li class="chapter" data-level="1" data-path="learning-objectives.html"><a href="learning-objectives.html"><i class="fa fa-check"></i><b>1</b> Learning objectives</a></li>
 <li class="chapter" data-level="2" data-path="preparing-for-the-workshop.html"><a href="preparing-for-the-workshop.html"><i class="fa fa-check"></i><b>2</b> Preparing for the workshop</a></li>
 <li class="part"><span><b>Linear mixed models (LMMs)</b></span></li>
@@ -346,19 +346,19 @@ levels, and while this variation may be what we are most interested in,
 there is simply not enough data to test these e ffects with confidence.</p>
 <p>Let’s have a look at an example of this by testing the random slope
 terms for clipping:</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="random-intercepts.html#cb43-1"></a><span class="co"># Poisson-lognormal with random slopes for popu and amd</span></span>
-<span id="cb43-2"><a href="random-intercepts.html#cb43-2"></a>mpl2 &lt;-<span class="st"> </span><span class="kw">glmer</span>(total.fruits <span class="op">~</span><span class="st"> </span>nutrient <span class="op">*</span><span class="st"> </span>amd <span class="op">+</span><span class="st"> </span>rack <span class="op">+</span><span class="st"> </span>status <span class="op">+</span><span class="st"> </span></span>
-<span id="cb43-3"><a href="random-intercepts.html#cb43-3"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>X) <span class="op">+</span><span class="st"> </span>(amd <span class="op">|</span><span class="st"> </span>popu) <span class="op">+</span><span class="st"> </span>(amd <span class="op">|</span><span class="st"> </span>gen), <span class="dt">data =</span> dat.tf, <span class="dt">family =</span> <span class="st">&quot;poisson&quot;</span>, </span>
-<span id="cb43-4"><a href="random-intercepts.html#cb43-4"></a>    <span class="dt">control =</span> <span class="kw">glmerControl</span>(<span class="dt">optimizer =</span> <span class="st">&quot;bobyqa&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="random-intercepts.html#cb44-1"></a><span class="co"># Poisson-lognormal with random slopes for popu and amd</span></span>
+<span id="cb44-2"><a href="random-intercepts.html#cb44-2"></a>mpl2 &lt;-<span class="st"> </span><span class="kw">glmer</span>(total.fruits <span class="op">~</span><span class="st"> </span>nutrient <span class="op">*</span><span class="st"> </span>amd <span class="op">+</span><span class="st"> </span>rack <span class="op">+</span><span class="st"> </span>status <span class="op">+</span><span class="st"> </span></span>
+<span id="cb44-3"><a href="random-intercepts.html#cb44-3"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>X) <span class="op">+</span><span class="st"> </span>(amd <span class="op">|</span><span class="st"> </span>popu) <span class="op">+</span><span class="st"> </span>(amd <span class="op">|</span><span class="st"> </span>gen), <span class="dt">data =</span> dat.tf, <span class="dt">family =</span> <span class="st">&quot;poisson&quot;</span>, </span>
+<span id="cb44-4"><a href="random-intercepts.html#cb44-4"></a>    <span class="dt">control =</span> <span class="kw">glmerControl</span>(<span class="dt">optimizer =</span> <span class="st">&quot;bobyqa&quot;</span>))</span></code></pre></div>
 <p>We can examine the variance components using the model <code>summary</code>.
 Alternatively, we could examine the correlation matrix among the random
 clipping intercepts and slopes. A third option is to use the <code>printvc</code>
 function that prints the variance-covariance matrices along with an
 equals sign ( = ) next to any covariance component with a nearly perfect
 correlation.</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="random-intercepts.html#cb44-1"></a><span class="kw">summary</span>(mpl2)  <span class="co"># option 1</span></span>
-<span id="cb44-2"><a href="random-intercepts.html#cb44-2"></a><span class="kw">attr</span>(<span class="kw">VarCorr</span>(mpl2)<span class="op">$</span>gen, <span class="st">&quot;correlation&quot;</span>)  <span class="co"># option 2</span></span>
-<span id="cb44-3"><a href="random-intercepts.html#cb44-3"></a><span class="kw">printvc</span>(mpl2)  <span class="co"># option 3</span></span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="random-intercepts.html#cb45-1"></a><span class="kw">summary</span>(mpl2)  <span class="co"># option 1</span></span>
+<span id="cb45-2"><a href="random-intercepts.html#cb45-2"></a><span class="kw">attr</span>(<span class="kw">VarCorr</span>(mpl2)<span class="op">$</span>gen, <span class="st">&quot;correlation&quot;</span>)  <span class="co"># option 2</span></span>
+<span id="cb45-3"><a href="random-intercepts.html#cb45-3"></a><span class="kw">printvc</span>(mpl2)  <span class="co"># option 3</span></span></code></pre></div>
 <p>Notice the perfect correlation between (Intercept) and amdclipped
 (slope). ++++</p>
 

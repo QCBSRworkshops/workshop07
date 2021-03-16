@@ -5,20 +5,20 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 5 Introduction to the dataset | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)</title>
-  <meta name="description" content="Multivariate Analyses in R" />
+  <meta name="description" content="Linear and generalized linear mixed models (LMM and GLMM)" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 5 Introduction to the dataset | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://github.com/qcbsRworkshops/" />
   <meta property="og:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
-  <meta property="og:description" content="Multivariate Analyses in R" />
+  <meta property="og:description" content="Linear and generalized linear mixed models (LMM and GLMM)" />
   <meta name="github-repo" content="qcbsRworkshops/workshop09" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapter 5 Introduction to the dataset | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)" />
   
-  <meta name="twitter:description" content="Multivariate Analyses in R" />
+  <meta name="twitter:description" content="Linear and generalized linear mixed models (LMM and GLMM)" />
   <meta name="twitter:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
 
 <meta name="author" content="Developed and maintained by the contributors of the QCBS R Workshop Series" />
@@ -142,7 +142,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#contributors"><i class="fa fa-check"></i><b>0.2</b> Contributors</a></li>
 <li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#contributing"><i class="fa fa-check"></i><b>0.3</b> Contributing</a></li>
 </ul></li>
-<li class="part"><span><b>Preparation for the workshop</b></span></li>
+<li class="part"><span><b>Linear mixed models (LMM) in <code>R</code></b></span></li>
 <li class="chapter" data-level="1" data-path="learning-objectives.html"><a href="learning-objectives.html"><i class="fa fa-check"></i><b>1</b> Learning objectives</a></li>
 <li class="chapter" data-level="2" data-path="preparing-for-the-workshop.html"><a href="preparing-for-the-workshop.html"><i class="fa fa-check"></i><b>2</b> Preparing for the workshop</a></li>
 <li class="part"><span><b>Linear mixed models (LMMs)</b></span></li>
@@ -226,35 +226,35 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="introduction-to-the-dataset" class="section level1">
 <h1><span class="header-section-number">Chapter 5</span> Introduction to the dataset</h1>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="introduction-to-the-dataset.html#cb2-1"></a><span class="co"># Remove prior commands in R</span></span>
-<span id="cb2-2"><a href="introduction-to-the-dataset.html#cb2-2"></a><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())</span>
-<span id="cb2-3"><a href="introduction-to-the-dataset.html#cb2-3"></a></span>
-<span id="cb2-4"><a href="introduction-to-the-dataset.html#cb2-4"></a><span class="co"># Place all workshop material in one folder on your computer</span></span>
-<span id="cb2-5"><a href="introduction-to-the-dataset.html#cb2-5"></a><span class="co"># Run the following line of code and use the browsing window</span></span>
-<span id="cb2-6"><a href="introduction-to-the-dataset.html#cb2-6"></a><span class="co"># to choose the QCBS_W6_Data.csv file in the folder that</span></span>
-<span id="cb2-7"><a href="introduction-to-the-dataset.html#cb2-7"></a><span class="co"># contains the workshop material</span></span>
-<span id="cb2-8"><a href="introduction-to-the-dataset.html#cb2-8"></a><span class="kw">file.choose</span>()</span>
-<span id="cb2-9"><a href="introduction-to-the-dataset.html#cb2-9"></a></span>
-<span id="cb2-10"><a href="introduction-to-the-dataset.html#cb2-10"></a><span class="co"># Set the working directory to the folder which contains the</span></span>
-<span id="cb2-11"><a href="introduction-to-the-dataset.html#cb2-11"></a><span class="co"># lab material by copy and pasting all but the R file name</span></span>
-<span id="cb2-12"><a href="introduction-to-the-dataset.html#cb2-12"></a><span class="co"># from the output of the file.choose() command into the set</span></span>
-<span id="cb2-13"><a href="introduction-to-the-dataset.html#cb2-13"></a><span class="co"># working directory command.</span></span>
-<span id="cb2-14"><a href="introduction-to-the-dataset.html#cb2-14"></a></span>
-<span id="cb2-15"><a href="introduction-to-the-dataset.html#cb2-15"></a><span class="co"># For example paste &#39;/Users/ziegljac/Documents/QCBS_R/&#39; -&gt;</span></span>
-<span id="cb2-16"><a href="introduction-to-the-dataset.html#cb2-16"></a><span class="co"># include the quotations NOT</span></span>
-<span id="cb2-17"><a href="introduction-to-the-dataset.html#cb2-17"></a><span class="co"># &#39;/Users/ziegljac/Documents/QCBS_R/Get_Data_Func.R&#39; -&gt;</span></span>
-<span id="cb2-18"><a href="introduction-to-the-dataset.html#cb2-18"></a><span class="co"># include the quotations</span></span>
-<span id="cb2-19"><a href="introduction-to-the-dataset.html#cb2-19"></a><span class="kw">setwd</span>()</span>
-<span id="cb2-20"><a href="introduction-to-the-dataset.html#cb2-20"></a></span>
-<span id="cb2-21"><a href="introduction-to-the-dataset.html#cb2-21"></a><span class="co"># Load useful libraries and data If you have never loaded</span></span>
-<span id="cb2-22"><a href="introduction-to-the-dataset.html#cb2-22"></a><span class="co"># these libraries before you will have to use The</span></span>
-<span id="cb2-23"><a href="introduction-to-the-dataset.html#cb2-23"></a><span class="co"># install.packages() function before the library() function</span></span>
-<span id="cb2-24"><a href="introduction-to-the-dataset.html#cb2-24"></a><span class="kw">library</span>(ggplot2)</span>
-<span id="cb2-25"><a href="introduction-to-the-dataset.html#cb2-25"></a><span class="kw">library</span>(lme4)</span>
-<span id="cb2-26"><a href="introduction-to-the-dataset.html#cb2-26"></a><span class="kw">library</span>(arm)</span>
-<span id="cb2-27"><a href="introduction-to-the-dataset.html#cb2-27"></a><span class="kw">library</span>(AICcmodavg)</span>
-<span id="cb2-28"><a href="introduction-to-the-dataset.html#cb2-28"></a></span>
-<span id="cb2-29"><a href="introduction-to-the-dataset.html#cb2-29"></a>data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;QCBS_W6_Data.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="introduction-to-the-dataset.html#cb3-1"></a><span class="co"># Remove prior commands in R</span></span>
+<span id="cb3-2"><a href="introduction-to-the-dataset.html#cb3-2"></a><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())</span>
+<span id="cb3-3"><a href="introduction-to-the-dataset.html#cb3-3"></a></span>
+<span id="cb3-4"><a href="introduction-to-the-dataset.html#cb3-4"></a><span class="co"># Place all workshop material in one folder on your computer</span></span>
+<span id="cb3-5"><a href="introduction-to-the-dataset.html#cb3-5"></a><span class="co"># Run the following line of code and use the browsing window</span></span>
+<span id="cb3-6"><a href="introduction-to-the-dataset.html#cb3-6"></a><span class="co"># to choose the QCBS_W6_Data.csv file in the folder that</span></span>
+<span id="cb3-7"><a href="introduction-to-the-dataset.html#cb3-7"></a><span class="co"># contains the workshop material</span></span>
+<span id="cb3-8"><a href="introduction-to-the-dataset.html#cb3-8"></a><span class="kw">file.choose</span>()</span>
+<span id="cb3-9"><a href="introduction-to-the-dataset.html#cb3-9"></a></span>
+<span id="cb3-10"><a href="introduction-to-the-dataset.html#cb3-10"></a><span class="co"># Set the working directory to the folder which contains the</span></span>
+<span id="cb3-11"><a href="introduction-to-the-dataset.html#cb3-11"></a><span class="co"># lab material by copy and pasting all but the R file name</span></span>
+<span id="cb3-12"><a href="introduction-to-the-dataset.html#cb3-12"></a><span class="co"># from the output of the file.choose() command into the set</span></span>
+<span id="cb3-13"><a href="introduction-to-the-dataset.html#cb3-13"></a><span class="co"># working directory command.</span></span>
+<span id="cb3-14"><a href="introduction-to-the-dataset.html#cb3-14"></a></span>
+<span id="cb3-15"><a href="introduction-to-the-dataset.html#cb3-15"></a><span class="co"># For example paste &#39;/Users/ziegljac/Documents/QCBS_R/&#39; -&gt;</span></span>
+<span id="cb3-16"><a href="introduction-to-the-dataset.html#cb3-16"></a><span class="co"># include the quotations NOT</span></span>
+<span id="cb3-17"><a href="introduction-to-the-dataset.html#cb3-17"></a><span class="co"># &#39;/Users/ziegljac/Documents/QCBS_R/Get_Data_Func.R&#39; -&gt;</span></span>
+<span id="cb3-18"><a href="introduction-to-the-dataset.html#cb3-18"></a><span class="co"># include the quotations</span></span>
+<span id="cb3-19"><a href="introduction-to-the-dataset.html#cb3-19"></a><span class="kw">setwd</span>()</span>
+<span id="cb3-20"><a href="introduction-to-the-dataset.html#cb3-20"></a></span>
+<span id="cb3-21"><a href="introduction-to-the-dataset.html#cb3-21"></a><span class="co"># Load useful libraries and data If you have never loaded</span></span>
+<span id="cb3-22"><a href="introduction-to-the-dataset.html#cb3-22"></a><span class="co"># these libraries before you will have to use The</span></span>
+<span id="cb3-23"><a href="introduction-to-the-dataset.html#cb3-23"></a><span class="co"># install.packages() function before the library() function</span></span>
+<span id="cb3-24"><a href="introduction-to-the-dataset.html#cb3-24"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb3-25"><a href="introduction-to-the-dataset.html#cb3-25"></a><span class="kw">library</span>(lme4)</span>
+<span id="cb3-26"><a href="introduction-to-the-dataset.html#cb3-26"></a><span class="kw">library</span>(arm)</span>
+<span id="cb3-27"><a href="introduction-to-the-dataset.html#cb3-27"></a><span class="kw">library</span>(AICcmodavg)</span>
+<span id="cb3-28"><a href="introduction-to-the-dataset.html#cb3-28"></a></span>
+<span id="cb3-29"><a href="introduction-to-the-dataset.html#cb3-29"></a>data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;QCBS_W6_Data.csv&quot;</span>)</span></code></pre></div>
 <p>The dataset we will be using deals with fish trophic positions.
 Individuals were sampled over a range of body lengths that come from
 three different fish species caught in six different lakes. Here is a
@@ -273,27 +273,27 @@ is occurring. Two key questions to ask yourself are:</p>
 <pre><code>-Do I expect all species to increase in trophic position with length? In the exact same way?
 -Do I expect these relationships to be the same across lakes? What might differ?</code></pre>
 <p>++++ Challenge 1 Answer |</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="introduction-to-the-dataset.html#cb4-1"></a><span class="co"># Used to strip down figures to make them simpler</span></span>
-<span id="cb4-2"><a href="introduction-to-the-dataset.html#cb4-2"></a>fig &lt;-<span class="st"> </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(), </span>
-<span id="cb4-3"><a href="introduction-to-the-dataset.html#cb4-3"></a>    <span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), <span class="dt">panel.background =</span> <span class="kw">element_blank</span>()) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb4-4"><a href="introduction-to-the-dataset.html#cb4-4"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">strip.background =</span> <span class="kw">element_blank</span>(), <span class="dt">strip.text.y =</span> <span class="kw">element_text</span>()) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb4-5"><a href="introduction-to-the-dataset.html#cb4-5"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">legend.background =</span> <span class="kw">element_blank</span>()) <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">legend.key =</span> <span class="kw">element_blank</span>()) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb4-6"><a href="introduction-to-the-dataset.html#cb4-6"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">panel.border =</span> <span class="kw">element_rect</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill =</span> <span class="ot">NA</span>))</span>
-<span id="cb4-7"><a href="introduction-to-the-dataset.html#cb4-7"></a></span>
-<span id="cb4-8"><a href="introduction-to-the-dataset.html#cb4-8"></a><span class="co"># Make the followoing three plots to explore the data</span></span>
-<span id="cb4-9"><a href="introduction-to-the-dataset.html#cb4-9"></a>plot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Fish_Length, Trophic_Pos), <span class="dt">data =</span> data)</span>
-<span id="cb4-10"><a href="introduction-to-the-dataset.html#cb4-10"></a></span>
-<span id="cb4-11"><a href="introduction-to-the-dataset.html#cb4-11"></a><span class="co"># Plot 1 - All Data</span></span>
-<span id="cb4-12"><a href="introduction-to-the-dataset.html#cb4-12"></a>plot <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Length (mm)&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Trophic Position&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb4-13"><a href="introduction-to-the-dataset.html#cb4-13"></a><span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;All Data&quot;</span>) <span class="op">+</span><span class="st"> </span>fig</span>
-<span id="cb4-14"><a href="introduction-to-the-dataset.html#cb4-14"></a></span>
-<span id="cb4-15"><a href="introduction-to-the-dataset.html#cb4-15"></a><span class="co"># Plot 2 - By Speceis</span></span>
-<span id="cb4-16"><a href="introduction-to-the-dataset.html#cb4-16"></a>plot <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">facet_wrap</span>(<span class="op">~</span>Fish_Species) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Length (mm)&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb4-17"><a href="introduction-to-the-dataset.html#cb4-17"></a><span class="st">    </span><span class="kw">ylab</span>(<span class="st">&quot;Trophic Position&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;By Species&quot;</span>) <span class="op">+</span><span class="st"> </span>fig</span>
-<span id="cb4-18"><a href="introduction-to-the-dataset.html#cb4-18"></a></span>
-<span id="cb4-19"><a href="introduction-to-the-dataset.html#cb4-19"></a><span class="co"># Plot 3 - By Lake</span></span>
-<span id="cb4-20"><a href="introduction-to-the-dataset.html#cb4-20"></a>plot <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">facet_wrap</span>(<span class="op">~</span>Lake) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Length (mm)&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb4-21"><a href="introduction-to-the-dataset.html#cb4-21"></a><span class="st">    </span><span class="kw">ylab</span>(<span class="st">&quot;Trophic Position&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;By Lake&quot;</span>) <span class="op">+</span><span class="st"> </span>fig</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="introduction-to-the-dataset.html#cb5-1"></a><span class="co"># Used to strip down figures to make them simpler</span></span>
+<span id="cb5-2"><a href="introduction-to-the-dataset.html#cb5-2"></a>fig &lt;-<span class="st"> </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(), </span>
+<span id="cb5-3"><a href="introduction-to-the-dataset.html#cb5-3"></a>    <span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), <span class="dt">panel.background =</span> <span class="kw">element_blank</span>()) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb5-4"><a href="introduction-to-the-dataset.html#cb5-4"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">strip.background =</span> <span class="kw">element_blank</span>(), <span class="dt">strip.text.y =</span> <span class="kw">element_text</span>()) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb5-5"><a href="introduction-to-the-dataset.html#cb5-5"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">legend.background =</span> <span class="kw">element_blank</span>()) <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">legend.key =</span> <span class="kw">element_blank</span>()) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb5-6"><a href="introduction-to-the-dataset.html#cb5-6"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">panel.border =</span> <span class="kw">element_rect</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill =</span> <span class="ot">NA</span>))</span>
+<span id="cb5-7"><a href="introduction-to-the-dataset.html#cb5-7"></a></span>
+<span id="cb5-8"><a href="introduction-to-the-dataset.html#cb5-8"></a><span class="co"># Make the followoing three plots to explore the data</span></span>
+<span id="cb5-9"><a href="introduction-to-the-dataset.html#cb5-9"></a>plot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Fish_Length, Trophic_Pos), <span class="dt">data =</span> data)</span>
+<span id="cb5-10"><a href="introduction-to-the-dataset.html#cb5-10"></a></span>
+<span id="cb5-11"><a href="introduction-to-the-dataset.html#cb5-11"></a><span class="co"># Plot 1 - All Data</span></span>
+<span id="cb5-12"><a href="introduction-to-the-dataset.html#cb5-12"></a>plot <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Length (mm)&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Trophic Position&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb5-13"><a href="introduction-to-the-dataset.html#cb5-13"></a><span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;All Data&quot;</span>) <span class="op">+</span><span class="st"> </span>fig</span>
+<span id="cb5-14"><a href="introduction-to-the-dataset.html#cb5-14"></a></span>
+<span id="cb5-15"><a href="introduction-to-the-dataset.html#cb5-15"></a><span class="co"># Plot 2 - By Speceis</span></span>
+<span id="cb5-16"><a href="introduction-to-the-dataset.html#cb5-16"></a>plot <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">facet_wrap</span>(<span class="op">~</span>Fish_Species) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Length (mm)&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb5-17"><a href="introduction-to-the-dataset.html#cb5-17"></a><span class="st">    </span><span class="kw">ylab</span>(<span class="st">&quot;Trophic Position&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;By Species&quot;</span>) <span class="op">+</span><span class="st"> </span>fig</span>
+<span id="cb5-18"><a href="introduction-to-the-dataset.html#cb5-18"></a></span>
+<span id="cb5-19"><a href="introduction-to-the-dataset.html#cb5-19"></a><span class="co"># Plot 3 - By Lake</span></span>
+<span id="cb5-20"><a href="introduction-to-the-dataset.html#cb5-20"></a>plot <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">facet_wrap</span>(<span class="op">~</span>Lake) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Length (mm)&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb5-21"><a href="introduction-to-the-dataset.html#cb5-21"></a><span class="st">    </span><span class="kw">ylab</span>(<span class="st">&quot;Trophic Position&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;By Lake&quot;</span>) <span class="op">+</span><span class="st"> </span>fig</span></code></pre></div>
 <p><strong>OUTPUT</strong><br />
 <strong>Plot 1</strong> <img src="images/fig_2_w5.png" width="300" /> <strong>Plot 2</strong>
 <img src="images/fig_3_w5.png" width="300" /></p>
