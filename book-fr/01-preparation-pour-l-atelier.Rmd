@@ -1,4 +1,4 @@
-# (PART\*) Preparation pour l'atelier {-}
+# (PART\*) Modèles linéaires mixtes en `R` {-}
 
 # Objectifs d'apprentissage
 

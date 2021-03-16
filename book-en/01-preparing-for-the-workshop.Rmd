@@ -1,4 +1,4 @@
-# (PART\*) Preparation for the workshop {-}
+# (PART\*) Linear mixed models (LMM) in `R` {-}
 
 # Learning objectives
 
