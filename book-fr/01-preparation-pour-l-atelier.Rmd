@@ -21,6 +21,7 @@ Dans cet atelier, vous apprendrez à déterminer si vous devez utiliser un modè
 
 Pour vous préparer à cet atelier, vous devez télécharger et installer les dernières versions de RStudio et de `R`. Vous devez également télécharger les données que nous utiliserons au cours de cet atelier:
 
+-    [R Script](https://qcbsrworkshops.github.io/workshop07/book-fr/workshop07-script-fr.R)
 -    [Fish data](http://qcbs.ca/wiki/_media/qcbs_w6_data.csv)
 -    [Arabidopsis data](http://qcbs.ca/wiki/_media/banta_totalfruits.csv)
 -    [Inverts data](http://qcbs.ca/wiki/_media/inverts.csv)
