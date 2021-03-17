@@ -1,0 +1,147 @@
+
+# (PART\*) Model selection {-}
+
+The same methods can be used with a glmm or lmm to choose between models with various random intercepts and/or random slopes and to choose fixed effects to keep in final model.
+
+<br>
+
+Here are two approaches :
+
+- an **information theoretic approach** (e.g., AICc - Workshop 5)
+- a **frequentist approach** (where the significance of each term is evaluated using a likelihood ratio test; LRT, with the `anova()` function)
+
+
+---
+
+We first code potential models and compare them using AICc.comment[*]:
+
+```{r}
+mpl2 <- update(mpl1, . ~ . - rack) # model without rack
+mpl3 <- update(mpl1, . ~ . - status) # model without status
+mpl4 <- update(mpl1, . ~ . - amd:nutrient) # without amd:nutrient interaction
+
+aic_tab  <- MuMIn::model.sel(mpl1, mpl2, mpl3, mpl4)
+(round(aic_table <- aic_tab[ , c("AICc", "delta", "df")], digits = 2))
+```
+
+.comment[*NB: We do not cover all possible models above, however, the interaction `amd:nutrient` can only be evaluated if both amd and nutrient (i.e., the main effects) are included in the model.
+]
+
+
+---
+
+
+Alternatively, we can use `drop1()` and `dfun()` functions to evaluate our fixed effects (`dfun()` converts the AIC values returned by the `drop1()` into $\Delta$AIC values)
+
+.small[
+```{r}
+dd_LRT <- drop1(mpl1, test = "Chisq")
+(dd_AIC <- dfun(drop1(mpl1)))
+```
+]
+
+--
+
+- Strong **rack** effect (dAIC = 55.08 if we remove this variable)
+- Effects of **status** and **interaction** term are weak (dAIC < 2)
+
+
+---
+
+Let's start by **removing the non-significant interaction** term to test main effects of nutrient and clipping
+```{r}
+mpl2 <- update(mpl1, . ~ . - amd:nutrient)
+
+mpl3 <- update(mpl2, . ~ . - rack) # pas de rack ou d'interaction
+mpl4 <- update(mpl2, . ~ . - status) # pas de status ou d'interaction
+mpl5 <- update(mpl2, . ~ . - nutrient) # pas de nutrient ou d'interaction
+mpl6 <- update(mpl2, . ~ . - amd) # pas d'herbivorie ou d'interaction
+```
+
+Choose the method you want to select the best model :
+.pull-left2[ Method with AICc
+```{r}
+aic_tab2  <- MuMIn::model.sel(mpl2, mpl3, mpl4, mpl5, mpl6)
+(round(aic_table2 <- aic_tab2[ , c("AICc", "delta", "df")], digits = 2))
+```
+]
+.pull-right2[ Method with `drop1()`
+```{r}
+dd_LRT2 <- drop1(mpl2, test = "Chisq")
+dd_AIC2 <- dfun(drop1(mpl2))
+```
+]
+
+
+---
+
+**What are our conclusions ?**
+<br>
+
+Both the main effects of **nutrient** and **clipping** are strong (large change in AIC of $135.6$ (`mpl5`) and $10.2$ (`mpl6`) if either nutrient or clipping are dropped, respectively).
+
+<br>
+
+**Our final model includes :**
+
+Fixed effects
+* nutrients
+* clipping
+* rack
+
+Random effects
+* observation-level random effect `(1|X)` 
+* populations `(1|popu)` 
+* genotypes `(1|gen)`
+
+
+---
+# Challenge 9 
+
+Use the `inverts` dataset (larval development times (`PLD`) of 74 marine invertebrate and vertebrate species reared at different temperatures and time), answer the following questions:
+
+- What is the effect of feeding type and climate (**fixed effects**) on `PLD`?
+- Does this relationship vary among taxa (**random effects**)?
+- What is the **best distribution family** for this count data?
+- Finally, once you determined the best distribution family, re-evaluate your random and fixed effects.
+
+
+---
+# Solution ![:cube]()
+
+```{R, eval = FALSE}
+# inverts <- read.csv('data/inverts.csv', header = TRUE)
+# head(inverts)
+# table(inverts$temp, inverts$feeding.type)
+
+# mod.glm <- glm(PLD ~ temp + feeding.type, family = poisson(), data = inverts)
+# summary(mod.glm)
+# drop1(mod.glm, test = "Chisq")
+
+# boxplot(PLD ~ temp,  data = inverts)
+# boxplot(PLD ~ feeding.type,  data = inverts)
+
+# boxplot(predict(mod.glm, type = "response")~inverts$temp)
+
+# plot()
+
+# modglm <- glm(PLD ~ temp + feeding.type, family = poisson(), data = inverts)
+```
+
+
+---
+# Solution ![:cube]()
+```{R, eval = FALSE}
+# r2 <- ranef(mpl1, condVar = TRUE)
+# d2 <- dotplot(r2, par.settings = pp)
+
+# plot(aggregate(PLD ~ taxon, FUN = mean, data = inverts)[,2], aggregate(PLD ~ taxon, FUN = var, data = inverts)[,2], pch = 19)
+# abline(a = 0, b = 1, lty = 2)
+
+# mod.glmer <- glmer.nb(PLD ~ temp + feeding.type + (1|taxon), data = inverts)
+# mod.glm <- glm.nb(PLD ~ temp + feeding.type, family = poisson(), data = inverts)
+
+# plot(aggregate(PLD ~ taxon, FUN = var, data = inverts)[,2], aggregate(PLD ~ taxon, FUN = mean, data = inverts)[,2])
+# abline(a = 0, b = 1, lty = 2 )
+```
+
