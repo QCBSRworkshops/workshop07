@@ -277,7 +277,7 @@ Note: _MFF: Not sure that mixed models help when the sample size is small. Also,
 .pull-right[
 **Option 1. Separate**
 
-We could run seprate analyses for each species :
+We could run separate analyses for each species :
 
 * Estimate 6 intercepts and 6 slopes for each species (i.e. 6 lakes)
 
