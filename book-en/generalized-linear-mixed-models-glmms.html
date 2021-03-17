@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 19 Generalized linear mixed models (GLMMs) | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)</title>
+  <title>Chapter 9 Generalized linear mixed models (GLMMs) | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)</title>
   <meta name="description" content="Linear and generalized linear mixed models (LMM and GLMM)" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 19 Generalized linear mixed models (GLMMs) | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)" />
+  <meta property="og:title" content="Chapter 9 Generalized linear mixed models (GLMMs) | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://github.com/qcbsRworkshops/" />
   <meta property="og:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="qcbsRworkshops/workshop09" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 19 Generalized linear mixed models (GLMMs) | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)" />
+  <meta name="twitter:title" content="Chapter 9 Generalized linear mixed models (GLMMs) | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)" />
   
   <meta name="twitter:description" content="Linear and generalized linear mixed models (LMM and GLMM)" />
   <meta name="twitter:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
@@ -30,7 +30,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
-<link rel="prev" href="solution.html"/>
+<link rel="prev" href="mixed-model-protocol.html"/>
 <link rel="next" href="structure-in-dataset.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -175,38 +175,43 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="mixed-model-protocol.html"><a href="mixed-model-protocol.html#consider-scale"><i class="fa fa-check"></i>Consider scale</a></li>
 <li class="chapter" data-level="" data-path="mixed-model-protocol.html"><a href="mixed-model-protocol.html#do-you-need-a-lmm"><i class="fa fa-check"></i>Do you need a LMM?</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="mixed-model-protocol.html"><a href="mixed-model-protocol.html#step-2.-code-potential-models-and-model-selection"><i class="fa fa-check"></i>Step 2. Code potential models and model selection</a></li>
+<li class="chapter" data-level="" data-path="mixed-model-protocol.html"><a href="mixed-model-protocol.html#step-2.-code-potential-models-and-model-selection"><i class="fa fa-check"></i>Step 2. Code potential models and model selection</a><ul>
+<li class="chapter" data-level="" data-path="mixed-model-protocol.html"><a href="mixed-model-protocol.html#estimation-methods"><i class="fa fa-check"></i>Estimation methods</a></li>
+<li class="chapter" data-level="" data-path="mixed-model-protocol.html"><a href="mixed-model-protocol.html#different-model-structures"><i class="fa fa-check"></i>Different model structures</a></li>
+<li class="chapter" data-level="" data-path="mixed-model-protocol.html"><a href="mixed-model-protocol.html#challenge-4"><i class="fa fa-check"></i>Challenge 4</a></li>
+<li class="chapter" data-level="" data-path="mixed-model-protocol.html"><a href="mixed-model-protocol.html#challenge-5"><i class="fa fa-check"></i>Challenge 5</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="note-on-estimation-methods.html"><a href="note-on-estimation-methods.html"><i class="fa fa-check"></i><b>9</b> Note on estimation methods</a></li>
-<li class="chapter" data-level="10" data-path="step-2-code-potential-models.html"><a href="step-2-code-potential-models.html"><i class="fa fa-check"></i><b>10</b> Step 2. Code potential models</a></li>
-<li class="chapter" data-level="11" data-path="solution-cube.html"><a href="solution-cube.html"><i class="fa fa-check"></i><b>11</b> Solution <img src="" alt=":cube" /></a></li>
-<li class="chapter" data-level="12" data-path="challenge-5-cube.html"><a href="challenge-5-cube.html"><i class="fa fa-check"></i><b>12</b> Challenge 5 <img src="" alt=":cube" /></a></li>
-<li class="chapter" data-level="13" data-path="solution-cube-1.html"><a href="solution-cube-1.html"><i class="fa fa-check"></i><b>13</b> Solution <img src="" alt=":cube" /></a></li>
-<li class="chapter" data-level="14" data-path="step-2-model-selection.html"><a href="step-2-model-selection.html"><i class="fa fa-check"></i><b>14</b> Step 2. Model selection</a></li>
-<li class="chapter" data-level="15" data-path="step-2-model-selection-1.html"><a href="step-2-model-selection-1.html"><i class="fa fa-check"></i><b>15</b> Step 2. Model selection</a></li>
-<li class="chapter" data-level="16" data-path="step-2-model-selection-2.html"><a href="step-2-model-selection-2.html"><i class="fa fa-check"></i><b>16</b> Step 2. Model selection</a></li>
-<li class="chapter" data-level="17" data-path="step-2-model-selection-3.html"><a href="step-2-model-selection-3.html"><i class="fa fa-check"></i><b>17</b> Step 2. Model selection</a></li>
-<li class="chapter" data-level="18" data-path="solution.html"><a href="solution.html"><i class="fa fa-check"></i><b>18</b> Solution</a></li>
+<li class="chapter" data-level="" data-path="mixed-model-protocol.html"><a href="mixed-model-protocol.html#step-3.-model-validation"><i class="fa fa-check"></i>Step 3. Model validation</a><ul>
+<li class="chapter" data-level="" data-path="mixed-model-protocol.html"><a href="mixed-model-protocol.html#check-the-homogeneity-of-the-variance"><i class="fa fa-check"></i>1. Check the homogeneity of the variance</a></li>
+<li class="chapter" data-level="" data-path="mixed-model-protocol.html"><a href="mixed-model-protocol.html#check-the-independence-of-the-model-residuals-with-each-covariate"><i class="fa fa-check"></i>2. Check the independence of the model residuals with each covariate</a></li>
+<li class="chapter" data-level="" data-path="mixed-model-protocol.html"><a href="mixed-model-protocol.html#check-the-normality-of-the-model-residuals"><i class="fa fa-check"></i>3. Check the normality of the model residuals</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="mixed-model-protocol.html"><a href="mixed-model-protocol.html#step-4.-interpretation-and-visualization"><i class="fa fa-check"></i>Step 4. Interpretation and visualization</a><ul>
+<li class="chapter" data-level="" data-path="mixed-model-protocol.html"><a href="mixed-model-protocol.html#challenge-6"><i class="fa fa-check"></i>Challenge 6</a></li>
+<li class="chapter" data-level="" data-path="mixed-model-protocol.html"><a href="mixed-model-protocol.html#challenge-7"><i class="fa fa-check"></i>Challenge 7</a></li>
+<li class="chapter" data-level="" data-path="mixed-model-protocol.html"><a href="mixed-model-protocol.html#challenge-8"><i class="fa fa-check"></i>Challenge 8</a></li>
+</ul></li>
+</ul></li>
 <li class="part"><span><b>Generalized linear mixed models (GLMM) in <code>R</code></b></span></li>
-<li class="chapter" data-level="19" data-path="generalized-linear-mixed-models-glmms.html"><a href="generalized-linear-mixed-models-glmms.html"><i class="fa fa-check"></i><b>19</b> Generalized linear mixed models (GLMMs)</a></li>
-<li class="chapter" data-level="20" data-path="structure-in-dataset.html"><a href="structure-in-dataset.html"><i class="fa fa-check"></i><b>20</b> Structure in dataset</a><ul>
-<li class="chapter" data-level="20.1" data-path="structure-in-dataset.html"><a href="structure-in-dataset.html#poisson-glmm"><i class="fa fa-check"></i><b>20.1</b> Poisson GLMM</a></li>
-<li class="chapter" data-level="20.2" data-path="structure-in-dataset.html"><a href="structure-in-dataset.html#negative-binomial-poisson-gamma-glmm"><i class="fa fa-check"></i><b>20.2</b> Negative binomial (Poisson-gamma) GLMM</a></li>
-<li class="chapter" data-level="20.3" data-path="structure-in-dataset.html"><a href="structure-in-dataset.html#poisson-lognormal-glmm"><i class="fa fa-check"></i><b>20.3</b> Poisson-lognormal GLMM</a></li>
+<li class="chapter" data-level="9" data-path="generalized-linear-mixed-models-glmms.html"><a href="generalized-linear-mixed-models-glmms.html"><i class="fa fa-check"></i><b>9</b> Generalized linear mixed models (GLMMs)</a></li>
+<li class="chapter" data-level="10" data-path="structure-in-dataset.html"><a href="structure-in-dataset.html"><i class="fa fa-check"></i><b>10</b> Structure in dataset</a><ul>
+<li class="chapter" data-level="10.1" data-path="structure-in-dataset.html"><a href="structure-in-dataset.html#poisson-glmm"><i class="fa fa-check"></i><b>10.1</b> Poisson GLMM</a></li>
+<li class="chapter" data-level="10.2" data-path="structure-in-dataset.html"><a href="structure-in-dataset.html#negative-binomial-poisson-gamma-glmm"><i class="fa fa-check"></i><b>10.2</b> Negative binomial (Poisson-gamma) GLMM</a></li>
+<li class="chapter" data-level="10.3" data-path="structure-in-dataset.html"><a href="structure-in-dataset.html#poisson-lognormal-glmm"><i class="fa fa-check"></i><b>10.3</b> Poisson-lognormal GLMM</a></li>
 </ul></li>
-<li class="chapter" data-level="21" data-path="random-intercepts.html"><a href="random-intercepts.html"><i class="fa fa-check"></i><b>21</b> Random intercepts</a><ul>
-<li class="chapter" data-level="21.1" data-path="random-intercepts.html"><a href="random-intercepts.html#parameter-plots"><i class="fa fa-check"></i><b>21.1</b> Parameter plots</a></li>
-<li class="chapter" data-level="21.2" data-path="random-intercepts.html"><a href="random-intercepts.html#random-intercept-plots"><i class="fa fa-check"></i><b>21.2</b> Random intercept plots</a></li>
-<li class="chapter" data-level="21.3" data-path="random-intercepts.html"><a href="random-intercepts.html#random-slopes"><i class="fa fa-check"></i><b>21.3</b> Random slopes</a></li>
+<li class="chapter" data-level="11" data-path="random-intercepts.html"><a href="random-intercepts.html"><i class="fa fa-check"></i><b>11</b> Random intercepts</a><ul>
+<li class="chapter" data-level="11.1" data-path="random-intercepts.html"><a href="random-intercepts.html#parameter-plots"><i class="fa fa-check"></i><b>11.1</b> Parameter plots</a></li>
+<li class="chapter" data-level="11.2" data-path="random-intercepts.html"><a href="random-intercepts.html#random-intercept-plots"><i class="fa fa-check"></i><b>11.2</b> Random intercept plots</a></li>
+<li class="chapter" data-level="11.3" data-path="random-intercepts.html"><a href="random-intercepts.html#random-slopes"><i class="fa fa-check"></i><b>11.3</b> Random slopes</a></li>
 </ul></li>
-<li class="chapter" data-level="22" data-path="final-model.html"><a href="final-model.html"><i class="fa fa-check"></i><b>22</b> Final model</a></li>
+<li class="chapter" data-level="12" data-path="final-model.html"><a href="final-model.html"><i class="fa fa-check"></i><b>12</b> Final model</a></li>
 <li class="part"><span><b>Final considerations</b></span></li>
-<li class="chapter" data-level="23" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>23</b> Summary</a></li>
-<li class="chapter" data-level="24" data-path="additional-resources.html"><a href="additional-resources.html"><i class="fa fa-check"></i><b>24</b> Additional resources</a><ul>
-<li class="chapter" data-level="24.1" data-path="additional-resources.html"><a href="additional-resources.html#lmm-textbooks"><i class="fa fa-check"></i><b>24.1</b> LMM Textbooks</a></li>
-<li class="chapter" data-level="24.2" data-path="additional-resources.html"><a href="additional-resources.html#glmm-resources"><i class="fa fa-check"></i><b>24.2</b> GLMM resources</a></li>
+<li class="chapter" data-level="13" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>13</b> Summary</a></li>
+<li class="chapter" data-level="14" data-path="additional-resources.html"><a href="additional-resources.html"><i class="fa fa-check"></i><b>14</b> Additional resources</a><ul>
+<li class="chapter" data-level="14.1" data-path="additional-resources.html"><a href="additional-resources.html#lmm-textbooks"><i class="fa fa-check"></i><b>14.1</b> LMM Textbooks</a></li>
+<li class="chapter" data-level="14.2" data-path="additional-resources.html"><a href="additional-resources.html#glmm-resources"><i class="fa fa-check"></i><b>14.2</b> GLMM resources</a></li>
 </ul></li>
-<li class="chapter" data-level="25" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>25</b> References</a></li>
+<li class="chapter" data-level="15" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>15</b> References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/qcbsRworkshops" target="blank">QCBS R Workshop Series</a></li>
 
@@ -242,7 +247,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
   <img class= "hero-image" src="assets/images/jean-philippe-delberghe-75xPHEQBmvA-unsplash_hero_image.jpg">
 </div>
 <div id="generalized-linear-mixed-models-glmms" class="section level1">
-<h1><span class="header-section-number">Chapter 19</span> Generalized linear mixed models (GLMMs)</h1>
+<h1><span class="header-section-number">Chapter 9</span> Generalized linear mixed models (GLMMs)</h1>
 <p>As seen above, heterogeneous response distributions can be accurately
 modelled by relaxing the assumptions of normally distributed errors and
 letting the errors take on different distribution families (e.g.,
@@ -284,63 +289,63 @@ Bolker and colleagues, we will explore the eff ects of nutrient levels,
 herbivory and their interaction ( fixed effects) on the production
 <em>Arabidopsis thaliana</em> and the across-population and/or across-genotype
 variability in these relationships (random eff ects).</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="generalized-linear-mixed-models-glmms.html#cb41-1"></a><span class="co"># First load and view the dataset</span></span>
-<span id="cb41-2"><a href="generalized-linear-mixed-models-glmms.html#cb41-2"></a>dat.tf &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;Banta_TotalFruits.csv&quot;</span>)</span>
-<span id="cb41-3"><a href="generalized-linear-mixed-models-glmms.html#cb41-3"></a><span class="kw">str</span>(dat.tf)</span>
-<span id="cb41-4"><a href="generalized-linear-mixed-models-glmms.html#cb41-4"></a></span>
-<span id="cb41-5"><a href="generalized-linear-mixed-models-glmms.html#cb41-5"></a><span class="co"># X observation number reg factor for one of three regions;</span></span>
-<span id="cb41-6"><a href="generalized-linear-mixed-models-glmms.html#cb41-6"></a><span class="co"># Netherlands, Spain or Sweden popu factor with a level for</span></span>
-<span id="cb41-7"><a href="generalized-linear-mixed-models-glmms.html#cb41-7"></a><span class="co"># each population (random effect) gen factor with a level for</span></span>
-<span id="cb41-8"><a href="generalized-linear-mixed-models-glmms.html#cb41-8"></a><span class="co"># each genotype (random effect) rack nuisance factor for one</span></span>
-<span id="cb41-9"><a href="generalized-linear-mixed-models-glmms.html#cb41-9"></a><span class="co"># of two greenhouse racks nutrient factor with levels for low</span></span>
-<span id="cb41-10"><a href="generalized-linear-mixed-models-glmms.html#cb41-10"></a><span class="co"># (value = 1) or high (value = 8) nutrients (fixed effect)</span></span>
-<span id="cb41-11"><a href="generalized-linear-mixed-models-glmms.html#cb41-11"></a><span class="co"># amd factor with levels for no damage or simulated herbivory</span></span>
-<span id="cb41-12"><a href="generalized-linear-mixed-models-glmms.html#cb41-12"></a><span class="co"># (apical meristem damage) (fixed effect) status nuisance</span></span>
-<span id="cb41-13"><a href="generalized-linear-mixed-models-glmms.html#cb41-13"></a><span class="co"># factor for germination method total.fruits the response</span></span>
-<span id="cb41-14"><a href="generalized-linear-mixed-models-glmms.html#cb41-14"></a><span class="co"># variable; an integer indicating the number of fruits per</span></span>
-<span id="cb41-15"><a href="generalized-linear-mixed-models-glmms.html#cb41-15"></a><span class="co"># plant</span></span>
-<span id="cb41-16"><a href="generalized-linear-mixed-models-glmms.html#cb41-16"></a></span>
-<span id="cb41-17"><a href="generalized-linear-mixed-models-glmms.html#cb41-17"></a><span class="co"># 2-3 genotypes nested within each of the 9 populations</span></span>
-<span id="cb41-18"><a href="generalized-linear-mixed-models-glmms.html#cb41-18"></a><span class="kw">table</span>(dat.tf<span class="op">$</span>popu, dat.tf<span class="op">$</span>gen)</span>
-<span id="cb41-19"><a href="generalized-linear-mixed-models-glmms.html#cb41-19"></a></span>
-<span id="cb41-20"><a href="generalized-linear-mixed-models-glmms.html#cb41-20"></a><span class="co"># Housekeeping: make integers into factors, relevel clipping</span></span>
-<span id="cb41-21"><a href="generalized-linear-mixed-models-glmms.html#cb41-21"></a><span class="co"># (amd) and rename nutrient levels</span></span>
-<span id="cb41-22"><a href="generalized-linear-mixed-models-glmms.html#cb41-22"></a>dat.tf &lt;-<span class="st"> </span><span class="kw">transform</span>(dat.tf, <span class="dt">X =</span> <span class="kw">factor</span>(X), <span class="dt">gen =</span> <span class="kw">factor</span>(gen), </span>
-<span id="cb41-23"><a href="generalized-linear-mixed-models-glmms.html#cb41-23"></a>    <span class="dt">rack =</span> <span class="kw">factor</span>(rack), <span class="dt">amd =</span> <span class="kw">factor</span>(amd, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;unclipped&quot;</span>, </span>
-<span id="cb41-24"><a href="generalized-linear-mixed-models-glmms.html#cb41-24"></a>        <span class="st">&quot;clipped&quot;</span>)), <span class="dt">nutrient =</span> <span class="kw">factor</span>(nutrient, <span class="dt">label =</span> <span class="kw">c</span>(<span class="st">&quot;Low&quot;</span>, </span>
-<span id="cb41-25"><a href="generalized-linear-mixed-models-glmms.html#cb41-25"></a>        <span class="st">&quot;High&quot;</span>)))</span>
-<span id="cb41-26"><a href="generalized-linear-mixed-models-glmms.html#cb41-26"></a></span>
-<span id="cb41-27"><a href="generalized-linear-mixed-models-glmms.html#cb41-27"></a><span class="co"># Install/load packages</span></span>
-<span id="cb41-28"><a href="generalized-linear-mixed-models-glmms.html#cb41-28"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(lme4)) {</span>
-<span id="cb41-29"><a href="generalized-linear-mixed-models-glmms.html#cb41-29"></a>    <span class="kw">install.packages</span>(<span class="st">&quot;lme4&quot;</span>)</span>
-<span id="cb41-30"><a href="generalized-linear-mixed-models-glmms.html#cb41-30"></a>}</span>
-<span id="cb41-31"><a href="generalized-linear-mixed-models-glmms.html#cb41-31"></a><span class="kw">require</span>(lme4)</span>
-<span id="cb41-32"><a href="generalized-linear-mixed-models-glmms.html#cb41-32"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(coefplot2)) {</span>
-<span id="cb41-33"><a href="generalized-linear-mixed-models-glmms.html#cb41-33"></a>    <span class="kw">install.packages</span>(<span class="st">&quot;coefplot2&quot;</span>, <span class="dt">repos =</span> <span class="st">&quot;http://www.math.mcmaster.ca/bolker/R&quot;</span>, </span>
-<span id="cb41-34"><a href="generalized-linear-mixed-models-glmms.html#cb41-34"></a>        <span class="dt">type =</span> <span class="st">&quot;source&quot;</span>)</span>
-<span id="cb41-35"><a href="generalized-linear-mixed-models-glmms.html#cb41-35"></a>}</span>
-<span id="cb41-36"><a href="generalized-linear-mixed-models-glmms.html#cb41-36"></a><span class="kw">require</span>(coefplot2)</span>
-<span id="cb41-37"><a href="generalized-linear-mixed-models-glmms.html#cb41-37"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(reshape)) {</span>
-<span id="cb41-38"><a href="generalized-linear-mixed-models-glmms.html#cb41-38"></a>    <span class="kw">install.packages</span>(<span class="st">&quot;reshape&quot;</span>)</span>
-<span id="cb41-39"><a href="generalized-linear-mixed-models-glmms.html#cb41-39"></a>}</span>
-<span id="cb41-40"><a href="generalized-linear-mixed-models-glmms.html#cb41-40"></a><span class="kw">require</span>(reshape)</span>
-<span id="cb41-41"><a href="generalized-linear-mixed-models-glmms.html#cb41-41"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(ggplot2)) {</span>
-<span id="cb41-42"><a href="generalized-linear-mixed-models-glmms.html#cb41-42"></a>    <span class="kw">install.packages</span>(<span class="st">&quot;ggplot2&quot;</span>)</span>
-<span id="cb41-43"><a href="generalized-linear-mixed-models-glmms.html#cb41-43"></a>}</span>
-<span id="cb41-44"><a href="generalized-linear-mixed-models-glmms.html#cb41-44"></a><span class="kw">require</span>(ggplot2)</span>
-<span id="cb41-45"><a href="generalized-linear-mixed-models-glmms.html#cb41-45"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(plyr)) {</span>
-<span id="cb41-46"><a href="generalized-linear-mixed-models-glmms.html#cb41-46"></a>    <span class="kw">install.packages</span>(<span class="st">&quot;plyr&quot;</span>)</span>
-<span id="cb41-47"><a href="generalized-linear-mixed-models-glmms.html#cb41-47"></a>}</span>
-<span id="cb41-48"><a href="generalized-linear-mixed-models-glmms.html#cb41-48"></a><span class="kw">require</span>(plyr)</span>
-<span id="cb41-49"><a href="generalized-linear-mixed-models-glmms.html#cb41-49"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(gridExtra)) {</span>
-<span id="cb41-50"><a href="generalized-linear-mixed-models-glmms.html#cb41-50"></a>    <span class="kw">install.packages</span>(<span class="st">&quot;gridExtra&quot;</span>)</span>
-<span id="cb41-51"><a href="generalized-linear-mixed-models-glmms.html#cb41-51"></a>}</span>
-<span id="cb41-52"><a href="generalized-linear-mixed-models-glmms.html#cb41-52"></a><span class="kw">require</span>(gridExtra)</span>
-<span id="cb41-53"><a href="generalized-linear-mixed-models-glmms.html#cb41-53"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(emdbook)) {</span>
-<span id="cb41-54"><a href="generalized-linear-mixed-models-glmms.html#cb41-54"></a>    <span class="kw">install.packages</span>(<span class="st">&quot;emdbook&quot;</span>)</span>
-<span id="cb41-55"><a href="generalized-linear-mixed-models-glmms.html#cb41-55"></a>}</span>
-<span id="cb41-56"><a href="generalized-linear-mixed-models-glmms.html#cb41-56"></a><span class="kw">require</span>(emdbook)</span>
-<span id="cb41-57"><a href="generalized-linear-mixed-models-glmms.html#cb41-57"></a><span class="kw">source</span>(<span class="st">&quot;glmm_funs.R&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="generalized-linear-mixed-models-glmms.html#cb63-1"></a><span class="co"># First load and view the dataset</span></span>
+<span id="cb63-2"><a href="generalized-linear-mixed-models-glmms.html#cb63-2"></a>dat.tf &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;Banta_TotalFruits.csv&quot;</span>)</span>
+<span id="cb63-3"><a href="generalized-linear-mixed-models-glmms.html#cb63-3"></a><span class="kw">str</span>(dat.tf)</span>
+<span id="cb63-4"><a href="generalized-linear-mixed-models-glmms.html#cb63-4"></a></span>
+<span id="cb63-5"><a href="generalized-linear-mixed-models-glmms.html#cb63-5"></a><span class="co"># X observation number reg factor for one of three regions;</span></span>
+<span id="cb63-6"><a href="generalized-linear-mixed-models-glmms.html#cb63-6"></a><span class="co"># Netherlands, Spain or Sweden popu factor with a level for</span></span>
+<span id="cb63-7"><a href="generalized-linear-mixed-models-glmms.html#cb63-7"></a><span class="co"># each population (random effect) gen factor with a level for</span></span>
+<span id="cb63-8"><a href="generalized-linear-mixed-models-glmms.html#cb63-8"></a><span class="co"># each genotype (random effect) rack nuisance factor for one</span></span>
+<span id="cb63-9"><a href="generalized-linear-mixed-models-glmms.html#cb63-9"></a><span class="co"># of two greenhouse racks nutrient factor with levels for low</span></span>
+<span id="cb63-10"><a href="generalized-linear-mixed-models-glmms.html#cb63-10"></a><span class="co"># (value = 1) or high (value = 8) nutrients (fixed effect)</span></span>
+<span id="cb63-11"><a href="generalized-linear-mixed-models-glmms.html#cb63-11"></a><span class="co"># amd factor with levels for no damage or simulated herbivory</span></span>
+<span id="cb63-12"><a href="generalized-linear-mixed-models-glmms.html#cb63-12"></a><span class="co"># (apical meristem damage) (fixed effect) status nuisance</span></span>
+<span id="cb63-13"><a href="generalized-linear-mixed-models-glmms.html#cb63-13"></a><span class="co"># factor for germination method total.fruits the response</span></span>
+<span id="cb63-14"><a href="generalized-linear-mixed-models-glmms.html#cb63-14"></a><span class="co"># variable; an integer indicating the number of fruits per</span></span>
+<span id="cb63-15"><a href="generalized-linear-mixed-models-glmms.html#cb63-15"></a><span class="co"># plant</span></span>
+<span id="cb63-16"><a href="generalized-linear-mixed-models-glmms.html#cb63-16"></a></span>
+<span id="cb63-17"><a href="generalized-linear-mixed-models-glmms.html#cb63-17"></a><span class="co"># 2-3 genotypes nested within each of the 9 populations</span></span>
+<span id="cb63-18"><a href="generalized-linear-mixed-models-glmms.html#cb63-18"></a><span class="kw">table</span>(dat.tf<span class="op">$</span>popu, dat.tf<span class="op">$</span>gen)</span>
+<span id="cb63-19"><a href="generalized-linear-mixed-models-glmms.html#cb63-19"></a></span>
+<span id="cb63-20"><a href="generalized-linear-mixed-models-glmms.html#cb63-20"></a><span class="co"># Housekeeping: make integers into factors, relevel clipping</span></span>
+<span id="cb63-21"><a href="generalized-linear-mixed-models-glmms.html#cb63-21"></a><span class="co"># (amd) and rename nutrient levels</span></span>
+<span id="cb63-22"><a href="generalized-linear-mixed-models-glmms.html#cb63-22"></a>dat.tf &lt;-<span class="st"> </span><span class="kw">transform</span>(dat.tf, <span class="dt">X =</span> <span class="kw">factor</span>(X), <span class="dt">gen =</span> <span class="kw">factor</span>(gen), </span>
+<span id="cb63-23"><a href="generalized-linear-mixed-models-glmms.html#cb63-23"></a>    <span class="dt">rack =</span> <span class="kw">factor</span>(rack), <span class="dt">amd =</span> <span class="kw">factor</span>(amd, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;unclipped&quot;</span>, </span>
+<span id="cb63-24"><a href="generalized-linear-mixed-models-glmms.html#cb63-24"></a>        <span class="st">&quot;clipped&quot;</span>)), <span class="dt">nutrient =</span> <span class="kw">factor</span>(nutrient, <span class="dt">label =</span> <span class="kw">c</span>(<span class="st">&quot;Low&quot;</span>, </span>
+<span id="cb63-25"><a href="generalized-linear-mixed-models-glmms.html#cb63-25"></a>        <span class="st">&quot;High&quot;</span>)))</span>
+<span id="cb63-26"><a href="generalized-linear-mixed-models-glmms.html#cb63-26"></a></span>
+<span id="cb63-27"><a href="generalized-linear-mixed-models-glmms.html#cb63-27"></a><span class="co"># Install/load packages</span></span>
+<span id="cb63-28"><a href="generalized-linear-mixed-models-glmms.html#cb63-28"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(lme4)) {</span>
+<span id="cb63-29"><a href="generalized-linear-mixed-models-glmms.html#cb63-29"></a>    <span class="kw">install.packages</span>(<span class="st">&quot;lme4&quot;</span>)</span>
+<span id="cb63-30"><a href="generalized-linear-mixed-models-glmms.html#cb63-30"></a>}</span>
+<span id="cb63-31"><a href="generalized-linear-mixed-models-glmms.html#cb63-31"></a><span class="kw">require</span>(lme4)</span>
+<span id="cb63-32"><a href="generalized-linear-mixed-models-glmms.html#cb63-32"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(coefplot2)) {</span>
+<span id="cb63-33"><a href="generalized-linear-mixed-models-glmms.html#cb63-33"></a>    <span class="kw">install.packages</span>(<span class="st">&quot;coefplot2&quot;</span>, <span class="dt">repos =</span> <span class="st">&quot;http://www.math.mcmaster.ca/bolker/R&quot;</span>, </span>
+<span id="cb63-34"><a href="generalized-linear-mixed-models-glmms.html#cb63-34"></a>        <span class="dt">type =</span> <span class="st">&quot;source&quot;</span>)</span>
+<span id="cb63-35"><a href="generalized-linear-mixed-models-glmms.html#cb63-35"></a>}</span>
+<span id="cb63-36"><a href="generalized-linear-mixed-models-glmms.html#cb63-36"></a><span class="kw">require</span>(coefplot2)</span>
+<span id="cb63-37"><a href="generalized-linear-mixed-models-glmms.html#cb63-37"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(reshape)) {</span>
+<span id="cb63-38"><a href="generalized-linear-mixed-models-glmms.html#cb63-38"></a>    <span class="kw">install.packages</span>(<span class="st">&quot;reshape&quot;</span>)</span>
+<span id="cb63-39"><a href="generalized-linear-mixed-models-glmms.html#cb63-39"></a>}</span>
+<span id="cb63-40"><a href="generalized-linear-mixed-models-glmms.html#cb63-40"></a><span class="kw">require</span>(reshape)</span>
+<span id="cb63-41"><a href="generalized-linear-mixed-models-glmms.html#cb63-41"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(ggplot2)) {</span>
+<span id="cb63-42"><a href="generalized-linear-mixed-models-glmms.html#cb63-42"></a>    <span class="kw">install.packages</span>(<span class="st">&quot;ggplot2&quot;</span>)</span>
+<span id="cb63-43"><a href="generalized-linear-mixed-models-glmms.html#cb63-43"></a>}</span>
+<span id="cb63-44"><a href="generalized-linear-mixed-models-glmms.html#cb63-44"></a><span class="kw">require</span>(ggplot2)</span>
+<span id="cb63-45"><a href="generalized-linear-mixed-models-glmms.html#cb63-45"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(plyr)) {</span>
+<span id="cb63-46"><a href="generalized-linear-mixed-models-glmms.html#cb63-46"></a>    <span class="kw">install.packages</span>(<span class="st">&quot;plyr&quot;</span>)</span>
+<span id="cb63-47"><a href="generalized-linear-mixed-models-glmms.html#cb63-47"></a>}</span>
+<span id="cb63-48"><a href="generalized-linear-mixed-models-glmms.html#cb63-48"></a><span class="kw">require</span>(plyr)</span>
+<span id="cb63-49"><a href="generalized-linear-mixed-models-glmms.html#cb63-49"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(gridExtra)) {</span>
+<span id="cb63-50"><a href="generalized-linear-mixed-models-glmms.html#cb63-50"></a>    <span class="kw">install.packages</span>(<span class="st">&quot;gridExtra&quot;</span>)</span>
+<span id="cb63-51"><a href="generalized-linear-mixed-models-glmms.html#cb63-51"></a>}</span>
+<span id="cb63-52"><a href="generalized-linear-mixed-models-glmms.html#cb63-52"></a><span class="kw">require</span>(gridExtra)</span>
+<span id="cb63-53"><a href="generalized-linear-mixed-models-glmms.html#cb63-53"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(emdbook)) {</span>
+<span id="cb63-54"><a href="generalized-linear-mixed-models-glmms.html#cb63-54"></a>    <span class="kw">install.packages</span>(<span class="st">&quot;emdbook&quot;</span>)</span>
+<span id="cb63-55"><a href="generalized-linear-mixed-models-glmms.html#cb63-55"></a>}</span>
+<span id="cb63-56"><a href="generalized-linear-mixed-models-glmms.html#cb63-56"></a><span class="kw">require</span>(emdbook)</span>
+<span id="cb63-57"><a href="generalized-linear-mixed-models-glmms.html#cb63-57"></a><span class="kw">source</span>(<span class="st">&quot;glmm_funs.R&quot;</span>)</span></code></pre></div>
 
 </div>
 <hr>
@@ -354,7 +359,7 @@ variability in these relationships (random eff ects).</p>
           </div>
         </div>
       </div>
-<a href="solution.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="mixed-model-protocol.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="structure-in-dataset.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

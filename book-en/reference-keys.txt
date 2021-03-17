@@ -20,16 +20,6 @@ parameters-are-varied
 data-structure-is-taken-into-account
 challenge-2
 mixed-model-protocol
-note-on-estimation-methods
-step-2.-code-potential-models
-solution-cube
-challenge-5-cube
-solution-cube-1
-step-2.-model-selection
-step-2.-model-selection-1
-step-2.-model-selection-2
-step-2.-model-selection-3
-solution
 generalized-linear-mixed-models-glmms
 structure-in-dataset
 poisson-glmm
