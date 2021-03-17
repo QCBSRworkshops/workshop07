@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 7 How do LMMs work? | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)</title>
+  <title>Chapter 18 Additional ressources | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)</title>
   <meta name="description" content="Linear and generalized linear mixed models (LMM and GLMM)" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 7 How do LMMs work? | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)" />
+  <meta property="og:title" content="Chapter 18 Additional ressources | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://github.com/qcbsRworkshops/" />
   <meta property="og:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="qcbsRworkshops/workshop09" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 7 How do LMMs work? | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)" />
+  <meta name="twitter:title" content="Chapter 18 Additional ressources | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)" />
   
   <meta name="twitter:description" content="Linear and generalized linear mixed models (LMM and GLMM)" />
   <meta name="twitter:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
-<link rel="prev" href="fixed-vs-random-effects.html"/>
-<link rel="next" href="mixed-model-protocol.html"/>
+<link rel="prev" href="poisson-lognormal-glmm.html"/>
+<link rel="next" href="references.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -237,76 +237,24 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div class="hero-image-container"> 
   <img class= "hero-image" src="assets/images/jean-philippe-delberghe-75xPHEQBmvA-unsplash_hero_image.jpg">
 </div>
-<div id="how-do-lmms-work" class="section level1">
-<h1><span class="header-section-number">Chapter 7</span> How do LMMs work?</h1>
-<div id="parameters-are-varied" class="section level2">
-<h2><span class="header-section-number">7.1</span> Parameters are varied</h2>
-<p>In linear mixed models, intercepts and/or slopes are allowed to vary according to a given factor (random effect; e.g. by lake and/or species).</p>
-<p>Allowing intercepts and/or slopes to vary by random effects means that you assume they come from a normal distribution. A mean and standard deviation of that distribution are estimated based on your data. The most likely intercepts and slopes from that distribution are then fit by optimization (ex. maximum likelihood or restricted maximum likelihood).</p>
-<div id="intercepts" class="section level3 unnumbered">
-<h3>Intercepts:</h3>
-<p>If we consider species as a random effect first, we can estimate a mean and standard deviation for the combined distribution of species intercepts rather than separate intercepts for each species. The mean of this distribution is the ‘species level model’.</p>
-<p>In this example, we only have three species. In general, the more levels you have for a given factor, the more accurately the parameters of the distribution can be estimated (three may be a little low for estimating a mean and standard deviation but it makes simpler graphs!). <em>Note that when you implement LMM’s in <code>R</code>, the intercept in the summary is the species level intercept (i.e. the mean of all random intercepts).</em></p>
-<p><img src="images/fig_7_w5.png" /></p>
-<p>Likewise, if we consider lake as a random effect then only mean and standard deviation of the combined lake intercept are estimated. This saves you the need to estimate 6 different lake intercept parameters, ultimately saving degrees of freedom as less parameter estimates are needed given the amount of data.</p>
-<p><img src="images/fig_8_w5.png" /></p>
-</div>
-<div id="slopes" class="section level3 unnumbered">
-<h3>Slopes:</h3>
-<p>The same concept is used for allowing slope to vary by a given factor (random effect). This is a little harder to visualize than the intercepts.</p>
-<p>In the case of species, the mean and standard deviation of slope parameters are estimated instead of three separate slopes. <em>Note that when you implement LMM’s in <code>R</code>, the slope in the summary is the species level slope.</em></p>
-<p><img src="images/fig_9_w5.png" /></p>
-</div>
-</div>
-<div id="data-structure-is-taken-into-account" class="section level2">
-<h2><span class="header-section-number">7.2</span> Data structure is taken into account</h2>
-<p>In linear mixed models, intercepts, slopes and their confidence intervals are adjusted to take the data structure into account.</p>
-<p><strong>What happens if the sample size for a specific factor level is small?</strong> (e.g. low <span class="math inline">\(n\)</span> for a specific species)</p>
-<p>If a certain species or lake is poorly represented in the data, the model will give more weight to the pooled model to estimate the intercept and/or slope of that species or lake (i.e. shrinkage).</p>
-<p>Ideally, you should have a minimum of <span class="math inline">\(n\)</span> =3 for any specific factor level.</p>
-<p><img src="images/fig_12_w5.png" /></p>
-<p><strong>How do we assess the impact of a random effect on the model?</strong></p>
-<p>The confidence intervals for the <strong>general</strong> intercepts and slopes are adjusted to account for pseudoreplication based on the <strong>intraclass correlation coefficient (ICC)</strong></p>
-<p>The ICC is calculated as the <strong>ratio</strong> of variance between the random effect and the total variance. Thus, the ICC describes the proportion of variance in the response variable that is attributed to a specific random effect:</p>
-<p><span class="math display">\[ICC = \frac{\sigma_{\alpha}^2}{\sigma_{\alpha}^2 + \sigma_{\varepsilon}^2}\]</span>
-<em>Note: The specific mathematical notation may vary according to the article/book and according to how the model equation was written.</em></p>
-<p>In our fish example, the ICC informs us of the <strong>extent</strong> to which the average trophic position (i.e. intercepts) <strong>varies</strong> among species or lakes.</p>
-<div class="two-col">
-<ins>
-High ICC
-</ins>
-<p><img src="images/ICCplot2_qcbs.png" /></p>
-<p>The % of variance (ICC) is high because <strong>species differ strongly</strong> in their average trophic position.</p>
-<p>The confidence intervals for the general intercept and slope are high.</p>
-<ins>
-Low ICC
-</ins>
-<p><img src="images/ICCplot_qcbs.png" /></p>
-<p>The % of variance (ICC) is low because <strong>species differ poorly</strong> in their average trophic position.</p>
-<p>The confidence intervals for the general intercept and slope are small.</p>
-</div>
-</div>
-<div id="challenge-2" class="section level2">
-<h2><span class="header-section-number">7.3</span> Challenge 2</h2>
-<p>For your second challenge, think about these two questions. How will the ICC and confidence intervals be affected in these two scenarios:</p>
+<div id="additional-ressources" class="section level1">
+<h1><span class="header-section-number">Chapter 18</span> Additional ressources</h1>
+<p><img src="images/book1.jpg" />
+<img src="images/book2.jpg" />
+<img src="images/book3.jpg" /></p>
+<p><strong>Popular libraries for (G)LMMs</strong></p>
 <ul>
-<li><strong>1.</strong> Fish trophic positions are not variable among lakes?</li>
-<li><strong>2.</strong> Fish trophic positions are similar within lakes but variable among lakes?</li>
+<li>Frequentist : <code>nlme</code>, <code>lme4</code>, <code>glmmTMB</code></li>
+<li>Bayesian : <code>brms</code>, <code>rstan</code>, <code>rstanarm</code>, <code>MCMCglmm</code></li>
 </ul>
-<hr />
-<div id="challenge-2-solution" class="section level4 unnumbered">
-<h4><strong>Challenge 2 Solution:</strong></h4>
-<ul>
-<li><strong>1.</strong> Low ICC, smaller confidence intervals</li>
-<li><strong>2.</strong> High ICC, larger confidence intervals</li>
-</ul>
+<p><strong>Papers</strong>
+* <a href="http://dx.doi.org/10.7717/peerj.4794">Harrison <em>et al.</em> (2018), <em>PeerJ</em>, DOI 10.7717/peerj.4794</a>
+* <a href="https://doi.org/10.7717/peerj.9522">Silk <em>et al.</em> (2020), <em>PeerJ</em>, DOI 10.7717/peerj.9522</a>
+* <a href="https://doi.org/10.1111/2041-210X.13434">Schielzeth <em>et al.</em> (2020), <em>Methods Ecol Evol.</em>, DOI: 10.1111/2041-210X.13434</a>
+* <a href="https://doi.org/10.1111/2041-210X.12577">Zuur &amp; Ieno (2016), <em>Methods Ecol Evol.</em>, DOI: 10.1111/2041-210X.12577</a></p>
+<p><strong>Thank you for attending this workshop!</strong></p>
 
 </div>
-</div>
-</div>
-
-
-
 <hr>
 <center> 
   <div class="footer">
@@ -318,8 +266,8 @@ Low ICC
           </div>
         </div>
       </div>
-<a href="fixed-vs-random-effects.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="mixed-model-protocol.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="poisson-lognormal-glmm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

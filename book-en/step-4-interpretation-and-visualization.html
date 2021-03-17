@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 12 Step 4. Interpretation and visualization | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)</title>
+  <meta name="description" content="Linear and generalized linear mixed models (LMM and GLMM)" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 12 Step 4. Interpretation and visualization | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://github.com/qcbsRworkshops/" />
+  <meta property="og:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
+  <meta property="og:description" content="Linear and generalized linear mixed models (LMM and GLMM)" />
+  <meta name="github-repo" content="qcbsRworkshops/workshop09" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 12 Step 4. Interpretation and visualization | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)" />
+  
+  <meta name="twitter:description" content="Linear and generalized linear mixed models (LMM and GLMM)" />
+  <meta name="twitter:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
+
+<meta name="author" content="Developed and maintained by the contributors of the QCBS R Workshop Series" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
+<link rel="prev" href="step-3-model-validation.html"/>
+<link rel="next" href="introduction-to-glmm.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="assets/qcbs-style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="toc-logo"><a href="./"><img src="assets/images/csbq_logo_gray_accueil.png"></a></li>
+<link rel="icon" type="image/png" href="assets/images/favicon.ico"/>
+
+<li class="divider"></li>
+<li class="part"><span><b>QCBS R Workshop Series</b></span></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#code-of-conduct"><i class="fa fa-check"></i><b>0.1</b> Code of conduct</a><ul>
+<li class="chapter" data-level="0.1.1" data-path="index.html"><a href="index.html#expected-behaviour"><i class="fa fa-check"></i><b>0.1.1</b> Expected behaviour</a></li>
+<li class="chapter" data-level="0.1.2" data-path="index.html"><a href="index.html#unacceptable-behaviour"><i class="fa fa-check"></i><b>0.1.2</b> Unacceptable behaviour</a></li>
+</ul></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#contributors"><i class="fa fa-check"></i><b>0.2</b> Contributors</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#contributing"><i class="fa fa-check"></i><b>0.3</b> Contributing</a></li>
+</ul></li>
+<li class="part"><span><b>Linear mixed models (LMM) in <code>R</code></b></span></li>
+<li class="chapter" data-level="1" data-path="learning-objectives.html"><a href="learning-objectives.html"><i class="fa fa-check"></i><b>1</b> Learning objectives</a></li>
+<li class="chapter" data-level="2" data-path="preparing-for-the-workshop.html"><a href="preparing-for-the-workshop.html"><i class="fa fa-check"></i><b>2</b> Preparing for the workshop</a></li>
+<li class="chapter" data-level="3" data-path="why-choose-mixed-models.html"><a href="why-choose-mixed-models.html"><i class="fa fa-check"></i><b>3</b> Why choose mixed models?</a></li>
+<li class="chapter" data-level="4" data-path="starting-with-a-question.html"><a href="starting-with-a-question.html"><i class="fa fa-check"></i><b>4</b> Starting with a question</a><ul>
+<li class="chapter" data-level="4.1" data-path="starting-with-a-question.html"><a href="starting-with-a-question.html#challenge-1"><i class="fa fa-check"></i><b>4.1</b> Challenge 1</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html"><i class="fa fa-check"></i><b>5</b> Analyzing the data</a><ul>
+<li class="chapter" data-level="5.1" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#separate"><i class="fa fa-check"></i><b>5.1</b> Separate</a></li>
+<li class="chapter" data-level="5.2" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#lump"><i class="fa fa-check"></i><b>5.2</b> Lump</a></li>
+<li class="chapter" data-level="5.3" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#is-there-a-third-option"><i class="fa fa-check"></i><b>5.3</b> Is there a third option?</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="fixed-vs-random-effects.html"><a href="fixed-vs-random-effects.html"><i class="fa fa-check"></i><b>6</b> Fixed vs. random effects</a><ul>
+<li class="chapter" data-level="6.1" data-path="fixed-vs-random-effects.html"><a href="fixed-vs-random-effects.html#fixed-effects-deterministic-processes"><i class="fa fa-check"></i><b>6.1</b> Fixed effects: deterministic processes</a></li>
+<li class="chapter" data-level="6.2" data-path="fixed-vs-random-effects.html"><a href="fixed-vs-random-effects.html#random-effects-stochastic-processes"><i class="fa fa-check"></i><b>6.2</b> Random effects: stochastic processes</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="how-do-lmms-work.html"><a href="how-do-lmms-work.html"><i class="fa fa-check"></i><b>7</b> How do LMMs work?</a><ul>
+<li class="chapter" data-level="7.1" data-path="how-do-lmms-work.html"><a href="how-do-lmms-work.html#parameters-are-varied"><i class="fa fa-check"></i><b>7.1</b> Parameters are varied</a><ul>
+<li class="chapter" data-level="" data-path="how-do-lmms-work.html"><a href="how-do-lmms-work.html#intercepts"><i class="fa fa-check"></i>Intercepts:</a></li>
+<li class="chapter" data-level="" data-path="how-do-lmms-work.html"><a href="how-do-lmms-work.html#slopes"><i class="fa fa-check"></i>Slopes:</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="how-do-lmms-work.html"><a href="how-do-lmms-work.html#data-structure-is-taken-into-account"><i class="fa fa-check"></i><b>7.2</b> Data structure is taken into account</a></li>
+<li class="chapter" data-level="7.3" data-path="how-do-lmms-work.html"><a href="how-do-lmms-work.html#challenge-2"><i class="fa fa-check"></i><b>7.3</b> Challenge 2</a></li>
+</ul></li>
+<li class="part"><span><b>Implementing LMM in <code>R</code></b></span></li>
+<li class="chapter" data-level="8" data-path="mixed-model-protocol.html"><a href="mixed-model-protocol.html"><i class="fa fa-check"></i><b>8</b> Mixed model protocol</a></li>
+<li class="chapter" data-level="9" data-path="step-1-a-priori-model-building.html"><a href="step-1-a-priori-model-building.html"><i class="fa fa-check"></i><b>9</b> Step 1. <em>A priori</em> model building</a><ul>
+<li class="chapter" data-level="9.1" data-path="step-1-a-priori-model-building.html"><a href="step-1-a-priori-model-building.html#check-data-structure"><i class="fa fa-check"></i><b>9.1</b> Check data structure</a></li>
+<li class="chapter" data-level="9.2" data-path="step-1-a-priori-model-building.html"><a href="step-1-a-priori-model-building.html#check-collinearity"><i class="fa fa-check"></i><b>9.2</b> Check collinearity</a></li>
+<li class="chapter" data-level="9.3" data-path="step-1-a-priori-model-building.html"><a href="step-1-a-priori-model-building.html#challenge-3"><i class="fa fa-check"></i><b>9.3</b> Challenge 3</a></li>
+<li class="chapter" data-level="9.4" data-path="step-1-a-priori-model-building.html"><a href="step-1-a-priori-model-building.html#consider-scale"><i class="fa fa-check"></i><b>9.4</b> Consider scale</a></li>
+<li class="chapter" data-level="9.5" data-path="step-1-a-priori-model-building.html"><a href="step-1-a-priori-model-building.html#do-you-need-a-lmm"><i class="fa fa-check"></i><b>9.5</b> Do you need a LMM?</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="step-2-code-potential-models-and-model-selection.html"><a href="step-2-code-potential-models-and-model-selection.html"><i class="fa fa-check"></i><b>10</b> Step 2. Code potential models and model selection</a><ul>
+<li class="chapter" data-level="10.1" data-path="step-2-code-potential-models-and-model-selection.html"><a href="step-2-code-potential-models-and-model-selection.html#estimation-methods"><i class="fa fa-check"></i><b>10.1</b> Estimation methods</a></li>
+<li class="chapter" data-level="10.2" data-path="step-2-code-potential-models-and-model-selection.html"><a href="step-2-code-potential-models-and-model-selection.html#different-model-structures"><i class="fa fa-check"></i><b>10.2</b> Different model structures</a></li>
+<li class="chapter" data-level="10.3" data-path="step-2-code-potential-models-and-model-selection.html"><a href="step-2-code-potential-models-and-model-selection.html#challenge-4"><i class="fa fa-check"></i><b>10.3</b> Challenge 4</a></li>
+<li class="chapter" data-level="10.4" data-path="step-2-code-potential-models-and-model-selection.html"><a href="step-2-code-potential-models-and-model-selection.html#challenge-5"><i class="fa fa-check"></i><b>10.4</b> Challenge 5</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="step-3-model-validation.html"><a href="step-3-model-validation.html"><i class="fa fa-check"></i><b>11</b> Step 3. Model validation</a><ul>
+<li class="chapter" data-level="11.1" data-path="step-3-model-validation.html"><a href="step-3-model-validation.html#check-the-homogeneity-of-the-variance"><i class="fa fa-check"></i><b>11.1</b> 1. Check the homogeneity of the variance</a></li>
+<li class="chapter" data-level="11.2" data-path="step-3-model-validation.html"><a href="step-3-model-validation.html#check-the-independence-of-the-model-residuals-with-each-covariate"><i class="fa fa-check"></i><b>11.2</b> 2. Check the independence of the model residuals with each covariate</a></li>
+<li class="chapter" data-level="11.3" data-path="step-3-model-validation.html"><a href="step-3-model-validation.html#check-the-normality-of-the-model-residuals"><i class="fa fa-check"></i><b>11.3</b> 3. Check the normality of the model residuals</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="step-4-interpretation-and-visualization.html"><a href="step-4-interpretation-and-visualization.html"><i class="fa fa-check"></i><b>12</b> Step 4. Interpretation and visualization</a><ul>
+<li class="chapter" data-level="12.1" data-path="step-4-interpretation-and-visualization.html"><a href="step-4-interpretation-and-visualization.html#interpreting-our-model"><i class="fa fa-check"></i><b>12.1</b> Interpreting our model</a></li>
+<li class="chapter" data-level="12.2" data-path="step-4-interpretation-and-visualization.html"><a href="step-4-interpretation-and-visualization.html#challenge-6"><i class="fa fa-check"></i><b>12.2</b> Challenge 6</a></li>
+<li class="chapter" data-level="12.3" data-path="step-4-interpretation-and-visualization.html"><a href="step-4-interpretation-and-visualization.html#challenge-7"><i class="fa fa-check"></i><b>12.3</b> Challenge 7</a></li>
+<li class="chapter" data-level="12.4" data-path="step-4-interpretation-and-visualization.html"><a href="step-4-interpretation-and-visualization.html#challenge-8"><i class="fa fa-check"></i><b>12.4</b> Challenge 8</a></li>
+</ul></li>
+<li class="part"><span><b>Generalized linear mixed models (GLMM) in <code>R</code></b></span></li>
+<li class="chapter" data-level="13" data-path="introduction-to-glmm.html"><a href="introduction-to-glmm.html"><i class="fa fa-check"></i><b>13</b> Introduction to GLMM</a></li>
+<li class="chapter" data-level="14" data-path="choose-an-error-distribution.html"><a href="choose-an-error-distribution.html"><i class="fa fa-check"></i><b>14</b> Choose an error distribution</a></li>
+<li class="chapter" data-level="15" data-path="poisson-glmm.html"><a href="poisson-glmm.html"><i class="fa fa-check"></i><b>15</b> Poisson GLMM</a></li>
+<li class="chapter" data-level="16" data-path="negative-binomial-glmm.html"><a href="negative-binomial-glmm.html"><i class="fa fa-check"></i><b>16</b> Negative binomial GLMM</a></li>
+<li class="chapter" data-level="17" data-path="poisson-lognormal-glmm.html"><a href="poisson-lognormal-glmm.html"><i class="fa fa-check"></i><b>17</b> Poisson-lognormal GLMM</a></li>
+<li class="part"><span><b>Model selection</b></span><ul>
+<li class="chapter" data-level="17.1" data-path="poisson-lognormal-glmm.html"><a href="poisson-lognormal-glmm.html#challenge-9"><i class="fa fa-check"></i><b>17.1</b> Challenge 9</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="additional-ressources.html"><a href="additional-ressources.html"><i class="fa fa-check"></i><b>18</b> Additional ressources</a></li>
+<li class="chapter" data-level="19" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>19</b> References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/qcbsRworkshops" target="blank">QCBS R Workshop Series</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<!------------------------ Hero Image Container --------------------------> 
+
+<head>
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=10.0,initial-scale=1.0">
+  <script src="https://kit.fontawesome.com/6a26f47516.js"></script>
+  <script src="assets/qcbs-hideOutput.js"></script>
+  <link href="assets/qcbs-style.css" rel="stylesheet">
+</head>
+
+
+
+<div class="hero-image-container"> 
+  <img class= "hero-image" src="assets/images/jean-philippe-delberghe-75xPHEQBmvA-unsplash_hero_image.jpg">
+</div>
+<div id="step-4.-interpretation-and-visualization" class="section level1">
+<h1><span class="header-section-number">Chapter 12</span> Step 4. Interpretation and visualization</h1>
+<div id="interpreting-our-model" class="section level2">
+<h2><span class="header-section-number">12.1</span> Interpreting our model</h2>
+<p>Let’s take a closer look at our final model using the <code>summary()</code> function. How can we interpret this information?</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="step-4-interpretation-and-visualization.html#cb52-1"></a><span class="co"># Now we are ready for interpretation and visualization Let&#39;s</span></span>
+<span id="cb52-2"><a href="step-4-interpretation-and-visualization.html#cb52-2"></a><span class="co"># take a closer look at our final model using the `summary()`</span></span>
+<span id="cb52-3"><a href="step-4-interpretation-and-visualization.html#cb52-3"></a><span class="co"># function.</span></span>
+<span id="cb52-4"><a href="step-4-interpretation-and-visualization.html#cb52-4"></a>(summ_M8 &lt;-<span class="st"> </span><span class="kw">summary</span>(M8))</span></code></pre></div>
+<pre><code>## Linear mixed model fit by REML [&#39;lmerMod&#39;]
+## Formula: Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake)
+##    Data: fish.data
+## 
+## REML criterion at convergence: 21.7
+## 
+## Scaled residuals: 
+##      Min       1Q   Median       3Q      Max 
+## -2.77187 -0.60166  0.05589  0.64239  2.27776 
+## 
+## Random effects:
+##  Groups       Name        Variance Std.Dev. Corr
+##  Lake         (Intercept) 0.20504  0.4528       
+##  Fish_Species (Intercept) 0.86715  0.9312       
+##               Z_Length    0.02466  0.1570   1.00
+##  Residual                 0.05039  0.2245       
+## Number of obs: 180, groups:  Lake, 6; Fish_Species, 3
+## 
+## Fixed effects:
+##               Estimate Std. Error t value
+## (Intercept) -0.0009059  0.5687733  -0.002
+## Z_Length     0.4222697  0.0922117   4.579
+## 
+## Correlation of Fixed Effects:
+##          (Intr)
+## Z_Length 0.929 
+## optimizer (nloptwrap) convergence code: 0 (OK)
+## boundary (singular) fit: see ?isSingular</code></pre>
+<p><strong>Let’s go section by section and try to understand what we are looking at.</strong></p>
+<ins>
+Random effects:
+</ins>
+<ul>
+<li><p><code>Groups</code>: grouping factors</p></li>
+<li><p><code>Name</code>: <code>(Intercept)</code> for the intercepts or the name of the variable on which the random slope is estimated (<code>Z_length</code> in this example)</p></li>
+<li><p><code>Variance</code> the variance of the estimated effect (<code>Std.Dev.</code> is the standard deviation of this estimate)</p></li>
+<li><p><code>Corr</code> the correlation between the random interpet and the random slope for a given grouping factor (see <a href="https://stats.stackexchange.com/questions/320978/understanding-and-coding-random-intercept-correlation-lmer">this dicussion</a>).</p></li>
+</ul>
+<hr />
+<ins>
+Fixed effects:
+</ins>
+<p>This part presents the fixed effect estimates. The value of the t statistics <a href="https://en.wikipedia.org/wiki/T-statistic">(Student test)</a> is shown <strong>without the p-value</strong> (it is a decision from the package authors, see why in <a href="https://stats.stackexchange.com/questions/185360/t-value-associated-with-nlme-lme4">this discussion</a>).</p>
+<p>This statistics could be used as it is. You could also calculate the 95% confidence interval (CI) with this equation:</p>
+<p><span class="math display">\[ CI = Estimate \pm 1.96*Std.Error \]</span></p>
+<p>If 0 is in the interval, then the parameter is not significantly different from zero at a threshold of <span class="math inline">\(\alpha\)</span> = 0.05.</p>
+<hr />
+<p><strong>Some useful functions</strong></p>
+<ul>
+<li><p><code>coef(M8)</code> and <code>ranef(M8)</code> return random effects of model M8</p></li>
+<li><p><code>coef(summary(M8))</code> returns fixed effects</p></li>
+<li><p><code>sigma(M8)</code> returns standard deviation of residuals</p></li>
+<li><p><code>fitted(M8)</code> returns predicted values by the model</p></li>
+<li><p><code>residuals(M8)</code> returns residuals</p></li>
+</ul>
+</div>
+<div id="challenge-6" class="section level2">
+<h2><span class="header-section-number">12.2</span> Challenge 6</h2>
+<ul>
+<li><p><strong>1.</strong> What is the slope and confidence interval of the Z_Length variable in the M8 model?</p></li>
+<li><p><strong>2.</strong> Is the slope of Z_Length significantly different from 0?</p></li>
+</ul>
+<hr />
+<div id="challenge-6-solution" class="section level4 unnumbered">
+<h4><strong>Challenge 6 Solution:</strong></h4>
+<p><strong>1.</strong> What is the slope and confidence interval of the Z_Length variable in the M8 model?</p>
+<ul>
+<li><p>slope = 0.422;</p></li>
+<li><p>CI upper limit = 0.4223 + 0.09*1.96 = 0.5987</p></li>
+<li><p>CI lower limit = 0.4223 - 0.09*1.96 = 0.2459</p></li>
+</ul>
+<p><strong>2.</strong> Is the slope of Z_Length significantly different from 0?</p>
+<ul>
+<li>Yes, because the CI [0.2459, 0.5987] does not include 0</li>
+</ul>
+</div>
+</div>
+<div id="challenge-7" class="section level2">
+<h2><span class="header-section-number">12.3</span> Challenge 7</h2>
+<p><strong>Is it possible to visualize graphically the different intercepts and slopes of the model to better interpret the results?</strong></p>
+<p>Take 2 minutes to think about different ways to represent the results of M8.</p>
+<p><em>Hint: consider the different “levels” of the model</em></p>
+<hr />
+<div id="challenge-7-solution" class="section level4 unnumbered">
+<h4><strong>Challenge 7 Solution:</strong></h4>
+<p><strong>Is it possible to visualize graphically the different intercepts and slopes of the model to better interpret the results?</strong></p>
+<p>Yes! We could do this by generating:</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>A figure with all data grouped</p></li>
+<li><p>A figure by species</p></li>
+<li><p>A figure by lake</p></li>
+</ol>
+<p>To produce these figures, we need (1) the coefficients of the full model that are in the model summary, (2) The coefficients for each level of the model, which can be obtained with the <code>coef</code> function</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="step-4-interpretation-and-visualization.html#cb54-1"></a><span class="co"># Challenge 7: *Is it possible to visualize graphically the</span></span>
+<span id="cb54-2"><a href="step-4-interpretation-and-visualization.html#cb54-2"></a><span class="co"># different intercepts and slopes of the model to better</span></span>
+<span id="cb54-3"><a href="step-4-interpretation-and-visualization.html#cb54-3"></a><span class="co"># interpret the results?</span></span>
+<span id="cb54-4"><a href="step-4-interpretation-and-visualization.html#cb54-4"></a></span>
+<span id="cb54-5"><a href="step-4-interpretation-and-visualization.html#cb54-5"></a><span class="co"># Challenge 7 solution: Yes! We could do this by generating</span></span>
+<span id="cb54-6"><a href="step-4-interpretation-and-visualization.html#cb54-6"></a><span class="co"># the following figures.  a) A figure with all data grouped</span></span>
+<span id="cb54-7"><a href="step-4-interpretation-and-visualization.html#cb54-7"></a><span class="co"># b) A figure by species c) A figure by lake</span></span>
+<span id="cb54-8"><a href="step-4-interpretation-and-visualization.html#cb54-8"></a></span>
+<span id="cb54-9"><a href="step-4-interpretation-and-visualization.html#cb54-9"></a><span class="co"># To produce these figures, first we need the coefficients of</span></span>
+<span id="cb54-10"><a href="step-4-interpretation-and-visualization.html#cb54-10"></a><span class="co"># the full model that are in the model summary.</span></span>
+<span id="cb54-11"><a href="step-4-interpretation-and-visualization.html#cb54-11"></a>summ_M8<span class="op">$</span>coefficients</span></code></pre></div>
+<pre><code>##                  Estimate Std. Error      t value
+## (Intercept) -0.0009058974 0.56877327 -0.001592722
+## Z_Length     0.4222697238 0.09221166  4.579352788</code></pre>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="step-4-interpretation-and-visualization.html#cb56-1"></a><span class="co"># Intercept = Intercept = 9.0589745 × 10^4 Slope = 0.4222697</span></span>
+<span id="cb56-2"><a href="step-4-interpretation-and-visualization.html#cb56-2"></a></span>
+<span id="cb56-3"><a href="step-4-interpretation-and-visualization.html#cb56-3"></a><span class="co"># We also need the coefficients for each level of the model,</span></span>
+<span id="cb56-4"><a href="step-4-interpretation-and-visualization.html#cb56-4"></a><span class="co"># which can be obtained with the `coef` function</span></span>
+<span id="cb56-5"><a href="step-4-interpretation-and-visualization.html#cb56-5"></a><span class="kw">coef</span>(M8)</span></code></pre></div>
+<pre><code>## $Lake
+##     (Intercept)  Z_Length
+## L1 -0.085984071 0.4222697
+## L2  0.002205209 0.4222697
+## L3 -0.301816557 0.4222697
+## L4 -0.574039728 0.4222697
+## L5  0.218650140 0.4222697
+## L6  0.735549622 0.4222697
+## 
+## $Fish_Species
+##    (Intercept)  Z_Length
+## S1  -1.0752985 0.2410746
+## S2   0.5597871 0.5168300
+## S3   0.5127938 0.5089046
+## 
+## attr(,&quot;class&quot;)
+## [1] &quot;coef.mer&quot;</code></pre>
+<p><strong>Now let’s make our figures!</strong></p>
+<ol style="list-style-type: lower-alpha">
+<li>Figure with all data grouped</li>
+</ol>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="step-4-interpretation-and-visualization.html#cb58-1"></a><span class="co"># Now let&#39;s make our figures!</span></span>
+<span id="cb58-2"><a href="step-4-interpretation-and-visualization.html#cb58-2"></a><span class="kw">library</span>(ggplot2)  <span class="co"># Load ggplot2 if you haven&#39;t already</span></span>
+<span id="cb58-3"><a href="step-4-interpretation-and-visualization.html#cb58-3"></a></span>
+<span id="cb58-4"><a href="step-4-interpretation-and-visualization.html#cb58-4"></a><span class="co"># a) Figure with all data grouped Create a simplified ggplot</span></span>
+<span id="cb58-5"><a href="step-4-interpretation-and-visualization.html#cb58-5"></a><span class="co"># theme</span></span>
+<span id="cb58-6"><a href="step-4-interpretation-and-visualization.html#cb58-6"></a>fig &lt;-<span class="st"> </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(), </span>
+<span id="cb58-7"><a href="step-4-interpretation-and-visualization.html#cb58-7"></a>    <span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), <span class="dt">panel.background =</span> <span class="kw">element_blank</span>()) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb58-8"><a href="step-4-interpretation-and-visualization.html#cb58-8"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">strip.background =</span> <span class="kw">element_blank</span>(), <span class="dt">strip.text.y =</span> <span class="kw">element_text</span>()) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb58-9"><a href="step-4-interpretation-and-visualization.html#cb58-9"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">legend.background =</span> <span class="kw">element_blank</span>()) <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">legend.key =</span> <span class="kw">element_blank</span>()) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb58-10"><a href="step-4-interpretation-and-visualization.html#cb58-10"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">panel.border =</span> <span class="kw">element_rect</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill =</span> <span class="ot">NA</span>))</span>
+<span id="cb58-11"><a href="step-4-interpretation-and-visualization.html#cb58-11"></a></span>
+<span id="cb58-12"><a href="step-4-interpretation-and-visualization.html#cb58-12"></a>plot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Z_Length, Z_TP), <span class="dt">data =</span> fish.data)</span>
+<span id="cb58-13"><a href="step-4-interpretation-and-visualization.html#cb58-13"></a>Plot_AllData &lt;-<span class="st"> </span>plot <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Length (mm)&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Trophic position&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb58-14"><a href="step-4-interpretation-and-visualization.html#cb58-14"></a><span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;All data&quot;</span>) <span class="op">+</span><span class="st"> </span>fig</span>
+<span id="cb58-15"><a href="step-4-interpretation-and-visualization.html#cb58-15"></a></span>
+<span id="cb58-16"><a href="step-4-interpretation-and-visualization.html#cb58-16"></a>Plot_AllData <span class="op">+</span><span class="st"> </span><span class="kw">geom_abline</span>(<span class="dt">intercept =</span> summ_M8<span class="op">$</span>coefficients[<span class="dv">1</span>, </span>
+<span id="cb58-17"><a href="step-4-interpretation-and-visualization.html#cb58-17"></a>    <span class="dv">1</span>], <span class="dt">slope =</span> summ_M8<span class="op">$</span>coefficients[<span class="dv">2</span>, <span class="dv">1</span>])</span></code></pre></div>
+<p><img src="book-en_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="step-4-interpretation-and-visualization.html#cb59-1"></a><span class="co"># You could also write out the numbers like this:</span></span>
+<span id="cb59-2"><a href="step-4-interpretation-and-visualization.html#cb59-2"></a><span class="co"># Plot_AllData + geom_abline(intercept = -0.0009059, slope =</span></span>
+<span id="cb59-3"><a href="step-4-interpretation-and-visualization.html#cb59-3"></a><span class="co"># 0.4222697)</span></span></code></pre></div>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Figure by species</li>
+</ol>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="step-4-interpretation-and-visualization.html#cb60-1"></a><span class="co"># b) Figure by species Create a table with the coefs to</span></span>
+<span id="cb60-2"><a href="step-4-interpretation-and-visualization.html#cb60-2"></a><span class="co"># facilitate their manipulation</span></span>
+<span id="cb60-3"><a href="step-4-interpretation-and-visualization.html#cb60-3"></a>Lake.coef &lt;-<span class="st"> </span><span class="kw">coef</span>(M8)<span class="op">$</span>Lake</span>
+<span id="cb60-4"><a href="step-4-interpretation-and-visualization.html#cb60-4"></a><span class="kw">colnames</span>(Lake.coef) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Intercept&quot;</span>, <span class="st">&quot;Slope&quot;</span>)</span>
+<span id="cb60-5"><a href="step-4-interpretation-and-visualization.html#cb60-5"></a>Species.coef &lt;-<span class="st"> </span><span class="kw">coef</span>(M8)<span class="op">$</span>Fish_Species</span>
+<span id="cb60-6"><a href="step-4-interpretation-and-visualization.html#cb60-6"></a><span class="kw">colnames</span>(Species.coef) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Intercept&quot;</span>, <span class="st">&quot;Slope&quot;</span>)</span>
+<span id="cb60-7"><a href="step-4-interpretation-and-visualization.html#cb60-7"></a></span>
+<span id="cb60-8"><a href="step-4-interpretation-and-visualization.html#cb60-8"></a>Plot_BySpecies &lt;-<span class="st"> </span>plot <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> <span class="kw">factor</span>(Fish_Species)), </span>
+<span id="cb60-9"><a href="step-4-interpretation-and-visualization.html#cb60-9"></a>    <span class="dt">size =</span> <span class="dv">4</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Length (mm)&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Trophic position&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb60-10"><a href="step-4-interpretation-and-visualization.html#cb60-10"></a><span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;By species&quot;</span>) <span class="op">+</span><span class="st"> </span>fig</span>
+<span id="cb60-11"><a href="step-4-interpretation-and-visualization.html#cb60-11"></a></span>
+<span id="cb60-12"><a href="step-4-interpretation-and-visualization.html#cb60-12"></a><span class="co"># Add regression lines for each species</span></span>
+<span id="cb60-13"><a href="step-4-interpretation-and-visualization.html#cb60-13"></a>Plot_BySpecies <span class="op">+</span><span class="st"> </span><span class="kw">geom_abline</span>(<span class="dt">intercept =</span> Species.coef[<span class="dv">1</span>, <span class="dv">1</span>], </span>
+<span id="cb60-14"><a href="step-4-interpretation-and-visualization.html#cb60-14"></a>    <span class="dt">slope =</span> Species.coef[<span class="dv">1</span>, <span class="dv">2</span>], <span class="dt">col =</span> <span class="st">&quot;coral2&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_abline</span>(<span class="dt">intercept =</span> Species.coef[<span class="dv">2</span>, </span>
+<span id="cb60-15"><a href="step-4-interpretation-and-visualization.html#cb60-15"></a>    <span class="dv">1</span>], <span class="dt">slope =</span> Species.coef[<span class="dv">2</span>, <span class="dv">2</span>], <span class="dt">col =</span> <span class="st">&quot;green4&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_abline</span>(<span class="dt">intercept =</span> Species.coef[<span class="dv">3</span>, </span>
+<span id="cb60-16"><a href="step-4-interpretation-and-visualization.html#cb60-16"></a>    <span class="dv">1</span>], <span class="dt">slope =</span> Species.coef[<span class="dv">3</span>, <span class="dv">2</span>], <span class="dt">col =</span> <span class="st">&quot;blue1&quot;</span>)</span></code></pre></div>
+<p><img src="book-en_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Figure by lake</li>
+</ol>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="step-4-interpretation-and-visualization.html#cb61-1"></a><span class="co"># c) Figure by lake</span></span>
+<span id="cb61-2"><a href="step-4-interpretation-and-visualization.html#cb61-2"></a>Plot_ByLake &lt;-<span class="st"> </span>plot <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> <span class="kw">factor</span>(Lake)), </span>
+<span id="cb61-3"><a href="step-4-interpretation-and-visualization.html#cb61-3"></a>    <span class="dt">size =</span> <span class="dv">4</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Length (mm)&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Trophic Position&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb61-4"><a href="step-4-interpretation-and-visualization.html#cb61-4"></a><span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;By Lake&quot;</span>) <span class="op">+</span><span class="st"> </span>fig</span>
+<span id="cb61-5"><a href="step-4-interpretation-and-visualization.html#cb61-5"></a></span>
+<span id="cb61-6"><a href="step-4-interpretation-and-visualization.html#cb61-6"></a><span class="co"># Add in regression lines with the intercepts specific to</span></span>
+<span id="cb61-7"><a href="step-4-interpretation-and-visualization.html#cb61-7"></a><span class="co"># each lake</span></span>
+<span id="cb61-8"><a href="step-4-interpretation-and-visualization.html#cb61-8"></a>Plot_ByLake <span class="op">+</span><span class="st"> </span><span class="kw">geom_abline</span>(<span class="dt">intercept =</span> Lake.coef[<span class="dv">1</span>, <span class="dv">1</span>], <span class="dt">slope =</span> Lake.coef[<span class="dv">1</span>, </span>
+<span id="cb61-9"><a href="step-4-interpretation-and-visualization.html#cb61-9"></a>    <span class="dv">2</span>], <span class="dt">col =</span> <span class="st">&quot;coral2&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_abline</span>(<span class="dt">intercept =</span> Lake.coef[<span class="dv">2</span>, </span>
+<span id="cb61-10"><a href="step-4-interpretation-and-visualization.html#cb61-10"></a>    <span class="dv">1</span>], <span class="dt">slope =</span> Lake.coef[<span class="dv">2</span>, <span class="dv">2</span>], <span class="dt">col =</span> <span class="st">&quot;khaki4&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_abline</span>(<span class="dt">intercept =</span> Lake.coef[<span class="dv">3</span>, </span>
+<span id="cb61-11"><a href="step-4-interpretation-and-visualization.html#cb61-11"></a>    <span class="dv">1</span>], <span class="dt">slope =</span> Lake.coef[<span class="dv">3</span>, <span class="dv">2</span>], <span class="dt">col =</span> <span class="st">&quot;green4&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_abline</span>(<span class="dt">intercept =</span> Lake.coef[<span class="dv">4</span>, </span>
+<span id="cb61-12"><a href="step-4-interpretation-and-visualization.html#cb61-12"></a>    <span class="dv">1</span>], <span class="dt">slope =</span> Lake.coef[<span class="dv">4</span>, <span class="dv">2</span>], <span class="dt">col =</span> <span class="st">&quot;darkgoldenrod&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_abline</span>(<span class="dt">intercept =</span> Lake.coef[<span class="dv">5</span>, </span>
+<span id="cb61-13"><a href="step-4-interpretation-and-visualization.html#cb61-13"></a>    <span class="dv">1</span>], <span class="dt">slope =</span> Lake.coef[<span class="dv">5</span>, <span class="dv">2</span>], <span class="dt">col =</span> <span class="st">&quot;royalblue1&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_abline</span>(<span class="dt">intercept =</span> Lake.coef[<span class="dv">6</span>, </span>
+<span id="cb61-14"><a href="step-4-interpretation-and-visualization.html#cb61-14"></a>    <span class="dv">1</span>], <span class="dt">slope =</span> Lake.coef[<span class="dv">6</span>, <span class="dv">2</span>], <span class="dt">col =</span> <span class="st">&quot;magenta3&quot;</span>)</span></code></pre></div>
+<p><img src="book-en_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
+</div>
+</div>
+<div id="challenge-8" class="section level2">
+<h2><span class="header-section-number">12.4</span> Challenge 8</h2>
+<p>Let’s test our knowledge by considering another scenario.</p>
+<p>Imagine that you have inventoried species richness <strong>in 1000 quadrats</strong> that are within <strong>10 different sites</strong> which are also within <strong>10 different forests</strong>. You also <strong>measured productivity</strong> in each <strong>quadrat</strong>.</p>
+<p>You want to know if productivity is a good predictor of biodiversity. <strong>What mixed model could you use for this dataset?</strong></p>
+<hr />
+<div id="challenge-8-solution" class="section level4 unnumbered">
+<h4><strong>Challenge 8 Solution:</strong></h4>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="step-4-interpretation-and-visualization.html#cb62-1"></a><span class="kw">lmer</span>(Biodiv <span class="op">~</span><span class="st"> </span>Productivity <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Forest<span class="op">/</span>Site))</span></code></pre></div>
+<p>Here the random effects are nested (i.e. Sites within forest) and not crossed.</p>
+<p>Why use <code>(1 | Forest / Site)</code> rather than <code>(1 | Forest) + (1 | Site)</code>?</p>
+<p>See the answer <a href="https://stats.stackexchange.com/questions/228800/crossed-vs-nested-random-effects-how-do-they-differ-and-how-are-they-specified">here</a>!</p>
+
+</div>
+</div>
+</div>
+
+
+
+<hr>
+<center> 
+  <div class="footer">
+      All the content of the workshop series is under a <a href="https://creativecommons.org/licenses/by-nc/2.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+  </div>
+</center>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="step-3-model-validation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="introduction-to-glmm.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": false
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

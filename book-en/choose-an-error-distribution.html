@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 7 How do LMMs work? | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)</title>
+  <title>Chapter 14 Choose an error distribution | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)</title>
   <meta name="description" content="Linear and generalized linear mixed models (LMM and GLMM)" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 7 How do LMMs work? | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)" />
+  <meta property="og:title" content="Chapter 14 Choose an error distribution | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://github.com/qcbsRworkshops/" />
   <meta property="og:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="qcbsRworkshops/workshop09" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 7 How do LMMs work? | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)" />
+  <meta name="twitter:title" content="Chapter 14 Choose an error distribution | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)" />
   
   <meta name="twitter:description" content="Linear and generalized linear mixed models (LMM and GLMM)" />
   <meta name="twitter:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
-<link rel="prev" href="fixed-vs-random-effects.html"/>
-<link rel="next" href="mixed-model-protocol.html"/>
+<link rel="prev" href="introduction-to-glmm.html"/>
+<link rel="next" href="poisson-glmm.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -237,76 +237,104 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div class="hero-image-container"> 
   <img class= "hero-image" src="assets/images/jean-philippe-delberghe-75xPHEQBmvA-unsplash_hero_image.jpg">
 </div>
-<div id="how-do-lmms-work" class="section level1">
-<h1><span class="header-section-number">Chapter 7</span> How do LMMs work?</h1>
-<div id="parameters-are-varied" class="section level2">
-<h2><span class="header-section-number">7.1</span> Parameters are varied</h2>
-<p>In linear mixed models, intercepts and/or slopes are allowed to vary according to a given factor (random effect; e.g. by lake and/or species).</p>
-<p>Allowing intercepts and/or slopes to vary by random effects means that you assume they come from a normal distribution. A mean and standard deviation of that distribution are estimated based on your data. The most likely intercepts and slopes from that distribution are then fit by optimization (ex. maximum likelihood or restricted maximum likelihood).</p>
-<div id="intercepts" class="section level3 unnumbered">
-<h3>Intercepts:</h3>
-<p>If we consider species as a random effect first, we can estimate a mean and standard deviation for the combined distribution of species intercepts rather than separate intercepts for each species. The mean of this distribution is the ‘species level model’.</p>
-<p>In this example, we only have three species. In general, the more levels you have for a given factor, the more accurately the parameters of the distribution can be estimated (three may be a little low for estimating a mean and standard deviation but it makes simpler graphs!). <em>Note that when you implement LMM’s in <code>R</code>, the intercept in the summary is the species level intercept (i.e. the mean of all random intercepts).</em></p>
-<p><img src="images/fig_7_w5.png" /></p>
-<p>Likewise, if we consider lake as a random effect then only mean and standard deviation of the combined lake intercept are estimated. This saves you the need to estimate 6 different lake intercept parameters, ultimately saving degrees of freedom as less parameter estimates are needed given the amount of data.</p>
-<p><img src="images/fig_8_w5.png" /></p>
-</div>
-<div id="slopes" class="section level3 unnumbered">
-<h3>Slopes:</h3>
-<p>The same concept is used for allowing slope to vary by a given factor (random effect). This is a little harder to visualize than the intercepts.</p>
-<p>In the case of species, the mean and standard deviation of slope parameters are estimated instead of three separate slopes. <em>Note that when you implement LMM’s in <code>R</code>, the slope in the summary is the species level slope.</em></p>
-<p><img src="images/fig_9_w5.png" /></p>
-</div>
-</div>
-<div id="data-structure-is-taken-into-account" class="section level2">
-<h2><span class="header-section-number">7.2</span> Data structure is taken into account</h2>
-<p>In linear mixed models, intercepts, slopes and their confidence intervals are adjusted to take the data structure into account.</p>
-<p><strong>What happens if the sample size for a specific factor level is small?</strong> (e.g. low <span class="math inline">\(n\)</span> for a specific species)</p>
-<p>If a certain species or lake is poorly represented in the data, the model will give more weight to the pooled model to estimate the intercept and/or slope of that species or lake (i.e. shrinkage).</p>
-<p>Ideally, you should have a minimum of <span class="math inline">\(n\)</span> =3 for any specific factor level.</p>
-<p><img src="images/fig_12_w5.png" /></p>
-<p><strong>How do we assess the impact of a random effect on the model?</strong></p>
-<p>The confidence intervals for the <strong>general</strong> intercepts and slopes are adjusted to account for pseudoreplication based on the <strong>intraclass correlation coefficient (ICC)</strong></p>
-<p>The ICC is calculated as the <strong>ratio</strong> of variance between the random effect and the total variance. Thus, the ICC describes the proportion of variance in the response variable that is attributed to a specific random effect:</p>
-<p><span class="math display">\[ICC = \frac{\sigma_{\alpha}^2}{\sigma_{\alpha}^2 + \sigma_{\varepsilon}^2}\]</span>
-<em>Note: The specific mathematical notation may vary according to the article/book and according to how the model equation was written.</em></p>
-<p>In our fish example, the ICC informs us of the <strong>extent</strong> to which the average trophic position (i.e. intercepts) <strong>varies</strong> among species or lakes.</p>
-<div class="two-col">
-<ins>
-High ICC
-</ins>
-<p><img src="images/ICCplot2_qcbs.png" /></p>
-<p>The % of variance (ICC) is high because <strong>species differ strongly</strong> in their average trophic position.</p>
-<p>The confidence intervals for the general intercept and slope are high.</p>
-<ins>
-Low ICC
-</ins>
-<p><img src="images/ICCplot_qcbs.png" /></p>
-<p>The % of variance (ICC) is low because <strong>species differ poorly</strong> in their average trophic position.</p>
-<p>The confidence intervals for the general intercept and slope are small.</p>
-</div>
-</div>
-<div id="challenge-2" class="section level2">
-<h2><span class="header-section-number">7.3</span> Challenge 2</h2>
-<p>For your second challenge, think about these two questions. How will the ICC and confidence intervals be affected in these two scenarios:</p>
-<ul>
-<li><strong>1.</strong> Fish trophic positions are not variable among lakes?</li>
-<li><strong>2.</strong> Fish trophic positions are similar within lakes but variable among lakes?</li>
-</ul>
+<div id="choose-an-error-distribution" class="section level1">
+<h1><span class="header-section-number">Chapter 14</span> Choose an error distribution</h1>
+<p>Now we need to select an error distribution. This choice will be informed by the structure of our data.</p>
+<p>In the Arabidopsis dataset, the response variable is count data which suggests we need a <strong>Poisson distribution</strong> (i.e. the variance is equal to the mean).</p>
+<p>Let’s take a look:</p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="choose-an-error-distribution.html#cb64-1"></a><span class="co"># Before we go any further, we need to select an error</span></span>
+<span id="cb64-2"><a href="choose-an-error-distribution.html#cb64-2"></a><span class="co"># distribution. This choice will be informed by the structure</span></span>
+<span id="cb64-3"><a href="choose-an-error-distribution.html#cb64-3"></a><span class="co"># of our data.  Our response variable is count data which</span></span>
+<span id="cb64-4"><a href="choose-an-error-distribution.html#cb64-4"></a><span class="co"># suggests we need a Poisson distribution (i.e. the variance</span></span>
+<span id="cb64-5"><a href="choose-an-error-distribution.html#cb64-5"></a><span class="co"># is equal to the mean).</span></span>
+<span id="cb64-6"><a href="choose-an-error-distribution.html#cb64-6"></a><span class="kw">hist</span>(dat.tf<span class="op">$</span>total.fruits, <span class="dt">breaks =</span> <span class="dv">50</span>, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;&quot;</span>, </span>
+<span id="cb64-7"><a href="choose-an-error-distribution.html#cb64-7"></a>    <span class="dt">xlab =</span> <span class="st">&quot;Total fruits&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Count&quot;</span>)</span></code></pre></div>
+<p><img src="book-en_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
+<p>However, as we will soon see, the variance increases with the mean much more rapidly than expected under the Poisson distribution…</p>
 <hr />
-<div id="challenge-2-solution" class="section level4 unnumbered">
-<h4><strong>Challenge 2 Solution:</strong></h4>
+<p><strong>Explore variance </strong></p>
+<p>Let’s take a closer look at the variance within our data.</p>
+<p>To illustrate heterogeneity in variance we will first create boxplots of the <strong>log</strong> of total fruit production (<strong>response variable</strong>) versus different environmental factors.</p>
+<p>Let’s create new variables that represent every combination of <strong>nutrient</strong> x <strong>clipping</strong> x <strong>random factor</strong></p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="choose-an-error-distribution.html#cb65-1"></a><span class="co"># Let&#39;s explore the variance within our data Create new</span></span>
+<span id="cb65-2"><a href="choose-an-error-distribution.html#cb65-2"></a><span class="co"># variables that represent every combination of variables</span></span>
+<span id="cb65-3"><a href="choose-an-error-distribution.html#cb65-3"></a>dat.tf &lt;-<span class="st"> </span><span class="kw">within</span>(dat.tf, {</span>
+<span id="cb65-4"><a href="choose-an-error-distribution.html#cb65-4"></a>    <span class="co"># genotype x nutrient x clipping</span></span>
+<span id="cb65-5"><a href="choose-an-error-distribution.html#cb65-5"></a>    gna &lt;-<span class="st"> </span><span class="kw">interaction</span>(gen, nutrient, amd)</span>
+<span id="cb65-6"><a href="choose-an-error-distribution.html#cb65-6"></a>    gna &lt;-<span class="st"> </span><span class="kw">reorder</span>(gna, total.fruits, mean)</span>
+<span id="cb65-7"><a href="choose-an-error-distribution.html#cb65-7"></a>    <span class="co"># population x nutrient x clipping</span></span>
+<span id="cb65-8"><a href="choose-an-error-distribution.html#cb65-8"></a>    pna &lt;-<span class="st"> </span><span class="kw">interaction</span>(popu, nutrient, amd)</span>
+<span id="cb65-9"><a href="choose-an-error-distribution.html#cb65-9"></a>    pna &lt;-<span class="st"> </span><span class="kw">reorder</span>(pna, total.fruits, mean)</span>
+<span id="cb65-10"><a href="choose-an-error-distribution.html#cb65-10"></a>})</span></code></pre></div>
+<p>Now let’s visualize:</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="choose-an-error-distribution.html#cb66-1"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb66-2"><a href="choose-an-error-distribution.html#cb66-2"></a><span class="co"># Boxplot of total fruits vs genotype x nutrient x clipping interaction</span></span>
+<span id="cb66-3"><a href="choose-an-error-distribution.html#cb66-3"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> dat.tf, <span class="kw">aes</span>(<span class="kw">factor</span>(<span class="dt">x =</span> gna), <span class="dt">y =</span> <span class="kw">log</span>(total.fruits <span class="op">+</span><span class="st"> </span><span class="dv">1</span>))) <span class="op">+</span></span>
+<span id="cb66-4"><a href="choose-an-error-distribution.html#cb66-4"></a><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">colour =</span> <span class="st">&quot;skyblue2&quot;</span>, <span class="dt">outlier.shape =</span> <span class="dv">21</span>,</span>
+<span id="cb66-5"><a href="choose-an-error-distribution.html#cb66-5"></a>  <span class="dt">outlier.colour =</span> <span class="st">&quot;skyblue2&quot;</span>) <span class="op">+</span></span>
+<span id="cb66-6"><a href="choose-an-error-distribution.html#cb66-6"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;log (Total fruits)</span><span class="ch">\n</span><span class="st">&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="co"># \n creates a space after the title</span></span>
+<span id="cb66-7"><a href="choose-an-error-distribution.html#cb66-7"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">Genotype x nutrient x clipping&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="co"># space before the title</span></span>
+<span id="cb66-8"><a href="choose-an-error-distribution.html#cb66-8"></a><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_blank</span>()) <span class="op">+</span></span>
+<span id="cb66-9"><a href="choose-an-error-distribution.html#cb66-9"></a><span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun =</span> mean, <span class="dt">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<p><img src="book-en_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
+<p>From this plot, we see that the variance of total fruits shows a large amount of heterogeneity among populations (population x nutrient x clipping interaction).</p>
+<hr />
+<p><strong>Back to choosing an error distribution</strong></p>
+<p>As we just saw, there is a large amount of heterogeneity among group variances even when the response variable is transformed (i.e. log).</p>
+<p>To determine which distribution family to use, we can run a diagnostic plot of the <strong>group variances vs group means</strong>. We provide an example below for the genotype x nutrient x clipping grouping.</p>
 <ul>
-<li><strong>1.</strong> Low ICC, smaller confidence intervals</li>
-<li><strong>2.</strong> High ICC, larger confidence intervals</li>
+<li><ol style="list-style-type: decimal">
+<li>If we observe a linear relationship between the variance and the mean with a slope = 1, then the Poisson family is appropriate,</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: decimal">
+<li>If we observe a linear mean-variance relationship with a slope &gt; 1 (i.e. Var = φµ where φ &gt; 1), then the quasi-Poisson family (as introduced above) should be applied,</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: decimal">
+<li>Finally, a quadratic relationship between the variance and the mean (i.e. <span class="math inline">\(Var = µ(1 + α) or µ(1 + µ/k)\)</span>) is characteristic of overdispersed data that is driven by an underlying heterogeneity among samples. In this case, the negative binomial (Poisson-gamma) would be more appropriate.</li>
+</ol></li>
 </ul>
-
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="choose-an-error-distribution.html#cb67-1"></a><span class="co">## Run a diagnostic lot of the group variances vs group means</span></span>
+<span id="cb67-2"><a href="choose-an-error-distribution.html#cb67-2"></a><span class="co">## (genotype x nutrient x clipping grouping).  Code used to</span></span>
+<span id="cb67-3"><a href="choose-an-error-distribution.html#cb67-3"></a><span class="co">## produce the plot :</span></span>
+<span id="cb67-4"><a href="choose-an-error-distribution.html#cb67-4"></a><span class="co">## https://github.com/QCBSRworkshops/workshop07/blob/main/pres-fr/data/glmm_e.r</span></span>
+<span id="cb67-5"><a href="choose-an-error-distribution.html#cb67-5"></a><span class="co">## Substantial variation among the sample variances on the</span></span>
+<span id="cb67-6"><a href="choose-an-error-distribution.html#cb67-6"></a><span class="co">## transformed data For example, among genotypes:</span></span>
+<span id="cb67-7"><a href="choose-an-error-distribution.html#cb67-7"></a>grpVars &lt;-<span class="st"> </span><span class="kw">tapply</span>(dat.tf<span class="op">$</span>total.fruits, dat.tf<span class="op">$</span>gna, var)</span>
+<span id="cb67-8"><a href="choose-an-error-distribution.html#cb67-8"></a></span>
+<span id="cb67-9"><a href="choose-an-error-distribution.html#cb67-9"></a>grpMeans &lt;-<span class="st"> </span><span class="kw">tapply</span>(dat.tf<span class="op">$</span>total.fruits, dat.tf<span class="op">$</span>gna, mean)</span>
+<span id="cb67-10"><a href="choose-an-error-distribution.html#cb67-10"></a></span>
+<span id="cb67-11"><a href="choose-an-error-distribution.html#cb67-11"></a><span class="co"># Quasi-Poisson</span></span>
+<span id="cb67-12"><a href="choose-an-error-distribution.html#cb67-12"></a>lm1 &lt;-<span class="st"> </span><span class="kw">lm</span>(grpVars <span class="op">~</span><span class="st"> </span>grpMeans <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</span>
+<span id="cb67-13"><a href="choose-an-error-distribution.html#cb67-13"></a>phi.fit &lt;-<span class="st"> </span><span class="kw">coef</span>(lm1)</span>
+<span id="cb67-14"><a href="choose-an-error-distribution.html#cb67-14"></a><span class="co"># The -1 specifies a model with the intercept set to zero</span></span>
+<span id="cb67-15"><a href="choose-an-error-distribution.html#cb67-15"></a></span>
+<span id="cb67-16"><a href="choose-an-error-distribution.html#cb67-16"></a><span class="co"># Negative binomial</span></span>
+<span id="cb67-17"><a href="choose-an-error-distribution.html#cb67-17"></a>lm2 &lt;-<span class="st"> </span><span class="kw">lm</span>(grpVars <span class="op">~</span><span class="st"> </span><span class="kw">I</span>(grpMeans<span class="op">^</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span><span class="kw">offset</span>(grpMeans) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</span>
+<span id="cb67-18"><a href="choose-an-error-distribution.html#cb67-18"></a>k.fit &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">/</span><span class="kw">coef</span>(lm2)</span>
+<span id="cb67-19"><a href="choose-an-error-distribution.html#cb67-19"></a><span class="co"># The offset() is used to specify that we want the group</span></span>
+<span id="cb67-20"><a href="choose-an-error-distribution.html#cb67-20"></a><span class="co"># means added as a term with its coefficient fixed to 1</span></span>
+<span id="cb67-21"><a href="choose-an-error-distribution.html#cb67-21"></a></span>
+<span id="cb67-22"><a href="choose-an-error-distribution.html#cb67-22"></a><span class="co"># Non-parametric loess fit</span></span>
+<span id="cb67-23"><a href="choose-an-error-distribution.html#cb67-23"></a>Lfit &lt;-<span class="st"> </span><span class="kw">loess</span>(grpVars <span class="op">~</span><span class="st"> </span>grpMeans)</span>
+<span id="cb67-24"><a href="choose-an-error-distribution.html#cb67-24"></a></span>
+<span id="cb67-25"><a href="choose-an-error-distribution.html#cb67-25"></a><span class="co"># The plot</span></span>
+<span id="cb67-26"><a href="choose-an-error-distribution.html#cb67-26"></a><span class="kw">plot</span>(grpVars <span class="op">~</span><span class="st"> </span>grpMeans, <span class="dt">xlab =</span> <span class="st">&quot;Group means&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Group variances&quot;</span>)</span>
+<span id="cb67-27"><a href="choose-an-error-distribution.html#cb67-27"></a><span class="kw">abline</span>(<span class="dt">a =</span> <span class="dv">0</span>, <span class="dt">b =</span> <span class="dv">1</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb67-28"><a href="choose-an-error-distribution.html#cb67-28"></a><span class="kw">text</span>(<span class="dv">105</span>, <span class="dv">500</span>, <span class="st">&quot;Poisson&quot;</span>)</span>
+<span id="cb67-29"><a href="choose-an-error-distribution.html#cb67-29"></a><span class="kw">curve</span>(phi.fit <span class="op">*</span><span class="st"> </span>x, <span class="dt">col =</span> <span class="dv">2</span>, <span class="dt">add =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb67-30"><a href="choose-an-error-distribution.html#cb67-30"></a><span class="co"># bquote() is used to substitute numeric values in equations</span></span>
+<span id="cb67-31"><a href="choose-an-error-distribution.html#cb67-31"></a><span class="co"># with symbols</span></span>
+<span id="cb67-32"><a href="choose-an-error-distribution.html#cb67-32"></a><span class="kw">text</span>(<span class="dv">110</span>, <span class="dv">3900</span>, <span class="kw">bquote</span>(<span class="kw">paste</span>(<span class="st">&quot;QP: &quot;</span>, sigma<span class="op">^</span><span class="dv">2</span> <span class="op">==</span><span class="st"> </span>.(<span class="kw">round</span>(phi.fit, </span>
+<span id="cb67-33"><a href="choose-an-error-distribution.html#cb67-33"></a>    <span class="dv">1</span>)) <span class="op">*</span><span class="st"> </span>mu)), <span class="dt">col =</span> <span class="dv">2</span>)</span>
+<span id="cb67-34"><a href="choose-an-error-distribution.html#cb67-34"></a><span class="kw">curve</span>(x <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>x<span class="op">/</span>k.fit), <span class="dt">col =</span> <span class="dv">4</span>, <span class="dt">add =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb67-35"><a href="choose-an-error-distribution.html#cb67-35"></a><span class="kw">text</span>(<span class="dv">104</span>, <span class="dv">7200</span>, <span class="kw">paste</span>(<span class="st">&quot;NB: k = &quot;</span>, <span class="kw">round</span>(k.fit, <span class="dv">1</span>), <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>), </span>
+<span id="cb67-36"><a href="choose-an-error-distribution.html#cb67-36"></a>    <span class="dt">col =</span> <span class="dv">4</span>)</span>
+<span id="cb67-37"><a href="choose-an-error-distribution.html#cb67-37"></a>mvec &lt;-<span class="st"> </span><span class="dv">0</span><span class="op">:</span><span class="dv">120</span></span>
+<span id="cb67-38"><a href="choose-an-error-distribution.html#cb67-38"></a><span class="kw">lines</span>(mvec, <span class="kw">predict</span>(Lfit, mvec), <span class="dt">col =</span> <span class="dv">5</span>)</span>
+<span id="cb67-39"><a href="choose-an-error-distribution.html#cb67-39"></a><span class="kw">text</span>(<span class="dv">118</span>, <span class="dv">2000</span>, <span class="st">&quot;loess&quot;</span>, <span class="dt">col =</span> <span class="dv">5</span>)</span></code></pre></div>
+<p><img src="book-en_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
+<p>From the plot above we note that a linear quasi-Poisson may be better than the negative binomial, <em>but additional modeling is needed.</em></p>
 </div>
-</div>
-</div>
-
-
-
 <hr>
 <center> 
   <div class="footer">
@@ -318,8 +346,8 @@ Low ICC
           </div>
         </div>
       </div>
-<a href="fixed-vs-random-effects.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="mixed-model-protocol.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="introduction-to-glmm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="poisson-glmm.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

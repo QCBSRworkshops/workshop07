@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 7 How do LMMs work? | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)</title>
+  <title>Chapter 11 Step 3. Model validation | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)</title>
   <meta name="description" content="Linear and generalized linear mixed models (LMM and GLMM)" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 7 How do LMMs work? | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)" />
+  <meta property="og:title" content="Chapter 11 Step 3. Model validation | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://github.com/qcbsRworkshops/" />
   <meta property="og:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="qcbsRworkshops/workshop09" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 7 How do LMMs work? | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)" />
+  <meta name="twitter:title" content="Chapter 11 Step 3. Model validation | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)" />
   
   <meta name="twitter:description" content="Linear and generalized linear mixed models (LMM and GLMM)" />
   <meta name="twitter:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
-<link rel="prev" href="fixed-vs-random-effects.html"/>
-<link rel="next" href="mixed-model-protocol.html"/>
+<link rel="prev" href="step-2-code-potential-models-and-model-selection.html"/>
+<link rel="next" href="step-4-interpretation-and-visualization.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -237,76 +237,80 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div class="hero-image-container"> 
   <img class= "hero-image" src="assets/images/jean-philippe-delberghe-75xPHEQBmvA-unsplash_hero_image.jpg">
 </div>
-<div id="how-do-lmms-work" class="section level1">
-<h1><span class="header-section-number">Chapter 7</span> How do LMMs work?</h1>
-<div id="parameters-are-varied" class="section level2">
-<h2><span class="header-section-number">7.1</span> Parameters are varied</h2>
-<p>In linear mixed models, intercepts and/or slopes are allowed to vary according to a given factor (random effect; e.g. by lake and/or species).</p>
-<p>Allowing intercepts and/or slopes to vary by random effects means that you assume they come from a normal distribution. A mean and standard deviation of that distribution are estimated based on your data. The most likely intercepts and slopes from that distribution are then fit by optimization (ex. maximum likelihood or restricted maximum likelihood).</p>
-<div id="intercepts" class="section level3 unnumbered">
-<h3>Intercepts:</h3>
-<p>If we consider species as a random effect first, we can estimate a mean and standard deviation for the combined distribution of species intercepts rather than separate intercepts for each species. The mean of this distribution is the ‘species level model’.</p>
-<p>In this example, we only have three species. In general, the more levels you have for a given factor, the more accurately the parameters of the distribution can be estimated (three may be a little low for estimating a mean and standard deviation but it makes simpler graphs!). <em>Note that when you implement LMM’s in <code>R</code>, the intercept in the summary is the species level intercept (i.e. the mean of all random intercepts).</em></p>
-<p><img src="images/fig_7_w5.png" /></p>
-<p>Likewise, if we consider lake as a random effect then only mean and standard deviation of the combined lake intercept are estimated. This saves you the need to estimate 6 different lake intercept parameters, ultimately saving degrees of freedom as less parameter estimates are needed given the amount of data.</p>
-<p><img src="images/fig_8_w5.png" /></p>
-</div>
-<div id="slopes" class="section level3 unnumbered">
-<h3>Slopes:</h3>
-<p>The same concept is used for allowing slope to vary by a given factor (random effect). This is a little harder to visualize than the intercepts.</p>
-<p>In the case of species, the mean and standard deviation of slope parameters are estimated instead of three separate slopes. <em>Note that when you implement LMM’s in <code>R</code>, the slope in the summary is the species level slope.</em></p>
-<p><img src="images/fig_9_w5.png" /></p>
-</div>
-</div>
-<div id="data-structure-is-taken-into-account" class="section level2">
-<h2><span class="header-section-number">7.2</span> Data structure is taken into account</h2>
-<p>In linear mixed models, intercepts, slopes and their confidence intervals are adjusted to take the data structure into account.</p>
-<p><strong>What happens if the sample size for a specific factor level is small?</strong> (e.g. low <span class="math inline">\(n\)</span> for a specific species)</p>
-<p>If a certain species or lake is poorly represented in the data, the model will give more weight to the pooled model to estimate the intercept and/or slope of that species or lake (i.e. shrinkage).</p>
-<p>Ideally, you should have a minimum of <span class="math inline">\(n\)</span> =3 for any specific factor level.</p>
-<p><img src="images/fig_12_w5.png" /></p>
-<p><strong>How do we assess the impact of a random effect on the model?</strong></p>
-<p>The confidence intervals for the <strong>general</strong> intercepts and slopes are adjusted to account for pseudoreplication based on the <strong>intraclass correlation coefficient (ICC)</strong></p>
-<p>The ICC is calculated as the <strong>ratio</strong> of variance between the random effect and the total variance. Thus, the ICC describes the proportion of variance in the response variable that is attributed to a specific random effect:</p>
-<p><span class="math display">\[ICC = \frac{\sigma_{\alpha}^2}{\sigma_{\alpha}^2 + \sigma_{\varepsilon}^2}\]</span>
-<em>Note: The specific mathematical notation may vary according to the article/book and according to how the model equation was written.</em></p>
-<p>In our fish example, the ICC informs us of the <strong>extent</strong> to which the average trophic position (i.e. intercepts) <strong>varies</strong> among species or lakes.</p>
-<div class="two-col">
-<ins>
-High ICC
-</ins>
-<p><img src="images/ICCplot2_qcbs.png" /></p>
-<p>The % of variance (ICC) is high because <strong>species differ strongly</strong> in their average trophic position.</p>
-<p>The confidence intervals for the general intercept and slope are high.</p>
-<ins>
-Low ICC
-</ins>
-<p><img src="images/ICCplot_qcbs.png" /></p>
-<p>The % of variance (ICC) is low because <strong>species differ poorly</strong> in their average trophic position.</p>
-<p>The confidence intervals for the general intercept and slope are small.</p>
-</div>
-</div>
-<div id="challenge-2" class="section level2">
-<h2><span class="header-section-number">7.3</span> Challenge 2</h2>
-<p>For your second challenge, think about these two questions. How will the ICC and confidence intervals be affected in these two scenarios:</p>
+<div id="step-3.-model-validation" class="section level1">
+<h1><span class="header-section-number">Chapter 11</span> Step 3. Model validation</h1>
+<p>Now that we have our model, we must verify that the model follows all the basic assumptions:</p>
 <ul>
-<li><strong>1.</strong> Fish trophic positions are not variable among lakes?</li>
-<li><strong>2.</strong> Fish trophic positions are similar within lakes but variable among lakes?</li>
-</ul>
-<hr />
-<div id="challenge-2-solution" class="section level4 unnumbered">
-<h4><strong>Challenge 2 Solution:</strong></h4>
+<li><strong>1. Check the homogeneity of the variance:</strong>
 <ul>
-<li><strong>1.</strong> Low ICC, smaller confidence intervals</li>
-<li><strong>2.</strong> High ICC, larger confidence intervals</li>
+<li>Plot predicted values vs residual values</li>
+</ul></li>
+<li><strong>2. Check the independence of the model residuals:</strong>
+<ul>
+<li>Plot residuals vs each covariate of the model</li>
+<li>Plot residuals vs each covariate not included in the model</li>
+</ul></li>
+<li><strong>3. Check the normality of the model residuals:</strong>
+<ul>
+<li>Histogram of residuals</li>
+</ul></li>
 </ul>
-
+<div id="check-the-homogeneity-of-the-variance" class="section level2">
+<h2><span class="header-section-number">11.1</span> 1. Check the homogeneity of the variance</h2>
+<p>In order to check the homgeneity of the variance, we can plot predicted values vs residual values.</p>
+<p>Homogeneous dispersion of the residuals means that the assumption is respected.</p>
+<p><img src="images/resid-plots.gif" /></p>
+<p>Now let’s look at our data, is the dispersion homogenous?</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="step-3-model-validation.html#cb46-1"></a><span class="co"># Plot predicted values vs residual values</span></span>
+<span id="cb46-2"><a href="step-3-model-validation.html#cb46-2"></a><span class="kw">par</span>(<span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>))</span>
+<span id="cb46-3"><a href="step-3-model-validation.html#cb46-3"></a><span class="kw">plot</span>(<span class="kw">resid</span>(M8) <span class="op">~</span><span class="st"> </span><span class="kw">fitted</span>(M8), <span class="dt">xlab =</span> <span class="st">&quot;Predicted values&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Normalized residuals&quot;</span>)</span>
+<span id="cb46-4"><a href="step-3-model-validation.html#cb46-4"></a><span class="kw">abline</span>(<span class="dt">h =</span> <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="book-en_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="step-3-model-validation.html#cb47-1"></a><span class="co"># Homogeneous dispersion of the residuals means that the</span></span>
+<span id="cb47-2"><a href="step-3-model-validation.html#cb47-2"></a><span class="co"># assumption is respected.</span></span></code></pre></div>
+<p><strong>Yes! Homogeneous dispersion of the residuals means that the assumption is respected.</strong></p>
+</div>
+<div id="check-the-independence-of-the-model-residuals-with-each-covariate" class="section level2">
+<h2><span class="header-section-number">11.2</span> 2. Check the independence of the model residuals with each covariate</h2>
+<p>In order to check the independence of the model residuals with each covariate we will (1) plot residuals vs each covariate of the model and (2) plot residuals vs each covariate not included in the model.</p>
+<p>Let’s start by (1) plotting the residuals vs each covariate of the model.</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="step-3-model-validation.html#cb48-1"></a><span class="co"># In order to check the independence of the model residuals</span></span>
+<span id="cb48-2"><a href="step-3-model-validation.html#cb48-2"></a><span class="co"># we need to plot residuals vs each covariate of the model</span></span>
+<span id="cb48-3"><a href="step-3-model-validation.html#cb48-3"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>))</span>
+<span id="cb48-4"><a href="step-3-model-validation.html#cb48-4"></a></span>
+<span id="cb48-5"><a href="step-3-model-validation.html#cb48-5"></a><span class="kw">plot</span>(<span class="kw">resid</span>(M8) <span class="op">~</span><span class="st"> </span>fish.data<span class="op">$</span>Z_Length, <span class="dt">xlab =</span> <span class="st">&quot;Length&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Normalized residuals&quot;</span>)</span>
+<span id="cb48-6"><a href="step-3-model-validation.html#cb48-6"></a><span class="kw">abline</span>(<span class="dt">h =</span> <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb48-7"><a href="step-3-model-validation.html#cb48-7"></a></span>
+<span id="cb48-8"><a href="step-3-model-validation.html#cb48-8"></a><span class="kw">boxplot</span>(<span class="kw">resid</span>(M8) <span class="op">~</span><span class="st"> </span>Fish_Species, <span class="dt">data =</span> fish.data, <span class="dt">xlab =</span> <span class="st">&quot;Species&quot;</span>, </span>
+<span id="cb48-9"><a href="step-3-model-validation.html#cb48-9"></a>    <span class="dt">ylab =</span> <span class="st">&quot;Normalized residuals&quot;</span>)</span>
+<span id="cb48-10"><a href="step-3-model-validation.html#cb48-10"></a><span class="kw">abline</span>(<span class="dt">h =</span> <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb48-11"><a href="step-3-model-validation.html#cb48-11"></a></span>
+<span id="cb48-12"><a href="step-3-model-validation.html#cb48-12"></a><span class="kw">boxplot</span>(<span class="kw">resid</span>(M8) <span class="op">~</span><span class="st"> </span>Lake, <span class="dt">data =</span> fish.data, <span class="dt">xlab =</span> <span class="st">&quot;Lakes&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Normalized residuals&quot;</span>)</span>
+<span id="cb48-13"><a href="step-3-model-validation.html#cb48-13"></a><span class="kw">abline</span>(<span class="dt">h =</span> <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="book-en_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="step-3-model-validation.html#cb49-1"></a><span class="co"># Homogeneous dispersion of the residuals around 0 means no</span></span>
+<span id="cb49-2"><a href="step-3-model-validation.html#cb49-2"></a><span class="co"># pattern of residuals depending on the variable, therefore</span></span>
+<span id="cb49-3"><a href="step-3-model-validation.html#cb49-3"></a><span class="co"># the assumption is respected!  Note: The clusters are due to</span></span>
+<span id="cb49-4"><a href="step-3-model-validation.html#cb49-4"></a><span class="co"># the data structure, where fish of only 5 size classes</span></span>
+<span id="cb49-5"><a href="step-3-model-validation.html#cb49-5"></a><span class="co"># (large, small, and three groups in between) were captured.</span></span></code></pre></div>
+<p><strong>Homogeneous dispersion of the residuals around 0 means no pattern of residuals depending on the variable, therefore the assumption is respected!</strong></p>
+<p><em>Note: The clusters are due to the data structure, where fish of only 5 size classes (large, small, and three groups in between) were captured.</em></p>
+<p>Now, we should (2) plot residuals vs each covariate not included in the model.</p>
+<p>If you observe patterns in these plots, you will know that there is variation in your dataset that could be explained by these covariates and you should consider including them in your model. <strong>However because we have included all the measured variables in our model, we can not do this step with our data.</strong></p>
+</div>
+<div id="check-the-normality-of-the-model-residuals" class="section level2">
+<h2><span class="header-section-number">11.3</span> 3. Check the normality of the model residuals</h2>
+<p>Now we will check the normality of the model residuals as residuals following a normal distribution indicate that the model is not biased.</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="step-3-model-validation.html#cb50-1"></a><span class="co"># Check the normality of the model residuals as residuals</span></span>
+<span id="cb50-2"><a href="step-3-model-validation.html#cb50-2"></a><span class="co"># following a normal distribution indicate that the model is</span></span>
+<span id="cb50-3"><a href="step-3-model-validation.html#cb50-3"></a><span class="co"># not biased.</span></span>
+<span id="cb50-4"><a href="step-3-model-validation.html#cb50-4"></a><span class="kw">hist</span>(<span class="kw">resid</span>(M8))</span></code></pre></div>
+<p><img src="book-en_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="step-3-model-validation.html#cb51-1"></a><span class="co"># The residuals are normal! This means our model is not</span></span>
+<span id="cb51-2"><a href="step-3-model-validation.html#cb51-2"></a><span class="co"># biased.</span></span></code></pre></div>
+<p><strong>The residuals are normal! This means our model is not biased.</strong></p>
 </div>
 </div>
-</div>
-
-
-
 <hr>
 <center> 
   <div class="footer">
@@ -318,8 +322,8 @@ Low ICC
           </div>
         </div>
       </div>
-<a href="fixed-vs-random-effects.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="mixed-model-protocol.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="step-2-code-potential-models-and-model-selection.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="step-4-interpretation-and-visualization.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
