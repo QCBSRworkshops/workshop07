@@ -1,0 +1,449 @@
+# (PART\*) Implementing LMM in `R` {-}
+
+# Mixed model protocol
+
+- **Step 1.** *A priori* model building and data exploration
+- **Step 2.** Code potential models and model selection
+- **Step 3.** Model validation
+- **Step 4.** Model interpretation and visualization
+
+## Step 1. *A priori* model building {-}
+
+**What we know *a priori*:**
+
+We want to determine if the trophic position can be predicted by body length, while taking into account the variation between species and lakes. So we want a model that looks like this:
+
+$$PT_{ijk} \sim Length_i + Lake_j + Species_k + \epsilon_{ijk}$$
+
+### Check data structure {-}
+
+**Does the data have the right structure?**
+
+```{r, echo = FALSE}
+# Load data in again
+fish.data <- read.csv('data/qcbs_w7_data.csv')
+```
+
+Look at the data structure:
+
+```{r, echo = TRUE, eval = TRUE}
+# Look at data structure
+str(fish.data)
+```
+
+Now look at the distribution of samples for each factor:
+
+```{r, echo = TRUE, eval = TRUE}
+# Look at the distribution of samples for each factor
+table(fish.data[ , c("Lake", "Fish_Species")])
+```
+
+This dataset is perfectly balanced, but **mixed models can be used to analyze unbalanced experimental plans**, as it is often the case in ecology!
+
+Let's also look at the distribution of continuous variables:
+
+```{r, echo = TRUE, eval = TRUE}
+# Look at the distribution of continuous variables:
+par(mfrow = c(1, 2), mar = c(4, 4, 1, 1))
+hist(fish.data$Fish_Length, xlab = "Length (mm)", main = "")
+hist(fish.data$Trophic_Pos, xlab = "Trophic position", main = "")
+```
+
+Major deviations could cause heteroscedasticity problems. If necessary, make transformations. In this case, **the data seems OK**.
+
+---
+
+### Check collinearity {-}
+
+**Check for collinearity between your explanatory variables**
+
+The problem with collinear predictors is simply that they explain the same thing, so their effect on the response variable will be confounded in the model.
+
+In this example, there is no risk of collinearity with only one continuous variable. If you had another continuous variable (`var2`), one simple way to check for collinearity is `cor(var1, var2)`
+
+Here an [example of collinearity](https://yetanotheriteration.netlify.app/2018/01/high-collinearity-effect-in-regressions/).
+
+---
+
+### Challenge 3 {-}
+
+This is a thinking problem!
+
+Given our data, What additional measures could we have taken in the field that could have been strongly correlated with body length?
+
+
+#### **Challenge 3 Solution:** {-}
+
+There are multiple potential answers here.
+
+One example is fish body mass - this variable is strongly correlated with fish length. Therefore, we do not want to include these two variables in the same model.
+
+---
+
+### Consider scale {-}
+
+**Consider the scale of your data**
+
+If two variables in the same model have very different scales, the mixed model will likely return a `convergence error` when trying to compute the parameters.
+
+The <a href="https://fr.wikipedia.org/wiki/Cote_Z_(statistiques)">Z-correction</a> standardizes the variables and solve this problem (use function `scale()` in `R`):
+
+$$z = \frac{x-mean(x)}{standard.deviation(x)}$$
+Consider the scale of the variables within our dataset:
+
+Body length -> Long scale
+Trophic position -> Short scale
+
+Because our data have very different scales of variation, we apply the **Z-correction**
+
+```{r, echo = TRUE, eval = TRUE}
+# Standardized length, "by hand"
+fish.data$Z_Length <- (fish.data$Fish_Length - mean(fish.data$Fish_Length)) / 
+                      sd(fish.data$Fish_Length)
+
+# Standardized trophic position, with the function scale
+fish.data$Z_TP     <- scale(fish.data$Trophic_Pos)
+
+```
+
+---
+
+### Do you need a LMM? {-}
+
+**Determine if you need a mixed model** 
+
+To find out if a mixed model is needed for your data, you need to determine whether it is important to consider the random effects that might influence the relationship you are interested in (in our case, lake and species).
+
+We can do this by:
+
+- 1. Creating a linear model without random effect
+- 2. Calculating the residuals of this linear model
+- 3. Plot the residuals against the levels of the potential random factors
+
+
+Create a linear model without random effects
+
+```{r, echo = TRUE, eval = TRUE}
+lm.test <- lm(Z_TP ~ Z_Length, data = fish.data)
+```
+
+Calculate residuals of this linear model
+
+```{r, echo = TRUE, eval = TRUE}
+lm.test.resid <- rstandard(lm.test)
+```
+
+
+Plot the residuals against the levels of the potential random factors
+
+```{r, echo = TRUE, eval = TRUE}
+par(mfrow = c(1, 2))
+
+plot(lm.test.resid ~ as.factor(fish.data$Fish_Species),
+     xlab = "Species", ylab = "Standardized residuals")
+
+abline(0, 0, lty = 2)
+
+plot(lm.test.resid ~ as.factor(fish.data$Lake),
+     xlab = "Lake", ylab = "Standardized residuals")
+
+abline(0, 0, lty = 2)
+```
+
+These results suggest that there is residual variance that could be explained by these factors, so they should be included in a mixed effect model!
+
+## Step 2. Code potential models and model selection {-}
+
+
+################# LINLEY STOPPED HERE 2021-03-17
+
+**Translate this model...**
+
+$$PT_{ijk} \sim Length_i + Lake_j + Species_k + \epsilon_{ijk}$$
+
+**... in R code**
+
+```{r, include = FALSE}
+library(lme4)
+```
+
+```{r, eval = TRUE}
+lmer(Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species),
+     data = fish.data, REML = TRUE)
+```
+
+--
+
+* `lmer` ![:faic](arrow-right)"linear mixed model" function from `lme4` package
+* `(1 | Lake)` ![:faic](arrow-right) indicate varying intercepts among lakes
+* `REML = TRUE` ![:faic](arrow-right) estimation method
+
+---
+# Note on estimation methods
+
+REML (*Restricted Maximum Likelihood*) is the default method in `lmer` (see `?lmer`).
+
+The *Maximum Likelihood* (ML) method underestimate model variances by a factor of $(n-k)/n$, where $k$ is the number of fixed effects. 
+
+The REML method corrects for this bias.
+
+See this [article](https://towardsdatascience.com/maximum-likelihood-ml-vs-reml-78cf79bef2cf) for more information on the difference between ML and REML. 
+
+---
+# Note on estimation methods
+
+**Remember that you should use :** 
+
+* **REML** to compare models with **nested random effects** and the same fixed effect structure
+
+* **ML** to compare models with **nested fixed effects** and the same random effect structure
+
+* **ML** to compare models **with and without random effects**
+
+---
+# Step 2. Code potential models
+
+**What if we want the slopes to vary?**
+
+.center[
+![](images/fig_22_w5.png)
+
+---
+# Step 2. Code potential models
+
+**Different structures for the model :**
+
+- `(1 | Lake)` random effect by lake at the intrecept
+- `(1 + Z_Length | Lake)` random effect by lake at the intercept and slope in response to the body length (NB: (`Z_Length | Lake)` gives the same random structure)
+- `(-1 + Z_Length | Lake)` to have only the random effect at the slope
+- `(1 | Lake) + (1 | Species)`  for crossed random effects
+- `(1 | Lake:Fish_Species)` for the interaction between 2 random effects
+
+- If your dataset includes nested random effects, you could use `/` to specify them, e.g. `(1 | factor1 / factor2)` if `factor2` is nested in `factor1` ([see ![:faic](stack-exchange)](https://stats.stackexchange.com/questions/228800/crossed-vs-nested-random-effects-how-do-they-differ-and-how-are-they-specified))
+
+---
+# Challenge 4 ![:cube]()
+
+Re-write the following code so that the **slopes** of the relationship between trophic position and body length **vary by lake and species**:
+
+```{r}
+lmer(Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species),
+     data = fish.data, REML = TRUE)
+```
+
+---
+# Solution ![:cube]()
+
+```{r}
+lmer(Z_TP ~ Z_Length + (1 + Z_Length | Lake) + (1 + Z_Length | Fish_Species),
+     data = fish.data, REML = TRUE)
+```
+
+
+---
+# Step 2. Model selection
+
+* To determine if you have built the best mixed model based on your prior knowledge, you should compare this *a priori* model to other alternative models.
+
+* With the dataset you are working on, there are several alternative models that might better fit your data.
+
+---
+# Challenge 5 ![:cube]()
+
+Make a list of 7 alternative models that could be compared to this one:
+
+```{r, eval= FALSE}
+lmer(Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species),
+     data = fish.data, REML = TRUE)
+```
+
+.comment[Note: If we had different fixed effects between the models or a model without random effects, we would have to specify `REML = FALSE` to compare with likelihood methods like AIC.]
+
+---
+# Solution ![:cube]()
+
+We first will also build the **basic linear model** `lm()` because it is always useful to see the variation in the AICc values.
+
+```{r}
+M0 <- lm(Z_TP ~ Z_Length, data = fish.data)
+```
+
+However, to compare this model to the LMMs, it is important to .alert[change the estimation method to ML (`REML=FALSE`)] because `lm()` does not use the same estimation method as `lmer()`.
+
+---
+# Solution ![:cube]()
+
+```{r}
+# Linear model with no random effects
+M0 <- lm(Z_TP ~ Z_Length, data = fish.data)
+# Full model with varying intercepts
+M1 <- lmer(Z_TP ~ Z_Length + (1 | Fish_Species) + (1 | Lake), 
+           data = fish.data, REML = FALSE)
+# Full model with varying intercepts and slopes
+M2 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 + Z_Length | Lake),
+           data = fish.data, REML = FALSE)
+# No Lake, varying intercepts only
+M3 <- lmer(Z_TP ~ Z_Length + (1 | Fish_Species), data = fish.data, REML = FALSE)
+# No Species, varying intercepts only
+M4 <- lmer(Z_TP ~ Z_Length + (1 | Lake), data = fish.data, REML = FALSE)
+# No Lake, varying intercepts and slopes
+M5 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species), 
+           data = fish.data, REML = FALSE)
+# No Species, varying intercepts and slopes
+M6 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Lake), data = fish.data, REML = FALSE)
+# Full model with varying intercepts and slopes only varying by lake
+M7 <- lmer(Z_TP ~ Z_Length + (1 | Fish_Species) + (1 + Z_Length | Lake),
+           data = fish.data, REML = FALSE)
+# Full model with varying intercepts and slopes only varying by species
+M8 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake),
+           data = fish.data, REML = FALSE)
+```
+
+---
+# Solution ![:cube]()
+
+When fitting LMMs with `lmer()`, you may encounter some errors or warnings such as: 
+
+* `boundary (singular) fit: see ?isSingular`, see [this discussion ![:faic](stack-exchange)](https://stats.stackexchange.com/questions/378939/dealing-with-singular-fit-in-mixed-models)
+
+* `Model failed to converge with max|grad| ...`, see [this discussion ![:faic](stack-exchange)](https://stats.stackexchange.com/questions/242109/model-failed-to-converge-warning-in-lmer)
+
+Here a [list](https://rdrr.io/cran/lme4/man/troubleshooting.html) of possible problems and how to troubleshoot them.
+
+---
+# Step 2. Model selection
+
+* Now that we have a list of potential models, we want to compare them to each other to select the one(s) with the highest predictive power given the data.
+
+* Models can be compared by using the `AICc` function from the` MuMIn` package.
+
+* The Akaike Information Criterion (AIC) is a **measure of model quality** that can be used to compare models.
+
+* `AICc` corrects for bias created by small sample sizes.
+
+---
+# Step 2. Model selection
+
+To find the AICc value of a model, use:
+
+```{r}
+library(MuMIn)
+MuMIn::AICc(M1)
+```
+
+---
+# Step 2. Model selection
+
+To group all AICc values into a single table, use:
+```{r}
+AIC.table  <- MuMIn::model.sel(M0, M1, M2, M3, M4, M5, M6, M7, M8)
+(AIC.table <- AIC.table[ , c("df", "logLik", "AICc", "delta")])
+```
+
+* `df` is the degree of freedom
+* `logLik` is the loglikelihood
+* `delta` is the AICc difference with the lowest value
+
+We only displayed part of the results returned by the function `model.sel()`, see `?model.sel` for more information.
+
+---
+# Step 2. Model selection
+
+What do these AICc values mean?
+
+```{r}
+AIC.table 
+
+```
+
+* The model with the smallest AICc has the highest predictive power.
+
+* Some suggest that if models are within 2 AICc units of each other then they are equally plausible.
+
+* Let's take a closer look at M8 and M2. We can exclude other model because they have such higher AICc.
+
+---
+# Step 2. Model selection
+
+```{r}
+M8 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake),
+           data = fish.data, REML = TRUE)
+
+M2 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 + Z_Length | Lake),
+           data = fish.data, REML = TRUE)
+
+MuMIn::model.sel(M2,M8)[ , c("df", "logLik", "AICc", "delta")]
+```
+
+Model `M8` seems to be the best among all models that we tested.
+
+Note that we use now REML (i.e. `REML = TRUE`) as we are comparing two models with nested random effects and the same fixed effect structure.
+
+---
+# Step 2. Model selection
+
+What is the structure of the best model?
+
+```{r, eval = FALSE}
+M8 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake),
+           data = data, REML = FALSE)
+```
+
+Both the intercepts and slopes of the relationship between trophic position and length may vary by fish species, but only the intercepts may vary by lake.
+
+.pull-left[![](images/fig_9_w5.png)]
+.pull-right[![](images/fig_8_w5.png)]
+
+---
+# Step 2. Model selection
+
+Once the best model is selected, the estimation method must be reset to `REML = TRUE`.
+
+```{r}
+M8 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake),
+           data = fish.data, REML = TRUE)
+```
+
+---
+exclude: true
+
+# Challenge 6 ![:cube]()
+
+Take 2 minutes with your neighbour to draw out the model structure of M2.
+
+Biologically, how does it differ from M8?
+
+Why is it not surprising that it's AICc value was 2nd best?
+
+```{r, eval = FALSE}
+M8 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake),
+           data = fish.data, REML = TRUE)
+
+M2 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 + Z_Length | Lake),
+           data = fish.data, REML = TRUE)
+```
+
+---
+exclude: true
+
+# Solution
+
+
+**Group discussion...**
+
+--
+exclude: true
+
+.alert[M2] The trophic position is a function of length and both the intercept and the effect of length on trophic position can vary by fish species and lake.
+
+  * .small[the intrinsic factors of species and lakes cause the relationship between trophic position and length to differ (i.e. both slopes and intercepts) (i.e. slopes and intercepts)]
+
+
+.alert[M8] The trophic position is a function of length and both the intercept and the effect of length on trophic position can vary by fish species but only the intercept can vary by lake (not the slope of trophic position on length).
+
+  * .small[intrinsic factors of species alone cause this relationship to differ (i.e. slopes) and that on average trophic positions might be higher or lower in one lake versus another (i.e. intercepts).]
+
+
+
+
+
