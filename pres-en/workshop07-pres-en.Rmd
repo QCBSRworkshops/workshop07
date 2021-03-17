@@ -654,7 +654,7 @@ What additional measures could we have taken in the field that could have been s
 
 **Consider the scale of your data**
 
-* If two variables in the same model have very different scales, the mixed model will likely returns a `convergence error` when trying to compute the parameters.
+* If two variables in the same model have very different scales, the mixed model will likely return a `convergence error` when trying to compute the parameters.
 
 * The <a href="https://fr.wikipedia.org/wiki/Cote_Z_(statistiques)">Z-correction</a> standardizes the variables and solve this problem (function `scale()` in `R`):
 
