@@ -10,7 +10,7 @@ number of ecological questions and take many different forms. In this workshop w
 
 Before we dive in, let's start by considering an example dataset and proposing a research question.
 
-The [dataset](http://qcbs.ca/wiki/_media/qcbs_w7_data.csv) we will be using looks at fish trophic positions. In this dataset, data was collected for **3** different fish species (S1-3) with 10 individuals sampled per species across 6 different lakes (L1-6). Individuals from each species exhibit variation in their body length and trophic position which was measured. 
+The [dataset](http://qcbs.ca/wiki/_media/qcbs_w7_data.csv) we will be using looks at fish trophic positions. In this dataset, data was collected for **3** different fish species (S1-3) with 10 individuals sampled per species across 6 different lakes (L1-6). Individuals from each species were measured and exhibit variation in their body length and trophic position. 
 
 Here is a visual representation to help wrap your head around all of this! 
 
@@ -24,7 +24,7 @@ This will be our motivating question for this workshop.
 
 ## Challenge 1
 
-For our first challenge, reproduce plots 1-3 using the script below and the Fish dataset. Observe each plot and try to get a sense of what is occurring. Two key questions to ask yourself are:
+For our first challenge, reproduce plots 1-3 using the script below and the Fish dataset. Observe each plot and try to get a sense of what is occurring. A few key questions to ask yourself are:
 
 - **1.** Do we expect an increase in trophic position with length in the exact same way for *all species*?
 - **2.** Do we expect an increase in trophic position with length in the exact same way for *all lakes*?
@@ -84,34 +84,35 @@ Let's look a little closer at these options using our dataset!!
 
 ### Option 1: Separate {-}
 
+One way to analyze this data is to fit linear regressions for each species in each lake.
+
 What would it look like it we ran separate analyses for each species?
 
-- Estimate 6 intercepts and 6 slopes for each species (i.e. 6 lakes)
+![](images/fig_5_w5.png)
 
-- Sample size *n* = 10 for each analysis (i.e. 10 fish/species/lake)
+Notice you would have to estimate a slope and intercept parameter for each regression (2 parameters x 3 species X 6 lakes = 36 parameter estimates) and the sample size for each analysis would be 10. 
 
-- Low chance of detecting an effect due to small *n*
-
-[![](images/fig_5_w5.png) ]
+There is a decreased chance of finding an effect due to low sample size and increased familywise error rate due to multiple comparisons.
 
 ### Option 2: Lump {-}
 
+Another way to analyze this data is to fit a single linear regression ignoring species and lake.
+
 What would it look like it we put all of our data together for all lakes?
 
-- Big sample size!
+![](images/fig_6_w5.png)
 
-- What about pseudoreplication? (fish within a lake and within a species might be correlated)
+Notice you now have a huge sample size and far fewer parameters to estimate! 
 
-- A lot of noise in the data! Some of it might be due to **differences** among **species** and **lakes**
+But what about pseudoreplication? Fish within a lake and within a species might be correlated. 
 
-.pull-left[![](images/fig_6_w5.png)]
+Also, look at all that noise in the data, some of it might be due to **differences** among **species** and **lakes**
 
-
-## Choosing LMMs 
+## Introducing LMMs
 
 For our question, we only want to know if there is a **general effect of body length on the trophic position**.
 
-However, this relationship might differ slightly among **species** due to unmeasured biological processes (e.g. growth rate) or among **lakes** due to unmeasured environmental variables. This is why both separating and lumping are unsatisfactory options, we need to find a way to **control** for these potential effects while still maximizing the use of our data.
+However, this relationship might differ slightly among **species** due to unmeasured biological processes (e.g. growth rate) or among **lakes** due to unmeasured environmental variables. But we are not interested in this variation, so we need to find a way to **control** for these potential effects while still maximizing the use of our data. This is why both separating and lumping alone are unsatisfactory options
 
 This brings us to mixed models! Linear mixed models enable us to lump **and** separate the analysis. 
 
