@@ -71,6 +71,7 @@ This is a thinking problem!
 
 Given our data, What additional measures could we have taken in the field that could have been strongly correlated with body length?
 
+---
 
 #### **Challenge 3 Solution:** {-}
 
@@ -155,44 +156,39 @@ These results suggest that there is residual variance that could be explained by
 ## Step 2. Code potential models and model selection {-}
 
 
-################# LINLEY STOPPED HERE 2021-03-17
-
 **Translate this model...**
 
 $$PT_{ijk} \sim Length_i + Lake_j + Species_k + \epsilon_{ijk}$$
 
-**... in R code**
+**... into R code**
 
-```{r, include = FALSE}
+```{r, eval = TRUE, include = FALSE}
 library(lme4)
 ```
 
-```{r, eval = TRUE}
+```{r, echo = TRUE, eval = TRUE}
 lmer(Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species),
      data = fish.data, REML = TRUE)
 ```
 
---
+Where: 
 
-* `lmer` ![:faic](arrow-right)"linear mixed model" function from `lme4` package
-* `(1 | Lake)` ![:faic](arrow-right) indicate varying intercepts among lakes
-* `REML = TRUE` ![:faic](arrow-right) estimation method
+- `lmer` -> "linear mixed model" function from `lme4` package
+- `(1 | Lake)` -> indicate varying intercepts among lakes
+- `REML = TRUE` -> estimation method
 
----
-# Note on estimation methods
+### Estimation methods {-}
 
 REML (*Restricted Maximum Likelihood*) is the default method in `lmer` (see `?lmer`).
 
-The *Maximum Likelihood* (ML) method underestimate model variances by a factor of $(n-k)/n$, where $k$ is the number of fixed effects. 
+The *Maximum Likelihood* (ML) method underestimate model variances by a factor of $(n-k)/n$, where $k$ is the number of fixed effects. The *REML* method corrects for this bias.
 
-The REML method corrects for this bias.
+REML estimates can be used when comparing models with the same fixed effects (i.e. nested models). However, if you are comparing models where the fixed effects differ among models then maximum likelihood should be used to fit parameters as this method is not dependent on the coefficients of the fixed effects. Fitting using maximum likelihood is done by setting `REML=FALSE` in the lmer command.
 
 See this [article](https://towardsdatascience.com/maximum-likelihood-ml-vs-reml-78cf79bef2cf) for more information on the difference between ML and REML. 
 
----
-# Note on estimation methods
 
-**Remember that you should use :** 
+**In summary:** 
 
 * **REML** to compare models with **nested random effects** and the same fixed effect structure
 
@@ -200,18 +196,14 @@ See this [article](https://towardsdatascience.com/maximum-likelihood-ml-vs-reml-
 
 * **ML** to compare models **with and without random effects**
 
----
-# Step 2. Code potential models
+
+### Different model structures {-}
 
 **What if we want the slopes to vary?**
 
-.center[
 ![](images/fig_22_w5.png)
 
----
-# Step 2. Code potential models
-
-**Different structures for the model :**
+**Let's look at different model structures:**
 
 - `(1 | Lake)` random effect by lake at the intrecept
 - `(1 + Z_Length | Lake)` random effect by lake at the intercept and slope in response to the body length (NB: (`Z_Length | Lake)` gives the same random structure)
@@ -221,60 +213,63 @@ See this [article](https://towardsdatascience.com/maximum-likelihood-ml-vs-reml-
 
 - If your dataset includes nested random effects, you could use `/` to specify them, e.g. `(1 | factor1 / factor2)` if `factor2` is nested in `factor1` ([see ![:faic](stack-exchange)](https://stats.stackexchange.com/questions/228800/crossed-vs-nested-random-effects-how-do-they-differ-and-how-are-they-specified))
 
----
-# Challenge 4 ![:cube]()
+### Challenge 4 {-}
 
 Re-write the following code so that the **slopes** of the relationship between trophic position and body length **vary by lake and species**:
 
-```{r}
+```{r, echo = TRUE, eval = TRUE}
+# Challenge 4: Can you re-write this code so that the slopes between trophic position and body length vary by lake and species?
 lmer(Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species),
      data = fish.data, REML = TRUE)
 ```
 
 ---
-# Solution ![:cube]()
 
-```{r}
+#### **Challenge 4 Solution:** {-}
+
+```{r, echo = TRUE, eval = TRUE}
+# Challenge 4 solution:
 lmer(Z_TP ~ Z_Length + (1 + Z_Length | Lake) + (1 + Z_Length | Fish_Species),
      data = fish.data, REML = TRUE)
 ```
 
 
 ---
-# Step 2. Model selection
 
-* To determine if you have built the best mixed model based on your prior knowledge, you should compare this *a priori* model to other alternative models.
+### Challenge 5 {-}
 
-* With the dataset you are working on, there are several alternative models that might better fit your data.
+To determine if you have built the best mixed model based on your prior knowledge, you should compare this *a priori* model to other alternative models.
 
----
-# Challenge 5 ![:cube]()
+With the dataset you are working on, there are several alternative models that might better fit your data. For challenge 5, make a list of 7 alternative models that could be compared to this one:
 
-Make a list of 7 alternative models that could be compared to this one:
-
-```{r, eval= FALSE}
+```{r, echo = TRUE, eval = TRUE}
+# Challenge 5: Make a list of 7 alternative models that could be compared to this initial model:
 lmer(Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species),
      data = fish.data, REML = TRUE)
 ```
 
-.comment[Note: If we had different fixed effects between the models or a model without random effects, we would have to specify `REML = FALSE` to compare with likelihood methods like AIC.]
+*Note: If we had different fixed effects between the models or a model without random effects, we would have to specify `REML = FALSE` to compare with likelihood methods like AIC.*
 
 ---
-# Solution ![:cube]()
 
-We first will also build the **basic linear model** `lm()` because it is always useful to see the variation in the AICc values.
+#### **Challenge 5 Solution:** {-}
 
-```{r}
+We first will also build the **basic linear model** `lm()` because it is always useful to see the variation in the AICc values (we will discuss these in more detail in the next section).
+
+```{r, echo = TRUE, eval = TRUE}
+# Challenge 5 solution: Basic linear model
 M0 <- lm(Z_TP ~ Z_Length, data = fish.data)
 ```
 
-However, to compare this model to the LMMs, it is important to .alert[change the estimation method to ML (`REML=FALSE`)] because `lm()` does not use the same estimation method as `lmer()`.
+In order to compare this model to the LMMs, it is important to **change the estimation method to ML (`REML=FALSE`)** for all other models because `lm()` does not use the same estimation method as `lmer()`. 
 
----
-# Solution ![:cube]()
+Let's look at the other models you could have written (note `REML = FALSE`):
 
-```{r}
-# Linear model with no random effects
+```{r, echo = TRUE, eval = TRUE}
+# Challenge 5 solution, other potential models
+# Note that REML = FALSE in order to compare with the basic linear model where estimation method = ML
+
+# Basic linear model / Linear model with no random effects
 M0 <- lm(Z_TP ~ Z_Length, data = fish.data)
 # Full model with varying intercepts
 M1 <- lmer(Z_TP ~ Z_Length + (1 | Fish_Species) + (1 | Lake), 
@@ -299,151 +294,413 @@ M8 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake),
            data = fish.data, REML = FALSE)
 ```
 
----
-# Solution ![:cube]()
 
-When fitting LMMs with `lmer()`, you may encounter some errors or warnings such as: 
+**When fitting LMMs with `lmer()`, you may encounter some errors or warnings such as:**
 
-* `boundary (singular) fit: see ?isSingular`, see [this discussion ![:faic](stack-exchange)](https://stats.stackexchange.com/questions/378939/dealing-with-singular-fit-in-mixed-models)
+- `boundary (singular) fit: see ?isSingular`, see [this discussion on stack-exchange](https://stats.stackexchange.com/questions/378939/dealing-with-singular-fit-in-mixed-models)
 
-* `Model failed to converge with max|grad| ...`, see [this discussion ![:faic](stack-exchange)](https://stats.stackexchange.com/questions/242109/model-failed-to-converge-warning-in-lmer)
+- `Model failed to converge with max|grad| ...`, see [this discussion on stack-exchange](https://stats.stackexchange.com/questions/242109/model-failed-to-converge-warning-in-lmer)
 
 Here a [list](https://rdrr.io/cran/lme4/man/troubleshooting.html) of possible problems and how to troubleshoot them.
 
 ---
-# Step 2. Model selection
+### Comparing models
 
-* Now that we have a list of potential models, we want to compare them to each other to select the one(s) with the highest predictive power given the data.
+Now that we have a list of potential models, we want to compare them to each other to select the one(s) with the highest predictive power given the data.
 
-* Models can be compared by using the `AICc` function from the` MuMIn` package.
+Models can be compared by using the `AICc` function from the` MuMIn` package. The Akaike Information Criterion (AIC) is a **measure of model quality** that can be used to compare models.
 
-* The Akaike Information Criterion (AIC) is a **measure of model quality** that can be used to compare models.
+ `AICc` corrects for bias created by small sample sizes.
 
-* `AICc` corrects for bias created by small sample sizes.
+In order the find the AICc value of a model, use:
 
----
-# Step 2. Model selection
-
-To find the AICc value of a model, use:
-
-```{r}
+```{r, echo = TRUE, eval = TRUE}
+# Load MuMIn package which allows us to find AICc values for our models
 library(MuMIn)
+
+# Find AICc value for our first model (Basic linear model)
 MuMIn::AICc(M1)
 ```
 
----
-# Step 2. Model selection
+To group all AICc values into a single table, use `MuMIn::model.sel()` to calculate AICc for each model (along with other outputs) and then select only the columns of interest to print in a table.
 
-To group all AICc values into a single table, use:
-```{r}
+```{r, echo = TRUE, eval = TRUE}
+# To group all AICc values into a single table, we can use MuMIn::model.sel() to calculate AICc for each model (along with other outputs)
 AIC.table  <- MuMIn::model.sel(M0, M1, M2, M3, M4, M5, M6, M7, M8)
+
+# Then we can select only the columns of interest to print into a table 
+# `df` is the degree of freedom
+# `logLik` is the loglikelihood
+# `delta` is the AICc difference with the lowest value
 (AIC.table <- AIC.table[ , c("df", "logLik", "AICc", "delta")])
+
+# For more information on the other outputs/results returned by the function `model.sel()`, see `?model.sel`.
 ```
 
-* `df` is the degree of freedom
-* `logLik` is the loglikelihood
-* `delta` is the AICc difference with the lowest value
+Where:
+
+- `df` is the degree of freedom
+- `logLik` is the loglikelihood
+- `delta` is the AICc difference with the lowest value
 
 We only displayed part of the results returned by the function `model.sel()`, see `?model.sel` for more information.
 
 ---
-# Step 2. Model selection
 
-What do these AICc values mean?
+**What do these AICc values mean?**
 
-```{r}
-AIC.table 
+- The model with the smallest AICc has the highest predictive power.
+- Some suggest that if models are within 2 AICc units of each other then they are equally plausible.
+- Let's take a closer look at M8 and M2. We can exclude other models because they have such higher AICc.
 
-```
+*Note that we use now REML (i.e. `REML = TRUE`) as we are comparing two models with nested random effects and the same fixed effect structure.*
 
-* The model with the smallest AICc has the highest predictive power.
-
-* Some suggest that if models are within 2 AICc units of each other then they are equally plausible.
-
-* Let's take a closer look at M8 and M2. We can exclude other model because they have such higher AICc.
-
----
-# Step 2. Model selection
-
-```{r}
+```{r, echo = TRUE, eval = TRUE}
+# Let's take a closer look at M8 and M2. We can exclude other model because they have such higher AICc
+# Because we are comparing two mixed effect models, we can set `REML = TRUE` when generating M8 and M2
 M8 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake),
            data = fish.data, REML = TRUE)
 
 M2 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 + Z_Length | Lake),
            data = fish.data, REML = TRUE)
-
+# Now let's print a table in order to compare M2 and M8 
 MuMIn::model.sel(M2,M8)[ , c("df", "logLik", "AICc", "delta")]
 ```
 
 Model `M8` seems to be the best among all models that we tested.
 
-Note that we use now REML (i.e. `REML = TRUE`) as we are comparing two models with nested random effects and the same fixed effect structure.
-
 ---
-# Step 2. Model selection
 
-What is the structure of the best model?
+**What is the structure of the best model?**
 
-```{r, eval = FALSE}
+```{r, echo = TRUE, eval = TRUE}
+# Let's take a look at the best model again, what is it's structure?
 M8 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake),
-           data = data, REML = FALSE)
+           data = fish.data, REML = FALSE)
+# Both the intercepts and slopes of the relationship between trophic position and length may vary by fish species, but only the intercepts may vary by lake.
 ```
 
 Both the intercepts and slopes of the relationship between trophic position and length may vary by fish species, but only the intercepts may vary by lake.
 
-.pull-left[![](images/fig_9_w5.png)]
-.pull-right[![](images/fig_8_w5.png)]
+<div class = 'two-col'>
 
----
-# Step 2. Model selection
+![](images/fig_9_w5.png)  
+![](images/fig_8_w5.png)
+
+</div>
 
 Once the best model is selected, the estimation method must be reset to `REML = TRUE`.
 
 ```{r}
+# Once the best model is selected, the estimation method must be reset to `REML = TRUE`.
 M8 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake),
            data = fish.data, REML = TRUE)
 ```
 
----
-exclude: true
 
-# Challenge 6 ![:cube]()
+## Step 3. Model validation {-}
 
-Take 2 minutes with your neighbour to draw out the model structure of M2.
+Now that we have our model, we must verify that the model follows all the basic assumptions:
 
-Biologically, how does it differ from M8?
+- **1. Check the homogeneity of the variance:**
+  - Plot predicted values vs residual values
 
-Why is it not surprising that it's AICc value was 2nd best?
+- **2. Check the independence of the model residuals:**
+  - Plot residuals vs each covariate of the model
+  - Plot residuals vs each covariate not included in the model
 
-```{r, eval = FALSE}
-M8 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake),
-           data = fish.data, REML = TRUE)
+- **3. Check the normality of the model residuals:**
+  - Histogram of residuals
 
-M2 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 + Z_Length | Lake),
-           data = fish.data, REML = TRUE)
+
+### 1. Check the homogeneity of the variance {-}
+
+In order to check the homgeneity of the variance, we can plot predicted values vs residual values.
+
+Homogeneous dispersion of the residuals means that the assumption is respected.
+
+![](images/resid-plots.gif)
+
+Now let's look at our data, is the dispersion homogenous?
+
+```{r, echo = TRUE, eval = TRUE}
+# Plot predicted values vs residual values
+par(mar=c(4,4,.5,.5))
+plot(resid(M8) ~ fitted(M8), 
+     xlab = 'Predicted values', 
+     ylab = 'Normalized residuals')
+abline(h = 0, lty = 2)
+# Homogeneous dispersion of the residuals means that the assumption is respected.
 ```
 
+**Yes! Homogeneous dispersion of the residuals means that the assumption is respected.**
+
+### 2. Check the independence of the model residuals with each covariate {-}
+
+In order to check the independence of the model residuals with each covariate we will (1) plot residuals vs each covariate of the model and (2) plot residuals vs each covariate not included in the model.
+
+Let's start by (1) plotting the residuals vs each covariate of the model.
+
+```{r, echo = TRUE, eval = TRUE}
+# In order to check the independence of the model residuals we need to plot residuals vs each covariate of the model
+par(mfrow = c(1,3), mar=c(4,4,.5,.5))
+
+plot(resid(M8) ~ fish.data$Z_Length, 
+     xlab = "Length", ylab = "Normalized residuals")
+abline(h = 0, lty = 2)
+
+boxplot(resid(M8) ~ Fish_Species, data = fish.data, 
+        xlab = "Species", ylab = "Normalized residuals")
+abline(h = 0, lty = 2)
+
+boxplot(resid(M8) ~ Lake, data = fish.data, 
+        xlab = "Lakes", ylab = "Normalized residuals")
+abline(h = 0, lty = 2)
+# Homogeneous dispersion of the residuals around 0 means no pattern of residuals depending on the variable, therefore the assumption is respected!
+# Note: The clusters are due to the data structure, where fish of only 5 size classes (large, small, and three groups in between) were captured.
+```
+
+
+**Homogeneous dispersion of the residuals around 0 means no pattern of residuals depending on the variable, therefore the assumption is respected!**
+
+*Note: The clusters are due to the data structure, where fish of only 5 size classes (large, small, and three groups in between) were captured.*
+
+Now, we should (2) plot residuals vs each covariate not included in the model. 
+
+If you observe patterns in these plots, you will know that there is variation in your dataset that could be explained by these covariates and you should consider including them in your model. **However because we have included all the measured variables in our model, we can not do this step with our data.**
+
+
+### 3. Check the normality of the model residuals {-}
+
+Now we will check the normality of the model residuals as residuals following a normal distribution indicate that the model is not biased.
+
+```{r, echo = TRUE, eval = TRUE}
+# Check the normality of the model residuals as residuals following a normal distribution indicate that the model is not biased.
+hist(resid(M8))
+# The residuals are normal! This means our model is not biased.
+```
+
+**The residuals are normal! This means our model is not biased.**
+
+
+## Step 4. Interpretation and visualization {-}
+
+Let's take a closer look at our final model using the `summary()` function. How can we interpret this information?
+
+```{r, echo = TRUE, eval = TRUE}
+# Now we are ready for interpretation and visualization
+# Let's take a closer look at our final model using the `summary()` function. 
+(summ_M8 <- summary(M8))
+```
+**Let's go section by section and try to understand what we are looking at.**
+
+<ins> Random effects: </ins>
+
+- `Groups`: grouping factors
+
+- `Name`: `(Intercept)` for the intercepts or the name of the variable on which the random slope is estimated (`Z_length` in this example)
+  
+- `Variance` the variance of the estimated effect (`Std.Dev.` is the standard deviation of this estimate)
+
+- `Corr` the correlation between the random interpet and the random slope for a given grouping factor (see [this dicussion](https://stats.stackexchange.com/questions/320978/understanding-and-coding-random-intercept-correlation-lmer)).
+
 ---
-exclude: true
 
-# Solution
+<ins> Fixed effects: </ins>
+
+This part presents the fixed effect estimates. The value of the t statistics [(Student test)](https://en.wikipedia.org/wiki/T-statistic) is shown **without the p-value** (it is a decision from the package authors, see why in [this discussion](https://stats.stackexchange.com/questions/185360/t-value-associated-with-nlme-lme4)).
+  
+This statistics could be used as it is. You could also calculate the 95% confidence interval (CI) with this equation:
+    
+$$ CI = Estimate \pm 1.96*Std.Error $$
+    
+If 0 is in the interval, then the parameter is not significantly different from zero at a threshold of $\alpha$ = 0.05.
+
+---
+
+**Some useful functions**
+
+- `coef(M8)` and `ranef(M8)` return random effects of model M8
+
+- `coef(summary(M8))` returns fixed effects
+
+- `sigma(M8)` returns standard deviation of residuals
+
+- `fitted(M8)` returns predicted values by the model
+
+- `residuals(M8)` returns residuals
+  
+  
+### Challenge 6 {-}
+
+- **1.** What is the slope and confidence interval of the Z_Length variable in the M8 model?
+
+- **2.** Is the slope of Z_Length significantly different from 0?
+
+---
+
+#### **Challenge 6 Solution:** {-}
+  
+**1.** What is the slope and confidence interval of the Z_Length variable in the M8 model?
+    
+- slope = 0.422;
+  
+- CI upper limit = 0.4223 + 0.09*1.96 = 0.5987
+
+- CI lower limit = 0.4223 - 0.09*1.96 = 0.2459
+
+**2.** Is the slope of Z_Length significantly different from 0?
+  
+  - Yes, because the CI [0.2459, 0.5987] does not include 0
+  
+
+### Challenge 7 {-}
+    
+**Is it possible to visualize graphically the different intercepts and slopes of the model to better interpret the results?**
+
+Take 2 minutes to think about different ways to represent the results of M8.
+  
+*Hint: consider the different "levels" of the model*
+    
+---
+
+#### **Challenge 7 Solution:** {-}
+
+**Is it possible to visualize graphically the different intercepts and slopes of the model to better interpret the results?**
+
+Yes! We could do this by generating:
+
+a) A figure with all data grouped
+
+b) A figure by species
+
+c) A figure by lake
+
+To produce these figures, we need (1) the coefficients of the full model that are in the model summary, (2) The coefficients for each level of the model, which can be obtained with the `coef` function
+
+```{r, echo = TRUE, eval = TRUE}
+# Challenge 7: *Is it possible to visualize graphically the different intercepts and slopes of the model to better interpret the results?
+
+# Challenge 7 solution: Yes! We could do this by generating the following figures.
+# a) A figure with all data grouped
+# b) A figure by species
+# c) A figure by lake
+
+# To produce these figures, first we need the coefficients of the full model that are in the model summary.
+summ_M8$coefficients
+# Intercept = Intercept = 9.0589745 × 10^4
+# Slope = 0.4222697
+
+# We also need the coefficients for each level of the model, which can be obtained with the `coef` function
+coef(M8)
+```
+
+**Now let's make our figures!**
+
+a) Figure with all data grouped
+
+```{r, echo = TRUE, eval = TRUE}
+# Now let's make our figures!
+library(ggplot2) # Load ggplot2 if you haven't already
+
+# a) Figure with all data grouped
+# Create a simplified ggplot theme
+fig <- theme_bw() +
+  theme(panel.grid.minor=element_blank(),
+        panel.grid.major=element_blank(),
+        panel.background=element_blank()) +
+  theme(strip.background=element_blank(),
+        strip.text.y = element_text()) +
+  theme(legend.background=element_blank()) +
+  theme(legend.key=element_blank()) +
+  theme(panel.border = element_rect(colour="black", fill=NA))
+
+plot <- ggplot(aes(Z_Length, Z_TP), data = fish.data)
+Plot_AllData <- plot + geom_point() +
+  xlab("Length (mm)") + 
+  ylab("Trophic position") +
+  labs(title = "All data") + fig
+
+Plot_AllData + geom_abline(intercept = summ_M8$coefficients[1,1], 
+                           slope     = summ_M8$coefficients[2,1])
+
+# You could also write out the numbers like this:
+# Plot_AllData + geom_abline(intercept = -0.0009059, slope = 0.4222697)
+```
 
 
-**Group discussion...**
+b) Figure by species
 
---
-exclude: true
+```{r, echo = TRUE, eval = TRUE}
+# b) Figure by species
+# Create a table with the coefs to facilitate their manipulation
+Lake.coef              <- coef(M8)$Lake
+colnames(Lake.coef)    <- c("Intercept", "Slope")
+Species.coef           <- coef(M8)$Fish_Species
+colnames(Species.coef) <- c("Intercept", "Slope")
 
-.alert[M2] The trophic position is a function of length and both the intercept and the effect of length on trophic position can vary by fish species and lake.
+Plot_BySpecies <- plot + 
+  geom_point(aes(colour = factor(Fish_Species)), size = 4) +
+  xlab("Length (mm)") + ylab("Trophic position") +
+  labs(title = "By species") + fig
 
-  * .small[the intrinsic factors of species and lakes cause the relationship between trophic position and length to differ (i.e. both slopes and intercepts) (i.e. slopes and intercepts)]
+# Add regression lines for each species
+Plot_BySpecies +
+  geom_abline(intercept = Species.coef[1,1], 
+              slope     = Species.coef[1,2], col = "coral2") +
+  geom_abline(intercept = Species.coef[2,1], 
+              slope     = Species.coef[2,2], col = "green4") +
+  geom_abline(intercept = Species.coef[3,1], 
+              slope     = Species.coef[3,2], col = "blue1")
+
+```
 
 
-.alert[M8] The trophic position is a function of length and both the intercept and the effect of length on trophic position can vary by fish species but only the intercept can vary by lake (not the slope of trophic position on length).
+c) Figure by lake
 
-  * .small[intrinsic factors of species alone cause this relationship to differ (i.e. slopes) and that on average trophic positions might be higher or lower in one lake versus another (i.e. intercepts).]
+```{r, echo = TRUE, eval = TRUE}
+# c) Figure by lake
+Plot_ByLake <- plot + 
+  geom_point(aes(colour = factor(Lake)), size = 4) +
+  xlab("Length (mm)") + ylab("Trophic Position") +
+  labs(title = "By Lake") + fig
 
+# Add in regression lines with the intercepts specific to each lake
+Plot_ByLake +
+  geom_abline(intercept = Lake.coef[1,1], 
+              slope     = Lake.coef[1,2], col = "coral2") +
+  geom_abline(intercept = Lake.coef[2,1], 
+              slope     = Lake.coef[2,2], col = "khaki4") +
+  geom_abline(intercept = Lake.coef[3,1], 
+              slope     = Lake.coef[3,2], col = "green4") +
+  geom_abline(intercept = Lake.coef[4,1], 
+              slope     = Lake.coef[4,2], col = "darkgoldenrod") +
+  geom_abline(intercept = Lake.coef[5,1], 
+              slope     = Lake.coef[5,2], col = "royalblue1") +
+  geom_abline(intercept = Lake.coef[6,1], 
+              slope     = Lake.coef[6,2], col = "magenta3")
 
+```
 
+### Challenge 8 {-}
 
+Let's test our knowledge by considering another scenario.
 
+Imagine that you have inventoried species richness **in 1000 quadrats** that are within **10 different sites** which are also within **10 different forests**. You also **measured productivity** in each **quadrat**. 
+
+You want to know if productivity is a good predictor of biodiversity. **What mixed model could you use for this dataset?**
+    
+---
+
+#### **Challenge 8 Solution:** {-}
+
+```{r, echo = TRUE, eval = FALSE}
+lmer(Biodiv ~ Productivity + (1 | Forest / Site))
+```
+
+Here the random effects are nested (i.e. Sites within forest) and not crossed.
+
+Why use `(1 | Forest / Site)` rather than `(1 | Forest) + (1 | Site)`? 
+
+See the answer [here](https://stats.stackexchange.com/questions/228800/crossed-vs-nested-random-effects-how-do-they-differ-and-how-are-they-specified)!
+  
