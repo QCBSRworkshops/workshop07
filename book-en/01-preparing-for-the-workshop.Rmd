@@ -2,7 +2,7 @@
 
 # Learning objectives
 
-Mixed effects models allow ecologists to overcome a number of limitations associated with traditional linear models. 
+Mixed effects models allow ecologists to overcome a number of limitations associated with traditional linear models.
 
 In this workshop, you will learn when it is important to use a **mixed effects model** to analyze your data. Specifically, we will:
 
@@ -40,7 +40,7 @@ This workshop requires the following `R` packages:
 
 To install them from CRAN, run:
 
-```{r, echo = TRUE, eval = FALSE}
+```{r, echo = TRUE, eval = TRUE, message=FALSE, warning=FALSE}
 install.packages("ggplot2")
 install.packages("lme4")
 install.packages("AICcmodavg")
@@ -49,11 +49,13 @@ install.packages("vcdExtra")
 install.packages("bbmle")
 install.packages("DescTools")
 install.packages("remotes")
+install.packages("MuMIn")
+
 ```
 
 To load these packages, run:
 
-```{r, echo = TRUE, eval = FALSE}
+```{r, echo = TRUE, eval = TRUE, message=FALSE, warning=FALSE}
 library(ggplot2)
 library(lme4)
 library(AICcmodavg)
@@ -62,5 +64,6 @@ library(vcdExtra)
 library(bbmle)
 library(DescTools)
 library(remotes)
-```
+library(MuMIn)
 
+```
