@@ -7,7 +7,7 @@
 - **Step 3.** Model validation
 - **Step 4.** Model interpretation and visualization
 
-## Step 1. *A priori* model building {-}
+# Step 1. *A priori* model building
 
 **What we know *a priori*:**
 
@@ -15,7 +15,7 @@ We want to determine if the trophic position can be predicted by body length, wh
 
 $$PT_{ijk} \sim Length_i + Lake_j + Species_k + \epsilon_{ijk}$$
 
-### Check data structure {-}
+## Check data structure 
 
 **Does the data have the right structure?**
 
@@ -53,7 +53,7 @@ Major deviations could cause heteroscedasticity problems. If necessary, make tra
 
 ---
 
-### Check collinearity {-}
+## Check collinearity 
 
 **Check for collinearity between your explanatory variables**
 
@@ -65,7 +65,7 @@ Here an [example of collinearity](https://yetanotheriteration.netlify.app/2018/0
 
 ---
 
-### Challenge 3 {-}
+## Challenge 3
 
 This is a thinking problem!
 
@@ -81,7 +81,7 @@ One example is fish body mass - this variable is strongly correlated with fish l
 
 ---
 
-### Consider scale {-}
+## Consider scale
 
 **Consider the scale of your data**
 
@@ -109,7 +109,7 @@ fish.data$Z_TP     <- scale(fish.data$Trophic_Pos)
 
 ---
 
-### Do you need a LMM? {-}
+## Do you need a LMM?
 
 **Determine if you need a mixed model** 
 
@@ -153,7 +153,7 @@ abline(0, 0, lty = 2)
 
 These results suggest that there is residual variance that could be explained by these factors, so they should be included in a mixed effect model!
 
-## Step 2. Code potential models and model selection {-}
+# Step 2. Code potential models and model selection
 
 
 **Translate this model...**
@@ -177,7 +177,7 @@ Where:
 - `(1 | Lake)` -> indicate varying intercepts among lakes
 - `REML = TRUE` -> estimation method
 
-### Estimation methods {-}
+## Estimation methods 
 
 REML (*Restricted Maximum Likelihood*) is the default method in `lmer` (see `?lmer`).
 
@@ -197,7 +197,7 @@ See this [article](https://towardsdatascience.com/maximum-likelihood-ml-vs-reml-
 * **ML** to compare models **with and without random effects**
 
 
-### Different model structures {-}
+## Different model structures
 
 **What if we want the slopes to vary?**
 
@@ -213,7 +213,7 @@ See this [article](https://towardsdatascience.com/maximum-likelihood-ml-vs-reml-
 
 - If your dataset includes nested random effects, you could use `/` to specify them, e.g. `(1 | factor1 / factor2)` if `factor2` is nested in `factor1` ([see ![:faic](stack-exchange)](https://stats.stackexchange.com/questions/228800/crossed-vs-nested-random-effects-how-do-they-differ-and-how-are-they-specified))
 
-### Challenge 4 {-}
+## Challenge 4
 
 Re-write the following code so that the **slopes** of the relationship between trophic position and body length **vary by lake and species**:
 
@@ -236,7 +236,7 @@ lmer(Z_TP ~ Z_Length + (1 + Z_Length | Lake) + (1 + Z_Length | Fish_Species),
 
 ---
 
-### Challenge 5 {-}
+## Challenge 5 
 
 To determine if you have built the best mixed model based on your prior knowledge, you should compare this *a priori* model to other alternative models.
 
@@ -304,7 +304,7 @@ M8 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake),
 Here a [list](https://rdrr.io/cran/lme4/man/troubleshooting.html) of possible problems and how to troubleshoot them.
 
 ---
-### Comparing models
+## Comparing models
 
 Now that we have a list of potential models, we want to compare them to each other to select the one(s) with the highest predictive power given the data.
 
@@ -398,7 +398,7 @@ M8 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake),
 ```
 
 
-## Step 3. Model validation {-}
+# Step 3. Model validation
 
 Now that we have our model, we must verify that the model follows all the basic assumptions:
 
@@ -413,7 +413,7 @@ Now that we have our model, we must verify that the model follows all the basic 
   - Histogram of residuals
 
 
-### 1. Check the homogeneity of the variance {-}
+## 1. Check the homogeneity of the variance 
 
 In order to check the homgeneity of the variance, we can plot predicted values vs residual values.
 
@@ -435,7 +435,7 @@ abline(h = 0, lty = 2)
 
 **Yes! Homogeneous dispersion of the residuals means that the assumption is respected.**
 
-### 2. Check the independence of the model residuals with each covariate {-}
+## 2. Check the independence of the model residuals with each covariate 
 
 In order to check the independence of the model residuals with each covariate we will (1) plot residuals vs each covariate of the model and (2) plot residuals vs each covariate not included in the model.
 
@@ -470,7 +470,7 @@ Now, we should (2) plot residuals vs each covariate not included in the model.
 If you observe patterns in these plots, you will know that there is variation in your dataset that could be explained by these covariates and you should consider including them in your model. **However because we have included all the measured variables in our model, we can not do this step with our data.**
 
 
-### 3. Check the normality of the model residuals {-}
+## 3. Check the normality of the model residuals 
 
 Now we will check the normality of the model residuals as residuals following a normal distribution indicate that the model is not biased.
 
@@ -483,7 +483,9 @@ hist(resid(M8))
 **The residuals are normal! This means our model is not biased.**
 
 
-## Step 4. Interpretation and visualization {-}
+# Step 4. Interpretation and visualization 
+
+## Interpreting our model
 
 Let's take a closer look at our final model using the `summary()` function. How can we interpret this information?
 
@@ -531,7 +533,7 @@ If 0 is in the interval, then the parameter is not significantly different from 
 - `residuals(M8)` returns residuals
   
   
-### Challenge 6 {-}
+## Challenge 6
 
 - **1.** What is the slope and confidence interval of the Z_Length variable in the M8 model?
 
@@ -554,7 +556,7 @@ If 0 is in the interval, then the parameter is not significantly different from 
   - Yes, because the CI [0.2459, 0.5987] does not include 0
   
 
-### Challenge 7 {-}
+## Challenge 7
     
 **Is it possible to visualize graphically the different intercepts and slopes of the model to better interpret the results?**
 
@@ -682,7 +684,7 @@ Plot_ByLake +
 
 ```
 
-### Challenge 8 {-}
+## Challenge 8
 
 Let's test our knowledge by considering another scenario.
 
