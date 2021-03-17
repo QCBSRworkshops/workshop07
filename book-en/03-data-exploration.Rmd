@@ -105,7 +105,9 @@ For your second challenge, think about these two questions. How will the ICC and
 - **1.** Fish trophic positions are not variable among lakes?
 - **2.** Fish trophic positions are similar within lakes but variable among lakes?
 
-#### **Challenge 1 Solution:** {-}
+---
+
+#### **Challenge 2 Solution:** {-}
 
 - **1.** Low ICC, smaller confidence intervals
 - **2.** High ICC, larger confidence intervals
