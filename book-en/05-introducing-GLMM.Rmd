@@ -1,4 +1,18 @@
-# (PART\*) Generalized linear mixed models (GLMMs) {-}
+# (PART\*) Generalized linear mixed models (GLMM) in `R` {-}
+
+- Intro
+- Implementing
+-etc
+
+
+
+
+
+
+
+
+
+
 
 # Generalized linear mixed models (GLMMs)
 

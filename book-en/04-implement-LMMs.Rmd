@@ -1,3 +1,27 @@
+# (PART\*) Implementing LMMs in `R` {-}
+
+
+- step 1
+- step 2
+- step 3
+- step 4
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # How do I implement LMM's in R?
 
 ## The mixed model protocol in R:
