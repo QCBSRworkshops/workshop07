@@ -48,7 +48,9 @@ install.packages("MASS")
 install.packages("vcdExtra")
 install.packages("bbmle")
 install.packages("DescTools")
+install.packages("remotes")
 install.packages("MuMIn")
+
 ```
 
 To load these packages, run:
@@ -61,5 +63,7 @@ library(MASS)
 library(vcdExtra)
 library(bbmle)
 library(DescTools)
+library(remotes)
 library(MuMIn)
+
 ```
