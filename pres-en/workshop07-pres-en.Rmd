@@ -1827,7 +1827,7 @@ control = glmerControl(optimizer = "bobyqa"))
 
 
 ---
-# GLMM Poisson-lognormale
+# Poisson-lognormal GLMM
 <br><br><br>
 
 Finally, we test for overdispersion :
