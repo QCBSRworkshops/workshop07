@@ -329,7 +329,7 @@ We wish to make conclusions about the levels of the factor or about the relation
 * The model estimates a general intercept and/or slope with a standard deviation for each random effect (i.e. the normal distribution)
 &lt;br&gt;&lt;br&gt;
 
-This avoids estimating an intercept and a slope for each species (+2 parameters per specie) = **saves degrees of freedom** (less parameter estimation is needed)
+This avoids estimating an intercept and a slope for each species (+2 parameters per species) = **saves degrees of freedom** (less parameter estimation is needed)
 
 
 ---
@@ -383,7 +383,7 @@ As for intercepts, only the mean and standard deviation of the slopes are estima
 ---
 # Taking the data structure into account
 &lt;br&gt;
-**What happens if the sample size for a specific factor level is small? (e.g. low `\(n\)` for a specific specie)**
+**What happens if the sample size for a specific factor level is small? (e.g. low `\(n\)` for a specific species)**
 
 If a certain species or lake is poorly represented in the data, the model will give more weight to the pooled model to estimate the intercept and/or slope of that species or lake (i.e. shrinkage).
 
@@ -405,7 +405,7 @@ Ideally, you should have a minimum of `\(n\)`=3 for any specific factor level.
 
 The ICC is calculated as the **ratio** of variance between the random effect (ex. ordonnées à l'origine des espèces) and the total variance.
 
-Thus, the ICC informs us on the **extent** to which the average trophic position (i.e. intercepts) **varies** among species or lakes.
+Thus, the ICC informs us of the **extent** to which the average trophic position (i.e. intercepts) **varies** among species or lakes.
 
 ???
 
@@ -1869,9 +1869,9 @@ if (!require("coefplot2"))
   remotes::install_github("palday/coefplot2", subdir = "pkg")
 # reshape (NA -&gt; 0.8.8) [CRAN]
 #   
-   checking for file ‘/tmp/RtmpX7r5zr/remotes35041893bfc7/palday-coefplot2-23b7dcb/pkg/DESCRIPTION’ ...
+   checking for file ‘/tmp/RtmphmYPTL/remotes350838ca755c/palday-coefplot2-23b7dcb/pkg/DESCRIPTION’ ...
   
-✔  checking for file ‘/tmp/RtmpX7r5zr/remotes35041893bfc7/palday-coefplot2-23b7dcb/pkg/DESCRIPTION’
+✔  checking for file ‘/tmp/RtmphmYPTL/remotes350838ca755c/palday-coefplot2-23b7dcb/pkg/DESCRIPTION’
 # 
   
 ─  preparing ‘coefplot2’:
