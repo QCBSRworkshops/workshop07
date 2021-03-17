@@ -62,6 +62,8 @@ plot + geom_point() + facet_wrap(~ Lake) + xlab("Length (mm)") + ylab("Trophic P
    labs(title="By Lake") + fig
 ```
 
+---
+
 #### **Challenge 1 Solution:** {-}
 
 Based on these plots we can draw two initial observations:
