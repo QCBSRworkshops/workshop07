@@ -22,7 +22,7 @@ there are 10 individuals per species.*
 A simple question you could answer with this dataset is **does fish trophic position increase with fish size?**
 This will be our motivating question for this workshop.
 
-## Challenge 1 {-}
+## Challenge 1
 
 For our first challenge, reproduce plots 1-3 using the script below and the Fish dataset. Observe each plot and try to get a sense of what is occurring. Two key questions to ask yourself are:
 
@@ -82,7 +82,6 @@ So how can we analyze this data?
 
 Let's look a little closer at these options using our dataset!!
 
-
 ### Option 1: Separate {-}
 
 What would it look like it we ran separate analyses for each species?
@@ -94,7 +93,6 @@ What would it look like it we ran separate analyses for each species?
 - Low chance of detecting an effect due to small *n*
 
 [![](images/fig_5_w5.png) ]
-
 
 ### Option 2: Lump {-}
 
@@ -109,60 +107,25 @@ What would it look like it we put all of our data together for all lakes?
 .pull-left[![](images/fig_6_w5.png)]
 
 
-## What should we do? {-}
+## Choosing LMMs 
 
-For **our question**, we only want to know if there is a **general effect of body length on the trophic position**.
+For our question, we only want to know if there is a **general effect of body length on the trophic position**.
 
-However, **this relationship might differ** slightly among **species** due to unmeasured biological processes (e.g. growth rate) or among **lakes** due to unmeasured environmental variables. So we need to **control** for these potential effects.
+However, this relationship might differ slightly among **species** due to unmeasured biological processes (e.g. growth rate) or among **lakes** due to unmeasured environmental variables. This is why both separating and lumping are unsatisfactory options, we need to find a way to **control** for these potential effects while still maximizing the use of our data.
 
-Linear mixed models enable us to **lump and separate the analysis**. 
+This brings us to mixed models! Linear mixed models enable us to lump **and** separate the analysis. 
 
-They
+Linear mixed models: 
 
-1. Estimate slope and intercept parameters for each species and lake (**separating**) but estimate fewer parameters than classical regression.
+- **1.** Estimate slope and intercept parameters for each species and lake (**separating**) but estimate fewer parameters than classical regression.
+- **2.** Use all the data available (**lumping**) while accounting for pseudoreplication by controlling for differences among lakes and species.
 
-2. Use all the data available (**lumping**) while accounting for pseudoreplication by controlling for differences among lakes and species.
+In doing so, they: 
 
+- (i) allow you to use all the data you have instead of using means of non-independent sample;
+- (ii) account for structure in your data (for example, quadrates nested in sites nested in forests);
+- (iii) allow relationships to vary by different grouping factors (also known as random effects);
+- (iv) they require less parameter estimates than classical regression which saves you degrees of freedom. 
 
-
-## What is a LMM and why should I care?
-
-Linear mixed models allow you to use all the data you have instead of using means of non-independent samples. They account for structure in your data (for example, quadrates nested in sites nested in forests). They allow
-relationships to vary by different grouping factors (sometimes referred to as random effects). Finally, they require less parameter estimates than classical regression which saves you degrees of freedom. 
-
-But how do they do all of this? These questions will hopefully become clear during this
-section. For now, let's move on to analyzing our dataset.
-
-
-
------ NEW rmd.
-
-# Fixed vs. random effects (Elements of an LMM?)
-
-- Fixed
-- Random
-
-# Accounting for structure
-
-- ICC
-- Challenge 2
-
---- NEW RMD
-
-# Implementing LMMs in `R` (new header?)
-
-- step 1
-- step 2
-- step 3
-- step 4
-
---- NEW RMD
-
-# (PART\*) Generalized linear mixed models (GLMM) in `R` {-}
-
-- Intro
-- Implementing
--etc
-
-
+But how do they do all of this? Let's get into it! 
 
