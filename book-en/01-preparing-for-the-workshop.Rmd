@@ -49,6 +49,8 @@ install.packages("vcdExtra")
 install.packages("bbmle")
 install.packages("DescTools")
 install.packages("remotes")
+install.packages("gridExtra")
+install.packages("lattice")
 ```
 
 To load these packages, run:
@@ -62,5 +64,7 @@ library(vcdExtra)
 library(bbmle)
 library(DescTools)
 library(remotes)
+library(gridExtra)
+library(lattice)
 ```
 
