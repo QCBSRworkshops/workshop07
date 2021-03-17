@@ -1,0 +1,270 @@
+--- 
+title: "Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)"
+subtitle: "QCBS R Workshop Series"
+author:
+- Developed and maintained by the contributors of the QCBS R Workshop Series^[The QCBS R Workshop Series is part of the [Québec Centre for Biodiversity Science](https://www.qcbs.ca), and is maintained by the series coordinators and graduent student, postdoctoral, and research professional members. **The contributors for this workshop can be accessed [here](link)**.]
+date: "`r Sys.time()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: ["references.bib"]
+biblio-style: apalike
+link-citations: yes
+cover-image: assets/images/logo/csbq_logo_accueil.png
+github-repo: "qcbsRworkshops/workshop09"
+description: "Linear and generalized linear mixed models (LMM and GLMM)"
+favicon: "assets/images/favicon.ico"
+always_allow_html: yes
+url: 'https\://github.com/qcbsRworkshops/'
+config:
+  edit:
+    link: https://github.com/qcbsRworkshops/workshop07/edit/main/book-en/%s
+    text: "Suggest changes"
+---
+
+# (PART\*) QCBS R Workshop Series {-}
+# Preface {-}
+
+Placeholder
+
+
+## Code of conduct
+### Expected behaviour
+### Unacceptable behaviour
+## Contributors
+## Contributing
+
+<!--chapter:end:index.Rmd-->
+
+
+# (PART\*) Linear mixed models (LMM) in `R` {-}
+# Learning objectives
+
+Placeholder
+
+
+
+<!--chapter:end:01-preparing-for-the-workshop.Rmd-->
+
+
+# Why choose mixed models? 
+
+Placeholder
+
+
+## Challenge 1 
+#### **Challenge 1 Solution:** {-}
+## Separate 
+## Lump 
+## Is there a third option? 
+
+<!--chapter:end:02-introduction-en.Rmd-->
+
+
+# Fixed vs. random effects 
+
+Placeholder
+
+
+## Fixed effects: deterministic processes 
+## Random effects: stochastic processes 
+## Parameters are varied
+### Intercepts: {-}
+### Slopes: {-}
+## Data structure is taken into account
+## Challenge 2
+#### **Challenge 2 Solution:** {-}
+
+<!--chapter:end:03-data-exploration.Rmd-->
+
+
+# (PART\*) Implementing LMM in `R` {-}
+# Mixed model protocol
+
+Placeholder
+
+
+## Check data structure 
+## Check collinearity 
+## Challenge 3
+#### **Challenge 3 Solution:** {-}
+## Consider scale
+## Do you need a LMM?
+## Estimation methods 
+## Different model structures
+## Challenge 4
+#### **Challenge 4 Solution:** {-}
+## Challenge 5 
+#### **Challenge 5 Solution:** {-}
+## Comparing models
+## 1. Check the homogeneity of the variance 
+## 2. Check the independence of the model residuals with each covariate 
+## 3. Check the normality of the model residuals 
+## Interpreting our model
+## Challenge 6
+#### **Challenge 6 Solution:** {-}
+## Challenge 7
+#### **Challenge 7 Solution:** {-}
+## Challenge 8
+#### **Challenge 8 Solution:** {-}
+
+<!--chapter:end:04-implement-LMM.Rmd-->
+
+
+# (PART\*) Generalized linear mixed models (GLMM) in `R` {-}
+# Introduction to GLMM
+
+Placeholder
+
+
+
+<!--chapter:end:05-introducing-GLMM.Rmd-->
+
+
+# (PART\*) Model selection {-}
+
+The same methods can be used with a GLMM or LMM to choose between models with various random intercepts and/or random slopes and to choose fixed effects to keep in final model.
+
+Here are two approaches :
+
+- an **information theoretic approach** (e.g., AICc - Workshop 5)
+- a **frequentist approach** (where the significance of each term is evaluated using a likelihood ratio test; LRT, with the `anova()` function)
+
+---
+
+We first code potential models and compare them using AICc:
+
+```{r, echo = TRUE, eval = TRUE}
+library(lme4)
+mpl1 <- glmer(total.fruits ~ nutrient*amd + rack + status +
+              (1|X) +
+              (1|popu)+
+              (1|gen),
+data = dat.tf, family = "poisson",
+control = glmerControl(optimizer = "bobyqa"))
+
+mpl2 <- update(mpl1, . ~ . - rack) # model without rack
+mpl3 <- update(mpl1, . ~ . - status) # model without status
+mpl4 <- update(mpl1, . ~ . - amd:nutrient) # without amd:nutrient interaction
+
+aic_tab  <- MuMIn::model.sel(mpl1, mpl2, mpl3, mpl4)
+(round(aic_table <- aic_tab[ , c("AICc", "delta", "df")], digits = 2))
+```
+
+*Note: We do not cover all possible models above, however, the interaction `amd:nutrient` can only be evaluated if both amd and nutrient (i.e., the main effects) are included in the model.*
+
+Alternatively, we can use `drop1()` and `dfun()` functions to evaluate our fixed effects (`dfun()` converts the AIC values returned by the `drop1()` into $\Delta$AIC values)
+
+```{r, echo = TRUE, eval = TRUE}
+dd_LRT <- drop1(mpl1, test = "Chisq")
+(dd_AIC <- dfun(drop1(mpl1)))
+```
+
+- Strong **rack** effect (dAIC = 55.08 if we remove this variable)
+- Effects of **status** and **interaction** term are weak (dAIC < 2)
+
+---
+
+Let's start by **removing the non-significant interaction** term to test main effects of nutrient and clipping
+
+```{r, echo = TRUE, eval = TRUE}
+mpl2 <- update(mpl1, . ~ . - amd:nutrient)
+
+mpl3 <- update(mpl2, . ~ . - rack) # pas de rack ou d'interaction
+mpl4 <- update(mpl2, . ~ . - status) # pas de status ou d'interaction
+mpl5 <- update(mpl2, . ~ . - nutrient) # pas de nutrient ou d'interaction
+mpl6 <- update(mpl2, . ~ . - amd) # pas d'herbivorie ou d'interaction
+```
+
+Choose the method you want to select the best model:
+
+<ins> Method with AICc </ins>
+
+```{r, echo = TRUE, eval = TRUE}
+aic_tab2  <- MuMIn::model.sel(mpl2, mpl3, mpl4, mpl5, mpl6)
+(round(aic_table2 <- aic_tab2[ , c("AICc", "delta", "df")], digits = 2))
+```
+
+<ins> Method with `drop1()` </ins>
+
+```{r, echo = TRUE, eval = TRUE}
+dd_LRT2 <- drop1(mpl2, test = "Chisq")
+dd_AIC2 <- dfun(drop1(mpl2))
+```
+
+**What are our conclusions ?**
+
+Both the main effects of **nutrient** and **clipping** are strong (large change in AIC of $135.6$ (`mpl5`) and $10.2$ (`mpl6`) if either nutrient or clipping are dropped, respectively).
+
+
+**Our final model includes :**
+
+Fixed effects
+* nutrients
+* clipping
+* rack
+
+Random effects
+* observation-level random effect `(1|X)` 
+* populations `(1|popu)` 
+* genotypes `(1|gen)`
+
+
+---
+# Challenge 9 
+
+Use the `inverts` dataset (larval development times (`PLD`) of 74 marine invertebrate and vertebrate species reared at different temperatures and time), answer the following questions:
+
+- What is the effect of feeding type and climate (**fixed effects**) on `PLD`?
+- Does this relationship vary among taxa (**random effects**)?
+- What is the **best distribution family** for this count data?
+- Finally, once you determined the best distribution family, re-evaluate your random and fixed effects.
+
+
+---
+# Solution ![:cube]()
+
+```{R, eval = FALSE}
+# inverts <- read.csv('data/inverts.csv', header = TRUE)
+# head(inverts)
+# table(inverts$temp, inverts$feeding.type)
+
+# mod.glm <- glm(PLD ~ temp + feeding.type, family = poisson(), data = inverts)
+# summary(mod.glm)
+# drop1(mod.glm, test = "Chisq")
+
+# boxplot(PLD ~ temp,  data = inverts)
+# boxplot(PLD ~ feeding.type,  data = inverts)
+
+# boxplot(predict(mod.glm, type = "response")~inverts$temp)
+
+# plot()
+
+# modglm <- glm(PLD ~ temp + feeding.type, family = poisson(), data = inverts)
+```
+
+
+---
+# Solution ![:cube]()
+```{R, eval = FALSE}
+# r2 <- ranef(mpl1, condVar = TRUE)
+# d2 <- dotplot(r2, par.settings = pp)
+
+# plot(aggregate(PLD ~ taxon, FUN = mean, data = inverts)[,2], aggregate(PLD ~ taxon, FUN = var, data = inverts)[,2], pch = 19)
+# abline(a = 0, b = 1, lty = 2)
+
+# mod.glmer <- glmer.nb(PLD ~ temp + feeding.type + (1|taxon), data = inverts)
+# mod.glm <- glm.nb(PLD ~ temp + feeding.type, family = poisson(), data = inverts)
+
+# plot(aggregate(PLD ~ taxon, FUN = var, data = inverts)[,2], aggregate(PLD ~ taxon, FUN = mean, data = inverts)[,2])
+# abline(a = 0, b = 1, lty = 2 )
+```
+
+
+<!--chapter:end:06-model-selection.Rmd-->
+
+`r if (knitr::is_html_output()) '
+# References
+'`
+
+<!--chapter:end:07-references.Rmd-->
+
