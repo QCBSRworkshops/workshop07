@@ -529,7 +529,7 @@ Les points provenant d'un même lac sont traités indépendamment car **peu corr
 
 **Q1.** Les positions trophiques des poissons ne varient pas entre les lacs
 
-.alert[R1. CCI faible, petits intervalles de confiances]
+.alert[R1. CCI faible, petits intervalles de confiance]
 
 <br>
 
