@@ -142,8 +142,6 @@ lm.test.resid <- rstandard(lm.test)
 Représentez graphiquement la valeur des résidus en fonction des niveaux des facteurs
 
 ```{r, echo = TRUE, eval = TRUE}
-par(mfrow = c(1, 2))
-
 plot(lm.test.resid ~ as.factor(fish.data$Fish_Species),
      xlab = "Species", ylab = "Standardized residuals")
 
