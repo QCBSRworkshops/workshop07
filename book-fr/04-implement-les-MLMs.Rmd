@@ -163,10 +163,6 @@ $$PT_{ijk} \sim Longueur_i + Lac_j + Espèce_k + \varepsilon_{ijk}$$
 
 **... en code R**
 
-```{r, eval = TRUE, include = FALSE}
-library(lme4)
-```
-
 ```{r, echo = TRUE, eval = TRUE}
 lmer(Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species),
      data = fish.data, REML = TRUE)
