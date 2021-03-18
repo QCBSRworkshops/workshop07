@@ -47,5 +47,5 @@ negative-binomial-glmm
 poisson-lognormal-glmm
 selection-methods
 challenge-9
-additional-ressources
+additional-resources
 references
