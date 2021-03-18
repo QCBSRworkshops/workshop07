@@ -48,6 +48,10 @@ install.packages("MASS")
 install.packages("vcdExtra")
 install.packages("bbmle")
 install.packages("DescTools")
+install.packages("remotes")
+install.packages("gridExtra")
+install.packages("lattice")
+install.packages("MuMIn")
 ```
 
 Pour charger ces paquets, exécutez:
@@ -60,5 +64,9 @@ library(MASS)
 library(vcdExtra)
 library(bbmle)
 library(DescTools)
+library(remotes)
+library(gridExtra)
+library(lattice)
+library(MuMIn)
 ```
 
