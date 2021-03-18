@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Atelier 7: Modèles linéaires et généralisés linéaires mixtes</title>
+  <title>Chapitre 11 Step 3. Validation du modèle | Atelier 7: Modèles linéaires et généralisés linéaires mixtes</title>
   <meta name="description" content="Modèles linéaires et généralisés linéaires mixtes" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Atelier 7: Modèles linéaires et généralisés linéaires mixtes" />
+  <meta property="og:title" content="Chapitre 11 Step 3. Validation du modèle | Atelier 7: Modèles linéaires et généralisés linéaires mixtes" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://github.com/qcbsRworkshops/" />
   <meta property="og:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="qcbsRworkshops/workshop09" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Atelier 7: Modèles linéaires et généralisés linéaires mixtes" />
+  <meta name="twitter:title" content="Chapitre 11 Step 3. Validation du modèle | Atelier 7: Modèles linéaires et généralisés linéaires mixtes" />
   
   <meta name="twitter:description" content="Modèles linéaires et généralisés linéaires mixtes" />
   <meta name="twitter:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
-
-<link rel="next" href="objectifs-dapprentissage.html"/>
+<link rel="prev" href="step-2-coder-le-modèle.html"/>
+<link rel="next" href="step-4-interprétation-et-visualisation.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -240,74 +240,82 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div class="hero-image-container"> 
   <img class= "hero-image" src="assets/images/jean-philippe-delberghe-75xPHEQBmvA-unsplash_hero_image.jpg">
 </div>
-<div id="header">
-<h1 class="title">Atelier 7: Modèles linéaires et généralisés linéaires mixtes</h1>
-<h2 class="subtitle"><em>Série d’ateliers R du CSBQ</em></h2>
-<p class="author"><em>Développé et entretenu par les contributeurs et les contributrices de la Série d’ateliers R du CSBQ<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</em></p>
-<p class="date"><em>2021-03-18 06:22:10</em></p>
-</div>
-<div id="préface" class="section level1 unnumbered">
-<h1>Préface</h1>
-<p>La <strong>Série d’ateliers R du CSBQ</strong> est une série de 10 ateliers qui guide les participants à travers les étapes nécessaires à l’utilisation de R pour un large éventail d’analyses statistiques pertinentes pour la recherche en biologie et en écologie. Ces ateliers en accès libre ont été créés par des membres du CSBQ, à la fois pour les membres du CSBQ et pour la communauté au sens large.</p>
-<p>Le contenu de cet atelier a été revu par plusieurs membres du CSBQ. Si vous souhaitez suggérer des modifications, veuillez contacter les coordinateurs de la série actuelle, dont la liste figure sur la page principale de Github</p>
-<div id="code-de-conduite" class="section level2">
-<h2><span class="header-section-number">0.1</span> Code de conduite</h2>
-<p>La Série d’ateliers R du CSBQ et le Symposium R du CSBQ sont des lieux dédiés à fournir un environnement accueillant et favorable à toutes les personnes, indépendamment de leurs origines ou de leur identité.</p>
-<p>Les participants, les présentateurs et les organisateurs de la série d’ateliers et d’autres activités connexes acceptent le présent code de conduite lorsqu’ils assistent à des activités liées aux ateliers.</p>
-<p>Nous ne tolérons pas les comportements irrespectueux ou qui excluent, intimident ou gênent les autres.</p>
-<p>Nous ne tolérons pas la discrimination ou le harcèlement fondés sur des caractéristiques telles que, mais sans s’y limiter, l’identité et l’expression du genre, l’orientation sexuelle, le handicap, l’apparence physique, la taille du corps, la citoyenneté, la nationalité, les origines ethniques ou sociales, la grossesse, le statut familial, les informations génétiques, la religion ou les convictions (ou l’absence de celles-ci), l’appartenance à une minorité nationale, la propriété, l’âge, l’éducation, le statut socio-économique, les choix techniques et le niveau d’expérience.</p>
-<p>Il s’applique à tous les espaces gérés par l’atelier ou affiliés à celui-ci, y compris, mais sans s’y limiter, les ateliers, les listes de diffusion et les forums en ligne tels que GitHub, Slack et Twitter.</p>
-<div id="comportement-attendu" class="section level3">
-<h3><span class="header-section-number">0.1.1</span> Comportement attendu</h3>
-<p>Tous les participants sont tenus de faire preuve de respect et de courtoisie envers les autres. Toutes les interactions doivent être professionnelles, quelle que soit la plateforme utilisée : en ligne ou en personne.</p>
-<p>Afin de favoriser un environnement d’apprentissage positif et professionnel, nous encourageons les types de comportements suivants dans tous les événements et plates-formes des ateliers :</p>
+<div id="step-3.-validation-du-modèle" class="section level1">
+<h1><span class="header-section-number">Chapitre 11</span> Step 3. Validation du modèle</h1>
+<p>Vous devez vérifier que le modèle respecte toutes les suppositions de base:</p>
 <ul>
-<li>Utiliser un langage accueillant et inclusif ;</li>
-<li>Respecter les différents points de vue et expériences ;</li>
-<li>Accepter avec grâce les critiques constructives ;</li>
-<li>Se concentrer sur ce qui est le mieux pour la communauté ;</li>
-<li>Faire preuve de courtoisie et de respect envers les autres membres de la communauté.</li>
-</ul>
-</div>
-<div id="comportements-inacceptables" class="section level3">
-<h3><span class="header-section-number">0.1.2</span> Comportements inacceptables</h3>
-<p>Voici quelques exemples de comportements inacceptables de la part des participants à tout événement ou plateforme d’atelier :</p>
+<li><strong>1. Vérifier l’homogénéité de la variance:</strong>
 <ul>
-<li>les commentaires écrits ou verbaux qui ont pour effet d’exclure des personnes sur la base de leur appartenance à un groupe spécifique ;</li>
-<li>faire craindre à quelqu’un pour sa sécurité, par exemple en le harcelant ou en l’intimidant ;</li>
-<li>des menaces ou des propos violents dirigés contre une autre personne ;</li>
-<li>l’affichage d’images sexuelles ou violentes ;</li>
-<li>l’attention sexuelle non désirée ;</li>
-<li>les contacts physiques non consensuels ou non désirés ;</li>
-<li>des insultes ou des rabais ;</li>
-<li>les blagues sexistes, racistes, homophobes, transphobes, incapables ou d’exclusion ;</li>
-<li>l’incitation à la violence, au suicide ou à l’automutilation ;</li>
-<li>la poursuite de l’interaction (y compris la photographie ou l’enregistrement) avec une personne après qu’on - lui a demandé d’arrêter ;</li>
-<li>la publication d’une communication privée sans consentement.</li>
+<li>Faire un graphique des valeurs prédites en fonction des valeurs résiduelles</li>
+</ul></li>
+<li><strong>2. Vérifier l’indépendance des résidus:</strong>
+<ul>
+<li>Graphique des résidus vs chaque covariable du modèle</li>
+<li>Graphique des résidus vs chaque covariable non incluse du modèle</li>
+</ul></li>
+<li><strong>3. Vérifier la normalité:</strong>
+<ul>
+<li>Histogramme</li>
+</ul></li>
 </ul>
+<div id="vérifier-lhomogénéité-de-la-variance" class="section level2">
+<h2><span class="header-section-number">11.1</span> 1. Vérifier l’homogénéité de la variance</h2>
+<p>Afin de vérifier l’homogénéité de la variance, nous pouvons tracer les valeurs prédites par rapport aux valeurs résiduelles.</p>
+<p>Une dispersion homogène des résidus signifie que l’hypothèse est respectée.</p>
+<p><img src="images/resid-plots.gif" /></p>
+<p>Maintenant, regardons nos données, la dispersion est-elle homogène ?</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="step-3-validation-du-modèle.html#cb50-1"></a><span class="co"># Plotez les valeurs prédites par rapport aux valeurs</span></span>
+<span id="cb50-2"><a href="step-3-validation-du-modèle.html#cb50-2"></a><span class="co"># résiduelles</span></span>
+<span id="cb50-3"><a href="step-3-validation-du-modèle.html#cb50-3"></a><span class="kw">par</span>(<span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>))</span>
+<span id="cb50-4"><a href="step-3-validation-du-modèle.html#cb50-4"></a><span class="kw">plot</span>(<span class="kw">resid</span>(M8) <span class="op">~</span><span class="st"> </span><span class="kw">fitted</span>(M8), <span class="dt">xlab =</span> <span class="st">&quot;Predicted values&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Normalized residuals&quot;</span>)</span>
+<span id="cb50-5"><a href="step-3-validation-du-modèle.html#cb50-5"></a><span class="kw">abline</span>(<span class="dt">h =</span> <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="step-3-validation-du-modèle.html#cb51-1"></a><span class="co"># La dispersion homogène des résidus signifie que l&#39;hypothèse</span></span>
+<span id="cb51-2"><a href="step-3-validation-du-modèle.html#cb51-2"></a><span class="co"># est respectée.</span></span></code></pre></div>
+<p><strong>Oui! La dispersion homogène des résidus signifie que l’hypothèse est respectée.</strong></p>
 </div>
+<div id="vérifier-lindépendance-des-résidus" class="section level2">
+<h2><span class="header-section-number">11.2</span> 2. Vérifier l’indépendance des résidus</h2>
+<p>Afin de vérifier l’indépendance des résidus du modèle par rapport à chaque covariable, nous allons (1) tracer les résidus par rapport à chaque covariable du modèle et (2) tracer les résidus par rapport à chaque covariable non incluse dans le modèle.</p>
+<p>Commençons par (1) tracer les résidus par rapport à chaque covariable du modèle.</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="step-3-validation-du-modèle.html#cb52-1"></a><span class="co"># Afin de vérifier l&#39;indépendance des résidus du modèle, nous</span></span>
+<span id="cb52-2"><a href="step-3-validation-du-modèle.html#cb52-2"></a><span class="co"># devons tracer les résidus en fonction de chaque covariable</span></span>
+<span id="cb52-3"><a href="step-3-validation-du-modèle.html#cb52-3"></a><span class="co"># du modèle.</span></span>
+<span id="cb52-4"><a href="step-3-validation-du-modèle.html#cb52-4"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>))</span>
+<span id="cb52-5"><a href="step-3-validation-du-modèle.html#cb52-5"></a></span>
+<span id="cb52-6"><a href="step-3-validation-du-modèle.html#cb52-6"></a><span class="kw">plot</span>(<span class="kw">resid</span>(M8) <span class="op">~</span><span class="st"> </span>fish.data<span class="op">$</span>Z_Length, <span class="dt">xlab =</span> <span class="st">&quot;Length&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Normalized residuals&quot;</span>)</span>
+<span id="cb52-7"><a href="step-3-validation-du-modèle.html#cb52-7"></a><span class="kw">abline</span>(<span class="dt">h =</span> <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb52-8"><a href="step-3-validation-du-modèle.html#cb52-8"></a></span>
+<span id="cb52-9"><a href="step-3-validation-du-modèle.html#cb52-9"></a><span class="kw">boxplot</span>(<span class="kw">resid</span>(M8) <span class="op">~</span><span class="st"> </span>Fish_Species, <span class="dt">data =</span> fish.data, <span class="dt">xlab =</span> <span class="st">&quot;Species&quot;</span>, </span>
+<span id="cb52-10"><a href="step-3-validation-du-modèle.html#cb52-10"></a>    <span class="dt">ylab =</span> <span class="st">&quot;Normalized residuals&quot;</span>)</span>
+<span id="cb52-11"><a href="step-3-validation-du-modèle.html#cb52-11"></a><span class="kw">abline</span>(<span class="dt">h =</span> <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb52-12"><a href="step-3-validation-du-modèle.html#cb52-12"></a></span>
+<span id="cb52-13"><a href="step-3-validation-du-modèle.html#cb52-13"></a><span class="kw">boxplot</span>(<span class="kw">resid</span>(M8) <span class="op">~</span><span class="st"> </span>Lake, <span class="dt">data =</span> fish.data, <span class="dt">xlab =</span> <span class="st">&quot;Lakes&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Normalized residuals&quot;</span>)</span>
+<span id="cb52-14"><a href="step-3-validation-du-modèle.html#cb52-14"></a><span class="kw">abline</span>(<span class="dt">h =</span> <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="step-3-validation-du-modèle.html#cb53-1"></a><span class="co"># La dispersion homogène des résidus autour de 0 signifie</span></span>
+<span id="cb53-2"><a href="step-3-validation-du-modèle.html#cb53-2"></a><span class="co"># qu&#39;il n&#39;y a pas de modèle de résidus en fonction de la</span></span>
+<span id="cb53-3"><a href="step-3-validation-du-modèle.html#cb53-3"></a><span class="co"># variable, donc l&#39;hypothèse est respectée !  Note : Les</span></span>
+<span id="cb53-4"><a href="step-3-validation-du-modèle.html#cb53-4"></a><span class="co"># groupes sont dus à la structure des données, où les</span></span>
+<span id="cb53-5"><a href="step-3-validation-du-modèle.html#cb53-5"></a><span class="co"># poissons de seulement 5 classes de taille (grande, petite,</span></span>
+<span id="cb53-6"><a href="step-3-validation-du-modèle.html#cb53-6"></a><span class="co"># et trois groupes intermédiaires) ont été capturés.</span></span></code></pre></div>
+<p><strong>La dispersion homogène des résidus autour de 0 signifie qu’il n’y a pas de modèle de résidus en fonction de la variable, donc l’hypothèse est respectée!</strong></p>
+<p>*Remarque : les groupes sont dus à la structure des données, où les poissons de seulement 5 classes de taille (grande, petite, et trois groupes intermédiaires) ont été capturés.</p>
+<p>Maintenant, nous devons (2) tracer les résidus par rapport à chaque covariable non incluse dans le modèle.</p>
+<p>Si vous observez des tendances dans ces graphiques, vous saurez qu’il existe une variation dans votre ensemble de données qui pourrait être expliquée par ces covariables et vous devriez envisager de les inclure dans votre modèle. <strong>Cependant, comme nous avons inclus toutes les variables mesurées dans notre modèle, nous ne pouvons pas effectuer cette étape avec nos données.</strong></p>
 </div>
-<div id="contributeurs-et-contributrices" class="section level2">
-<h2><span class="header-section-number">0.2</span> Contributeurs et contributrices</h2>
-<p>Développé à l’origine par :</p>
-<p>A contribué à modifier la présentation :</p>
-<p>Contribution avec des changements à la documentation écrite :</p>
-<p>Contribution en signalant des problèmes et en suggérant des modifications :</p>
+<div id="vérifier-la-normalité" class="section level2">
+<h2><span class="header-section-number">11.3</span> 3. Vérifier la normalité</h2>
+<p>Nous allons maintenant vérifier la normalité des résidus du modèle, car des résidus suivant une distribution normale indiquent que le modèle n’est pas biaisé.</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="step-3-validation-du-modèle.html#cb54-1"></a><span class="co"># Vérifiez la normalité des résidus du modèle car des résidus</span></span>
+<span id="cb54-2"><a href="step-3-validation-du-modèle.html#cb54-2"></a><span class="co"># suivant une distribution normale indiquent que le modèle</span></span>
+<span id="cb54-3"><a href="step-3-validation-du-modèle.html#cb54-3"></a><span class="co"># n&#39;est pas biaisé.</span></span>
+<span id="cb54-4"><a href="step-3-validation-du-modèle.html#cb54-4"></a><span class="kw">hist</span>(<span class="kw">resid</span>(M8))</span></code></pre></div>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="step-3-validation-du-modèle.html#cb55-1"></a><span class="co"># Les résidus sont normaux ! Cela signifie que notre modèle</span></span>
+<span id="cb55-2"><a href="step-3-validation-du-modèle.html#cb55-2"></a><span class="co"># n&#39;est pas biaisé.</span></span></code></pre></div>
+<p><strong>Les résidus sont normaux ! Cela signifie que notre modèle n’est pas biaisé.</strong></p>
 </div>
-<div id="contribuez-à-la-série" class="section level2">
-<h2><span class="header-section-number">0.3</span> Contribuez à la série!</h2>
-<p>En construction.</p>
-
-</div>
-</div>
-
-
-
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p>La Série d’ateliers R du CSBQ fait partie du <a href="https://www.qcbs.ca">Centre de la science de la biodiversité du Québec</a>, et est maintenue par les coordonnateurs et les coordonnatrices de la série, et les membres étudiants diplômés, postdoctoraux et professionnels de la recherche. <strong>La liste des contributeurs et des contributrices de cet atelier sont accessibles<a href="lien">ici</a></strong><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
-</ol>
 </div>
 <hr>
 <center> 
@@ -320,8 +328,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-
-<a href="objectifs-dapprentissage.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="step-2-coder-le-modèle.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="step-4-interprétation-et-visualisation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

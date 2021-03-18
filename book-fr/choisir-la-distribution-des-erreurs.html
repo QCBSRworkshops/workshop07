@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Atelier 7: Modèles linéaires et généralisés linéaires mixtes</title>
+  <title>Chapitre 14 Choisir la distribution des erreurs | Atelier 7: Modèles linéaires et généralisés linéaires mixtes</title>
   <meta name="description" content="Modèles linéaires et généralisés linéaires mixtes" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Atelier 7: Modèles linéaires et généralisés linéaires mixtes" />
+  <meta property="og:title" content="Chapitre 14 Choisir la distribution des erreurs | Atelier 7: Modèles linéaires et généralisés linéaires mixtes" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://github.com/qcbsRworkshops/" />
   <meta property="og:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="qcbsRworkshops/workshop09" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Atelier 7: Modèles linéaires et généralisés linéaires mixtes" />
+  <meta name="twitter:title" content="Chapitre 14 Choisir la distribution des erreurs | Atelier 7: Modèles linéaires et généralisés linéaires mixtes" />
   
   <meta name="twitter:description" content="Modèles linéaires et généralisés linéaires mixtes" />
   <meta name="twitter:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
-
-<link rel="next" href="objectifs-dapprentissage.html"/>
+<link rel="prev" href="introduction-des-glmm.html"/>
+<link rel="next" href="poisson-glmm.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -240,74 +240,104 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div class="hero-image-container"> 
   <img class= "hero-image" src="assets/images/jean-philippe-delberghe-75xPHEQBmvA-unsplash_hero_image.jpg">
 </div>
-<div id="header">
-<h1 class="title">Atelier 7: Modèles linéaires et généralisés linéaires mixtes</h1>
-<h2 class="subtitle"><em>Série d’ateliers R du CSBQ</em></h2>
-<p class="author"><em>Développé et entretenu par les contributeurs et les contributrices de la Série d’ateliers R du CSBQ<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</em></p>
-<p class="date"><em>2021-03-18 06:22:10</em></p>
-</div>
-<div id="préface" class="section level1 unnumbered">
-<h1>Préface</h1>
-<p>La <strong>Série d’ateliers R du CSBQ</strong> est une série de 10 ateliers qui guide les participants à travers les étapes nécessaires à l’utilisation de R pour un large éventail d’analyses statistiques pertinentes pour la recherche en biologie et en écologie. Ces ateliers en accès libre ont été créés par des membres du CSBQ, à la fois pour les membres du CSBQ et pour la communauté au sens large.</p>
-<p>Le contenu de cet atelier a été revu par plusieurs membres du CSBQ. Si vous souhaitez suggérer des modifications, veuillez contacter les coordinateurs de la série actuelle, dont la liste figure sur la page principale de Github</p>
-<div id="code-de-conduite" class="section level2">
-<h2><span class="header-section-number">0.1</span> Code de conduite</h2>
-<p>La Série d’ateliers R du CSBQ et le Symposium R du CSBQ sont des lieux dédiés à fournir un environnement accueillant et favorable à toutes les personnes, indépendamment de leurs origines ou de leur identité.</p>
-<p>Les participants, les présentateurs et les organisateurs de la série d’ateliers et d’autres activités connexes acceptent le présent code de conduite lorsqu’ils assistent à des activités liées aux ateliers.</p>
-<p>Nous ne tolérons pas les comportements irrespectueux ou qui excluent, intimident ou gênent les autres.</p>
-<p>Nous ne tolérons pas la discrimination ou le harcèlement fondés sur des caractéristiques telles que, mais sans s’y limiter, l’identité et l’expression du genre, l’orientation sexuelle, le handicap, l’apparence physique, la taille du corps, la citoyenneté, la nationalité, les origines ethniques ou sociales, la grossesse, le statut familial, les informations génétiques, la religion ou les convictions (ou l’absence de celles-ci), l’appartenance à une minorité nationale, la propriété, l’âge, l’éducation, le statut socio-économique, les choix techniques et le niveau d’expérience.</p>
-<p>Il s’applique à tous les espaces gérés par l’atelier ou affiliés à celui-ci, y compris, mais sans s’y limiter, les ateliers, les listes de diffusion et les forums en ligne tels que GitHub, Slack et Twitter.</p>
-<div id="comportement-attendu" class="section level3">
-<h3><span class="header-section-number">0.1.1</span> Comportement attendu</h3>
-<p>Tous les participants sont tenus de faire preuve de respect et de courtoisie envers les autres. Toutes les interactions doivent être professionnelles, quelle que soit la plateforme utilisée : en ligne ou en personne.</p>
-<p>Afin de favoriser un environnement d’apprentissage positif et professionnel, nous encourageons les types de comportements suivants dans tous les événements et plates-formes des ateliers :</p>
-<ul>
-<li>Utiliser un langage accueillant et inclusif ;</li>
-<li>Respecter les différents points de vue et expériences ;</li>
-<li>Accepter avec grâce les critiques constructives ;</li>
-<li>Se concentrer sur ce qui est le mieux pour la communauté ;</li>
-<li>Faire preuve de courtoisie et de respect envers les autres membres de la communauté.</li>
-</ul>
-</div>
-<div id="comportements-inacceptables" class="section level3">
-<h3><span class="header-section-number">0.1.2</span> Comportements inacceptables</h3>
-<p>Voici quelques exemples de comportements inacceptables de la part des participants à tout événement ou plateforme d’atelier :</p>
-<ul>
-<li>les commentaires écrits ou verbaux qui ont pour effet d’exclure des personnes sur la base de leur appartenance à un groupe spécifique ;</li>
-<li>faire craindre à quelqu’un pour sa sécurité, par exemple en le harcelant ou en l’intimidant ;</li>
-<li>des menaces ou des propos violents dirigés contre une autre personne ;</li>
-<li>l’affichage d’images sexuelles ou violentes ;</li>
-<li>l’attention sexuelle non désirée ;</li>
-<li>les contacts physiques non consensuels ou non désirés ;</li>
-<li>des insultes ou des rabais ;</li>
-<li>les blagues sexistes, racistes, homophobes, transphobes, incapables ou d’exclusion ;</li>
-<li>l’incitation à la violence, au suicide ou à l’automutilation ;</li>
-<li>la poursuite de l’interaction (y compris la photographie ou l’enregistrement) avec une personne après qu’on - lui a demandé d’arrêter ;</li>
-<li>la publication d’une communication privée sans consentement.</li>
-</ul>
-</div>
-</div>
-<div id="contributeurs-et-contributrices" class="section level2">
-<h2><span class="header-section-number">0.2</span> Contributeurs et contributrices</h2>
-<p>Développé à l’origine par :</p>
-<p>A contribué à modifier la présentation :</p>
-<p>Contribution avec des changements à la documentation écrite :</p>
-<p>Contribution en signalant des problèmes et en suggérant des modifications :</p>
-</div>
-<div id="contribuez-à-la-série" class="section level2">
-<h2><span class="header-section-number">0.3</span> Contribuez à la série!</h2>
-<p>En construction.</p>
-
-</div>
-</div>
-
-
-
-<div class="footnotes">
+<div id="choisir-la-distribution-des-erreurs" class="section level1">
+<h1><span class="header-section-number">Chapitre 14</span> Choisir la distribution des erreurs</h1>
+<p>Nous devons maintenant choisir une distribution d’erreurs. Ce choix sera informé par la structure de nos données.</p>
+<p>La variable réponse constitue des données d’abondance, donc nous devons choisir une <strong>distribution de Poisson</strong> (i.e variance égale à la moyenne)</p>
+<p>Let’s take a look:</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="choisir-la-distribution-des-erreurs.html#cb68-1"></a><span class="co"># Avant d&#39;aller plus loin, nous devons choisir une</span></span>
+<span id="cb68-2"><a href="choisir-la-distribution-des-erreurs.html#cb68-2"></a><span class="co"># distribution d&#39;erreurs. Ce choix sera guidé par la</span></span>
+<span id="cb68-3"><a href="choisir-la-distribution-des-erreurs.html#cb68-3"></a><span class="co"># structure de nos données.  Notre variable de réponse est</span></span>
+<span id="cb68-4"><a href="choisir-la-distribution-des-erreurs.html#cb68-4"></a><span class="co"># une donnée de comptage, ce qui suggère que nous avons</span></span>
+<span id="cb68-5"><a href="choisir-la-distribution-des-erreurs.html#cb68-5"></a><span class="co"># besoin d&#39;une distribution de Poisson (c&#39;est-à-dire que la</span></span>
+<span id="cb68-6"><a href="choisir-la-distribution-des-erreurs.html#cb68-6"></a><span class="co"># variance est égale à la moyenne).</span></span>
+<span id="cb68-7"><a href="choisir-la-distribution-des-erreurs.html#cb68-7"></a><span class="kw">hist</span>(dat.tf<span class="op">$</span>total.fruits, <span class="dt">breaks =</span> <span class="dv">50</span>, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;&quot;</span>, </span>
+<span id="cb68-8"><a href="choisir-la-distribution-des-erreurs.html#cb68-8"></a>    <span class="dt">xlab =</span> <span class="st">&quot;Total fruits&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Count&quot;</span>)</span></code></pre></div>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
+<p>Cependant, comme nous le verrons, la variance de chaque groupe augmente beaucoup plus rapidement que prévu…</p>
 <hr />
-<ol start="1">
-<li id="fn1"><p>La Série d’ateliers R du CSBQ fait partie du <a href="https://www.qcbs.ca">Centre de la science de la biodiversité du Québec</a>, et est maintenue par les coordonnateurs et les coordonnatrices de la série, et les membres étudiants diplômés, postdoctoraux et professionnels de la recherche. <strong>La liste des contributeurs et des contributrices de cet atelier sont accessibles<a href="lien">ici</a></strong><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
-</ol>
+<p><strong>Exploration de la variance </strong></p>
+<p>Examinons de plus près la variance au sein de nos données.</p>
+<p>Pour illustrer l’hétérogénéité de la variance, nous allons créer des boîtes à moustaches (boxplots) du <strong>log</strong> du nombre total de fruits (<strong>variable réponse</strong>) par rapport aux différents facteurs environnementaux.</p>
+<p>Créons d’abord de nouvelles variables qui représentent toutes les combinaisons de <strong>nutriments</strong> x <strong>herbivorie</strong> x <strong>facteur aléatoire</strong>.</p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="choisir-la-distribution-des-erreurs.html#cb69-1"></a><span class="co"># Explorons la variance dans nos données Créez de nouvelles</span></span>
+<span id="cb69-2"><a href="choisir-la-distribution-des-erreurs.html#cb69-2"></a><span class="co"># variables qui représentent chaque combinaison de variables.</span></span>
+<span id="cb69-3"><a href="choisir-la-distribution-des-erreurs.html#cb69-3"></a>dat.tf &lt;-<span class="st"> </span><span class="kw">within</span>(dat.tf, {</span>
+<span id="cb69-4"><a href="choisir-la-distribution-des-erreurs.html#cb69-4"></a>    <span class="co"># genotype x nutrient x clipping</span></span>
+<span id="cb69-5"><a href="choisir-la-distribution-des-erreurs.html#cb69-5"></a>    gna &lt;-<span class="st"> </span><span class="kw">interaction</span>(gen, nutrient, amd)</span>
+<span id="cb69-6"><a href="choisir-la-distribution-des-erreurs.html#cb69-6"></a>    gna &lt;-<span class="st"> </span><span class="kw">reorder</span>(gna, total.fruits, mean)</span>
+<span id="cb69-7"><a href="choisir-la-distribution-des-erreurs.html#cb69-7"></a>    <span class="co"># population x nutrient x clipping</span></span>
+<span id="cb69-8"><a href="choisir-la-distribution-des-erreurs.html#cb69-8"></a>    pna &lt;-<span class="st"> </span><span class="kw">interaction</span>(popu, nutrient, amd)</span>
+<span id="cb69-9"><a href="choisir-la-distribution-des-erreurs.html#cb69-9"></a>    pna &lt;-<span class="st"> </span><span class="kw">reorder</span>(pna, total.fruits, mean)</span>
+<span id="cb69-10"><a href="choisir-la-distribution-des-erreurs.html#cb69-10"></a>})</span></code></pre></div>
+<p>Maintenant, visualisons:</p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="choisir-la-distribution-des-erreurs.html#cb70-1"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb70-2"><a href="choisir-la-distribution-des-erreurs.html#cb70-2"></a><span class="co"># Boxplot of total fruits vs genotype x nutrient x clipping interaction</span></span>
+<span id="cb70-3"><a href="choisir-la-distribution-des-erreurs.html#cb70-3"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> dat.tf, <span class="kw">aes</span>(<span class="kw">factor</span>(<span class="dt">x =</span> gna), <span class="dt">y =</span> <span class="kw">log</span>(total.fruits <span class="op">+</span><span class="st"> </span><span class="dv">1</span>))) <span class="op">+</span></span>
+<span id="cb70-4"><a href="choisir-la-distribution-des-erreurs.html#cb70-4"></a><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">colour =</span> <span class="st">&quot;skyblue2&quot;</span>, <span class="dt">outlier.shape =</span> <span class="dv">21</span>,</span>
+<span id="cb70-5"><a href="choisir-la-distribution-des-erreurs.html#cb70-5"></a>  <span class="dt">outlier.colour =</span> <span class="st">&quot;skyblue2&quot;</span>) <span class="op">+</span></span>
+<span id="cb70-6"><a href="choisir-la-distribution-des-erreurs.html#cb70-6"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;log (Total fruits)</span><span class="ch">\n</span><span class="st">&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="co"># \n creates a space after the title</span></span>
+<span id="cb70-7"><a href="choisir-la-distribution-des-erreurs.html#cb70-7"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">Genotype x nutrient x clipping&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="co"># space before the title</span></span>
+<span id="cb70-8"><a href="choisir-la-distribution-des-erreurs.html#cb70-8"></a><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_blank</span>()) <span class="op">+</span></span>
+<span id="cb70-9"><a href="choisir-la-distribution-des-erreurs.html#cb70-9"></a><span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun =</span> mean, <span class="dt">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
+<p>De même, la variance du total de fruits montre une grande hétérogénéité entre les populations (population x nutriments x herbivorie).</p>
+<hr />
+<p><strong>Retour au choix de la distribution des erreurs</strong></p>
+<p>Comme nous venons de le voir, il existe une importante hétérogénéité parmi la variance de chaque groupe, même lorsque la variable réponse est transformée (i.e. log).</p>
+<p>Pour identifier la famille de distribution la plus appropriée , nous pouvons examiner un graphique de diagnostic de <strong>la variance de chaque groupe par rapport à leurs moyennes</strong>. Nous présentons un exemple ci-dessous pour le regroupement par génotype x nutriments x herbivore (clipping).</p>
+<ul>
+<li><ol style="list-style-type: decimal">
+<li>Si nous observons une relation linéaire entre la variance et la moyenne avec une pente = 1, une famille de Poisson serait appropriée,</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: decimal">
+<li>Si nous observons une relation moyenne-variance linéaire avec une pente&gt; 1 (c. Var = φµ où φ &gt; 1), la famille quasi-Poisson (tel que présenté ci-dessus) doit être utilisée,</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: decimal">
+<li>Enfin, une relation quadratique entre la variance et la moyenne (c. <span class="math inline">\(Var = µ(1 + α) or µ(1 + µ/k)\)</span>), est caractéristique des données surdispersées résultant d’une hétérogénéité sous-jacente entre les échantillons. Dans ce cas, la distribution binomiale négative (Poisson-gamma) serait plus appropriée.</li>
+</ol></li>
+</ul>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="choisir-la-distribution-des-erreurs.html#cb71-1"></a><span class="co">## Run a diagnostic lot of the group variances vs group means</span></span>
+<span id="cb71-2"><a href="choisir-la-distribution-des-erreurs.html#cb71-2"></a><span class="co">## (genotype x nutrient x clipping grouping).  Code used to</span></span>
+<span id="cb71-3"><a href="choisir-la-distribution-des-erreurs.html#cb71-3"></a><span class="co">## produce the plot :</span></span>
+<span id="cb71-4"><a href="choisir-la-distribution-des-erreurs.html#cb71-4"></a><span class="co">## https://github.com/QCBSRworkshops/workshop07/blob/main/pres-fr/data/glmm_e.r</span></span>
+<span id="cb71-5"><a href="choisir-la-distribution-des-erreurs.html#cb71-5"></a><span class="co">## Substantial variation among the sample variances on the</span></span>
+<span id="cb71-6"><a href="choisir-la-distribution-des-erreurs.html#cb71-6"></a><span class="co">## transformed data For example, among genotypes:</span></span>
+<span id="cb71-7"><a href="choisir-la-distribution-des-erreurs.html#cb71-7"></a>grpVars &lt;-<span class="st"> </span><span class="kw">tapply</span>(dat.tf<span class="op">$</span>total.fruits, dat.tf<span class="op">$</span>gna, var)</span>
+<span id="cb71-8"><a href="choisir-la-distribution-des-erreurs.html#cb71-8"></a></span>
+<span id="cb71-9"><a href="choisir-la-distribution-des-erreurs.html#cb71-9"></a>grpMeans &lt;-<span class="st"> </span><span class="kw">tapply</span>(dat.tf<span class="op">$</span>total.fruits, dat.tf<span class="op">$</span>gna, mean)</span>
+<span id="cb71-10"><a href="choisir-la-distribution-des-erreurs.html#cb71-10"></a></span>
+<span id="cb71-11"><a href="choisir-la-distribution-des-erreurs.html#cb71-11"></a><span class="co"># Quasi-Poisson</span></span>
+<span id="cb71-12"><a href="choisir-la-distribution-des-erreurs.html#cb71-12"></a>lm1 &lt;-<span class="st"> </span><span class="kw">lm</span>(grpVars <span class="op">~</span><span class="st"> </span>grpMeans <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</span>
+<span id="cb71-13"><a href="choisir-la-distribution-des-erreurs.html#cb71-13"></a>phi.fit &lt;-<span class="st"> </span><span class="kw">coef</span>(lm1)</span>
+<span id="cb71-14"><a href="choisir-la-distribution-des-erreurs.html#cb71-14"></a><span class="co"># The -1 specifies a model with the intercept set to zero</span></span>
+<span id="cb71-15"><a href="choisir-la-distribution-des-erreurs.html#cb71-15"></a></span>
+<span id="cb71-16"><a href="choisir-la-distribution-des-erreurs.html#cb71-16"></a><span class="co"># Negative binomial</span></span>
+<span id="cb71-17"><a href="choisir-la-distribution-des-erreurs.html#cb71-17"></a>lm2 &lt;-<span class="st"> </span><span class="kw">lm</span>(grpVars <span class="op">~</span><span class="st"> </span><span class="kw">I</span>(grpMeans<span class="op">^</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span><span class="kw">offset</span>(grpMeans) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</span>
+<span id="cb71-18"><a href="choisir-la-distribution-des-erreurs.html#cb71-18"></a>k.fit &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">/</span><span class="kw">coef</span>(lm2)</span>
+<span id="cb71-19"><a href="choisir-la-distribution-des-erreurs.html#cb71-19"></a><span class="co"># The offset() is used to specify that we want the group</span></span>
+<span id="cb71-20"><a href="choisir-la-distribution-des-erreurs.html#cb71-20"></a><span class="co"># means added as a term with its coefficient fixed to 1</span></span>
+<span id="cb71-21"><a href="choisir-la-distribution-des-erreurs.html#cb71-21"></a></span>
+<span id="cb71-22"><a href="choisir-la-distribution-des-erreurs.html#cb71-22"></a><span class="co"># Non-parametric loess fit</span></span>
+<span id="cb71-23"><a href="choisir-la-distribution-des-erreurs.html#cb71-23"></a>Lfit &lt;-<span class="st"> </span><span class="kw">loess</span>(grpVars <span class="op">~</span><span class="st"> </span>grpMeans)</span>
+<span id="cb71-24"><a href="choisir-la-distribution-des-erreurs.html#cb71-24"></a></span>
+<span id="cb71-25"><a href="choisir-la-distribution-des-erreurs.html#cb71-25"></a><span class="co"># The plot</span></span>
+<span id="cb71-26"><a href="choisir-la-distribution-des-erreurs.html#cb71-26"></a><span class="kw">plot</span>(grpVars <span class="op">~</span><span class="st"> </span>grpMeans, <span class="dt">xlab =</span> <span class="st">&quot;Group means&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Group variances&quot;</span>)</span>
+<span id="cb71-27"><a href="choisir-la-distribution-des-erreurs.html#cb71-27"></a><span class="kw">abline</span>(<span class="dt">a =</span> <span class="dv">0</span>, <span class="dt">b =</span> <span class="dv">1</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb71-28"><a href="choisir-la-distribution-des-erreurs.html#cb71-28"></a><span class="kw">text</span>(<span class="dv">105</span>, <span class="dv">500</span>, <span class="st">&quot;Poisson&quot;</span>)</span>
+<span id="cb71-29"><a href="choisir-la-distribution-des-erreurs.html#cb71-29"></a><span class="kw">curve</span>(phi.fit <span class="op">*</span><span class="st"> </span>x, <span class="dt">col =</span> <span class="dv">2</span>, <span class="dt">add =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb71-30"><a href="choisir-la-distribution-des-erreurs.html#cb71-30"></a><span class="co"># bquote() is used to substitute numeric values in equations</span></span>
+<span id="cb71-31"><a href="choisir-la-distribution-des-erreurs.html#cb71-31"></a><span class="co"># with symbols</span></span>
+<span id="cb71-32"><a href="choisir-la-distribution-des-erreurs.html#cb71-32"></a><span class="kw">text</span>(<span class="dv">110</span>, <span class="dv">3900</span>, <span class="kw">bquote</span>(<span class="kw">paste</span>(<span class="st">&quot;QP: &quot;</span>, sigma<span class="op">^</span><span class="dv">2</span> <span class="op">==</span><span class="st"> </span>.(<span class="kw">round</span>(phi.fit, </span>
+<span id="cb71-33"><a href="choisir-la-distribution-des-erreurs.html#cb71-33"></a>    <span class="dv">1</span>)) <span class="op">*</span><span class="st"> </span>mu)), <span class="dt">col =</span> <span class="dv">2</span>)</span>
+<span id="cb71-34"><a href="choisir-la-distribution-des-erreurs.html#cb71-34"></a><span class="kw">curve</span>(x <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>x<span class="op">/</span>k.fit), <span class="dt">col =</span> <span class="dv">4</span>, <span class="dt">add =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb71-35"><a href="choisir-la-distribution-des-erreurs.html#cb71-35"></a><span class="kw">text</span>(<span class="dv">104</span>, <span class="dv">7200</span>, <span class="kw">paste</span>(<span class="st">&quot;NB: k = &quot;</span>, <span class="kw">round</span>(k.fit, <span class="dv">1</span>), <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>), </span>
+<span id="cb71-36"><a href="choisir-la-distribution-des-erreurs.html#cb71-36"></a>    <span class="dt">col =</span> <span class="dv">4</span>)</span>
+<span id="cb71-37"><a href="choisir-la-distribution-des-erreurs.html#cb71-37"></a>mvec &lt;-<span class="st"> </span><span class="dv">0</span><span class="op">:</span><span class="dv">120</span></span>
+<span id="cb71-38"><a href="choisir-la-distribution-des-erreurs.html#cb71-38"></a><span class="kw">lines</span>(mvec, <span class="kw">predict</span>(Lfit, mvec), <span class="dt">col =</span> <span class="dv">5</span>)</span>
+<span id="cb71-39"><a href="choisir-la-distribution-des-erreurs.html#cb71-39"></a><span class="kw">text</span>(<span class="dv">118</span>, <span class="dv">2000</span>, <span class="st">&quot;loess&quot;</span>, <span class="dt">col =</span> <span class="dv">5</span>)</span></code></pre></div>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
+<p>From the plot above we note that a linear quasi-Poisson may be better than the negative binomial, <em>but additional modeling is needed.</em></p>
 </div>
 <hr>
 <center> 
@@ -320,8 +350,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-
-<a href="objectifs-dapprentissage.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="introduction-des-glmm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="poisson-glmm.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Atelier 7: Modèles linéaires et généralisés linéaires mixtes</title>
+  <title>Chapitre 18 Sélection du modèle | Atelier 7: Modèles linéaires et généralisés linéaires mixtes</title>
   <meta name="description" content="Modèles linéaires et généralisés linéaires mixtes" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Atelier 7: Modèles linéaires et généralisés linéaires mixtes" />
+  <meta property="og:title" content="Chapitre 18 Sélection du modèle | Atelier 7: Modèles linéaires et généralisés linéaires mixtes" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://github.com/qcbsRworkshops/" />
   <meta property="og:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="qcbsRworkshops/workshop09" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Atelier 7: Modèles linéaires et généralisés linéaires mixtes" />
+  <meta name="twitter:title" content="Chapitre 18 Sélection du modèle | Atelier 7: Modèles linéaires et généralisés linéaires mixtes" />
   
   <meta name="twitter:description" content="Modèles linéaires et généralisés linéaires mixtes" />
   <meta name="twitter:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
-
-<link rel="next" href="objectifs-dapprentissage.html"/>
+<link rel="prev" href="glmm-poisson-lognormale.html"/>
+<link rel="next" href="ressources-additionnelles.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -240,75 +240,135 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div class="hero-image-container"> 
   <img class= "hero-image" src="assets/images/jean-philippe-delberghe-75xPHEQBmvA-unsplash_hero_image.jpg">
 </div>
-<div id="header">
-<h1 class="title">Atelier 7: Modèles linéaires et généralisés linéaires mixtes</h1>
-<h2 class="subtitle"><em>Série d’ateliers R du CSBQ</em></h2>
-<p class="author"><em>Développé et entretenu par les contributeurs et les contributrices de la Série d’ateliers R du CSBQ<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</em></p>
-<p class="date"><em>2021-03-18 06:22:10</em></p>
-</div>
-<div id="préface" class="section level1 unnumbered">
-<h1>Préface</h1>
-<p>La <strong>Série d’ateliers R du CSBQ</strong> est une série de 10 ateliers qui guide les participants à travers les étapes nécessaires à l’utilisation de R pour un large éventail d’analyses statistiques pertinentes pour la recherche en biologie et en écologie. Ces ateliers en accès libre ont été créés par des membres du CSBQ, à la fois pour les membres du CSBQ et pour la communauté au sens large.</p>
-<p>Le contenu de cet atelier a été revu par plusieurs membres du CSBQ. Si vous souhaitez suggérer des modifications, veuillez contacter les coordinateurs de la série actuelle, dont la liste figure sur la page principale de Github</p>
-<div id="code-de-conduite" class="section level2">
-<h2><span class="header-section-number">0.1</span> Code de conduite</h2>
-<p>La Série d’ateliers R du CSBQ et le Symposium R du CSBQ sont des lieux dédiés à fournir un environnement accueillant et favorable à toutes les personnes, indépendamment de leurs origines ou de leur identité.</p>
-<p>Les participants, les présentateurs et les organisateurs de la série d’ateliers et d’autres activités connexes acceptent le présent code de conduite lorsqu’ils assistent à des activités liées aux ateliers.</p>
-<p>Nous ne tolérons pas les comportements irrespectueux ou qui excluent, intimident ou gênent les autres.</p>
-<p>Nous ne tolérons pas la discrimination ou le harcèlement fondés sur des caractéristiques telles que, mais sans s’y limiter, l’identité et l’expression du genre, l’orientation sexuelle, le handicap, l’apparence physique, la taille du corps, la citoyenneté, la nationalité, les origines ethniques ou sociales, la grossesse, le statut familial, les informations génétiques, la religion ou les convictions (ou l’absence de celles-ci), l’appartenance à une minorité nationale, la propriété, l’âge, l’éducation, le statut socio-économique, les choix techniques et le niveau d’expérience.</p>
-<p>Il s’applique à tous les espaces gérés par l’atelier ou affiliés à celui-ci, y compris, mais sans s’y limiter, les ateliers, les listes de diffusion et les forums en ligne tels que GitHub, Slack et Twitter.</p>
-<div id="comportement-attendu" class="section level3">
-<h3><span class="header-section-number">0.1.1</span> Comportement attendu</h3>
-<p>Tous les participants sont tenus de faire preuve de respect et de courtoisie envers les autres. Toutes les interactions doivent être professionnelles, quelle que soit la plateforme utilisée : en ligne ou en personne.</p>
-<p>Afin de favoriser un environnement d’apprentissage positif et professionnel, nous encourageons les types de comportements suivants dans tous les événements et plates-formes des ateliers :</p>
+<div id="sélection-du-modèle" class="section level1">
+<h1><span class="header-section-number">Chapitre 18</span> Sélection du modèle</h1>
+<p>Les même méthodes peuvent être utilisées avec un glmm ou lmm pour choisir entre des modèles avec différentes ordonnées à l’origine et/ou pentes aléatoires ainsi que pour choisir les effets fixes à conserver dans le modèle final.</p>
+<p>En voici deux:</p>
 <ul>
-<li>Utiliser un langage accueillant et inclusif ;</li>
-<li>Respecter les différents points de vue et expériences ;</li>
-<li>Accepter avec grâce les critiques constructives ;</li>
-<li>Se concentrer sur ce qui est le mieux pour la communauté ;</li>
-<li>Faire preuve de courtoisie et de respect envers les autres membres de la communauté.</li>
+<li>une <strong>approche de la théorie de l’information</strong> (e.g., AICc - Atelier 5)</li>
+<li>une <strong>approche fréquentiste</strong> (où l’importance de chaque terme est évaluée en faisant un test de rapport de vraisemblance; LRT, avec la fonction <code>anova()</code>)</li>
 </ul>
-</div>
-<div id="comportements-inacceptables" class="section level3">
-<h3><span class="header-section-number">0.1.2</span> Comportements inacceptables</h3>
-<p>Voici quelques exemples de comportements inacceptables de la part des participants à tout événement ou plateforme d’atelier :</p>
-<ul>
-<li>les commentaires écrits ou verbaux qui ont pour effet d’exclure des personnes sur la base de leur appartenance à un groupe spécifique ;</li>
-<li>faire craindre à quelqu’un pour sa sécurité, par exemple en le harcelant ou en l’intimidant ;</li>
-<li>des menaces ou des propos violents dirigés contre une autre personne ;</li>
-<li>l’affichage d’images sexuelles ou violentes ;</li>
-<li>l’attention sexuelle non désirée ;</li>
-<li>les contacts physiques non consensuels ou non désirés ;</li>
-<li>des insultes ou des rabais ;</li>
-<li>les blagues sexistes, racistes, homophobes, transphobes, incapables ou d’exclusion ;</li>
-<li>l’incitation à la violence, au suicide ou à l’automutilation ;</li>
-<li>la poursuite de l’interaction (y compris la photographie ou l’enregistrement) avec une personne après qu’on - lui a demandé d’arrêter ;</li>
-<li>la publication d’une communication privée sans consentement.</li>
-</ul>
-</div>
-</div>
-<div id="contributeurs-et-contributrices" class="section level2">
-<h2><span class="header-section-number">0.2</span> Contributeurs et contributrices</h2>
-<p>Développé à l’origine par :</p>
-<p>A contribué à modifier la présentation :</p>
-<p>Contribution avec des changements à la documentation écrite :</p>
-<p>Contribution en signalant des problèmes et en suggérant des modifications :</p>
-</div>
-<div id="contribuez-à-la-série" class="section level2">
-<h2><span class="header-section-number">0.3</span> Contribuez à la série!</h2>
-<p>En construction.</p>
-
-</div>
-</div>
-
-
-
-<div class="footnotes">
 <hr />
-<ol start="1">
-<li id="fn1"><p>La Série d’ateliers R du CSBQ fait partie du <a href="https://www.qcbs.ca">Centre de la science de la biodiversité du Québec</a>, et est maintenue par les coordonnateurs et les coordonnatrices de la série, et les membres étudiants diplômés, postdoctoraux et professionnels de la recherche. <strong>La liste des contributeurs et des contributrices de cet atelier sont accessibles<a href="lien">ici</a></strong><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
-</ol>
+<p>Nous dérivons d’abord les modèles potentiels et les comparons en utilisant l’AICc:</p>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="sélection-du-modèle.html#cb100-1"></a><span class="kw">library</span>(lme4)</span>
+<span id="cb100-2"><a href="sélection-du-modèle.html#cb100-2"></a>mpl1 &lt;-<span class="st"> </span><span class="kw">glmer</span>(total.fruits <span class="op">~</span><span class="st"> </span>nutrient <span class="op">*</span><span class="st"> </span>amd <span class="op">+</span><span class="st"> </span>rack <span class="op">+</span><span class="st"> </span>status <span class="op">+</span><span class="st"> </span></span>
+<span id="cb100-3"><a href="sélection-du-modèle.html#cb100-3"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>X) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>popu) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>gen), <span class="dt">data =</span> dat.tf, <span class="dt">family =</span> <span class="st">&quot;poisson&quot;</span>, </span>
+<span id="cb100-4"><a href="sélection-du-modèle.html#cb100-4"></a>    <span class="dt">control =</span> <span class="kw">glmerControl</span>(<span class="dt">optimizer =</span> <span class="st">&quot;bobyqa&quot;</span>))</span>
+<span id="cb100-5"><a href="sélection-du-modèle.html#cb100-5"></a></span>
+<span id="cb100-6"><a href="sélection-du-modèle.html#cb100-6"></a>mpl2 &lt;-<span class="st"> </span><span class="kw">update</span>(mpl1, . <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>rack)  <span class="co"># modèle sans rack</span></span>
+<span id="cb100-7"><a href="sélection-du-modèle.html#cb100-7"></a>mpl3 &lt;-<span class="st"> </span><span class="kw">update</span>(mpl1, . <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>status)  <span class="co"># modèle sans status</span></span>
+<span id="cb100-8"><a href="sélection-du-modèle.html#cb100-8"></a>mpl4 &lt;-<span class="st"> </span><span class="kw">update</span>(mpl1, . <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>amd<span class="op">:</span>nutrient)  <span class="co"># modèle sans interaction amd:nutrient</span></span>
+<span id="cb100-9"><a href="sélection-du-modèle.html#cb100-9"></a></span>
+<span id="cb100-10"><a href="sélection-du-modèle.html#cb100-10"></a>aic_tab &lt;-<span class="st"> </span>MuMIn<span class="op">::</span><span class="kw">model.sel</span>(mpl1, mpl2, mpl3, mpl4)</span>
+<span id="cb100-11"><a href="sélection-du-modèle.html#cb100-11"></a>(<span class="kw">round</span>(aic_table &lt;-<span class="st"> </span>aic_tab[, <span class="kw">c</span>(<span class="st">&quot;AICc&quot;</span>, <span class="st">&quot;delta&quot;</span>, <span class="st">&quot;df&quot;</span>)], <span class="dt">digits =</span> <span class="dv">2</span>))</span></code></pre></div>
+<pre><code>##         AICc delta df
+## mpl1 5015.73  0.00 10
+## mpl4 5017.11  1.38  9
+## mpl3 5017.22  1.49  8
+## mpl2 5070.75 55.02  9</code></pre>
+<p><em>Nous ne couvrons pas tous les modèles possibles ci-dessus, cependant, l’interaction <code>amd:nutriments</code> ne peut être évaluée que si les effets additifs de amd et de nutriments sont présents dans le modèle.</em></p>
+<p>Nous pouvons aussi utiliser les fonctions <code>drop1()</code> et <code>dfun()</code> pour évaluer nos effets fixes (<code>dfun()</code> convertit les valeurs AIC retournées par <code>drop1()</code> en valeurs <span class="math inline">\(\Delta\)</span>AIC)</p>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="sélection-du-modèle.html#cb102-1"></a>dd_LRT &lt;-<span class="st"> </span><span class="kw">drop1</span>(mpl1, <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>)</span>
+<span id="cb102-2"><a href="sélection-du-modèle.html#cb102-2"></a>(dd_AIC &lt;-<span class="st"> </span><span class="kw">dfun</span>(<span class="kw">drop1</span>(mpl1)))</span></code></pre></div>
+<pre><code>## Single term deletions
+## 
+## Model:
+## total.fruits ~ nutrient * amd + rack + status + (1 | X) + (1 | 
+##     popu) + (1 | gen)
+##              npar   dAIC
+## &lt;none&gt;             0.000
+## rack            1 55.083
+## status          2  1.612
+## nutrient:amd    1  1.444</code></pre>
+<ul>
+<li>Fort effet de <strong>rack</strong> (dAIC = 55.08 si on enlève cette variable)</li>
+<li>Effets de <strong>status</strong> et de l’<strong>interaction</strong> sont faibles (dAIC &lt; 2)</li>
+</ul>
+<hr />
+<p>Commençons par <strong>enlever l’interaction non significative</strong> afin de tester les effets principaux de nutriments et d’herbivorie.</p>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="sélection-du-modèle.html#cb104-1"></a>mpl2 &lt;-<span class="st"> </span><span class="kw">update</span>(mpl1, . <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>amd<span class="op">:</span>nutrient)</span>
+<span id="cb104-2"><a href="sélection-du-modèle.html#cb104-2"></a></span>
+<span id="cb104-3"><a href="sélection-du-modèle.html#cb104-3"></a>mpl3 &lt;-<span class="st"> </span><span class="kw">update</span>(mpl2, . <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>rack)  <span class="co"># pas de rack ou d&#39;interaction</span></span>
+<span id="cb104-4"><a href="sélection-du-modèle.html#cb104-4"></a>mpl4 &lt;-<span class="st"> </span><span class="kw">update</span>(mpl2, . <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>status)  <span class="co"># pas de status ou d&#39;interaction</span></span>
+<span id="cb104-5"><a href="sélection-du-modèle.html#cb104-5"></a>mpl5 &lt;-<span class="st"> </span><span class="kw">update</span>(mpl2, . <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>nutrient)  <span class="co"># pas de nutrient ou d&#39;interaction</span></span>
+<span id="cb104-6"><a href="sélection-du-modèle.html#cb104-6"></a>mpl6 &lt;-<span class="st"> </span><span class="kw">update</span>(mpl2, . <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>amd)  <span class="co"># pas d&#39;herbivorie ou d&#39;interaction</span></span></code></pre></div>
+<p>Sélectionnez le meilleur modèle avec la méthode de votre choix:</p>
+<ins>
+Méthode par AICc
+</ins>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="sélection-du-modèle.html#cb105-1"></a>aic_tab2 &lt;-<span class="st"> </span>MuMIn<span class="op">::</span><span class="kw">model.sel</span>(mpl2, mpl3, mpl4, mpl5, mpl6)</span>
+<span id="cb105-2"><a href="sélection-du-modèle.html#cb105-2"></a>(<span class="kw">round</span>(aic_table2 &lt;-<span class="st"> </span>aic_tab2[, <span class="kw">c</span>(<span class="st">&quot;AICc&quot;</span>, <span class="st">&quot;delta&quot;</span>, <span class="st">&quot;df&quot;</span>)], <span class="dt">digits =</span> <span class="dv">2</span>))</span></code></pre></div>
+<pre><code>##         AICc  delta df
+## mpl2 5017.11   0.00  9
+## mpl4 5018.28   1.17  7
+## mpl6 5027.27  10.16  8
+## mpl3 5071.28  54.17  8
+## mpl5 5152.74 135.63  8</code></pre>
+<ins>
+Méthode avec <code>drop1()</code>
+</ins>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="sélection-du-modèle.html#cb107-1"></a>dd_LRT2 &lt;-<span class="st"> </span><span class="kw">drop1</span>(mpl2, <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>)</span>
+<span id="cb107-2"><a href="sélection-du-modèle.html#cb107-2"></a>dd_AIC2 &lt;-<span class="st"> </span><span class="kw">dfun</span>(<span class="kw">drop1</span>(mpl2))</span></code></pre></div>
+<p><strong>Quels sont nos constats ?</strong></p>
+<p>Les <strong>nutriments</strong> et l’<strong>herbivorie</strong> ont un effet important (grand changement d’AIC de <span class="math inline">\(135.6\)</span> (<code>mpl5</code>) et <span class="math inline">\(10.2\)</span> (<code>mpl6</code>) si l’un ou l’autre sont supprimés, respectivement).</p>
+<p><strong>Notre modèle final inclut donc :</strong></p>
+<p>Effets fixes
+* nutriments,
+* herbivorie
+* la variable nuisance de rack.</p>
+<p>Effets aléatoires
+* effet du niveau d’observation <code>(1|X)</code>
+* populations <code>(1|popu)</code>
+* génotypes <code>(1|gen)</code></p>
+<div id="défi-9" class="section level2">
+<h2><span class="header-section-number">18.1</span> Défi 9</h2>
+<p>En utilisant l’ensemble de données <code>inverts</code> (temps de développement larvaire (<code>PLD</code>) de 74 espèces d’invertébrés et vertébrés marins élevés à différentes températures et temps), répondez aux questions suivantes:</p>
+<ul>
+<li>Quel est l’effet du type d’alimentation et du climat (<strong>effets fixes</strong>) sur <code>PLD</code>?</li>
+<li>Est-ce que cette relation varie selon les taxons (<strong>effets aléatoires</strong>)?</li>
+<li>Quelle est la <strong>meilleure famille de distributions</strong> pour ces données?</li>
+<li>Finalement, une fois que vous avez déterminé la meilleure famille de distribution, re-évaluez vos effets fixes et aléatoires.</li>
+</ul>
+<div id="défi-9-solution" class="section level4 unnumbered">
+<h4><strong>Défi 9 Solution:</strong></h4>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="sélection-du-modèle.html#cb108-1"></a><span class="co"># inverts &lt;- read.csv(&#39;data/inverts.csv&#39;, header = TRUE)</span></span>
+<span id="cb108-2"><a href="sélection-du-modèle.html#cb108-2"></a><span class="co"># head(inverts) table(inverts$temp, inverts$feeding.type)</span></span>
+<span id="cb108-3"><a href="sélection-du-modèle.html#cb108-3"></a></span>
+<span id="cb108-4"><a href="sélection-du-modèle.html#cb108-4"></a><span class="co"># mod.glm &lt;- glm(PLD ~ temp + feeding.type, family =</span></span>
+<span id="cb108-5"><a href="sélection-du-modèle.html#cb108-5"></a><span class="co"># poisson(), data = inverts) summary(mod.glm) drop1(mod.glm,</span></span>
+<span id="cb108-6"><a href="sélection-du-modèle.html#cb108-6"></a><span class="co"># test = &#39;Chisq&#39;)</span></span>
+<span id="cb108-7"><a href="sélection-du-modèle.html#cb108-7"></a></span>
+<span id="cb108-8"><a href="sélection-du-modèle.html#cb108-8"></a><span class="co"># boxplot(PLD ~ temp, data = inverts) boxplot(PLD ~</span></span>
+<span id="cb108-9"><a href="sélection-du-modèle.html#cb108-9"></a><span class="co"># feeding.type, data = inverts)</span></span>
+<span id="cb108-10"><a href="sélection-du-modèle.html#cb108-10"></a></span>
+<span id="cb108-11"><a href="sélection-du-modèle.html#cb108-11"></a><span class="co"># boxplot(predict(mod.glm, type = &#39;response&#39;)~inverts$temp)</span></span>
+<span id="cb108-12"><a href="sélection-du-modèle.html#cb108-12"></a></span>
+<span id="cb108-13"><a href="sélection-du-modèle.html#cb108-13"></a><span class="co"># plot()</span></span>
+<span id="cb108-14"><a href="sélection-du-modèle.html#cb108-14"></a></span>
+<span id="cb108-15"><a href="sélection-du-modèle.html#cb108-15"></a><span class="co"># modglm &lt;- glm(PLD ~ temp + feeding.type, family =</span></span>
+<span id="cb108-16"><a href="sélection-du-modèle.html#cb108-16"></a><span class="co"># poisson(), data = inverts)</span></span>
+<span id="cb108-17"><a href="sélection-du-modèle.html#cb108-17"></a></span>
+<span id="cb108-18"><a href="sélection-du-modèle.html#cb108-18"></a><span class="co"># r2 &lt;- ranef(mpl1, condVar = TRUE) d2 &lt;- dotplot(r2,</span></span>
+<span id="cb108-19"><a href="sélection-du-modèle.html#cb108-19"></a><span class="co"># par.settings = pp)</span></span>
+<span id="cb108-20"><a href="sélection-du-modèle.html#cb108-20"></a></span>
+<span id="cb108-21"><a href="sélection-du-modèle.html#cb108-21"></a><span class="co"># plot(aggregate(PLD ~ taxon, FUN = mean, data =</span></span>
+<span id="cb108-22"><a href="sélection-du-modèle.html#cb108-22"></a><span class="co"># inverts)[,2], aggregate(PLD ~ taxon, FUN = var, data =</span></span>
+<span id="cb108-23"><a href="sélection-du-modèle.html#cb108-23"></a><span class="co"># inverts)[,2], pch = 19) abline(a = 0, b = 1, lty = 2)</span></span>
+<span id="cb108-24"><a href="sélection-du-modèle.html#cb108-24"></a></span>
+<span id="cb108-25"><a href="sélection-du-modèle.html#cb108-25"></a><span class="co"># mod.glmer &lt;- glmer.nb(PLD ~ temp + feeding.type +</span></span>
+<span id="cb108-26"><a href="sélection-du-modèle.html#cb108-26"></a><span class="co"># (1|taxon), data = inverts) mod.glm &lt;- glm.nb(PLD ~ temp +</span></span>
+<span id="cb108-27"><a href="sélection-du-modèle.html#cb108-27"></a><span class="co"># feeding.type, family = poisson(), data = inverts)</span></span>
+<span id="cb108-28"><a href="sélection-du-modèle.html#cb108-28"></a></span>
+<span id="cb108-29"><a href="sélection-du-modèle.html#cb108-29"></a><span class="co"># plot(aggregate(PLD ~ taxon, FUN = var, data = inverts)[,2],</span></span>
+<span id="cb108-30"><a href="sélection-du-modèle.html#cb108-30"></a><span class="co"># aggregate(PLD ~ taxon, FUN = mean, data = inverts)[,2])</span></span>
+<span id="cb108-31"><a href="sélection-du-modèle.html#cb108-31"></a><span class="co"># abline(a = 0, b = 1, lty = 2 )</span></span></code></pre></div>
+
 </div>
+</div>
+</div>
+
+
+
 <hr>
 <center> 
   <div class="footer">
@@ -320,8 +380,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-
-<a href="objectifs-dapprentissage.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="glmm-poisson-lognormale.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="ressources-additionnelles.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Atelier 7: Modèles linéaires et généralisés linéaires mixtes</title>
+  <title>Chapitre 9 Étape 1. Construction du modèle a priori | Atelier 7: Modèles linéaires et généralisés linéaires mixtes</title>
   <meta name="description" content="Modèles linéaires et généralisés linéaires mixtes" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Atelier 7: Modèles linéaires et généralisés linéaires mixtes" />
+  <meta property="og:title" content="Chapitre 9 Étape 1. Construction du modèle a priori | Atelier 7: Modèles linéaires et généralisés linéaires mixtes" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://github.com/qcbsRworkshops/" />
   <meta property="og:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="qcbsRworkshops/workshop09" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Atelier 7: Modèles linéaires et généralisés linéaires mixtes" />
+  <meta name="twitter:title" content="Chapitre 9 Étape 1. Construction du modèle a priori | Atelier 7: Modèles linéaires et généralisés linéaires mixtes" />
   
   <meta name="twitter:description" content="Modèles linéaires et généralisés linéaires mixtes" />
   <meta name="twitter:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
-
-<link rel="next" href="objectifs-dapprentissage.html"/>
+<link rel="prev" href="le-protocole-des-modèles-mixtes.html"/>
+<link rel="next" href="step-2-coder-le-modèle.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -240,74 +240,119 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div class="hero-image-container"> 
   <img class= "hero-image" src="assets/images/jean-philippe-delberghe-75xPHEQBmvA-unsplash_hero_image.jpg">
 </div>
-<div id="header">
-<h1 class="title">Atelier 7: Modèles linéaires et généralisés linéaires mixtes</h1>
-<h2 class="subtitle"><em>Série d’ateliers R du CSBQ</em></h2>
-<p class="author"><em>Développé et entretenu par les contributeurs et les contributrices de la Série d’ateliers R du CSBQ<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</em></p>
-<p class="date"><em>2021-03-18 06:22:10</em></p>
-</div>
-<div id="préface" class="section level1 unnumbered">
-<h1>Préface</h1>
-<p>La <strong>Série d’ateliers R du CSBQ</strong> est une série de 10 ateliers qui guide les participants à travers les étapes nécessaires à l’utilisation de R pour un large éventail d’analyses statistiques pertinentes pour la recherche en biologie et en écologie. Ces ateliers en accès libre ont été créés par des membres du CSBQ, à la fois pour les membres du CSBQ et pour la communauté au sens large.</p>
-<p>Le contenu de cet atelier a été revu par plusieurs membres du CSBQ. Si vous souhaitez suggérer des modifications, veuillez contacter les coordinateurs de la série actuelle, dont la liste figure sur la page principale de Github</p>
-<div id="code-de-conduite" class="section level2">
-<h2><span class="header-section-number">0.1</span> Code de conduite</h2>
-<p>La Série d’ateliers R du CSBQ et le Symposium R du CSBQ sont des lieux dédiés à fournir un environnement accueillant et favorable à toutes les personnes, indépendamment de leurs origines ou de leur identité.</p>
-<p>Les participants, les présentateurs et les organisateurs de la série d’ateliers et d’autres activités connexes acceptent le présent code de conduite lorsqu’ils assistent à des activités liées aux ateliers.</p>
-<p>Nous ne tolérons pas les comportements irrespectueux ou qui excluent, intimident ou gênent les autres.</p>
-<p>Nous ne tolérons pas la discrimination ou le harcèlement fondés sur des caractéristiques telles que, mais sans s’y limiter, l’identité et l’expression du genre, l’orientation sexuelle, le handicap, l’apparence physique, la taille du corps, la citoyenneté, la nationalité, les origines ethniques ou sociales, la grossesse, le statut familial, les informations génétiques, la religion ou les convictions (ou l’absence de celles-ci), l’appartenance à une minorité nationale, la propriété, l’âge, l’éducation, le statut socio-économique, les choix techniques et le niveau d’expérience.</p>
-<p>Il s’applique à tous les espaces gérés par l’atelier ou affiliés à celui-ci, y compris, mais sans s’y limiter, les ateliers, les listes de diffusion et les forums en ligne tels que GitHub, Slack et Twitter.</p>
-<div id="comportement-attendu" class="section level3">
-<h3><span class="header-section-number">0.1.1</span> Comportement attendu</h3>
-<p>Tous les participants sont tenus de faire preuve de respect et de courtoisie envers les autres. Toutes les interactions doivent être professionnelles, quelle que soit la plateforme utilisée : en ligne ou en personne.</p>
-<p>Afin de favoriser un environnement d’apprentissage positif et professionnel, nous encourageons les types de comportements suivants dans tous les événements et plates-formes des ateliers :</p>
+<div id="étape-1.-construction-du-modèle-a-priori" class="section level1">
+<h1><span class="header-section-number">Chapitre 9</span> Étape 1. Construction du modèle <em>a priori</em></h1>
+<p><strong>Modèle basé sur connaissance <em>a priori</em>:</strong></p>
+<p>Nous voulons déterminer si la position trophique peut être prédite par la longueur corporelle, tout en prenant en compte la variation entre les espèces et les lacs. Donc nous voulons un modèle qui ressemble à ceci:</p>
+<p><span class="math display">\[PT_{ijk} \sim Longueur_i + Lac_j + Espèce_k + \epsilon_{ijk}\]</span>
+où:</p>
 <ul>
-<li>Utiliser un langage accueillant et inclusif ;</li>
-<li>Respecter les différents points de vue et expériences ;</li>
-<li>Accepter avec grâce les critiques constructives ;</li>
-<li>Se concentrer sur ce qui est le mieux pour la communauté ;</li>
-<li>Faire preuve de courtoisie et de respect envers les autres membres de la communauté.</li>
+<li><code>PT_ijk</code> est la position trophique du poisson (i) du lac (j) et de l’espèce (k)</li>
+<li><code>ε</code> sont les résidus du modèle (c. à d. la variation inexpliquée).</li>
 </ul>
-</div>
-<div id="comportements-inacceptables" class="section level3">
-<h3><span class="header-section-number">0.1.2</span> Comportements inacceptables</h3>
-<p>Voici quelques exemples de comportements inacceptables de la part des participants à tout événement ou plateforme d’atelier :</p>
-<ul>
-<li>les commentaires écrits ou verbaux qui ont pour effet d’exclure des personnes sur la base de leur appartenance à un groupe spécifique ;</li>
-<li>faire craindre à quelqu’un pour sa sécurité, par exemple en le harcelant ou en l’intimidant ;</li>
-<li>des menaces ou des propos violents dirigés contre une autre personne ;</li>
-<li>l’affichage d’images sexuelles ou violentes ;</li>
-<li>l’attention sexuelle non désirée ;</li>
-<li>les contacts physiques non consensuels ou non désirés ;</li>
-<li>des insultes ou des rabais ;</li>
-<li>les blagues sexistes, racistes, homophobes, transphobes, incapables ou d’exclusion ;</li>
-<li>l’incitation à la violence, au suicide ou à l’automutilation ;</li>
-<li>la poursuite de l’interaction (y compris la photographie ou l’enregistrement) avec une personne après qu’on - lui a demandé d’arrêter ;</li>
-<li>la publication d’une communication privée sans consentement.</li>
-</ul>
-</div>
-</div>
-<div id="contributeurs-et-contributrices" class="section level2">
-<h2><span class="header-section-number">0.2</span> Contributeurs et contributrices</h2>
-<p>Développé à l’origine par :</p>
-<p>A contribué à modifier la présentation :</p>
-<p>Contribution avec des changements à la documentation écrite :</p>
-<p>Contribution en signalant des problèmes et en suggérant des modifications :</p>
-</div>
-<div id="contribuez-à-la-série" class="section level2">
-<h2><span class="header-section-number">0.3</span> Contribuez à la série!</h2>
-<p>En construction.</p>
-
-</div>
-</div>
-
-
-
-<div class="footnotes">
+<div id="exploration-des-données" class="section level2">
+<h2><span class="header-section-number">9.1</span> Exploration des données</h2>
+<p><strong>Les données ont-elles la bonne structure?</strong></p>
+<p>Regardez la structure des données :</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="étape-1-construction-du-modèle-a-priori.html#cb4-1"></a><span class="co"># Regardez la structure des données</span></span>
+<span id="cb4-2"><a href="étape-1-construction-du-modèle-a-priori.html#cb4-2"></a><span class="kw">str</span>(fish.data)</span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    180 obs. of  4 variables:
+##  $ Lake        : chr  &quot;L1&quot; &quot;L1&quot; &quot;L1&quot; &quot;L1&quot; ...
+##  $ Fish_Species: chr  &quot;S1&quot; &quot;S1&quot; &quot;S1&quot; &quot;S1&quot; ...
+##  $ Fish_Length : num  105 195 294 414 237 ...
+##  $ Trophic_Pos : num  2.6 2.7 2.74 2.74 2.79 ...</code></pre>
+<p>Regardez maintenant la distribution des échantillons pour chaque facteur:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="étape-1-construction-du-modèle-a-priori.html#cb6-1"></a><span class="co"># egardez la distribution des échantillons pour chaque</span></span>
+<span id="cb6-2"><a href="étape-1-construction-du-modèle-a-priori.html#cb6-2"></a><span class="co"># facteur:</span></span>
+<span id="cb6-3"><a href="étape-1-construction-du-modèle-a-priori.html#cb6-3"></a><span class="kw">table</span>(fish.data[, <span class="kw">c</span>(<span class="st">&quot;Lake&quot;</span>, <span class="st">&quot;Fish_Species&quot;</span>)])</span></code></pre></div>
+<pre><code>##     Fish_Species
+## Lake S1 S2 S3
+##   L1 10 10 10
+##   L2 10 10 10
+##   L3 10 10 10
+##   L4 10 10 10
+##   L5 10 10 10
+##   L6 10 10 10</code></pre>
+<p>Ce jeu de données est parfaitement équilibré, mais les <strong>modèles mixtes peuvent analyser des designs expérimentaux non équilibrés</strong>, comme c’est souvent le cas en écologie!</p>
+<p>Regardez la distribution des variables continues:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="étape-1-construction-du-modèle-a-priori.html#cb8-1"></a><span class="co"># Regardez la distribution des variables continues.</span></span>
+<span id="cb8-2"><a href="étape-1-construction-du-modèle-a-priori.html#cb8-2"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb8-3"><a href="étape-1-construction-du-modèle-a-priori.html#cb8-3"></a><span class="kw">hist</span>(fish.data<span class="op">$</span>Fish_Length, <span class="dt">xlab =</span> <span class="st">&quot;Length (mm)&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb8-4"><a href="étape-1-construction-du-modèle-a-priori.html#cb8-4"></a><span class="kw">hist</span>(fish.data<span class="op">$</span>Trophic_Pos, <span class="dt">xlab =</span> <span class="st">&quot;Trophic position&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>Des déviations majeures pourraient causer des problèmes d’hétéroscédasticité. Si nécessaire, faites des transformations. Dans ce cas-ci, <strong>les données semblent correctes</strong>.</p>
 <hr />
-<ol start="1">
-<li id="fn1"><p>La Série d’ateliers R du CSBQ fait partie du <a href="https://www.qcbs.ca">Centre de la science de la biodiversité du Québec</a>, et est maintenue par les coordonnateurs et les coordonnatrices de la série, et les membres étudiants diplômés, postdoctoraux et professionnels de la recherche. <strong>La liste des contributeurs et des contributrices de cet atelier sont accessibles<a href="lien">ici</a></strong><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
-</ol>
+</div>
+<div id="vérifier-la-colinéarité" class="section level2">
+<h2><span class="header-section-number">9.2</span> Vérifier la colinéarité</h2>
+<p><strong>Vérifier la colinéarité entre vos variables explicatives</strong></p>
+<p>The problem with collinear predictors is simply that they explain the same thing, so their effect on the response variable will be confounded in the model.</p>
+<p>Dans cet exemple, il n’y a pas de risque de colinéarité avec seulement une variable continue. Si vous aviez une autre variable continue (<code>Var2</code>), une façon simple de vérifier la colinéarité est <code>cor(var1, var2)</code></p>
+<p>Voici un <a href="https://yetanotheriteration.netlify.app/2018/01/high-collinearity-effect-in-regressions/">exemple de colinéarité</a>.</p>
+<hr />
+</div>
+<div id="défi-3" class="section level2">
+<h2><span class="header-section-number">9.3</span> Défi 3</h2>
+<p>C’est un problème de réflexion!</p>
+<p>Quelles mesures supplémentaires aurions-nous pu prendre sur le terrain et qui auraient pu être fortement corrélées avec la longueur corporelle?</p>
+<hr />
+<div id="défi-3-solution" class="section level4 unnumbered">
+<h4><strong>Défi 3 Solution:</strong></h4>
+<p>Il y a plusieurs réponses possibles ici.</p>
+<p>Un exemple est la masse du poisson – c’est une variable fortement corrélée avec la longueur du poisson. Par conséquent, nous ne voulons pas inclure ces deux variables dans le même modèle.</p>
+<hr />
+</div>
+</div>
+<div id="considérez-léchelle" class="section level2">
+<h2><span class="header-section-number">9.4</span> Considérez l’échelle</h2>
+<p><strong>Considérez l’échelle de vos données</strong></p>
+<p>Si deux variables dans un même modèle ont des échelles très différentes, il est probable que le modèle indique <code>un problème de convergence</code> en essayant de calculer les paramètres.</p>
+<p>La <a href="https://fr.wikipedia.org/wiki/Cote_Z_(statistiques)">correction Z</a> standardise les variables et résout ce problème (fonction <code>scale()</code> dans <code>R</code>) :</p>
+<p><span class="math display">\[z = \frac{x-moyenne(x)}{écart.type(x)}\]</span></p>
+<p>Considérez l’échelle des variables dans notre ensemble de données:</p>
+<p>Longueur corporelle -&gt; Longue échelle
+Position trophique -&gt; Courte échelle</p>
+<p>Parce que nos données ont des échelles très différentes, on applique la <strong>correction Z</strong></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="étape-1-construction-du-modèle-a-priori.html#cb9-1"></a><span class="co"># Longueur corrigée, &#39;à la main&#39;</span></span>
+<span id="cb9-2"><a href="étape-1-construction-du-modèle-a-priori.html#cb9-2"></a>fish.data<span class="op">$</span>Z_Length &lt;-<span class="st"> </span>(fish.data<span class="op">$</span>Fish_Length <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(fish.data<span class="op">$</span>Fish_Length))<span class="op">/</span><span class="kw">sd</span>(fish.data<span class="op">$</span>Fish_Length)</span>
+<span id="cb9-3"><a href="étape-1-construction-du-modèle-a-priori.html#cb9-3"></a></span>
+<span id="cb9-4"><a href="étape-1-construction-du-modèle-a-priori.html#cb9-4"></a><span class="co"># Position trophique corrigée, avec la fonction scale</span></span>
+<span id="cb9-5"><a href="étape-1-construction-du-modèle-a-priori.html#cb9-5"></a>fish.data<span class="op">$</span>Z_TP &lt;-<span class="st"> </span><span class="kw">scale</span>(fish.data<span class="op">$</span>Trophic_Pos)</span></code></pre></div>
+<hr />
+</div>
+<div id="avez-vous-besoin-dun-mlm" class="section level2">
+<h2><span class="header-section-number">9.5</span> Avez-vous besoin d’un MLM?</h2>
+<p><strong>Déterminez si vous avez besoin d’un modèle mixte</strong>.</p>
+<p>Pour savoir si un modèle mixte est nécessaire pour vos données, vous devez déterminer s’il est important de prendre en compte l’effet aléatoire de facteurs qui pourraient influencer la relation qui vous intéresse (dans notre cas, lac et espèce).</p>
+<p>Nous pouvons le faire en:</p>
+<ul>
+<li><ol style="list-style-type: decimal">
+<li>Créant un modèle linéaire sans les facteurs qui pourraient avoir un effet aléatoire</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: decimal">
+<li>Calculant les résidus de ce modèle linéaire</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: decimal">
+<li>Produisant un graphique de la valeur des résidus en fonction des niveaux des facteurs potentiellement aléatoires</li>
+</ol></li>
+</ul>
+<p>Créer un modèle linéaire sans les facteurs</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="étape-1-construction-du-modèle-a-priori.html#cb10-1"></a>lm.test &lt;-<span class="st"> </span><span class="kw">lm</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length, <span class="dt">data =</span> fish.data)</span></code></pre></div>
+<p>Calculer les résidus de ce modèle linéaire</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="étape-1-construction-du-modèle-a-priori.html#cb11-1"></a>lm.test.resid &lt;-<span class="st"> </span><span class="kw">rstandard</span>(lm.test)</span></code></pre></div>
+<p>Représentez graphiquement la valeur des résidus en fonction des niveaux des facteurs</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="étape-1-construction-du-modèle-a-priori.html#cb12-1"></a><span class="kw">plot</span>(lm.test.resid <span class="op">~</span><span class="st"> </span><span class="kw">as.factor</span>(fish.data<span class="op">$</span>Fish_Species), <span class="dt">xlab =</span> <span class="st">&quot;Species&quot;</span>, </span>
+<span id="cb12-2"><a href="étape-1-construction-du-modèle-a-priori.html#cb12-2"></a>    <span class="dt">ylab =</span> <span class="st">&quot;Standardized residuals&quot;</span>)</span>
+<span id="cb12-3"><a href="étape-1-construction-du-modèle-a-priori.html#cb12-3"></a></span>
+<span id="cb12-4"><a href="étape-1-construction-du-modèle-a-priori.html#cb12-4"></a><span class="kw">abline</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="étape-1-construction-du-modèle-a-priori.html#cb13-1"></a><span class="kw">plot</span>(lm.test.resid <span class="op">~</span><span class="st"> </span><span class="kw">as.factor</span>(fish.data<span class="op">$</span>Lake), <span class="dt">xlab =</span> <span class="st">&quot;Lake&quot;</span>, </span>
+<span id="cb13-2"><a href="étape-1-construction-du-modèle-a-priori.html#cb13-2"></a>    <span class="dt">ylab =</span> <span class="st">&quot;Standardized residuals&quot;</span>)</span>
+<span id="cb13-3"><a href="étape-1-construction-du-modèle-a-priori.html#cb13-3"></a></span>
+<span id="cb13-4"><a href="étape-1-construction-du-modèle-a-priori.html#cb13-4"></a><span class="kw">abline</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-13-2.png" width="672" /></p>
+<p>Ces patrons suggèrent qu’il y a de la variance résiduelle qui pourrait être expliquée par ces facteurs, et ils devraient donc être inclus dans le modèle!</p>
+</div>
 </div>
 <hr>
 <center> 
@@ -320,8 +365,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-
-<a href="objectifs-dapprentissage.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="le-protocole-des-modèles-mixtes.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="step-2-coder-le-modèle.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

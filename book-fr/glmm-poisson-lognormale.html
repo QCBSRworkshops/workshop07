@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Atelier 7: Modèles linéaires et généralisés linéaires mixtes</title>
+  <title>Chapitre 17 GLMM Poisson-lognormale | Atelier 7: Modèles linéaires et généralisés linéaires mixtes</title>
   <meta name="description" content="Modèles linéaires et généralisés linéaires mixtes" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Atelier 7: Modèles linéaires et généralisés linéaires mixtes" />
+  <meta property="og:title" content="Chapitre 17 GLMM Poisson-lognormale | Atelier 7: Modèles linéaires et généralisés linéaires mixtes" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://github.com/qcbsRworkshops/" />
   <meta property="og:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="qcbsRworkshops/workshop09" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Atelier 7: Modèles linéaires et généralisés linéaires mixtes" />
+  <meta name="twitter:title" content="Chapitre 17 GLMM Poisson-lognormale | Atelier 7: Modèles linéaires et généralisés linéaires mixtes" />
   
   <meta name="twitter:description" content="Modèles linéaires et généralisés linéaires mixtes" />
   <meta name="twitter:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
-
-<link rel="next" href="objectifs-dapprentissage.html"/>
+<link rel="prev" href="glmm-binomiale-negative.html"/>
+<link rel="next" href="sélection-du-modèle.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -240,75 +240,108 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div class="hero-image-container"> 
   <img class= "hero-image" src="assets/images/jean-philippe-delberghe-75xPHEQBmvA-unsplash_hero_image.jpg">
 </div>
-<div id="header">
-<h1 class="title">Atelier 7: Modèles linéaires et généralisés linéaires mixtes</h1>
-<h2 class="subtitle"><em>Série d’ateliers R du CSBQ</em></h2>
-<p class="author"><em>Développé et entretenu par les contributeurs et les contributrices de la Série d’ateliers R du CSBQ<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</em></p>
-<p class="date"><em>2021-03-18 06:22:10</em></p>
-</div>
-<div id="préface" class="section level1 unnumbered">
-<h1>Préface</h1>
-<p>La <strong>Série d’ateliers R du CSBQ</strong> est une série de 10 ateliers qui guide les participants à travers les étapes nécessaires à l’utilisation de R pour un large éventail d’analyses statistiques pertinentes pour la recherche en biologie et en écologie. Ces ateliers en accès libre ont été créés par des membres du CSBQ, à la fois pour les membres du CSBQ et pour la communauté au sens large.</p>
-<p>Le contenu de cet atelier a été revu par plusieurs membres du CSBQ. Si vous souhaitez suggérer des modifications, veuillez contacter les coordinateurs de la série actuelle, dont la liste figure sur la page principale de Github</p>
-<div id="code-de-conduite" class="section level2">
-<h2><span class="header-section-number">0.1</span> Code de conduite</h2>
-<p>La Série d’ateliers R du CSBQ et le Symposium R du CSBQ sont des lieux dédiés à fournir un environnement accueillant et favorable à toutes les personnes, indépendamment de leurs origines ou de leur identité.</p>
-<p>Les participants, les présentateurs et les organisateurs de la série d’ateliers et d’autres activités connexes acceptent le présent code de conduite lorsqu’ils assistent à des activités liées aux ateliers.</p>
-<p>Nous ne tolérons pas les comportements irrespectueux ou qui excluent, intimident ou gênent les autres.</p>
-<p>Nous ne tolérons pas la discrimination ou le harcèlement fondés sur des caractéristiques telles que, mais sans s’y limiter, l’identité et l’expression du genre, l’orientation sexuelle, le handicap, l’apparence physique, la taille du corps, la citoyenneté, la nationalité, les origines ethniques ou sociales, la grossesse, le statut familial, les informations génétiques, la religion ou les convictions (ou l’absence de celles-ci), l’appartenance à une minorité nationale, la propriété, l’âge, l’éducation, le statut socio-économique, les choix techniques et le niveau d’expérience.</p>
-<p>Il s’applique à tous les espaces gérés par l’atelier ou affiliés à celui-ci, y compris, mais sans s’y limiter, les ateliers, les listes de diffusion et les forums en ligne tels que GitHub, Slack et Twitter.</p>
-<div id="comportement-attendu" class="section level3">
-<h3><span class="header-section-number">0.1.1</span> Comportement attendu</h3>
-<p>Tous les participants sont tenus de faire preuve de respect et de courtoisie envers les autres. Toutes les interactions doivent être professionnelles, quelle que soit la plateforme utilisée : en ligne ou en personne.</p>
-<p>Afin de favoriser un environnement d’apprentissage positif et professionnel, nous encourageons les types de comportements suivants dans tous les événements et plates-formes des ateliers :</p>
-<ul>
-<li>Utiliser un langage accueillant et inclusif ;</li>
-<li>Respecter les différents points de vue et expériences ;</li>
-<li>Accepter avec grâce les critiques constructives ;</li>
-<li>Se concentrer sur ce qui est le mieux pour la communauté ;</li>
-<li>Faire preuve de courtoisie et de respect envers les autres membres de la communauté.</li>
-</ul>
-</div>
-<div id="comportements-inacceptables" class="section level3">
-<h3><span class="header-section-number">0.1.2</span> Comportements inacceptables</h3>
-<p>Voici quelques exemples de comportements inacceptables de la part des participants à tout événement ou plateforme d’atelier :</p>
-<ul>
-<li>les commentaires écrits ou verbaux qui ont pour effet d’exclure des personnes sur la base de leur appartenance à un groupe spécifique ;</li>
-<li>faire craindre à quelqu’un pour sa sécurité, par exemple en le harcelant ou en l’intimidant ;</li>
-<li>des menaces ou des propos violents dirigés contre une autre personne ;</li>
-<li>l’affichage d’images sexuelles ou violentes ;</li>
-<li>l’attention sexuelle non désirée ;</li>
-<li>les contacts physiques non consensuels ou non désirés ;</li>
-<li>des insultes ou des rabais ;</li>
-<li>les blagues sexistes, racistes, homophobes, transphobes, incapables ou d’exclusion ;</li>
-<li>l’incitation à la violence, au suicide ou à l’automutilation ;</li>
-<li>la poursuite de l’interaction (y compris la photographie ou l’enregistrement) avec une personne après qu’on - lui a demandé d’arrêter ;</li>
-<li>la publication d’une communication privée sans consentement.</li>
-</ul>
-</div>
-</div>
-<div id="contributeurs-et-contributrices" class="section level2">
-<h2><span class="header-section-number">0.2</span> Contributeurs et contributrices</h2>
-<p>Développé à l’origine par :</p>
-<p>A contribué à modifier la présentation :</p>
-<p>Contribution avec des changements à la documentation écrite :</p>
-<p>Contribution en signalant des problèmes et en suggérant des modifications :</p>
-</div>
-<div id="contribuez-à-la-série" class="section level2">
-<h2><span class="header-section-number">0.3</span> Contribuez à la série!</h2>
-<p>En construction.</p>
-
-</div>
-</div>
-
-
-
-<div class="footnotes">
+<div id="glmm-poisson-lognormale" class="section level1">
+<h1><span class="header-section-number">Chapitre 17</span> GLMM Poisson-lognormale</h1>
+<p>Une deuxième option pour une distribution où la variance augmente plus rapidement avec la moyenne est la distribution <strong>Poisson-lognormale</strong>.</p>
+<p>On réalise cette distribution en ajoutant un <strong>effet aléatoire de niveau d’observation</strong> dans le modèle.</p>
+<p>Voir Harrison (2014) pour plus de détails <a href="https://doi.org/10.7717/peerj.616" class="uri">https://doi.org/10.7717/peerj.616</a>.</p>
+<p>Pour ce faire, nous créons tout d’abord une variable nommée <code>X</code>:</p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="glmm-poisson-lognormale.html#cb80-1"></a><span class="co">## GLMM Poisson-lognormale</span></span>
+<span id="cb80-2"><a href="glmm-poisson-lognormale.html#cb80-2"></a></span>
+<span id="cb80-3"><a href="glmm-poisson-lognormale.html#cb80-3"></a><span class="co"># Cette variable est déjà dans vos données &#39;dat.tf&#39;, mais</span></span>
+<span id="cb80-4"><a href="glmm-poisson-lognormale.html#cb80-4"></a><span class="co"># voici comment la créer.</span></span>
+<span id="cb80-5"><a href="glmm-poisson-lognormale.html#cb80-5"></a>dat.tf<span class="op">$</span>X &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(dat.tf)</span></code></pre></div>
+<p>On traite la surdispersion en ajoutant l’effet <code>(1|X)</code> dans la formule:</p>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="glmm-poisson-lognormale.html#cb81-1"></a><span class="co"># Tenir compte de la surdispersion</span></span>
+<span id="cb81-2"><a href="glmm-poisson-lognormale.html#cb81-2"></a>mpl1 &lt;-<span class="st"> </span><span class="kw">glmer</span>(total.fruits <span class="op">~</span><span class="st"> </span>nutrient <span class="op">*</span><span class="st"> </span>amd <span class="op">+</span><span class="st"> </span>rack <span class="op">+</span><span class="st"> </span>status <span class="op">+</span><span class="st"> </span></span>
+<span id="cb81-3"><a href="glmm-poisson-lognormale.html#cb81-3"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>X) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>popu) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>gen), <span class="dt">data =</span> dat.tf, <span class="dt">family =</span> <span class="st">&quot;poisson&quot;</span>, </span>
+<span id="cb81-4"><a href="glmm-poisson-lognormale.html#cb81-4"></a>    <span class="dt">control =</span> <span class="kw">glmerControl</span>(<span class="dt">optimizer =</span> <span class="st">&quot;bobyqa&quot;</span>))</span></code></pre></div>
+<p>On teste finalement pour la présence de surdispersion:</p>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="glmm-poisson-lognormale.html#cb82-1"></a><span class="co"># Surdispersion?</span></span>
+<span id="cb82-2"><a href="glmm-poisson-lognormale.html#cb82-2"></a><span class="kw">overdisp_fun</span>(mpl1)</span></code></pre></div>
+<pre><code>##         chisq         ratio             p          logp 
+##  1.775360e+02  2.886764e-01  1.000000e+00 -3.754681e-73</code></pre>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="glmm-poisson-lognormale.html#cb84-1"></a><span class="co"># Le rapport est maintenant conforme avec notre critère, soit</span></span>
+<span id="cb84-2"><a href="glmm-poisson-lognormale.html#cb84-2"></a><span class="co"># &lt; 1</span></span></code></pre></div>
+<p><strong>Le rapport est maintenant conforme avec notre critère, soit &lt; 1!</strong></p>
 <hr />
-<ol start="1">
-<li id="fn1"><p>La Série d’ateliers R du CSBQ fait partie du <a href="https://www.qcbs.ca">Centre de la science de la biodiversité du Québec</a>, et est maintenue par les coordonnateurs et les coordonnatrices de la série, et les membres étudiants diplômés, postdoctoraux et professionnels de la recherche. <strong>La liste des contributeurs et des contributrices de cet atelier sont accessibles<a href="lien">ici</a></strong><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
-</ol>
+<p><strong>Maintenant que nous avons choisi notre distribution d’erreur, visualisons les paramètres du modèle.</strong></p>
+<p>Peut être obtenu en utilisant la fonction <code>coefplot2()</code>de la librairie <code>coefplot2</code>:</p>
+<p><em>Notez: Cette librairie n’est pas sur le CRAN! On utilise la librairie remotes pour l’installer à partir de GitHub.</em></p>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="glmm-poisson-lognormale.html#cb85-1"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&quot;coefplot2&quot;</span>)) remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;palday/coefplot2&quot;</span>, </span>
+<span id="cb85-2"><a href="glmm-poisson-lognormale.html#cb85-2"></a>    <span class="dt">subdir =</span> <span class="st">&quot;pkg&quot;</span>)</span></code></pre></div>
+<pre><code>## Loading required package: coefplot2</code></pre>
+<pre><code>## Warning in library(package, lib.loc = lib.loc, character.only = TRUE,
+## logical.return = TRUE, : there is no package called &#39;coefplot2&#39;</code></pre>
+<pre><code>## Using bundled GitHub PAT. Please add your own PAT to the env var `GITHUB_PAT`</code></pre>
+<pre><code>## Downloading GitHub repo palday/coefplot2@HEAD</code></pre>
+<pre><code>## reshape (NA -&gt; 0.8.8 ) [CRAN]
+## coda    (NA -&gt; 0.19-4) [CRAN]</code></pre>
+<pre><code>## Installing 2 packages: reshape, coda</code></pre>
+<pre><code>## Installing packages into &#39;/home/runner/work/_temp/Library&#39;
+## (as &#39;lib&#39; is unspecified)</code></pre>
+<pre><code>##   
+   checking for file ‘/tmp/RtmpQTbHdj/remotes344966a7b36c/palday-coefplot2-23b7dcb/pkg/DESCRIPTION’ ...
+  
+✔  checking for file ‘/tmp/RtmpQTbHdj/remotes344966a7b36c/palday-coefplot2-23b7dcb/pkg/DESCRIPTION’
+## 
+  
+─  preparing ‘coefplot2’:
+## 
+  
+   checking DESCRIPTION meta-information ...
+  
+✔  checking DESCRIPTION meta-information
+## 
+  
+─  checking for LF line-endings in source and make files and shell scripts
+## 
+  
+─  checking for empty or unneeded directories
+## 
+  
+─  building ‘coefplot2_0.1.3.3.tar.gz’
+## 
+  
+   
+## </code></pre>
+<pre><code>## Installing package into &#39;/home/runner/work/_temp/Library&#39;
+## (as &#39;lib&#39; is unspecified)</code></pre>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="glmm-poisson-lognormale.html#cb95-1"></a><span class="kw">library</span>(coefplot2)</span></code></pre></div>
+<pre><code>## Loading required package: coda</code></pre>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="glmm-poisson-lognormale.html#cb97-1"></a><span class="co"># Effets aléatoires</span></span>
+<span id="cb97-2"><a href="glmm-poisson-lognormale.html#cb97-2"></a><span class="kw">coefplot2</span>(mpl1, <span class="dt">ptype =</span> <span class="st">&quot;vcov&quot;</span>, <span class="dt">intercept =</span> <span class="ot">TRUE</span>, <span class="dt">main =</span> <span class="st">&quot;Random effect variance&quot;</span>)</span></code></pre></div>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="glmm-poisson-lognormale.html#cb98-1"></a><span class="co"># Effets fixes</span></span>
+<span id="cb98-2"><a href="glmm-poisson-lognormale.html#cb98-2"></a><span class="kw">coefplot2</span>(mpl1, <span class="dt">intercept =</span> <span class="ot">TRUE</span>, <span class="dt">main =</span> <span class="st">&quot;Fixed effect coefficient&quot;</span>)</span></code></pre></div>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
+<p><em>Notez: barres d’erreur visibles seulement pour les effets fixes car <code>glmer()</code> ne modélise pas d’incertitude pour les effets aléatoires.</em></p>
+<hr />
+<p><strong>Visualisation des effets aléatoires</strong></p>
+<p>Vous pouvez extraire les effets aléatoires en utilisant la fonction <code>ranef()</code> et les tracer en utilisant un <code>dotplot()</code> de la librairie <code>lattice</code>.</p>
+<p>On constate une variation <strong>inter-population</strong>:</p>
+<ul>
+<li>Les populations espagnoles (SP) ont des valeurs plus élevées que les populations suédoises (SW) et néerlandaises (NL)</li>
+</ul>
+<p>On constate une faible variation <strong>inter-génotype</strong> :</p>
+<ul>
+<li>Les différences entre les génotypes semblent induites par le génotype 34</li>
+</ul>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="glmm-poisson-lognormale.html#cb99-1"></a><span class="kw">library</span>(gridExtra)</span>
+<span id="cb99-2"><a href="glmm-poisson-lognormale.html#cb99-2"></a><span class="kw">library</span>(lattice)</span>
+<span id="cb99-3"><a href="glmm-poisson-lognormale.html#cb99-3"></a><span class="co"># dotplot code</span></span>
+<span id="cb99-4"><a href="glmm-poisson-lognormale.html#cb99-4"></a>pp &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">layout.widths =</span> <span class="kw">list</span>(<span class="dt">left.padding =</span> <span class="dv">0</span>, <span class="dt">right.padding =</span> <span class="dv">0</span>), </span>
+<span id="cb99-5"><a href="glmm-poisson-lognormale.html#cb99-5"></a>    <span class="dt">layout.heights =</span> <span class="kw">list</span>(<span class="dt">top.padding =</span> <span class="dv">0</span>, <span class="dt">bottom.padding =</span> <span class="dv">0</span>))</span>
+<span id="cb99-6"><a href="glmm-poisson-lognormale.html#cb99-6"></a>r2 &lt;-<span class="st"> </span><span class="kw">ranef</span>(mpl1, <span class="dt">condVar =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb99-7"><a href="glmm-poisson-lognormale.html#cb99-7"></a>d2 &lt;-<span class="st"> </span><span class="kw">dotplot</span>(r2, <span class="dt">par.settings =</span> pp)</span>
+<span id="cb99-8"><a href="glmm-poisson-lognormale.html#cb99-8"></a></span>
+<span id="cb99-9"><a href="glmm-poisson-lognormale.html#cb99-9"></a><span class="kw">grid.arrange</span>(d2<span class="op">$</span>gen, d2<span class="op">$</span>popu, <span class="dt">nrow =</span> <span class="dv">1</span>)</span></code></pre></div>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
+
 </div>
+
+
+
 <hr>
 <center> 
   <div class="footer">
@@ -320,8 +353,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-
-<a href="objectifs-dapprentissage.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="glmm-binomiale-negative.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="sélection-du-modèle.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
