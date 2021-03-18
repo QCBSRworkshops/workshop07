@@ -52,7 +52,6 @@ install.packages("remotes")
 install.packages("gridExtra")
 install.packages("lattice")
 install.packages("MuMIn")
-
 ```
 
 To load these packages, run:
