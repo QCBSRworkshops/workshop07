@@ -1,30 +1,27 @@
 # (PART\*) Additional LMM and GLMM resources {-}
 
-# Additional resources
+# Ressources additionnelles
 
 
 ![](images/book1.jpg)
 ![](images/book2.jpg)
 ![](images/book3.jpg)
 
+**Libraries connues pour des (G)LMM** 
 
-**Popular libraries for (G)LMMs** 
+* Fréquentiste : `nlme`, `lme4`, `glmmTMB`
+* Bayésien : `brms`, `rstan`, `rstanarm`, `MCMCglmm`
 
-* Frequentist : `nlme`, `lme4`, `glmmTMB`
-* Bayesian : `brms`, `rstan`, `rstanarm`, `MCMCglmm`
-
-**Papers**
-- [Harrison *et al.* (2018), *PeerJ*, DOI 10.7717/peerj.4794
+**Articles**
+* [Harrison *et al.* (2018), *PeerJ*, DOI 10.7717/peerj.4794
 ](http://dx.doi.org/10.7717/peerj.4794)
-
-- [Silk *et al.* (2020), *PeerJ*,  DOI 10.7717/peerj.9522
+* [Silk *et al.* (2020), *PeerJ*,  DOI 10.7717/peerj.9522
 ](https://doi.org/10.7717/peerj.9522)
-
-- [Schielzeth *et al.* (2020), *Methods Ecol Evol.*,  DOI: 10.1111/2041-210X.13434
+* [Schielzeth *et al.* (2020), *Methods Ecol Evol.*,  DOI: 10.1111/2041-210X.13434
 ]( https://doi.org/10.1111/2041-210X.13434)
-
-- [Zuur & Ieno (2016), *Methods Ecol Evol.*,  DOI: 10.1111/2041-210X.12577
+* [Zuur & Ieno (2016), *Methods Ecol Evol.*,  DOI: 10.1111/2041-210X.12577
 ]( https://doi.org/10.1111/2041-210X.12577)
 
 
-**Thank you for attending this workshop!**
+
+**Merci de votre participation à cet atelier!!**

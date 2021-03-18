@@ -1,64 +1,65 @@
-# (PART\*) Generalized linear mixed models (GLMM) in `R` {-}
+# (PART\*) Modèles Linéaires Généralisés Mixtes (GLMMs) en `R` {-}
 
-# Introduction to GLMM
+# Introduction des GLMM
 
-Generalized linear mixed models (GLMM) are an extension of generalized linear models (GLM) that account for additional structure in dataset.
+Les modèles linéaires généralisés mixtes (GLMM) sont une extension des modèles linéaires généralisés (GLM) qui prennent en compte une structure supplémentaire dans l'ensemble des données.
 
-They follows similar steps to those we just introduced with linear mixed models (LMM):
+Ils suivent des étapes similaires à celles que nous venons de présenter avec les modèles linéaires mixtes (LMM):
 
-- **1.** Incorporate random effects (like LMMs)
+- **1.** Ils incorporent les effets aléatoires (comme les LMMs)
+ 
+- **2.** Permettent de gérer des données non-normales (en laissant les erreurs prendre différentes familles de distribution - e.g Poisson ou binomial négatif) (comme les GLMs; atelier 6)
 
-- **2.** Handle non-normal data, letting errors take on different distribution families - e.g. Poisson or negative binomial (like GLMs; Workshop 6)
 
 ---
 
-As with the LMM portion of this workshop, we are going to work through the GLMM material with a dataset in order to better understand how GLMMs work and how to implement them in `R`.
+Comme pour la partie LMM de cet atelier, nous allons travailler sur le matériel GLMM avec un ensemble de données afin de mieux comprendre le fonctionnement des GLMMs et comment les implémenter dans `R`.
 
-In the Arabidopsis dataset, the effect of nutrient availability and herbivory (**fixed effects**) on the fruit production (**response variable**) of Arabidopsis thaliana was evaluated by measuring 625 plants across 9 different populations, each comprised of 2 to 3 different genotypes (**random effects**).
+Dans le jeu de données Arabidopsis, l'effet de la disponibilité des nutriments et de l'herbivorie (**effets fixes**) sur la production de fruits (**variable de réponse**) d'Arabidopsis thaliana a été évalué en mesurant 625 plantes dans 9 populations différentes, chacune comprenant 2 à 3 génotypes différents (**effets aléatoires**).
 
-Start by importing the `Arabidopsis` dataset `banta_totalfruits.csv` into `R`.
+Chargez les données `Arabidopsis` `banta_totalfruits.csv` dans `R`.
 
 ```{r, echo = TRUE, eval = TRUE}
 dat.tf <- read.csv("data/banta_totalfruits.csv")
 
-## In this dataset, the column headers are defined as:
-# popu factor with a level for each population
-# gen factor with a level for each genotype
-# nutrient factor with levels for low (value = 1) or high (value = 8)
-# amd factor with levels for no damage or simulated herbivory
-# total.fruits integer indicating the number of fruits per plant
+## Dans cet ensemble de données, les en-têtes de colonne sont définis comme suit:
+# popu facteur avec un niveau pour chaque population
+# gen facteur avec un niveau pour chaque génotype
+# nutrient facteur avec niveau bas (valeur = 1) ou haut (valeur = 8)
+# amd facteur précisant l'absence ou la présence d'herbivorie
+# total.fruits nombre entier indiquant le nombre de fruits par plante
 ```
 
-# Choose an error distribution
+# Choisir la distribution des erreurs
 
-Now we need to select an error distribution. This choice will be informed by the structure of our data. 
+Nous devons maintenant choisir une distribution d'erreurs. Ce choix sera informé par la structure de nos données. 
 
-In the Arabidopsis dataset, the response variable is count data which suggests we need a **Poisson distribution** (i.e. the variance is equal to the mean).
+La variable réponse constitue des données d'abondance, donc nous devons choisir une **distribution de Poisson** (i.e variance égale à la moyenne)
 
 Let's take a look:
 
 ```{r, echo = TRUE, eval = TRUE}
-#Before we go any further, we need to select an error distribution. This choice will be informed by the structure of our data. 
-# Our response variable is count data which suggests we need a Poisson distribution (i.e. the variance is equal to the mean).
+#Avant d'aller plus loin, nous devons choisir une distribution d'erreurs. Ce choix sera guidé par la structure de nos données. 
+# Notre variable de réponse est une donnée de comptage, ce qui suggère que nous avons besoin d'une distribution de Poisson (c'est-à-dire que la variance est égale à la moyenne).
 hist(dat.tf$total.fruits, breaks = 50, col = 'blue', main = '',
      xlab = 'Total fruits', ylab = 'Count')
 ```
 
-However, as we will soon see, the variance increases with the mean much more rapidly than expected under the Poisson distribution...
+Cependant, comme nous le verrons, la variance de chaque groupe augmente beaucoup plus rapidement que prévu...
 
 ---
 
-**Explore variance **
+**Exploration de la variance **
 
-Let's take a closer look at the variance within our data.
+Examinons de plus près la variance au sein de nos données.
 
-To illustrate heterogeneity in variance we will first create boxplots of the **log** of total fruit production (**response variable**) versus different environmental factors.
+Pour illustrer l'hétérogénéité de la variance, nous allons créer des boîtes à moustaches (boxplots) du **log** du nombre total de fruits (**variable réponse**) par rapport aux différents facteurs environnementaux.
 
-Let's create new variables that represent every combination of **nutrient** x **clipping** x **random factor**
+Créons d'abord de nouvelles variables qui représentent toutes les combinaisons de **nutriments** x **herbivorie** x **facteur aléatoire**.
 
 ```{r, echo = TRUE, eval = TRUE}
-# Let's explore the variance within our data
-# Create new variables that represent every combination of variables
+# Explorons la variance dans nos données
+# Créez de nouvelles variables qui représentent chaque combinaison de variables.
 dat.tf <- within(dat.tf,
 {
   # genotype x nutrient x clipping
@@ -70,7 +71,7 @@ dat.tf <- within(dat.tf,
 })
 ```
 
-Now let's visualize:
+Maintenant, visualisons:
 
 ```{r, echo = TRUE, eval = TRUE}
 library(ggplot2)
@@ -86,21 +87,21 @@ ggplot(data = dat.tf, aes(factor(x = gna), y = log(total.fruits + 1))) +
 ```
 
 
-From this plot, we see that the variance of total fruits shows a large amount of heterogeneity among populations (population x nutrient x clipping interaction).
+De même, la variance du total de fruits montre une grande hétérogénéité entre les populations (population x nutriments x herbivorie).
 
 ---
 
-**Back to choosing an error distribution** 
+**Retour au choix de la distribution des erreurs** 
 
-As we just saw, there is a large amount of heterogeneity among group variances even when the response variable is transformed (i.e. log).
+Comme nous venons de le voir, il existe une importante hétérogénéité parmi la variance de chaque groupe, même lorsque la variable réponse est transformée (i.e. log).
 
-To determine which distribution family to use, we can run a diagnostic plot of the **group variances vs group means**. We provide an example below for the genotype x nutrient x clipping grouping.
+Pour identifier la famille de distribution la plus appropriée , nous pouvons examiner un graphique de diagnostic de **la variance de chaque groupe par rapport à leurs moyennes**. Nous présentons un exemple ci-dessous pour le regroupement par génotype x nutriments x herbivore (clipping).
 
-- 1. If we observe a linear relationship between the variance and the mean with a slope = 1, then the Poisson family is appropriate,
+- 1. Si nous observons une relation linéaire entre la variance et la moyenne avec une pente = 1, une famille de Poisson serait appropriée,
 
-- 2. If we observe a linear mean-variance relationship with a slope > 1 (i.e. Var = φµ where φ > 1), then the quasi-Poisson family (as introduced above) should be applied,
+- 2. Si nous observons une relation moyenne-variance linéaire avec une pente> 1 (c. Var = φµ où φ > 1), la famille quasi-Poisson (tel que présenté ci-dessus) doit être utilisée,
 
-- 3. Finally, a quadratic relationship between the variance and the mean (i.e. $Var = µ(1 + α) or µ(1 + µ/k)$) is characteristic of overdispersed data that is driven by an underlying heterogeneity among samples. In this case, the negative binomial (Poisson-gamma) would be more appropriate.
+- 3. Enfin, une relation quadratique entre la variance et la moyenne (c. $Var = µ(1 + α) or µ(1 + µ/k)$), est caractéristique des données surdispersées résultant d'une hétérogénéité sous-jacente entre les échantillons. Dans ce cas, la distribution binomiale négative (Poisson-gamma) serait plus appropriée.
 
 ```{r, echo = TRUE, eval = TRUE}
 ## Run a diagnostic lot of the group variances vs group means (genotype x nutrient x clipping grouping). 
@@ -144,11 +145,11 @@ From the plot above we note that a linear quasi-Poisson may be better than the n
 
 # Poisson GLMM
 
-**Given the mean-variance relationship, we will most likely need a model with over-dispersion.**
+**Compte tenu de la relation moyenne-variance, nous avons besoin d'un modèle qui tient compte de la surdispersion.**
 
-To understand why, let's start with a Poisson model.
+Pour comprendre pourquoi, commençons avec un modèle avec une distribution de Poisson.
 
-To run a GLMM in `R` we will use the `glmer()` function from the `lme4` package:
+Pour lancer un GLMM dans `R`, nous faisons appel à la fonction `glmer()` de la librairie `lme4`:
 
 ```{r, echo = TRUE, eval = TRUE}
 ## Poisson GLMM
@@ -161,78 +162,78 @@ mp1 <- glmer(total.fruits ~ nutrient*amd + rack + status +
              data = dat.tf, family = "poisson")
 ```
 
-**Random effects**: `(1|popu)` and `(1|gen)`. We model random intercepts for both factors so that total fruit production can vary among populations (`popu`) and genotypes (`gen`).
+**Effets aléatoires** : `(1|popu)` et `(1|gen)`. Nous faisons varier les ordonnées à l'origine pour les différentes populations (`popu`) et génotypes (`gen`).
 
 ---
 
-**Over-dispersion check**
+**Vérification de la surdispersion**
 
-We can check for overdispersion using the `overdisp_fun()` function (Bolker *et al*. 2011) which divides the Pearson residuals by the residual degrees of freedom. 
+On vérifie la surdispersion en utilisant la fonction `overdisp_fun()` (Bolker *et al*. 2011) qui divise la déviance des résidus (de Pearson) par leurs degrés de liberté.
 
-The function tests whether **the ratio is greater than 1**.
+La fonction teste si le **rapport est plus grand que 1**.
 
-Let's run the test:
+Effectuons ce test:
 
-```{r, echo = TRUE, eval = TRUE}
-# Download the glmm_funs.R code from the wiki page and source it to run the function
-source(file = "data/glmm_funs.R") # This line will vary depending on where your data is saved
-# Over-dispersion check
+```{r}
+# Téléchargez le code glmm_funs.R de la page wiki et sourcez le pour exécuter la fonction dans R
+source(file = "data/glmm_funs.R")
+# Surdispersion?
 overdisp_fun(mp1)
-# Ratio is significantly > 1
+# Le rapport est significativement > 1
 ```
 
-**Ratio is significantly > 1**
+**Le rapport est significativement > 1**
 
-As expected, we need to model a **different distribution** where the variance increases more rapidly than the mean.
+Comme on s'y attendait, nous devons modéliser une **distribution différente** où la variance augmente plus rapidement que la moyenne.
 
 
-# Negative binomial GLMM
+# GLMM binomiale negative
 
-One option for a distribution where the variance increases more rapidly with the mean is the **negative binomial** (or Poisson-gamma) distribution. Recall that the negative binomial distribution meets the assumption that the variance is proportional to the square of the mean.
+Une option pour une distribution où la variance augmente plus rapidement avec la moyenne est la distribution **binomiale négative** (ou Poisson-gamma). Rappelons que la distribution binomiale négative répond à l'hypothèse selon laquelle la variance est proportionnelle au carré de la moyenne.
 
-We can model this distribution using the function `glmer.nb()`:
+On peut modéliser cette distribution avec la fonction `glmer.nb()`:
 
 ```{r, echo = TRUE, eval = TRUE}
-## Negative binomial GLMM using the function glmer.nb()
+## GLMM binomial négatif utilisant la fonction glmer.nb()
 mnb1 <- glmer.nb(total.fruits ~ nutrient*amd + rack + status +
                  (1|popu)+
                  (1|gen),
                  data = dat.tf,
                  control = glmerControl(optimizer = "bobyqa"))
-# Control argument specifies the way we optimize the parameter values
+# Control spécifie la façon dont nous optimisons les valeurs des paramètres
 ```
 
 We test again for over-dispersion:
 
 ```{r, echo = TRUE, eval = TRUE}
-# Over-dispersion check
+# Surdispersion?
 overdisp_fun(mnb1)
-# Ratio is now much closer to 1 although p < 0.05
+# Le rapport est beaucoup plus près de 1 mais la valeur de p < 0.05
 ```
 
-**Ratio is now much closer to 1 although p < 0.05**
+**Le rapport est beaucoup plus près de 1 mais la valeur de p < 0.05**
 
-# Poisson-lognormal GLMM
+# GLMM Poisson-lognormale
 
-A second option for a distribution where the variance increases more rapidly with the mean is the **Poisson-lognormal** distribution.
+Une deuxième option pour une distribution où la variance augmente plus rapidement avec la moyenne est la distribution **Poisson-lognormale**.
 
-This can be achieved simply by placing an **observation-level random effect** in the model formula.
+On réalise cette distribution en ajoutant un **effet aléatoire de niveau d'observation** dans le modèle.
 
-See Harrison (2014) for further details https://doi.org/10.7717/peerj.616.
+Voir Harrison (2014) pour plus de détails https://doi.org/10.7717/peerj.616.
 
-To do this in `R`, we first create a variable named `X`:
+Pour ce faire, nous créons tout d'abord une variable nommée `X`:
 
 ```{r, echo = TRUE, eval = TRUE}
-## Poisson-lognormal GLMM
+## GLMM Poisson-lognormale
 
-# This variable is already in your data "dat.tf", but here is how we create it :
+# Cette variable est déjà dans vos données "dat.tf", mais voici comment la créer.
 dat.tf$X <- 1:nrow(dat.tf)
 ```
 
-We take over-dispersion into account by adding the random effect `(1|X)` in the formula:
+On traite la surdispersion en ajoutant l'effet `(1|X)` dans la formule:
 
 ```{r, echo = TRUE, eval = TRUE}
-# Account for over-dispersion
+# Tenir compte de la surdispersion
 mpl1 <- glmer(total.fruits ~ nutrient*amd + rack + status +
               (1|X) +
               (1|popu)+
@@ -241,23 +242,23 @@ data = dat.tf, family = "poisson",
 control = glmerControl(optimizer = "bobyqa"))
 ```
 
-Finally, we test for over-dispersion:
+On teste finalement pour la présence de surdispersion:
 
 ```{r, echo = TRUE, eval = TRUE}
-# Over-dispersion check
+# Surdispersion?
 overdisp_fun(mpl1)
-# Ratio now meets our criterion, thus, < 1
+# Le rapport est maintenant conforme avec notre critère, soit < 1
 ```
 
-**Ratio is not <1 and meets our criterion!**
+**Le rapport est maintenant conforme avec notre critère, soit < 1!**
 
 ---
 
-**Now that we've chosen out error distribution, let's visualize the model parameters.**
+**Maintenant que nous avons choisi notre distribution d'erreur, visualisons les paramètres du modèle.**
 
-A graphical representation of the model parameters can be obtained using the `coefplot2()` function from the `coefplot2` package :
+Peut être obtenu en utilisant la fonction `coefplot2()`de la librairie `coefplot2`:
 
-*Note: This package is not on CRAN! We install it from GitHub using the remotes package.*
+*Notez: Cette librairie n'est pas sur le CRAN! On utilise la librairie remotes pour l'installer à partir de GitHub.*
 
 ```{R install_coefplot2}
 if (!require("coefplot2"))
@@ -267,30 +268,30 @@ library(coefplot2)
 
 
 ```{r, echo = TRUE, eval = TRUE}
-# Variance terms
+# Effets aléatoires
 coefplot2(mpl1, ptype = "vcov", intercept = TRUE, main = "Random effect variance")
 ```
 
 ```{r, echo = TRUE, eval = TRUE}
-# Fixed effects
+# Effets fixes
 coefplot2(mpl1, intercept = TRUE, main = "Fixed effect coefficient")
 ```
 
-*Note: error bars are only shown for the fixed effects because `glmer()` doesn't model uncertainty for random effects.*
+*Notez: barres d'erreur visibles seulement pour les effets fixes car `glmer()` ne modélise pas d'incertitude pour les effets aléatoires.*
 
 ---
 
-**Now let's visualize the random effects**
+**Visualisation des effets aléatoires**
 
-You can extract the random effect predictions using `ranef()` and plot them using a `dotplot()` from the `lattice` package.
+Vous pouvez extraire les effets aléatoires en utilisant la fonction `ranef()` et les tracer en utilisant un `dotplot()` de la librairie `lattice`.
 
-We observe differences **among population**: 
+On constate une variation **inter-population**: 
 
-- Spanish populations (SP) have larger values than Swedish (SW) or Dutch (NL) populations
+- Les populations espagnoles (SP) ont des valeurs plus élevées que les populations suédoises (SW) et néerlandaises (NL)
 
-We observe mild differences **among genotypes**: 
+On constate une faible variation **inter-génotype** :
 
-- Difference among genotypes largely driven by genotype 34
+- Les différences entre les génotypes semblent induites par le génotype 34
 
 ```{r, echo = TRUE, eval = TRUE}
 library(gridExtra)
