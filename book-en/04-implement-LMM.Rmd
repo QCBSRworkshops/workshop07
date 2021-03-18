@@ -166,6 +166,7 @@ $$TP_{ijk} \sim Length_i + Lake_j + Species_k + \epsilon_{ijk}$$
 **... into R code**
 
 ```{r, eval = TRUE, include = FALSE}
+install.packages("lme4")
 library(lme4)
 ```
 
