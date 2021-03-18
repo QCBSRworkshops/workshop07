@@ -166,6 +166,7 @@ $$PT_{ijk} \sim Longueur_i + Lac_j + Espèce_k + \varepsilon_{ijk}$$
 **... en code R**
 
 ```{r, eval = TRUE, include = FALSE}
+install.packages("lme4")
 library(lme4)
 ```
 
