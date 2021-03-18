@@ -199,11 +199,12 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="16" data-path="negative-binomial-glmm.html"><a href="negative-binomial-glmm.html"><i class="fa fa-check"></i><b>16</b> Negative binomial GLMM</a></li>
 <li class="chapter" data-level="17" data-path="poisson-lognormal-glmm.html"><a href="poisson-lognormal-glmm.html"><i class="fa fa-check"></i><b>17</b> Poisson-lognormal GLMM</a></li>
 <li class="part"><span><b>Model selection</b></span></li>
-<li class="chapter" data-level="18" data-path="selection-methods.html"><a href="selection-methods.html"><i class="fa fa-check"></i><b>18</b> Selection Methods</a></li>
-<li class="chapter" data-level="19" data-path="challenge-9.html"><a href="challenge-9.html"><i class="fa fa-check"></i><b>19</b> Challenge 9</a></li>
+<li class="chapter" data-level="18" data-path="selection-methods.html"><a href="selection-methods.html"><i class="fa fa-check"></i><b>18</b> Selection Methods</a><ul>
+<li class="chapter" data-level="18.1" data-path="selection-methods.html"><a href="selection-methods.html#challenge-9"><i class="fa fa-check"></i><b>18.1</b> Challenge 9</a></li>
+</ul></li>
 <li class="part"><span><b>Additional LMM and GLMM resources</b></span></li>
-<li class="chapter" data-level="20" data-path="additional-resources.html"><a href="additional-resources.html"><i class="fa fa-check"></i><b>20</b> Additional resources</a></li>
-<li class="chapter" data-level="21" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>21</b> References</a></li>
+<li class="chapter" data-level="19" data-path="additional-resources.html"><a href="additional-resources.html"><i class="fa fa-check"></i><b>19</b> Additional resources</a></li>
+<li class="chapter" data-level="20" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>20</b> References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/qcbsRworkshops" target="blank">QCBS R Workshop Series</a></li>
 
@@ -241,7 +242,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div id="starting-with-a-question" class="section level1">
 <h1><span class="header-section-number">Chapter 4</span> Starting with a question</h1>
 <p>Before we dive in, let’s start by considering an example dataset and proposing a research question.</p>
-<p>The <a href="http://qcbs.ca/wiki/_media/qcbs_w7_data.csv">dataset</a> we will be using looks at fish trophic positions. In this dataset, data was collected for <strong>3</strong> different fish species (S1-3) with 10 individuals sampled per species across 6 different lakes (L1-6). Individuals from each species were measured and exhibit variation in their body length and trophic position.</p>
+<p>The <a href="http://qcbs.ca/wiki/_media/qcbs_w7_data.csv">dataset</a> we will be using looks at fish trophic positions. In this dataset, data was collected for <strong>3</strong> different fish species (S1-3) with <strong>10</strong> individuals sampled per species across <strong>6</strong> different lakes (L1-6). Individuals from each species were measured and exhibit variation in their body length and trophic position.</p>
 <p>Here is a visual representation to help wrap your head around all of this!</p>
 <p><em>Note: Only three sizes of fish are shown within each species but in reality
 there are 10 individuals per species.</em></p>
@@ -263,7 +264,7 @@ Observe each plot and try to get a sense of what is occurring. A few key questio
 <span id="cb3-3"><a href="starting-with-a-question.html#cb3-3"></a><span class="co"># Load dataset into R</span></span>
 <span id="cb3-4"><a href="starting-with-a-question.html#cb3-4"></a>fish.data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/qcbs_w7_data.csv&quot;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">TRUE</span>)  <span class="co"># This line will vary depending on where your data is saved</span></span>
 <span id="cb3-5"><a href="starting-with-a-question.html#cb3-5"></a></span>
-<span id="cb3-6"><a href="starting-with-a-question.html#cb3-6"></a><span class="co"># simple theme</span></span>
+<span id="cb3-6"><a href="starting-with-a-question.html#cb3-6"></a><span class="co"># Simple theme</span></span>
 <span id="cb3-7"><a href="starting-with-a-question.html#cb3-7"></a>fig &lt;-<span class="st"> </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(), </span>
 <span id="cb3-8"><a href="starting-with-a-question.html#cb3-8"></a>    <span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), <span class="dt">panel.background =</span> <span class="kw">element_blank</span>()) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb3-9"><a href="starting-with-a-question.html#cb3-9"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">strip.background =</span> <span class="kw">element_blank</span>(), <span class="dt">strip.text.y =</span> <span class="kw">element_text</span>()) <span class="op">+</span><span class="st"> </span></span>

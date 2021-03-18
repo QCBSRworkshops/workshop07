@@ -31,7 +31,7 @@
   
   <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
 <link rel="prev" href="poisson-lognormal-glmm.html"/>
-<link rel="next" href="challenge-9.html"/>
+<link rel="next" href="additional-resources.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -199,11 +199,12 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="16" data-path="negative-binomial-glmm.html"><a href="negative-binomial-glmm.html"><i class="fa fa-check"></i><b>16</b> Negative binomial GLMM</a></li>
 <li class="chapter" data-level="17" data-path="poisson-lognormal-glmm.html"><a href="poisson-lognormal-glmm.html"><i class="fa fa-check"></i><b>17</b> Poisson-lognormal GLMM</a></li>
 <li class="part"><span><b>Model selection</b></span></li>
-<li class="chapter" data-level="18" data-path="selection-methods.html"><a href="selection-methods.html"><i class="fa fa-check"></i><b>18</b> Selection Methods</a></li>
-<li class="chapter" data-level="19" data-path="challenge-9.html"><a href="challenge-9.html"><i class="fa fa-check"></i><b>19</b> Challenge 9</a></li>
+<li class="chapter" data-level="18" data-path="selection-methods.html"><a href="selection-methods.html"><i class="fa fa-check"></i><b>18</b> Selection Methods</a><ul>
+<li class="chapter" data-level="18.1" data-path="selection-methods.html"><a href="selection-methods.html#challenge-9"><i class="fa fa-check"></i><b>18.1</b> Challenge 9</a></li>
+</ul></li>
 <li class="part"><span><b>Additional LMM and GLMM resources</b></span></li>
-<li class="chapter" data-level="20" data-path="additional-resources.html"><a href="additional-resources.html"><i class="fa fa-check"></i><b>20</b> Additional resources</a></li>
-<li class="chapter" data-level="21" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>21</b> References</a></li>
+<li class="chapter" data-level="19" data-path="additional-resources.html"><a href="additional-resources.html"><i class="fa fa-check"></i><b>19</b> Additional resources</a></li>
+<li class="chapter" data-level="20" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>20</b> References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/qcbsRworkshops" target="blank">QCBS R Workshop Series</a></li>
 
@@ -318,7 +319,63 @@ Method with <code>drop1()</code>
 * observation-level random effect <code>(1|X)</code>
 * populations <code>(1|popu)</code>
 * genotypes <code>(1|gen)</code></p>
+<div id="challenge-9" class="section level2">
+<h2><span class="header-section-number">18.1</span> Challenge 9</h2>
+<p>Use the <code>inverts</code> dataset (larval development times (<code>PLD</code>) of 74 marine invertebrate and vertebrate species reared at different temperatures and time), answer the following questions:</p>
+<ul>
+<li><ol style="list-style-type: decimal">
+<li>What is the effect of feeding type and climate (<strong>fixed effects</strong>) on <code>PLD</code>?</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: decimal">
+<li>Does this relationship vary among taxa (<strong>random effects</strong>)?</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: decimal">
+<li>What is the <strong>best distribution family</strong> for this count data?</li>
+</ol></li>
+<li><ol start="4" style="list-style-type: decimal">
+<li>Finally, once you determined the best distribution family, re-evaluate your random and fixed effects.</li>
+</ol></li>
+</ul>
+<div id="challenge-9-solution" class="section level4 unnumbered">
+<h4><strong>Challenge 9 Solution:</strong></h4>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="selection-methods.html#cb104-1"></a><span class="co"># inverts &lt;- read.csv(&#39;data/inverts.csv&#39;, header = TRUE)</span></span>
+<span id="cb104-2"><a href="selection-methods.html#cb104-2"></a><span class="co"># head(inverts) table(inverts$temp, inverts$feeding.type)</span></span>
+<span id="cb104-3"><a href="selection-methods.html#cb104-3"></a></span>
+<span id="cb104-4"><a href="selection-methods.html#cb104-4"></a><span class="co"># mod.glm &lt;- glm(PLD ~ temp + feeding.type, family =</span></span>
+<span id="cb104-5"><a href="selection-methods.html#cb104-5"></a><span class="co"># poisson(), data = inverts) summary(mod.glm) drop1(mod.glm,</span></span>
+<span id="cb104-6"><a href="selection-methods.html#cb104-6"></a><span class="co"># test = &#39;Chisq&#39;)</span></span>
+<span id="cb104-7"><a href="selection-methods.html#cb104-7"></a></span>
+<span id="cb104-8"><a href="selection-methods.html#cb104-8"></a><span class="co"># boxplot(PLD ~ temp, data = inverts) boxplot(PLD ~</span></span>
+<span id="cb104-9"><a href="selection-methods.html#cb104-9"></a><span class="co"># feeding.type, data = inverts)</span></span>
+<span id="cb104-10"><a href="selection-methods.html#cb104-10"></a></span>
+<span id="cb104-11"><a href="selection-methods.html#cb104-11"></a><span class="co"># boxplot(predict(mod.glm, type = &#39;response&#39;)~inverts$temp)</span></span>
+<span id="cb104-12"><a href="selection-methods.html#cb104-12"></a></span>
+<span id="cb104-13"><a href="selection-methods.html#cb104-13"></a><span class="co"># plot()</span></span>
+<span id="cb104-14"><a href="selection-methods.html#cb104-14"></a></span>
+<span id="cb104-15"><a href="selection-methods.html#cb104-15"></a><span class="co"># modglm &lt;- glm(PLD ~ temp + feeding.type, family =</span></span>
+<span id="cb104-16"><a href="selection-methods.html#cb104-16"></a><span class="co"># poisson(), data = inverts)</span></span>
+<span id="cb104-17"><a href="selection-methods.html#cb104-17"></a></span>
+<span id="cb104-18"><a href="selection-methods.html#cb104-18"></a><span class="co"># r2 &lt;- ranef(mpl1, condVar = TRUE) d2 &lt;- dotplot(r2,</span></span>
+<span id="cb104-19"><a href="selection-methods.html#cb104-19"></a><span class="co"># par.settings = pp)</span></span>
+<span id="cb104-20"><a href="selection-methods.html#cb104-20"></a></span>
+<span id="cb104-21"><a href="selection-methods.html#cb104-21"></a><span class="co"># plot(aggregate(PLD ~ taxon, FUN = mean, data =</span></span>
+<span id="cb104-22"><a href="selection-methods.html#cb104-22"></a><span class="co"># inverts)[,2], aggregate(PLD ~ taxon, FUN = var, data =</span></span>
+<span id="cb104-23"><a href="selection-methods.html#cb104-23"></a><span class="co"># inverts)[,2], pch = 19) abline(a = 0, b = 1, lty = 2)</span></span>
+<span id="cb104-24"><a href="selection-methods.html#cb104-24"></a></span>
+<span id="cb104-25"><a href="selection-methods.html#cb104-25"></a><span class="co"># mod.glmer &lt;- glmer.nb(PLD ~ temp + feeding.type +</span></span>
+<span id="cb104-26"><a href="selection-methods.html#cb104-26"></a><span class="co"># (1|taxon), data = inverts) mod.glm &lt;- glm.nb(PLD ~ temp +</span></span>
+<span id="cb104-27"><a href="selection-methods.html#cb104-27"></a><span class="co"># feeding.type, family = poisson(), data = inverts)</span></span>
+<span id="cb104-28"><a href="selection-methods.html#cb104-28"></a></span>
+<span id="cb104-29"><a href="selection-methods.html#cb104-29"></a><span class="co"># plot(aggregate(PLD ~ taxon, FUN = var, data = inverts)[,2],</span></span>
+<span id="cb104-30"><a href="selection-methods.html#cb104-30"></a><span class="co"># aggregate(PLD ~ taxon, FUN = mean, data = inverts)[,2])</span></span>
+<span id="cb104-31"><a href="selection-methods.html#cb104-31"></a><span class="co"># abline(a = 0, b = 1, lty = 2 )</span></span></code></pre></div>
+
 </div>
+</div>
+</div>
+
+
+
 <hr>
 <center> 
   <div class="footer">
@@ -331,7 +388,7 @@ Method with <code>drop1()</code>
         </div>
       </div>
 <a href="poisson-lognormal-glmm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="challenge-9.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="additional-resources.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
