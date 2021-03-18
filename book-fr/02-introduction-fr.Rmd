@@ -43,7 +43,7 @@ fig <- theme_bw() + theme(panel.grid.minor=element_blank(), panel.grid.major=ele
   theme(legend.key=element_blank()) + theme(panel.border = element_rect(colour="black", fill=NA))
 
 # Faites les trois graphiques suivants pour explorer les données
-plot <- ggplot(aes(Fish_Length,Trophic_Pos),data=data)
+plot <- ggplot(aes(Fish_Length,Trophic_Pos), data= fish.data)
 
 # Graphique 1 - Toutes les données
 plot + geom_point() + xlab("Length (mm)") + ylab("Trophic Position") + labs(title="All Data") + fig
