@@ -180,6 +180,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.2" data-path="step-2-code-potential-models-and-model-selection.html"><a href="step-2-code-potential-models-and-model-selection.html#different-model-structures"><i class="fa fa-check"></i><b>10.2</b> Different model structures</a></li>
 <li class="chapter" data-level="10.3" data-path="step-2-code-potential-models-and-model-selection.html"><a href="step-2-code-potential-models-and-model-selection.html#challenge-4"><i class="fa fa-check"></i><b>10.3</b> Challenge 4</a></li>
 <li class="chapter" data-level="10.4" data-path="step-2-code-potential-models-and-model-selection.html"><a href="step-2-code-potential-models-and-model-selection.html#challenge-5"><i class="fa fa-check"></i><b>10.4</b> Challenge 5</a></li>
+<li class="chapter" data-level="10.5" data-path="step-2-code-potential-models-and-model-selection.html"><a href="step-2-code-potential-models-and-model-selection.html#comparing-models"><i class="fa fa-check"></i><b>10.5</b> Comparing models</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="step-3-model-validation.html"><a href="step-3-model-validation.html"><i class="fa fa-check"></i><b>11</b> Step 3. Model validation</a><ul>
 <li class="chapter" data-level="11.1" data-path="step-3-model-validation.html"><a href="step-3-model-validation.html#check-the-homogeneity-of-the-variance"><i class="fa fa-check"></i><b>11.1</b> 1. Check the homogeneity of the variance</a></li>
@@ -251,14 +252,14 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>As with the LMM portion of this workshop, we are going to work through the GLMM material with a dataset in order to better understand how GLMMs work and how to implement them in <code>R</code>.</p>
 <p>In the Arabidopsis dataset, the effect of nutrient availability and herbivory (<strong>fixed effects</strong>) on the fruit production (<strong>response variable</strong>) of Arabidopsis thaliana was evaluated by measuring 625 plants across 9 different populations, each comprised of 2 to 3 different genotypes (<strong>random effects</strong>).</p>
 <p>Start by importing the <code>Arabidopsis</code> dataset <code>banta_totalfruits.csv</code> into <code>R</code>.</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="introduction-to-glmm.html#cb63-1"></a>dat.tf &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/banta_totalfruits.csv&quot;</span>)</span>
-<span id="cb63-2"><a href="introduction-to-glmm.html#cb63-2"></a></span>
-<span id="cb63-3"><a href="introduction-to-glmm.html#cb63-3"></a><span class="co">## In this dataset, the column headers are defined as: popu</span></span>
-<span id="cb63-4"><a href="introduction-to-glmm.html#cb63-4"></a><span class="co">## factor with a level for each population gen factor with a</span></span>
-<span id="cb63-5"><a href="introduction-to-glmm.html#cb63-5"></a><span class="co">## level for each genotype nutrient factor with levels for low</span></span>
-<span id="cb63-6"><a href="introduction-to-glmm.html#cb63-6"></a><span class="co">## (value = 1) or high (value = 8) amd factor with levels for</span></span>
-<span id="cb63-7"><a href="introduction-to-glmm.html#cb63-7"></a><span class="co">## no damage or simulated herbivory total.fruits integer</span></span>
-<span id="cb63-8"><a href="introduction-to-glmm.html#cb63-8"></a><span class="co">## indicating the number of fruits per plant</span></span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="introduction-to-glmm.html#cb68-1"></a>dat.tf &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/banta_totalfruits.csv&quot;</span>)</span>
+<span id="cb68-2"><a href="introduction-to-glmm.html#cb68-2"></a></span>
+<span id="cb68-3"><a href="introduction-to-glmm.html#cb68-3"></a><span class="co">## In this dataset, the column headers are defined as: popu</span></span>
+<span id="cb68-4"><a href="introduction-to-glmm.html#cb68-4"></a><span class="co">## factor with a level for each population gen factor with a</span></span>
+<span id="cb68-5"><a href="introduction-to-glmm.html#cb68-5"></a><span class="co">## level for each genotype nutrient factor with levels for low</span></span>
+<span id="cb68-6"><a href="introduction-to-glmm.html#cb68-6"></a><span class="co">## (value = 1) or high (value = 8) amd factor with levels for</span></span>
+<span id="cb68-7"><a href="introduction-to-glmm.html#cb68-7"></a><span class="co">## no damage or simulated herbivory total.fruits integer</span></span>
+<span id="cb68-8"><a href="introduction-to-glmm.html#cb68-8"></a><span class="co">## indicating the number of fruits per plant</span></span></code></pre></div>
 </div>
 <hr>
 <center> 

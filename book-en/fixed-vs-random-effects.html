@@ -180,6 +180,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.2" data-path="step-2-code-potential-models-and-model-selection.html"><a href="step-2-code-potential-models-and-model-selection.html#different-model-structures"><i class="fa fa-check"></i><b>10.2</b> Different model structures</a></li>
 <li class="chapter" data-level="10.3" data-path="step-2-code-potential-models-and-model-selection.html"><a href="step-2-code-potential-models-and-model-selection.html#challenge-4"><i class="fa fa-check"></i><b>10.3</b> Challenge 4</a></li>
 <li class="chapter" data-level="10.4" data-path="step-2-code-potential-models-and-model-selection.html"><a href="step-2-code-potential-models-and-model-selection.html#challenge-5"><i class="fa fa-check"></i><b>10.4</b> Challenge 5</a></li>
+<li class="chapter" data-level="10.5" data-path="step-2-code-potential-models-and-model-selection.html"><a href="step-2-code-potential-models-and-model-selection.html#comparing-models"><i class="fa fa-check"></i><b>10.5</b> Comparing models</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="step-3-model-validation.html"><a href="step-3-model-validation.html"><i class="fa fa-check"></i><b>11</b> Step 3. Model validation</a><ul>
 <li class="chapter" data-level="11.1" data-path="step-3-model-validation.html"><a href="step-3-model-validation.html#check-the-homogeneity-of-the-variance"><i class="fa fa-check"></i><b>11.1</b> 1. Check the homogeneity of the variance</a></li>
@@ -255,7 +256,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="random-effects-stochastic-processes" class="section level2">
 <h2><span class="header-section-number">6.2</span> Random effects: stochastic processes</h2>
-<p>Variables with a random effect are also called random factors, as they are only <strong>qualitative variables</strong> (categorical, not continous).</p>
+<p>Variables with a random effect are also called random factors, as they are only <strong>qualitative variables</strong> (categorical, not continuous).</p>
 <p>A random effect is observed when the data only includes a random sample of the factor’s many possible levels, which are all of interest.</p>
 <p>They usually are grouping factors for which you want to control the effect in your model, but are not interested in their specific effect on the response variable. Therefore they enable us to structure the error process.</p>
 <p><strong>Example:</strong> If you are studying mercury contamination in fish in Ugandan crater lakes. For logistical reasons, you can’t sample all the crater lakes, so you sample only 8 of them. However, fish from a given lake might have some sort of correlation between themselves (auto-correlation) since they experience the same environmental conditions. Even though you’re not interested in the effect of each lake specifically, you should account for this potential correlation with a random factor (crater lake) in order to make conclusions about crater lakes in general.</p>

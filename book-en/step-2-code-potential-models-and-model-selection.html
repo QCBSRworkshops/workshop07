@@ -180,6 +180,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.2" data-path="step-2-code-potential-models-and-model-selection.html"><a href="step-2-code-potential-models-and-model-selection.html#different-model-structures"><i class="fa fa-check"></i><b>10.2</b> Different model structures</a></li>
 <li class="chapter" data-level="10.3" data-path="step-2-code-potential-models-and-model-selection.html"><a href="step-2-code-potential-models-and-model-selection.html#challenge-4"><i class="fa fa-check"></i><b>10.3</b> Challenge 4</a></li>
 <li class="chapter" data-level="10.4" data-path="step-2-code-potential-models-and-model-selection.html"><a href="step-2-code-potential-models-and-model-selection.html#challenge-5"><i class="fa fa-check"></i><b>10.4</b> Challenge 5</a></li>
+<li class="chapter" data-level="10.5" data-path="step-2-code-potential-models-and-model-selection.html"><a href="step-2-code-potential-models-and-model-selection.html#comparing-models"><i class="fa fa-check"></i><b>10.5</b> Comparing models</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="step-3-model-validation.html"><a href="step-3-model-validation.html"><i class="fa fa-check"></i><b>11</b> Step 3. Model validation</a><ul>
 <li class="chapter" data-level="11.1" data-path="step-3-model-validation.html"><a href="step-3-model-validation.html#check-the-homogeneity-of-the-variance"><i class="fa fa-check"></i><b>11.1</b> 1. Check the homogeneity of the variance</a></li>
@@ -242,7 +243,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div id="step-2.-code-potential-models-and-model-selection" class="section level1">
 <h1><span class="header-section-number">Chapter 10</span> Step 2. Code potential models and model selection</h1>
 <p><strong>Translate this model…</strong></p>
-<p><span class="math display">\[PT_{ijk} \sim Length_i + Lake_j + Species_k + \epsilon_{ijk}\]</span></p>
+<p><span class="math display">\[TP_{ijk} \sim Length_i + Lake_j + Species_k + \epsilon_{ijk}\]</span></p>
 <p><strong>… into R code</strong></p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="step-2-code-potential-models-and-model-selection.html#cb15-1"></a><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Fish_Species), <span class="dt">data =</span> fish.data, </span>
 <span id="cb15-2"><a href="step-2-code-potential-models-and-model-selection.html#cb15-2"></a>    <span class="dt">REML =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
@@ -289,7 +290,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li><p><code>(-1 + Z_Length | Lake)</code> to have only the random effect at the slope</p></li>
 <li><p><code>(1 | Lake) + (1 | Species)</code> for crossed random effects</p></li>
 <li><p><code>(1 | Lake:Fish_Species)</code> for the interaction between 2 random effects</p></li>
-<li><p>If your dataset includes nested random effects, you could use <code>/</code> to specify them, e.g. <code>(1 | factor1 / factor2)</code> if <code>factor2</code> is nested in <code>factor1</code> (<a href="https://stats.stackexchange.com/questions/228800/crossed-vs-nested-random-effects-how-do-they-differ-and-how-are-they-specified">see <img src="stack-exchange" alt=":faic" /></a>)</p></li>
+<li><p>If your dataset includes nested random effects, you could use <code>/</code> to specify them, e.g. <code>(1 | factor1 / factor2)</code> if <code>factor2</code> is nested in <code>factor1</code> (<a href="https://stats.stackexchange.com/questions/228800/crossed-vs-nested-random-effects-how-do-they-differ-and-how-are-they-specified">see stack-exchange</a>)</p></li>
 </ul>
 </div>
 <div id="challenge-4" class="section level2">
@@ -412,6 +413,53 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li><p><code>Model failed to converge with max|grad| ...</code>, see <a href="https://stats.stackexchange.com/questions/242109/model-failed-to-converge-warning-in-lmer">this discussion on stack-exchange</a></p></li>
 </ul>
 <p>Here a <a href="https://rdrr.io/cran/lme4/man/troubleshooting.html">list</a> of possible problems and how to troubleshoot them.</p>
+</div>
+</div>
+<div id="comparing-models" class="section level2">
+<h2><span class="header-section-number">10.5</span> Comparing models</h2>
+<p>Now that we have a list of potential models, we want to compare them to each other to select the one(s) with the highest predictive power given the data.</p>
+<p>Models can be compared by using the <code>AICc</code> function from the<code>MuMIn</code> package. The Akaike Information Criterion (AIC) is a <strong>measure of model quality</strong> that can be used to compare models.</p>
+<p><code>AICc</code> corrects for bias created by small sample sizes.</p>
+<p>In order the find the AICc value of a model, use:</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="step-2-code-potential-models-and-model-selection.html#cb35-1"></a><span class="co"># Load MuMIn package which allows us to find AICc values for</span></span>
+<span id="cb35-2"><a href="step-2-code-potential-models-and-model-selection.html#cb35-2"></a><span class="co"># our models</span></span>
+<span id="cb35-3"><a href="step-2-code-potential-models-and-model-selection.html#cb35-3"></a><span class="kw">library</span>(MuMIn)</span>
+<span id="cb35-4"><a href="step-2-code-potential-models-and-model-selection.html#cb35-4"></a></span>
+<span id="cb35-5"><a href="step-2-code-potential-models-and-model-selection.html#cb35-5"></a><span class="co"># Find AICc value for our first model (Basic linear model)</span></span>
+<span id="cb35-6"><a href="step-2-code-potential-models-and-model-selection.html#cb35-6"></a>MuMIn<span class="op">::</span><span class="kw">AICc</span>(M1)</span></code></pre></div>
+<pre><code>## [1] 77.30499</code></pre>
+<p>To group all AICc values into a single table, use <code>MuMIn::model.sel()</code> to calculate AICc for each model (along with other outputs) and then select only the columns of interest to print in a table.</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="step-2-code-potential-models-and-model-selection.html#cb37-1"></a><span class="co"># To group all AICc values into a single table, we can use</span></span>
+<span id="cb37-2"><a href="step-2-code-potential-models-and-model-selection.html#cb37-2"></a><span class="co"># MuMIn::model.sel() to calculate AICc for each model (along</span></span>
+<span id="cb37-3"><a href="step-2-code-potential-models-and-model-selection.html#cb37-3"></a><span class="co"># with other outputs)</span></span>
+<span id="cb37-4"><a href="step-2-code-potential-models-and-model-selection.html#cb37-4"></a>AIC.table &lt;-<span class="st"> </span>MuMIn<span class="op">::</span><span class="kw">model.sel</span>(M0, M1, M2, M3, M4, M5, M6, M7, </span>
+<span id="cb37-5"><a href="step-2-code-potential-models-and-model-selection.html#cb37-5"></a>    M8)</span>
+<span id="cb37-6"><a href="step-2-code-potential-models-and-model-selection.html#cb37-6"></a></span>
+<span id="cb37-7"><a href="step-2-code-potential-models-and-model-selection.html#cb37-7"></a><span class="co"># Then we can select only the columns of interest to print</span></span>
+<span id="cb37-8"><a href="step-2-code-potential-models-and-model-selection.html#cb37-8"></a><span class="co"># into a table `df` is the degree of freedom `logLik` is the</span></span>
+<span id="cb37-9"><a href="step-2-code-potential-models-and-model-selection.html#cb37-9"></a><span class="co"># loglikelihood `delta` is the AICc difference with the</span></span>
+<span id="cb37-10"><a href="step-2-code-potential-models-and-model-selection.html#cb37-10"></a><span class="co"># lowest value</span></span>
+<span id="cb37-11"><a href="step-2-code-potential-models-and-model-selection.html#cb37-11"></a>(AIC.table &lt;-<span class="st"> </span>AIC.table[, <span class="kw">c</span>(<span class="st">&quot;df&quot;</span>, <span class="st">&quot;logLik&quot;</span>, <span class="st">&quot;AICc&quot;</span>, <span class="st">&quot;delta&quot;</span>)])</span></code></pre></div>
+<pre><code>##    df      logLik      AICc      delta
+## M8  7   -8.597929  31.84702   0.000000
+## M2  9   -8.216019  35.49086   3.643839
+## M1  5  -33.480080  77.30499  45.457965
+## M7  7  -33.186374  81.02391  49.176890
+## M5  6 -128.310995 269.10754 237.260517
+## M3  4 -134.532965 277.29450 245.447480
+## M4  4 -224.715763 457.66010 425.813076
+## M6  6 -224.671201 461.82795 429.980930
+## M0  3 -236.861362 479.85909 448.012065</code></pre>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="step-2-code-potential-models-and-model-selection.html#cb39-1"></a><span class="co"># For more information on the other outputs/results returned</span></span>
+<span id="cb39-2"><a href="step-2-code-potential-models-and-model-selection.html#cb39-2"></a><span class="co"># by the function `model.sel()`, see `?model.sel`.</span></span></code></pre></div>
+<p>Where:</p>
+<ul>
+<li><code>df</code> is the degree of freedom</li>
+<li><code>logLik</code> is the loglikelihood</li>
+<li><code>delta</code> is the AICc difference with the lowest value</li>
+</ul>
+<p>We only displayed part of the results returned by the function <code>model.sel()</code>, see <code>?model.sel</code> for more information.</p>
+<hr />
 <p><strong>What do these AICc values mean?</strong></p>
 <ul>
 <li>The model with the smallest AICc has the highest predictive power.</li>
@@ -419,44 +467,43 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li>Let’s take a closer look at M8 and M2. We can exclude other models because they have such higher AICc.</li>
 </ul>
 <p><em>Note that we use now REML (i.e. <code>REML = TRUE</code>) as we are comparing two models with nested random effects and the same fixed effect structure.</em></p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="step-2-code-potential-models-and-model-selection.html#cb35-1"></a><span class="co"># Let&#39;s take a closer look at M8 and M2. We can exclude other</span></span>
-<span id="cb35-2"><a href="step-2-code-potential-models-and-model-selection.html#cb35-2"></a><span class="co"># model because they have such higher AICc Because we are</span></span>
-<span id="cb35-3"><a href="step-2-code-potential-models-and-model-selection.html#cb35-3"></a><span class="co"># comparing two mixed effect models, we can set `REML = TRUE`</span></span>
-<span id="cb35-4"><a href="step-2-code-potential-models-and-model-selection.html#cb35-4"></a><span class="co"># when generating M8 and M2</span></span>
-<span id="cb35-5"><a href="step-2-code-potential-models-and-model-selection.html#cb35-5"></a>M8 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Fish_Species) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb35-6"><a href="step-2-code-potential-models-and-model-selection.html#cb35-6"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake), <span class="dt">data =</span> fish.data, <span class="dt">REML =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="step-2-code-potential-models-and-model-selection.html#cb40-1"></a><span class="co"># Let&#39;s take a closer look at M8 and M2. We can exclude other</span></span>
+<span id="cb40-2"><a href="step-2-code-potential-models-and-model-selection.html#cb40-2"></a><span class="co"># model because they have such higher AICc Because we are</span></span>
+<span id="cb40-3"><a href="step-2-code-potential-models-and-model-selection.html#cb40-3"></a><span class="co"># comparing two mixed effect models, we can set `REML = TRUE`</span></span>
+<span id="cb40-4"><a href="step-2-code-potential-models-and-model-selection.html#cb40-4"></a><span class="co"># when generating M8 and M2</span></span>
+<span id="cb40-5"><a href="step-2-code-potential-models-and-model-selection.html#cb40-5"></a>M8 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Fish_Species) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb40-6"><a href="step-2-code-potential-models-and-model-selection.html#cb40-6"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake), <span class="dt">data =</span> fish.data, <span class="dt">REML =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <pre><code>## boundary (singular) fit: see ?isSingular</code></pre>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="step-2-code-potential-models-and-model-selection.html#cb37-1"></a>M2 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Fish_Species) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb37-2"><a href="step-2-code-potential-models-and-model-selection.html#cb37-2"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Lake), <span class="dt">data =</span> fish.data, <span class="dt">REML =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="step-2-code-potential-models-and-model-selection.html#cb42-1"></a>M2 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Fish_Species) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb42-2"><a href="step-2-code-potential-models-and-model-selection.html#cb42-2"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Lake), <span class="dt">data =</span> fish.data, <span class="dt">REML =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <pre><code>## boundary (singular) fit: see ?isSingular</code></pre>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="step-2-code-potential-models-and-model-selection.html#cb39-1"></a><span class="co"># Now let&#39;s print a table in order to compare M2 and M8</span></span>
-<span id="cb39-2"><a href="step-2-code-potential-models-and-model-selection.html#cb39-2"></a>MuMIn<span class="op">::</span><span class="kw">model.sel</span>(M2, M8)[, <span class="kw">c</span>(<span class="st">&quot;df&quot;</span>, <span class="st">&quot;logLik&quot;</span>, <span class="st">&quot;AICc&quot;</span>, <span class="st">&quot;delta&quot;</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="step-2-code-potential-models-and-model-selection.html#cb44-1"></a><span class="co"># Now let&#39;s print a table in order to compare M2 and M8</span></span>
+<span id="cb44-2"><a href="step-2-code-potential-models-and-model-selection.html#cb44-2"></a>MuMIn<span class="op">::</span><span class="kw">model.sel</span>(M2, M8)[, <span class="kw">c</span>(<span class="st">&quot;df&quot;</span>, <span class="st">&quot;logLik&quot;</span>, <span class="st">&quot;AICc&quot;</span>, <span class="st">&quot;delta&quot;</span>)]</span></code></pre></div>
 <pre><code>##    df    logLik     AICc    delta
 ## M8  7 -10.84011 36.33137 0.000000
 ## M2  9 -10.28932 39.63747 3.306098</code></pre>
 <p>Model <code>M8</code> seems to be the best among all models that we tested.</p>
 <hr />
 <p><strong>What is the structure of the best model?</strong></p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="step-2-code-potential-models-and-model-selection.html#cb41-1"></a><span class="co"># Let&#39;s take a look at the best model again, what is it&#39;s</span></span>
-<span id="cb41-2"><a href="step-2-code-potential-models-and-model-selection.html#cb41-2"></a><span class="co"># structure?</span></span>
-<span id="cb41-3"><a href="step-2-code-potential-models-and-model-selection.html#cb41-3"></a>M8 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Fish_Species) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb41-4"><a href="step-2-code-potential-models-and-model-selection.html#cb41-4"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake), <span class="dt">data =</span> fish.data, <span class="dt">REML =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="step-2-code-potential-models-and-model-selection.html#cb46-1"></a><span class="co"># Let&#39;s take a look at the best model again, what is it&#39;s</span></span>
+<span id="cb46-2"><a href="step-2-code-potential-models-and-model-selection.html#cb46-2"></a><span class="co"># structure?</span></span>
+<span id="cb46-3"><a href="step-2-code-potential-models-and-model-selection.html#cb46-3"></a>M8 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Fish_Species) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb46-4"><a href="step-2-code-potential-models-and-model-selection.html#cb46-4"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake), <span class="dt">data =</span> fish.data, <span class="dt">REML =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <pre><code>## boundary (singular) fit: see ?isSingular</code></pre>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="step-2-code-potential-models-and-model-selection.html#cb43-1"></a><span class="co"># Both the intercepts and slopes of the relationship between</span></span>
-<span id="cb43-2"><a href="step-2-code-potential-models-and-model-selection.html#cb43-2"></a><span class="co"># trophic position and length may vary by fish species, but</span></span>
-<span id="cb43-3"><a href="step-2-code-potential-models-and-model-selection.html#cb43-3"></a><span class="co"># only the intercepts may vary by lake.</span></span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="step-2-code-potential-models-and-model-selection.html#cb48-1"></a><span class="co"># Both the intercepts and slopes of the relationship between</span></span>
+<span id="cb48-2"><a href="step-2-code-potential-models-and-model-selection.html#cb48-2"></a><span class="co"># trophic position and length may vary by fish species, but</span></span>
+<span id="cb48-3"><a href="step-2-code-potential-models-and-model-selection.html#cb48-3"></a><span class="co"># only the intercepts may vary by lake.</span></span></code></pre></div>
 <p>Both the intercepts and slopes of the relationship between trophic position and length may vary by fish species, but only the intercepts may vary by lake.</p>
 <div class="two-col">
 <p><img src="images/fig_9_w5.png" /><br />
 <img src="images/fig_8_w5.png" /></p>
 </div>
 <p>Once the best model is selected, the estimation method must be reset to <code>REML = TRUE</code>.</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="step-2-code-potential-models-and-model-selection.html#cb44-1"></a><span class="co"># Once the best model is selected, the estimation method must</span></span>
-<span id="cb44-2"><a href="step-2-code-potential-models-and-model-selection.html#cb44-2"></a><span class="co"># be reset to `REML = TRUE`.</span></span>
-<span id="cb44-3"><a href="step-2-code-potential-models-and-model-selection.html#cb44-3"></a>M8 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Fish_Species) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb44-4"><a href="step-2-code-potential-models-and-model-selection.html#cb44-4"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake), <span class="dt">data =</span> fish.data, <span class="dt">REML =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="step-2-code-potential-models-and-model-selection.html#cb49-1"></a><span class="co"># Once the best model is selected, the estimation method must</span></span>
+<span id="cb49-2"><a href="step-2-code-potential-models-and-model-selection.html#cb49-2"></a><span class="co"># be reset to `REML = TRUE`.</span></span>
+<span id="cb49-3"><a href="step-2-code-potential-models-and-model-selection.html#cb49-3"></a>M8 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Fish_Species) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb49-4"><a href="step-2-code-potential-models-and-model-selection.html#cb49-4"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake), <span class="dt">data =</span> fish.data, <span class="dt">REML =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <pre><code>## boundary (singular) fit: see ?isSingular</code></pre>
-</div>
 </div>
 </div>
 <hr>

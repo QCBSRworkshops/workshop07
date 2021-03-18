@@ -180,6 +180,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.2" data-path="step-2-code-potential-models-and-model-selection.html"><a href="step-2-code-potential-models-and-model-selection.html#different-model-structures"><i class="fa fa-check"></i><b>10.2</b> Different model structures</a></li>
 <li class="chapter" data-level="10.3" data-path="step-2-code-potential-models-and-model-selection.html"><a href="step-2-code-potential-models-and-model-selection.html#challenge-4"><i class="fa fa-check"></i><b>10.3</b> Challenge 4</a></li>
 <li class="chapter" data-level="10.4" data-path="step-2-code-potential-models-and-model-selection.html"><a href="step-2-code-potential-models-and-model-selection.html#challenge-5"><i class="fa fa-check"></i><b>10.4</b> Challenge 5</a></li>
+<li class="chapter" data-level="10.5" data-path="step-2-code-potential-models-and-model-selection.html"><a href="step-2-code-potential-models-and-model-selection.html#comparing-models"><i class="fa fa-check"></i><b>10.5</b> Comparing models</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="step-3-model-validation.html"><a href="step-3-model-validation.html"><i class="fa fa-check"></i><b>11</b> Step 3. Model validation</a><ul>
 <li class="chapter" data-level="11.1" data-path="step-3-model-validation.html"><a href="step-3-model-validation.html#check-the-homogeneity-of-the-variance"><i class="fa fa-check"></i><b>11.1</b> 1. Check the homogeneity of the variance</a></li>
@@ -243,17 +244,17 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Chapter 16</span> Negative binomial GLMM</h1>
 <p>One option for a distribution where the variance increases more rapidly with the mean is the <strong>negative binomial</strong> (or Poisson-gamma) distribution. Recall that the negative binomial distribution meets the assumption that the variance is proportional to the square of the mean.</p>
 <p>We can model this distribution using the function <code>glmer.nb()</code>:</p>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="negative-binomial-glmm.html#cb72-1"></a><span class="co">## Negative binomial GLMM using the function glmer.nb()</span></span>
-<span id="cb72-2"><a href="negative-binomial-glmm.html#cb72-2"></a>mnb1 &lt;-<span class="st"> </span><span class="kw">glmer.nb</span>(total.fruits <span class="op">~</span><span class="st"> </span>nutrient <span class="op">*</span><span class="st"> </span>amd <span class="op">+</span><span class="st"> </span>rack <span class="op">+</span><span class="st"> </span>status <span class="op">+</span><span class="st"> </span></span>
-<span id="cb72-3"><a href="negative-binomial-glmm.html#cb72-3"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>popu) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>gen), <span class="dt">data =</span> dat.tf, <span class="dt">control =</span> <span class="kw">glmerControl</span>(<span class="dt">optimizer =</span> <span class="st">&quot;bobyqa&quot;</span>))</span>
-<span id="cb72-4"><a href="negative-binomial-glmm.html#cb72-4"></a><span class="co"># Control argument specifies the way we optimize the</span></span>
-<span id="cb72-5"><a href="negative-binomial-glmm.html#cb72-5"></a><span class="co"># parameter values</span></span></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="negative-binomial-glmm.html#cb77-1"></a><span class="co">## Negative binomial GLMM using the function glmer.nb()</span></span>
+<span id="cb77-2"><a href="negative-binomial-glmm.html#cb77-2"></a>mnb1 &lt;-<span class="st"> </span><span class="kw">glmer.nb</span>(total.fruits <span class="op">~</span><span class="st"> </span>nutrient <span class="op">*</span><span class="st"> </span>amd <span class="op">+</span><span class="st"> </span>rack <span class="op">+</span><span class="st"> </span>status <span class="op">+</span><span class="st"> </span></span>
+<span id="cb77-3"><a href="negative-binomial-glmm.html#cb77-3"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>popu) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>gen), <span class="dt">data =</span> dat.tf, <span class="dt">control =</span> <span class="kw">glmerControl</span>(<span class="dt">optimizer =</span> <span class="st">&quot;bobyqa&quot;</span>))</span>
+<span id="cb77-4"><a href="negative-binomial-glmm.html#cb77-4"></a><span class="co"># Control argument specifies the way we optimize the</span></span>
+<span id="cb77-5"><a href="negative-binomial-glmm.html#cb77-5"></a><span class="co"># parameter values</span></span></code></pre></div>
 <p>We test again for over-dispersion:</p>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="negative-binomial-glmm.html#cb73-1"></a><span class="co"># Over-dispersion check</span></span>
-<span id="cb73-2"><a href="negative-binomial-glmm.html#cb73-2"></a><span class="kw">overdisp_fun</span>(mnb1)</span></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="negative-binomial-glmm.html#cb78-1"></a><span class="co"># Over-dispersion check</span></span>
+<span id="cb78-2"><a href="negative-binomial-glmm.html#cb78-2"></a><span class="kw">overdisp_fun</span>(mnb1)</span></code></pre></div>
 <pre><code>##         chisq         ratio             p          logp 
 ## 721.034466390   1.170510497   0.002143424  -6.145350714</code></pre>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="negative-binomial-glmm.html#cb75-1"></a><span class="co"># Ratio is now much closer to 1 although p &lt; 0.05</span></span></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="negative-binomial-glmm.html#cb80-1"></a><span class="co"># Ratio is now much closer to 1 although p &lt; 0.05</span></span></code></pre></div>
 <p><strong>Ratio is now much closer to 1 although p &lt; 0.05</strong></p>
 </div>
 <hr>

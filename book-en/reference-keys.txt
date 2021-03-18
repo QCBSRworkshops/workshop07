@@ -31,6 +31,7 @@ estimation-methods
 different-model-structures
 challenge-4
 challenge-5
+comparing-models
 step-3.-model-validation
 check-the-homogeneity-of-the-variance
 check-the-independence-of-the-model-residuals-with-each-covariate

@@ -180,6 +180,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.2" data-path="step-2-code-potential-models-and-model-selection.html"><a href="step-2-code-potential-models-and-model-selection.html#different-model-structures"><i class="fa fa-check"></i><b>10.2</b> Different model structures</a></li>
 <li class="chapter" data-level="10.3" data-path="step-2-code-potential-models-and-model-selection.html"><a href="step-2-code-potential-models-and-model-selection.html#challenge-4"><i class="fa fa-check"></i><b>10.3</b> Challenge 4</a></li>
 <li class="chapter" data-level="10.4" data-path="step-2-code-potential-models-and-model-selection.html"><a href="step-2-code-potential-models-and-model-selection.html#challenge-5"><i class="fa fa-check"></i><b>10.4</b> Challenge 5</a></li>
+<li class="chapter" data-level="10.5" data-path="step-2-code-potential-models-and-model-selection.html"><a href="step-2-code-potential-models-and-model-selection.html#comparing-models"><i class="fa fa-check"></i><b>10.5</b> Comparing models</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="step-3-model-validation.html"><a href="step-3-model-validation.html"><i class="fa fa-check"></i><b>11</b> Step 3. Model validation</a><ul>
 <li class="chapter" data-level="11.1" data-path="step-3-model-validation.html"><a href="step-3-model-validation.html#check-the-homogeneity-of-the-variance"><i class="fa fa-check"></i><b>11.1</b> 1. Check the homogeneity of the variance</a></li>
@@ -243,7 +244,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Chapter 9</span> Step 1. <em>A priori</em> model building</h1>
 <p><strong>What we know <em>a priori</em>:</strong></p>
 <p>We want to determine if the trophic position can be predicted by body length, while taking into account the variation between species and lakes. So we want a model that looks like this:</p>
-<p><span class="math display">\[PT_{ijk} \sim Length_i + Lake_j + Species_k + \epsilon_{ijk}\]</span></p>
+<p><span class="math display">\[TP_{ijk} \sim Length_i + Lake_j + Species_k + \epsilon_{ijk}\]</span>
+where:
+- <code>TP_ijk</code> is the trophic position of individual (i) from lake (j) of species (k)
+- <code>ε</code> are the residuals of the model (i.e. the unexplained variation).</p>
 <div id="check-data-structure" class="section level2">
 <h2><span class="header-section-number">9.1</span> Check data structure</h2>
 <p><strong>Does the data have the right structure?</strong></p>
