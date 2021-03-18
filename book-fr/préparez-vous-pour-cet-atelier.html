@@ -146,11 +146,17 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1" data-path="objectifs-dapprentissage.html"><a href="objectifs-dapprentissage.html"><i class="fa fa-check"></i><b>1</b> Objectifs d’apprentissage</a></li>
 <li class="chapter" data-level="2" data-path="préparez-vous-pour-cet-atelier.html"><a href="préparez-vous-pour-cet-atelier.html"><i class="fa fa-check"></i><b>2</b> Préparez-vous pour cet atelier</a></li>
 <li class="chapter" data-level="3" data-path="pourquoi-choisir-un-mlm.html"><a href="pourquoi-choisir-un-mlm.html"><i class="fa fa-check"></i><b>3</b> Pourquoi choisir un MLM?</a></li>
-<li class="chapter" data-level="4" data-path="quest-ce-quun-mlm-et-pourquoi-est-ce-important.html"><a href="quest-ce-quun-mlm-et-pourquoi-est-ce-important.html"><i class="fa fa-check"></i><b>4</b> Qu’est-ce qu’un MLM et pourquoi est-ce important?</a></li>
-<li class="chapter" data-level="5" data-path="introduction-au-jeu-de-données.html"><a href="introduction-au-jeu-de-données.html"><i class="fa fa-check"></i><b>5</b> Introduction au jeu de données</a></li>
+<li class="chapter" data-level="4" data-path="commencer-par-une-question.html"><a href="commencer-par-une-question.html"><i class="fa fa-check"></i><b>4</b> Commencer par une question</a><ul>
+<li class="chapter" data-level="4.1" data-path="commencer-par-une-question.html"><a href="commencer-par-une-question.html#défi-1"><i class="fa fa-check"></i><b>4.1</b> Défi 1</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="analyse-des-données.html"><a href="analyse-des-données.html"><i class="fa fa-check"></i><b>5</b> Analyse des données</a><ul>
+<li class="chapter" data-level="5.1" data-path="analyse-des-données.html"><a href="analyse-des-données.html#nombreuses-analyses-séparées"><i class="fa fa-check"></i><b>5.1</b> Nombreuses analyses séparées</a></li>
+<li class="chapter" data-level="5.2" data-path="analyse-des-données.html"><a href="analyse-des-données.html#une-analyse-groupée"><i class="fa fa-check"></i><b>5.2</b> Une analyse groupée</a></li>
+<li class="chapter" data-level="5.3" data-path="analyse-des-données.html"><a href="analyse-des-données.html#il-y-a-une-troisième-option"><i class="fa fa-check"></i><b>5.3</b> Il y a une troisième option?</a></li>
+</ul></li>
 <li class="chapter" data-level="6" data-path="comment-pourrions-nous-analyser-ces-données.html"><a href="comment-pourrions-nous-analyser-ces-données.html"><i class="fa fa-check"></i><b>6</b> Comment pourrions-nous analyser ces données?</a><ul>
-<li class="chapter" data-level="6.1" data-path="comment-pourrions-nous-analyser-ces-données.html"><a href="comment-pourrions-nous-analyser-ces-données.html#nombreuses-analyses-séparées"><i class="fa fa-check"></i><b>6.1</b> Nombreuses analyses séparées</a></li>
-<li class="chapter" data-level="6.2" data-path="comment-pourrions-nous-analyser-ces-données.html"><a href="comment-pourrions-nous-analyser-ces-données.html#une-analyse-groupée"><i class="fa fa-check"></i><b>6.2</b> Une analyse groupée</a></li>
+<li class="chapter" data-level="6.1" data-path="comment-pourrions-nous-analyser-ces-données.html"><a href="comment-pourrions-nous-analyser-ces-données.html#nombreuses-analyses-séparées-1"><i class="fa fa-check"></i><b>6.1</b> Nombreuses analyses séparées</a></li>
+<li class="chapter" data-level="6.2" data-path="comment-pourrions-nous-analyser-ces-données.html"><a href="comment-pourrions-nous-analyser-ces-données.html#une-analyse-groupée-1"><i class="fa fa-check"></i><b>6.2</b> Une analyse groupée</a></li>
 <li class="chapter" data-level="6.3" data-path="comment-pourrions-nous-analyser-ces-données.html"><a href="comment-pourrions-nous-analyser-ces-données.html#construire-un-mlm"><i class="fa fa-check"></i><b>6.3</b> Construire un MLM</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="effets-fixes-et-aléatoires.html"><a href="effets-fixes-et-aléatoires.html"><i class="fa fa-check"></i><b>7</b> Effets fixes et aléatoires</a><ul>
@@ -250,7 +256,11 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-4"><a href="préparez-vous-pour-cet-atelier.html#cb1-4"></a><span class="kw">install.packages</span>(<span class="st">&quot;MASS&quot;</span>)</span>
 <span id="cb1-5"><a href="préparez-vous-pour-cet-atelier.html#cb1-5"></a><span class="kw">install.packages</span>(<span class="st">&quot;vcdExtra&quot;</span>)</span>
 <span id="cb1-6"><a href="préparez-vous-pour-cet-atelier.html#cb1-6"></a><span class="kw">install.packages</span>(<span class="st">&quot;bbmle&quot;</span>)</span>
-<span id="cb1-7"><a href="préparez-vous-pour-cet-atelier.html#cb1-7"></a><span class="kw">install.packages</span>(<span class="st">&quot;DescTools&quot;</span>)</span></code></pre></div>
+<span id="cb1-7"><a href="préparez-vous-pour-cet-atelier.html#cb1-7"></a><span class="kw">install.packages</span>(<span class="st">&quot;DescTools&quot;</span>)</span>
+<span id="cb1-8"><a href="préparez-vous-pour-cet-atelier.html#cb1-8"></a><span class="kw">install.packages</span>(<span class="st">&quot;remotes&quot;</span>)</span>
+<span id="cb1-9"><a href="préparez-vous-pour-cet-atelier.html#cb1-9"></a><span class="kw">install.packages</span>(<span class="st">&quot;gridExtra&quot;</span>)</span>
+<span id="cb1-10"><a href="préparez-vous-pour-cet-atelier.html#cb1-10"></a><span class="kw">install.packages</span>(<span class="st">&quot;lattice&quot;</span>)</span>
+<span id="cb1-11"><a href="préparez-vous-pour-cet-atelier.html#cb1-11"></a><span class="kw">install.packages</span>(<span class="st">&quot;MuMIn&quot;</span>)</span></code></pre></div>
 <p>Pour charger ces paquets, exécutez:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="préparez-vous-pour-cet-atelier.html#cb2-1"></a><span class="kw">library</span>(ggplot2)</span>
 <span id="cb2-2"><a href="préparez-vous-pour-cet-atelier.html#cb2-2"></a><span class="kw">library</span>(lme4)</span>
@@ -258,7 +268,11 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-4"><a href="préparez-vous-pour-cet-atelier.html#cb2-4"></a><span class="kw">library</span>(MASS)</span>
 <span id="cb2-5"><a href="préparez-vous-pour-cet-atelier.html#cb2-5"></a><span class="kw">library</span>(vcdExtra)</span>
 <span id="cb2-6"><a href="préparez-vous-pour-cet-atelier.html#cb2-6"></a><span class="kw">library</span>(bbmle)</span>
-<span id="cb2-7"><a href="préparez-vous-pour-cet-atelier.html#cb2-7"></a><span class="kw">library</span>(DescTools)</span></code></pre></div>
+<span id="cb2-7"><a href="préparez-vous-pour-cet-atelier.html#cb2-7"></a><span class="kw">library</span>(DescTools)</span>
+<span id="cb2-8"><a href="préparez-vous-pour-cet-atelier.html#cb2-8"></a><span class="kw">library</span>(remotes)</span>
+<span id="cb2-9"><a href="préparez-vous-pour-cet-atelier.html#cb2-9"></a><span class="kw">library</span>(gridExtra)</span>
+<span id="cb2-10"><a href="préparez-vous-pour-cet-atelier.html#cb2-10"></a><span class="kw">library</span>(lattice)</span>
+<span id="cb2-11"><a href="préparez-vous-pour-cet-atelier.html#cb2-11"></a><span class="kw">library</span>(MuMIn)</span></code></pre></div>
 
 </div>
 <hr>

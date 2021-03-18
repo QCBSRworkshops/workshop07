@@ -146,11 +146,17 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1" data-path="objectifs-dapprentissage.html"><a href="objectifs-dapprentissage.html"><i class="fa fa-check"></i><b>1</b> Objectifs d’apprentissage</a></li>
 <li class="chapter" data-level="2" data-path="préparez-vous-pour-cet-atelier.html"><a href="préparez-vous-pour-cet-atelier.html"><i class="fa fa-check"></i><b>2</b> Préparez-vous pour cet atelier</a></li>
 <li class="chapter" data-level="3" data-path="pourquoi-choisir-un-mlm.html"><a href="pourquoi-choisir-un-mlm.html"><i class="fa fa-check"></i><b>3</b> Pourquoi choisir un MLM?</a></li>
-<li class="chapter" data-level="4" data-path="quest-ce-quun-mlm-et-pourquoi-est-ce-important.html"><a href="quest-ce-quun-mlm-et-pourquoi-est-ce-important.html"><i class="fa fa-check"></i><b>4</b> Qu’est-ce qu’un MLM et pourquoi est-ce important?</a></li>
-<li class="chapter" data-level="5" data-path="introduction-au-jeu-de-données.html"><a href="introduction-au-jeu-de-données.html"><i class="fa fa-check"></i><b>5</b> Introduction au jeu de données</a></li>
+<li class="chapter" data-level="4" data-path="commencer-par-une-question.html"><a href="commencer-par-une-question.html"><i class="fa fa-check"></i><b>4</b> Commencer par une question</a><ul>
+<li class="chapter" data-level="4.1" data-path="commencer-par-une-question.html"><a href="commencer-par-une-question.html#défi-1"><i class="fa fa-check"></i><b>4.1</b> Défi 1</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="analyse-des-données.html"><a href="analyse-des-données.html"><i class="fa fa-check"></i><b>5</b> Analyse des données</a><ul>
+<li class="chapter" data-level="5.1" data-path="analyse-des-données.html"><a href="analyse-des-données.html#nombreuses-analyses-séparées"><i class="fa fa-check"></i><b>5.1</b> Nombreuses analyses séparées</a></li>
+<li class="chapter" data-level="5.2" data-path="analyse-des-données.html"><a href="analyse-des-données.html#une-analyse-groupée"><i class="fa fa-check"></i><b>5.2</b> Une analyse groupée</a></li>
+<li class="chapter" data-level="5.3" data-path="analyse-des-données.html"><a href="analyse-des-données.html#il-y-a-une-troisième-option"><i class="fa fa-check"></i><b>5.3</b> Il y a une troisième option?</a></li>
+</ul></li>
 <li class="chapter" data-level="6" data-path="comment-pourrions-nous-analyser-ces-données.html"><a href="comment-pourrions-nous-analyser-ces-données.html"><i class="fa fa-check"></i><b>6</b> Comment pourrions-nous analyser ces données?</a><ul>
-<li class="chapter" data-level="6.1" data-path="comment-pourrions-nous-analyser-ces-données.html"><a href="comment-pourrions-nous-analyser-ces-données.html#nombreuses-analyses-séparées"><i class="fa fa-check"></i><b>6.1</b> Nombreuses analyses séparées</a></li>
-<li class="chapter" data-level="6.2" data-path="comment-pourrions-nous-analyser-ces-données.html"><a href="comment-pourrions-nous-analyser-ces-données.html#une-analyse-groupée"><i class="fa fa-check"></i><b>6.2</b> Une analyse groupée</a></li>
+<li class="chapter" data-level="6.1" data-path="comment-pourrions-nous-analyser-ces-données.html"><a href="comment-pourrions-nous-analyser-ces-données.html#nombreuses-analyses-séparées-1"><i class="fa fa-check"></i><b>6.1</b> Nombreuses analyses séparées</a></li>
+<li class="chapter" data-level="6.2" data-path="comment-pourrions-nous-analyser-ces-données.html"><a href="comment-pourrions-nous-analyser-ces-données.html#une-analyse-groupée-1"><i class="fa fa-check"></i><b>6.2</b> Une analyse groupée</a></li>
 <li class="chapter" data-level="6.3" data-path="comment-pourrions-nous-analyser-ces-données.html"><a href="comment-pourrions-nous-analyser-ces-données.html#construire-un-mlm"><i class="fa fa-check"></i><b>6.3</b> Construire un MLM</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="effets-fixes-et-aléatoires.html"><a href="effets-fixes-et-aléatoires.html"><i class="fa fa-check"></i><b>7</b> Effets fixes et aléatoires</a><ul>
@@ -250,26 +256,26 @@ et<br />
 (Housekeeping) avant de construire un modèle ! Les données ont-elles la
 bonne structure ? Utilisez le code suivant pour visualiser la structure
 et les types de variables au sein de votre jeu de données.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="comment-implémenter-un-mlm-dans-r.html#cb10-1"></a><span class="co">################ Section 2######################### Exécution d&#39;un modèle</span></span>
-<span id="cb10-2"><a href="comment-implémenter-un-mlm-dans-r.html#cb10-2"></a><span class="co">################ mixte en R Processus de quatre étapes pour la construction</span></span>
-<span id="cb10-3"><a href="comment-implémenter-un-mlm-dans-r.html#cb10-3"></a><span class="co">################ d&#39;un modèle mixte en R</span></span>
-<span id="cb10-4"><a href="comment-implémenter-un-mlm-dans-r.html#cb10-4"></a></span>
-<span id="cb10-5"><a href="comment-implémenter-un-mlm-dans-r.html#cb10-5"></a><span class="co"># 1) Construction du modèle a priori et exploration des</span></span>
-<span id="cb10-6"><a href="comment-implémenter-un-mlm-dans-r.html#cb10-6"></a><span class="co"># données #### i) Définir un modèle basé sur une connaissance</span></span>
-<span id="cb10-7"><a href="comment-implémenter-un-mlm-dans-r.html#cb10-7"></a><span class="co"># a priori Nous savons que nous voulons construire un modèle</span></span>
-<span id="cb10-8"><a href="comment-implémenter-un-mlm-dans-r.html#cb10-8"></a><span class="co"># qui évalue la relation entre la position trophique et la</span></span>
-<span id="cb10-9"><a href="comment-implémenter-un-mlm-dans-r.html#cb10-9"></a><span class="co"># longueur tout en tenant compte de la variation due au lac</span></span>
-<span id="cb10-10"><a href="comment-implémenter-un-mlm-dans-r.html#cb10-10"></a><span class="co"># et à l&#39;espèce Position trophique ~ Longueur + Espèce + Lac</span></span>
-<span id="cb10-11"><a href="comment-implémenter-un-mlm-dans-r.html#cb10-11"></a></span>
-<span id="cb10-12"><a href="comment-implémenter-un-mlm-dans-r.html#cb10-12"></a><span class="co"># ii)Housekeeping et exploration des données Assurez-vous que</span></span>
-<span id="cb10-13"><a href="comment-implémenter-un-mlm-dans-r.html#cb10-13"></a><span class="co"># la structure de vos données soit correcte</span></span>
-<span id="cb10-14"><a href="comment-implémenter-un-mlm-dans-r.html#cb10-14"></a><span class="kw">str</span>(data)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="comment-implémenter-un-mlm-dans-r.html#cb8-1"></a><span class="co">################ Section 2######################### Exécution d&#39;un modèle</span></span>
+<span id="cb8-2"><a href="comment-implémenter-un-mlm-dans-r.html#cb8-2"></a><span class="co">################ mixte en R Processus de quatre étapes pour la construction</span></span>
+<span id="cb8-3"><a href="comment-implémenter-un-mlm-dans-r.html#cb8-3"></a><span class="co">################ d&#39;un modèle mixte en R</span></span>
+<span id="cb8-4"><a href="comment-implémenter-un-mlm-dans-r.html#cb8-4"></a></span>
+<span id="cb8-5"><a href="comment-implémenter-un-mlm-dans-r.html#cb8-5"></a><span class="co"># 1) Construction du modèle a priori et exploration des</span></span>
+<span id="cb8-6"><a href="comment-implémenter-un-mlm-dans-r.html#cb8-6"></a><span class="co"># données #### i) Définir un modèle basé sur une connaissance</span></span>
+<span id="cb8-7"><a href="comment-implémenter-un-mlm-dans-r.html#cb8-7"></a><span class="co"># a priori Nous savons que nous voulons construire un modèle</span></span>
+<span id="cb8-8"><a href="comment-implémenter-un-mlm-dans-r.html#cb8-8"></a><span class="co"># qui évalue la relation entre la position trophique et la</span></span>
+<span id="cb8-9"><a href="comment-implémenter-un-mlm-dans-r.html#cb8-9"></a><span class="co"># longueur tout en tenant compte de la variation due au lac</span></span>
+<span id="cb8-10"><a href="comment-implémenter-un-mlm-dans-r.html#cb8-10"></a><span class="co"># et à l&#39;espèce Position trophique ~ Longueur + Espèce + Lac</span></span>
+<span id="cb8-11"><a href="comment-implémenter-un-mlm-dans-r.html#cb8-11"></a></span>
+<span id="cb8-12"><a href="comment-implémenter-un-mlm-dans-r.html#cb8-12"></a><span class="co"># ii)Housekeeping et exploration des données Assurez-vous que</span></span>
+<span id="cb8-13"><a href="comment-implémenter-un-mlm-dans-r.html#cb8-13"></a><span class="co"># la structure de vos données soit correcte</span></span>
+<span id="cb8-14"><a href="comment-implémenter-un-mlm-dans-r.html#cb8-14"></a><span class="kw">str</span>(data)</span></code></pre></div>
 <p>++++ Sortie | <img src="images/fig_13_w5.png" width="600" /> ++++</p>
 <p>Regardez la distribution des échantillons pour chaque facteur :</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="comment-implémenter-un-mlm-dans-r.html#cb11-1"></a><span class="co"># Regardez la distribution des échantillons de chaque facteur</span></span>
-<span id="cb11-2"><a href="comment-implémenter-un-mlm-dans-r.html#cb11-2"></a><span class="co"># pour vérifier si le jeu de données est équilibré</span></span>
-<span id="cb11-3"><a href="comment-implémenter-un-mlm-dans-r.html#cb11-3"></a><span class="kw">table</span>(data<span class="op">$</span>Lake)</span>
-<span id="cb11-4"><a href="comment-implémenter-un-mlm-dans-r.html#cb11-4"></a><span class="kw">table</span>(data<span class="op">$</span>Fish_Species)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="comment-implémenter-un-mlm-dans-r.html#cb9-1"></a><span class="co"># Regardez la distribution des échantillons de chaque facteur</span></span>
+<span id="cb9-2"><a href="comment-implémenter-un-mlm-dans-r.html#cb9-2"></a><span class="co"># pour vérifier si le jeu de données est équilibré</span></span>
+<span id="cb9-3"><a href="comment-implémenter-un-mlm-dans-r.html#cb9-3"></a><span class="kw">table</span>(data<span class="op">$</span>Lake)</span>
+<span id="cb9-4"><a href="comment-implémenter-un-mlm-dans-r.html#cb9-4"></a><span class="kw">table</span>(data<span class="op">$</span>Fish_Species)</span></code></pre></div>
 <p>++++ Sortie | <strong>Lac</strong><br />
 ---- <img src="images/fig_15_w5.png" width="200" /><br />
 ---- <strong>Espèce</strong><br />
@@ -279,11 +285,11 @@ et les types de variables au sein de votre jeu de données.</p>
 peuvent analyser les plans expérimentaux non équilibrés (comme c’est
 souvent le cas en écologie!)</p>
 <p>Regardez la distribution des variables continues :</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="comment-implémenter-un-mlm-dans-r.html#cb12-1"></a><span class="co"># Regardez la distribution des variables continues</span></span>
-<span id="cb12-2"><a href="comment-implémenter-un-mlm-dans-r.html#cb12-2"></a><span class="co"># Transformez si nécessaire (ça évitera des problèmes</span></span>
-<span id="cb12-3"><a href="comment-implémenter-un-mlm-dans-r.html#cb12-3"></a><span class="co"># d’hétérogénéité des résidus du modèle)</span></span>
-<span id="cb12-4"><a href="comment-implémenter-un-mlm-dans-r.html#cb12-4"></a><span class="kw">hist</span>(data<span class="op">$</span>Fish_Length)</span>
-<span id="cb12-5"><a href="comment-implémenter-un-mlm-dans-r.html#cb12-5"></a><span class="kw">hist</span>(data<span class="op">$</span>Trophic_Pos)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="comment-implémenter-un-mlm-dans-r.html#cb10-1"></a><span class="co"># Regardez la distribution des variables continues</span></span>
+<span id="cb10-2"><a href="comment-implémenter-un-mlm-dans-r.html#cb10-2"></a><span class="co"># Transformez si nécessaire (ça évitera des problèmes</span></span>
+<span id="cb10-3"><a href="comment-implémenter-un-mlm-dans-r.html#cb10-3"></a><span class="co"># d’hétérogénéité des résidus du modèle)</span></span>
+<span id="cb10-4"><a href="comment-implémenter-un-mlm-dans-r.html#cb10-4"></a><span class="kw">hist</span>(data<span class="op">$</span>Fish_Length)</span>
+<span id="cb10-5"><a href="comment-implémenter-un-mlm-dans-r.html#cb10-5"></a><span class="kw">hist</span>(data<span class="op">$</span>Trophic_Pos)</span></code></pre></div>
 <p>++++ Sortie | <strong>Longueur</strong><br />
 ---- <img src="images/fig_16_w5.png" width="400" /><br />
 ---- <strong>Position trophique</strong><br />
@@ -304,9 +310,9 @@ du modèle et peu de pouvoir aux variables qui suivent.</p>
 une variable explicative continue. Si vous aviez une autre variable
 explicative (Var2) et vouliez vérifier la colinéarité, vous pouvez
 utiliser le code suivant :</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="comment-implémenter-un-mlm-dans-r.html#cb13-1"></a><span class="co"># Évaluer la colinéarité entre variables</span></span>
-<span id="cb13-2"><a href="comment-implémenter-un-mlm-dans-r.html#cb13-2"></a><span class="kw">plot</span>(data)</span>
-<span id="cb13-3"><a href="comment-implémenter-un-mlm-dans-r.html#cb13-3"></a><span class="kw">cor</span>(data<span class="op">$</span>Fish_Length, data<span class="op">$</span>Var2)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="comment-implémenter-un-mlm-dans-r.html#cb11-1"></a><span class="co"># Évaluer la colinéarité entre variables</span></span>
+<span id="cb11-2"><a href="comment-implémenter-un-mlm-dans-r.html#cb11-2"></a><span class="kw">plot</span>(data)</span>
+<span id="cb11-3"><a href="comment-implémenter-un-mlm-dans-r.html#cb11-3"></a><span class="kw">cor</span>(data<span class="op">$</span>Fish_Length, data<span class="op">$</span>Var2)</span></code></pre></div>
 <hr />
 <p><strong>DÉFI 3</strong><br />
 </p>
@@ -327,17 +333,17 @@ même si elles étaient à l’origine de différentes unités :<br />
 Parce que nos données ont des échelles très différentes, (la longueur
 est à une échelle plus longue que la position trophique), on applique la
 correction Z.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="comment-implémenter-un-mlm-dans-r.html#cb14-1"></a><span class="co"># Considérez l&#39;échelle de vos données Note : Si deux</span></span>
-<span id="cb14-2"><a href="comment-implémenter-un-mlm-dans-r.html#cb14-2"></a><span class="co"># variables dans le même modèle ont des valeurs se situant</span></span>
-<span id="cb14-3"><a href="comment-implémenter-un-mlm-dans-r.html#cb14-3"></a><span class="co"># sur des échelles très différentes, il est probable que le</span></span>
-<span id="cb14-4"><a href="comment-implémenter-un-mlm-dans-r.html#cb14-4"></a><span class="co"># modèle mixte indique un &#39;problème de convergence&#39; en</span></span>
-<span id="cb14-5"><a href="comment-implémenter-un-mlm-dans-r.html#cb14-5"></a><span class="co"># essayant de calculer les paramètres. La correction Z</span></span>
-<span id="cb14-6"><a href="comment-implémenter-un-mlm-dans-r.html#cb14-6"></a><span class="co"># standardize les variables et résout ce problème : Qu&#39;est-ce</span></span>
-<span id="cb14-7"><a href="comment-implémenter-un-mlm-dans-r.html#cb14-7"></a><span class="co"># qu&#39;une correction de Z ?: (z = (x - mean(x))/sd(x))</span></span>
-<span id="cb14-8"><a href="comment-implémenter-un-mlm-dans-r.html#cb14-8"></a><span class="co"># Longueur corrigée</span></span>
-<span id="cb14-9"><a href="comment-implémenter-un-mlm-dans-r.html#cb14-9"></a>data<span class="op">$</span>Z_Length &lt;-<span class="st"> </span>(data<span class="op">$</span>Fish_Length <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(data<span class="op">$</span>Fish_Length))<span class="op">/</span><span class="kw">sd</span>(data<span class="op">$</span>Fish_Length)</span>
-<span id="cb14-10"><a href="comment-implémenter-un-mlm-dans-r.html#cb14-10"></a><span class="co"># Position trophique corrigée</span></span>
-<span id="cb14-11"><a href="comment-implémenter-un-mlm-dans-r.html#cb14-11"></a>data<span class="op">$</span>Z_TP &lt;-<span class="st"> </span>(data<span class="op">$</span>Trophic_Pos <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(data<span class="op">$</span>Trophic_Pos))<span class="op">/</span><span class="kw">sd</span>(data<span class="op">$</span>Trophic_Pos)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="comment-implémenter-un-mlm-dans-r.html#cb12-1"></a><span class="co"># Considérez l&#39;échelle de vos données Note : Si deux</span></span>
+<span id="cb12-2"><a href="comment-implémenter-un-mlm-dans-r.html#cb12-2"></a><span class="co"># variables dans le même modèle ont des valeurs se situant</span></span>
+<span id="cb12-3"><a href="comment-implémenter-un-mlm-dans-r.html#cb12-3"></a><span class="co"># sur des échelles très différentes, il est probable que le</span></span>
+<span id="cb12-4"><a href="comment-implémenter-un-mlm-dans-r.html#cb12-4"></a><span class="co"># modèle mixte indique un &#39;problème de convergence&#39; en</span></span>
+<span id="cb12-5"><a href="comment-implémenter-un-mlm-dans-r.html#cb12-5"></a><span class="co"># essayant de calculer les paramètres. La correction Z</span></span>
+<span id="cb12-6"><a href="comment-implémenter-un-mlm-dans-r.html#cb12-6"></a><span class="co"># standardize les variables et résout ce problème : Qu&#39;est-ce</span></span>
+<span id="cb12-7"><a href="comment-implémenter-un-mlm-dans-r.html#cb12-7"></a><span class="co"># qu&#39;une correction de Z ?: (z = (x - mean(x))/sd(x))</span></span>
+<span id="cb12-8"><a href="comment-implémenter-un-mlm-dans-r.html#cb12-8"></a><span class="co"># Longueur corrigée</span></span>
+<span id="cb12-9"><a href="comment-implémenter-un-mlm-dans-r.html#cb12-9"></a>data<span class="op">$</span>Z_Length &lt;-<span class="st"> </span>(data<span class="op">$</span>Fish_Length <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(data<span class="op">$</span>Fish_Length))<span class="op">/</span><span class="kw">sd</span>(data<span class="op">$</span>Fish_Length)</span>
+<span id="cb12-10"><a href="comment-implémenter-un-mlm-dans-r.html#cb12-10"></a><span class="co"># Position trophique corrigée</span></span>
+<span id="cb12-11"><a href="comment-implémenter-un-mlm-dans-r.html#cb12-11"></a>data<span class="op">$</span>Z_TP &lt;-<span class="st"> </span>(data<span class="op">$</span>Trophic_Pos <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(data<span class="op">$</span>Trophic_Pos))<span class="op">/</span><span class="kw">sd</span>(data<span class="op">$</span>Trophic_Pos)</span></code></pre></div>
 <p>Pour savoir si un modèle mixte est nécessaire pour vos données, vous
 devez déterminer s’il est important de prendre en compte l’effet
 aléatoire de facteurs qui pourraient influencer la relation qui vous
@@ -347,18 +353,18 @@ Nous pouvons le faire en :</p>
 effet aléatoire
 -Calculant les résidus de ce modèle linéaire
 -Produisant un graphique de la valeur des résidus en fonction des niveaux des facteurs potentiellement aléatoires</code></pre>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="comment-implémenter-un-mlm-dans-r.html#cb16-1"></a><span class="co"># Déterminez s&#39;il est important de tenir compte des</span></span>
-<span id="cb16-2"><a href="comment-implémenter-un-mlm-dans-r.html#cb16-2"></a><span class="co"># variations dans les &#39;effets aléatoires&#39; en comparant les</span></span>
-<span id="cb16-3"><a href="comment-implémenter-un-mlm-dans-r.html#cb16-3"></a><span class="co"># résidus d&#39;un modèle linéaire sans les effets aléatoires en</span></span>
-<span id="cb16-4"><a href="comment-implémenter-un-mlm-dans-r.html#cb16-4"></a><span class="co"># fonction des effets aléatoires potentiels</span></span>
-<span id="cb16-5"><a href="comment-implémenter-un-mlm-dans-r.html#cb16-5"></a>lm.test &lt;-<span class="st"> </span><span class="kw">lm</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length, <span class="dt">data =</span> data)</span>
-<span id="cb16-6"><a href="comment-implémenter-un-mlm-dans-r.html#cb16-6"></a>lm.test.resid &lt;-<span class="st"> </span><span class="kw">rstandard</span>(lm.test)</span>
-<span id="cb16-7"><a href="comment-implémenter-un-mlm-dans-r.html#cb16-7"></a><span class="co"># Effet de l’espèce</span></span>
-<span id="cb16-8"><a href="comment-implémenter-un-mlm-dans-r.html#cb16-8"></a><span class="kw">plot</span>(lm.test.resid <span class="op">~</span><span class="st"> </span>data<span class="op">$</span>Fish_Species, <span class="dt">xlab =</span> <span class="st">&quot;Species&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Standardized residuals&quot;</span>)</span>
-<span id="cb16-9"><a href="comment-implémenter-un-mlm-dans-r.html#cb16-9"></a><span class="kw">abline</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span>
-<span id="cb16-10"><a href="comment-implémenter-un-mlm-dans-r.html#cb16-10"></a><span class="co"># Effet du lac</span></span>
-<span id="cb16-11"><a href="comment-implémenter-un-mlm-dans-r.html#cb16-11"></a><span class="kw">plot</span>(lm.test.resid <span class="op">~</span><span class="st"> </span>data<span class="op">$</span>Lake, <span class="dt">xlab =</span> <span class="st">&quot;Lake&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Standardized residuals&quot;</span>)</span>
-<span id="cb16-12"><a href="comment-implémenter-un-mlm-dans-r.html#cb16-12"></a><span class="kw">abline</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="comment-implémenter-un-mlm-dans-r.html#cb14-1"></a><span class="co"># Déterminez s&#39;il est important de tenir compte des</span></span>
+<span id="cb14-2"><a href="comment-implémenter-un-mlm-dans-r.html#cb14-2"></a><span class="co"># variations dans les &#39;effets aléatoires&#39; en comparant les</span></span>
+<span id="cb14-3"><a href="comment-implémenter-un-mlm-dans-r.html#cb14-3"></a><span class="co"># résidus d&#39;un modèle linéaire sans les effets aléatoires en</span></span>
+<span id="cb14-4"><a href="comment-implémenter-un-mlm-dans-r.html#cb14-4"></a><span class="co"># fonction des effets aléatoires potentiels</span></span>
+<span id="cb14-5"><a href="comment-implémenter-un-mlm-dans-r.html#cb14-5"></a>lm.test &lt;-<span class="st"> </span><span class="kw">lm</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length, <span class="dt">data =</span> data)</span>
+<span id="cb14-6"><a href="comment-implémenter-un-mlm-dans-r.html#cb14-6"></a>lm.test.resid &lt;-<span class="st"> </span><span class="kw">rstandard</span>(lm.test)</span>
+<span id="cb14-7"><a href="comment-implémenter-un-mlm-dans-r.html#cb14-7"></a><span class="co"># Effet de l’espèce</span></span>
+<span id="cb14-8"><a href="comment-implémenter-un-mlm-dans-r.html#cb14-8"></a><span class="kw">plot</span>(lm.test.resid <span class="op">~</span><span class="st"> </span>data<span class="op">$</span>Fish_Species, <span class="dt">xlab =</span> <span class="st">&quot;Species&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Standardized residuals&quot;</span>)</span>
+<span id="cb14-9"><a href="comment-implémenter-un-mlm-dans-r.html#cb14-9"></a><span class="kw">abline</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb14-10"><a href="comment-implémenter-un-mlm-dans-r.html#cb14-10"></a><span class="co"># Effet du lac</span></span>
+<span id="cb14-11"><a href="comment-implémenter-un-mlm-dans-r.html#cb14-11"></a><span class="kw">plot</span>(lm.test.resid <span class="op">~</span><span class="st"> </span>data<span class="op">$</span>Lake, <span class="dt">xlab =</span> <span class="st">&quot;Lake&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Standardized residuals&quot;</span>)</span>
+<span id="cb14-12"><a href="comment-implémenter-un-mlm-dans-r.html#cb14-12"></a><span class="kw">abline</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
 <p>++++ Sortie| <strong>Effet de l’espèce</strong><br />
 ---- <img src="images/fig_18_w5.png" width="400" /><br />
 ---- <strong>Effet du lac</strong><br />
@@ -396,11 +402,11 @@ avec les matrices X et Y pour corriger le biais).</p>
 Réécrivez le code suivant de façon à ce que les pentes de la relation de
 la position trophique en fonction de la longueur corporelle varient par
 lac et par espèce.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="comment-implémenter-un-mlm-dans-r.html#cb17-1"></a><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Species), <span class="dt">data =</span> data, </span>
-<span id="cb17-2"><a href="comment-implémenter-un-mlm-dans-r.html#cb17-2"></a>    <span class="dt">REML =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="comment-implémenter-un-mlm-dans-r.html#cb15-1"></a><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Species), <span class="dt">data =</span> data, </span>
+<span id="cb15-2"><a href="comment-implémenter-un-mlm-dans-r.html#cb15-2"></a>    <span class="dt">REML =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <p>++++ Réponse défi 4 |</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="comment-implémenter-un-mlm-dans-r.html#cb18-1"></a><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Lake) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span></span>
-<span id="cb18-2"><a href="comment-implémenter-un-mlm-dans-r.html#cb18-2"></a><span class="st">    </span>Species), <span class="dt">data =</span> data, <span class="dt">REML =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="comment-implémenter-un-mlm-dans-r.html#cb16-1"></a><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Lake) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span></span>
+<span id="cb16-2"><a href="comment-implémenter-un-mlm-dans-r.html#cb16-2"></a><span class="st">    </span>Species), <span class="dt">data =</span> data, <span class="dt">REML =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <p>++++</p>
 <hr />
 <p>Pour déterminer si vous avez construit le meilleur modèle mixte basé sur
@@ -416,31 +422,31 @@ effets fixes entre les modèles, nous aurions dû indiquer «REML = FALSE»
 afin de comparer les modèles avec des méthodes de vraisemblance tels que
 AIC (voir ci-dessus). Cependant, vous devez rapporter les estimations
 des paramètres du «meilleur» modèle en utilisant «REML = TRUE».</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="comment-implémenter-un-mlm-dans-r.html#cb19-1"></a><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Species), <span class="dt">data =</span> data, </span>
-<span id="cb19-2"><a href="comment-implémenter-un-mlm-dans-r.html#cb19-2"></a>    <span class="dt">REML =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="comment-implémenter-un-mlm-dans-r.html#cb17-1"></a><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Species), <span class="dt">data =</span> data, </span>
+<span id="cb17-2"><a href="comment-implémenter-un-mlm-dans-r.html#cb17-2"></a>    <span class="dt">REML =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <p>++++ Réponse défi 5 |</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="comment-implémenter-un-mlm-dans-r.html#cb20-1"></a>m1 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Species), <span class="dt">data =</span> data, </span>
-<span id="cb20-2"><a href="comment-implémenter-un-mlm-dans-r.html#cb20-2"></a>    <span class="dt">REML =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb20-3"><a href="comment-implémenter-un-mlm-dans-r.html#cb20-3"></a>m2 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Lake) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span></span>
-<span id="cb20-4"><a href="comment-implémenter-un-mlm-dans-r.html#cb20-4"></a><span class="st">    </span>Species), <span class="dt">data =</span> data, <span class="dt">REML =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb20-5"><a href="comment-implémenter-un-mlm-dans-r.html#cb20-5"></a>m3 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Species), <span class="dt">data =</span> data, <span class="dt">REML =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb20-6"><a href="comment-implémenter-un-mlm-dans-r.html#cb20-6"></a>m4 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake), <span class="dt">data =</span> data, <span class="dt">REML =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb20-7"><a href="comment-implémenter-un-mlm-dans-r.html#cb20-7"></a>m5 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Species), <span class="dt">data =</span> data, </span>
-<span id="cb20-8"><a href="comment-implémenter-un-mlm-dans-r.html#cb20-8"></a>    <span class="dt">REML =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb20-9"><a href="comment-implémenter-un-mlm-dans-r.html#cb20-9"></a>m6 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Lake), <span class="dt">data =</span> data, </span>
-<span id="cb20-10"><a href="comment-implémenter-un-mlm-dans-r.html#cb20-10"></a>    <span class="dt">REML =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb20-11"><a href="comment-implémenter-un-mlm-dans-r.html#cb20-11"></a>m7 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Lake) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Species), </span>
-<span id="cb20-12"><a href="comment-implémenter-un-mlm-dans-r.html#cb20-12"></a>    <span class="dt">data =</span> data, <span class="dt">REML =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb20-13"><a href="comment-implémenter-un-mlm-dans-r.html#cb20-13"></a>m8 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Species), </span>
-<span id="cb20-14"><a href="comment-implémenter-un-mlm-dans-r.html#cb20-14"></a>    <span class="dt">data =</span> data, <span class="dt">REML =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb20-15"><a href="comment-implémenter-un-mlm-dans-r.html#cb20-15"></a></span>
-<span id="cb20-16"><a href="comment-implémenter-un-mlm-dans-r.html#cb20-16"></a><span class="co"># Modèle bonus!</span></span>
-<span id="cb20-17"><a href="comment-implémenter-un-mlm-dans-r.html#cb20-17"></a>M0 &lt;-<span class="st"> </span><span class="kw">lm</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length, <span class="dt">data =</span> data)</span>
-<span id="cb20-18"><a href="comment-implémenter-un-mlm-dans-r.html#cb20-18"></a><span class="co"># Il est toujours utile de construire le modèle linéaire de</span></span>
-<span id="cb20-19"><a href="comment-implémenter-un-mlm-dans-r.html#cb20-19"></a><span class="co"># base sans facteurs avec variation de l&#39;ordonnée à l&#39;origine</span></span>
-<span id="cb20-20"><a href="comment-implémenter-un-mlm-dans-r.html#cb20-20"></a><span class="co"># ou de pente pour voir la variation dans les valeurs de AICc</span></span>
-<span id="cb20-21"><a href="comment-implémenter-un-mlm-dans-r.html#cb20-21"></a><span class="co"># values (même si &#39;lm&#39; n&#39;utilise pas la même méthode</span></span>
-<span id="cb20-22"><a href="comment-implémenter-un-mlm-dans-r.html#cb20-22"></a><span class="co"># d&#39;estimation).</span></span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="comment-implémenter-un-mlm-dans-r.html#cb18-1"></a>m1 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Species), <span class="dt">data =</span> data, </span>
+<span id="cb18-2"><a href="comment-implémenter-un-mlm-dans-r.html#cb18-2"></a>    <span class="dt">REML =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb18-3"><a href="comment-implémenter-un-mlm-dans-r.html#cb18-3"></a>m2 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Lake) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span></span>
+<span id="cb18-4"><a href="comment-implémenter-un-mlm-dans-r.html#cb18-4"></a><span class="st">    </span>Species), <span class="dt">data =</span> data, <span class="dt">REML =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb18-5"><a href="comment-implémenter-un-mlm-dans-r.html#cb18-5"></a>m3 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Species), <span class="dt">data =</span> data, <span class="dt">REML =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb18-6"><a href="comment-implémenter-un-mlm-dans-r.html#cb18-6"></a>m4 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake), <span class="dt">data =</span> data, <span class="dt">REML =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb18-7"><a href="comment-implémenter-un-mlm-dans-r.html#cb18-7"></a>m5 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Species), <span class="dt">data =</span> data, </span>
+<span id="cb18-8"><a href="comment-implémenter-un-mlm-dans-r.html#cb18-8"></a>    <span class="dt">REML =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb18-9"><a href="comment-implémenter-un-mlm-dans-r.html#cb18-9"></a>m6 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Lake), <span class="dt">data =</span> data, </span>
+<span id="cb18-10"><a href="comment-implémenter-un-mlm-dans-r.html#cb18-10"></a>    <span class="dt">REML =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb18-11"><a href="comment-implémenter-un-mlm-dans-r.html#cb18-11"></a>m7 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Lake) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Species), </span>
+<span id="cb18-12"><a href="comment-implémenter-un-mlm-dans-r.html#cb18-12"></a>    <span class="dt">data =</span> data, <span class="dt">REML =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb18-13"><a href="comment-implémenter-un-mlm-dans-r.html#cb18-13"></a>m8 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Species), </span>
+<span id="cb18-14"><a href="comment-implémenter-un-mlm-dans-r.html#cb18-14"></a>    <span class="dt">data =</span> data, <span class="dt">REML =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb18-15"><a href="comment-implémenter-un-mlm-dans-r.html#cb18-15"></a></span>
+<span id="cb18-16"><a href="comment-implémenter-un-mlm-dans-r.html#cb18-16"></a><span class="co"># Modèle bonus!</span></span>
+<span id="cb18-17"><a href="comment-implémenter-un-mlm-dans-r.html#cb18-17"></a>M0 &lt;-<span class="st"> </span><span class="kw">lm</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length, <span class="dt">data =</span> data)</span>
+<span id="cb18-18"><a href="comment-implémenter-un-mlm-dans-r.html#cb18-18"></a><span class="co"># Il est toujours utile de construire le modèle linéaire de</span></span>
+<span id="cb18-19"><a href="comment-implémenter-un-mlm-dans-r.html#cb18-19"></a><span class="co"># base sans facteurs avec variation de l&#39;ordonnée à l&#39;origine</span></span>
+<span id="cb18-20"><a href="comment-implémenter-un-mlm-dans-r.html#cb18-20"></a><span class="co"># ou de pente pour voir la variation dans les valeurs de AICc</span></span>
+<span id="cb18-21"><a href="comment-implémenter-un-mlm-dans-r.html#cb18-21"></a><span class="co"># values (même si &#39;lm&#39; n&#39;utilise pas la même méthode</span></span>
+<span id="cb18-22"><a href="comment-implémenter-un-mlm-dans-r.html#cb18-22"></a><span class="co"># d&#39;estimation).</span></span></code></pre></div>
 <p>++++</p>
 <hr />
 <p>Maintenant que nous avons une liste de modèles potentiels, nous voulons
@@ -459,55 +465,55 @@ d’estimation que <code>lmer()</code>. Par contre, il y a une preuve qui démon
 que pour les modèles linéaires de bases les résultats de la méthode des
 moindres carrés (Least squares) est équivalente au résultats de la
 méthode ML.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="comment-implémenter-un-mlm-dans-r.html#cb21-1"></a><span class="co"># 2) Coder les modèles potentiels et sélectionner le meilleur</span></span>
-<span id="cb21-2"><a href="comment-implémenter-un-mlm-dans-r.html#cb21-2"></a><span class="co"># modèle #### i) Coder les modèles potentiels Liste de tous</span></span>
-<span id="cb21-3"><a href="comment-implémenter-un-mlm-dans-r.html#cb21-3"></a><span class="co"># les modèles potentiels --&gt; Note: vous pouvez choisir de ne</span></span>
-<span id="cb21-4"><a href="comment-implémenter-un-mlm-dans-r.html#cb21-4"></a><span class="co"># pas coder ceux qui n&#39;ont pas de sens biologique.</span></span>
-<span id="cb21-5"><a href="comment-implémenter-un-mlm-dans-r.html#cb21-5"></a><span class="co"># Construisez aussi le modèle lm() pour voir la variation</span></span>
-<span id="cb21-6"><a href="comment-implémenter-un-mlm-dans-r.html#cb21-6"></a><span class="co"># dans les valeurs de AICc, mais changez la méthode à ML</span></span>
-<span id="cb21-7"><a href="comment-implémenter-un-mlm-dans-r.html#cb21-7"></a><span class="co"># (REML=FALSE) parce que lm() n&#39;utilise pas la même méthode</span></span>
-<span id="cb21-8"><a href="comment-implémenter-un-mlm-dans-r.html#cb21-8"></a><span class="co"># d&#39;estimation que lmer().  Modèle linéaire sans effets</span></span>
-<span id="cb21-9"><a href="comment-implémenter-un-mlm-dans-r.html#cb21-9"></a><span class="co"># aléatoires</span></span>
-<span id="cb21-10"><a href="comment-implémenter-un-mlm-dans-r.html#cb21-10"></a>M0 &lt;-<span class="st"> </span><span class="kw">lm</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length, <span class="dt">data =</span> data)</span>
-<span id="cb21-11"><a href="comment-implémenter-un-mlm-dans-r.html#cb21-11"></a><span class="co"># Modèle complet avec différents intercepts</span></span>
-<span id="cb21-12"><a href="comment-implémenter-un-mlm-dans-r.html#cb21-12"></a>M1 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Fish_Species) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake), </span>
-<span id="cb21-13"><a href="comment-implémenter-un-mlm-dans-r.html#cb21-13"></a>    <span class="dt">data =</span> data, <span class="dt">REML =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb21-14"><a href="comment-implémenter-un-mlm-dans-r.html#cb21-14"></a><span class="co"># Modèle complet avec différents intercepts et pentes</span></span>
-<span id="cb21-15"><a href="comment-implémenter-un-mlm-dans-r.html#cb21-15"></a>M2 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Fish_Species) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb21-16"><a href="comment-implémenter-un-mlm-dans-r.html#cb21-16"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Lake), <span class="dt">data =</span> data, <span class="dt">REML =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb21-17"><a href="comment-implémenter-un-mlm-dans-r.html#cb21-17"></a><span class="co"># Aucun effet Lac, intercept aléatoire seulement</span></span>
-<span id="cb21-18"><a href="comment-implémenter-un-mlm-dans-r.html#cb21-18"></a>M3 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Fish_Species), <span class="dt">data =</span> data, </span>
-<span id="cb21-19"><a href="comment-implémenter-un-mlm-dans-r.html#cb21-19"></a>    <span class="dt">REML =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb21-20"><a href="comment-implémenter-un-mlm-dans-r.html#cb21-20"></a><span class="co"># Aucun effet Espèce, intercept aléatoire seulement</span></span>
-<span id="cb21-21"><a href="comment-implémenter-un-mlm-dans-r.html#cb21-21"></a>M4 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake), <span class="dt">data =</span> data, <span class="dt">REML =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb21-22"><a href="comment-implémenter-un-mlm-dans-r.html#cb21-22"></a><span class="co"># Aucun effet Lac, intercept et pente aléatoires</span></span>
-<span id="cb21-23"><a href="comment-implémenter-un-mlm-dans-r.html#cb21-23"></a>M5 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Fish_Species), <span class="dt">data =</span> data, </span>
-<span id="cb21-24"><a href="comment-implémenter-un-mlm-dans-r.html#cb21-24"></a>    <span class="dt">REML =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb21-25"><a href="comment-implémenter-un-mlm-dans-r.html#cb21-25"></a><span class="co"># Aucun effet Espèce, intercept et pente aléatoires</span></span>
-<span id="cb21-26"><a href="comment-implémenter-un-mlm-dans-r.html#cb21-26"></a>M6 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Lake), <span class="dt">data =</span> data, </span>
-<span id="cb21-27"><a href="comment-implémenter-un-mlm-dans-r.html#cb21-27"></a>    <span class="dt">REML =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb21-28"><a href="comment-implémenter-un-mlm-dans-r.html#cb21-28"></a><span class="co"># Modèle complet avec intercepts et pentes qui variant par</span></span>
-<span id="cb21-29"><a href="comment-implémenter-un-mlm-dans-r.html#cb21-29"></a><span class="co"># Lac</span></span>
-<span id="cb21-30"><a href="comment-implémenter-un-mlm-dans-r.html#cb21-30"></a>M7 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Fish_Species) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span></span>
-<span id="cb21-31"><a href="comment-implémenter-un-mlm-dans-r.html#cb21-31"></a><span class="st">    </span>Lake), <span class="dt">data =</span> data, <span class="dt">REML =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb21-32"><a href="comment-implémenter-un-mlm-dans-r.html#cb21-32"></a><span class="co"># Modèle complet avec intercepts et pentes qui variant par</span></span>
-<span id="cb21-33"><a href="comment-implémenter-un-mlm-dans-r.html#cb21-33"></a><span class="co"># Espèce</span></span>
-<span id="cb21-34"><a href="comment-implémenter-un-mlm-dans-r.html#cb21-34"></a>M8 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Fish_Species) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb21-35"><a href="comment-implémenter-un-mlm-dans-r.html#cb21-35"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake), <span class="dt">data =</span> data, <span class="dt">REML =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb21-36"><a href="comment-implémenter-un-mlm-dans-r.html#cb21-36"></a></span>
-<span id="cb21-37"><a href="comment-implémenter-un-mlm-dans-r.html#cb21-37"></a></span>
-<span id="cb21-38"><a href="comment-implémenter-un-mlm-dans-r.html#cb21-38"></a><span class="co"># ii) Comparer les modèles en comparant les valeurs AICc</span></span>
-<span id="cb21-39"><a href="comment-implémenter-un-mlm-dans-r.html#cb21-39"></a><span class="co"># Calculer les valeurs AICc pour chaque modèle</span></span>
-<span id="cb21-40"><a href="comment-implémenter-un-mlm-dans-r.html#cb21-40"></a>AICc &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">AICc</span>(M0), <span class="kw">AICc</span>(M1), <span class="kw">AICc</span>(M2), <span class="kw">AICc</span>(M3), <span class="kw">AICc</span>(M4), <span class="kw">AICc</span>(M5), </span>
-<span id="cb21-41"><a href="comment-implémenter-un-mlm-dans-r.html#cb21-41"></a>    <span class="kw">AICc</span>(M6), <span class="kw">AICc</span>(M7), <span class="kw">AICc</span>(M8))</span>
-<span id="cb21-42"><a href="comment-implémenter-un-mlm-dans-r.html#cb21-42"></a><span class="co"># Mettre des valeurs dans une table pour faciliter la</span></span>
-<span id="cb21-43"><a href="comment-implémenter-un-mlm-dans-r.html#cb21-43"></a><span class="co"># comparaison</span></span>
-<span id="cb21-44"><a href="comment-implémenter-un-mlm-dans-r.html#cb21-44"></a>Model &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;M0&quot;</span>, <span class="st">&quot;M1&quot;</span>, <span class="st">&quot;M2&quot;</span>, <span class="st">&quot;M3&quot;</span>, <span class="st">&quot;M4&quot;</span>, <span class="st">&quot;M5&quot;</span>, <span class="st">&quot;M6&quot;</span>, <span class="st">&quot;M7&quot;</span>, <span class="st">&quot;M8&quot;</span>)</span>
-<span id="cb21-45"><a href="comment-implémenter-un-mlm-dans-r.html#cb21-45"></a>AICtable &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Model =</span> Model, <span class="dt">AICc =</span> AICc)</span>
-<span id="cb21-46"><a href="comment-implémenter-un-mlm-dans-r.html#cb21-46"></a>AICtable</span>
-<span id="cb21-47"><a href="comment-implémenter-un-mlm-dans-r.html#cb21-47"></a><span class="co"># M8 a la plus faible valeur AICc donc le meilleur modèle M2</span></span>
-<span id="cb21-48"><a href="comment-implémenter-un-mlm-dans-r.html#cb21-48"></a><span class="co"># est également un bon modèle, mais tous les autres modèles</span></span>
-<span id="cb21-49"><a href="comment-implémenter-un-mlm-dans-r.html#cb21-49"></a><span class="co"># ne sont pas aussi bons.</span></span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="comment-implémenter-un-mlm-dans-r.html#cb19-1"></a><span class="co"># 2) Coder les modèles potentiels et sélectionner le meilleur</span></span>
+<span id="cb19-2"><a href="comment-implémenter-un-mlm-dans-r.html#cb19-2"></a><span class="co"># modèle #### i) Coder les modèles potentiels Liste de tous</span></span>
+<span id="cb19-3"><a href="comment-implémenter-un-mlm-dans-r.html#cb19-3"></a><span class="co"># les modèles potentiels --&gt; Note: vous pouvez choisir de ne</span></span>
+<span id="cb19-4"><a href="comment-implémenter-un-mlm-dans-r.html#cb19-4"></a><span class="co"># pas coder ceux qui n&#39;ont pas de sens biologique.</span></span>
+<span id="cb19-5"><a href="comment-implémenter-un-mlm-dans-r.html#cb19-5"></a><span class="co"># Construisez aussi le modèle lm() pour voir la variation</span></span>
+<span id="cb19-6"><a href="comment-implémenter-un-mlm-dans-r.html#cb19-6"></a><span class="co"># dans les valeurs de AICc, mais changez la méthode à ML</span></span>
+<span id="cb19-7"><a href="comment-implémenter-un-mlm-dans-r.html#cb19-7"></a><span class="co"># (REML=FALSE) parce que lm() n&#39;utilise pas la même méthode</span></span>
+<span id="cb19-8"><a href="comment-implémenter-un-mlm-dans-r.html#cb19-8"></a><span class="co"># d&#39;estimation que lmer().  Modèle linéaire sans effets</span></span>
+<span id="cb19-9"><a href="comment-implémenter-un-mlm-dans-r.html#cb19-9"></a><span class="co"># aléatoires</span></span>
+<span id="cb19-10"><a href="comment-implémenter-un-mlm-dans-r.html#cb19-10"></a>M0 &lt;-<span class="st"> </span><span class="kw">lm</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length, <span class="dt">data =</span> data)</span>
+<span id="cb19-11"><a href="comment-implémenter-un-mlm-dans-r.html#cb19-11"></a><span class="co"># Modèle complet avec différents intercepts</span></span>
+<span id="cb19-12"><a href="comment-implémenter-un-mlm-dans-r.html#cb19-12"></a>M1 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Fish_Species) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake), </span>
+<span id="cb19-13"><a href="comment-implémenter-un-mlm-dans-r.html#cb19-13"></a>    <span class="dt">data =</span> data, <span class="dt">REML =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb19-14"><a href="comment-implémenter-un-mlm-dans-r.html#cb19-14"></a><span class="co"># Modèle complet avec différents intercepts et pentes</span></span>
+<span id="cb19-15"><a href="comment-implémenter-un-mlm-dans-r.html#cb19-15"></a>M2 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Fish_Species) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb19-16"><a href="comment-implémenter-un-mlm-dans-r.html#cb19-16"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Lake), <span class="dt">data =</span> data, <span class="dt">REML =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb19-17"><a href="comment-implémenter-un-mlm-dans-r.html#cb19-17"></a><span class="co"># Aucun effet Lac, intercept aléatoire seulement</span></span>
+<span id="cb19-18"><a href="comment-implémenter-un-mlm-dans-r.html#cb19-18"></a>M3 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Fish_Species), <span class="dt">data =</span> data, </span>
+<span id="cb19-19"><a href="comment-implémenter-un-mlm-dans-r.html#cb19-19"></a>    <span class="dt">REML =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb19-20"><a href="comment-implémenter-un-mlm-dans-r.html#cb19-20"></a><span class="co"># Aucun effet Espèce, intercept aléatoire seulement</span></span>
+<span id="cb19-21"><a href="comment-implémenter-un-mlm-dans-r.html#cb19-21"></a>M4 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake), <span class="dt">data =</span> data, <span class="dt">REML =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb19-22"><a href="comment-implémenter-un-mlm-dans-r.html#cb19-22"></a><span class="co"># Aucun effet Lac, intercept et pente aléatoires</span></span>
+<span id="cb19-23"><a href="comment-implémenter-un-mlm-dans-r.html#cb19-23"></a>M5 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Fish_Species), <span class="dt">data =</span> data, </span>
+<span id="cb19-24"><a href="comment-implémenter-un-mlm-dans-r.html#cb19-24"></a>    <span class="dt">REML =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb19-25"><a href="comment-implémenter-un-mlm-dans-r.html#cb19-25"></a><span class="co"># Aucun effet Espèce, intercept et pente aléatoires</span></span>
+<span id="cb19-26"><a href="comment-implémenter-un-mlm-dans-r.html#cb19-26"></a>M6 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Lake), <span class="dt">data =</span> data, </span>
+<span id="cb19-27"><a href="comment-implémenter-un-mlm-dans-r.html#cb19-27"></a>    <span class="dt">REML =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb19-28"><a href="comment-implémenter-un-mlm-dans-r.html#cb19-28"></a><span class="co"># Modèle complet avec intercepts et pentes qui variant par</span></span>
+<span id="cb19-29"><a href="comment-implémenter-un-mlm-dans-r.html#cb19-29"></a><span class="co"># Lac</span></span>
+<span id="cb19-30"><a href="comment-implémenter-un-mlm-dans-r.html#cb19-30"></a>M7 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Fish_Species) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span></span>
+<span id="cb19-31"><a href="comment-implémenter-un-mlm-dans-r.html#cb19-31"></a><span class="st">    </span>Lake), <span class="dt">data =</span> data, <span class="dt">REML =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb19-32"><a href="comment-implémenter-un-mlm-dans-r.html#cb19-32"></a><span class="co"># Modèle complet avec intercepts et pentes qui variant par</span></span>
+<span id="cb19-33"><a href="comment-implémenter-un-mlm-dans-r.html#cb19-33"></a><span class="co"># Espèce</span></span>
+<span id="cb19-34"><a href="comment-implémenter-un-mlm-dans-r.html#cb19-34"></a>M8 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Fish_Species) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb19-35"><a href="comment-implémenter-un-mlm-dans-r.html#cb19-35"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake), <span class="dt">data =</span> data, <span class="dt">REML =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb19-36"><a href="comment-implémenter-un-mlm-dans-r.html#cb19-36"></a></span>
+<span id="cb19-37"><a href="comment-implémenter-un-mlm-dans-r.html#cb19-37"></a></span>
+<span id="cb19-38"><a href="comment-implémenter-un-mlm-dans-r.html#cb19-38"></a><span class="co"># ii) Comparer les modèles en comparant les valeurs AICc</span></span>
+<span id="cb19-39"><a href="comment-implémenter-un-mlm-dans-r.html#cb19-39"></a><span class="co"># Calculer les valeurs AICc pour chaque modèle</span></span>
+<span id="cb19-40"><a href="comment-implémenter-un-mlm-dans-r.html#cb19-40"></a>AICc &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">AICc</span>(M0), <span class="kw">AICc</span>(M1), <span class="kw">AICc</span>(M2), <span class="kw">AICc</span>(M3), <span class="kw">AICc</span>(M4), <span class="kw">AICc</span>(M5), </span>
+<span id="cb19-41"><a href="comment-implémenter-un-mlm-dans-r.html#cb19-41"></a>    <span class="kw">AICc</span>(M6), <span class="kw">AICc</span>(M7), <span class="kw">AICc</span>(M8))</span>
+<span id="cb19-42"><a href="comment-implémenter-un-mlm-dans-r.html#cb19-42"></a><span class="co"># Mettre des valeurs dans une table pour faciliter la</span></span>
+<span id="cb19-43"><a href="comment-implémenter-un-mlm-dans-r.html#cb19-43"></a><span class="co"># comparaison</span></span>
+<span id="cb19-44"><a href="comment-implémenter-un-mlm-dans-r.html#cb19-44"></a>Model &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;M0&quot;</span>, <span class="st">&quot;M1&quot;</span>, <span class="st">&quot;M2&quot;</span>, <span class="st">&quot;M3&quot;</span>, <span class="st">&quot;M4&quot;</span>, <span class="st">&quot;M5&quot;</span>, <span class="st">&quot;M6&quot;</span>, <span class="st">&quot;M7&quot;</span>, <span class="st">&quot;M8&quot;</span>)</span>
+<span id="cb19-45"><a href="comment-implémenter-un-mlm-dans-r.html#cb19-45"></a>AICtable &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Model =</span> Model, <span class="dt">AICc =</span> AICc)</span>
+<span id="cb19-46"><a href="comment-implémenter-un-mlm-dans-r.html#cb19-46"></a>AICtable</span>
+<span id="cb19-47"><a href="comment-implémenter-un-mlm-dans-r.html#cb19-47"></a><span class="co"># M8 a la plus faible valeur AICc donc le meilleur modèle M2</span></span>
+<span id="cb19-48"><a href="comment-implémenter-un-mlm-dans-r.html#cb19-48"></a><span class="co"># est également un bon modèle, mais tous les autres modèles</span></span>
+<span id="cb19-49"><a href="comment-implémenter-un-mlm-dans-r.html#cb19-49"></a><span class="co"># ne sont pas aussi bons.</span></span></code></pre></div>
 <p>++++ Sortie| <img src="images/fig_23_w5.png" width="200" /> ++++</p>
 <p>Le modèle avec un AICc plus bas a le plus grand pouvoir prédictif
 considérant les données. Certains disent que si deux modèles sont à plus
@@ -516,12 +522,12 @@ ou moins 2 unitées d’AICc de différence, leurs pouvoirs prédictifs sont
 mais tous les autres ont des AICc tellement plus élevés qu’on peut
 exclure la possibilité qu’ils soient les meilleurs modèles pour nos
 données.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="comment-implémenter-un-mlm-dans-r.html#cb22-1"></a><span class="co"># Une fois que les meilleurs modèles sont sélectionnés il</span></span>
-<span id="cb22-2"><a href="comment-implémenter-un-mlm-dans-r.html#cb22-2"></a><span class="co"># faut remettre REML=TRUE</span></span>
-<span id="cb22-3"><a href="comment-implémenter-un-mlm-dans-r.html#cb22-3"></a>M8 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Fish_Species) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb22-4"><a href="comment-implémenter-un-mlm-dans-r.html#cb22-4"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake), <span class="dt">data =</span> data, <span class="dt">REML =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb22-5"><a href="comment-implémenter-un-mlm-dans-r.html#cb22-5"></a>M2 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Fish_Species) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb22-6"><a href="comment-implémenter-un-mlm-dans-r.html#cb22-6"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Lake), <span class="dt">data =</span> data, <span class="dt">REML =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="comment-implémenter-un-mlm-dans-r.html#cb20-1"></a><span class="co"># Une fois que les meilleurs modèles sont sélectionnés il</span></span>
+<span id="cb20-2"><a href="comment-implémenter-un-mlm-dans-r.html#cb20-2"></a><span class="co"># faut remettre REML=TRUE</span></span>
+<span id="cb20-3"><a href="comment-implémenter-un-mlm-dans-r.html#cb20-3"></a>M8 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Fish_Species) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb20-4"><a href="comment-implémenter-un-mlm-dans-r.html#cb20-4"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake), <span class="dt">data =</span> data, <span class="dt">REML =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb20-5"><a href="comment-implémenter-un-mlm-dans-r.html#cb20-5"></a>M2 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Fish_Species) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb20-6"><a href="comment-implémenter-un-mlm-dans-r.html#cb20-6"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Lake), <span class="dt">data =</span> data, <span class="dt">REML =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <hr />
 <p><strong>DÉFI 6</strong><br />
 Prenez 2 minutes avec votre voisin pour étudier la structure du modèle
@@ -555,37 +561,37 @@ au modèle M8.</p>
 <h2><span class="header-section-number">9.4</span> Validation du modèle</h2>
 <p>Pour vérifier la supposition d’homogénéité, il faut faire un graphique
 des valeurs prédites en fonction des valeurs résiduelles.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="comment-implémenter-un-mlm-dans-r.html#cb23-1"></a><span class="co"># 3) Vérification des suppositions du modèle ####</span></span>
-<span id="cb23-2"><a href="comment-implémenter-un-mlm-dans-r.html#cb23-2"></a><span class="co"># Vérification pour M8 A. Vérifiez l&#39;homogénéité : graphique</span></span>
-<span id="cb23-3"><a href="comment-implémenter-un-mlm-dans-r.html#cb23-3"></a><span class="co"># des valeurs prédites vs valeurs résiduelles</span></span>
-<span id="cb23-4"><a href="comment-implémenter-un-mlm-dans-r.html#cb23-4"></a>E1 &lt;-<span class="st"> </span><span class="kw">resid</span>(M8)</span>
-<span id="cb23-5"><a href="comment-implémenter-un-mlm-dans-r.html#cb23-5"></a>F1 &lt;-<span class="st"> </span><span class="kw">fitted</span>(M8)</span>
-<span id="cb23-6"><a href="comment-implémenter-un-mlm-dans-r.html#cb23-6"></a><span class="kw">plot</span>(<span class="dt">x =</span> F1, <span class="dt">y =</span> E1, <span class="dt">xlab =</span> <span class="st">&quot;Fitted Values&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Normalized residuals&quot;</span>)</span>
-<span id="cb23-7"><a href="comment-implémenter-un-mlm-dans-r.html#cb23-7"></a><span class="kw">abline</span>(<span class="dt">h =</span> <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="comment-implémenter-un-mlm-dans-r.html#cb21-1"></a><span class="co"># 3) Vérification des suppositions du modèle ####</span></span>
+<span id="cb21-2"><a href="comment-implémenter-un-mlm-dans-r.html#cb21-2"></a><span class="co"># Vérification pour M8 A. Vérifiez l&#39;homogénéité : graphique</span></span>
+<span id="cb21-3"><a href="comment-implémenter-un-mlm-dans-r.html#cb21-3"></a><span class="co"># des valeurs prédites vs valeurs résiduelles</span></span>
+<span id="cb21-4"><a href="comment-implémenter-un-mlm-dans-r.html#cb21-4"></a>E1 &lt;-<span class="st"> </span><span class="kw">resid</span>(M8)</span>
+<span id="cb21-5"><a href="comment-implémenter-un-mlm-dans-r.html#cb21-5"></a>F1 &lt;-<span class="st"> </span><span class="kw">fitted</span>(M8)</span>
+<span id="cb21-6"><a href="comment-implémenter-un-mlm-dans-r.html#cb21-6"></a><span class="kw">plot</span>(<span class="dt">x =</span> F1, <span class="dt">y =</span> E1, <span class="dt">xlab =</span> <span class="st">&quot;Fitted Values&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Normalized residuals&quot;</span>)</span>
+<span id="cb21-7"><a href="comment-implémenter-un-mlm-dans-r.html#cb21-7"></a><span class="kw">abline</span>(<span class="dt">h =</span> <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
 <p>++++ Sortie| <img src="images/fig_24_w5.png" width="400" /> ++++</p>
 <p>L’étendue similaire des résidus suggère que le modèle est adéquat pour
 bien modéliser nos données.</p>
 <p>Pour vérifier la supposition d’indépendance, il faut faire un graphique
 des résidus en fonction de chaque covariable du modèle :</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="comment-implémenter-un-mlm-dans-r.html#cb24-1"></a><span class="co"># B. Vérifiez l’indépendance : i. graphique des résidus VS</span></span>
-<span id="cb24-2"><a href="comment-implémenter-un-mlm-dans-r.html#cb24-2"></a><span class="co"># chaque covariable du modèle Longueur corporelle des</span></span>
-<span id="cb24-3"><a href="comment-implémenter-un-mlm-dans-r.html#cb24-3"></a><span class="co"># poissons</span></span>
-<span id="cb24-4"><a href="comment-implémenter-un-mlm-dans-r.html#cb24-4"></a><span class="kw">plot</span>(<span class="dt">x =</span> data<span class="op">$</span>Z_Length, <span class="dt">y =</span> E1, <span class="dt">xlab =</span> <span class="st">&quot;Z Length&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Normalized residuals&quot;</span>)</span>
-<span id="cb24-5"><a href="comment-implémenter-un-mlm-dans-r.html#cb24-5"></a><span class="kw">abline</span>(<span class="dt">h =</span> <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span>
-<span id="cb24-6"><a href="comment-implémenter-un-mlm-dans-r.html#cb24-6"></a><span class="co"># Note: Les regroupements de données sont dus à la structure</span></span>
-<span id="cb24-7"><a href="comment-implémenter-un-mlm-dans-r.html#cb24-7"></a><span class="co"># des données, où des poissons de seulement 5 classes de</span></span>
-<span id="cb24-8"><a href="comment-implémenter-un-mlm-dans-r.html#cb24-8"></a><span class="co"># taille (grandes, petites, et trois groupes entre les deux)</span></span>
-<span id="cb24-9"><a href="comment-implémenter-un-mlm-dans-r.html#cb24-9"></a><span class="co"># étaient capturés.</span></span>
-<span id="cb24-10"><a href="comment-implémenter-un-mlm-dans-r.html#cb24-10"></a></span>
-<span id="cb24-11"><a href="comment-implémenter-un-mlm-dans-r.html#cb24-11"></a><span class="co"># Espèce</span></span>
-<span id="cb24-12"><a href="comment-implémenter-un-mlm-dans-r.html#cb24-12"></a><span class="kw">boxplot</span>(E1 <span class="op">~</span><span class="st"> </span>Fish_Species, <span class="dt">ylab =</span> <span class="st">&quot;Normalized residuals&quot;</span>, <span class="dt">data =</span> data, </span>
-<span id="cb24-13"><a href="comment-implémenter-un-mlm-dans-r.html#cb24-13"></a>    <span class="dt">xlab =</span> <span class="st">&quot;Species&quot;</span>)</span>
-<span id="cb24-14"><a href="comment-implémenter-un-mlm-dans-r.html#cb24-14"></a><span class="kw">abline</span>(<span class="dt">h =</span> <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span>
-<span id="cb24-15"><a href="comment-implémenter-un-mlm-dans-r.html#cb24-15"></a></span>
-<span id="cb24-16"><a href="comment-implémenter-un-mlm-dans-r.html#cb24-16"></a><span class="co"># Lac</span></span>
-<span id="cb24-17"><a href="comment-implémenter-un-mlm-dans-r.html#cb24-17"></a><span class="kw">boxplot</span>(E1 <span class="op">~</span><span class="st"> </span>Lake, <span class="dt">ylab =</span> <span class="st">&quot;Normalized residuals&quot;</span>, <span class="dt">data =</span> data, </span>
-<span id="cb24-18"><a href="comment-implémenter-un-mlm-dans-r.html#cb24-18"></a>    <span class="dt">xlab =</span> <span class="st">&quot;Lake&quot;</span>)</span>
-<span id="cb24-19"><a href="comment-implémenter-un-mlm-dans-r.html#cb24-19"></a><span class="kw">abline</span>(<span class="dt">h =</span> <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="comment-implémenter-un-mlm-dans-r.html#cb22-1"></a><span class="co"># B. Vérifiez l’indépendance : i. graphique des résidus VS</span></span>
+<span id="cb22-2"><a href="comment-implémenter-un-mlm-dans-r.html#cb22-2"></a><span class="co"># chaque covariable du modèle Longueur corporelle des</span></span>
+<span id="cb22-3"><a href="comment-implémenter-un-mlm-dans-r.html#cb22-3"></a><span class="co"># poissons</span></span>
+<span id="cb22-4"><a href="comment-implémenter-un-mlm-dans-r.html#cb22-4"></a><span class="kw">plot</span>(<span class="dt">x =</span> data<span class="op">$</span>Z_Length, <span class="dt">y =</span> E1, <span class="dt">xlab =</span> <span class="st">&quot;Z Length&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Normalized residuals&quot;</span>)</span>
+<span id="cb22-5"><a href="comment-implémenter-un-mlm-dans-r.html#cb22-5"></a><span class="kw">abline</span>(<span class="dt">h =</span> <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb22-6"><a href="comment-implémenter-un-mlm-dans-r.html#cb22-6"></a><span class="co"># Note: Les regroupements de données sont dus à la structure</span></span>
+<span id="cb22-7"><a href="comment-implémenter-un-mlm-dans-r.html#cb22-7"></a><span class="co"># des données, où des poissons de seulement 5 classes de</span></span>
+<span id="cb22-8"><a href="comment-implémenter-un-mlm-dans-r.html#cb22-8"></a><span class="co"># taille (grandes, petites, et trois groupes entre les deux)</span></span>
+<span id="cb22-9"><a href="comment-implémenter-un-mlm-dans-r.html#cb22-9"></a><span class="co"># étaient capturés.</span></span>
+<span id="cb22-10"><a href="comment-implémenter-un-mlm-dans-r.html#cb22-10"></a></span>
+<span id="cb22-11"><a href="comment-implémenter-un-mlm-dans-r.html#cb22-11"></a><span class="co"># Espèce</span></span>
+<span id="cb22-12"><a href="comment-implémenter-un-mlm-dans-r.html#cb22-12"></a><span class="kw">boxplot</span>(E1 <span class="op">~</span><span class="st"> </span>Fish_Species, <span class="dt">ylab =</span> <span class="st">&quot;Normalized residuals&quot;</span>, <span class="dt">data =</span> data, </span>
+<span id="cb22-13"><a href="comment-implémenter-un-mlm-dans-r.html#cb22-13"></a>    <span class="dt">xlab =</span> <span class="st">&quot;Species&quot;</span>)</span>
+<span id="cb22-14"><a href="comment-implémenter-un-mlm-dans-r.html#cb22-14"></a><span class="kw">abline</span>(<span class="dt">h =</span> <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb22-15"><a href="comment-implémenter-un-mlm-dans-r.html#cb22-15"></a></span>
+<span id="cb22-16"><a href="comment-implémenter-un-mlm-dans-r.html#cb22-16"></a><span class="co"># Lac</span></span>
+<span id="cb22-17"><a href="comment-implémenter-un-mlm-dans-r.html#cb22-17"></a><span class="kw">boxplot</span>(E1 <span class="op">~</span><span class="st"> </span>Lake, <span class="dt">ylab =</span> <span class="st">&quot;Normalized residuals&quot;</span>, <span class="dt">data =</span> data, </span>
+<span id="cb22-18"><a href="comment-implémenter-un-mlm-dans-r.html#cb22-18"></a>    <span class="dt">xlab =</span> <span class="st">&quot;Lake&quot;</span>)</span>
+<span id="cb22-19"><a href="comment-implémenter-un-mlm-dans-r.html#cb22-19"></a><span class="kw">abline</span>(<span class="dt">h =</span> <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
 <p>++++ Sortie|</p>
 <hr />
 <p><img src="images/fig_25_w5.png" width="400" /></p>
@@ -606,18 +612,18 @@ notre modèle, nous ne pouvons pas faire cette étape.</p>
 <p>Il est également important de vérifier la normalité des résidus. Des
 résidus suivant une distribution normale indiquent que le modèle n’est
 pas biaisé.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="comment-implémenter-un-mlm-dans-r.html#cb25-1"></a><span class="co"># D. Vérifier la normalité : histogramme</span></span>
-<span id="cb25-2"><a href="comment-implémenter-un-mlm-dans-r.html#cb25-2"></a><span class="kw">hist</span>(E1)</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="comment-implémenter-un-mlm-dans-r.html#cb23-1"></a><span class="co"># D. Vérifier la normalité : histogramme</span></span>
+<span id="cb23-2"><a href="comment-implémenter-un-mlm-dans-r.html#cb23-2"></a><span class="kw">hist</span>(E1)</span></code></pre></div>
 <p>++++ Sortie| <img src="images/fig_28_w5.png" width="400" /> ++++</p>
 </div>
 <div id="interpréter-les-résultats-et-les-visualiser-graphiquement" class="section level2">
 <h2><span class="header-section-number">9.5</span> Interpréter les résultats et les visualiser graphiquement</h2>
 <p>Vous pouvez voir le résumé du modèle à l’aide de :</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="comment-implémenter-un-mlm-dans-r.html#cb26-1"></a><span class="co"># Vérifiez le résumé du modèle Cela vous permet d&#39;avoir une</span></span>
-<span id="cb26-2"><a href="comment-implémenter-un-mlm-dans-r.html#cb26-2"></a><span class="co"># idée de la variance expliquée par les différentes</span></span>
-<span id="cb26-3"><a href="comment-implémenter-un-mlm-dans-r.html#cb26-3"></a><span class="co"># composantes du modèle et la «significativité» des effets</span></span>
-<span id="cb26-4"><a href="comment-implémenter-un-mlm-dans-r.html#cb26-4"></a><span class="co"># fixes</span></span>
-<span id="cb26-5"><a href="comment-implémenter-un-mlm-dans-r.html#cb26-5"></a><span class="kw">summary</span>(M8)</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="comment-implémenter-un-mlm-dans-r.html#cb24-1"></a><span class="co"># Vérifiez le résumé du modèle Cela vous permet d&#39;avoir une</span></span>
+<span id="cb24-2"><a href="comment-implémenter-un-mlm-dans-r.html#cb24-2"></a><span class="co"># idée de la variance expliquée par les différentes</span></span>
+<span id="cb24-3"><a href="comment-implémenter-un-mlm-dans-r.html#cb24-3"></a><span class="co"># composantes du modèle et la «significativité» des effets</span></span>
+<span id="cb24-4"><a href="comment-implémenter-un-mlm-dans-r.html#cb24-4"></a><span class="co"># fixes</span></span>
+<span id="cb24-5"><a href="comment-implémenter-un-mlm-dans-r.html#cb24-5"></a><span class="kw">summary</span>(M8)</span></code></pre></div>
 <p>++++ Sortie| <img src="images/fig_29_w5.png" width="500" /> ++++</p>
 <p>La sortie est divisée en descriptions des effets aléatoires (ce qui peut
 varier en fonction de la distribution normale) et les effets fixes (ce
@@ -670,59 +676,59 @@ obtenus en utilisant la fonction "coef ()".</p>
 Obtenir les paramètres d’intérêts<br />
 <img src="images/fig_33_w5.png" width="600" /></p>
 <p>et tracer les données avec le modèle superposée</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="comment-implémenter-un-mlm-dans-r.html#cb28-1"></a><span class="co"># Visualiser les résultats du modèle #### Il existe plusieurs</span></span>
-<span id="cb28-2"><a href="comment-implémenter-un-mlm-dans-r.html#cb28-2"></a><span class="co"># façons de visualiser les résultats d&#39;un modèle mixte, qui</span></span>
-<span id="cb28-3"><a href="comment-implémenter-un-mlm-dans-r.html#cb28-3"></a><span class="co"># font tous appel au coefficients générés par le modèle.  La</span></span>
-<span id="cb28-4"><a href="comment-implémenter-un-mlm-dans-r.html#cb28-4"></a><span class="co"># première étape est d&#39;obtenir les coefficients du modèle</span></span>
-<span id="cb28-5"><a href="comment-implémenter-un-mlm-dans-r.html#cb28-5"></a><span class="co"># afin de les ajouter aux figures</span></span>
-<span id="cb28-6"><a href="comment-implémenter-un-mlm-dans-r.html#cb28-6"></a><span class="kw">coef</span>(M8)</span>
-<span id="cb28-7"><a href="comment-implémenter-un-mlm-dans-r.html#cb28-7"></a><span class="co"># Maintenant, mettez les coefs dans un tableau pour les</span></span>
-<span id="cb28-8"><a href="comment-implémenter-un-mlm-dans-r.html#cb28-8"></a><span class="co"># rendre plus faciles à manipuler</span></span>
-<span id="cb28-9"><a href="comment-implémenter-un-mlm-dans-r.html#cb28-9"></a>Lake.coef &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">coef</span>(M8)<span class="op">$</span>Lake)</span>
-<span id="cb28-10"><a href="comment-implémenter-un-mlm-dans-r.html#cb28-10"></a><span class="kw">colnames</span>(Lake.coef) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Intercept&quot;</span>, <span class="st">&quot;Slope&quot;</span>)</span>
-<span id="cb28-11"><a href="comment-implémenter-un-mlm-dans-r.html#cb28-11"></a>Species.coef &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">coef</span>(M8)<span class="op">$</span>Fish_Species)</span>
-<span id="cb28-12"><a href="comment-implémenter-un-mlm-dans-r.html#cb28-12"></a><span class="kw">colnames</span>(Species.coef) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Intercept&quot;</span>, <span class="st">&quot;Slope&quot;</span>)</span>
-<span id="cb28-13"><a href="comment-implémenter-un-mlm-dans-r.html#cb28-13"></a></span>
-<span id="cb28-14"><a href="comment-implémenter-un-mlm-dans-r.html#cb28-14"></a><span class="co"># Graphique 1 – toutes les données Graphique qui inclut</span></span>
-<span id="cb28-15"><a href="comment-implémenter-un-mlm-dans-r.html#cb28-15"></a><span class="co"># toutes les données</span></span>
-<span id="cb28-16"><a href="comment-implémenter-un-mlm-dans-r.html#cb28-16"></a>plot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Z_Length, Z_TP), <span class="dt">data =</span> data)</span>
-<span id="cb28-17"><a href="comment-implémenter-un-mlm-dans-r.html#cb28-17"></a>Plot_AllData &lt;-<span class="st"> </span>plot <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Length (mm)&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Trophic Position&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb28-18"><a href="comment-implémenter-un-mlm-dans-r.html#cb28-18"></a><span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;All Data&quot;</span>) <span class="op">+</span><span class="st"> </span>fig</span>
-<span id="cb28-19"><a href="comment-implémenter-un-mlm-dans-r.html#cb28-19"></a><span class="co"># Ajoutez un abline avec l&#39;intercept et la pente de la</span></span>
-<span id="cb28-20"><a href="comment-implémenter-un-mlm-dans-r.html#cb28-20"></a><span class="co"># relation entre la longueur et la position trophique Notez</span></span>
-<span id="cb28-21"><a href="comment-implémenter-un-mlm-dans-r.html#cb28-21"></a><span class="co"># que vous pouvez obtenir l’origine et la pente du facteur</span></span>
-<span id="cb28-22"><a href="comment-implémenter-un-mlm-dans-r.html#cb28-22"></a><span class="co"># fixe directement à partir du résumé du modèle</span></span>
-<span id="cb28-23"><a href="comment-implémenter-un-mlm-dans-r.html#cb28-23"></a><span class="kw">summary</span>(M8)</span>
-<span id="cb28-24"><a href="comment-implémenter-un-mlm-dans-r.html#cb28-24"></a>Plot_AllData <span class="op">+</span><span class="st"> </span><span class="kw">geom_abline</span>(<span class="dt">intercept =</span> <span class="fl">-0.0009059</span>, <span class="dt">slope =</span> <span class="fl">0.4222697</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="comment-implémenter-un-mlm-dans-r.html#cb26-1"></a><span class="co"># Visualiser les résultats du modèle #### Il existe plusieurs</span></span>
+<span id="cb26-2"><a href="comment-implémenter-un-mlm-dans-r.html#cb26-2"></a><span class="co"># façons de visualiser les résultats d&#39;un modèle mixte, qui</span></span>
+<span id="cb26-3"><a href="comment-implémenter-un-mlm-dans-r.html#cb26-3"></a><span class="co"># font tous appel au coefficients générés par le modèle.  La</span></span>
+<span id="cb26-4"><a href="comment-implémenter-un-mlm-dans-r.html#cb26-4"></a><span class="co"># première étape est d&#39;obtenir les coefficients du modèle</span></span>
+<span id="cb26-5"><a href="comment-implémenter-un-mlm-dans-r.html#cb26-5"></a><span class="co"># afin de les ajouter aux figures</span></span>
+<span id="cb26-6"><a href="comment-implémenter-un-mlm-dans-r.html#cb26-6"></a><span class="kw">coef</span>(M8)</span>
+<span id="cb26-7"><a href="comment-implémenter-un-mlm-dans-r.html#cb26-7"></a><span class="co"># Maintenant, mettez les coefs dans un tableau pour les</span></span>
+<span id="cb26-8"><a href="comment-implémenter-un-mlm-dans-r.html#cb26-8"></a><span class="co"># rendre plus faciles à manipuler</span></span>
+<span id="cb26-9"><a href="comment-implémenter-un-mlm-dans-r.html#cb26-9"></a>Lake.coef &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">coef</span>(M8)<span class="op">$</span>Lake)</span>
+<span id="cb26-10"><a href="comment-implémenter-un-mlm-dans-r.html#cb26-10"></a><span class="kw">colnames</span>(Lake.coef) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Intercept&quot;</span>, <span class="st">&quot;Slope&quot;</span>)</span>
+<span id="cb26-11"><a href="comment-implémenter-un-mlm-dans-r.html#cb26-11"></a>Species.coef &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">coef</span>(M8)<span class="op">$</span>Fish_Species)</span>
+<span id="cb26-12"><a href="comment-implémenter-un-mlm-dans-r.html#cb26-12"></a><span class="kw">colnames</span>(Species.coef) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Intercept&quot;</span>, <span class="st">&quot;Slope&quot;</span>)</span>
+<span id="cb26-13"><a href="comment-implémenter-un-mlm-dans-r.html#cb26-13"></a></span>
+<span id="cb26-14"><a href="comment-implémenter-un-mlm-dans-r.html#cb26-14"></a><span class="co"># Graphique 1 – toutes les données Graphique qui inclut</span></span>
+<span id="cb26-15"><a href="comment-implémenter-un-mlm-dans-r.html#cb26-15"></a><span class="co"># toutes les données</span></span>
+<span id="cb26-16"><a href="comment-implémenter-un-mlm-dans-r.html#cb26-16"></a>plot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Z_Length, Z_TP), <span class="dt">data =</span> data)</span>
+<span id="cb26-17"><a href="comment-implémenter-un-mlm-dans-r.html#cb26-17"></a>Plot_AllData &lt;-<span class="st"> </span>plot <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Length (mm)&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Trophic Position&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb26-18"><a href="comment-implémenter-un-mlm-dans-r.html#cb26-18"></a><span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;All Data&quot;</span>) <span class="op">+</span><span class="st"> </span>fig</span>
+<span id="cb26-19"><a href="comment-implémenter-un-mlm-dans-r.html#cb26-19"></a><span class="co"># Ajoutez un abline avec l&#39;intercept et la pente de la</span></span>
+<span id="cb26-20"><a href="comment-implémenter-un-mlm-dans-r.html#cb26-20"></a><span class="co"># relation entre la longueur et la position trophique Notez</span></span>
+<span id="cb26-21"><a href="comment-implémenter-un-mlm-dans-r.html#cb26-21"></a><span class="co"># que vous pouvez obtenir l’origine et la pente du facteur</span></span>
+<span id="cb26-22"><a href="comment-implémenter-un-mlm-dans-r.html#cb26-22"></a><span class="co"># fixe directement à partir du résumé du modèle</span></span>
+<span id="cb26-23"><a href="comment-implémenter-un-mlm-dans-r.html#cb26-23"></a><span class="kw">summary</span>(M8)</span>
+<span id="cb26-24"><a href="comment-implémenter-un-mlm-dans-r.html#cb26-24"></a>Plot_AllData <span class="op">+</span><span class="st"> </span><span class="kw">geom_abline</span>(<span class="dt">intercept =</span> <span class="fl">-0.0009059</span>, <span class="dt">slope =</span> <span class="fl">0.4222697</span>)</span></code></pre></div>
 <p>++++ Sortie| <img src="images/fig_34_w5.png" width="500" /> ++++</p>
 <p>2. Montrer les modèle au niveau de l’espèce ou du lac:<br />
 Obtenir les paramètres d’intérêts<br />
 <img src="images/fig_35_w5.png" width="200" /></p>
 <p>et tracer les données avec le modèle superposé</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="comment-implémenter-un-mlm-dans-r.html#cb29-1"></a><span class="co"># Graphique 2 - Par Espèce Colorez les données par espèce</span></span>
-<span id="cb29-2"><a href="comment-implémenter-un-mlm-dans-r.html#cb29-2"></a>Plot_BySpecies &lt;-<span class="st"> </span>plot <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> <span class="kw">factor</span>(Fish_Species)), </span>
-<span id="cb29-3"><a href="comment-implémenter-un-mlm-dans-r.html#cb29-3"></a>    <span class="dt">size =</span> <span class="dv">4</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Length (mm)&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Trophic Position&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb29-4"><a href="comment-implémenter-un-mlm-dans-r.html#cb29-4"></a><span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;By Species&quot;</span>) <span class="op">+</span><span class="st"> </span>fig</span>
-<span id="cb29-5"><a href="comment-implémenter-un-mlm-dans-r.html#cb29-5"></a><span class="co"># Ajoutez les lignes de régression pour chaque espèce</span></span>
-<span id="cb29-6"><a href="comment-implémenter-un-mlm-dans-r.html#cb29-6"></a>Plot_BySpecies <span class="op">+</span><span class="st"> </span><span class="kw">geom_abline</span>(<span class="dt">intercept =</span> Species.coef[<span class="dv">1</span>, <span class="dv">1</span>], </span>
-<span id="cb29-7"><a href="comment-implémenter-un-mlm-dans-r.html#cb29-7"></a>    <span class="dt">slope =</span> Species.coef[<span class="dv">1</span>, <span class="dv">2</span>], <span class="dt">colour =</span> <span class="st">&quot;coral2&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_abline</span>(<span class="dt">intercept =</span> Species.coef[<span class="dv">2</span>, </span>
-<span id="cb29-8"><a href="comment-implémenter-un-mlm-dans-r.html#cb29-8"></a>    <span class="dv">1</span>], <span class="dt">slope =</span> Species.coef[<span class="dv">2</span>, <span class="dv">2</span>], <span class="dt">colour =</span> <span class="st">&quot;green4&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_abline</span>(<span class="dt">intercept =</span> Species.coef[<span class="dv">3</span>, </span>
-<span id="cb29-9"><a href="comment-implémenter-un-mlm-dans-r.html#cb29-9"></a>    <span class="dv">1</span>], <span class="dt">slope =</span> Species.coef[<span class="dv">3</span>, <span class="dv">2</span>], <span class="dt">colour =</span> <span class="st">&quot;blue1&quot;</span>)</span>
-<span id="cb29-10"><a href="comment-implémenter-un-mlm-dans-r.html#cb29-10"></a></span>
-<span id="cb29-11"><a href="comment-implémenter-un-mlm-dans-r.html#cb29-11"></a><span class="co"># Graphique 3 – Par Lac Colorez les données par lac</span></span>
-<span id="cb29-12"><a href="comment-implémenter-un-mlm-dans-r.html#cb29-12"></a>Plot_ByLake &lt;-<span class="st"> </span>plot <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> <span class="kw">factor</span>(Lake)), </span>
-<span id="cb29-13"><a href="comment-implémenter-un-mlm-dans-r.html#cb29-13"></a>    <span class="dt">size =</span> <span class="dv">4</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Length (mm)&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Trophic Position&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb29-14"><a href="comment-implémenter-un-mlm-dans-r.html#cb29-14"></a><span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;By Lake&quot;</span>) <span class="op">+</span><span class="st"> </span>fig</span>
-<span id="cb29-15"><a href="comment-implémenter-un-mlm-dans-r.html#cb29-15"></a><span class="co"># Ajouter les lignes de régression avec les intercepts</span></span>
-<span id="cb29-16"><a href="comment-implémenter-un-mlm-dans-r.html#cb29-16"></a><span class="co"># spécifiques à chaque lac</span></span>
-<span id="cb29-17"><a href="comment-implémenter-un-mlm-dans-r.html#cb29-17"></a>Plot_ByLake <span class="op">+</span><span class="st"> </span><span class="kw">geom_abline</span>(<span class="dt">intercept =</span> Lake.coef[<span class="dv">1</span>, <span class="dv">1</span>], <span class="dt">slope =</span> Lake.coef[<span class="dv">1</span>, </span>
-<span id="cb29-18"><a href="comment-implémenter-un-mlm-dans-r.html#cb29-18"></a>    <span class="dv">2</span>], <span class="dt">colour =</span> <span class="st">&quot;coral2&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_abline</span>(<span class="dt">intercept =</span> Lake.coef[<span class="dv">2</span>, </span>
-<span id="cb29-19"><a href="comment-implémenter-un-mlm-dans-r.html#cb29-19"></a>    <span class="dv">1</span>], <span class="dt">slope =</span> Lake.coef[<span class="dv">2</span>, <span class="dv">2</span>], <span class="dt">colour =</span> <span class="st">&quot;khaki4&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_abline</span>(<span class="dt">intercept =</span> Lake.coef[<span class="dv">3</span>, </span>
-<span id="cb29-20"><a href="comment-implémenter-un-mlm-dans-r.html#cb29-20"></a>    <span class="dv">1</span>], <span class="dt">slope =</span> Lake.coef[<span class="dv">3</span>, <span class="dv">2</span>], <span class="dt">colour =</span> <span class="st">&quot;green4&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_abline</span>(<span class="dt">intercept =</span> Lake.coef[<span class="dv">4</span>, </span>
-<span id="cb29-21"><a href="comment-implémenter-un-mlm-dans-r.html#cb29-21"></a>    <span class="dv">1</span>], <span class="dt">slope =</span> Lake.coef[<span class="dv">4</span>, <span class="dv">2</span>], <span class="dt">colour =</span> <span class="st">&quot;darkgoldenrod&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb29-22"><a href="comment-implémenter-un-mlm-dans-r.html#cb29-22"></a><span class="st">    </span><span class="kw">geom_abline</span>(<span class="dt">intercept =</span> Lake.coef[<span class="dv">5</span>, <span class="dv">1</span>], <span class="dt">slope =</span> Lake.coef[<span class="dv">5</span>, </span>
-<span id="cb29-23"><a href="comment-implémenter-un-mlm-dans-r.html#cb29-23"></a>        <span class="dv">2</span>], <span class="dt">colour =</span> <span class="st">&quot;royalblue1&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_abline</span>(<span class="dt">intercept =</span> Lake.coef[<span class="dv">6</span>, </span>
-<span id="cb29-24"><a href="comment-implémenter-un-mlm-dans-r.html#cb29-24"></a>    <span class="dv">1</span>], <span class="dt">slope =</span> Lake.coef[<span class="dv">6</span>, <span class="dv">2</span>], <span class="dt">colour =</span> <span class="st">&quot;magenta3&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="comment-implémenter-un-mlm-dans-r.html#cb27-1"></a><span class="co"># Graphique 2 - Par Espèce Colorez les données par espèce</span></span>
+<span id="cb27-2"><a href="comment-implémenter-un-mlm-dans-r.html#cb27-2"></a>Plot_BySpecies &lt;-<span class="st"> </span>plot <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> <span class="kw">factor</span>(Fish_Species)), </span>
+<span id="cb27-3"><a href="comment-implémenter-un-mlm-dans-r.html#cb27-3"></a>    <span class="dt">size =</span> <span class="dv">4</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Length (mm)&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Trophic Position&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb27-4"><a href="comment-implémenter-un-mlm-dans-r.html#cb27-4"></a><span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;By Species&quot;</span>) <span class="op">+</span><span class="st"> </span>fig</span>
+<span id="cb27-5"><a href="comment-implémenter-un-mlm-dans-r.html#cb27-5"></a><span class="co"># Ajoutez les lignes de régression pour chaque espèce</span></span>
+<span id="cb27-6"><a href="comment-implémenter-un-mlm-dans-r.html#cb27-6"></a>Plot_BySpecies <span class="op">+</span><span class="st"> </span><span class="kw">geom_abline</span>(<span class="dt">intercept =</span> Species.coef[<span class="dv">1</span>, <span class="dv">1</span>], </span>
+<span id="cb27-7"><a href="comment-implémenter-un-mlm-dans-r.html#cb27-7"></a>    <span class="dt">slope =</span> Species.coef[<span class="dv">1</span>, <span class="dv">2</span>], <span class="dt">colour =</span> <span class="st">&quot;coral2&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_abline</span>(<span class="dt">intercept =</span> Species.coef[<span class="dv">2</span>, </span>
+<span id="cb27-8"><a href="comment-implémenter-un-mlm-dans-r.html#cb27-8"></a>    <span class="dv">1</span>], <span class="dt">slope =</span> Species.coef[<span class="dv">2</span>, <span class="dv">2</span>], <span class="dt">colour =</span> <span class="st">&quot;green4&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_abline</span>(<span class="dt">intercept =</span> Species.coef[<span class="dv">3</span>, </span>
+<span id="cb27-9"><a href="comment-implémenter-un-mlm-dans-r.html#cb27-9"></a>    <span class="dv">1</span>], <span class="dt">slope =</span> Species.coef[<span class="dv">3</span>, <span class="dv">2</span>], <span class="dt">colour =</span> <span class="st">&quot;blue1&quot;</span>)</span>
+<span id="cb27-10"><a href="comment-implémenter-un-mlm-dans-r.html#cb27-10"></a></span>
+<span id="cb27-11"><a href="comment-implémenter-un-mlm-dans-r.html#cb27-11"></a><span class="co"># Graphique 3 – Par Lac Colorez les données par lac</span></span>
+<span id="cb27-12"><a href="comment-implémenter-un-mlm-dans-r.html#cb27-12"></a>Plot_ByLake &lt;-<span class="st"> </span>plot <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> <span class="kw">factor</span>(Lake)), </span>
+<span id="cb27-13"><a href="comment-implémenter-un-mlm-dans-r.html#cb27-13"></a>    <span class="dt">size =</span> <span class="dv">4</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Length (mm)&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Trophic Position&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb27-14"><a href="comment-implémenter-un-mlm-dans-r.html#cb27-14"></a><span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;By Lake&quot;</span>) <span class="op">+</span><span class="st"> </span>fig</span>
+<span id="cb27-15"><a href="comment-implémenter-un-mlm-dans-r.html#cb27-15"></a><span class="co"># Ajouter les lignes de régression avec les intercepts</span></span>
+<span id="cb27-16"><a href="comment-implémenter-un-mlm-dans-r.html#cb27-16"></a><span class="co"># spécifiques à chaque lac</span></span>
+<span id="cb27-17"><a href="comment-implémenter-un-mlm-dans-r.html#cb27-17"></a>Plot_ByLake <span class="op">+</span><span class="st"> </span><span class="kw">geom_abline</span>(<span class="dt">intercept =</span> Lake.coef[<span class="dv">1</span>, <span class="dv">1</span>], <span class="dt">slope =</span> Lake.coef[<span class="dv">1</span>, </span>
+<span id="cb27-18"><a href="comment-implémenter-un-mlm-dans-r.html#cb27-18"></a>    <span class="dv">2</span>], <span class="dt">colour =</span> <span class="st">&quot;coral2&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_abline</span>(<span class="dt">intercept =</span> Lake.coef[<span class="dv">2</span>, </span>
+<span id="cb27-19"><a href="comment-implémenter-un-mlm-dans-r.html#cb27-19"></a>    <span class="dv">1</span>], <span class="dt">slope =</span> Lake.coef[<span class="dv">2</span>, <span class="dv">2</span>], <span class="dt">colour =</span> <span class="st">&quot;khaki4&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_abline</span>(<span class="dt">intercept =</span> Lake.coef[<span class="dv">3</span>, </span>
+<span id="cb27-20"><a href="comment-implémenter-un-mlm-dans-r.html#cb27-20"></a>    <span class="dv">1</span>], <span class="dt">slope =</span> Lake.coef[<span class="dv">3</span>, <span class="dv">2</span>], <span class="dt">colour =</span> <span class="st">&quot;green4&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_abline</span>(<span class="dt">intercept =</span> Lake.coef[<span class="dv">4</span>, </span>
+<span id="cb27-21"><a href="comment-implémenter-un-mlm-dans-r.html#cb27-21"></a>    <span class="dv">1</span>], <span class="dt">slope =</span> Lake.coef[<span class="dv">4</span>, <span class="dv">2</span>], <span class="dt">colour =</span> <span class="st">&quot;darkgoldenrod&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb27-22"><a href="comment-implémenter-un-mlm-dans-r.html#cb27-22"></a><span class="st">    </span><span class="kw">geom_abline</span>(<span class="dt">intercept =</span> Lake.coef[<span class="dv">5</span>, <span class="dv">1</span>], <span class="dt">slope =</span> Lake.coef[<span class="dv">5</span>, </span>
+<span id="cb27-23"><a href="comment-implémenter-un-mlm-dans-r.html#cb27-23"></a>        <span class="dv">2</span>], <span class="dt">colour =</span> <span class="st">&quot;royalblue1&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_abline</span>(<span class="dt">intercept =</span> Lake.coef[<span class="dv">6</span>, </span>
+<span id="cb27-24"><a href="comment-implémenter-un-mlm-dans-r.html#cb27-24"></a>    <span class="dv">1</span>], <span class="dt">slope =</span> Lake.coef[<span class="dv">6</span>, <span class="dv">2</span>], <span class="dt">colour =</span> <span class="st">&quot;magenta3&quot;</span>)</span></code></pre></div>
 <p>++++ Sortie| <img src="images/fig_36_w5.png" width="500" />
 <img src="images/fig_37_w5.png" width="500" /> ++++</p>
 </div>
@@ -745,8 +751,8 @@ cherchez à savoir si la productivité est un bon prédicteur de la
 biodiversité.</p>
 <p>Quel modèle mixte pourriez-vous utiliser pour ce jeu de données?</p>
 <p>++++ Réponse défi 8 |</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="comment-implémenter-un-mlm-dans-r.html#cb30-1"></a><span class="op">&gt;</span><span class="kw">lmer</span>(Bio_Div <span class="op">~</span><span class="st"> </span>Productivity <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>Forest<span class="op">/</span>Site))</span>
-<span id="cb30-2"><a href="comment-implémenter-un-mlm-dans-r.html#cb30-2"></a><span class="op">&gt;</span><span class="co"># Ici, les effets aléatoires sont nichés (i.e. sites dans forêt) et non croisés.</span></span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="comment-implémenter-un-mlm-dans-r.html#cb28-1"></a><span class="op">&gt;</span><span class="kw">lmer</span>(Bio_Div <span class="op">~</span><span class="st"> </span>Productivity <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>Forest<span class="op">/</span>Site))</span>
+<span id="cb28-2"><a href="comment-implémenter-un-mlm-dans-r.html#cb28-2"></a><span class="op">&gt;</span><span class="co"># Ici, les effets aléatoires sont nichés (i.e. sites dans forêt) et non croisés.</span></span></code></pre></div>
 <p>++++</p>
 <hr />
 <hr />
@@ -758,7 +764,7 @@ quantité de mercure dans ses tissus. Vous cherchez surtout à savoir si
 l’habitat est un bon prédicteur de la concentration en mercure.</p>
 <p>Quel modèle mixte pourriez-vous utiliser pour ce jeu de données? ++++
 Réponse défi 9 |</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="comment-implémenter-un-mlm-dans-r.html#cb31-1"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">lmer</span>(Mercury<span class="op">~</span>Length<span class="op">*</span>Habitat_Type<span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>Site)...)</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="comment-implémenter-un-mlm-dans-r.html#cb29-1"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">lmer</span>(Mercury<span class="op">~</span>Length<span class="op">*</span>Habitat_Type<span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>Site)...)</span></code></pre></div>
 <p>++++</p>
 
 </div>

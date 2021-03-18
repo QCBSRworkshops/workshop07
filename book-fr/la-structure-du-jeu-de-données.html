@@ -146,11 +146,17 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1" data-path="objectifs-dapprentissage.html"><a href="objectifs-dapprentissage.html"><i class="fa fa-check"></i><b>1</b> Objectifs d’apprentissage</a></li>
 <li class="chapter" data-level="2" data-path="préparez-vous-pour-cet-atelier.html"><a href="préparez-vous-pour-cet-atelier.html"><i class="fa fa-check"></i><b>2</b> Préparez-vous pour cet atelier</a></li>
 <li class="chapter" data-level="3" data-path="pourquoi-choisir-un-mlm.html"><a href="pourquoi-choisir-un-mlm.html"><i class="fa fa-check"></i><b>3</b> Pourquoi choisir un MLM?</a></li>
-<li class="chapter" data-level="4" data-path="quest-ce-quun-mlm-et-pourquoi-est-ce-important.html"><a href="quest-ce-quun-mlm-et-pourquoi-est-ce-important.html"><i class="fa fa-check"></i><b>4</b> Qu’est-ce qu’un MLM et pourquoi est-ce important?</a></li>
-<li class="chapter" data-level="5" data-path="introduction-au-jeu-de-données.html"><a href="introduction-au-jeu-de-données.html"><i class="fa fa-check"></i><b>5</b> Introduction au jeu de données</a></li>
+<li class="chapter" data-level="4" data-path="commencer-par-une-question.html"><a href="commencer-par-une-question.html"><i class="fa fa-check"></i><b>4</b> Commencer par une question</a><ul>
+<li class="chapter" data-level="4.1" data-path="commencer-par-une-question.html"><a href="commencer-par-une-question.html#défi-1"><i class="fa fa-check"></i><b>4.1</b> Défi 1</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="analyse-des-données.html"><a href="analyse-des-données.html"><i class="fa fa-check"></i><b>5</b> Analyse des données</a><ul>
+<li class="chapter" data-level="5.1" data-path="analyse-des-données.html"><a href="analyse-des-données.html#nombreuses-analyses-séparées"><i class="fa fa-check"></i><b>5.1</b> Nombreuses analyses séparées</a></li>
+<li class="chapter" data-level="5.2" data-path="analyse-des-données.html"><a href="analyse-des-données.html#une-analyse-groupée"><i class="fa fa-check"></i><b>5.2</b> Une analyse groupée</a></li>
+<li class="chapter" data-level="5.3" data-path="analyse-des-données.html"><a href="analyse-des-données.html#il-y-a-une-troisième-option"><i class="fa fa-check"></i><b>5.3</b> Il y a une troisième option?</a></li>
+</ul></li>
 <li class="chapter" data-level="6" data-path="comment-pourrions-nous-analyser-ces-données.html"><a href="comment-pourrions-nous-analyser-ces-données.html"><i class="fa fa-check"></i><b>6</b> Comment pourrions-nous analyser ces données?</a><ul>
-<li class="chapter" data-level="6.1" data-path="comment-pourrions-nous-analyser-ces-données.html"><a href="comment-pourrions-nous-analyser-ces-données.html#nombreuses-analyses-séparées"><i class="fa fa-check"></i><b>6.1</b> Nombreuses analyses séparées</a></li>
-<li class="chapter" data-level="6.2" data-path="comment-pourrions-nous-analyser-ces-données.html"><a href="comment-pourrions-nous-analyser-ces-données.html#une-analyse-groupée"><i class="fa fa-check"></i><b>6.2</b> Une analyse groupée</a></li>
+<li class="chapter" data-level="6.1" data-path="comment-pourrions-nous-analyser-ces-données.html"><a href="comment-pourrions-nous-analyser-ces-données.html#nombreuses-analyses-séparées-1"><i class="fa fa-check"></i><b>6.1</b> Nombreuses analyses séparées</a></li>
+<li class="chapter" data-level="6.2" data-path="comment-pourrions-nous-analyser-ces-données.html"><a href="comment-pourrions-nous-analyser-ces-données.html#une-analyse-groupée-1"><i class="fa fa-check"></i><b>6.2</b> Une analyse groupée</a></li>
 <li class="chapter" data-level="6.3" data-path="comment-pourrions-nous-analyser-ces-données.html"><a href="comment-pourrions-nous-analyser-ces-données.html#construire-un-mlm"><i class="fa fa-check"></i><b>6.3</b> Construire un MLM</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="effets-fixes-et-aléatoires.html"><a href="effets-fixes-et-aléatoires.html"><i class="fa fa-check"></i><b>7</b> Effets fixes et aléatoires</a><ul>
@@ -248,32 +254,32 @@ de Poisson est que la variance est égale à la moyenne. Cependant, comme
 nous le verrons ci-dessous, la variance de chaque groupe augmente
 beaucoup plus rapidement que la moyenne attendue sous la distribution de
 Poisson.</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="la-structure-du-jeu-de-données.html#cb34-1"></a><span class="co"># Créez de nouvelles variables qui représentent toutes les</span></span>
-<span id="cb34-2"><a href="la-structure-du-jeu-de-données.html#cb34-2"></a><span class="co"># combinaisons de nutriments x facteur clipping x facteur</span></span>
-<span id="cb34-3"><a href="la-structure-du-jeu-de-données.html#cb34-3"></a><span class="co"># aléatoire</span></span>
-<span id="cb34-4"><a href="la-structure-du-jeu-de-données.html#cb34-4"></a>dat.tf &lt;-<span class="st"> </span><span class="kw">within</span>(dat.tf, {</span>
-<span id="cb34-5"><a href="la-structure-du-jeu-de-données.html#cb34-5"></a>    <span class="co"># génotype x nutriments x clipping</span></span>
-<span id="cb34-6"><a href="la-structure-du-jeu-de-données.html#cb34-6"></a>    gna &lt;-<span class="st"> </span><span class="kw">interaction</span>(gen, nutrient, amd)</span>
-<span id="cb34-7"><a href="la-structure-du-jeu-de-données.html#cb34-7"></a>    gna &lt;-<span class="st"> </span><span class="kw">reorder</span>(gna, total.fruits, mean)</span>
-<span id="cb34-8"><a href="la-structure-du-jeu-de-données.html#cb34-8"></a>    <span class="co"># population x nutriments x clipping</span></span>
-<span id="cb34-9"><a href="la-structure-du-jeu-de-données.html#cb34-9"></a>    pna &lt;-<span class="st"> </span><span class="kw">interaction</span>(popu, nutrient, amd)</span>
-<span id="cb34-10"><a href="la-structure-du-jeu-de-données.html#cb34-10"></a>    pna &lt;-<span class="st"> </span><span class="kw">reorder</span>(pna, total.fruits, mean)</span>
-<span id="cb34-11"><a href="la-structure-du-jeu-de-données.html#cb34-11"></a>})</span>
-<span id="cb34-12"><a href="la-structure-du-jeu-de-données.html#cb34-12"></a></span>
-<span id="cb34-13"><a href="la-structure-du-jeu-de-données.html#cb34-13"></a></span>
-<span id="cb34-14"><a href="la-structure-du-jeu-de-données.html#cb34-14"></a><span class="co"># Boîte à moustaches du total de fruits vs. nouvelle variable</span></span>
-<span id="cb34-15"><a href="la-structure-du-jeu-de-données.html#cb34-15"></a><span class="co"># (génotype x nutriments x clipping)</span></span>
-<span id="cb34-16"><a href="la-structure-du-jeu-de-données.html#cb34-16"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> dat.tf, <span class="kw">aes</span>(<span class="kw">factor</span>(<span class="dt">x =</span> gna), <span class="dt">y =</span> <span class="kw">log</span>(total.fruits <span class="op">+</span><span class="st"> </span></span>
-<span id="cb34-17"><a href="la-structure-du-jeu-de-données.html#cb34-17"></a><span class="st">    </span><span class="dv">1</span>))) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>(<span class="dt">colour =</span> <span class="st">&quot;skyblue2&quot;</span>, <span class="dt">outlier.shape =</span> <span class="dv">21</span>, </span>
-<span id="cb34-18"><a href="la-structure-du-jeu-de-données.html#cb34-18"></a>    <span class="dt">outlier.colour =</span> <span class="st">&quot;skyblue2&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb34-19"><a href="la-structure-du-jeu-de-données.html#cb34-19"></a><span class="st">    </span><span class="kw">stat_summary</span>(<span class="dt">fun.y =</span> mean, <span class="dt">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>)</span>
-<span id="cb34-20"><a href="la-structure-du-jeu-de-données.html#cb34-20"></a></span>
-<span id="cb34-21"><a href="la-structure-du-jeu-de-données.html#cb34-21"></a><span class="co"># Boîte à moustaches du total des fruits vs. nouvelle</span></span>
-<span id="cb34-22"><a href="la-structure-du-jeu-de-données.html#cb34-22"></a><span class="co"># variable (population x nutriments x clipping)</span></span>
-<span id="cb34-23"><a href="la-structure-du-jeu-de-données.html#cb34-23"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> dat.tf, <span class="kw">aes</span>(<span class="kw">factor</span>(<span class="dt">x =</span> pna), <span class="dt">y =</span> <span class="kw">log</span>(total.fruits <span class="op">+</span><span class="st"> </span></span>
-<span id="cb34-24"><a href="la-structure-du-jeu-de-données.html#cb34-24"></a><span class="st">    </span><span class="dv">1</span>))) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>(<span class="dt">colour =</span> <span class="st">&quot;skyblue2&quot;</span>, <span class="dt">outlier.shape =</span> <span class="dv">21</span>, </span>
-<span id="cb34-25"><a href="la-structure-du-jeu-de-données.html#cb34-25"></a>    <span class="dt">outlier.colour =</span> <span class="st">&quot;skyblue2&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb34-26"><a href="la-structure-du-jeu-de-données.html#cb34-26"></a><span class="st">    </span><span class="kw">stat_summary</span>(<span class="dt">fun.y =</span> mean, <span class="dt">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="la-structure-du-jeu-de-données.html#cb32-1"></a><span class="co"># Créez de nouvelles variables qui représentent toutes les</span></span>
+<span id="cb32-2"><a href="la-structure-du-jeu-de-données.html#cb32-2"></a><span class="co"># combinaisons de nutriments x facteur clipping x facteur</span></span>
+<span id="cb32-3"><a href="la-structure-du-jeu-de-données.html#cb32-3"></a><span class="co"># aléatoire</span></span>
+<span id="cb32-4"><a href="la-structure-du-jeu-de-données.html#cb32-4"></a>dat.tf &lt;-<span class="st"> </span><span class="kw">within</span>(dat.tf, {</span>
+<span id="cb32-5"><a href="la-structure-du-jeu-de-données.html#cb32-5"></a>    <span class="co"># génotype x nutriments x clipping</span></span>
+<span id="cb32-6"><a href="la-structure-du-jeu-de-données.html#cb32-6"></a>    gna &lt;-<span class="st"> </span><span class="kw">interaction</span>(gen, nutrient, amd)</span>
+<span id="cb32-7"><a href="la-structure-du-jeu-de-données.html#cb32-7"></a>    gna &lt;-<span class="st"> </span><span class="kw">reorder</span>(gna, total.fruits, mean)</span>
+<span id="cb32-8"><a href="la-structure-du-jeu-de-données.html#cb32-8"></a>    <span class="co"># population x nutriments x clipping</span></span>
+<span id="cb32-9"><a href="la-structure-du-jeu-de-données.html#cb32-9"></a>    pna &lt;-<span class="st"> </span><span class="kw">interaction</span>(popu, nutrient, amd)</span>
+<span id="cb32-10"><a href="la-structure-du-jeu-de-données.html#cb32-10"></a>    pna &lt;-<span class="st"> </span><span class="kw">reorder</span>(pna, total.fruits, mean)</span>
+<span id="cb32-11"><a href="la-structure-du-jeu-de-données.html#cb32-11"></a>})</span>
+<span id="cb32-12"><a href="la-structure-du-jeu-de-données.html#cb32-12"></a></span>
+<span id="cb32-13"><a href="la-structure-du-jeu-de-données.html#cb32-13"></a></span>
+<span id="cb32-14"><a href="la-structure-du-jeu-de-données.html#cb32-14"></a><span class="co"># Boîte à moustaches du total de fruits vs. nouvelle variable</span></span>
+<span id="cb32-15"><a href="la-structure-du-jeu-de-données.html#cb32-15"></a><span class="co"># (génotype x nutriments x clipping)</span></span>
+<span id="cb32-16"><a href="la-structure-du-jeu-de-données.html#cb32-16"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> dat.tf, <span class="kw">aes</span>(<span class="kw">factor</span>(<span class="dt">x =</span> gna), <span class="dt">y =</span> <span class="kw">log</span>(total.fruits <span class="op">+</span><span class="st"> </span></span>
+<span id="cb32-17"><a href="la-structure-du-jeu-de-données.html#cb32-17"></a><span class="st">    </span><span class="dv">1</span>))) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>(<span class="dt">colour =</span> <span class="st">&quot;skyblue2&quot;</span>, <span class="dt">outlier.shape =</span> <span class="dv">21</span>, </span>
+<span id="cb32-18"><a href="la-structure-du-jeu-de-données.html#cb32-18"></a>    <span class="dt">outlier.colour =</span> <span class="st">&quot;skyblue2&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb32-19"><a href="la-structure-du-jeu-de-données.html#cb32-19"></a><span class="st">    </span><span class="kw">stat_summary</span>(<span class="dt">fun.y =</span> mean, <span class="dt">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>)</span>
+<span id="cb32-20"><a href="la-structure-du-jeu-de-données.html#cb32-20"></a></span>
+<span id="cb32-21"><a href="la-structure-du-jeu-de-données.html#cb32-21"></a><span class="co"># Boîte à moustaches du total des fruits vs. nouvelle</span></span>
+<span id="cb32-22"><a href="la-structure-du-jeu-de-données.html#cb32-22"></a><span class="co"># variable (population x nutriments x clipping)</span></span>
+<span id="cb32-23"><a href="la-structure-du-jeu-de-données.html#cb32-23"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> dat.tf, <span class="kw">aes</span>(<span class="kw">factor</span>(<span class="dt">x =</span> pna), <span class="dt">y =</span> <span class="kw">log</span>(total.fruits <span class="op">+</span><span class="st"> </span></span>
+<span id="cb32-24"><a href="la-structure-du-jeu-de-données.html#cb32-24"></a><span class="st">    </span><span class="dv">1</span>))) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>(<span class="dt">colour =</span> <span class="st">&quot;skyblue2&quot;</span>, <span class="dt">outlier.shape =</span> <span class="dv">21</span>, </span>
+<span id="cb32-25"><a href="la-structure-du-jeu-de-données.html#cb32-25"></a>    <span class="dt">outlier.colour =</span> <span class="st">&quot;skyblue2&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb32-26"><a href="la-structure-du-jeu-de-données.html#cb32-26"></a><span class="st">    </span><span class="kw">stat_summary</span>(<span class="dt">fun.y =</span> mean, <span class="dt">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
 <p><img src="images/workshp_6_glmm_boxplot.png" class="align-center" width="750" />
 <img src="images//workshop_6_glmm_boxplot_popu.png" class="align-center" width="750" /></p>
 <p>Tel qu’illustré ci-dessus, il existe une importante hétérogénéité parmi
@@ -313,8 +319,8 @@ la relation entre la moyenne et la variance que nous avons observée
 ci-dessus, nous aurons probablement besoin d’un modèle avec
 surdispersion, mais nous allons commencer par un modèle avec une
 distribution de Poisson.</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="la-structure-du-jeu-de-données.html#cb35-1"></a>mp1 &lt;-<span class="st"> </span><span class="kw">glmer</span>(total.fruits <span class="op">~</span><span class="st"> </span>nutrient <span class="op">*</span><span class="st"> </span>amd <span class="op">+</span><span class="st"> </span>rack <span class="op">+</span><span class="st"> </span>status <span class="op">+</span><span class="st"> </span></span>
-<span id="cb35-2"><a href="la-structure-du-jeu-de-données.html#cb35-2"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>popu) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>gen), <span class="dt">data =</span> dat.tf, <span class="dt">family =</span> <span class="st">&quot;poisson&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="la-structure-du-jeu-de-données.html#cb33-1"></a>mp1 &lt;-<span class="st"> </span><span class="kw">glmer</span>(total.fruits <span class="op">~</span><span class="st"> </span>nutrient <span class="op">*</span><span class="st"> </span>amd <span class="op">+</span><span class="st"> </span>rack <span class="op">+</span><span class="st"> </span>status <span class="op">+</span><span class="st"> </span></span>
+<span id="cb33-2"><a href="la-structure-du-jeu-de-données.html#cb33-2"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>popu) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>gen), <span class="dt">data =</span> dat.tf, <span class="dt">family =</span> <span class="st">&quot;poisson&quot;</span>)</span></code></pre></div>
 <p>Nous pouvons vérifier la surdispersion en utilisant la fonction
 <code>overdisp_fun</code> fournie par <a href="http://www.cell.com/cms/attachment/601623/4742452/mmc1.pdf">Bolker et al.
 (2011)</a> qui
@@ -323,13 +329,13 @@ vérifie si les valeurs diffèrent de façon significative (i.e. si le
 rapport entre la déviance et les degrés de liberté est significativement
 différent de 1). Une faible valeur de p indique que les données sont
 surdispersées (i.e. le ratio est significativement différent de 1).</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="la-structure-du-jeu-de-données.html#cb36-1"></a><span class="co"># Surdispersion?</span></span>
-<span id="cb36-2"><a href="la-structure-du-jeu-de-données.html#cb36-2"></a><span class="kw">overdisp_fun</span>(mp1)</span>
-<span id="cb36-3"><a href="la-structure-du-jeu-de-données.html#cb36-3"></a></span>
-<span id="cb36-4"><a href="la-structure-du-jeu-de-données.html#cb36-4"></a><span class="co"># On peut aussi l’estimer en divisant la déviance résiduelle</span></span>
-<span id="cb36-5"><a href="la-structure-du-jeu-de-données.html#cb36-5"></a><span class="co"># par les degrés de liberté des résidus</span></span>
-<span id="cb36-6"><a href="la-structure-du-jeu-de-données.html#cb36-6"></a><span class="kw">summary</span>(mp1)</span>
-<span id="cb36-7"><a href="la-structure-du-jeu-de-données.html#cb36-7"></a><span class="co"># déviance résiduelle = 18253.7 and dl resid = 616</span></span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="la-structure-du-jeu-de-données.html#cb34-1"></a><span class="co"># Surdispersion?</span></span>
+<span id="cb34-2"><a href="la-structure-du-jeu-de-données.html#cb34-2"></a><span class="kw">overdisp_fun</span>(mp1)</span>
+<span id="cb34-3"><a href="la-structure-du-jeu-de-données.html#cb34-3"></a></span>
+<span id="cb34-4"><a href="la-structure-du-jeu-de-données.html#cb34-4"></a><span class="co"># On peut aussi l’estimer en divisant la déviance résiduelle</span></span>
+<span id="cb34-5"><a href="la-structure-du-jeu-de-données.html#cb34-5"></a><span class="co"># par les degrés de liberté des résidus</span></span>
+<span id="cb34-6"><a href="la-structure-du-jeu-de-données.html#cb34-6"></a><span class="kw">summary</span>(mp1)</span>
+<span id="cb34-7"><a href="la-structure-du-jeu-de-données.html#cb34-7"></a><span class="co"># déviance résiduelle = 18253.7 and dl resid = 616</span></span></code></pre></div>
 <p>Le ratio est &gt;&gt; 1, donc comme on s’y attendait, nous devons utiliser
 une distribution différente où la variance augmente plus rapidement que
 la moyenne, tels que la distribution binomiale négative.</p>
@@ -339,23 +345,23 @@ la moyenne, tels que la distribution binomiale négative.</p>
 <p>Rappelez-vous que la distribution binomiale négative (ou Poisson-gamma)
 satisfait la supposition que la variance est ** proportionnelle au
 carré de la moyenne **.</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="la-structure-du-jeu-de-données.html#cb37-1"></a><span class="co"># Note : Ce modèle converge si vous utilisez la version 3.0.2</span></span>
-<span id="cb37-2"><a href="la-structure-du-jeu-de-données.html#cb37-2"></a><span class="co"># de R, mais peut ne pas converger avec des versions plus</span></span>
-<span id="cb37-3"><a href="la-structure-du-jeu-de-données.html#cb37-3"></a><span class="co"># récentes. Si vous avez des problèmes de convergence,</span></span>
-<span id="cb37-4"><a href="la-structure-du-jeu-de-données.html#cb37-4"></a><span class="co"># essayez le code suivant avec la version 3.0.2.</span></span>
-<span id="cb37-5"><a href="la-structure-du-jeu-de-données.html#cb37-5"></a></span>
-<span id="cb37-6"><a href="la-structure-du-jeu-de-données.html#cb37-6"></a>mnb1 &lt;-<span class="st"> </span><span class="kw">glmer.nb</span>(total.fruits <span class="op">~</span><span class="st"> </span>nutrient <span class="op">*</span><span class="st"> </span>amd <span class="op">+</span><span class="st"> </span>rack <span class="op">+</span><span class="st"> </span>status <span class="op">+</span><span class="st"> </span></span>
-<span id="cb37-7"><a href="la-structure-du-jeu-de-données.html#cb37-7"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>popu) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>gen), <span class="dt">data =</span> dat.tf, <span class="dt">control =</span> <span class="kw">glmerControl</span>(<span class="dt">optimizer =</span> <span class="st">&quot;bobyqa&quot;</span>))</span>
-<span id="cb37-8"><a href="la-structure-du-jeu-de-données.html#cb37-8"></a><span class="co"># Le nouvel argument «control», bien qu’au-delà de la portée</span></span>
-<span id="cb37-9"><a href="la-structure-du-jeu-de-données.html#cb37-9"></a><span class="co"># de cet atelier, spécifie la façon dont nous optimisons les</span></span>
-<span id="cb37-10"><a href="la-structure-du-jeu-de-données.html#cb37-10"></a><span class="co"># valeurs des paramètres (c. en prenant la dérivée d&#39;une</span></span>
-<span id="cb37-11"><a href="la-structure-du-jeu-de-données.html#cb37-11"></a><span class="co"># fonction ou en procédant par itération).  Si ce n’est pas</span></span>
-<span id="cb37-12"><a href="la-structure-du-jeu-de-données.html#cb37-12"></a><span class="co"># possible de prendre la dérivée de la fonction, un</span></span>
-<span id="cb37-13"><a href="la-structure-du-jeu-de-données.html#cb37-13"></a><span class="co"># algorithme itératif comme bobyqa (Bound Optimization BY</span></span>
-<span id="cb37-14"><a href="la-structure-du-jeu-de-données.html#cb37-14"></a><span class="co"># Quadratic Approximation) est utilisé.</span></span>
-<span id="cb37-15"><a href="la-structure-du-jeu-de-données.html#cb37-15"></a></span>
-<span id="cb37-16"><a href="la-structure-du-jeu-de-données.html#cb37-16"></a><span class="co"># Surdispersion?</span></span>
-<span id="cb37-17"><a href="la-structure-du-jeu-de-données.html#cb37-17"></a><span class="kw">overdisp_fun</span>(mnb1)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="la-structure-du-jeu-de-données.html#cb35-1"></a><span class="co"># Note : Ce modèle converge si vous utilisez la version 3.0.2</span></span>
+<span id="cb35-2"><a href="la-structure-du-jeu-de-données.html#cb35-2"></a><span class="co"># de R, mais peut ne pas converger avec des versions plus</span></span>
+<span id="cb35-3"><a href="la-structure-du-jeu-de-données.html#cb35-3"></a><span class="co"># récentes. Si vous avez des problèmes de convergence,</span></span>
+<span id="cb35-4"><a href="la-structure-du-jeu-de-données.html#cb35-4"></a><span class="co"># essayez le code suivant avec la version 3.0.2.</span></span>
+<span id="cb35-5"><a href="la-structure-du-jeu-de-données.html#cb35-5"></a></span>
+<span id="cb35-6"><a href="la-structure-du-jeu-de-données.html#cb35-6"></a>mnb1 &lt;-<span class="st"> </span><span class="kw">glmer.nb</span>(total.fruits <span class="op">~</span><span class="st"> </span>nutrient <span class="op">*</span><span class="st"> </span>amd <span class="op">+</span><span class="st"> </span>rack <span class="op">+</span><span class="st"> </span>status <span class="op">+</span><span class="st"> </span></span>
+<span id="cb35-7"><a href="la-structure-du-jeu-de-données.html#cb35-7"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>popu) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>gen), <span class="dt">data =</span> dat.tf, <span class="dt">control =</span> <span class="kw">glmerControl</span>(<span class="dt">optimizer =</span> <span class="st">&quot;bobyqa&quot;</span>))</span>
+<span id="cb35-8"><a href="la-structure-du-jeu-de-données.html#cb35-8"></a><span class="co"># Le nouvel argument «control», bien qu’au-delà de la portée</span></span>
+<span id="cb35-9"><a href="la-structure-du-jeu-de-données.html#cb35-9"></a><span class="co"># de cet atelier, spécifie la façon dont nous optimisons les</span></span>
+<span id="cb35-10"><a href="la-structure-du-jeu-de-données.html#cb35-10"></a><span class="co"># valeurs des paramètres (c. en prenant la dérivée d&#39;une</span></span>
+<span id="cb35-11"><a href="la-structure-du-jeu-de-données.html#cb35-11"></a><span class="co"># fonction ou en procédant par itération).  Si ce n’est pas</span></span>
+<span id="cb35-12"><a href="la-structure-du-jeu-de-données.html#cb35-12"></a><span class="co"># possible de prendre la dérivée de la fonction, un</span></span>
+<span id="cb35-13"><a href="la-structure-du-jeu-de-données.html#cb35-13"></a><span class="co"># algorithme itératif comme bobyqa (Bound Optimization BY</span></span>
+<span id="cb35-14"><a href="la-structure-du-jeu-de-données.html#cb35-14"></a><span class="co"># Quadratic Approximation) est utilisé.</span></span>
+<span id="cb35-15"><a href="la-structure-du-jeu-de-données.html#cb35-15"></a></span>
+<span id="cb35-16"><a href="la-structure-du-jeu-de-données.html#cb35-16"></a><span class="co"># Surdispersion?</span></span>
+<span id="cb35-17"><a href="la-structure-du-jeu-de-données.html#cb35-17"></a><span class="kw">overdisp_fun</span>(mnb1)</span></code></pre></div>
 <p>Le rapport est maintenant beaucoup plus près de 1 (bien que la valeur p
 est encore inférieur à 0,05).</p>
 </div>
@@ -382,11 +388,11 @@ Poisson-lognormal nous permet d’assigner l’agrégation observée à
 différentes sources d’hétérogénéité. Ici, afin d’évaluer un effet
 aléatoire au niveau de l’observation, nous allons l’évaluer au niveau
 individuel.</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="la-structure-du-jeu-de-données.html#cb38-1"></a>mpl1 &lt;-<span class="st"> </span><span class="kw">glmer</span>(total.fruits <span class="op">~</span><span class="st"> </span>nutrient <span class="op">*</span><span class="st"> </span>amd <span class="op">+</span><span class="st"> </span>rack <span class="op">+</span><span class="st"> </span>status <span class="op">+</span><span class="st"> </span></span>
-<span id="cb38-2"><a href="la-structure-du-jeu-de-données.html#cb38-2"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>X) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>popu) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>gen), <span class="dt">data =</span> dat.tf, <span class="dt">family =</span> <span class="st">&quot;poisson&quot;</span>, </span>
-<span id="cb38-3"><a href="la-structure-du-jeu-de-données.html#cb38-3"></a>    <span class="dt">control =</span> <span class="kw">glmerControl</span>(<span class="dt">optimizer =</span> <span class="st">&quot;bobyqa&quot;</span>))</span>
-<span id="cb38-4"><a href="la-structure-du-jeu-de-données.html#cb38-4"></a></span>
-<span id="cb38-5"><a href="la-structure-du-jeu-de-données.html#cb38-5"></a><span class="kw">overdisp_fun</span>(mpl1)</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="la-structure-du-jeu-de-données.html#cb36-1"></a>mpl1 &lt;-<span class="st"> </span><span class="kw">glmer</span>(total.fruits <span class="op">~</span><span class="st"> </span>nutrient <span class="op">*</span><span class="st"> </span>amd <span class="op">+</span><span class="st"> </span>rack <span class="op">+</span><span class="st"> </span>status <span class="op">+</span><span class="st"> </span></span>
+<span id="cb36-2"><a href="la-structure-du-jeu-de-données.html#cb36-2"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>X) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>popu) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>gen), <span class="dt">data =</span> dat.tf, <span class="dt">family =</span> <span class="st">&quot;poisson&quot;</span>, </span>
+<span id="cb36-3"><a href="la-structure-du-jeu-de-données.html#cb36-3"></a>    <span class="dt">control =</span> <span class="kw">glmerControl</span>(<span class="dt">optimizer =</span> <span class="st">&quot;bobyqa&quot;</span>))</span>
+<span id="cb36-4"><a href="la-structure-du-jeu-de-données.html#cb36-4"></a></span>
+<span id="cb36-5"><a href="la-structure-du-jeu-de-données.html#cb36-5"></a><span class="kw">overdisp_fun</span>(mpl1)</span></code></pre></div>
 <p>Nous avons réussi! Le rapport entre la déviance et les degrés de liberté
 est maintenant conforme avec notre critère (en fait, il est plus //petit
 // 1).</p>

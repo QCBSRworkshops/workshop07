@@ -31,7 +31,7 @@
   
   <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
 <link rel="prev" href="préparez-vous-pour-cet-atelier.html"/>
-<link rel="next" href="quest-ce-quun-mlm-et-pourquoi-est-ce-important.html"/>
+<link rel="next" href="commencer-par-une-question.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -146,11 +146,17 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1" data-path="objectifs-dapprentissage.html"><a href="objectifs-dapprentissage.html"><i class="fa fa-check"></i><b>1</b> Objectifs d’apprentissage</a></li>
 <li class="chapter" data-level="2" data-path="préparez-vous-pour-cet-atelier.html"><a href="préparez-vous-pour-cet-atelier.html"><i class="fa fa-check"></i><b>2</b> Préparez-vous pour cet atelier</a></li>
 <li class="chapter" data-level="3" data-path="pourquoi-choisir-un-mlm.html"><a href="pourquoi-choisir-un-mlm.html"><i class="fa fa-check"></i><b>3</b> Pourquoi choisir un MLM?</a></li>
-<li class="chapter" data-level="4" data-path="quest-ce-quun-mlm-et-pourquoi-est-ce-important.html"><a href="quest-ce-quun-mlm-et-pourquoi-est-ce-important.html"><i class="fa fa-check"></i><b>4</b> Qu’est-ce qu’un MLM et pourquoi est-ce important?</a></li>
-<li class="chapter" data-level="5" data-path="introduction-au-jeu-de-données.html"><a href="introduction-au-jeu-de-données.html"><i class="fa fa-check"></i><b>5</b> Introduction au jeu de données</a></li>
+<li class="chapter" data-level="4" data-path="commencer-par-une-question.html"><a href="commencer-par-une-question.html"><i class="fa fa-check"></i><b>4</b> Commencer par une question</a><ul>
+<li class="chapter" data-level="4.1" data-path="commencer-par-une-question.html"><a href="commencer-par-une-question.html#défi-1"><i class="fa fa-check"></i><b>4.1</b> Défi 1</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="analyse-des-données.html"><a href="analyse-des-données.html"><i class="fa fa-check"></i><b>5</b> Analyse des données</a><ul>
+<li class="chapter" data-level="5.1" data-path="analyse-des-données.html"><a href="analyse-des-données.html#nombreuses-analyses-séparées"><i class="fa fa-check"></i><b>5.1</b> Nombreuses analyses séparées</a></li>
+<li class="chapter" data-level="5.2" data-path="analyse-des-données.html"><a href="analyse-des-données.html#une-analyse-groupée"><i class="fa fa-check"></i><b>5.2</b> Une analyse groupée</a></li>
+<li class="chapter" data-level="5.3" data-path="analyse-des-données.html"><a href="analyse-des-données.html#il-y-a-une-troisième-option"><i class="fa fa-check"></i><b>5.3</b> Il y a une troisième option?</a></li>
+</ul></li>
 <li class="chapter" data-level="6" data-path="comment-pourrions-nous-analyser-ces-données.html"><a href="comment-pourrions-nous-analyser-ces-données.html"><i class="fa fa-check"></i><b>6</b> Comment pourrions-nous analyser ces données?</a><ul>
-<li class="chapter" data-level="6.1" data-path="comment-pourrions-nous-analyser-ces-données.html"><a href="comment-pourrions-nous-analyser-ces-données.html#nombreuses-analyses-séparées"><i class="fa fa-check"></i><b>6.1</b> Nombreuses analyses séparées</a></li>
-<li class="chapter" data-level="6.2" data-path="comment-pourrions-nous-analyser-ces-données.html"><a href="comment-pourrions-nous-analyser-ces-données.html#une-analyse-groupée"><i class="fa fa-check"></i><b>6.2</b> Une analyse groupée</a></li>
+<li class="chapter" data-level="6.1" data-path="comment-pourrions-nous-analyser-ces-données.html"><a href="comment-pourrions-nous-analyser-ces-données.html#nombreuses-analyses-séparées-1"><i class="fa fa-check"></i><b>6.1</b> Nombreuses analyses séparées</a></li>
+<li class="chapter" data-level="6.2" data-path="comment-pourrions-nous-analyser-ces-données.html"><a href="comment-pourrions-nous-analyser-ces-données.html#une-analyse-groupée-1"><i class="fa fa-check"></i><b>6.2</b> Une analyse groupée</a></li>
 <li class="chapter" data-level="6.3" data-path="comment-pourrions-nous-analyser-ces-données.html"><a href="comment-pourrions-nous-analyser-ces-données.html#construire-un-mlm"><i class="fa fa-check"></i><b>6.3</b> Construire un MLM</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="effets-fixes-et-aléatoires.html"><a href="effets-fixes-et-aléatoires.html"><i class="fa fa-check"></i><b>7</b> Effets fixes et aléatoires</a><ul>
@@ -225,8 +231,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="pourquoi-choisir-un-mlm" class="section level1">
 <h1><span class="header-section-number">Chapitre 3</span> Pourquoi choisir un MLM?</h1>
-<p>Les données écologiques et biologiques peuvent être complexes et désordonnées. Il existe généralement une structure particulière dans les données (<em>i.e.</em> les observations individuelles ne sont pas toujours indépendantes), les relations entre les variables d’intérêt peuvent différer en fonction de facteurs de regroupement, telles que les
-espèces, et la plupart du temps de faibles tailles d’échantillons rendent l’ajustement de modèles avec de nombreux paramètres difficile.</p>
+<p>Les données écologiques et biologiques peuvent être complexes et désordonnées. Il existe généralement une structure particulière dans les données (<em>i.e.</em> les observations individuelles ne sont pas toujours indépendantes), les relations entre les variables d’intérêt peuvent différer en fonction de facteurs de regroupement, telles que les espèces, et la plupart du temps de faibles tailles d’échantillons rendent l’ajustement de modèles avec de nombreux paramètres difficile.</p>
 <p>Les modèles linéaires à effets mixtes (MLM) ont été développés pour aborder ces questions. Ils peuvent être appliqués à un grand nombre de questions écologiques et prennent de nombreuses formes différentes. Dans cet atelier, nous allons utiliser une simple approche interrogative pour apprendre les bases du fonctionnement des MLMs et nous verrons comment les ajuster.</p>
 </div>
 <hr>
@@ -241,7 +246,7 @@ espèces, et la plupart du temps de faibles tailles d’échantillons rendent l�
         </div>
       </div>
 <a href="préparez-vous-pour-cet-atelier.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="quest-ce-quun-mlm-et-pourquoi-est-ce-important.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="commencer-par-une-question.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
