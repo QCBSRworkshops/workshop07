@@ -89,7 +89,7 @@ Random effects
 * genotypes `(1|gen)`
 
 
-# Challenge 9 
+## Challenge 9 
 
 Use the `inverts` dataset (larval development times (`PLD`) of 74 marine invertebrate and vertebrate species reared at different temperatures and time), answer the following questions:
 

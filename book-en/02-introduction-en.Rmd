@@ -10,7 +10,7 @@ number of ecological questions and take many different forms. In this workshop w
 
 Before we dive in, let's start by considering an example dataset and proposing a research question.
 
-The [dataset](http://qcbs.ca/wiki/_media/qcbs_w7_data.csv) we will be using looks at fish trophic positions. In this dataset, data was collected for **3** different fish species (S1-3) with 10 individuals sampled per species across 6 different lakes (L1-6). Individuals from each species were measured and exhibit variation in their body length and trophic position. 
+The [dataset](http://qcbs.ca/wiki/_media/qcbs_w7_data.csv) we will be using looks at fish trophic positions. In this dataset, data was collected for **3** different fish species (S1-3) with **10** individuals sampled per species across **6** different lakes (L1-6). Individuals from each species were measured and exhibit variation in their body length and trophic position. 
 
 Here is a visual representation to help wrap your head around all of this! 
 
@@ -38,7 +38,7 @@ library(ggplot2)
 #Load dataset into R 
 fish.data <- read.csv('data/qcbs_w7_data.csv', stringsAsFactors = TRUE) # This line will vary depending on where your data is saved
 
-# simple theme
+# Simple theme
 fig <- theme_bw() + theme(panel.grid.minor = element_blank(), 
                           panel.grid.major = element_blank(), 
                           panel.background = element_blank()) +
