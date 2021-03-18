@@ -1,4 +1,6 @@
-# Additional ressources
+# (PART\*) Additional LMM and GLMM resources {-}
+
+# Additional resources
 
 
 ![](images/book1.jpg)
@@ -12,13 +14,16 @@
 * Bayesian : `brms`, `rstan`, `rstanarm`, `MCMCglmm`
 
 **Papers**
-* [Harrison *et al.* (2018), *PeerJ*, DOI 10.7717/peerj.4794
+- [Harrison *et al.* (2018), *PeerJ*, DOI 10.7717/peerj.4794
 ](http://dx.doi.org/10.7717/peerj.4794)
-* [Silk *et al.* (2020), *PeerJ*,  DOI 10.7717/peerj.9522
+
+- [Silk *et al.* (2020), *PeerJ*,  DOI 10.7717/peerj.9522
 ](https://doi.org/10.7717/peerj.9522)
-* [Schielzeth *et al.* (2020), *Methods Ecol Evol.*,  DOI: 10.1111/2041-210X.13434
+
+- [Schielzeth *et al.* (2020), *Methods Ecol Evol.*,  DOI: 10.1111/2041-210X.13434
 ]( https://doi.org/10.1111/2041-210X.13434)
-* [Zuur & Ieno (2016), *Methods Ecol Evol.*,  DOI: 10.1111/2041-210X.12577
+
+- [Zuur & Ieno (2016), *Methods Ecol Evol.*,  DOI: 10.1111/2041-210X.12577
 ]( https://doi.org/10.1111/2041-210X.12577)
 
 
