@@ -13,7 +13,10 @@
 
 We want to determine if the trophic position can be predicted by body length, while taking into account the variation between species and lakes. So we want a model that looks like this:
 
-$$PT_{ijk} \sim Length_i + Lake_j + Species_k + \epsilon_{ijk}$$
+$$TP_{ijk} \sim Length_i + Lake_j + Species_k + \epsilon_{ijk}$$
+where:
+- `TP_ijk` is the trophic position of individual (i) from lake (j) of species (k)
+- `ε` are the residuals of the model (i.e. the unexplained variation).
 
 ## Check data structure 
 
@@ -158,7 +161,7 @@ These results suggest that there is residual variance that could be explained by
 
 **Translate this model...**
 
-$$PT_{ijk} \sim Length_i + Lake_j + Species_k + \epsilon_{ijk}$$
+$$TP_{ijk} \sim Length_i + Lake_j + Species_k + \epsilon_{ijk}$$
 
 **... into R code**
 
@@ -211,7 +214,7 @@ See this [article](https://towardsdatascience.com/maximum-likelihood-ml-vs-reml-
 - `(1 | Lake) + (1 | Species)`  for crossed random effects
 - `(1 | Lake:Fish_Species)` for the interaction between 2 random effects
 
-- If your dataset includes nested random effects, you could use `/` to specify them, e.g. `(1 | factor1 / factor2)` if `factor2` is nested in `factor1` ([see ![:faic](stack-exchange)](https://stats.stackexchange.com/questions/228800/crossed-vs-nested-random-effects-how-do-they-differ-and-how-are-they-specified))
+- If your dataset includes nested random effects, you could use `/` to specify them, e.g. `(1 | factor1 / factor2)` if `factor2` is nested in `factor1` ([see stack-exchange](https://stats.stackexchange.com/questions/228800/crossed-vs-nested-random-effects-how-do-they-differ-and-how-are-they-specified))
 
 ## Challenge 4
 
@@ -303,7 +306,6 @@ M8 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake),
 
 Here a [list](https://rdrr.io/cran/lme4/man/troubleshooting.html) of possible problems and how to troubleshoot them.
 
----
 ## Comparing models
 
 Now that we have a list of potential models, we want to compare them to each other to select the one(s) with the highest predictive power given the data.
