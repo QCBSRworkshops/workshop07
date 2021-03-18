@@ -17,7 +17,7 @@ We wish to make conclusions about the levels of the factor or about the relation
 
 ## Random effects: stochastic processes 
 
-Variables with a random effect are also called random factors, as they are only **qualitative variables** (categorical, not continous). 
+Variables with a random effect are also called random factors, as they are only **qualitative variables** (categorical, not continuous). 
 
 A random effect is observed when the data only includes a random sample of the factor's many possible levels, which are all of interest. 
 
