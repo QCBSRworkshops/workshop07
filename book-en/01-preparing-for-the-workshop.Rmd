@@ -19,53 +19,55 @@ In this workshop, you will learn when it is important to use a **mixed effects m
 
 # Preparing for the workshop
 
-To prepare for this workshop, you must download and install the earliest RStudio and R versions. You must also download the data we will use during this workshop:
+To prepare for this workshop, download and install the earliest RStudio and R versions. You should also download the data and some additional functions that we will use during this workshop:
 
 -    [R Script](https://qcbsrworkshops.github.io/workshop07/book-en/workshop07-script-en.R)
--    [Fish data](http://qcbs.ca/wiki/_media/qcbs_w7_data.csv)
--    [Arabidopsis data](http://qcbs.ca/wiki/_media/banta_totalfruits.csv)
--    [Inverts data](http://qcbs.ca/wiki/_media/inverts.csv)
--    [glmm_funs](http://qcbs.ca/wiki/_media/glmm_funs.r) (code for use in the GLMM section)
+-    [Fish data](https://raw.githubusercontent.com/QCBSRworkshops/workshop07/main/book-en/data/qcbs_w7_data.csv)
+-    [Arabidopsis data](https://raw.githubusercontent.com/QCBSRworkshops/workshop07/main/book-en/data/banta_totalfruits.csv)
+-    [Inverts data](https://raw.githubusercontent.com/QCBSRworkshops/workshop07/main/book-en/data/inverts.csv)
+-    [glmm_funs](https://raw.githubusercontent.com/QCBSRworkshops/workshop07/main/book-fr/data/glmm_funs.R) (code for use in the GLMM section)
 
+You can save these files by clicking on the links above, and right click + save on the webpage they open.
 
 This workshop requires the following `R` packages:
 
--    [ggplot2](http://cran.r-project.org/web/packages/ggplot2/index.html)
--    [lm4](http://cran.r-project.org/web/packages/lme4/index.html)
+-    [lme4](http://cran.r-project.org/web/packages/lme4/index.html)
 -    [AICcmodavg](http://cran.r-project.org/web/packages/AICcmodavg/index.html)
 -    [MASS](http://cran.r-project.org/web/packages/MASS/index.html)
 -    [vcdExtra](http://cran.r-project.org/web/packages/vcdExtra/index.html)
 -    [bbmle](http://cran.r-project.org/web/packages/bbmle/index.html)
+-    [MuMIn](http://cran.r-project.org/web/packages/MuMIn/index.html)
+-    [ggplot2](http://cran.r-project.org/web/packages/ggplot2/index.html)
 -    [DescTools](http://cran.r-project.org/web/packages/DescTools/index.html)
 
 To install them from CRAN, run:
 
 ```{r, echo = TRUE, eval = TRUE, message=FALSE, warning=FALSE}
-install.packages("ggplot2")
 install.packages("lme4")
 install.packages("AICcmodavg")
 install.packages("MASS")
 install.packages("vcdExtra")
 install.packages("bbmle")
+install.packages("MuMIn")
+install.packages("ggplot2")
 install.packages("DescTools")
 install.packages("remotes")
 install.packages("gridExtra")
 install.packages("lattice")
-install.packages("MuMIn")
 ```
 
 To load these packages, run:
 
 ```{r, echo = TRUE, eval = TRUE, message=FALSE, warning=FALSE}
-library(ggplot2)
 library(lme4)
 library(AICcmodavg)
 library(MASS)
 library(vcdExtra)
 library(bbmle)
+library(MuMIn)
+library(ggplot2)
 library(DescTools)
 library(remotes)
 library(gridExtra)
 library(lattice)
-library(MuMIn)
 ```

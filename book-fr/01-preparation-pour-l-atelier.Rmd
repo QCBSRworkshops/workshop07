@@ -1,4 +1,4 @@
-# (PART\*) Modèles linéaires mixtes (MLM) en `R` {-}
+# (PART\*) Modèles linéaires à effets mixtes (MLM) en `R` {-}
 
 # Objectifs d'apprentissage
 
@@ -10,7 +10,7 @@ Dans cet atelier, vous apprendrez à déterminer si vous devez utiliser un modè
 
 **2.** Identifier les situations dans lesquelles l'utilisation d'effets mixtes est appropriée
 
-**3.** Mettre en œuvre des modèles linéaires mixtes de base avec `R`
+**3.** Construire des modèles linéaires mixtes avec `R`
 
 **4.** Exécuter des modèles linéaires généralisés mixtes de base avec `R`
 
@@ -19,42 +19,43 @@ Dans cet atelier, vous apprendrez à déterminer si vous devez utiliser un modè
 
 # Préparez-vous pour cet atelier
 
-Pour vous préparer à cet atelier, vous devez télécharger et installer les dernières versions de RStudio et de `R`. Vous devez également télécharger les données que nous utiliserons au cours de cet atelier:
+Pour vous préparer pour cet atelier, téléchargez et installez les dernières versions de RStudio et de `R`. Télécharger également les données et quelques fonctions additionnelles que nous utiliserons au cours de cet atelier:
 
--    [R Script](https://qcbsrworkshops.github.io/workshop07/book-fr/workshop07-script-fr.R)
--    [Fish data](http://qcbs.ca/wiki/_media/qcbs_w6_data.csv)
--    [Arabidopsis data](http://qcbs.ca/wiki/_media/banta_totalfruits.csv)
--    [Inverts data](http://qcbs.ca/wiki/_media/inverts.csv)
--    [glmm_funs](http://qcbs.ca/wiki/_media/glmm_funs.r) 
+-    [Script R ](https://qcbsrworkshops.github.io/workshop07/book-fr/workshop07-script-fr.R)
+-    [Données: Poissons](https://raw.githubusercontent.com/QCBSRworkshops/workshop07/main/book-fr/data/qcbs_w7_data.csv)
+-    [Données: Arabidopsis](https://raw.githubusercontent.com/QCBSRworkshops/workshop07/main/book-fr/data/banta_totalfruits.csv)
+-    [Données: Invertébrés](https://raw.githubusercontent.com/QCBSRworkshops/workshop07/main/book-fr/data/inverts.csv)
+-    [glmm_funs](https://raw.githubusercontent.com/QCBSRworkshops/workshop07/main/book-fr/data/glmm_funs.R) (Code pour la section sur les GLMMs)
 
 
 Cet atelier nécessite les paquets `R` suivants:
 
--    [ggplot2](http://cran.r-project.org/web/packages/ggplot2/index.html)
--    [lm4](http://cran.r-project.org/web/packages/lme4/index.html)
+-    [lme4](http://cran.r-project.org/web/packages/lme4/index.html)
 -    [AICcmodavg](http://cran.r-project.org/web/packages/AICcmodavg/index.html)
 -    [MASS](http://cran.r-project.org/web/packages/MASS/index.html)
 -    [vcdExtra](http://cran.r-project.org/web/packages/vcdExtra/index.html)
 -    [bbmle](http://cran.r-project.org/web/packages/bbmle/index.html)
 -    [DescTools](http://cran.r-project.org/web/packages/DescTools/index.html)
+-    [MuMIn](http://cran.r-project.org/web/packages/MuMIn/index.html)
+-    [ggplot2](http://cran.r-project.org/web/packages/ggplot2/index.html)
 
-Pour les installer depuis CRAN, exécutez:
+Pour les installer à partir de CRAN, roulez:
 
 ```{r, echo = TRUE, eval = TRUE, message=FALSE, warning=FALSE}
-install.packages("ggplot2")
 install.packages("lme4")
 install.packages("AICcmodavg")
 install.packages("MASS")
 install.packages("vcdExtra")
 install.packages("bbmle")
+install.packages("MuMIn")
 install.packages("DescTools")
+install.packages("ggplot2")
 install.packages("remotes")
 install.packages("gridExtra")
 install.packages("lattice")
-install.packages("MuMIn")
 ```
 
-Pour charger ces paquets, exécutez:
+Ensuite, chargez ces paquets:
 
 ```{r, echo = TRUE, eval = TRUE, message=FALSE, warning=FALSE}
 library(ggplot2)
