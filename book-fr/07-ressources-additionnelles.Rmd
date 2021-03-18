@@ -1,4 +1,4 @@
-# (PART\*) Additional LMM and GLMM resources {-}
+# (PART\*) Ressources additionnelles par LMM et GLMM {-}
 
 # Ressources additionnelles
 
