@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 21 References | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)</title>
+  <title>Chapter 19 Challenge 9 | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)</title>
   <meta name="description" content="Linear and generalized linear mixed models (LMM and GLMM)" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 21 References | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)" />
+  <meta property="og:title" content="Chapter 19 Challenge 9 | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://github.com/qcbsRworkshops/" />
   <meta property="og:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="qcbsRworkshops/workshop09" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 21 References | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)" />
+  <meta name="twitter:title" content="Chapter 19 Challenge 9 | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)" />
   
   <meta name="twitter:description" content="Linear and generalized linear mixed models (LMM and GLMM)" />
   <meta name="twitter:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
-<link rel="prev" href="additional-ressources.html"/>
-
+<link rel="prev" href="selection-methods.html"/>
+<link rel="next" href="additional-ressources.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -237,16 +237,59 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div class="hero-image-container"> 
   <img class= "hero-image" src="assets/images/jean-philippe-delberghe-75xPHEQBmvA-unsplash_hero_image.jpg">
 </div>
-<div id="references" class="section level1">
-<h1><span class="header-section-number">Chapter 21</span> References</h1>
+<div id="challenge-9" class="section level1">
+<h1><span class="header-section-number">Chapter 19</span> Challenge 9</h1>
+<p>Use the <code>inverts</code> dataset (larval development times (<code>PLD</code>) of 74 marine invertebrate and vertebrate species reared at different temperatures and time), answer the following questions:</p>
+<ul>
+<li><ol style="list-style-type: decimal">
+<li>What is the effect of feeding type and climate (<strong>fixed effects</strong>) on <code>PLD</code>?</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: decimal">
+<li>Does this relationship vary among taxa (<strong>random effects</strong>)?</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: decimal">
+<li>What is the <strong>best distribution family</strong> for this count data?</li>
+</ol></li>
+<li><ol start="4" style="list-style-type: decimal">
+<li>Finally, once you determined the best distribution family, re-evaluate your random and fixed effects.</li>
+</ol></li>
+</ul>
+<div id="challenge-9-solution" class="section level4 unnumbered">
+<h4><strong>Challenge 9 Solution:</strong></h4>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="challenge-9.html#cb104-1"></a><span class="co"># inverts &lt;- read.csv(&#39;data/inverts.csv&#39;, header = TRUE)</span></span>
+<span id="cb104-2"><a href="challenge-9.html#cb104-2"></a><span class="co"># head(inverts) table(inverts$temp, inverts$feeding.type)</span></span>
+<span id="cb104-3"><a href="challenge-9.html#cb104-3"></a></span>
+<span id="cb104-4"><a href="challenge-9.html#cb104-4"></a><span class="co"># mod.glm &lt;- glm(PLD ~ temp + feeding.type, family =</span></span>
+<span id="cb104-5"><a href="challenge-9.html#cb104-5"></a><span class="co"># poisson(), data = inverts) summary(mod.glm) drop1(mod.glm,</span></span>
+<span id="cb104-6"><a href="challenge-9.html#cb104-6"></a><span class="co"># test = &#39;Chisq&#39;)</span></span>
+<span id="cb104-7"><a href="challenge-9.html#cb104-7"></a></span>
+<span id="cb104-8"><a href="challenge-9.html#cb104-8"></a><span class="co"># boxplot(PLD ~ temp, data = inverts) boxplot(PLD ~</span></span>
+<span id="cb104-9"><a href="challenge-9.html#cb104-9"></a><span class="co"># feeding.type, data = inverts)</span></span>
+<span id="cb104-10"><a href="challenge-9.html#cb104-10"></a></span>
+<span id="cb104-11"><a href="challenge-9.html#cb104-11"></a><span class="co"># boxplot(predict(mod.glm, type = &#39;response&#39;)~inverts$temp)</span></span>
+<span id="cb104-12"><a href="challenge-9.html#cb104-12"></a></span>
+<span id="cb104-13"><a href="challenge-9.html#cb104-13"></a><span class="co"># plot()</span></span>
+<span id="cb104-14"><a href="challenge-9.html#cb104-14"></a></span>
+<span id="cb104-15"><a href="challenge-9.html#cb104-15"></a><span class="co"># modglm &lt;- glm(PLD ~ temp + feeding.type, family =</span></span>
+<span id="cb104-16"><a href="challenge-9.html#cb104-16"></a><span class="co"># poisson(), data = inverts)</span></span>
+<span id="cb104-17"><a href="challenge-9.html#cb104-17"></a></span>
+<span id="cb104-18"><a href="challenge-9.html#cb104-18"></a><span class="co"># r2 &lt;- ranef(mpl1, condVar = TRUE) d2 &lt;- dotplot(r2,</span></span>
+<span id="cb104-19"><a href="challenge-9.html#cb104-19"></a><span class="co"># par.settings = pp)</span></span>
+<span id="cb104-20"><a href="challenge-9.html#cb104-20"></a></span>
+<span id="cb104-21"><a href="challenge-9.html#cb104-21"></a><span class="co"># plot(aggregate(PLD ~ taxon, FUN = mean, data =</span></span>
+<span id="cb104-22"><a href="challenge-9.html#cb104-22"></a><span class="co"># inverts)[,2], aggregate(PLD ~ taxon, FUN = var, data =</span></span>
+<span id="cb104-23"><a href="challenge-9.html#cb104-23"></a><span class="co"># inverts)[,2], pch = 19) abline(a = 0, b = 1, lty = 2)</span></span>
+<span id="cb104-24"><a href="challenge-9.html#cb104-24"></a></span>
+<span id="cb104-25"><a href="challenge-9.html#cb104-25"></a><span class="co"># mod.glmer &lt;- glmer.nb(PLD ~ temp + feeding.type +</span></span>
+<span id="cb104-26"><a href="challenge-9.html#cb104-26"></a><span class="co"># (1|taxon), data = inverts) mod.glm &lt;- glm.nb(PLD ~ temp +</span></span>
+<span id="cb104-27"><a href="challenge-9.html#cb104-27"></a><span class="co"># feeding.type, family = poisson(), data = inverts)</span></span>
+<span id="cb104-28"><a href="challenge-9.html#cb104-28"></a></span>
+<span id="cb104-29"><a href="challenge-9.html#cb104-29"></a><span class="co"># plot(aggregate(PLD ~ taxon, FUN = var, data = inverts)[,2],</span></span>
+<span id="cb104-30"><a href="challenge-9.html#cb104-30"></a><span class="co"># aggregate(PLD ~ taxon, FUN = mean, data = inverts)[,2])</span></span>
+<span id="cb104-31"><a href="challenge-9.html#cb104-31"></a><span class="co"># abline(a = 0, b = 1, lty = 2 )</span></span></code></pre></div>
 
 </div>
-
-
-
-
-
-
+</div>
 <hr>
 <center> 
   <div class="footer">
@@ -258,8 +301,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="additional-ressources.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="selection-methods.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="additional-ressources.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

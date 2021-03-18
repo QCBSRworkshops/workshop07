@@ -45,6 +45,7 @@ choose-an-error-distribution
 poisson-glmm
 negative-binomial-glmm
 poisson-lognormal-glmm
+selection-methods
 challenge-9
 additional-ressources
 references

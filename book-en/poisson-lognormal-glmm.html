@@ -31,7 +31,7 @@
   
   <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
 <link rel="prev" href="negative-binomial-glmm.html"/>
-<link rel="next" href="additional-ressources.html"/>
+<link rel="next" href="selection-methods.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -198,11 +198,11 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="15" data-path="poisson-glmm.html"><a href="poisson-glmm.html"><i class="fa fa-check"></i><b>15</b> Poisson GLMM</a></li>
 <li class="chapter" data-level="16" data-path="negative-binomial-glmm.html"><a href="negative-binomial-glmm.html"><i class="fa fa-check"></i><b>16</b> Negative binomial GLMM</a></li>
 <li class="chapter" data-level="17" data-path="poisson-lognormal-glmm.html"><a href="poisson-lognormal-glmm.html"><i class="fa fa-check"></i><b>17</b> Poisson-lognormal GLMM</a></li>
-<li class="part"><span><b>Model selection</b></span><ul>
-<li class="chapter" data-level="17.1" data-path="poisson-lognormal-glmm.html"><a href="poisson-lognormal-glmm.html#challenge-9"><i class="fa fa-check"></i><b>17.1</b> Challenge 9</a></li>
-</ul></li>
-<li class="chapter" data-level="18" data-path="additional-ressources.html"><a href="additional-ressources.html"><i class="fa fa-check"></i><b>18</b> Additional ressources</a></li>
-<li class="chapter" data-level="19" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>19</b> References</a></li>
+<li class="part"><span><b>Model selection</b></span></li>
+<li class="chapter" data-level="18" data-path="selection-methods.html"><a href="selection-methods.html"><i class="fa fa-check"></i><b>18</b> Selection Methods</a></li>
+<li class="chapter" data-level="19" data-path="challenge-9.html"><a href="challenge-9.html"><i class="fa fa-check"></i><b>19</b> Challenge 9</a></li>
+<li class="chapter" data-level="20" data-path="additional-ressources.html"><a href="additional-ressources.html"><i class="fa fa-check"></i><b>20</b> Additional ressources</a></li>
+<li class="chapter" data-level="21" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>21</b> References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/qcbsRworkshops" target="blank">QCBS R Workshop Series</a></li>
 
@@ -277,9 +277,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## Installing packages into &#39;/home/runner/work/_temp/Library&#39;
 ## (as &#39;lib&#39; is unspecified)</code></pre>
 <pre><code>##   
-   checking for file ‘/tmp/RtmprbtDDe/remotes3455565c5349/palday-coefplot2-23b7dcb/pkg/DESCRIPTION’ ...
+   checking for file ‘/tmp/RtmpCibbHl/remotes407b598287d1/palday-coefplot2-23b7dcb/pkg/DESCRIPTION’ ...
   
-✔  checking for file ‘/tmp/RtmprbtDDe/remotes3455565c5349/palday-coefplot2-23b7dcb/pkg/DESCRIPTION’
+✔  checking for file ‘/tmp/RtmpCibbHl/remotes407b598287d1/palday-coefplot2-23b7dcb/pkg/DESCRIPTION’
 ## 
   
 ─  preparing ‘coefplot2’:
@@ -338,137 +338,6 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 
 
 
-<p>Here are two approaches :</p>
-<ul>
-<li>an <strong>information theoretic approach</strong> (e.g., AICc - Workshop 5)</li>
-<li>a <strong>frequentist approach</strong> (where the significance of each term is evaluated using a likelihood ratio test; LRT, with the <code>anova()</code> function)</li>
-</ul>
-<hr />
-<p>We first code potential models and compare them using AICc:</p>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="poisson-lognormal-glmm.html#cb96-1"></a><span class="kw">library</span>(lme4)</span>
-<span id="cb96-2"><a href="poisson-lognormal-glmm.html#cb96-2"></a>mpl1 &lt;-<span class="st"> </span><span class="kw">glmer</span>(total.fruits <span class="op">~</span><span class="st"> </span>nutrient <span class="op">*</span><span class="st"> </span>amd <span class="op">+</span><span class="st"> </span>rack <span class="op">+</span><span class="st"> </span>status <span class="op">+</span><span class="st"> </span></span>
-<span id="cb96-3"><a href="poisson-lognormal-glmm.html#cb96-3"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>X) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>popu) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>gen), <span class="dt">data =</span> dat.tf, <span class="dt">family =</span> <span class="st">&quot;poisson&quot;</span>, </span>
-<span id="cb96-4"><a href="poisson-lognormal-glmm.html#cb96-4"></a>    <span class="dt">control =</span> <span class="kw">glmerControl</span>(<span class="dt">optimizer =</span> <span class="st">&quot;bobyqa&quot;</span>))</span>
-<span id="cb96-5"><a href="poisson-lognormal-glmm.html#cb96-5"></a></span>
-<span id="cb96-6"><a href="poisson-lognormal-glmm.html#cb96-6"></a>mpl2 &lt;-<span class="st"> </span><span class="kw">update</span>(mpl1, . <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>rack)  <span class="co"># model without rack</span></span>
-<span id="cb96-7"><a href="poisson-lognormal-glmm.html#cb96-7"></a>mpl3 &lt;-<span class="st"> </span><span class="kw">update</span>(mpl1, . <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>status)  <span class="co"># model without status</span></span>
-<span id="cb96-8"><a href="poisson-lognormal-glmm.html#cb96-8"></a>mpl4 &lt;-<span class="st"> </span><span class="kw">update</span>(mpl1, . <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>amd<span class="op">:</span>nutrient)  <span class="co"># without amd:nutrient interaction</span></span>
-<span id="cb96-9"><a href="poisson-lognormal-glmm.html#cb96-9"></a></span>
-<span id="cb96-10"><a href="poisson-lognormal-glmm.html#cb96-10"></a>aic_tab &lt;-<span class="st"> </span>MuMIn<span class="op">::</span><span class="kw">model.sel</span>(mpl1, mpl2, mpl3, mpl4)</span>
-<span id="cb96-11"><a href="poisson-lognormal-glmm.html#cb96-11"></a>(<span class="kw">round</span>(aic_table &lt;-<span class="st"> </span>aic_tab[, <span class="kw">c</span>(<span class="st">&quot;AICc&quot;</span>, <span class="st">&quot;delta&quot;</span>, <span class="st">&quot;df&quot;</span>)], <span class="dt">digits =</span> <span class="dv">2</span>))</span></code></pre></div>
-<pre><code>##         AICc delta df
-## mpl1 5015.73  0.00 10
-## mpl4 5017.11  1.38  9
-## mpl3 5017.22  1.49  8
-## mpl2 5070.75 55.02  9</code></pre>
-<p><em>Note: We do not cover all possible models above, however, the interaction <code>amd:nutrient</code> can only be evaluated if both amd and nutrient (i.e., the main effects) are included in the model.</em></p>
-<p>Alternatively, we can use <code>drop1()</code> and <code>dfun()</code> functions to evaluate our fixed effects (<code>dfun()</code> converts the AIC values returned by the <code>drop1()</code> into <span class="math inline">\(\Delta\)</span>AIC values)</p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="poisson-lognormal-glmm.html#cb98-1"></a>dd_LRT &lt;-<span class="st"> </span><span class="kw">drop1</span>(mpl1, <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>)</span>
-<span id="cb98-2"><a href="poisson-lognormal-glmm.html#cb98-2"></a>(dd_AIC &lt;-<span class="st"> </span><span class="kw">dfun</span>(<span class="kw">drop1</span>(mpl1)))</span></code></pre></div>
-<pre><code>## Single term deletions
-## 
-## Model:
-## total.fruits ~ nutrient * amd + rack + status + (1 | X) + (1 | 
-##     popu) + (1 | gen)
-##              npar   dAIC
-## &lt;none&gt;             0.000
-## rack            1 55.083
-## status          2  1.612
-## nutrient:amd    1  1.444</code></pre>
-<ul>
-<li>Strong <strong>rack</strong> effect (dAIC = 55.08 if we remove this variable)</li>
-<li>Effects of <strong>status</strong> and <strong>interaction</strong> term are weak (dAIC &lt; 2)</li>
-</ul>
-<hr />
-<p>Let’s start by <strong>removing the non-significant interaction</strong> term to test main effects of nutrient and clipping</p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="poisson-lognormal-glmm.html#cb100-1"></a>mpl2 &lt;-<span class="st"> </span><span class="kw">update</span>(mpl1, . <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>amd<span class="op">:</span>nutrient)</span>
-<span id="cb100-2"><a href="poisson-lognormal-glmm.html#cb100-2"></a></span>
-<span id="cb100-3"><a href="poisson-lognormal-glmm.html#cb100-3"></a>mpl3 &lt;-<span class="st"> </span><span class="kw">update</span>(mpl2, . <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>rack)  <span class="co"># pas de rack ou d&#39;interaction</span></span>
-<span id="cb100-4"><a href="poisson-lognormal-glmm.html#cb100-4"></a>mpl4 &lt;-<span class="st"> </span><span class="kw">update</span>(mpl2, . <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>status)  <span class="co"># pas de status ou d&#39;interaction</span></span>
-<span id="cb100-5"><a href="poisson-lognormal-glmm.html#cb100-5"></a>mpl5 &lt;-<span class="st"> </span><span class="kw">update</span>(mpl2, . <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>nutrient)  <span class="co"># pas de nutrient ou d&#39;interaction</span></span>
-<span id="cb100-6"><a href="poisson-lognormal-glmm.html#cb100-6"></a>mpl6 &lt;-<span class="st"> </span><span class="kw">update</span>(mpl2, . <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>amd)  <span class="co"># pas d&#39;herbivorie ou d&#39;interaction</span></span></code></pre></div>
-<p>Choose the method you want to select the best model:</p>
-<ins>
-Method with AICc
-</ins>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="poisson-lognormal-glmm.html#cb101-1"></a>aic_tab2 &lt;-<span class="st"> </span>MuMIn<span class="op">::</span><span class="kw">model.sel</span>(mpl2, mpl3, mpl4, mpl5, mpl6)</span>
-<span id="cb101-2"><a href="poisson-lognormal-glmm.html#cb101-2"></a>(<span class="kw">round</span>(aic_table2 &lt;-<span class="st"> </span>aic_tab2[, <span class="kw">c</span>(<span class="st">&quot;AICc&quot;</span>, <span class="st">&quot;delta&quot;</span>, <span class="st">&quot;df&quot;</span>)], <span class="dt">digits =</span> <span class="dv">2</span>))</span></code></pre></div>
-<pre><code>##         AICc  delta df
-## mpl2 5017.11   0.00  9
-## mpl4 5018.28   1.17  7
-## mpl6 5027.27  10.16  8
-## mpl3 5071.28  54.17  8
-## mpl5 5152.74 135.63  8</code></pre>
-<ins>
-Method with <code>drop1()</code>
-</ins>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="poisson-lognormal-glmm.html#cb103-1"></a>dd_LRT2 &lt;-<span class="st"> </span><span class="kw">drop1</span>(mpl2, <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>)</span>
-<span id="cb103-2"><a href="poisson-lognormal-glmm.html#cb103-2"></a>dd_AIC2 &lt;-<span class="st"> </span><span class="kw">dfun</span>(<span class="kw">drop1</span>(mpl2))</span></code></pre></div>
-<p><strong>What are our conclusions ?</strong></p>
-<p>Both the main effects of <strong>nutrient</strong> and <strong>clipping</strong> are strong (large change in AIC of <span class="math inline">\(135.6\)</span> (<code>mpl5</code>) and <span class="math inline">\(10.2\)</span> (<code>mpl6</code>) if either nutrient or clipping are dropped, respectively).</p>
-<p><strong>Our final model includes :</strong></p>
-<p>Fixed effects
-* nutrients
-* clipping
-* rack</p>
-<p>Random effects
-* observation-level random effect <code>(1|X)</code>
-* populations <code>(1|popu)</code>
-* genotypes <code>(1|gen)</code></p>
-<div id="challenge-9" class="section level2">
-<h2><span class="header-section-number">17.1</span> Challenge 9</h2>
-<p>Use the <code>inverts</code> dataset (larval development times (<code>PLD</code>) of 74 marine invertebrate and vertebrate species reared at different temperatures and time), answer the following questions:</p>
-<ul>
-<li><ol style="list-style-type: decimal">
-<li>What is the effect of feeding type and climate (<strong>fixed effects</strong>) on <code>PLD</code>?</li>
-</ol></li>
-<li><ol start="2" style="list-style-type: decimal">
-<li>Does this relationship vary among taxa (<strong>random effects</strong>)?</li>
-</ol></li>
-<li><ol start="3" style="list-style-type: decimal">
-<li>What is the <strong>best distribution family</strong> for this count data?</li>
-</ol></li>
-<li><ol start="4" style="list-style-type: decimal">
-<li>Finally, once you determined the best distribution family, re-evaluate your random and fixed effects.</li>
-</ol></li>
-</ul>
-<div id="challenge-9-solution" class="section level4 unnumbered">
-<h4><strong>Challenge 9 Solution:</strong></h4>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="poisson-lognormal-glmm.html#cb104-1"></a><span class="co"># inverts &lt;- read.csv(&#39;data/inverts.csv&#39;, header = TRUE)</span></span>
-<span id="cb104-2"><a href="poisson-lognormal-glmm.html#cb104-2"></a><span class="co"># head(inverts) table(inverts$temp, inverts$feeding.type)</span></span>
-<span id="cb104-3"><a href="poisson-lognormal-glmm.html#cb104-3"></a></span>
-<span id="cb104-4"><a href="poisson-lognormal-glmm.html#cb104-4"></a><span class="co"># mod.glm &lt;- glm(PLD ~ temp + feeding.type, family =</span></span>
-<span id="cb104-5"><a href="poisson-lognormal-glmm.html#cb104-5"></a><span class="co"># poisson(), data = inverts) summary(mod.glm) drop1(mod.glm,</span></span>
-<span id="cb104-6"><a href="poisson-lognormal-glmm.html#cb104-6"></a><span class="co"># test = &#39;Chisq&#39;)</span></span>
-<span id="cb104-7"><a href="poisson-lognormal-glmm.html#cb104-7"></a></span>
-<span id="cb104-8"><a href="poisson-lognormal-glmm.html#cb104-8"></a><span class="co"># boxplot(PLD ~ temp, data = inverts) boxplot(PLD ~</span></span>
-<span id="cb104-9"><a href="poisson-lognormal-glmm.html#cb104-9"></a><span class="co"># feeding.type, data = inverts)</span></span>
-<span id="cb104-10"><a href="poisson-lognormal-glmm.html#cb104-10"></a></span>
-<span id="cb104-11"><a href="poisson-lognormal-glmm.html#cb104-11"></a><span class="co"># boxplot(predict(mod.glm, type = &#39;response&#39;)~inverts$temp)</span></span>
-<span id="cb104-12"><a href="poisson-lognormal-glmm.html#cb104-12"></a></span>
-<span id="cb104-13"><a href="poisson-lognormal-glmm.html#cb104-13"></a><span class="co"># plot()</span></span>
-<span id="cb104-14"><a href="poisson-lognormal-glmm.html#cb104-14"></a></span>
-<span id="cb104-15"><a href="poisson-lognormal-glmm.html#cb104-15"></a><span class="co"># modglm &lt;- glm(PLD ~ temp + feeding.type, family =</span></span>
-<span id="cb104-16"><a href="poisson-lognormal-glmm.html#cb104-16"></a><span class="co"># poisson(), data = inverts)</span></span>
-<span id="cb104-17"><a href="poisson-lognormal-glmm.html#cb104-17"></a></span>
-<span id="cb104-18"><a href="poisson-lognormal-glmm.html#cb104-18"></a><span class="co"># r2 &lt;- ranef(mpl1, condVar = TRUE) d2 &lt;- dotplot(r2,</span></span>
-<span id="cb104-19"><a href="poisson-lognormal-glmm.html#cb104-19"></a><span class="co"># par.settings = pp)</span></span>
-<span id="cb104-20"><a href="poisson-lognormal-glmm.html#cb104-20"></a></span>
-<span id="cb104-21"><a href="poisson-lognormal-glmm.html#cb104-21"></a><span class="co"># plot(aggregate(PLD ~ taxon, FUN = mean, data =</span></span>
-<span id="cb104-22"><a href="poisson-lognormal-glmm.html#cb104-22"></a><span class="co"># inverts)[,2], aggregate(PLD ~ taxon, FUN = var, data =</span></span>
-<span id="cb104-23"><a href="poisson-lognormal-glmm.html#cb104-23"></a><span class="co"># inverts)[,2], pch = 19) abline(a = 0, b = 1, lty = 2)</span></span>
-<span id="cb104-24"><a href="poisson-lognormal-glmm.html#cb104-24"></a></span>
-<span id="cb104-25"><a href="poisson-lognormal-glmm.html#cb104-25"></a><span class="co"># mod.glmer &lt;- glmer.nb(PLD ~ temp + feeding.type +</span></span>
-<span id="cb104-26"><a href="poisson-lognormal-glmm.html#cb104-26"></a><span class="co"># (1|taxon), data = inverts) mod.glm &lt;- glm.nb(PLD ~ temp +</span></span>
-<span id="cb104-27"><a href="poisson-lognormal-glmm.html#cb104-27"></a><span class="co"># feeding.type, family = poisson(), data = inverts)</span></span>
-<span id="cb104-28"><a href="poisson-lognormal-glmm.html#cb104-28"></a></span>
-<span id="cb104-29"><a href="poisson-lognormal-glmm.html#cb104-29"></a><span class="co"># plot(aggregate(PLD ~ taxon, FUN = var, data = inverts)[,2],</span></span>
-<span id="cb104-30"><a href="poisson-lognormal-glmm.html#cb104-30"></a><span class="co"># aggregate(PLD ~ taxon, FUN = mean, data = inverts)[,2])</span></span>
-<span id="cb104-31"><a href="poisson-lognormal-glmm.html#cb104-31"></a><span class="co"># abline(a = 0, b = 1, lty = 2 )</span></span></code></pre></div>
-
-</div>
-</div>
-</div>
 <hr>
 <center> 
   <div class="footer">
@@ -481,7 +350,7 @@ Method with <code>drop1()</code>
         </div>
       </div>
 <a href="negative-binomial-glmm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="additional-ressources.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="selection-methods.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
