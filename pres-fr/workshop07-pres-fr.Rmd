@@ -14,6 +14,7 @@ output:
       highlightLines: true
       highlightStyle: github
 ---
+class: inverse, center, middle
 
 ```{r setup, echo = FALSE}
 knitr::opts_chunk$set(
@@ -27,12 +28,29 @@ knitr::opts_chunk$set(
   fig.align = 'center'
 )
 
-options(repos=structure(c(CRAN = "http://cran.r-project.org")))
+options(repos = structure(
+  c(CRAN = "http://cran.r-project.org")
+  )
+  )
+
+# Install xaringanExtra
+
+if(nzchar(system.file(package = "xaringanExtra")) == FALSE) {remotes::install_github("gadenbuie/xaringanExtra", upgrade = "always")}
+
+# Include copy-to-clipboard icons
+
+htmltools::tagList(
+  xaringanExtra::use_clipboard(
+    button_text = "<i class=\"fas fa-clipboard\"></i>",
+    success_text = "<i class=\"fa fa-check\" style=\"color: #90BE6D\"></i>",
+    error_text = "<i class=\"fa fa-times-circle\" style=\"color: #F94144\"></i>"
+  ),
+  rmarkdown::html_dependency_font_awesome()
+)
 
 mypar = list(mar = c(3, 3, 1, 0.5), mgp = c(1.6, 0.3, 0), tck = -.02)
 ```
 
-class: inverse, center, middle
 
 ```{r install_pkgs, message = FALSE, warning = FALSE, include = FALSE, results = 0}
 # Standard procedure to check and install packages and their dependencies, if needed
@@ -66,26 +84,51 @@ lapply(list.of.packages, require, character.only = TRUE, quietly = TRUE)
 [![badge](https://img.shields.io/static/v1?style=for-the-badge&label=diapos&message=07&color=red&logo=adobe-acrobat-reader)](https://qcbsrworkshops.github.io/workshop07/workshop07-fr/workshop07-fr.pdf)
 [![badge](https://img.shields.io/static/v1?style=for-the-badge&label=script&message=07&color=2a50b8&logo=r)](https://qcbsrworkshops.github.io/workshop07/workshop07-fr/workshop07-fr.R)
 
-
 ---
-# À propos de cet atelier
 
-<br>
-
-Vous verrez à travers l'atelier une série de  **défis** que vous reconnaitrez avec ce cube rubik.
+<p style="font-size:75%">
 
 .center[
-![:scale 25%](images/rubicub.png)
+**Contributeurs et contributrices au développement de cet atelier**
+
+en modifiant et en améliorant son contenu dans le cadre du <br>Prix d'apprentissage et du développement (*Le*arning *a*nd *D*evelopment *A*ward*).
 ]
 
-<br>
 
-**N'hésitez-pas à collaborer pour résoudre ces défis!**
+.pull-left[
+.right[
 
+ **2022** - **2021** - **2020**
+
+
+
+]
+]
+
+.pull-right[
+.left[
+**2019** - **2018** - **2017**
+
+
+
+**2016** - **2015** - **2014**
+
+
+
+]
+
+]
+</p>
 
 ---
 
-# Librairies requises
+# Matériel requis
+
+Pour suivre cet atelier, il est nécessaire d'avoir téléchargé et installé les dernières versions de [RStudio](https://rstudio.com/products/rstudio/download/#download) et de [R](https://cran.rstudio.com/).
+
+.pull-left[
+Vous devez également utiliser les paquets suivants :
+
 
 * [ggplot2](https://cran.r-project.org/package=ggplot2)
 * [lme4](https://cran.r-project.org/package=lme4)
@@ -95,20 +138,47 @@ Vous verrez à travers l'atelier une série de  **défis** que vous reconnaitrez
 * [bbmle](https://cran.r-project.org/package=bbmle)
 * [DescTools](https://cran.r-project.org/package=DescTools)
 
+]
+
+.pull-right[
+
+Pour les installer à partir du CRAN, exécutez :
+
+```{r eval = FALSE}
+install.packages(
+  c("ggplot2", 
+    "lme4", 
+    "MuMIn", 
+    'MASS', 
+    'vcdExtra', 
+    'bbmle', 
+    'DescTools')
+)
+```
+]
 
 <br>
 
-Pour les installer à partir du CRAN, faire :
+.pull-left2[
+Tout au long de cet atelier, il y aura une série de **défis** que vous pouvez reconnaître par ce rubix cube.
 
-```{r eval = FALSE}
-install.packages(c("ggplot2", 
-                   "lme4", 
-                   "MuMIn", 
-                   'MASS', 
-                   'vcdExtra', 
-                   'bbmle', 
-                   'DescTools'))
-```
+]
+
+.pull-right2[
+.center[
+![:scale 45%](images/rubicub.png)
+
+]
+
+]
+
+<br>
+
+<br>
+
+.center[
+**Lors de ces défis, n'hésitez pas à collaborer !**.
+]
 
 ---
 
@@ -150,6 +220,7 @@ Pour répondre, nous utiliserons un jeu de données où la longueur corporelle d
 
 ---
 exclude: true
+
 # Familiarisez-vous avec le jeu de données
 <br>
 
@@ -1821,11 +1892,15 @@ Peut être obtenu en utilisant la fonction `coefplot2()`de la librairie `coefplo
 <br><br>
 
 
-.alert[![:faic](warning) Cette librairie n'est pas sur le CRAN! On utilise la librairie remotes pour l'installer à partir de GitHub]
+.alert[![:faic](warning) Cette librairie n'est pas sur le CRAN! On utilise la librairie `remotes` pour l'installer à partir de GitHub]
 
-```{R install_coefplot2}
+```{R install_coefplot2, message = FALSE, warning = FALSE}
 if (!require("coefplot2"))
-  remotes::install_github("palday/coefplot2", subdir = "pkg")
+  remotes::install_github("palday/coefplot2", 
+                          subdir = "pkg", 
+                          upgrade = "always", 
+                          quiet = TRUE)
+
 library(coefplot2)
 ```
 

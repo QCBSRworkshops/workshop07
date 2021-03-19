@@ -5,6 +5,12 @@
     <meta charset="utf-8" />
     <meta name="author" content="Centre de la Science de la Biodiversité du Québec" />
     <link href="assets/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <script src="assets/clipboard-2.0.6/clipboard.min.js"></script>
+    <link href="assets/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.css" rel="stylesheet" />
+    <script src="assets/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.js"></script>
+    <script>window.xaringanExtraClipboard(null, {"button":"<i class=\"fas fa-clipboard\"><\/i>","success":"<i class=\"fa fa-check\" style=\"color: #90BE6D\"><\/i>","error":"<i class=\"fa fa-times-circle\" style=\"color: #F94144\"><\/i>"})</script>
+    <link href="assets/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+    <link href="assets/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css">
     <link rel="stylesheet" href="qcbsR.css" type="text/css" />
@@ -20,10 +26,63 @@ class: center, middle, inverse, title-slide
 
 ---
 
-
-
-
 class: inverse, center, middle
+
+
+```
+## Using bundled GitHub PAT. Please add your own PAT to the env var `GITHUB_PAT`
+```
+
+```
+## Downloading GitHub repo gadenbuie/xaringanExtra@HEAD
+```
+
+```
+## uuid (NA -&gt; 0.1-4) [CRAN]
+```
+
+```
+## Installing 1 packages: uuid
+```
+
+```
+## Installing package into '/home/runner/work/_temp/Library'
+## (as 'lib' is unspecified)
+```
+
+```
+##   
+   checking for file ‘/tmp/RtmpuiWAVS/remotes3c381694401f/gadenbuie-xaringanExtra-f7687fc/DESCRIPTION’ ...
+  
+✔  checking for file ‘/tmp/RtmpuiWAVS/remotes3c381694401f/gadenbuie-xaringanExtra-f7687fc/DESCRIPTION’
+## 
+  
+─  preparing ‘xaringanExtra’:
+## 
+  
+   checking DESCRIPTION meta-information ...
+  
+✔  checking DESCRIPTION meta-information
+## 
+  
+─  checking for LF line-endings in source and make files and shell scripts
+## 
+  
+─  checking for empty or unneeded directories
+## 
+  
+─  building ‘xaringanExtra_0.3.1.tar.gz’
+## 
+  
+   
+## 
+```
+
+```
+## Installing package into '/home/runner/work/_temp/Library'
+## (as 'lib' is unspecified)
+```
+
 
 
 
@@ -35,26 +94,51 @@ class: inverse, center, middle
 [![badge](https://img.shields.io/static/v1?style=for-the-badge&amp;label=diapos&amp;message=07&amp;color=red&amp;logo=adobe-acrobat-reader)](https://qcbsrworkshops.github.io/workshop07/workshop07-fr/workshop07-fr.pdf)
 [![badge](https://img.shields.io/static/v1?style=for-the-badge&amp;label=script&amp;message=07&amp;color=2a50b8&amp;logo=r)](https://qcbsrworkshops.github.io/workshop07/workshop07-fr/workshop07-fr.R)
 
-
 ---
-# À propos de cet atelier
 
-&lt;br&gt;
-
-Vous verrez à travers l'atelier une série de  **défis** que vous reconnaitrez avec ce cube rubik.
+&lt;p style="font-size:75%"&gt;
 
 .center[
-![:scale 25%](images/rubicub.png)
+**Contributeurs et contributrices au développement de cet atelier**
+
+en modifiant et en améliorant son contenu dans le cadre du &lt;br&gt;Prix d'apprentissage et du développement (*Le*arning *a*nd *D*evelopment *A*ward*).
 ]
 
-&lt;br&gt;
 
-**N'hésitez-pas à collaborer pour résoudre ces défis!**
+.pull-left[
+.right[
 
+ **2022** - **2021** - **2020**
+
+
+
+]
+]
+
+.pull-right[
+.left[
+**2019** - **2018** - **2017**
+
+
+
+**2016** - **2015** - **2014**
+
+
+
+]
+
+]
+&lt;/p&gt;
 
 ---
 
-# Librairies requises
+# Matériel requis
+
+Pour suivre cet atelier, il est nécessaire d'avoir téléchargé et installé les dernières versions de [RStudio](https://rstudio.com/products/rstudio/download/#download) et de [R](https://cran.rstudio.com/).
+
+.pull-left[
+Vous devez également utiliser les paquets suivants :
+
 
 * [ggplot2](https://cran.r-project.org/package=ggplot2)
 * [lme4](https://cran.r-project.org/package=lme4)
@@ -64,21 +148,48 @@ Vous verrez à travers l'atelier une série de  **défis** que vous reconnaitrez
 * [bbmle](https://cran.r-project.org/package=bbmle)
 * [DescTools](https://cran.r-project.org/package=DescTools)
 
+]
 
-&lt;br&gt;
+.pull-right[
 
-Pour les installer à partir du CRAN, faire :
+Pour les installer à partir du CRAN, exécutez :
 
 
 ```r
-install.packages(c("ggplot2", 
-                   "lme4", 
-                   "MuMIn", 
-                   'MASS', 
-                   'vcdExtra', 
-                   'bbmle', 
-                   'DescTools'))
+install.packages(
+  c("ggplot2", 
+    "lme4", 
+    "MuMIn", 
+    'MASS', 
+    'vcdExtra', 
+    'bbmle', 
+    'DescTools')
+)
 ```
+]
+
+&lt;br&gt;
+
+.pull-left2[
+Tout au long de cet atelier, il y aura une série de **défis** que vous pouvez reconnaître par ce rubix cube.
+
+]
+
+.pull-right2[
+.center[
+![:scale 45%](images/rubicub.png)
+
+]
+
+]
+
+&lt;br&gt;
+
+&lt;br&gt;
+
+.center[
+**Lors de ces défis, n'hésitez pas à collaborer !**.
+]
 
 ---
 
@@ -120,6 +231,7 @@ Pour répondre, nous utiliserons un jeu de données où la longueur corporelle d
 
 ---
 exclude: true
+
 # Familiarisez-vous avec le jeu de données
 &lt;br&gt;
 
@@ -1845,36 +1957,16 @@ Peut être obtenu en utilisant la fonction `coefplot2()`de la librairie `coefplo
 &lt;br&gt;&lt;br&gt;
 
 
-.alert[![:faic](warning) Cette librairie n'est pas sur le CRAN! On utilise la librairie remotes pour l'installer à partir de GitHub]
+.alert[![:faic](warning) Cette librairie n'est pas sur le CRAN! On utilise la librairie `remotes` pour l'installer à partir de GitHub]
 
 
 ```r
 if (!require("coefplot2"))
-  remotes::install_github("palday/coefplot2", subdir = "pkg")
-# reshape (NA -&gt; 0.8.8) [CRAN]
-#   
-   checking for file ‘/tmp/RtmpTQQPI7/remotes4e2877e36df9/palday-coefplot2-23b7dcb/pkg/DESCRIPTION’ ...
-  
-✔  checking for file ‘/tmp/RtmpTQQPI7/remotes4e2877e36df9/palday-coefplot2-23b7dcb/pkg/DESCRIPTION’
-# 
-  
-─  preparing ‘coefplot2’:
-#    checking DESCRIPTION meta-information ...
-  
-✔  checking DESCRIPTION meta-information
-# 
-  
-─  checking for LF line-endings in source and make files and shell scripts
-# 
-  
-─  checking for empty or unneeded directories
-# 
-  
-─  building ‘coefplot2_0.1.3.3.tar.gz’
-# 
-  
-   
-# 
+  remotes::install_github("palday/coefplot2", 
+                          subdir = "pkg", 
+                          upgrade = "always", 
+                          quiet = TRUE)
+
 library(coefplot2)
 ```
 
