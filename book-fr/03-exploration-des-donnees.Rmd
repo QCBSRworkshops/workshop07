@@ -65,31 +65,31 @@ Si une espèce ou un lac est peu représenté dans les données, le modèle va a
 
 **Comment évaluer l'impact d'un effet aléatoire sur le modèle?**
 
-Les intervalles de confiance des ordonnées à l'origine et des pentes **générales** sont ajustés pour tenir compte de la pseudo-replication basée sur le **coefficient de corrélation intra-classe (CIC)**.
+Les intervalles de confiance des ordonnées à l'origine et des pentes **générales** sont ajustés pour tenir compte de la pseudo-replication basée sur le **coefficient de corrélation intra-classe (CCI)**.
 
-Le CIC correspond au **ratio** entre la variance d'un effet aléatoire (e.g. ordonnées à l'origine des espèces) et la variance totale. Ainsi, l'ICC décrit la proportion de la variance de la variable de réponse qui est attribuée à un effet aléatoire spécifique:
+Le CCI correspond au **ratio** entre la variance d'un effet aléatoire (e.g. ordonnées à l'origine des espèces) et la variance totale. Ainsi, l'ICC décrit la proportion de la variance de la variable de réponse qui est attribuée à un effet aléatoire spécifique:
 
-$$ICC = \frac{\sigma_{\alpha}^2}{\sigma_{\alpha}^2 + \sigma_{\varepsilon}^2}$$
+$$CCI = \frac{\sigma_{\alpha}^2}{\sigma_{\alpha}^2 + \sigma_{\varepsilon}^2}$$
 *Notez: La notation mathématique spécifique peut varier selon l'article/livre et selon la façon dont l'équation du modèle a été écrite.*
 
-Dans notre exemple, le CIC nous informe donc **à quel point** la position trophique moyenne entre chaque espèce ou chaque lac (c'est-à-dire les ordonnées à l'origine) **varie**.
+Dans notre exemple, le CCI nous informe donc **à quel point** la position trophique moyenne entre chaque espèce ou chaque lac (c'est-à-dire les ordonnées à l'origine) **varie**.
 
 
 <div class = 'two-col'>
 
-<ins> CIC élevé </ins>
+<ins> CCI élevé </ins>
 
 ![](images/ICCplot2_qcbs.png)
 
-Le ratio de variance (CIC) est élevé puisque **les espèces diffèrent grandement** dans leur position trophique moyenne.
+Le ratio de variance (CCI) est élevé puisque **les espèces diffèrent grandement** dans leur position trophique moyenne.
 
 Les intervalles de confiance pour la pente et l'ordonnée à l'origine générale sont donc grandes.
 
-<ins> CIC faible </ins>
+<ins> CCI faible </ins>
 
 ![](images/ICCplot_qcbs.png)
 
-Le ratio de variance (CIC) est faible car **les espèces diffèrent faiblement** dans leur position trophique moyenne.
+Le ratio de variance (CCI) est faible car **les espèces diffèrent faiblement** dans leur position trophique moyenne.
 
 Les intervalles de confiance pour la pente et l'ordonnée à l'origine générale sont donc petits.
 
@@ -98,7 +98,7 @@ Les intervalles de confiance pour la pente et l'ordonnée à l'origine général
 
 ## Défi 2
 
-Pour votre deuxième défi, réfléchissez à ces deux questions. Comment le CIC et les intervalles de confiance seront-ils affectés dans ces deux scénarios:
+Pour votre deuxième défi, réfléchissez à ces deux questions. Comment le CCI et les intervalles de confiance seront-ils affectés dans ces deux scénarios:
 
 **1.** Si les positions trophiques des poissons ne varient pas entre les lacs?
 
@@ -108,5 +108,5 @@ Pour votre deuxième défi, réfléchissez à ces deux questions. Comment le CIC
 
 #### **Défi 2 Solution:** {-}
 
-- **1.** CIC serait faible et les intervalles de confiance seraient plus petits
-- **2.** CIC serait élevé et les intervalles de confiance seraient plus larges
+- **1.** CCI serait faible et les intervalles de confiance seraient plus petits
+- **2.** CCI serait élevé et les intervalles de confiance seraient plus larges
