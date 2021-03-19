@@ -150,9 +150,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.1" data-path="starting-with-a-question.html"><a href="starting-with-a-question.html#challenge-1"><i class="fa fa-check"></i><b>4.1</b> Challenge 1</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html"><i class="fa fa-check"></i><b>5</b> Analyzing the data</a><ul>
-<li class="chapter" data-level="5.1" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#separate"><i class="fa fa-check"></i><b>5.1</b> Separate</a></li>
-<li class="chapter" data-level="5.2" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#lump"><i class="fa fa-check"></i><b>5.2</b> Lump</a></li>
-<li class="chapter" data-level="5.3" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#is-there-a-third-option"><i class="fa fa-check"></i><b>5.3</b> Is there a third option?</a></li>
+<li class="chapter" data-level="5.1" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#option-1-separate"><i class="fa fa-check"></i><b>5.1</b> Option 1: Separate</a></li>
+<li class="chapter" data-level="5.2" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#option-2-lump-everything-together"><i class="fa fa-check"></i><b>5.2</b> Option 2: Lump everything together</a></li>
+<li class="chapter" data-level="5.3" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#option-3-is-there-a-third-option"><i class="fa fa-check"></i><b>5.3</b> Option 3: Is there a third option?</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="fixed-vs-random-effects.html"><a href="fixed-vs-random-effects.html"><i class="fa fa-check"></i><b>6</b> Fixed vs. random effects</a><ul>
 <li class="chapter" data-level="6.1" data-path="fixed-vs-random-effects.html"><a href="fixed-vs-random-effects.html#fixed-effects-deterministic-processes"><i class="fa fa-check"></i><b>6.1</b> Fixed effects: deterministic processes</a></li>
@@ -242,48 +242,50 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="preparing-for-the-workshop" class="section level1">
 <h1><span class="header-section-number">Chapter 2</span> Preparing for the workshop</h1>
-<p>To prepare for this workshop, you must download and install the earliest RStudio and R versions. You must also download the data we will use during this workshop:</p>
+<p>To prepare for this workshop, download and install the earliest RStudio and R versions. You should also download the data and some additional functions that we will use during this workshop:</p>
 <ul>
 <li><a href="https://qcbsrworkshops.github.io/workshop07/book-en/workshop07-script-en.R">R Script</a></li>
-<li><a href="http://qcbs.ca/wiki/_media/qcbs_w7_data.csv">Fish data</a></li>
-<li><a href="http://qcbs.ca/wiki/_media/banta_totalfruits.csv">Arabidopsis data</a></li>
-<li><a href="http://qcbs.ca/wiki/_media/inverts.csv">Inverts data</a></li>
-<li><a href="http://qcbs.ca/wiki/_media/glmm_funs.r">glmm_funs</a> (code for use in the GLMM section)</li>
+<li><a href="https://raw.githubusercontent.com/QCBSRworkshops/workshop07/main/book-en/data/qcbs_w7_data.csv">Fish data</a></li>
+<li><a href="https://raw.githubusercontent.com/QCBSRworkshops/workshop07/main/book-en/data/banta_totalfruits.csv">Arabidopsis data</a></li>
+<li><a href="https://raw.githubusercontent.com/QCBSRworkshops/workshop07/main/book-en/data/inverts.csv">Inverts data</a></li>
+<li><a href="https://raw.githubusercontent.com/QCBSRworkshops/workshop07/main/book-fr/data/glmm_funs.R">glmm_funs</a> (code for use in the GLMM section)</li>
 </ul>
+<p>You can save these files by clicking on the links above, and right click + save on the webpage they open.</p>
 <p>This workshop requires the following <code>R</code> packages:</p>
 <ul>
-<li><a href="http://cran.r-project.org/web/packages/ggplot2/index.html">ggplot2</a></li>
-<li><a href="http://cran.r-project.org/web/packages/lme4/index.html">lm4</a></li>
+<li><a href="http://cran.r-project.org/web/packages/lme4/index.html">lme4</a></li>
 <li><a href="http://cran.r-project.org/web/packages/AICcmodavg/index.html">AICcmodavg</a></li>
 <li><a href="http://cran.r-project.org/web/packages/MASS/index.html">MASS</a></li>
 <li><a href="http://cran.r-project.org/web/packages/vcdExtra/index.html">vcdExtra</a></li>
 <li><a href="http://cran.r-project.org/web/packages/bbmle/index.html">bbmle</a></li>
+<li><a href="http://cran.r-project.org/web/packages/MuMIn/index.html">MuMIn</a></li>
+<li><a href="http://cran.r-project.org/web/packages/ggplot2/index.html">ggplot2</a></li>
 <li><a href="http://cran.r-project.org/web/packages/DescTools/index.html">DescTools</a></li>
 </ul>
 <p>To install them from CRAN, run:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="preparing-for-the-workshop.html#cb1-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;ggplot2&quot;</span>)</span>
-<span id="cb1-2"><a href="preparing-for-the-workshop.html#cb1-2"></a><span class="kw">install.packages</span>(<span class="st">&quot;lme4&quot;</span>)</span>
-<span id="cb1-3"><a href="preparing-for-the-workshop.html#cb1-3"></a><span class="kw">install.packages</span>(<span class="st">&quot;AICcmodavg&quot;</span>)</span>
-<span id="cb1-4"><a href="preparing-for-the-workshop.html#cb1-4"></a><span class="kw">install.packages</span>(<span class="st">&quot;MASS&quot;</span>)</span>
-<span id="cb1-5"><a href="preparing-for-the-workshop.html#cb1-5"></a><span class="kw">install.packages</span>(<span class="st">&quot;vcdExtra&quot;</span>)</span>
-<span id="cb1-6"><a href="preparing-for-the-workshop.html#cb1-6"></a><span class="kw">install.packages</span>(<span class="st">&quot;bbmle&quot;</span>)</span>
-<span id="cb1-7"><a href="preparing-for-the-workshop.html#cb1-7"></a><span class="kw">install.packages</span>(<span class="st">&quot;DescTools&quot;</span>)</span>
-<span id="cb1-8"><a href="preparing-for-the-workshop.html#cb1-8"></a><span class="kw">install.packages</span>(<span class="st">&quot;remotes&quot;</span>)</span>
-<span id="cb1-9"><a href="preparing-for-the-workshop.html#cb1-9"></a><span class="kw">install.packages</span>(<span class="st">&quot;gridExtra&quot;</span>)</span>
-<span id="cb1-10"><a href="preparing-for-the-workshop.html#cb1-10"></a><span class="kw">install.packages</span>(<span class="st">&quot;lattice&quot;</span>)</span>
-<span id="cb1-11"><a href="preparing-for-the-workshop.html#cb1-11"></a><span class="kw">install.packages</span>(<span class="st">&quot;MuMIn&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="preparing-for-the-workshop.html#cb1-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;lme4&quot;</span>)</span>
+<span id="cb1-2"><a href="preparing-for-the-workshop.html#cb1-2"></a><span class="kw">install.packages</span>(<span class="st">&quot;AICcmodavg&quot;</span>)</span>
+<span id="cb1-3"><a href="preparing-for-the-workshop.html#cb1-3"></a><span class="kw">install.packages</span>(<span class="st">&quot;MASS&quot;</span>)</span>
+<span id="cb1-4"><a href="preparing-for-the-workshop.html#cb1-4"></a><span class="kw">install.packages</span>(<span class="st">&quot;vcdExtra&quot;</span>)</span>
+<span id="cb1-5"><a href="preparing-for-the-workshop.html#cb1-5"></a><span class="kw">install.packages</span>(<span class="st">&quot;bbmle&quot;</span>)</span>
+<span id="cb1-6"><a href="preparing-for-the-workshop.html#cb1-6"></a><span class="kw">install.packages</span>(<span class="st">&quot;MuMIn&quot;</span>)</span>
+<span id="cb1-7"><a href="preparing-for-the-workshop.html#cb1-7"></a><span class="kw">install.packages</span>(<span class="st">&quot;ggplot2&quot;</span>)</span>
+<span id="cb1-8"><a href="preparing-for-the-workshop.html#cb1-8"></a><span class="kw">install.packages</span>(<span class="st">&quot;DescTools&quot;</span>)</span>
+<span id="cb1-9"><a href="preparing-for-the-workshop.html#cb1-9"></a><span class="kw">install.packages</span>(<span class="st">&quot;remotes&quot;</span>)</span>
+<span id="cb1-10"><a href="preparing-for-the-workshop.html#cb1-10"></a><span class="kw">install.packages</span>(<span class="st">&quot;gridExtra&quot;</span>)</span>
+<span id="cb1-11"><a href="preparing-for-the-workshop.html#cb1-11"></a><span class="kw">install.packages</span>(<span class="st">&quot;lattice&quot;</span>)</span></code></pre></div>
 <p>To load these packages, run:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="preparing-for-the-workshop.html#cb2-1"></a><span class="kw">library</span>(ggplot2)</span>
-<span id="cb2-2"><a href="preparing-for-the-workshop.html#cb2-2"></a><span class="kw">library</span>(lme4)</span>
-<span id="cb2-3"><a href="preparing-for-the-workshop.html#cb2-3"></a><span class="kw">library</span>(AICcmodavg)</span>
-<span id="cb2-4"><a href="preparing-for-the-workshop.html#cb2-4"></a><span class="kw">library</span>(MASS)</span>
-<span id="cb2-5"><a href="preparing-for-the-workshop.html#cb2-5"></a><span class="kw">library</span>(vcdExtra)</span>
-<span id="cb2-6"><a href="preparing-for-the-workshop.html#cb2-6"></a><span class="kw">library</span>(bbmle)</span>
-<span id="cb2-7"><a href="preparing-for-the-workshop.html#cb2-7"></a><span class="kw">library</span>(DescTools)</span>
-<span id="cb2-8"><a href="preparing-for-the-workshop.html#cb2-8"></a><span class="kw">library</span>(remotes)</span>
-<span id="cb2-9"><a href="preparing-for-the-workshop.html#cb2-9"></a><span class="kw">library</span>(gridExtra)</span>
-<span id="cb2-10"><a href="preparing-for-the-workshop.html#cb2-10"></a><span class="kw">library</span>(lattice)</span>
-<span id="cb2-11"><a href="preparing-for-the-workshop.html#cb2-11"></a><span class="kw">library</span>(MuMIn)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="preparing-for-the-workshop.html#cb2-1"></a><span class="kw">library</span>(lme4)</span>
+<span id="cb2-2"><a href="preparing-for-the-workshop.html#cb2-2"></a><span class="kw">library</span>(AICcmodavg)</span>
+<span id="cb2-3"><a href="preparing-for-the-workshop.html#cb2-3"></a><span class="kw">library</span>(MASS)</span>
+<span id="cb2-4"><a href="preparing-for-the-workshop.html#cb2-4"></a><span class="kw">library</span>(vcdExtra)</span>
+<span id="cb2-5"><a href="preparing-for-the-workshop.html#cb2-5"></a><span class="kw">library</span>(bbmle)</span>
+<span id="cb2-6"><a href="preparing-for-the-workshop.html#cb2-6"></a><span class="kw">library</span>(MuMIn)</span>
+<span id="cb2-7"><a href="preparing-for-the-workshop.html#cb2-7"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb2-8"><a href="preparing-for-the-workshop.html#cb2-8"></a><span class="kw">library</span>(DescTools)</span>
+<span id="cb2-9"><a href="preparing-for-the-workshop.html#cb2-9"></a><span class="kw">library</span>(remotes)</span>
+<span id="cb2-10"><a href="preparing-for-the-workshop.html#cb2-10"></a><span class="kw">library</span>(gridExtra)</span>
+<span id="cb2-11"><a href="preparing-for-the-workshop.html#cb2-11"></a><span class="kw">library</span>(lattice)</span></code></pre></div>
 
 </div>
 <hr>

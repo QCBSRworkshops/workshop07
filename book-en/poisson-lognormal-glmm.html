@@ -150,9 +150,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.1" data-path="starting-with-a-question.html"><a href="starting-with-a-question.html#challenge-1"><i class="fa fa-check"></i><b>4.1</b> Challenge 1</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html"><i class="fa fa-check"></i><b>5</b> Analyzing the data</a><ul>
-<li class="chapter" data-level="5.1" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#separate"><i class="fa fa-check"></i><b>5.1</b> Separate</a></li>
-<li class="chapter" data-level="5.2" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#lump"><i class="fa fa-check"></i><b>5.2</b> Lump</a></li>
-<li class="chapter" data-level="5.3" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#is-there-a-third-option"><i class="fa fa-check"></i><b>5.3</b> Is there a third option?</a></li>
+<li class="chapter" data-level="5.1" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#option-1-separate"><i class="fa fa-check"></i><b>5.1</b> Option 1: Separate</a></li>
+<li class="chapter" data-level="5.2" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#option-2-lump-everything-together"><i class="fa fa-check"></i><b>5.2</b> Option 2: Lump everything together</a></li>
+<li class="chapter" data-level="5.3" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#option-3-is-there-a-third-option"><i class="fa fa-check"></i><b>5.3</b> Option 3: Is there a third option?</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="fixed-vs-random-effects.html"><a href="fixed-vs-random-effects.html"><i class="fa fa-check"></i><b>6</b> Fixed vs. random effects</a><ul>
 <li class="chapter" data-level="6.1" data-path="fixed-vs-random-effects.html"><a href="fixed-vs-random-effects.html#fixed-effects-deterministic-processes"><i class="fa fa-check"></i><b>6.1</b> Fixed effects: deterministic processes</a></li>
@@ -280,9 +280,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## Installing packages into &#39;/home/runner/work/_temp/Library&#39;
 ## (as &#39;lib&#39; is unspecified)</code></pre>
 <pre><code>##   
-   checking for file ‘/tmp/RtmpfACWcP/remotes345d5773ad1f/palday-coefplot2-23b7dcb/pkg/DESCRIPTION’ ...
+   checking for file ‘/tmp/RtmpknHcxb/remotes34476e178a1d/palday-coefplot2-23b7dcb/pkg/DESCRIPTION’ ...
   
-✔  checking for file ‘/tmp/RtmpfACWcP/remotes345d5773ad1f/palday-coefplot2-23b7dcb/pkg/DESCRIPTION’
+✔  checking for file ‘/tmp/RtmpknHcxb/remotes34476e178a1d/palday-coefplot2-23b7dcb/pkg/DESCRIPTION’
 ## 
   
 ─  preparing ‘coefplot2’:
@@ -310,10 +310,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## Loading required package: coda</code></pre>
 <div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="poisson-lognormal-glmm.html#cb98-1"></a><span class="co"># Variance terms</span></span>
 <span id="cb98-2"><a href="poisson-lognormal-glmm.html#cb98-2"></a><span class="kw">coefplot2</span>(mpl1, <span class="dt">ptype =</span> <span class="st">&quot;vcov&quot;</span>, <span class="dt">intercept =</span> <span class="ot">TRUE</span>, <span class="dt">main =</span> <span class="st">&quot;Random effect variance&quot;</span>)</span></code></pre></div>
-<p><img src="book-en_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
+<p><img src="book-en_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
 <div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="poisson-lognormal-glmm.html#cb99-1"></a><span class="co"># Fixed effects</span></span>
 <span id="cb99-2"><a href="poisson-lognormal-glmm.html#cb99-2"></a><span class="kw">coefplot2</span>(mpl1, <span class="dt">intercept =</span> <span class="ot">TRUE</span>, <span class="dt">main =</span> <span class="st">&quot;Fixed effect coefficient&quot;</span>)</span></code></pre></div>
-<p><img src="book-en_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
+<p><img src="book-en_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
 <p><em>Note: error bars are only shown for the fixed effects because <code>glmer()</code> doesn’t model uncertainty for random effects.</em></p>
 <hr />
 <p><strong>Now let’s visualize the random effects</strong></p>
@@ -335,7 +335,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb100-7"><a href="poisson-lognormal-glmm.html#cb100-7"></a>d2 &lt;-<span class="st"> </span><span class="kw">dotplot</span>(r2, <span class="dt">par.settings =</span> pp)</span>
 <span id="cb100-8"><a href="poisson-lognormal-glmm.html#cb100-8"></a></span>
 <span id="cb100-9"><a href="poisson-lognormal-glmm.html#cb100-9"></a><span class="kw">grid.arrange</span>(d2<span class="op">$</span>gen, d2<span class="op">$</span>popu, <span class="dt">nrow =</span> <span class="dv">1</span>)</span></code></pre></div>
-<p><img src="book-en_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
+<p><img src="book-en_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
 
 </div>
 

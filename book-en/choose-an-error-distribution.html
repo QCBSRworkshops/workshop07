@@ -150,9 +150,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.1" data-path="starting-with-a-question.html"><a href="starting-with-a-question.html#challenge-1"><i class="fa fa-check"></i><b>4.1</b> Challenge 1</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html"><i class="fa fa-check"></i><b>5</b> Analyzing the data</a><ul>
-<li class="chapter" data-level="5.1" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#separate"><i class="fa fa-check"></i><b>5.1</b> Separate</a></li>
-<li class="chapter" data-level="5.2" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#lump"><i class="fa fa-check"></i><b>5.2</b> Lump</a></li>
-<li class="chapter" data-level="5.3" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#is-there-a-third-option"><i class="fa fa-check"></i><b>5.3</b> Is there a third option?</a></li>
+<li class="chapter" data-level="5.1" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#option-1-separate"><i class="fa fa-check"></i><b>5.1</b> Option 1: Separate</a></li>
+<li class="chapter" data-level="5.2" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#option-2-lump-everything-together"><i class="fa fa-check"></i><b>5.2</b> Option 2: Lump everything together</a></li>
+<li class="chapter" data-level="5.3" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#option-3-is-there-a-third-option"><i class="fa fa-check"></i><b>5.3</b> Option 3: Is there a third option?</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="fixed-vs-random-effects.html"><a href="fixed-vs-random-effects.html"><i class="fa fa-check"></i><b>6</b> Fixed vs. random effects</a><ul>
 <li class="chapter" data-level="6.1" data-path="fixed-vs-random-effects.html"><a href="fixed-vs-random-effects.html#fixed-effects-deterministic-processes"><i class="fa fa-check"></i><b>6.1</b> Fixed effects: deterministic processes</a></li>
@@ -252,7 +252,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb69-5"><a href="choose-an-error-distribution.html#cb69-5"></a><span class="co"># is equal to the mean).</span></span>
 <span id="cb69-6"><a href="choose-an-error-distribution.html#cb69-6"></a><span class="kw">hist</span>(dat.tf<span class="op">$</span>total.fruits, <span class="dt">breaks =</span> <span class="dv">50</span>, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;&quot;</span>, </span>
 <span id="cb69-7"><a href="choose-an-error-distribution.html#cb69-7"></a>    <span class="dt">xlab =</span> <span class="st">&quot;Total fruits&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Count&quot;</span>)</span></code></pre></div>
-<p><img src="book-en_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
+<p><img src="book-en_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
 <p>However, as we will soon see, the variance increases with the mean much more rapidly than expected under the Poisson distribution…</p>
 <hr />
 <p><strong>Explore variance </strong></p>
@@ -279,7 +279,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb71-7"><a href="choose-an-error-distribution.html#cb71-7"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">Genotype x nutrient x clipping&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="co"># space before the title</span></span>
 <span id="cb71-8"><a href="choose-an-error-distribution.html#cb71-8"></a><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_blank</span>()) <span class="op">+</span></span>
 <span id="cb71-9"><a href="choose-an-error-distribution.html#cb71-9"></a><span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun =</span> mean, <span class="dt">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
-<p><img src="book-en_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
+<p><img src="book-en_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
 <p>From this plot, we see that the variance of total fruits shows a large amount of heterogeneity among populations (population x nutrient x clipping interaction).</p>
 <hr />
 <p><strong>Back to choosing an error distribution</strong></p>
@@ -335,7 +335,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb72-37"><a href="choose-an-error-distribution.html#cb72-37"></a>mvec &lt;-<span class="st"> </span><span class="dv">0</span><span class="op">:</span><span class="dv">120</span></span>
 <span id="cb72-38"><a href="choose-an-error-distribution.html#cb72-38"></a><span class="kw">lines</span>(mvec, <span class="kw">predict</span>(Lfit, mvec), <span class="dt">col =</span> <span class="dv">5</span>)</span>
 <span id="cb72-39"><a href="choose-an-error-distribution.html#cb72-39"></a><span class="kw">text</span>(<span class="dv">118</span>, <span class="dv">2000</span>, <span class="st">&quot;loess&quot;</span>, <span class="dt">col =</span> <span class="dv">5</span>)</span></code></pre></div>
-<p><img src="book-en_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
+<p><img src="book-en_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
 <p>From the plot above we note that a linear quasi-Poisson may be better than the negative binomial, <em>but additional modeling is needed.</em></p>
 </div>
 <hr>

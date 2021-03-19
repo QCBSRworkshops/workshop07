@@ -150,9 +150,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.1" data-path="starting-with-a-question.html"><a href="starting-with-a-question.html#challenge-1"><i class="fa fa-check"></i><b>4.1</b> Challenge 1</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html"><i class="fa fa-check"></i><b>5</b> Analyzing the data</a><ul>
-<li class="chapter" data-level="5.1" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#separate"><i class="fa fa-check"></i><b>5.1</b> Separate</a></li>
-<li class="chapter" data-level="5.2" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#lump"><i class="fa fa-check"></i><b>5.2</b> Lump</a></li>
-<li class="chapter" data-level="5.3" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#is-there-a-third-option"><i class="fa fa-check"></i><b>5.3</b> Is there a third option?</a></li>
+<li class="chapter" data-level="5.1" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#option-1-separate"><i class="fa fa-check"></i><b>5.1</b> Option 1: Separate</a></li>
+<li class="chapter" data-level="5.2" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#option-2-lump-everything-together"><i class="fa fa-check"></i><b>5.2</b> Option 2: Lump everything together</a></li>
+<li class="chapter" data-level="5.3" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#option-3-is-there-a-third-option"><i class="fa fa-check"></i><b>5.3</b> Option 3: Is there a third option?</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="fixed-vs-random-effects.html"><a href="fixed-vs-random-effects.html"><i class="fa fa-check"></i><b>6</b> Fixed vs. random effects</a><ul>
 <li class="chapter" data-level="6.1" data-path="fixed-vs-random-effects.html"><a href="fixed-vs-random-effects.html#fixed-effects-deterministic-processes"><i class="fa fa-check"></i><b>6.1</b> Fixed effects: deterministic processes</a></li>
@@ -268,7 +268,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb51-2"><a href="step-3-model-validation.html#cb51-2"></a><span class="kw">par</span>(<span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>))</span>
 <span id="cb51-3"><a href="step-3-model-validation.html#cb51-3"></a><span class="kw">plot</span>(<span class="kw">resid</span>(M8) <span class="op">~</span><span class="st"> </span><span class="kw">fitted</span>(M8), <span class="dt">xlab =</span> <span class="st">&quot;Predicted values&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Normalized residuals&quot;</span>)</span>
 <span id="cb51-4"><a href="step-3-model-validation.html#cb51-4"></a><span class="kw">abline</span>(<span class="dt">h =</span> <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="book-en_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<p><img src="book-en_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
 <div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="step-3-model-validation.html#cb52-1"></a><span class="co"># Homogeneous dispersion of the residuals means that the</span></span>
 <span id="cb52-2"><a href="step-3-model-validation.html#cb52-2"></a><span class="co"># assumption is respected.</span></span></code></pre></div>
 <p><strong>Yes! Homogeneous dispersion of the residuals means that the assumption is respected.</strong></p>
@@ -290,7 +290,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb53-11"><a href="step-3-model-validation.html#cb53-11"></a></span>
 <span id="cb53-12"><a href="step-3-model-validation.html#cb53-12"></a><span class="kw">boxplot</span>(<span class="kw">resid</span>(M8) <span class="op">~</span><span class="st"> </span>Lake, <span class="dt">data =</span> fish.data, <span class="dt">xlab =</span> <span class="st">&quot;Lakes&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Normalized residuals&quot;</span>)</span>
 <span id="cb53-13"><a href="step-3-model-validation.html#cb53-13"></a><span class="kw">abline</span>(<span class="dt">h =</span> <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="book-en_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<p><img src="book-en_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
 <div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="step-3-model-validation.html#cb54-1"></a><span class="co"># Homogeneous dispersion of the residuals around 0 means no</span></span>
 <span id="cb54-2"><a href="step-3-model-validation.html#cb54-2"></a><span class="co"># pattern of residuals depending on the variable, therefore</span></span>
 <span id="cb54-3"><a href="step-3-model-validation.html#cb54-3"></a><span class="co"># the assumption is respected!  Note: The clusters are due to</span></span>
@@ -308,7 +308,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb55-2"><a href="step-3-model-validation.html#cb55-2"></a><span class="co"># following a normal distribution indicate that the model is</span></span>
 <span id="cb55-3"><a href="step-3-model-validation.html#cb55-3"></a><span class="co"># not biased.</span></span>
 <span id="cb55-4"><a href="step-3-model-validation.html#cb55-4"></a><span class="kw">hist</span>(<span class="kw">resid</span>(M8))</span></code></pre></div>
-<p><img src="book-en_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+<p><img src="book-en_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
 <div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="step-3-model-validation.html#cb56-1"></a><span class="co"># The residuals are normal! This means our model is not</span></span>
 <span id="cb56-2"><a href="step-3-model-validation.html#cb56-2"></a><span class="co"># biased.</span></span></code></pre></div>
 <p><strong>The residuals are normal! This means our model is not biased.</strong></p>

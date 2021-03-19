@@ -150,9 +150,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.1" data-path="starting-with-a-question.html"><a href="starting-with-a-question.html#challenge-1"><i class="fa fa-check"></i><b>4.1</b> Challenge 1</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html"><i class="fa fa-check"></i><b>5</b> Analyzing the data</a><ul>
-<li class="chapter" data-level="5.1" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#separate"><i class="fa fa-check"></i><b>5.1</b> Separate</a></li>
-<li class="chapter" data-level="5.2" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#lump"><i class="fa fa-check"></i><b>5.2</b> Lump</a></li>
-<li class="chapter" data-level="5.3" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#is-there-a-third-option"><i class="fa fa-check"></i><b>5.3</b> Is there a third option?</a></li>
+<li class="chapter" data-level="5.1" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#option-1-separate"><i class="fa fa-check"></i><b>5.1</b> Option 1: Separate</a></li>
+<li class="chapter" data-level="5.2" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#option-2-lump-everything-together"><i class="fa fa-check"></i><b>5.2</b> Option 2: Lump everything together</a></li>
+<li class="chapter" data-level="5.3" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#option-3-is-there-a-third-option"><i class="fa fa-check"></i><b>5.3</b> Option 3: Is there a third option?</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="fixed-vs-random-effects.html"><a href="fixed-vs-random-effects.html"><i class="fa fa-check"></i><b>6</b> Fixed vs. random effects</a><ul>
 <li class="chapter" data-level="6.1" data-path="fixed-vs-random-effects.html"><a href="fixed-vs-random-effects.html#fixed-effects-deterministic-processes"><i class="fa fa-check"></i><b>6.1</b> Fixed effects: deterministic processes</a></li>
@@ -399,7 +399,7 @@ Fixed effects:
 <span id="cb63-15"><a href="step-4-interpretation-and-visualization.html#cb63-15"></a></span>
 <span id="cb63-16"><a href="step-4-interpretation-and-visualization.html#cb63-16"></a>Plot_AllData <span class="op">+</span><span class="st"> </span><span class="kw">geom_abline</span>(<span class="dt">intercept =</span> summ_M8<span class="op">$</span>coefficients[<span class="dv">1</span>, </span>
 <span id="cb63-17"><a href="step-4-interpretation-and-visualization.html#cb63-17"></a>    <span class="dv">1</span>], <span class="dt">slope =</span> summ_M8<span class="op">$</span>coefficients[<span class="dv">2</span>, <span class="dv">1</span>])</span></code></pre></div>
-<p><img src="book-en_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+<p><img src="book-en_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
 <div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="step-4-interpretation-and-visualization.html#cb64-1"></a><span class="co"># You could also write out the numbers like this:</span></span>
 <span id="cb64-2"><a href="step-4-interpretation-and-visualization.html#cb64-2"></a><span class="co"># Plot_AllData + geom_abline(intercept = -0.0009059, slope =</span></span>
 <span id="cb64-3"><a href="step-4-interpretation-and-visualization.html#cb64-3"></a><span class="co"># 0.4222697)</span></span></code></pre></div>
@@ -422,7 +422,7 @@ Fixed effects:
 <span id="cb65-14"><a href="step-4-interpretation-and-visualization.html#cb65-14"></a>    <span class="dt">slope =</span> Species.coef[<span class="dv">1</span>, <span class="dv">2</span>], <span class="dt">col =</span> <span class="st">&quot;coral2&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_abline</span>(<span class="dt">intercept =</span> Species.coef[<span class="dv">2</span>, </span>
 <span id="cb65-15"><a href="step-4-interpretation-and-visualization.html#cb65-15"></a>    <span class="dv">1</span>], <span class="dt">slope =</span> Species.coef[<span class="dv">2</span>, <span class="dv">2</span>], <span class="dt">col =</span> <span class="st">&quot;green4&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_abline</span>(<span class="dt">intercept =</span> Species.coef[<span class="dv">3</span>, </span>
 <span id="cb65-16"><a href="step-4-interpretation-and-visualization.html#cb65-16"></a>    <span class="dv">1</span>], <span class="dt">slope =</span> Species.coef[<span class="dv">3</span>, <span class="dv">2</span>], <span class="dt">col =</span> <span class="st">&quot;blue1&quot;</span>)</span></code></pre></div>
-<p><img src="book-en_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
+<p><img src="book-en_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
 <ol start="3" style="list-style-type: lower-alpha">
 <li>Figure by lake</li>
 </ol>
@@ -440,7 +440,7 @@ Fixed effects:
 <span id="cb66-12"><a href="step-4-interpretation-and-visualization.html#cb66-12"></a>    <span class="dv">1</span>], <span class="dt">slope =</span> Lake.coef[<span class="dv">4</span>, <span class="dv">2</span>], <span class="dt">col =</span> <span class="st">&quot;darkgoldenrod&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_abline</span>(<span class="dt">intercept =</span> Lake.coef[<span class="dv">5</span>, </span>
 <span id="cb66-13"><a href="step-4-interpretation-and-visualization.html#cb66-13"></a>    <span class="dv">1</span>], <span class="dt">slope =</span> Lake.coef[<span class="dv">5</span>, <span class="dv">2</span>], <span class="dt">col =</span> <span class="st">&quot;royalblue1&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">geom_abline</span>(<span class="dt">intercept =</span> Lake.coef[<span class="dv">6</span>, </span>
 <span id="cb66-14"><a href="step-4-interpretation-and-visualization.html#cb66-14"></a>    <span class="dv">1</span>], <span class="dt">slope =</span> Lake.coef[<span class="dv">6</span>, <span class="dv">2</span>], <span class="dt">col =</span> <span class="st">&quot;magenta3&quot;</span>)</span></code></pre></div>
-<p><img src="book-en_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
+<p><img src="book-en_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
 </div>
 </div>
 <div id="challenge-8" class="section level2">

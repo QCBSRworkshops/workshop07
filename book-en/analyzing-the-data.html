@@ -150,9 +150,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.1" data-path="starting-with-a-question.html"><a href="starting-with-a-question.html#challenge-1"><i class="fa fa-check"></i><b>4.1</b> Challenge 1</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html"><i class="fa fa-check"></i><b>5</b> Analyzing the data</a><ul>
-<li class="chapter" data-level="5.1" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#separate"><i class="fa fa-check"></i><b>5.1</b> Separate</a></li>
-<li class="chapter" data-level="5.2" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#lump"><i class="fa fa-check"></i><b>5.2</b> Lump</a></li>
-<li class="chapter" data-level="5.3" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#is-there-a-third-option"><i class="fa fa-check"></i><b>5.3</b> Is there a third option?</a></li>
+<li class="chapter" data-level="5.1" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#option-1-separate"><i class="fa fa-check"></i><b>5.1</b> Option 1: Separate</a></li>
+<li class="chapter" data-level="5.2" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#option-2-lump-everything-together"><i class="fa fa-check"></i><b>5.2</b> Option 2: Lump everything together</a></li>
+<li class="chapter" data-level="5.3" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#option-3-is-there-a-third-option"><i class="fa fa-check"></i><b>5.3</b> Option 3: Is there a third option?</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="fixed-vs-random-effects.html"><a href="fixed-vs-random-effects.html"><i class="fa fa-check"></i><b>6</b> Fixed vs. random effects</a><ul>
 <li class="chapter" data-level="6.1" data-path="fixed-vs-random-effects.html"><a href="fixed-vs-random-effects.html#fixed-effects-deterministic-processes"><i class="fa fa-check"></i><b>6.1</b> Fixed effects: deterministic processes</a></li>
@@ -255,16 +255,16 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li><strong>Option 3:</strong> ?</li>
 </ul>
 <p>Let’s look a little closer at these options using our fish dataset!</p>
-<div id="separate" class="section level2">
-<h2><span class="header-section-number">5.1</span> Separate</h2>
+<div id="option-1-separate" class="section level2">
+<h2><span class="header-section-number">5.1</span> Option 1: Separate</h2>
 <p>One way to analyze this data is to fit linear regressions for each species in each lake.</p>
 <p>What would it look like it we ran separate analyses for each species?</p>
 <p><img src="images/fig_5_w5.png" /></p>
 <p>Notice you would have to estimate a slope and intercept parameter for each regression (2 parameters x 3 species X 6 lakes = 36 parameter estimates) and the sample size for each analysis would be 10.</p>
 <p>There is a decreased chance of finding an effect due to low sample size and increased familywise error rate due to multiple comparisons.</p>
 </div>
-<div id="lump" class="section level2">
-<h2><span class="header-section-number">5.2</span> Lump</h2>
+<div id="option-2-lump-everything-together" class="section level2">
+<h2><span class="header-section-number">5.2</span> Option 2: Lump everything together</h2>
 <p>Another way to analyze this data is to fit a single linear regression ignoring species and lake.</p>
 <p>What would it look like it we put all of our data together for all lakes?</p>
 <p><img src="images/fig_6_w5.png" /></p>
@@ -272,8 +272,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>But what about pseudoreplication? Fish within a lake and within a species might be correlated.</p>
 <p>Also, look at all that noise in the data, some of it might be due to <strong>differences</strong> among <strong>species</strong> and <strong>lakes</strong></p>
 </div>
-<div id="is-there-a-third-option" class="section level2">
-<h2><span class="header-section-number">5.3</span> Is there a third option?</h2>
+<div id="option-3-is-there-a-third-option" class="section level2">
+<h2><span class="header-section-number">5.3</span> Option 3: Is there a third option?</h2>
 <p>For our question, we only want to know if there is a <strong>general effect of body length on the trophic position</strong>.</p>
 <p>However, this relationship might differ slightly among <strong>species</strong> due to unmeasured biological processes (e.g. growth rate) or among <strong>lakes</strong> due to unmeasured environmental variables. But we are not interested in this variation, so we need to find a way to <strong>control</strong> for these potential effects while still maximizing the use of our data. This is why both separating and lumping alone are unsatisfactory options.</p>
 <p>This brings us to mixed models! Linear mixed models enable us to lump <strong>and</strong> separate the analysis.</p>

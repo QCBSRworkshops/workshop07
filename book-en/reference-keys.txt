@@ -9,9 +9,9 @@ why-choose-mixed-models
 starting-with-a-question
 challenge-1
 analyzing-the-data
-separate
-lump
-is-there-a-third-option
+option-1-separate
+option-2-lump-everything-together
+option-3-is-there-a-third-option
 fixed-vs.-random-effects
 fixed-effects-deterministic-processes
 random-effects-stochastic-processes

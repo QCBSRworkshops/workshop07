@@ -150,9 +150,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.1" data-path="starting-with-a-question.html"><a href="starting-with-a-question.html#challenge-1"><i class="fa fa-check"></i><b>4.1</b> Challenge 1</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html"><i class="fa fa-check"></i><b>5</b> Analyzing the data</a><ul>
-<li class="chapter" data-level="5.1" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#separate"><i class="fa fa-check"></i><b>5.1</b> Separate</a></li>
-<li class="chapter" data-level="5.2" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#lump"><i class="fa fa-check"></i><b>5.2</b> Lump</a></li>
-<li class="chapter" data-level="5.3" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#is-there-a-third-option"><i class="fa fa-check"></i><b>5.3</b> Is there a third option?</a></li>
+<li class="chapter" data-level="5.1" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#option-1-separate"><i class="fa fa-check"></i><b>5.1</b> Option 1: Separate</a></li>
+<li class="chapter" data-level="5.2" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#option-2-lump-everything-together"><i class="fa fa-check"></i><b>5.2</b> Option 2: Lump everything together</a></li>
+<li class="chapter" data-level="5.3" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#option-3-is-there-a-third-option"><i class="fa fa-check"></i><b>5.3</b> Option 3: Is there a third option?</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="fixed-vs-random-effects.html"><a href="fixed-vs-random-effects.html"><i class="fa fa-check"></i><b>6</b> Fixed vs. random effects</a><ul>
 <li class="chapter" data-level="6.1" data-path="fixed-vs-random-effects.html"><a href="fixed-vs-random-effects.html#fixed-effects-deterministic-processes"><i class="fa fa-check"></i><b>6.1</b> Fixed effects: deterministic processes</a></li>
@@ -266,7 +266,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>In linear mixed models, intercepts, slopes and their confidence intervals are adjusted to take the data structure into account.</p>
 <p><strong>What happens if the sample size for a specific factor level is small?</strong> (e.g. low <span class="math inline">\(n\)</span> for a specific species)</p>
 <p>If a certain species or lake is poorly represented in the data, the model will give more weight to the pooled model to estimate the intercept and/or slope of that species or lake (i.e. shrinkage).</p>
-<p>Ideally, you should have a minimum of <span class="math inline">\(n\)</span> =3 for any specific factor level.</p>
+<p><strong>Ideally, you should have a minimum of <span class="math inline">\(n\)</span> = 3 for any specific factor level.</strong></p>
 <p><img src="images/fig_12_w5.png" /></p>
 <p><strong>How do we assess the impact of a random effect on the model?</strong></p>
 <p>The confidence intervals for the <strong>general</strong> intercepts and slopes are adjusted to account for pseudoreplication based on the <strong>intraclass correlation coefficient (ICC)</strong></p>
@@ -287,6 +287,9 @@ Low ICC
 <p><img src="images/ICCplot_qcbs.png" /></p>
 <p>The % of variance (ICC) is low because <strong>species differ poorly</strong> in their average trophic position.</p>
 <p>The confidence intervals for the general intercept and slope are small.</p>
+<p><strong>For more details on ICC</strong>:</p>
+<p><a href="https://doi.org/10.1111/j.1469-185X.2010.00141.x">Nakagawa et Schielzeth (2013)</a>
+<a href="https://doi.org/10.1098/rsif.2017.0213">Nakagawa <em>et al.</em> (2017)</a></p>
 </div>
 </div>
 <div id="challenge-2" class="section level2">

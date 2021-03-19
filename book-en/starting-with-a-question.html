@@ -150,9 +150,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.1" data-path="starting-with-a-question.html"><a href="starting-with-a-question.html#challenge-1"><i class="fa fa-check"></i><b>4.1</b> Challenge 1</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html"><i class="fa fa-check"></i><b>5</b> Analyzing the data</a><ul>
-<li class="chapter" data-level="5.1" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#separate"><i class="fa fa-check"></i><b>5.1</b> Separate</a></li>
-<li class="chapter" data-level="5.2" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#lump"><i class="fa fa-check"></i><b>5.2</b> Lump</a></li>
-<li class="chapter" data-level="5.3" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#is-there-a-third-option"><i class="fa fa-check"></i><b>5.3</b> Is there a third option?</a></li>
+<li class="chapter" data-level="5.1" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#option-1-separate"><i class="fa fa-check"></i><b>5.1</b> Option 1: Separate</a></li>
+<li class="chapter" data-level="5.2" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#option-2-lump-everything-together"><i class="fa fa-check"></i><b>5.2</b> Option 2: Lump everything together</a></li>
+<li class="chapter" data-level="5.3" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#option-3-is-there-a-third-option"><i class="fa fa-check"></i><b>5.3</b> Option 3: Is there a third option?</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="fixed-vs-random-effects.html"><a href="fixed-vs-random-effects.html"><i class="fa fa-check"></i><b>6</b> Fixed vs. random effects</a><ul>
 <li class="chapter" data-level="6.1" data-path="fixed-vs-random-effects.html"><a href="fixed-vs-random-effects.html#fixed-effects-deterministic-processes"><i class="fa fa-check"></i><b>6.1</b> Fixed effects: deterministic processes</a></li>
@@ -258,42 +258,45 @@ Observe each plot and try to get a sense of what is occurring. A few key questio
 <ul>
 <li><strong>1.</strong> Do we expect an increase in trophic position with length in the exact same way for <em>all species</em>?</li>
 <li><strong>2.</strong> Do we expect an increase in trophic position with length in the exact same way for <em>all lakes</em>?</li>
-<li><strong>3.</strong> How might these relationships differ?</li>
 </ul>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="starting-with-a-question.html#cb3-1"></a><span class="kw">library</span>(ggplot2)</span>
-<span id="cb3-2"><a href="starting-with-a-question.html#cb3-2"></a></span>
-<span id="cb3-3"><a href="starting-with-a-question.html#cb3-3"></a><span class="co"># Load dataset into R</span></span>
-<span id="cb3-4"><a href="starting-with-a-question.html#cb3-4"></a>fish.data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/qcbs_w7_data.csv&quot;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">TRUE</span>)  <span class="co"># This line will vary depending on where your data is saved</span></span>
-<span id="cb3-5"><a href="starting-with-a-question.html#cb3-5"></a></span>
-<span id="cb3-6"><a href="starting-with-a-question.html#cb3-6"></a><span class="co"># Simple theme</span></span>
-<span id="cb3-7"><a href="starting-with-a-question.html#cb3-7"></a>fig &lt;-<span class="st"> </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(), </span>
-<span id="cb3-8"><a href="starting-with-a-question.html#cb3-8"></a>    <span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), <span class="dt">panel.background =</span> <span class="kw">element_blank</span>()) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb3-9"><a href="starting-with-a-question.html#cb3-9"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">strip.background =</span> <span class="kw">element_blank</span>(), <span class="dt">strip.text.y =</span> <span class="kw">element_text</span>()) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb3-10"><a href="starting-with-a-question.html#cb3-10"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">legend.background =</span> <span class="kw">element_blank</span>()) <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">legend.key =</span> <span class="kw">element_blank</span>()) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb3-11"><a href="starting-with-a-question.html#cb3-11"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">panel.border =</span> <span class="kw">element_rect</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill =</span> <span class="ot">NA</span>))</span>
-<span id="cb3-12"><a href="starting-with-a-question.html#cb3-12"></a></span>
-<span id="cb3-13"><a href="starting-with-a-question.html#cb3-13"></a>plot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Fish_Length, Trophic_Pos), <span class="dt">data =</span> fish.data)</span>
+<p><strong>How might these relationships differ?</strong></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="starting-with-a-question.html#cb3-1"></a><span class="co"># Load the dataset</span></span>
+<span id="cb3-2"><a href="starting-with-a-question.html#cb3-2"></a>fish.data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/qcbs_w7_data.csv&quot;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb3-3"><a href="starting-with-a-question.html#cb3-3"></a><span class="co"># This line will vary depending on where your data is saved.</span></span>
+<span id="cb3-4"><a href="starting-with-a-question.html#cb3-4"></a><span class="co"># Check your working directory with getwd() and change it, if</span></span>
+<span id="cb3-5"><a href="starting-with-a-question.html#cb3-5"></a><span class="co"># needed, with setwd()</span></span>
+<span id="cb3-6"><a href="starting-with-a-question.html#cb3-6"></a></span>
+<span id="cb3-7"><a href="starting-with-a-question.html#cb3-7"></a><span class="co"># Simple theme for all ggplot figures we produce after this</span></span>
+<span id="cb3-8"><a href="starting-with-a-question.html#cb3-8"></a>fig &lt;-<span class="st"> </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(), </span>
+<span id="cb3-9"><a href="starting-with-a-question.html#cb3-9"></a>    <span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), </span>
+<span id="cb3-10"><a href="starting-with-a-question.html#cb3-10"></a>    <span class="dt">strip.background =</span> <span class="kw">element_blank</span>(), <span class="dt">strip.text.y =</span> <span class="kw">element_text</span>(), </span>
+<span id="cb3-11"><a href="starting-with-a-question.html#cb3-11"></a>    <span class="dt">legend.background =</span> <span class="kw">element_blank</span>(), <span class="dt">legend.key =</span> <span class="kw">element_blank</span>(), </span>
+<span id="cb3-12"><a href="starting-with-a-question.html#cb3-12"></a>    <span class="dt">panel.border =</span> <span class="kw">element_rect</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill =</span> <span class="ot">NA</span>))</span>
+<span id="cb3-13"><a href="starting-with-a-question.html#cb3-13"></a></span>
 <span id="cb3-14"><a href="starting-with-a-question.html#cb3-14"></a></span>
-<span id="cb3-15"><a href="starting-with-a-question.html#cb3-15"></a><span class="co"># Plot 1 - All data</span></span>
-<span id="cb3-16"><a href="starting-with-a-question.html#cb3-16"></a>plot <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Length (mm)&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Trophic Position&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb3-17"><a href="starting-with-a-question.html#cb3-17"></a><span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;All Data&quot;</span>) <span class="op">+</span><span class="st"> </span>fig</span></code></pre></div>
-<p><img src="book-en_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<span id="cb3-15"><a href="starting-with-a-question.html#cb3-15"></a><span class="co"># Exploring the data graphically!</span></span>
+<span id="cb3-16"><a href="starting-with-a-question.html#cb3-16"></a></span>
+<span id="cb3-17"><a href="starting-with-a-question.html#cb3-17"></a><span class="co"># Basic plot aesthetics for the relationship we care about</span></span>
+<span id="cb3-18"><a href="starting-with-a-question.html#cb3-18"></a>plot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Fish_Length, Trophic_Pos), <span class="dt">data =</span> fish.data)</span>
+<span id="cb3-19"><a href="starting-with-a-question.html#cb3-19"></a></span>
+<span id="cb3-20"><a href="starting-with-a-question.html#cb3-20"></a><span class="co"># Plot 1 - All data</span></span>
+<span id="cb3-21"><a href="starting-with-a-question.html#cb3-21"></a>plot <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Length (mm)&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Trophic Position&quot;</span>, </span>
+<span id="cb3-22"><a href="starting-with-a-question.html#cb3-22"></a>    <span class="dt">title =</span> <span class="st">&quot;All Data&quot;</span>) <span class="op">+</span><span class="st"> </span>fig</span></code></pre></div>
+<p><img src="book-en_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="starting-with-a-question.html#cb4-1"></a><span class="co"># Plot 2 - By species</span></span>
-<span id="cb4-2"><a href="starting-with-a-question.html#cb4-2"></a>plot <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">facet_wrap</span>(<span class="op">~</span>Fish_Species) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Length (mm)&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb4-3"><a href="starting-with-a-question.html#cb4-3"></a><span class="st">    </span><span class="kw">ylab</span>(<span class="st">&quot;Trophic Position&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;By Species&quot;</span>) <span class="op">+</span><span class="st"> </span>fig</span></code></pre></div>
-<p><img src="book-en_files/figure-html/unnamed-chunk-5-2.png" width="672" /></p>
+<span id="cb4-2"><a href="starting-with-a-question.html#cb4-2"></a>plot <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">facet_wrap</span>(<span class="op">~</span>Fish_Species) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Length (mm)&quot;</span>, </span>
+<span id="cb4-3"><a href="starting-with-a-question.html#cb4-3"></a>    <span class="dt">y =</span> <span class="st">&quot;Trophic Position&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;By Species&quot;</span>) <span class="op">+</span><span class="st"> </span>fig</span></code></pre></div>
+<p><img src="book-en_files/figure-html/unnamed-chunk-6-2.png" width="672" /></p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="starting-with-a-question.html#cb5-1"></a><span class="co"># Plot 3 – By lake</span></span>
-<span id="cb5-2"><a href="starting-with-a-question.html#cb5-2"></a>plot <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">facet_wrap</span>(<span class="op">~</span>Lake) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Length (mm)&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb5-3"><a href="starting-with-a-question.html#cb5-3"></a><span class="st">    </span><span class="kw">ylab</span>(<span class="st">&quot;Trophic Position&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;By Lake&quot;</span>) <span class="op">+</span><span class="st"> </span>fig</span></code></pre></div>
-<p><img src="book-en_files/figure-html/unnamed-chunk-5-3.png" width="672" /></p>
+<span id="cb5-2"><a href="starting-with-a-question.html#cb5-2"></a>plot <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">facet_wrap</span>(<span class="op">~</span>Lake) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Length (mm)&quot;</span>, </span>
+<span id="cb5-3"><a href="starting-with-a-question.html#cb5-3"></a>    <span class="dt">y =</span> <span class="st">&quot;Trophic Position&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;By Lake&quot;</span>) <span class="op">+</span><span class="st"> </span>fig</span></code></pre></div>
+<p><img src="book-en_files/figure-html/unnamed-chunk-6-3.png" width="672" /></p>
 <hr />
 <div id="challenge-1-solution" class="section level4 unnumbered">
 <h4><strong>Challenge 1 Solution:</strong></h4>
 <p>Based on these plots we can draw two initial observations:</p>
-<ul>
-<li><strong>1.</strong> All species appear to increase in trophic position with length, but the slope might be different across species.</li>
-<li><strong>2</strong> Some parameters specific to each particular lake (ex. the primary productivity of the system) may change the observed relationship.</li>
-</ul>
+<p><strong>1.</strong> All species appear to increase in trophic position with length, but the slope might be different across species.</p>
+<p><strong>2.</strong> Some parameters specific to each particular lake (e.g. the system’s primary productivity) may change the observed relationship.</p>
 </div>
 </div>
 </div>
