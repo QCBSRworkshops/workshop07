@@ -61,7 +61,7 @@ In linear mixed models, intercepts, slopes and their confidence intervals are ad
 
 If a certain species or lake is poorly represented in the data, the model will give more weight to the pooled model to estimate the intercept and/or slope of that species or lake (i.e. shrinkage).
 
-Ideally, you should have a minimum of $n$ =3 for any specific factor level.
+**Ideally, you should have a minimum of $n$ = 3 for any specific factor level.**
 
 ![](images/fig_12_w5.png)
 

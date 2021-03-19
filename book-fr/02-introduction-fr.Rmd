@@ -6,7 +6,7 @@ Les modèles linéaires à effets mixtes (MLM) ont été développés pour abord
 
 # Commencer par une question
 
-Avant de nous plonger dans le vif du sujet, commençons par examiner un ensemble de données à titre d'exemple pour ensuite proposer une question de recherche.
+Avant de nous plonger dans le vif du sujet, commençons par se familiariser avec le jeu de données que nous utiliserons à titre d'exemple pour proposer une question de recherche.
 
 Le [jeu de données](https://raw.githubusercontent.com/QCBSRworkshops/workshop07/main/book-fr/data/qcbs_w7_data.csv) que nous utiliserons porte sur les positions trophiques des poissons. Dans ce jeu de données, des données ont été collectées pour **3** espèces de poissons différentes (S1-3) avec **10** individus échantillonnés par espèce dans **6** lacs différents (L1-6). Les individus de chaque espèce ont été mesurés et présentent des variations dans leur longueur corporelle et leur position trophique. 
 
@@ -22,13 +22,13 @@ Une simple question à laquelle vous pourriez répondre avec ce jeu de données 
 
 Pour notre premier défi, nous allons commencer à examiner notre jeu de données plus en profondeur. Reproduisez les graphiques 1-3 en utilisant le script ci-dessous et le jeu de données de poissons. 
 
-Regardez les graphiques et essayez de vous faire une idée de ce qui se passe. Quelques questions clés sont:
+Observez les graphiques puis evaluez ce que vous observez. Quelques questions clés sont:
 
 **1.** Est-ce qu'on s'attend à ce que, pour **toutes les espèces**, la position trophique augmente avec la longueur corporelle? Exactement de la même façon? 
 
 **2.** S'attend-on à ce que la relation entre la position trophique et la longueur corporelle soit pareille **entre les lacs**?  
 
-**3.** Comment ces relations pourraient-elles **différer**?  
+**Comment ces relations pourraient-elles différer?**  
 
 ```{r, echo = FALSE}
 library(ggplot2)
@@ -36,7 +36,7 @@ library(ggplot2)
 
 
 ```{r, echo = TRUE, eval = TRUE}
-# Chargez le jeu de données de poissons
+# Chargez le jeu de données
 fish.data <- read.csv('data/qcbs_w7_data.csv', stringsAsFactors = TRUE) 
 # Cette ligne variera en fonction de l'endroit où vos données sont enregistrées. 
 #Vérifiez votre répertoire de travail avec getwd(), et changez-le avec setwd() au besoin.
