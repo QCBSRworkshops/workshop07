@@ -95,6 +95,12 @@ The % of variance (ICC) is low because **species differ poorly** in their averag
 
 The confidence intervals for the general intercept and slope are small.
 
+
+**For more details on ICC**:
+
+[Nakagawa et Schielzeth (2013)](https://doi.org/10.1111/j.1469-185X.2010.00141.x)
+[Nakagawa *et al.* (2017)](https://doi.org/10.1098/rsif.2017.0213)
+
 </div>
 
 

@@ -93,8 +93,13 @@ Le ratio de variance (CCI) est faible car **les espèces diffèrent faiblement**
 
 Les intervalles de confiance pour la pente et l'ordonnée à l'origine générale sont donc petits.
 
-</div>
 
+**Pour plus de détails sur le CCI**:
+
+[Nakagawa et Schielzeth (2013)](https://doi.org/10.1111/j.1469-185X.2010.00141.x)
+[Nakagawa *et al.* (2017)](https://doi.org/10.1098/rsif.2017.0213)
+
+</div>
 
 ## Défi 2
 
