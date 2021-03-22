@@ -46,7 +46,9 @@ choose-an-error-distribution
 poisson-glmm
 negative-binomial-glmm
 poisson-lognormal-glmm
-selection-methods
+random-intercepts
+parameter-plots
+final-model
 challenge-9
 additional-resources
 references

@@ -415,7 +415,7 @@ overdisp_fun(mnb1)
 
 # Poisson-lognormal GLMM
 
-# This variable is already in your data "dat.tf", but here is how we create it :
+# This variable is already in your data "dat.tf", but here is how we create it:
 dat.tf$X <- 1:nrow(dat.tf)
 
 # Account for over-dispersion
@@ -429,6 +429,26 @@ control = glmerControl(optimizer = "bobyqa"))
 # Over-dispersion check
 overdisp_fun(mpl1)
 # Ratio now meets our criterion, thus, < 1
+
+# popu only
+mpl1.popu <- glmer(total.fruits ~ nutrient*amd + rack + status + 
+                     (1|X) +
+                     (1|popu), 
+                     data=dat.tf, family="poisson", control=glmerControl(optimizer="bobyqa"))
+ 
+# gen only
+mpl1.gen <-glmer(total.fruits ~ nutrient*amd + rack + status + 
+                   (1|X) +
+                   (1|gen), 
+                   data=dat.tf, family="poisson", control=glmerControl(optimizer="bobyqa"))
+ 
+# IC approach using AICc
+ICtab(mpl1, mpl1.popu, mpl1.gen, type = c("AICc"))
+
+# Frequentist approach using LRT
+anova(mpl1,mpl1.popu)
+
+anova(mpl1,mpl1.gen)
 
 if (!require("coefplot2"))
   remotes::install_github("palday/coefplot2", subdir = "pkg")
