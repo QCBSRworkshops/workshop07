@@ -271,32 +271,31 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb3-14"><a href="commencer-par-une-question.html#cb3-14"></a>        <span class="dt">legend.key=</span><span class="kw">element_blank</span>(),</span>
 <span id="cb3-15"><a href="commencer-par-une-question.html#cb3-15"></a>        <span class="dt">panel.border =</span> <span class="kw">element_rect</span>(<span class="dt">colour=</span><span class="st">&quot;black&quot;</span>, <span class="dt">fill =</span> <span class="ot">NA</span>))</span>
 <span id="cb3-16"><a href="commencer-par-une-question.html#cb3-16"></a></span>
-<span id="cb3-17"><a href="commencer-par-une-question.html#cb3-17"></a></span>
-<span id="cb3-18"><a href="commencer-par-une-question.html#cb3-18"></a><span class="co"># Explorez les données graphiquement!</span></span>
-<span id="cb3-19"><a href="commencer-par-une-question.html#cb3-19"></a></span>
-<span id="cb3-20"><a href="commencer-par-une-question.html#cb3-20"></a><span class="co"># Structure ggplot de base pour la relation qui nous intéresse</span></span>
-<span id="cb3-21"><a href="commencer-par-une-question.html#cb3-21"></a>plot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Fish_Length, <span class="dt">y =</span> Trophic_Pos), <span class="dt">data =</span> fish.data)</span>
-<span id="cb3-22"><a href="commencer-par-une-question.html#cb3-22"></a></span>
-<span id="cb3-23"><a href="commencer-par-une-question.html#cb3-23"></a><span class="co"># Graphique 1 - Toutes les données</span></span>
-<span id="cb3-24"><a href="commencer-par-une-question.html#cb3-24"></a>plot <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb3-25"><a href="commencer-par-une-question.html#cb3-25"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Longueur corporelle (mm)&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Position trophique&quot;</span>, </span>
-<span id="cb3-26"><a href="commencer-par-une-question.html#cb3-26"></a>       <span class="dt">title =</span> <span class="st">&quot;Toutes les données&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb3-27"><a href="commencer-par-une-question.html#cb3-27"></a><span class="st">  </span>fig <span class="co"># notre joli format ggplot!</span></span></code></pre></div>
-<p><img src="book-fr_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<span id="cb3-17"><a href="commencer-par-une-question.html#cb3-17"></a><span class="co"># Explorez les données graphiquement!</span></span>
+<span id="cb3-18"><a href="commencer-par-une-question.html#cb3-18"></a></span>
+<span id="cb3-19"><a href="commencer-par-une-question.html#cb3-19"></a><span class="co"># Structure ggplot de base pour la relation qui nous intéresse</span></span>
+<span id="cb3-20"><a href="commencer-par-une-question.html#cb3-20"></a>plot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Fish_Length, <span class="dt">y =</span> Trophic_Pos), <span class="dt">data =</span> fish.data)</span>
+<span id="cb3-21"><a href="commencer-par-une-question.html#cb3-21"></a></span>
+<span id="cb3-22"><a href="commencer-par-une-question.html#cb3-22"></a><span class="co"># Graphique 1 - Toutes les données</span></span>
+<span id="cb3-23"><a href="commencer-par-une-question.html#cb3-23"></a>plot <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb3-24"><a href="commencer-par-une-question.html#cb3-24"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Longueur corporelle (mm)&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Position trophique&quot;</span>, </span>
+<span id="cb3-25"><a href="commencer-par-une-question.html#cb3-25"></a>       <span class="dt">title =</span> <span class="st">&quot;Toutes les données&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb3-26"><a href="commencer-par-une-question.html#cb3-26"></a><span class="st">  </span>fig <span class="co"># notre joli format ggplot!</span></span></code></pre></div>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="commencer-par-une-question.html#cb4-1"></a><span class="co"># Graphique 2 - Par espèce</span></span>
 <span id="cb4-2"><a href="commencer-par-une-question.html#cb4-2"></a>plot <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></span>
 <span id="cb4-3"><a href="commencer-par-une-question.html#cb4-3"></a><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>Fish_Species) <span class="op">+</span><span class="st"> </span><span class="co"># séparer la visualisation par espèce</span></span>
 <span id="cb4-4"><a href="commencer-par-une-question.html#cb4-4"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Longueur corporelle (mm)&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Position trophique&quot;</span>, </span>
 <span id="cb4-5"><a href="commencer-par-une-question.html#cb4-5"></a>       <span class="dt">title =</span> <span class="st">&quot;Par espèce&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb4-6"><a href="commencer-par-une-question.html#cb4-6"></a><span class="st">  </span>fig</span></code></pre></div>
-<p><img src="book-fr_files/figure-html/unnamed-chunk-6-2.png" width="672" /></p>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-5-2.png" width="672" /></p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="commencer-par-une-question.html#cb5-1"></a><span class="co"># Graphique 3 – Par lac </span></span>
 <span id="cb5-2"><a href="commencer-par-une-question.html#cb5-2"></a>plot <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></span>
 <span id="cb5-3"><a href="commencer-par-une-question.html#cb5-3"></a><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>Lake) <span class="op">+</span><span class="st"> </span><span class="co"># séparer la visualisation par lac</span></span>
 <span id="cb5-4"><a href="commencer-par-une-question.html#cb5-4"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Longueur corporelle (mm)&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Position trophique&quot;</span>, </span>
 <span id="cb5-5"><a href="commencer-par-une-question.html#cb5-5"></a>       <span class="dt">title =</span> <span class="st">&quot;Par lac&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb5-6"><a href="commencer-par-une-question.html#cb5-6"></a><span class="st">  </span>fig</span></code></pre></div>
-<p><img src="book-fr_files/figure-html/unnamed-chunk-6-3.png" width="672" /></p>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-5-3.png" width="672" /></p>
 <hr />
 <div id="défi-1-solution" class="section level4 unnumbered">
 <h4><strong>Défi 1 Solution</strong></h4>

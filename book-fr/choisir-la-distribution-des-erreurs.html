@@ -253,7 +253,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb70-6"><a href="choisir-la-distribution-des-erreurs.html#cb70-6"></a><span class="co"># variance est égale à la moyenne).</span></span>
 <span id="cb70-7"><a href="choisir-la-distribution-des-erreurs.html#cb70-7"></a><span class="kw">hist</span>(dat.tf<span class="op">$</span>total.fruits, <span class="dt">breaks =</span> <span class="dv">50</span>, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;&quot;</span>, </span>
 <span id="cb70-8"><a href="choisir-la-distribution-des-erreurs.html#cb70-8"></a>    <span class="dt">xlab =</span> <span class="st">&quot;Total fruits&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Count&quot;</span>)</span></code></pre></div>
-<p><img src="book-fr_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
 <p>Cependant, comme nous le verrons, la variance de chaque groupe augmente beaucoup plus rapidement que prévu…</p>
 <hr />
 <p><strong>Exploration de la variance </strong></p>
@@ -282,7 +282,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb72-8"><a href="choisir-la-distribution-des-erreurs.html#cb72-8"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">Genotype x nutrient x clipping&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="co"># space before the title</span></span>
 <span id="cb72-9"><a href="choisir-la-distribution-des-erreurs.html#cb72-9"></a><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_blank</span>()) <span class="op">+</span></span>
 <span id="cb72-10"><a href="choisir-la-distribution-des-erreurs.html#cb72-10"></a><span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun =</span> mean, <span class="dt">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
-<p><img src="book-fr_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
 <p>De même, la variance du total de fruits montre une grande hétérogénéité entre les populations (population x nutriments x herbivorie).</p>
 <hr />
 <p><strong>Retour au choix de la distribution des erreurs</strong></p>
@@ -340,7 +340,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb73-39"><a href="choisir-la-distribution-des-erreurs.html#cb73-39"></a>mvec &lt;-<span class="st"> </span><span class="dv">0</span><span class="op">:</span><span class="dv">120</span></span>
 <span id="cb73-40"><a href="choisir-la-distribution-des-erreurs.html#cb73-40"></a><span class="kw">lines</span>(mvec, <span class="kw">predict</span>(Lfit, mvec), <span class="dt">col =</span> <span class="dv">5</span>)</span>
 <span id="cb73-41"><a href="choisir-la-distribution-des-erreurs.html#cb73-41"></a><span class="kw">text</span>(<span class="dv">118</span>, <span class="dv">2000</span>, <span class="st">&quot;loess&quot;</span>, <span class="dt">col =</span> <span class="dv">5</span>)</span></code></pre></div>
-<p><img src="book-fr_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
 <p>La figure ci-dessus montre qu’un modèle linéaire quasi-Poisson sera peut-être mieux qu’une binomiale négative, mais il faudrait <em>continuer le processus de modélisation</em>.</p>
 </div>
 <hr>

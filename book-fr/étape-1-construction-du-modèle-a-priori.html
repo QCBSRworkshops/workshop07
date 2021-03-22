@@ -278,7 +278,7 @@ où:</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="étape-1-construction-du-modèle-a-priori.html#cb10-1"></a><span class="co"># Regardez la distribution des variables continues.</span></span>
 <span id="cb10-2"><a href="étape-1-construction-du-modèle-a-priori.html#cb10-2"></a><span class="kw">hist</span>(fish.data<span class="op">$</span>Fish_Length, <span class="dt">xlab =</span> <span class="st">&quot;Length (mm)&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;&quot;</span>)</span>
 <span id="cb10-3"><a href="étape-1-construction-du-modèle-a-priori.html#cb10-3"></a><span class="kw">hist</span>(fish.data<span class="op">$</span>Trophic_Pos, <span class="dt">xlab =</span> <span class="st">&quot;Trophic position&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
-<p><img src="book-fr_files/figure-html/unnamed-chunk-9-1.png" width="50%" /><img src="book-fr_files/figure-html/unnamed-chunk-9-2.png" width="50%" /></p>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-8-1.png" width="50%" /><img src="book-fr_files/figure-html/unnamed-chunk-8-2.png" width="50%" /></p>
 <p>Des déviations majeures pourraient causer des problèmes d’hétéroscédasticité. Si nécessaire, faites des transformations. Dans ce cas-ci, <strong>les données semblent correctes</strong>.</p>
 <hr />
 </div>
@@ -342,12 +342,12 @@ où:</p>
 <span id="cb14-2"><a href="étape-1-construction-du-modèle-a-priori.html#cb14-2"></a>    <span class="dt">ylab =</span> <span class="st">&quot;Standardized residuals&quot;</span>)</span>
 <span id="cb14-3"><a href="étape-1-construction-du-modèle-a-priori.html#cb14-3"></a></span>
 <span id="cb14-4"><a href="étape-1-construction-du-modèle-a-priori.html#cb14-4"></a><span class="kw">abline</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="book-fr_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="étape-1-construction-du-modèle-a-priori.html#cb15-1"></a><span class="kw">plot</span>(lm.test.resid <span class="op">~</span><span class="st"> </span><span class="kw">as.factor</span>(fish.data<span class="op">$</span>Lake), <span class="dt">xlab =</span> <span class="st">&quot;Lake&quot;</span>, </span>
 <span id="cb15-2"><a href="étape-1-construction-du-modèle-a-priori.html#cb15-2"></a>    <span class="dt">ylab =</span> <span class="st">&quot;Standardized residuals&quot;</span>)</span>
 <span id="cb15-3"><a href="étape-1-construction-du-modèle-a-priori.html#cb15-3"></a></span>
 <span id="cb15-4"><a href="étape-1-construction-du-modèle-a-priori.html#cb15-4"></a><span class="kw">abline</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="book-fr_files/figure-html/unnamed-chunk-13-2.png" width="672" /></p>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-12-2.png" width="672" /></p>
 <p>Les résidues semblent varier de façon non-aléatoire entre les espèces et entre les lacs. Ces patrons suggèrent qu’il y a de la variance résiduelle qui pourrait être expliquée par ces facteurs, et ils devraient donc être inclus dans le modèle!</p>
 </div>
 </div>

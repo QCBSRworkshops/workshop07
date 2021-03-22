@@ -426,13 +426,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>Les modèles peuvent être comparés en utilisant la fonction <code>AICc</code> provenant du package <code>MuMIn</code>. Le critère d’information Akaike (AIC) est une <strong>mesure de qualité du modèle</strong> pouvant être utilisée pour comparer les modèles.</p>
 <p><code>AICc</code> corrige pour le biais créé par les faibles tailles d’échantillon.</p>
 <p>Pour trouver la valeur AICc d’un modèle, utilisez:</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="étape-2-coder-le-modèle.html#cb36-1"></a><span class="co"># Charger le paquet MuMIn qui nous permet de trouver les</span></span>
-<span id="cb36-2"><a href="étape-2-coder-le-modèle.html#cb36-2"></a><span class="co"># valeurs AICc pour nos modèles</span></span>
-<span id="cb36-3"><a href="étape-2-coder-le-modèle.html#cb36-3"></a><span class="kw">library</span>(MuMIn)</span>
-<span id="cb36-4"><a href="étape-2-coder-le-modèle.html#cb36-4"></a></span>
-<span id="cb36-5"><a href="étape-2-coder-le-modèle.html#cb36-5"></a><span class="co"># Trouver la valeur AICc pour notre premier modèle (Modèle</span></span>
-<span id="cb36-6"><a href="étape-2-coder-le-modèle.html#cb36-6"></a><span class="co"># linéaire de base)</span></span>
-<span id="cb36-7"><a href="étape-2-coder-le-modèle.html#cb36-7"></a>MuMIn<span class="op">::</span><span class="kw">AICc</span>(M1)</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="étape-2-coder-le-modèle.html#cb36-1"></a><span class="co"># Trouver la valeur AICc pour notre premier modèle (Modèle</span></span>
+<span id="cb36-2"><a href="étape-2-coder-le-modèle.html#cb36-2"></a><span class="co"># linéaire de base) avec le paquet MuMIn</span></span>
+<span id="cb36-3"><a href="étape-2-coder-le-modèle.html#cb36-3"></a>MuMIn<span class="op">::</span><span class="kw">AICc</span>(M1)</span></code></pre></div>
 <pre><code>## [1] 77.30499</code></pre>
 <p>Pour regrouper toutes les valeurs de l’AICc dans un seul tableau, utilisez <code>MuMIn::model.sel()</code> pour calculer l’AICc pour chaque modèle (avec d’autres sorties) et ensuite sélectionnez seulement les colonnes d’intérêt pour les imprimer dans un tableau.</p>
 <div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="étape-2-coder-le-modèle.html#cb38-1"></a><span class="co"># Pour regrouper toutes les valeurs de l&#39;AICc dans un seul</span></span>

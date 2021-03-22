@@ -6,28 +6,26 @@ install.packages("MASS")
 install.packages("vcdExtra")
 install.packages("bbmle")
 install.packages("MuMIn")
-install.packages("DescTools")
 install.packages("ggplot2")
+install.packages("DescTools")
 install.packages("remotes")
 install.packages("gridExtra")
 install.packages("lattice")
 
-library(ggplot2)
 library(lme4)
 library(AICcmodavg)
 library(MASS)
 library(vcdExtra)
 library(bbmle)
+library(MuMIn)
+library(ggplot2)
 library(DescTools)
 library(remotes)
 library(gridExtra)
 library(lattice)
-library(MuMIn)
 
 
 ##Section: 02-introduction-fr.R 
-
-library(ggplot2)
 
 # Chargez le jeu de données
 fish.data <- read.csv('data/qcbs_w7_data.csv', stringsAsFactors = TRUE) 
@@ -44,7 +42,6 @@ fig <- theme_bw() +
         legend.background=element_blank(),
         legend.key=element_blank(),
         panel.border = element_rect(colour="black", fill = NA))
-
 
 # Explorez les données graphiquement!
 
@@ -110,8 +107,6 @@ plot(lm.test.resid ~ as.factor(fish.data$Lake),
 
 abline(0, 0, lty = 2)
 
-library(lme4)
-
 lmer(Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species),
      data = fish.data, REML = TRUE)
 
@@ -157,10 +152,7 @@ M7 <- lmer(Z_TP ~ Z_Length + (1 | Fish_Species) + (1 + Z_Length | Lake),
 M8 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake),
            data = fish.data, REML = FALSE)
 
-# Charger le paquet MuMIn qui nous permet de trouver les valeurs AICc pour nos modèles
-library(MuMIn)
-
-# Trouver la valeur AICc pour notre premier modèle (Modèle linéaire de base)
+# Trouver la valeur AICc pour notre premier modèle (Modèle linéaire de base) avec le paquet MuMIn
 MuMIn::AICc(M1)
 
 # Pour regrouper toutes les valeurs de l'AICc dans un seul tableau, utilisez `MuMIn::model.sel()` pour calculer l'AICc pour chaque modèle (avec d'autres sorties) et ensuite sélectionnez seulement les colonnes d'intérêt pour les imprimer dans un tableau.
@@ -244,7 +236,6 @@ summ_M8$coefficients
 coef(M8)
 
 # Maintenant, faisons nos figures !
-library(ggplot2) # Chargez ggplot2 si ce n'est pas déjà fait
 
 # a) Figure avec toutes les données groupées
 # Créez un thème ggplot simplifié
@@ -346,8 +337,6 @@ dat.tf <- within(dat.tf,
   pna <- reorder(pna, total.fruits, mean)
 })
 
-library(ggplot2)
-
 # Boxplot of total fruits vs genotype x nutrient x clipping interaction
 ggplot(data = dat.tf, 
        aes(factor(x = gna), y = log(total.fruits + 1))) +
@@ -398,7 +387,6 @@ text(118, 2000, "loess", col = 5)
 GLMM Poisson
 # Nous avons besoin d'un modèle qui tient compte de la surdispersion.
 # Commençons avec un modèle Poisson
-library(lme4) # la fonction glmer() nous permet de faire le GLMM
 mp1 <- glmer(total.fruits ~ nutrient*amd + rack + status +
              (1|popu)+
              (1|gen),
@@ -452,8 +440,6 @@ coefplot2(mpl1, ptype = "vcov", intercept = TRUE, main = "Random effect variance
 # Effets fixes
 coefplot2(mpl1, intercept = TRUE, main = "Fixed effect coefficient")
 
-library(gridExtra)
-library(lattice)
 # dotplot code
 pp <- list(layout.widths = list(left.padding = 0, right.padding = 0),
            layout.heights = list(top.padding = 0, bottom.padding = 0))
@@ -465,7 +451,6 @@ grid.arrange(d2$gen, d2$popu, nrow = 1)
 
 ##Section: 06-sélection-du-modèle.R 
 
-library(lme4)
 mpl1 <- glmer(total.fruits ~ nutrient*amd + rack + status +
               (1|X) +
               (1|popu)+

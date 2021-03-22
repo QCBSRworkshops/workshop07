@@ -257,9 +257,12 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="http://cran.r-project.org/web/packages/MASS/index.html">MASS</a></li>
 <li><a href="http://cran.r-project.org/web/packages/vcdExtra/index.html">vcdExtra</a></li>
 <li><a href="http://cran.r-project.org/web/packages/bbmle/index.html">bbmle</a></li>
-<li><a href="http://cran.r-project.org/web/packages/DescTools/index.html">DescTools</a></li>
 <li><a href="http://cran.r-project.org/web/packages/MuMIn/index.html">MuMIn</a></li>
 <li><a href="http://cran.r-project.org/web/packages/ggplot2/index.html">ggplot2</a></li>
+<li><a href="http://cran.r-project.org/web/packages/DescTools/index.html">DescTools</a></li>
+<li><a href="http://cran.r-project.org/web/packages/remotes/index.html">remotes</a></li>
+<li><a href="http://cran.r-project.org/web/packages/gridExtra/index.html">gridExtra</a></li>
+<li><a href="http://cran.r-project.org/web/packages/lattice/index.html">lattice</a></li>
 </ul>
 <p>Pour les installer à partir de CRAN, roulez:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="préparez-vous-pour-cet-atelier.html#cb1-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;lme4&quot;</span>)</span>
@@ -268,23 +271,23 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-4"><a href="préparez-vous-pour-cet-atelier.html#cb1-4"></a><span class="kw">install.packages</span>(<span class="st">&quot;vcdExtra&quot;</span>)</span>
 <span id="cb1-5"><a href="préparez-vous-pour-cet-atelier.html#cb1-5"></a><span class="kw">install.packages</span>(<span class="st">&quot;bbmle&quot;</span>)</span>
 <span id="cb1-6"><a href="préparez-vous-pour-cet-atelier.html#cb1-6"></a><span class="kw">install.packages</span>(<span class="st">&quot;MuMIn&quot;</span>)</span>
-<span id="cb1-7"><a href="préparez-vous-pour-cet-atelier.html#cb1-7"></a><span class="kw">install.packages</span>(<span class="st">&quot;DescTools&quot;</span>)</span>
-<span id="cb1-8"><a href="préparez-vous-pour-cet-atelier.html#cb1-8"></a><span class="kw">install.packages</span>(<span class="st">&quot;ggplot2&quot;</span>)</span>
+<span id="cb1-7"><a href="préparez-vous-pour-cet-atelier.html#cb1-7"></a><span class="kw">install.packages</span>(<span class="st">&quot;ggplot2&quot;</span>)</span>
+<span id="cb1-8"><a href="préparez-vous-pour-cet-atelier.html#cb1-8"></a><span class="kw">install.packages</span>(<span class="st">&quot;DescTools&quot;</span>)</span>
 <span id="cb1-9"><a href="préparez-vous-pour-cet-atelier.html#cb1-9"></a><span class="kw">install.packages</span>(<span class="st">&quot;remotes&quot;</span>)</span>
 <span id="cb1-10"><a href="préparez-vous-pour-cet-atelier.html#cb1-10"></a><span class="kw">install.packages</span>(<span class="st">&quot;gridExtra&quot;</span>)</span>
 <span id="cb1-11"><a href="préparez-vous-pour-cet-atelier.html#cb1-11"></a><span class="kw">install.packages</span>(<span class="st">&quot;lattice&quot;</span>)</span></code></pre></div>
 <p>Ensuite, chargez ces paquets:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="préparez-vous-pour-cet-atelier.html#cb2-1"></a><span class="kw">library</span>(ggplot2)</span>
-<span id="cb2-2"><a href="préparez-vous-pour-cet-atelier.html#cb2-2"></a><span class="kw">library</span>(lme4)</span>
-<span id="cb2-3"><a href="préparez-vous-pour-cet-atelier.html#cb2-3"></a><span class="kw">library</span>(AICcmodavg)</span>
-<span id="cb2-4"><a href="préparez-vous-pour-cet-atelier.html#cb2-4"></a><span class="kw">library</span>(MASS)</span>
-<span id="cb2-5"><a href="préparez-vous-pour-cet-atelier.html#cb2-5"></a><span class="kw">library</span>(vcdExtra)</span>
-<span id="cb2-6"><a href="préparez-vous-pour-cet-atelier.html#cb2-6"></a><span class="kw">library</span>(bbmle)</span>
-<span id="cb2-7"><a href="préparez-vous-pour-cet-atelier.html#cb2-7"></a><span class="kw">library</span>(DescTools)</span>
-<span id="cb2-8"><a href="préparez-vous-pour-cet-atelier.html#cb2-8"></a><span class="kw">library</span>(remotes)</span>
-<span id="cb2-9"><a href="préparez-vous-pour-cet-atelier.html#cb2-9"></a><span class="kw">library</span>(gridExtra)</span>
-<span id="cb2-10"><a href="préparez-vous-pour-cet-atelier.html#cb2-10"></a><span class="kw">library</span>(lattice)</span>
-<span id="cb2-11"><a href="préparez-vous-pour-cet-atelier.html#cb2-11"></a><span class="kw">library</span>(MuMIn)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="préparez-vous-pour-cet-atelier.html#cb2-1"></a><span class="kw">library</span>(lme4)</span>
+<span id="cb2-2"><a href="préparez-vous-pour-cet-atelier.html#cb2-2"></a><span class="kw">library</span>(AICcmodavg)</span>
+<span id="cb2-3"><a href="préparez-vous-pour-cet-atelier.html#cb2-3"></a><span class="kw">library</span>(MASS)</span>
+<span id="cb2-4"><a href="préparez-vous-pour-cet-atelier.html#cb2-4"></a><span class="kw">library</span>(vcdExtra)</span>
+<span id="cb2-5"><a href="préparez-vous-pour-cet-atelier.html#cb2-5"></a><span class="kw">library</span>(bbmle)</span>
+<span id="cb2-6"><a href="préparez-vous-pour-cet-atelier.html#cb2-6"></a><span class="kw">library</span>(MuMIn)</span>
+<span id="cb2-7"><a href="préparez-vous-pour-cet-atelier.html#cb2-7"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb2-8"><a href="préparez-vous-pour-cet-atelier.html#cb2-8"></a><span class="kw">library</span>(DescTools)</span>
+<span id="cb2-9"><a href="préparez-vous-pour-cet-atelier.html#cb2-9"></a><span class="kw">library</span>(remotes)</span>
+<span id="cb2-10"><a href="préparez-vous-pour-cet-atelier.html#cb2-10"></a><span class="kw">library</span>(gridExtra)</span>
+<span id="cb2-11"><a href="préparez-vous-pour-cet-atelier.html#cb2-11"></a><span class="kw">library</span>(lattice)</span></code></pre></div>
 
 </div>
 <hr>

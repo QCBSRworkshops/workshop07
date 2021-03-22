@@ -267,7 +267,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb52-3"><a href="step-3-validation-du-modèle.html#cb52-3"></a><span class="kw">par</span>(<span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>))</span>
 <span id="cb52-4"><a href="step-3-validation-du-modèle.html#cb52-4"></a><span class="kw">plot</span>(<span class="kw">resid</span>(M8) <span class="op">~</span><span class="st"> </span><span class="kw">fitted</span>(M8), <span class="dt">xlab =</span> <span class="st">&quot;Predicted values&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Normalized residuals&quot;</span>)</span>
 <span id="cb52-5"><a href="step-3-validation-du-modèle.html#cb52-5"></a><span class="kw">abline</span>(<span class="dt">h =</span> <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="book-fr_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
 <div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="step-3-validation-du-modèle.html#cb53-1"></a><span class="co"># La dispersion homogène des résidus signifie que l&#39;hypothèse</span></span>
 <span id="cb53-2"><a href="step-3-validation-du-modèle.html#cb53-2"></a><span class="co"># est respectée.</span></span></code></pre></div>
 <p><strong>Oui! La dispersion homogène des résidus signifie que l’hypothèse est respectée.</strong></p>
@@ -290,7 +290,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb54-12"><a href="step-3-validation-du-modèle.html#cb54-12"></a></span>
 <span id="cb54-13"><a href="step-3-validation-du-modèle.html#cb54-13"></a><span class="kw">boxplot</span>(<span class="kw">resid</span>(M8) <span class="op">~</span><span class="st"> </span>Lake, <span class="dt">data =</span> fish.data, <span class="dt">xlab =</span> <span class="st">&quot;Lakes&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Normalized residuals&quot;</span>)</span>
 <span id="cb54-14"><a href="step-3-validation-du-modèle.html#cb54-14"></a><span class="kw">abline</span>(<span class="dt">h =</span> <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="book-fr_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
 <div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="step-3-validation-du-modèle.html#cb55-1"></a><span class="co"># La dispersion homogène des résidus autour de 0 signifie</span></span>
 <span id="cb55-2"><a href="step-3-validation-du-modèle.html#cb55-2"></a><span class="co"># qu&#39;il n&#39;y a pas de modèle de résidus en fonction de la</span></span>
 <span id="cb55-3"><a href="step-3-validation-du-modèle.html#cb55-3"></a><span class="co"># variable, donc l&#39;hypothèse est respectée !  Note : Les</span></span>
@@ -309,7 +309,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb56-2"><a href="step-3-validation-du-modèle.html#cb56-2"></a><span class="co"># suivant une distribution normale indiquent que le modèle</span></span>
 <span id="cb56-3"><a href="step-3-validation-du-modèle.html#cb56-3"></a><span class="co"># n&#39;est pas biaisé.</span></span>
 <span id="cb56-4"><a href="step-3-validation-du-modèle.html#cb56-4"></a><span class="kw">hist</span>(<span class="kw">resid</span>(M8))</span></code></pre></div>
-<p><img src="book-fr_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
 <div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="step-3-validation-du-modèle.html#cb57-1"></a><span class="co"># Les résidus sont normaux ! Cela signifie que notre modèle</span></span>
 <span id="cb57-2"><a href="step-3-validation-du-modèle.html#cb57-2"></a><span class="co"># n&#39;est pas biaisé.</span></span></code></pre></div>
 <p><strong>Les résidus sont normaux ! Cela signifie que notre modèle n’est pas biaisé.</strong></p>
