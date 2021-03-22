@@ -338,9 +338,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## reshape (NA -&gt; 0.8.8 ) [CRAN]
 ## coda    (NA -&gt; 0.19-4) [CRAN]
 ##   
-   checking for file ‘/tmp/RtmpvmaYI2/remotes346d22e4e5bb/palday-coefplot2-23b7dcb/pkg/DESCRIPTION’ ...
+   checking for file ‘/tmp/Rtmpj2RKfo/remotes34995965ed1f/palday-coefplot2-23b7dcb/pkg/DESCRIPTION’ ...
   
-✔  checking for file ‘/tmp/RtmpvmaYI2/remotes346d22e4e5bb/palday-coefplot2-23b7dcb/pkg/DESCRIPTION’
+✔  checking for file ‘/tmp/Rtmpj2RKfo/remotes34995965ed1f/palday-coefplot2-23b7dcb/pkg/DESCRIPTION’
 ## 
   
 ─  preparing ‘coefplot2’:
@@ -367,11 +367,15 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb97-2"><a href="glmm-poisson-lognormale.html#cb97-2"></a><span class="kw">coefplot2</span>(mpl1, <span class="dt">ptype =</span> <span class="st">&quot;vcov&quot;</span>, <span class="dt">intercept =</span> <span class="ot">TRUE</span>, <span class="dt">main =</span> <span class="st">&quot;Random effect variance&quot;</span>)</span></code></pre></div>
 <p><img src="book-fr_files/figure-html/unnamed-chunk-46-1.png" width="672" /></p>
 <p>Ici, nous pouvons voir que certains effets aléatoires présentent une plus grande variance que d’autres.</p>
-<p>::: La variance des effets aléatoires (σ2i) représente la variance moyenne des effets aléatoires du modèle. Puisque cette variance reflète la variance “moyenne” des effets aléatoires pour les modèles mixtes, elle est également appropriée pour les modèles avec des structures d’effets aléatoires plus complexes, comme les pentes aléatoires ou les effets aléatoires imbriqués. :::</p>
+<div class="explanation">
+<p>La variance des effets aléatoires (σ2i) représente la variance moyenne des effets aléatoires du modèle. Puisque cette variance reflète la variance “moyenne” des effets aléatoires pour les modèles mixtes, elle est également appropriée pour les modèles avec des structures d’effets aléatoires plus complexes, comme les pentes aléatoires ou les effets aléatoires imbriqués.</p>
+</div>
 <div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="glmm-poisson-lognormale.html#cb98-1"></a><span class="co"># Effets fixes</span></span>
 <span id="cb98-2"><a href="glmm-poisson-lognormale.html#cb98-2"></a><span class="kw">coefplot2</span>(mpl1, <span class="dt">intercept =</span> <span class="ot">TRUE</span>, <span class="dt">main =</span> <span class="st">&quot;Fixed effect coefficient&quot;</span>)</span></code></pre></div>
 <p><img src="book-fr_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
-<p>::: La variance des effets fixes (σ2f) est la variance de la matrice-multiplication β∗X (vecteur de paramètres par matrice de modèle) :: :</p>
+<div class="explanation">
+<p>La variance des effets fixes (σ2f) est la variance de la matrice-multiplication β∗X (vecteur de paramètres par matrice de modèle)</p>
+</div>
 <p><em>Notez: Les barres d’erreur sont visibles seulement pour les effets fixes, car <code>glmer()</code> ne modélise pas d’incertitude pour les effets aléatoires.</em></p>
 <hr />
 <p><strong>Visualisation des effets aléatoires</strong></p>
