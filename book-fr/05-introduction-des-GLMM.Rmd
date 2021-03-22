@@ -217,9 +217,19 @@ overdisp_fun(mnb1)
 
 # GLMM Poisson-lognormale
 
-Une deuxième option pour une distribution où la variance augmente plus rapidement avec la moyenne est la distribution **Poisson-lognormale**.
+Une deuxième option pour une distribution où la variance augmente plus rapidement avec la moyenne est la distribution **Poisson-lognormale**. Ce modèle place effectivement une priorité lognormale sur $εi$. 
 
-On réalise cette distribution en ajoutant un **effet aléatoire de niveau d'observation** dans le modèle.
+Une distribution Poisson-lognormale avec une moyenne de $µ$ et une variance antérieure lognormale de $σ2$ a une variance:
+
+$var(y) = µ + µ2 [exp(σ2) - 1]$
+
+En revanche, nous avons vu que la distribution binomiale négative (Poisson-gamma) était donné par:
+
+$var(y) = µ + µ2/k$
+
+En générale, la variance $σ2$ dans la distribution Poisson-lognormal dépendra du niveau de regroupement que nous sélectionnons (i.e. au niveau individuel, génotype ou de la population). Donc, le modèle de Poisson-lognormal nous permet d'assigner l'agrégation observée à différentes sources d'hétérogénéité. 
+
+Pour mettre en œuvre le **effet aléatoire au niveau de l'observation**, nous allons l'évaluer au niveau individuel. Pour ce faire, il suffit de placer un **effet aléatoire au niveau des observations** dans la formule du modèle.
 
 Voir Harrison (2014) pour plus de détails https://doi.org/10.7717/peerj.616.
 
@@ -256,13 +266,50 @@ overdisp_fun(mpl1)
 
 ---
 
-**Maintenant que nous avons choisi notre distribution d'erreur, visualisons les paramètres du modèle.**
+## Intercepts aléatoires
+
+Maintenant que nous avons la distribution d'erreur appropriée, nous pouvons tester l'importance des interceptes aléatoires (pour population et génotype) en comparant des modèles nichés **avec** et **sans** les effets aléatoires d'intérêt en utilisant soit:
+
+- *1. L'approche théorique d'information (tel que le Critère d'Information d'Akaike; AIC)*, qui, comme nous l'avons vu apres examine plusieurs hypothèses concurrentes (modèles) simultanément pour identifier le modèle avec le pouvoir prédictif le plus élevé compte tenu des données. Nous allons encore une fois utiliser le AICc pour corriger les petites tailles d'échantillon.
+
+- *2. L'approche fréquentiste (test d'hypothèse nulle traditionnelle)*, où deux modèles nichés sont comparés en utilisant le tests de rapport de vraisemblance de la fonction anova(). Il est important de noter qu’avec cette approche, nous testons une hypothèse nulle d'une variance de zéro, mais étant donné que nous ne pouvons pas avoir un écart négatif, nous testons le paramètre à la limite de sa région réalisable. Par conséquent, la valeur de p rapporté est environ le double de ce qu'elle devrait être (c. nous avons tronquée la moitié des valeurs possibles ; celles qui tombent en dessous de 0).
+
+
+```{r, echo = TRUE, eval = TRUE}
+# popu seulement
+mpl1.popu <- glmer(total.fruits ~ nutrient*amd + rack + status + 
+                     (1|X) +
+                     (1|popu), 
+                     data=dat.tf, family="poisson", control=glmerControl(optimizer="bobyqa"))
+ 
+# gen seulement
+mpl1.gen <-glmer(total.fruits ~ nutrient*amd + rack + status + 
+                   (1|X) +
+                   (1|gen), 
+                   data=dat.tf, family="poisson", control=glmerControl(optimizer="bobyqa"))
+ 
+# Approche AICc
+ICtab(mpl1, mpl1.popu, mpl1.gen, type = c("AICc"))
+
+# Approche fréquentiste (Likelihood Ratio Test)
+anova(mpl1,mpl1.popu)
+
+anova(mpl1,mpl1.gen)
+```
+
+Notez que le modèle sans l'intercept aléatoire pour génotype est à moins de deux unités AICc du modèle complet, ce qui indique que les deux modèles sont tout aussi plausibles (i.e. peu de soutien pour inclure un intercept aléatoire pour le génotype). Toutefois, lorsque nous utilisons la comparaison de vraisemblance de modèles nichés (anova()), et corrigeons pour les valeurs p gonflés par un facteur de 2, nous trouvons que dans les deux cas, p <0,05. **Donc le modèle avec les deux effets aléatoires (mpl1) est sélectionné.**
+
+---
+
+## Représentation graphique des paramètres du modèle
+
+**Maintenant que nous avons choisi notre modèle, visualisons les paramètres du modèle.**
 
 Peut être obtenu en utilisant la fonction `coefplot2()`de la librairie `coefplot2`:
 
 *Notez: Cette librairie n'est pas sur le CRAN! On utilise la librairie `remotes` pour l'installer à partir de GitHub.*
 
-```{R install_coefplot2, eval = TRUE, results = hide}
+```{R install_coefplot2, eval = TRUE, message=FALSE}
 # Visualisons les paramètres du modèle
 
 # Cette librairie n'est pas sur le CRAN! On utilise la librairie `remotes` pour l'installer à partir de GitHub.
@@ -277,10 +324,17 @@ library(coefplot2)
 coefplot2(mpl1, ptype = "vcov", intercept = TRUE, main = "Random effect variance")
 ```
 
+Ici, nous pouvons voir que certains effets aléatoires présentent une plus grande variance que d'autres. 
+
+::: La variance des effets aléatoires (σ2i) représente la variance moyenne des effets aléatoires du modèle. Puisque cette variance reflète la variance "moyenne" des effets aléatoires pour les modèles mixtes, elle est également appropriée pour les modèles avec des structures d'effets aléatoires plus complexes, comme les pentes aléatoires ou les effets aléatoires imbriqués. :::
+
+
 ```{r, echo = TRUE, eval = TRUE}
 # Effets fixes
 coefplot2(mpl1, intercept = TRUE, main = "Fixed effect coefficient")
 ```
+
+::: La variance des effets fixes (σ2f) est la variance de la matrice-multiplication β∗X (vecteur de paramètres par matrice de modèle) :: :
 
 *Notez: Les barres d'erreur sont visibles seulement pour les effets fixes, car `glmer()` ne modélise pas d'incertitude pour les effets aléatoires.*
 

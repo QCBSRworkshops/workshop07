@@ -1,3 +1,114 @@
+--- 
+title: "Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)"
+subtitle: "QCBS R Workshop Series"
+author:
+- Developed and maintained by the contributors of the QCBS R Workshop Series^[The QCBS R Workshop Series is part of the [Québec Centre for Biodiversity Science](https://www.qcbs.ca), and is maintained by the series coordinators and graduent student, postdoctoral, and research professional members. **The contributors for this workshop can be accessed [here](link)**.]
+date: "`r Sys.time()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: ["references.bib"]
+biblio-style: apalike
+link-citations: yes
+cover-image: assets/images/logo/csbq_logo_accueil.png
+github-repo: "qcbsRworkshops/workshop09"
+description: "Linear and generalized linear mixed models (LMM and GLMM)"
+favicon: "assets/images/favicon.ico"
+always_allow_html: yes
+url: 'https\://github.com/qcbsRworkshops/'
+config:
+  edit:
+    link: https://github.com/qcbsRworkshops/workshop07/edit/main/book-en/%s
+    text: "Suggest changes"
+---
+
+# (PART\*) QCBS R Workshop Series {-}
+# Preface {-}
+
+Placeholder
+
+
+## Code of conduct
+### Expected behaviour
+### Unacceptable behaviour
+## Contributors
+## Contributing
+
+<!--chapter:end:index.Rmd-->
+
+
+# (PART\*) Linear mixed models (LMM) in `R` {-}
+# Learning objectives
+
+Placeholder
+
+
+
+<!--chapter:end:01-preparing-for-the-workshop.Rmd-->
+
+
+# Why choose mixed models? 
+
+Placeholder
+
+
+## Challenge 1 
+#### **Challenge 1 Solution:** {-}
+## Option 1: Separate 
+## Option 2: Lump everything together
+## Option 3: Is there a third option? 
+
+<!--chapter:end:02-introduction-en.Rmd-->
+
+
+# Fixed vs. random effects 
+
+Placeholder
+
+
+## Fixed effects: deterministic processes 
+## Random effects: stochastic processes 
+## Parameters are varied
+### Intercepts: {-}
+### Slopes: {-}
+## Data structure is taken into account
+## Challenge 2
+#### **Challenge 2 Solution:** {-}
+
+<!--chapter:end:03-data-exploration.Rmd-->
+
+
+# (PART\*) Implementing LMM in `R` {-}
+# Mixed model protocol
+
+Placeholder
+
+
+## Check data structure 
+## Check collinearity 
+## Challenge 3
+#### **Challenge 3 Solution:** {-}
+## Consider scale
+## Do you need a LMM?
+## Estimation methods 
+## Different model structures
+## Challenge 4
+#### **Challenge 4 Solution:** {-}
+## Challenge 5 
+#### **Challenge 5 Solution:** {-}
+## Comparing models
+## 1. Check the homogeneity of the variance 
+## 2. Check the independence of the model residuals with each covariate 
+## 3. Check the normality of the model residuals 
+## Interpreting our model
+## Challenge 6
+#### **Challenge 6 Solution:** {-}
+## Challenge 7
+#### **Challenge 7 Solution:** {-}
+## Challenge 8
+#### **Challenge 8 Solution:** {-}
+
+<!--chapter:end:04-implement-LMM.Rmd-->
+
 # (PART\*) Generalized linear mixed models (GLMM) in `R` {-}
 
 # Introduction to GLMM
@@ -303,7 +414,7 @@ A graphical representation of the model parameters can be obtained using the `co
 
 *Note: This package is not on CRAN! We install it from GitHub using the remotes package.*
 
-```{R install_coefplot2, eval = TRUE, message=FALSE}
+```{R install_coefplot2, eval = TRUE, results = hide}
 if (!require("coefplot2"))
   remotes::install_github("palday/coefplot2", subdir = "pkg")
 library(coefplot2)
@@ -349,3 +460,33 @@ grid.arrange(d2$gen, d2$popu, nrow = 1)
 From this plot, we observe differences **among population**, where Spanish populations (SP) have larger values than Swedish (SW) or Dutch (NL) populations.
 
 We also observe mild differences **among genotypes**, where difference among genotypes seem to be largely driven by genotype 34.
+
+<!--chapter:end:05-introducing-GLMM.Rmd-->
+
+
+# Final model
+
+Placeholder
+
+
+## Challenge 9 
+#### **Challenge 9 Solution:** {-}
+
+<!--chapter:end:06-model-selection.Rmd-->
+
+
+# (PART\*) Additional LMM and GLMM resources {-}
+# Additional resources
+
+Placeholder
+
+
+
+<!--chapter:end:07-additional-resources.Rmd-->
+
+`r if (knitr::is_html_output()) '
+# References
+'`
+
+<!--chapter:end:08-references-en.Rmd-->
+
