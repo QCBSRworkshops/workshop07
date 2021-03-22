@@ -14,6 +14,7 @@ output:
       highlightLines: true
       highlightStyle: github
 ---
+class: inverse, center, middle
 
 ```{r setup, echo = FALSE}
 knitr::opts_chunk$set(
@@ -27,12 +28,29 @@ knitr::opts_chunk$set(
   fig.align = 'center'
 )
 
-options(repos = structure(c(CRAN="http://cran.r-project.org")))
-
 mypar = list(mar = c(3,3,1,0.5), mgp = c(1.6, 0.3, 0), tck = -.02)
+
+options(repos = structure(
+  c(CRAN = "http://cran.r-project.org")
+  )
+  )
+
+# Install xaringanExtra
+
+if(nzchar(system.file(package = "xaringanExtra")) == FALSE) {remotes::install_github("gadenbuie/xaringanExtra", upgrade = "always")}
+
+# Include copy-to-clipboard icons
+
+htmltools::tagList(
+  xaringanExtra::use_clipboard(
+    button_text = "<i class=\"fas fa-clipboard\"></i>",
+    success_text = "<i class=\"fa fa-check\" style=\"color: #90BE6D\"></i>",
+    error_text = "<i class=\"fa fa-times-circle\" style=\"color: #F94144\"></i>"
+  ),
+  rmarkdown::html_dependency_font_awesome()
+)
 ```
 
-class: inverse, center, middle
 
 ```{r install_pkgs, message=FALSE, warning=FALSE, include=FALSE, results=0}
 # Standard procedure to check and install packages and their dependencies, if needed.
@@ -66,27 +84,51 @@ lapply(list.of.packages, require, character.only = TRUE, quietly = TRUE)
 [![badge](https://img.shields.io/static/v1?style=for-the-badge&label=Slides&message=07&color=red&logo=adobe-acrobat-reader)](https://qcbsrworkshops.github.io/workshop07/workshop07-en/workshop07-en.pdf)
 [![badge](https://img.shields.io/static/v1?style=for-the-badge&label=script&message=07&color=2a50b8&logo=r)](https://qcbsrworkshops.github.io/workshop07/workshop07-en/workshop07-en.R)
 
-
 ---
 
-# About this workshop
-
-<br>
-
-Throughout this workshop, there will be a series of **challenges** that you can recognize by this rubix cube.
+<p style="font-size:75%">
 
 .center[
-![:scale 25%](images/rubicub.png)
+**Contributors to the development of this workshop**
+
+by modifying and improving its content as part of the <br> *Le*arning *a*nd *D*evelopment *A*ward
 ]
 
-<br>
 
-**During these challenges, don't hesitate to collaborate!**
+.pull-left[
+.right[
+
+ **2022** - **2021** - **2020**
+
+
+
+]
+]
+
+.pull-right[
+.left[
+**2019** - **2018** - **2017**
+
+
+
+**2016** - **2015** - **2014**
+
+
+
+]
+
+]
+</p>
 
 ---
 
+# Required material
 
-# Required packages
+To follow this workshop, you are required to have downloaded and installed the latest [RStudio](https://rstudio.com/products/rstudio/download/#download) and [R](https://cran.rstudio.com/) versions.
+
+.pull-left[
+You must also use these packages:
+
 
 * [ggplot2](https://cran.r-project.org/package=ggplot2)
 * [lme4](https://cran.r-project.org/package=lme4)
@@ -96,18 +138,41 @@ Throughout this workshop, there will be a series of **challenges** that you can 
 * [bbmle](https://cran.r-project.org/package=bbmle)
 * [DescTools](https://cran.r-project.org/package=DescTools)
 
-<br>
-To install them from CRAN, do :
+]
+
+.pull-right[
+
+To install them from CRAN, run:
 
 ```{r eval = FALSE}
-install.packages(c("ggplot2", 
-                   "lme4", 
-                   "MuMIn", 
-                   'MASS', 
-                   'vcdExtra', 
-                   'bbmle', 
-                   'DescTools'))
+install.packages(
+  c("ggplot2", 
+    "lme4", 
+    "MuMIn", 
+    'MASS', 
+    'vcdExtra', 
+    'bbmle', 
+    'DescTools')
+)
 ```
+]
+
+<br>
+.pull-left2[
+Throughout this workshop, there will be a series of **challenges** that you can recognize by this rubix cube.
+]
+
+.pull-right2[
+
+.center[
+![:scale 45%](images/rubicub.png)
+]
+
+]
+
+.center[
+**During these challenges, do not hesitate to collaborate!**
+]
 
 ---
 
@@ -1847,11 +1912,15 @@ Can be obtained using the `coefplot2()` function from the `coefplot2` package :
 <br><br>
 
 
-.alert[![:faic](warning) This package is not on CRAN! We install it from GitHub using the remotes package.]
+.alert[![:faic](warning) This package is not on CRAN! We install it from GitHub using the `remotes` package.]
 
-```{R install_coefplot2}
+```{R install_coefplot2, message = FALSE, warning = FALSE}
 if (!require("coefplot2"))
-  remotes::install_github("palday/coefplot2", subdir = "pkg")
+  remotes::install_github("palday/coefplot2", 
+                          subdir = "pkg", 
+                          upgrade = "always", 
+                          quiet = TRUE)
+
 library(coefplot2)
 ```
 
@@ -1874,7 +1943,7 @@ coefplot2(mpl1, intercept = TRUE, main = "Fixed effect coefficient")
 ```
 ]
 
-.comment[Note : error bars are only shown for the fixed effects because `glmer()` doesn't model uncertainty for random effects.]
+.comment[Note: error bars are only shown for the fixed effects because `glmer()` does not model uncertainty for random effects.]
 
 
 ---

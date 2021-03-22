@@ -3,7 +3,7 @@
 
 # Sélection du modèle
 
-Les même méthodes peuvent être utilisées avec un glmm ou lmm pour choisir entre des modèles avec différentes ordonnées à l'origine et/ou pentes aléatoires ainsi que pour choisir les effets fixes à conserver dans le modèle final.
+Les même méthodes peuvent être utilisées avec un GLMM ou un LMM pour choisir entre des modèles avec différentes ordonnées à l'origine et/ou pentes aléatoires ainsi que pour choisir les effets fixes à conserver dans le modèle final.
 
 En voici deux:
 
