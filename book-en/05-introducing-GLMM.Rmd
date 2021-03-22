@@ -212,9 +212,19 @@ overdisp_fun(mnb1)
 
 # Poisson-lognormal GLMM
 
-A second option for a distribution where the variance increases more rapidly with the mean is the **Poisson-lognormal** distribution.
+A second option for a distribution where the variance increases more rapidly with the mean is the **Poisson-lognormal** distribution. This model effectively places a lognormal prior on $εi$. 
 
-This can be achieved simply by placing an **observation-level random effect** in the model formula.
+A Poisson-lognormal distribution with mean $µ$ and lognormal prior variance $σ2$ has variance:
+
+$var(y) = µ + µ2 [exp(σ2) - 1]$
+
+In contrast, for the negative binomial, we saw that the distribution was given by:
+
+$var(y) = µ + µ2/k$
+
+More generally, the variance term $σ2$ in the Poisson-lognormal distribution will depend on the grouping level we select (e.g., at the individual, genotype or population level). That is, the Poisson-lognormal model can allow for a more flexible approach to assigning the observed aggregation to different sources of heterogeneity. 
+
+To implement the *observation-level random effect*, we will evaluate it at the individual level. This can be achieved simply by placing an **observation-level random effect** in the model formula.
 
 See Harrison (2014) for further details https://doi.org/10.7717/peerj.616.
 
@@ -223,7 +233,7 @@ To do this in `R`, we first create a variable named `X`:
 ```{r, echo = TRUE, eval = TRUE}
 # Poisson-lognormal GLMM
 
-# This variable is already in your data "dat.tf", but here is how we create it :
+# This variable is already in your data "dat.tf", but here is how we create it:
 dat.tf$X <- 1:nrow(dat.tf)
 ```
 
@@ -251,7 +261,43 @@ overdisp_fun(mpl1)
 
 ---
 
-**Now that we've chosen out error distribution, let's visualize the model parameters.**
+## Random intercepts
+
+Now that we have the appropriate error distribution, we can test the importance of the random intercepts (for population and genotype) by comparing nested models **with** and **without** the random effects of interest using either:
+
+- *1. An information theoretic approach (such as, Akaike Information Criterion; AIC)*, which examines several competing hypotheses (models) simultaneously to identify the model with the highest predictive power given the data. As before, we will use the AICc to correct for small sample sizes. 
+
+- *2. A frequentist approach (traditional null hypothesis testing or drop1 approach)*, where the significance of each term is evaluated in turn (by comparing nested models together using the anova() function and the significance of the likelihood ratio test; LRT). It's important to keep in mind that with this approach we are testing a null hypothesis of zero variance for the random effects, but given that we cannot have negative variance, we are testing the parameter on the boundary of its feasible region. Therefore, the reported p value is approximately twice what it should be (i.e., we've truncated half of the possible values that fall below 0).
+
+```{r, echo = TRUE, eval = TRUE}
+# popu only
+mpl1.popu <- glmer(total.fruits ~ nutrient*amd + rack + status + 
+                     (1|X) +
+                     (1|popu), 
+                     data=dat.tf, family="poisson", control=glmerControl(optimizer="bobyqa"))
+ 
+# gen only
+mpl1.gen <-glmer(total.fruits ~ nutrient*amd + rack + status + 
+                   (1|X) +
+                   (1|gen), 
+                   data=dat.tf, family="poisson", control=glmerControl(optimizer="bobyqa"))
+ 
+# IC approach using AICc
+ICtab(mpl1, mpl1.popu, mpl1.gen, type = c("AICc"))
+
+# Frequentist approach using LRT
+anova(mpl1,mpl1.popu)
+
+anova(mpl1,mpl1.gen)
+```
+
+The model without the random intercept for genotype is within 2 AICc units of the full model, which indicates that they are equally plausible (i.e., little evidence for including a random intercept for genotype). However, when using the Likelihood approach, and keeping in mind the boundary effect (p-values are inflated by a factor of 2), we note that p « 0.05 in both anova tests. **Thus the model with both random terms (mpl1) is selected.**
+
+---
+
+## Parameter plots
+
+**Now that we've chosen our model, let's visualize the model parameters with parameter plots.**
 
 A graphical representation of the model parameters can be obtained using the `coefplot2()` function from the `coefplot2` package :
 
@@ -269,10 +315,16 @@ library(coefplot2)
 coefplot2(mpl1, ptype = "vcov", intercept = TRUE, main = "Random effect variance")
 ```
 
+Here we can see that some random effects exhibit greater variance than others. 
+
+::: The random effect variance (σ2i) represents the mean random effect variance of the model. Since this variance reflects the "average" random effects variance for mixed models, it is also appropriate for models with more complex random effects structures, like random slopes or nested random effects. :::
+
 ```{r, echo = TRUE, eval = TRUE}
 # Fixed effects
 coefplot2(mpl1, intercept = TRUE, main = "Fixed effect coefficient")
 ```
+
+::: The fixed effects variance (σ2f) is the variance of the matrix-multiplication β∗X (parameter vector by model matrix). :::
 
 *Note: error bars are only shown for the fixed effects because `glmer()` doesn't model uncertainty for random effects.*
 
@@ -280,15 +332,9 @@ coefplot2(mpl1, intercept = TRUE, main = "Fixed effect coefficient")
 
 **Now let's visualize the random effects**
 
-You can extract the random effect predictions using `ranef()` and plot them using a `dotplot()` from the `lattice` package.
+We can also extract the random effect (or group-level) deviations from the fixed intercept using `ranef()`. This will tell us how much the intercept is shifted up or down in particular *populations* or *genotypes* relative to the fixed intercept. The deviations can then be plotted using `dotplot()` from the `lattice` package, which will return a two-faceted plot for each random effect (i.e., popu and gen).
 
-We observe differences **among population**: 
 
-- Spanish populations (SP) have larger values than Swedish (SW) or Dutch (NL) populations
-
-We observe mild differences **among genotypes**: 
-
-- Difference among genotypes largely driven by genotype 34
 
 ```{r, echo = TRUE, eval = TRUE}
 # dotplot code
@@ -300,4 +346,6 @@ d2 <- dotplot(r2, par.settings = pp)
 grid.arrange(d2$gen, d2$popu, nrow = 1)
 ```
 
+From this plot, we observe differences **among population**, where Spanish populations (SP) have larger values than Swedish (SW) or Dutch (NL) populations.
 
+We also observe mild differences **among genotypes**, where difference among genotypes seem to be largely driven by genotype 34.
