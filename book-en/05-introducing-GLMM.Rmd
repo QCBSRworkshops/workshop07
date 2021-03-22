@@ -257,7 +257,7 @@ A graphical representation of the model parameters can be obtained using the `co
 
 *Note: This package is not on CRAN! We install it from GitHub using the remotes package.*
 
-```{R install_coefplot2}
+```{R install_coefplot2, eval = TRUE, results = hide}
 if (!require("coefplot2"))
   remotes::install_github("palday/coefplot2", subdir = "pkg")
 library(coefplot2)

@@ -262,7 +262,7 @@ Peut être obtenu en utilisant la fonction `coefplot2()`de la librairie `coefplo
 
 *Notez: Cette librairie n'est pas sur le CRAN! On utilise la librairie `remotes` pour l'installer à partir de GitHub.*
 
-```{R install_coefplot2}
+```{R install_coefplot2, eval = TRUE, results = hide}
 # Visualisons les paramètres du modèle
 
 # Cette librairie n'est pas sur le CRAN! On utilise la librairie `remotes` pour l'installer à partir de GitHub.
