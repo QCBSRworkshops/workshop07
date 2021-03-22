@@ -16,7 +16,7 @@ output:
 ---
 class: inverse, center, middle
 
-```{r setup, echo = FALSE}
+```{r setup, echo = FALSE, message=FALSE, warning=FALSE}
 knitr::opts_chunk$set(
   comment = "#",
   collapse = TRUE,
@@ -454,7 +454,6 @@ This avoids estimating an intercept and a slope for each species (+2 parameters 
 
 
 ---
-exclude: true
 # Random intercept
 
 <br>
@@ -471,7 +470,6 @@ Only need to estimate the mean and standard deviation of the normal distribution
 .comment[Note that the more levels your factor has, the more accurately the mean and standard deviation of the normal distribution will be estimated. Three levels may be a little low, but easier to visualize!]
 
 ---
-exclude:true
 # Random intercept
 
 <br>
@@ -487,7 +485,6 @@ This saves degrees of freedom (less parameter estimation is needed)
 
 
 ---
-exclude: true
 # Random slope
 
 
