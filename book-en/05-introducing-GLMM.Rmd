@@ -73,7 +73,6 @@ dat.tf <- within(dat.tf,
 Now let's visualize:
 
 ```{r, echo = TRUE, eval = TRUE}
-library(ggplot2)
 # Boxplot of total fruits vs genotype x nutrient x clipping interaction
 ggplot(data = dat.tf, aes(factor(x = gna), y = log(total.fruits + 1))) +
   geom_boxplot(colour = "skyblue2", outlier.shape = 21,
@@ -154,7 +153,6 @@ To run a GLMM in `R` we will use the `glmer()` function from the `lme4` package:
 ## Poisson GLMM
 # Given the mean-variance relationship, we will most likely need a model with over-dispersion.
 # To understand why, let's start with a Poisson model.
-library(lme4) # Load in lme4 pkg with glmer() command for running GLMM
 mp1 <- glmer(total.fruits ~ nutrient*amd + rack + status +
              (1|popu)+
              (1|gen),
@@ -293,8 +291,6 @@ We observe mild differences **among genotypes**:
 - Difference among genotypes largely driven by genotype 34
 
 ```{r, echo = TRUE, eval = TRUE}
-library(gridExtra)
-library(lattice)
 # dotplot code
 pp <- list(layout.widths = list(left.padding = 0, right.padding = 0),
            layout.heights = list(top.padding = 0, bottom.padding = 0))

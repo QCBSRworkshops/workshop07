@@ -15,7 +15,6 @@ Here are two approaches :
 We first code potential models and compare them using AICc:
 
 ```{r, echo = TRUE, eval = TRUE}
-library(lme4)
 mpl1 <- glmer(total.fruits ~ nutrient*amd + rack + status +
               (1|X) +
               (1|popu)+

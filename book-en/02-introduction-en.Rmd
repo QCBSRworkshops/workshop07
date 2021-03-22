@@ -33,8 +33,6 @@ Observe each plot and try to get a sense of what is occurring. A few key questio
 - **3.** How might these relationships differ?
 
 ```{r, echo = TRUE, eval = TRUE}
-library(ggplot2)
-
 #Load dataset into R 
 fish.data <- read.csv('data/qcbs_w7_data.csv', stringsAsFactors = TRUE) # This line will vary depending on where your data is saved
 

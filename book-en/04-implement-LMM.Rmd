@@ -165,10 +165,6 @@ $$TP_{ijk} \sim Length_i + Lake_j + Species_k + \epsilon_{ijk}$$
 
 **... into R code**
 
-```{r, eval = TRUE, include = FALSE}
-library(lme4)
-```
-
 ```{r, echo = TRUE, eval = TRUE}
 lmer(Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species),
      data = fish.data, REML = TRUE)
@@ -317,10 +313,7 @@ Models can be compared by using the `AICc` function from the` MuMIn` package. Th
 In order the find the AICc value of a model, use:
 
 ```{r, echo = TRUE, eval = TRUE}
-# Load MuMIn package which allows us to find AICc values for our models
-library(MuMIn)
-
-# Find AICc value for our first model (Basic linear model)
+# Find AICc value for our first model (Basic linear model) using the package MuMIn
 MuMIn::AICc(M1)
 ```
 
@@ -605,7 +598,6 @@ a) Figure with all data grouped
 
 ```{r, echo = TRUE, eval = TRUE}
 # Now let's make our figures!
-library(ggplot2) # Load ggplot2 if you haven't already
 
 # a) Figure with all data grouped
 # Create a simplified ggplot theme
