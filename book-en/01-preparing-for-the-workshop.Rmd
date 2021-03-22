@@ -42,7 +42,6 @@ This workshop requires the following `R` packages:
 -    [remotes](http://cran.r-project.org/web/packages/remotes/index.html)
 -    [gridExtra](http://cran.r-project.org/web/packages/gridExtra/index.html)
 -    [lattice](http://cran.r-project.org/web/packages/lattice/index.html)
--    [MuMIn](http://cran.r-project.org/web/packages/MuMIn/index.html)
 
 To install them from CRAN, run:
 

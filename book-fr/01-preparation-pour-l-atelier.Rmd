@@ -35,12 +35,12 @@ Cet atelier nécessite les paquets `R` suivants:
 -    [MASS](http://cran.r-project.org/web/packages/MASS/index.html)
 -    [vcdExtra](http://cran.r-project.org/web/packages/vcdExtra/index.html)
 -    [bbmle](http://cran.r-project.org/web/packages/bbmle/index.html)
+-    [MuMIn](http://cran.r-project.org/web/packages/MuMIn/index.html)
+-    [ggplot2](http://cran.r-project.org/web/packages/ggplot2/index.html)
 -    [DescTools](http://cran.r-project.org/web/packages/DescTools/index.html)
 -    [remotes](http://cran.r-project.org/web/packages/remotes/index.html)
 -    [gridExtra](http://cran.r-project.org/web/packages/gridExtra/index.html)
 -    [lattice](http://cran.r-project.org/web/packages/lattice/index.html)
--    [MuMIn](http://cran.r-project.org/web/packages/MuMIn/index.html)
--    [ggplot2](http://cran.r-project.org/web/packages/ggplot2/index.html)
 
 Pour les installer à partir de CRAN, roulez:
 
@@ -51,8 +51,8 @@ install.packages("MASS")
 install.packages("vcdExtra")
 install.packages("bbmle")
 install.packages("MuMIn")
-install.packages("DescTools")
 install.packages("ggplot2")
+install.packages("DescTools")
 install.packages("remotes")
 install.packages("gridExtra")
 install.packages("lattice")
@@ -61,16 +61,16 @@ install.packages("lattice")
 Ensuite, chargez ces paquets:
 
 ```{r, echo = TRUE, eval = TRUE, message=FALSE, warning=FALSE}
-library(ggplot2)
 library(lme4)
 library(AICcmodavg)
 library(MASS)
 library(vcdExtra)
 library(bbmle)
+library(MuMIn)
+library(ggplot2)
 library(DescTools)
 library(remotes)
 library(gridExtra)
 library(lattice)
-library(MuMIn)
 ```
 
