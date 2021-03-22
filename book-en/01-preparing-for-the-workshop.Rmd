@@ -37,6 +37,10 @@ This workshop requires the following `R` packages:
 -    [vcdExtra](http://cran.r-project.org/web/packages/vcdExtra/index.html)
 -    [bbmle](http://cran.r-project.org/web/packages/bbmle/index.html)
 -    [DescTools](http://cran.r-project.org/web/packages/DescTools/index.html)
+-    [remotes](http://cran.r-project.org/web/packages/remotes/index.html)
+-    [gridExtra](http://cran.r-project.org/web/packages/gridExtra/index.html)
+-    [lattice](http://cran.r-project.org/web/packages/lattice/index.html)
+-    [MuMIn](http://cran.r-project.org/web/packages/MuMIn/index.html)
 
 To install them from CRAN, run:
 
