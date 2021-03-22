@@ -31,13 +31,6 @@ Observe each plot and try to get a sense of what is occurring. A few key questio
 - **1.** Do we expect an increase in trophic position with length in the exact same way for *all species*?
 - **2.** Do we expect an increase in trophic position with length in the exact same way for *all lakes*?
 
-**How might these relationships differ?**
-
-```{r, echo = FALSE}
-library(ggplot2)
-```
-
-
 ```{r, echo = TRUE, eval = TRUE}
 # Load the dataset
 fish.data <- read.csv('data/qcbs_w7_data.csv', stringsAsFactors = TRUE) 
