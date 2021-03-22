@@ -30,34 +30,49 @@ Observe each plot and try to get a sense of what is occurring. A few key questio
 
 - **1.** Do we expect an increase in trophic position with length in the exact same way for *all species*?
 - **2.** Do we expect an increase in trophic position with length in the exact same way for *all lakes*?
-- **3.** How might these relationships differ?
 
 ```{r, echo = TRUE, eval = TRUE}
-#Load dataset into R 
-fish.data <- read.csv('data/qcbs_w7_data.csv', stringsAsFactors = TRUE) # This line will vary depending on where your data is saved
+# Load the dataset
+fish.data <- read.csv('data/qcbs_w7_data.csv', stringsAsFactors = TRUE) 
+# This line will vary depending on where your data is saved. 
+# Check your working directory with getwd() and change it, if needed, with setwd()
 
-# Simple theme
-fig <- theme_bw() + theme(panel.grid.minor = element_blank(), 
-                          panel.grid.major = element_blank(), 
-                          panel.background = element_blank()) +
-                    theme(strip.background = element_blank(), 
-                          strip.text.y = element_text()) + 
-                    theme(legend.background = element_blank()) +
-                    theme(legend.key = element_blank()) + 
-                    theme(panel.border = element_rect(colour = "black", fill = NA))
+# Simple theme for all ggplot figures we produce after this
+fig <- theme_bw() + 
+  theme(panel.grid.minor=element_blank(), 
+        panel.grid.major=element_blank(), 
+        panel.background=element_blank(), 
+        strip.background=element_blank(), 
+        strip.text.y = element_text(),
+        legend.background=element_blank(),
+        legend.key=element_blank(),
+        panel.border = element_rect(colour="black", fill = NA))
 
+
+# Exploring the data graphically!
+
+# Basic plot aesthetics for the relationship we care about
 plot <- ggplot(aes(Fish_Length, Trophic_Pos), data = fish.data)
 
 # Plot 1 - All data
-plot + geom_point() + xlab("Length (mm)") + ylab("Trophic Position") + labs(title = "All Data") + fig
+plot + geom_point() + 
+  labs(x = "Length (mm)", y = "Trophic Position", 
+       title = "All Data") + 
+  fig
 
 # Plot 2 - By species
-plot + geom_point() + facet_wrap(~ Fish_Species) + xlab("Length (mm)") + ylab("Trophic Position") +
-   labs(title="By Species") + fig
+plot + geom_point() + 
+  facet_wrap(~ Fish_Species) + 
+  labs(x = "Length (mm)", y = "Trophic Position", 
+       title = "By Species") + 
+  fig
 
 # Plot 3 – By lake
-plot + geom_point() + facet_wrap(~ Lake) + xlab("Length (mm)") + ylab("Trophic Position") +
-   labs(title="By Lake") + fig
+plot + geom_point() + 
+  facet_wrap(~ Lake) + 
+  labs(x = "Length (mm)", y = "Trophic Position", 
+       title = "By Lake") + 
+  fig
 ```
 
 ---
@@ -66,8 +81,9 @@ plot + geom_point() + facet_wrap(~ Lake) + xlab("Length (mm)") + ylab("Trophic P
 
 Based on these plots we can draw two initial observations:
 
-- **1.** All species appear to increase in trophic position with length, but the slope might be different across species.
-- **2** Some parameters specific to each particular lake (ex. the primary productivity of the system) may change the observed relationship.
+**1.** All species appear to increase in trophic position with length, but the slope might be different across species.
+
+**2.** Some parameters specific to each particular lake (e.g. the system's primary productivity) may change the observed relationship.
 
 
 # Analyzing the data
@@ -86,7 +102,7 @@ So how can we analyze our data?
 
 Let's look a little closer at these options using our fish dataset!
 
-## Separate 
+## Option 1: Separate 
 
 One way to analyze this data is to fit linear regressions for each species in each lake.
 
@@ -98,7 +114,7 @@ Notice you would have to estimate a slope and intercept parameter for each regre
 
 There is a decreased chance of finding an effect due to low sample size and increased familywise error rate due to multiple comparisons.
 
-## Lump 
+## Option 2: Lump everything together
 
 Another way to analyze this data is to fit a single linear regression ignoring species and lake.
 
@@ -113,7 +129,7 @@ But what about pseudoreplication? Fish within a lake and within a species might 
 Also, look at all that noise in the data, some of it might be due to **differences** among **species** and **lakes**
 
 
-## Is there a third option? 
+## Option 3: Is there a third option? 
 
 For our question, we only want to know if there is a **general effect of body length on the trophic position**.
 

@@ -1,10 +1,10 @@
-# (PART\*) Implementing LMM in `R` {-}
+# (PART\*) Implémenter un MLM dans `R` {-}
 
-# Le protocole des modèles mixtes
+# Le protocole pour implémenter des modèles à effets mixtes dans `R`
 
 - **Étape 1.** Construction du modèle *a priori* et exploration des données
-- **Étape 2.** Coder les modèles potentiels et sélection du meilleur modèle
-- **Étape 3.** Validation du modèle
+- **Étape 2.** Coder les modèles potentiels et faire la sélection du meilleur modèle
+- **Étape 3.** Validation du modèle choisi
 - **Étape 4.** Interprétation et visualisation des résultats
 
 # Étape 1. Construction du modèle *a priori*
@@ -16,40 +16,34 @@ Nous voulons déterminer si la position trophique peut être prédite par la lon
 $$PT_{ijk} \sim Longueur_i + Lac_j + Espèce_k + \epsilon_{ijk}$$
 où:
 
-- `PT_ijk` est la position trophique du poisson (i) du lac (j) et de l’espèce (k)
-- `ε` sont les résidus du modèle (c. à d. la variation inexpliquée).
+- $PT_{ijk}$ est la position trophique du poisson ($i$) du lac ($j$) et de l’espèce ($k$)
+- $\varepsilon$ sont les résidus du modèle (c'est-à-dire la variation inexpliquée).
 
 
 ## Exploration des données
 
 **Les données ont-elles la bonne structure?**
 
-```{r, echo = FALSE}
-# # Chargez les données
-fish.data <- read.csv('data/qcbs_w7_data.csv')
-```
-
-Regardez la structure des données :
+Vérifiez la structure des données :
 
 ```{r, echo = TRUE, eval = TRUE}
-# Regardez la structure des données
+# Vérifiez la structure des données
 str(fish.data)
 ```
 
-Regardez maintenant la distribution des échantillons pour chaque facteur:
+Observez maintenant la distribution des échantillons pour chaque facteur:
 
 ```{r, echo = TRUE, eval = TRUE}
-#egardez la distribution des échantillons pour chaque facteur:
+# Observez la distribution des échantillons pour chaque facteur:
 table(fish.data[ , c("Lake", "Fish_Species")])
 ```
 
 Ce jeu de données est parfaitement équilibré, mais les **modèles mixtes peuvent analyser des designs expérimentaux non équilibrés**, comme c'est souvent le cas en écologie!
 
-Regardez la distribution des variables continues:
+Regardez ensuite la distribution des variables continues:
 
-```{r, echo = TRUE, eval = TRUE}
+```{r, echo = TRUE, eval = TRUE, fig.show='hold', out.width='50%'}
 # Regardez la distribution des variables continues.
-par(mfrow = c(1, 2), mar = c(4, 4, 1, 1))
 hist(fish.data$Fish_Length, xlab = "Length (mm)", main = "")
 hist(fish.data$Trophic_Pos, xlab = "Trophic position", main = "")
 ```
@@ -62,7 +56,7 @@ Des déviations majeures pourraient causer des problèmes d'hétéroscédasticit
 
 **Vérifier la colinéarité entre vos variables explicatives**
 
-The problem with collinear predictors is simply that they explain the same thing, so their effect on the response variable will be confounded in the model.
+Le problème avec les prédicteurs colinéaires est simplement qu'ils expliquent la même chose, alors leur effet sur la variable réponse sera confondu dans le modèle. Par défaut, le modèle attribuera beaucoup de pouvoir explicatif à la première variable du modèle et peu de pouvoir aux variables qui suivent.
 
 Dans cet exemple, il n’y a pas de risque de colinéarité avec seulement une variable continue. Si vous aviez une autre variable continue (`Var2`), une façon simple de vérifier la colinéarité est `cor(var1, var2)` 
 
@@ -74,7 +68,7 @@ Voici un [exemple de colinéarité](https://yetanotheriteration.netlify.app/2018
 
 C'est un problème de réflexion!
 
-Quelles mesures supplémentaires aurions-nous pu prendre sur le terrain et qui auraient pu être fortement corrélées avec la longueur corporelle?
+Quelles mesures supplémentaires aurions-nous pu prendre sur le terrain qui auraient pu être fortement corrélées avec la longueur corporelle?
 
 ---
 
@@ -96,10 +90,7 @@ La <a href="https://fr.wikipedia.org/wiki/Cote_Z_(statistiques)">correction Z</a
 
 $$z = \frac{x-moyenne(x)}{écart.type(x)}$$
 
-Considérez l'échelle des variables dans notre ensemble de données:
-
-Longueur corporelle -> Longue échelle
-Position trophique -> Courte échelle
+Considérez l'échelle des variables dans notre ensemble de données. La longueur corporelle est mesurée sur une *longue* échelle, tandis que la position trophique est mesurée sur une échelle qui est beaucoup plus courte. 
 
 Parce que nos données ont des échelles très différentes, on applique la **correction Z**
 
@@ -109,7 +100,7 @@ fish.data$Z_Length <- (fish.data$Fish_Length - mean(fish.data$Fish_Length)) /
                       sd(fish.data$Fish_Length)
 
 # Position trophique corrigée, avec la fonction scale
-fish.data$Z_TP     <- scale(fish.data$Trophic_Pos)
+fish.data$Z_TP <- scale(fish.data$Trophic_Pos)
 ```
 
 ---
@@ -153,9 +144,9 @@ plot(lm.test.resid ~ as.factor(fish.data$Lake),
 abline(0, 0, lty = 2)
 ```
 
-Ces patrons suggèrent qu'il y a de la variance résiduelle qui pourrait être expliquée par ces facteurs, et ils devraient donc être inclus dans le modèle!
+Les résidues semblent varier de façon non-aléatoire entre les espèces et entre les lacs. Ces patrons suggèrent qu'il y a de la variance résiduelle qui pourrait être expliquée par ces facteurs, et ils devraient donc être inclus dans le modèle!
 
-# Step 2. Coder le modèle
+# Étape 2. Coder le modèle
 
 **Traduisons notre modèle...**
 
@@ -172,11 +163,11 @@ lmer(Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species),
      data = fish.data, REML = TRUE)
 ```
 
-Where: 
+Où: 
 
-- `lmer` ![:faic](arrow-right) fonction "linear mixed model" du package `lme4`
-- `(1 | Lake)` ![:faic](arrow-right) indique que les intercepts peuvent varier entre les lacs
-- `REML = TRUE` ![:faic](arrow-right) méthode d'estimation
+- `lmer()` est la fonction "linear mixed model" du package `lme4`
+- `(1 | Lake)` indique que les ordonnées à l'origine peuvent varier entre les lacs
+- `REML = TRUE` spécifie la méthode d'estimation
 
 ## Note sur les méthodes d'estimation
 
@@ -205,10 +196,10 @@ Consultez cet [article](https://towardsdatascience.com/maximum-likelihood-ml-vs-
 
 ![](images/fig_22_w5.png)
 
-**Différentes structures pour le modèle:**
+**Il y a différentes structures possibles pour le modèle:**
 
-- `(1 | Lake)` effet aléatoire par lac à l'intercept
-- `(1 + Z_Length | Lake)` effet aléatoire par lac à l'intercept et la pente en réponse à la longueur corporelle (NB: (`Z_Length | Lake)` donne le même résultat)
+- `(1 | Lake)` effet aléatoire par lac à l'ordonnée à l'origine
+- `(1 + Z_Length | Lake)` effet aléatoire par lac à l'ordonnée à l'origine et la pente en réponse à la longueur corporelle (NB: (`Z_Length | Lake)` donne le même résultat)
 - `(-1 + Z_Length | Lake)` pour avoir uniquement l'effet aléatoire sur la pente
 - `(1 | Lake) + (1 | Species)`  pour des effets aléatoires croisés
 - `(1 | Lake:Fish_Species)` pour utiliser l'interaction entre 2 facteurs groupant
@@ -273,25 +264,25 @@ Examinons les autres modèles que vous auriez pu écrire (notez `REML = FALSE`):
 
 # Modele linéaire de base
 M0 <- lm(Z_TP ~ Z_Length, data = fish.data)
-# modèle complet avec variation des intercepts
+# modèle complet avec variation des ordonnées à l'origine
 M1 <- lmer(Z_TP ~ Z_Length + (1 | Fish_Species) + (1 | Lake), 
            data = fish.data, REML = FALSE)
-# modèle complet avec variation des intercepts et de pentes
+# modèle complet avec variation des ordonnées à l'origine et de pentes
 M2 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 + Z_Length | Lake),
            data = fish.data, REML = FALSE)
-# Pas d'effet lac, les intercepts varient par espèces
+# Pas d'effet lac, les ordonnées à l'origine varient par espèces
 M3 <- lmer(Z_TP ~ Z_Length + (1 | Fish_Species), data = fish.data, REML = FALSE)
-# Pas d'effet espèces, les intercepts varient par lac
+# Pas d'effet espèces, les ordonnées à l'origine varient par lac
 M4 <- lmer(Z_TP ~ Z_Length + (1 | Lake), data = fish.data, REML = FALSE)
-# Pas d'effet de lac, les intercepts et les pentes varient par espèces
+# Pas d'effet de lac, les ordonnées à l'origine et les pentes varient par espèces
 M5 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species), 
            data = fish.data, REML = FALSE)
-# Pas d'effet de l'espèces, les intercepts et les pentes varient par lac
+# Pas d'effet de l'espèces, les ordonnées à l'origine et les pentes varient par lac
 M6 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Lake), data = fish.data, REML = FALSE)
-# modèle complet, variation d'intercept et pente par lac
+# modèle complet, variation d'ordonnée à l'origine et pente par lac
 M7 <- lmer(Z_TP ~ Z_Length + (1 | Fish_Species) + (1 + Z_Length | Lake),
            data = fish.data, REML = FALSE)
-# modèle complet, variation d'intercept et pente par espèces
+# modèle complet, variation d'ordonnée à l'origine et pente par espèces
 M8 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake),
            data = fish.data, REML = FALSE)
 ```
@@ -333,16 +324,16 @@ AIC.table  <- MuMIn::model.sel(M0, M1, M2, M3, M4, M5, M6, M7, M8)
 # `delta` est la différence d'AICc avec la valeur la plus petite
 (AIC.table <- AIC.table[ , c("df", "logLik", "AICc", "delta")])
 
-# For more information on the other outputs/results returned by the function `model.sel()`, see `?model.sel`.
+# Pour plus d'informations sur les autres sorties ou résultats de la fonction model.sel(), roulez `?model.sel`.
 ```
 
-Ou:
+Où:
 
-- `df` est le degré de liberté
+- `df` montre les degrés de liberté
 - `logLik` est le log de la vraisemblance
 - `delta` est la différence d'AICc avec la valeur la plus petite
 
-Nous avons seulement affiché une partie des résultats retourné par la fonction `model.sel()`, voir `?model.sel` pour plus d'information.
+Nous avons seulement affiché une partie des résultats retourné par la fonction `model.sel()`, voir `?model.sel` pour plus d'informations.
 
 ---
 
@@ -350,23 +341,26 @@ Nous avons seulement affiché une partie des résultats retourné par la fonctio
 
 - Le modèle avec le plus petit AICc a le plus grand pouvoir prédictif.
 - Souvent on considère que deux modèles à +/- 2 unités d'AICc de différence ont un pouvoir prédictif équivalent.
-- Examinons de plus proche M8 and M2. On peut exclure les autres modèles car ils ont des AICc beaucoup plus élevés.
+- Examinons de plus proche M8 and M2. On peut exclure les autres modèles, car ils ont des AICc beaucoup plus élevés.
 
-*Notez qu'on utilise maintenant REML (i.e. `REML=TRUE`) vu qu'on compare deux modèles avec des effets aléatoires nichés et avec la même structure d'effets fixes.*
+*Notez qu'on utilise maintenant REML (i.e. `REML=TRUE`) puisqu'on compare deux modèles avec des effets aléatoires nichés et avec la même structure d'effets fixes.*
 
 ```{r, echo = TRUE, eval = TRUE}
-# Let's take a closer look at M8 and M2. We can exclude other model because they have such higher AICc
-# Because we are comparing two mixed effect models, we can set `REML = TRUE` when generating M8 and M2
+# Examinons de plus proche M8 and M2 (les autres modèlesont des AICc beaucoup plus élevés)
+# `REML = TRUE` parce qu'on compare deux modèles avec des effets aléatoires nichés et avec la même structure d'effets fixes
 M8 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake),
-           data = fish.data, REML = TRUE)
+           data = fish.data, 
+           REML = TRUE) 
 
 M2 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 + Z_Length | Lake),
-           data = fish.data, REML = TRUE)
-# Now let's print a table in order to compare M2 and M8 
+           data = fish.data, 
+           REML = TRUE)
+
+# Sortonz un tableau pour comparer M2 et M8
 MuMIn::model.sel(M2,M8)[ , c("df", "logLik", "AICc", "delta")]
 ```
 
-Le modèle `M8` semble être le meilleur modèle parmi ceux qu'on a testé.
+Le modèle `M8` semble être le meilleur modèle parmi ceux qu'on a testé!
 
 ---
 
@@ -376,10 +370,10 @@ Le modèle `M8` semble être le meilleur modèle parmi ceux qu'on a testé.
 # Regardons à nouveau le meilleur modèle, quelle est sa structure?
 M8 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake),
            data = fish.data, REML = FALSE)
-# L'intercept et l'effet de la longueur sur la position trophique peut varier selon l'espèce de poissons, mais seulement l'intercept peut varier par lac
+# L'ordonnée à l'origine et l'effet de la longueur sur la position trophique peut varier selon l'espèce de poissons, mais seulement l'ordonnée à l'origine peut varier par lac
 ```
 
-L'intercept et l'effet de la longueur sur la position trophique peut varier selon l'espèce de poissons, mais seulement l'intercept peut varier par lac.
+L'ordonnée à l'origine et l'effet de la longueur sur la position trophique peut varier selon l'espèce de poissons, mais seulement l'ordonnée à l'origine peut varier par lac.
 
 <div class = 'two-col'>
 
@@ -388,28 +382,33 @@ L'intercept et l'effet de la longueur sur la position trophique peut varier selo
 
 </div>
 
-Une fois que le meilleur modèle est sélectionné il faut remettre la méthode d'estimation a `REML = TRUE`.
+Une fois que le meilleur modèle est sélectionné, il faut remettre la méthode d'estimation a `REML = TRUE`.
 
 ```{r}
 # Une fois que le meilleur modèle est sélectionné il faut remettre la méthode d'estimation a `REML = TRUE`
 M8 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake),
-           data = fish.data, REML = TRUE)
+           data = fish.data, 
+           REML = TRUE)
 ```
 
 
 # Step 3. Validation du modèle
 
-Vous devez vérifier que le modèle respecte toutes les suppositions de base:
+Maintenant qu'on a trouvé notre modèle, on doit vérifier que le modèle respecte toutes les suppositions de base. Il faut donc:
 
-- **1. Vérifier l'homogénéité de la variance:**
+
+**1. Vérifier l'homogénéité de la variance:**
+
   - Faire un graphique des valeurs prédites en fonction des valeurs résiduelles
 
-- **2. Vérifier l'indépendance des résidus:**
+**2. Vérifier l'indépendance des résidus:**
+
   - Graphique des résidus vs chaque covariable du modèle
   - Graphique des résidus vs chaque covariable non incluse du modèle
 
-- **3. Vérifier la normalité:**
-  - Histogramme
+**3. Vérifier la normalité:**
+
+  - Histogramme des résidus
 
 ## 1. Vérifier l'homogénéité de la variance 
 
@@ -494,7 +493,7 @@ Regardons de plus près notre modèle final en utilisant la fonction `summary()`
 
 **Allons-y section par section et essayons de comprendre ce que nous regardons.**
 
-<ins> Random effects: </ins>
+<ins> Effets aléatoires: </ins>
 
 - `Groups`: facteurs de regroupement
 
@@ -507,9 +506,9 @@ Regardons de plus près notre modèle final en utilisant la fonction `summary()`
 
 ---
 
-<ins> Fixed effects: </ins>
+<ins> Effets fixes: </ins>
 
-Cette partie présente l'estimation des effets fixes. Une valeur de la statistique T [(test de Student)](https://en.wikipedia.org/wiki/T-statistic) est retournée **sans p-value** (c'est un choix des auteurs du package, voir pourquoi dans [cette discussion](https://stats.stackexchange.com/questions/185360/t-value-associated-with-nlme-lme4)).
+Cette partie présente l'estimation des effets fixes. Une valeur de la statistique T [(test de Student)](https://en.wikipedia.org/wiki/T-statistic) est retournée **sans valeur de p** (c'est un choix des auteurs du package, voir pourquoi dans [cette discussion](https://stats.stackexchange.com/questions/185360/t-value-associated-with-nlme-lme4)).
 
 Cette statistique peut être utilisée telle quelle. Vous pouvez aussi calculer
 l’intervalle de confiance (IC) à 95% avec cette table en utilisant:
@@ -559,7 +558,7 @@ différente de zéro au seuil $\alpha$ = 0.05.
 
 ## Défi 7
     
-**Il est possible de visualiser graphiquement les différentes intercepts et pentes du modèle pour mieux interpréter les résultats?**
+**Il est possible de visualiser graphiquement les différentes ordonnées à l'origine et pentes du modèle pour mieux interpréter les résultats?**
 
 Prenez 2 minutes pour réfléchir aux différentes façons pour représenter les résultats de M8.
 
@@ -569,7 +568,7 @@ Prenez 2 minutes pour réfléchir aux différentes façons pour représenter les
 
 #### **Défi 7 Solution:** {-}
 
-**Il est possible de visualiser graphiquement les différentes intercepts et pentes du modèle pour mieux interpréter les résultats?**
+**Il est possible de visualiser graphiquement les différentes ordonnées à l'origine et pentes du modèle pour mieux interpréter les résultats?**
 
 Oui! Nous pourrions le faire en générant:
 
@@ -582,7 +581,7 @@ c) Figure par lac
 Pour faire ces figures, il nous faut (1) les coefficients du modèle complet qui sont dans le résumé du modèle, (2) les coefficients pour chaque niveau du modèle qu'on obtient avec la fonction `coef`.
 
 ```{r, echo = TRUE, eval = TRUE}
-# Défi 7 : *Il est possible de visualiser graphiquement les différentes intercepts et pentes du modèle pour mieux interpréter les résultats ?
+# Défi 7 : *Il est possible de visualiser graphiquement les différentes ordonnées à l'origine et pentes du modèle pour mieux interpréter les résultats ?
 
 # Solution du défi 7 : Oui ! Nous pourrions le faire en générant les figures suivantes.
 # a) Figure avec toutes les données regroupées
@@ -668,7 +667,7 @@ Plot_ByLake <- plot +
                 xlab("Length (mm)") + ylab("Trophic Position") +
                 labs(title = "By Lake") + fig
 
-# Ajouter les lignes de régression avec les intercepts spécifiques à chaque lac
+# Ajouter les lignes de régression avec les ordonnées à l'origine spécifiques à chaque lac
 Plot_ByLake +
   geom_abline(intercept = Lake.coef[1,1], 
               slope     = Lake.coef[1,2], col = "coral2") +
