@@ -22,7 +22,7 @@ Chargez les données `Arabidopsis` `banta_totalfruits.csv` dans `R`.
 ```{r, echo = TRUE, eval = TRUE}
 dat.tf <- read.csv("data/banta_totalfruits.csv")
 
-## Dans cet ensemble de données, les en-têtes de colonne sont définis comme suit:
+# Dans cet ensemble de données, les en-têtes de colonne sont définis comme suit:
 # popu: facteur avec un niveau pour chaque population
 # gen: facteur avec un niveau pour chaque génotype
 # nutrient: facteur avec niveau bas (valeur = 1) ou haut (valeur = 8)
@@ -106,7 +106,7 @@ Pour identifier la famille de distribution la plus appropriée, nous pouvons exa
 - 3. Enfin, une relation quadratique entre la variance et la moyenne (c. $Var = \mu(1+\alpha) or \mu(1+\mu/k)$), est caractéristique des données surdispersées résultant d'une hétérogénéité sous-jacente entre les échantillons. Dans ce cas, la distribution binomiale négative (Poisson-gamma) serait plus appropriée.
 
 ```{r, echo = TRUE, eval = TRUE}
-## Figure diagnostique de variances par groupe vs moyennes par groupe (genotype x nutrient x clipping grouping). 
+# Figure diagnostique de variances par groupe vs moyennes par groupe (genotype x nutrient x clipping grouping). 
 # Code pour créer la figure: https://github.com/QCBSRworkshops/workshop07/blob/main/pres-fr/data/glmm_e.r
 
 # On remarque beaucoup de variation entre les variances des échantillons dans les données transformées 
@@ -155,7 +155,7 @@ Pour comprendre pourquoi, commençons avec un modèle avec une distribution de P
 Pour lancer un GLMM dans `R`, nous faisons appel à la fonction `glmer()` de la librairie `lme4`:
 
 ```{r, echo = TRUE, eval = TRUE}
-## GLMM Poisson
+# GLMM Poisson
 # Nous avons besoin d'un modèle qui tient compte de la surdispersion.
 # Commençons avec un modèle Poisson
 mp1 <- glmer(total.fruits ~ nutrient*amd + rack + status +
@@ -196,7 +196,7 @@ Une option pour une distribution où la variance augmente plus rapidement avec l
 On peut modéliser cette distribution avec la fonction `glmer.nb()`:
 
 ```{r, echo = TRUE, eval = TRUE}
-## GLMM binomial négatif utilisant la fonction glmer.nb()
+# GLMM binomial négatif utilisant la fonction glmer.nb()
 mnb1 <- glmer.nb(total.fruits ~ nutrient*amd + rack + status +
                  (1|popu)+
                  (1|gen),
@@ -226,7 +226,7 @@ Voir Harrison (2014) pour plus de détails https://doi.org/10.7717/peerj.616.
 Pour ce faire, nous créons tout d'abord une variable nommée `X`:
 
 ```{r, echo = TRUE, eval = TRUE}
-## GLMM Poisson-lognormale
+# GLMM Poisson-lognormale
 
 # Cette variable est déjà dans vos données "dat.tf", mais voici comment la créer.
 dat.tf$X <- 1:nrow(dat.tf)
