@@ -16,7 +16,7 @@ output:
 ---
 class: inverse, center, middle
 
-```{r setup, echo = FALSE}
+```{r setup, echo = FALSE, echo = FALSE, message=FALSE, warning=FALSE}
 knitr::opts_chunk$set(
   comment = "#",
   collapse = TRUE,
@@ -455,7 +455,6 @@ On souhaite émettre des conclusions à propos des niveaux du facteur ou de la r
 Évite d'estimer une ordonnée à l'origine et une pente par espèce (+2 paramètres par espèce) = **économise des degrés de liberté** (moins de paramètres estimés).
 
 ---
-exclude: true
 # Effet aléatoire sur l'ordonnée à l'origine
 <br>
 
@@ -475,7 +474,6 @@ Note: (MFF) Cette diapo est difficile à comprendre. Je me demande si il y aurai
 
 
 ---
-exclude: true
 # Effet aléatoire sur l'ordonnée à l'origine
 <br><br>
 
@@ -488,7 +486,6 @@ Cela **économise des degrés de liberté** (moins d’estimation de paramètres
 
 
 ---
-exclude: true
 # Effet aléatoire sur la pente
 <br><br>
 
