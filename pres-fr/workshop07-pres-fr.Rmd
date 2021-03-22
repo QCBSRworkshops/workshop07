@@ -16,7 +16,7 @@ output:
 ---
 class: inverse, center, middle
 
-```{r setup, echo = FALSE, echo = FALSE, message=FALSE, warning=FALSE}
+```{r setup, echo = FALSE, echo = FALSE, message=FALSE, warning=FALSE, results=0}
 knitr::opts_chunk$set(
   comment = "#",
   collapse = TRUE,
