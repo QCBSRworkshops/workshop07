@@ -276,7 +276,7 @@ where:
 <span id="cb10-2"><a href="step-1-a-priori-model-building.html#cb10-2"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">1</span>))</span>
 <span id="cb10-3"><a href="step-1-a-priori-model-building.html#cb10-3"></a><span class="kw">hist</span>(fish.data<span class="op">$</span>Fish_Length, <span class="dt">xlab =</span> <span class="st">&quot;Length (mm)&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;&quot;</span>)</span>
 <span id="cb10-4"><a href="step-1-a-priori-model-building.html#cb10-4"></a><span class="kw">hist</span>(fish.data<span class="op">$</span>Trophic_Pos, <span class="dt">xlab =</span> <span class="st">&quot;Trophic position&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
-<p><img src="book-en_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="book-en_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>Major deviations could cause heteroscedasticity problems. If necessary, make transformations. In this case, <strong>the data seems OK</strong>.</p>
 <hr />
 </div>
@@ -349,7 +349,7 @@ Trophic position -&gt; Short scale</p>
 <span id="cb14-9"><a href="step-1-a-priori-model-building.html#cb14-9"></a>    <span class="dt">ylab =</span> <span class="st">&quot;Standardized residuals&quot;</span>)</span>
 <span id="cb14-10"><a href="step-1-a-priori-model-building.html#cb14-10"></a></span>
 <span id="cb14-11"><a href="step-1-a-priori-model-building.html#cb14-11"></a><span class="kw">abline</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="book-en_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p><img src="book-en_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <p>These results suggest that there is residual variance that could be explained by these factors, so they should be included in a mixed effect model!</p>
 </div>
 </div>

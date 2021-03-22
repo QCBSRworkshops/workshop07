@@ -421,12 +421,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>Models can be compared by using the <code>AICc</code> function from the<code>MuMIn</code> package. The Akaike Information Criterion (AIC) is a <strong>measure of model quality</strong> that can be used to compare models.</p>
 <p><code>AICc</code> corrects for bias created by small sample sizes.</p>
 <p>In order the find the AICc value of a model, use:</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="step-2-code-potential-models-and-model-selection.html#cb35-1"></a><span class="co"># Load MuMIn package which allows us to find AICc values for</span></span>
-<span id="cb35-2"><a href="step-2-code-potential-models-and-model-selection.html#cb35-2"></a><span class="co"># our models</span></span>
-<span id="cb35-3"><a href="step-2-code-potential-models-and-model-selection.html#cb35-3"></a><span class="kw">library</span>(MuMIn)</span>
-<span id="cb35-4"><a href="step-2-code-potential-models-and-model-selection.html#cb35-4"></a></span>
-<span id="cb35-5"><a href="step-2-code-potential-models-and-model-selection.html#cb35-5"></a><span class="co"># Find AICc value for our first model (Basic linear model)</span></span>
-<span id="cb35-6"><a href="step-2-code-potential-models-and-model-selection.html#cb35-6"></a>MuMIn<span class="op">::</span><span class="kw">AICc</span>(M1)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="step-2-code-potential-models-and-model-selection.html#cb35-1"></a><span class="co"># Find AICc value for our first model (Basic linear model)</span></span>
+<span id="cb35-2"><a href="step-2-code-potential-models-and-model-selection.html#cb35-2"></a><span class="co"># using the package MuMIn</span></span>
+<span id="cb35-3"><a href="step-2-code-potential-models-and-model-selection.html#cb35-3"></a>MuMIn<span class="op">::</span><span class="kw">AICc</span>(M1)</span></code></pre></div>
 <pre><code>## [1] 77.30499</code></pre>
 <p>To group all AICc values into a single table, use <code>MuMIn::model.sel()</code> to calculate AICc for each model (along with other outputs) and then select only the columns of interest to print in a table.</p>
 <div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="step-2-code-potential-models-and-model-selection.html#cb37-1"></a><span class="co"># To group all AICc values into a single table, we can use</span></span>

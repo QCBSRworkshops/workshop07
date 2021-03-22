@@ -27,8 +27,6 @@ library(lattice)
 
 ##Section: 02-introduction-en.R 
 
-library(ggplot2)
-
 # Load the dataset
 fish.data <- read.csv('data/qcbs_w7_data.csv', stringsAsFactors = TRUE) 
 # This line will vary depending on where your data is saved. 
@@ -117,8 +115,6 @@ plot(lm.test.resid ~ as.factor(fish.data$Lake),
 
 abline(0, 0, lty = 2)
 
-library(lme4)
-
 lmer(Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species),
      data = fish.data, REML = TRUE)
 
@@ -164,10 +160,7 @@ M7 <- lmer(Z_TP ~ Z_Length + (1 | Fish_Species) + (1 + Z_Length | Lake),
 M8 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake),
            data = fish.data, REML = FALSE)
 
-# Load MuMIn package which allows us to find AICc values for our models
-library(MuMIn)
-
-# Find AICc value for our first model (Basic linear model)
+# Find AICc value for our first model (Basic linear model) using the package MuMIn
 MuMIn::AICc(M1)
 
 # To group all AICc values into a single table, we can use MuMIn::model.sel() to calculate AICc for each model (along with other outputs)
@@ -249,7 +242,6 @@ summ_M8$coefficients
 coef(M8)
 
 # Now let's make our figures!
-library(ggplot2) # Load ggplot2 if you haven't already
 
 # a) Figure with all data grouped
 # Create a simplified ggplot theme
@@ -350,7 +342,6 @@ dat.tf <- within(dat.tf,
   pna <- reorder(pna, total.fruits, mean)
 })
 
-library(ggplot2)
 # Boxplot of total fruits vs genotype x nutrient x clipping interaction
 ggplot(data = dat.tf, aes(factor(x = gna), y = log(total.fruits + 1))) +
   geom_boxplot(colour = "skyblue2", outlier.shape = 21,
@@ -399,7 +390,6 @@ text(118, 2000, "loess", col = 5)
 Poisson GLMM
 # Given the mean-variance relationship, we will most likely need a model with over-dispersion.
 # To understand why, let's start with a Poisson model.
-library(lme4) # Load in lme4 pkg with glmer() command for running GLMM
 mp1 <- glmer(total.fruits ~ nutrient*amd + rack + status +
              (1|popu)+
              (1|gen),
@@ -450,8 +440,6 @@ coefplot2(mpl1, ptype = "vcov", intercept = TRUE, main = "Random effect variance
 # Fixed effects
 coefplot2(mpl1, intercept = TRUE, main = "Fixed effect coefficient")
 
-library(gridExtra)
-library(lattice)
 # dotplot code
 pp <- list(layout.widths = list(left.padding = 0, right.padding = 0),
            layout.heights = list(top.padding = 0, bottom.padding = 0))
@@ -463,7 +451,6 @@ grid.arrange(d2$gen, d2$popu, nrow = 1)
 
 ##Section: 06-model-selection.R 
 
-library(lme4)
 mpl1 <- glmer(total.fruits ~ nutrient*amd + rack + status +
               (1|X) +
               (1|popu)+

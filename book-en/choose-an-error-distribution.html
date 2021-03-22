@@ -252,7 +252,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb69-5"><a href="choose-an-error-distribution.html#cb69-5"></a><span class="co"># is equal to the mean).</span></span>
 <span id="cb69-6"><a href="choose-an-error-distribution.html#cb69-6"></a><span class="kw">hist</span>(dat.tf<span class="op">$</span>total.fruits, <span class="dt">breaks =</span> <span class="dv">50</span>, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;&quot;</span>, </span>
 <span id="cb69-7"><a href="choose-an-error-distribution.html#cb69-7"></a>    <span class="dt">xlab =</span> <span class="st">&quot;Total fruits&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Count&quot;</span>)</span></code></pre></div>
-<p><img src="book-en_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
+<p><img src="book-en_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
 <p>However, as we will soon see, the variance increases with the mean much more rapidly than expected under the Poisson distribution…</p>
 <hr />
 <p><strong>Explore variance </strong></p>
@@ -270,16 +270,15 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb70-9"><a href="choose-an-error-distribution.html#cb70-9"></a>    pna &lt;-<span class="st"> </span><span class="kw">reorder</span>(pna, total.fruits, mean)</span>
 <span id="cb70-10"><a href="choose-an-error-distribution.html#cb70-10"></a>})</span></code></pre></div>
 <p>Now let’s visualize:</p>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="choose-an-error-distribution.html#cb71-1"></a><span class="kw">library</span>(ggplot2)</span>
-<span id="cb71-2"><a href="choose-an-error-distribution.html#cb71-2"></a><span class="co"># Boxplot of total fruits vs genotype x nutrient x clipping interaction</span></span>
-<span id="cb71-3"><a href="choose-an-error-distribution.html#cb71-3"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> dat.tf, <span class="kw">aes</span>(<span class="kw">factor</span>(<span class="dt">x =</span> gna), <span class="dt">y =</span> <span class="kw">log</span>(total.fruits <span class="op">+</span><span class="st"> </span><span class="dv">1</span>))) <span class="op">+</span></span>
-<span id="cb71-4"><a href="choose-an-error-distribution.html#cb71-4"></a><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">colour =</span> <span class="st">&quot;skyblue2&quot;</span>, <span class="dt">outlier.shape =</span> <span class="dv">21</span>,</span>
-<span id="cb71-5"><a href="choose-an-error-distribution.html#cb71-5"></a>  <span class="dt">outlier.colour =</span> <span class="st">&quot;skyblue2&quot;</span>) <span class="op">+</span></span>
-<span id="cb71-6"><a href="choose-an-error-distribution.html#cb71-6"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;log (Total fruits)</span><span class="ch">\n</span><span class="st">&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="co"># \n creates a space after the title</span></span>
-<span id="cb71-7"><a href="choose-an-error-distribution.html#cb71-7"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">Genotype x nutrient x clipping&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="co"># space before the title</span></span>
-<span id="cb71-8"><a href="choose-an-error-distribution.html#cb71-8"></a><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_blank</span>()) <span class="op">+</span></span>
-<span id="cb71-9"><a href="choose-an-error-distribution.html#cb71-9"></a><span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun =</span> mean, <span class="dt">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
-<p><img src="book-en_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="choose-an-error-distribution.html#cb71-1"></a><span class="co"># Boxplot of total fruits vs genotype x nutrient x clipping interaction</span></span>
+<span id="cb71-2"><a href="choose-an-error-distribution.html#cb71-2"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> dat.tf, <span class="kw">aes</span>(<span class="kw">factor</span>(<span class="dt">x =</span> gna), <span class="dt">y =</span> <span class="kw">log</span>(total.fruits <span class="op">+</span><span class="st"> </span><span class="dv">1</span>))) <span class="op">+</span></span>
+<span id="cb71-3"><a href="choose-an-error-distribution.html#cb71-3"></a><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">colour =</span> <span class="st">&quot;skyblue2&quot;</span>, <span class="dt">outlier.shape =</span> <span class="dv">21</span>,</span>
+<span id="cb71-4"><a href="choose-an-error-distribution.html#cb71-4"></a>  <span class="dt">outlier.colour =</span> <span class="st">&quot;skyblue2&quot;</span>) <span class="op">+</span></span>
+<span id="cb71-5"><a href="choose-an-error-distribution.html#cb71-5"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;log (Total fruits)</span><span class="ch">\n</span><span class="st">&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="co"># \n creates a space after the title</span></span>
+<span id="cb71-6"><a href="choose-an-error-distribution.html#cb71-6"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">Genotype x nutrient x clipping&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="co"># space before the title</span></span>
+<span id="cb71-7"><a href="choose-an-error-distribution.html#cb71-7"></a><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_blank</span>()) <span class="op">+</span></span>
+<span id="cb71-8"><a href="choose-an-error-distribution.html#cb71-8"></a><span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun =</span> mean, <span class="dt">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<p><img src="book-en_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
 <p>From this plot, we see that the variance of total fruits shows a large amount of heterogeneity among populations (population x nutrient x clipping interaction).</p>
 <hr />
 <p><strong>Back to choosing an error distribution</strong></p>
@@ -335,7 +334,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb72-37"><a href="choose-an-error-distribution.html#cb72-37"></a>mvec &lt;-<span class="st"> </span><span class="dv">0</span><span class="op">:</span><span class="dv">120</span></span>
 <span id="cb72-38"><a href="choose-an-error-distribution.html#cb72-38"></a><span class="kw">lines</span>(mvec, <span class="kw">predict</span>(Lfit, mvec), <span class="dt">col =</span> <span class="dv">5</span>)</span>
 <span id="cb72-39"><a href="choose-an-error-distribution.html#cb72-39"></a><span class="kw">text</span>(<span class="dv">118</span>, <span class="dv">2000</span>, <span class="st">&quot;loess&quot;</span>, <span class="dt">col =</span> <span class="dv">5</span>)</span></code></pre></div>
-<p><img src="book-en_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
+<p><img src="book-en_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
 <p>From the plot above we note that a linear quasi-Poisson may be better than the negative binomial, <em>but additional modeling is needed.</em></p>
 </div>
 <hr>

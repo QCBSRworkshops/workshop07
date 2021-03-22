@@ -259,7 +259,6 @@ Observe each plot and try to get a sense of what is occurring. A few key questio
 <li><strong>1.</strong> Do we expect an increase in trophic position with length in the exact same way for <em>all species</em>?</li>
 <li><strong>2.</strong> Do we expect an increase in trophic position with length in the exact same way for <em>all lakes</em>?</li>
 </ul>
-<p><strong>How might these relationships differ?</strong></p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="starting-with-a-question.html#cb3-1"></a><span class="co"># Load the dataset</span></span>
 <span id="cb3-2"><a href="starting-with-a-question.html#cb3-2"></a>fish.data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/qcbs_w7_data.csv&quot;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">TRUE</span>)</span>
 <span id="cb3-3"><a href="starting-with-a-question.html#cb3-3"></a><span class="co"># This line will vary depending on where your data is saved.</span></span>
@@ -282,15 +281,15 @@ Observe each plot and try to get a sense of what is occurring. A few key questio
 <span id="cb3-20"><a href="starting-with-a-question.html#cb3-20"></a><span class="co"># Plot 1 - All data</span></span>
 <span id="cb3-21"><a href="starting-with-a-question.html#cb3-21"></a>plot <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Length (mm)&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Trophic Position&quot;</span>, </span>
 <span id="cb3-22"><a href="starting-with-a-question.html#cb3-22"></a>    <span class="dt">title =</span> <span class="st">&quot;All Data&quot;</span>) <span class="op">+</span><span class="st"> </span>fig</span></code></pre></div>
-<p><img src="book-en_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="book-en_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="starting-with-a-question.html#cb4-1"></a><span class="co"># Plot 2 - By species</span></span>
 <span id="cb4-2"><a href="starting-with-a-question.html#cb4-2"></a>plot <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">facet_wrap</span>(<span class="op">~</span>Fish_Species) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Length (mm)&quot;</span>, </span>
 <span id="cb4-3"><a href="starting-with-a-question.html#cb4-3"></a>    <span class="dt">y =</span> <span class="st">&quot;Trophic Position&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;By Species&quot;</span>) <span class="op">+</span><span class="st"> </span>fig</span></code></pre></div>
-<p><img src="book-en_files/figure-html/unnamed-chunk-6-2.png" width="672" /></p>
+<p><img src="book-en_files/figure-html/unnamed-chunk-5-2.png" width="672" /></p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="starting-with-a-question.html#cb5-1"></a><span class="co"># Plot 3 – By lake</span></span>
 <span id="cb5-2"><a href="starting-with-a-question.html#cb5-2"></a>plot <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">facet_wrap</span>(<span class="op">~</span>Lake) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Length (mm)&quot;</span>, </span>
 <span id="cb5-3"><a href="starting-with-a-question.html#cb5-3"></a>    <span class="dt">y =</span> <span class="st">&quot;Trophic Position&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;By Lake&quot;</span>) <span class="op">+</span><span class="st"> </span>fig</span></code></pre></div>
-<p><img src="book-en_files/figure-html/unnamed-chunk-6-3.png" width="672" /></p>
+<p><img src="book-en_files/figure-html/unnamed-chunk-5-3.png" width="672" /></p>
 <hr />
 <div id="challenge-1-solution" class="section level4 unnumbered">
 <h4><strong>Challenge 1 Solution:</strong></h4>

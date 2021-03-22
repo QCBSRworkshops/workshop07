@@ -280,9 +280,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## Installing packages into &#39;/home/runner/work/_temp/Library&#39;
 ## (as &#39;lib&#39; is unspecified)</code></pre>
 <pre><code>##   
-   checking for file ‘/tmp/RtmpSx5J41/remotes347a14d58926/palday-coefplot2-23b7dcb/pkg/DESCRIPTION’ ...
+   checking for file ‘/tmp/RtmppWu7kt/remotes349a192a3b71/palday-coefplot2-23b7dcb/pkg/DESCRIPTION’ ...
   
-✔  checking for file ‘/tmp/RtmpSx5J41/remotes347a14d58926/palday-coefplot2-23b7dcb/pkg/DESCRIPTION’
+✔  checking for file ‘/tmp/RtmppWu7kt/remotes349a192a3b71/palday-coefplot2-23b7dcb/pkg/DESCRIPTION’
 ## 
   
 ─  preparing ‘coefplot2’:
@@ -310,10 +310,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## Loading required package: coda</code></pre>
 <div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="poisson-lognormal-glmm.html#cb98-1"></a><span class="co"># Variance terms</span></span>
 <span id="cb98-2"><a href="poisson-lognormal-glmm.html#cb98-2"></a><span class="kw">coefplot2</span>(mpl1, <span class="dt">ptype =</span> <span class="st">&quot;vcov&quot;</span>, <span class="dt">intercept =</span> <span class="ot">TRUE</span>, <span class="dt">main =</span> <span class="st">&quot;Random effect variance&quot;</span>)</span></code></pre></div>
-<p><img src="book-en_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
+<p><img src="book-en_files/figure-html/unnamed-chunk-46-1.png" width="672" /></p>
 <div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="poisson-lognormal-glmm.html#cb99-1"></a><span class="co"># Fixed effects</span></span>
 <span id="cb99-2"><a href="poisson-lognormal-glmm.html#cb99-2"></a><span class="kw">coefplot2</span>(mpl1, <span class="dt">intercept =</span> <span class="ot">TRUE</span>, <span class="dt">main =</span> <span class="st">&quot;Fixed effect coefficient&quot;</span>)</span></code></pre></div>
-<p><img src="book-en_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
+<p><img src="book-en_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
 <p><em>Note: error bars are only shown for the fixed effects because <code>glmer()</code> doesn’t model uncertainty for random effects.</em></p>
 <hr />
 <p><strong>Now let’s visualize the random effects</strong></p>
@@ -326,16 +326,14 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>Difference among genotypes largely driven by genotype 34</li>
 </ul>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="poisson-lognormal-glmm.html#cb100-1"></a><span class="kw">library</span>(gridExtra)</span>
-<span id="cb100-2"><a href="poisson-lognormal-glmm.html#cb100-2"></a><span class="kw">library</span>(lattice)</span>
-<span id="cb100-3"><a href="poisson-lognormal-glmm.html#cb100-3"></a><span class="co"># dotplot code</span></span>
-<span id="cb100-4"><a href="poisson-lognormal-glmm.html#cb100-4"></a>pp &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">layout.widths =</span> <span class="kw">list</span>(<span class="dt">left.padding =</span> <span class="dv">0</span>, <span class="dt">right.padding =</span> <span class="dv">0</span>), </span>
-<span id="cb100-5"><a href="poisson-lognormal-glmm.html#cb100-5"></a>    <span class="dt">layout.heights =</span> <span class="kw">list</span>(<span class="dt">top.padding =</span> <span class="dv">0</span>, <span class="dt">bottom.padding =</span> <span class="dv">0</span>))</span>
-<span id="cb100-6"><a href="poisson-lognormal-glmm.html#cb100-6"></a>r2 &lt;-<span class="st"> </span><span class="kw">ranef</span>(mpl1, <span class="dt">condVar =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb100-7"><a href="poisson-lognormal-glmm.html#cb100-7"></a>d2 &lt;-<span class="st"> </span><span class="kw">dotplot</span>(r2, <span class="dt">par.settings =</span> pp)</span>
-<span id="cb100-8"><a href="poisson-lognormal-glmm.html#cb100-8"></a></span>
-<span id="cb100-9"><a href="poisson-lognormal-glmm.html#cb100-9"></a><span class="kw">grid.arrange</span>(d2<span class="op">$</span>gen, d2<span class="op">$</span>popu, <span class="dt">nrow =</span> <span class="dv">1</span>)</span></code></pre></div>
-<p><img src="book-en_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="poisson-lognormal-glmm.html#cb100-1"></a><span class="co"># dotplot code</span></span>
+<span id="cb100-2"><a href="poisson-lognormal-glmm.html#cb100-2"></a>pp &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">layout.widths =</span> <span class="kw">list</span>(<span class="dt">left.padding =</span> <span class="dv">0</span>, <span class="dt">right.padding =</span> <span class="dv">0</span>), </span>
+<span id="cb100-3"><a href="poisson-lognormal-glmm.html#cb100-3"></a>    <span class="dt">layout.heights =</span> <span class="kw">list</span>(<span class="dt">top.padding =</span> <span class="dv">0</span>, <span class="dt">bottom.padding =</span> <span class="dv">0</span>))</span>
+<span id="cb100-4"><a href="poisson-lognormal-glmm.html#cb100-4"></a>r2 &lt;-<span class="st"> </span><span class="kw">ranef</span>(mpl1, <span class="dt">condVar =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb100-5"><a href="poisson-lognormal-glmm.html#cb100-5"></a>d2 &lt;-<span class="st"> </span><span class="kw">dotplot</span>(r2, <span class="dt">par.settings =</span> pp)</span>
+<span id="cb100-6"><a href="poisson-lognormal-glmm.html#cb100-6"></a></span>
+<span id="cb100-7"><a href="poisson-lognormal-glmm.html#cb100-7"></a><span class="kw">grid.arrange</span>(d2<span class="op">$</span>gen, d2<span class="op">$</span>popu, <span class="dt">nrow =</span> <span class="dv">1</span>)</span></code></pre></div>
+<p><img src="book-en_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
 
 </div>
 
