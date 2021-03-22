@@ -1,11 +1,9 @@
 
-# (PART\*) Model selection {-}
+# Final model
 
-# Selection Methods
+The same methods we just saw can be used with a GLMM or LMM to choose between models with various random intercepts and/or random slopes and to choose fixed effects to keep in final model.
 
-The same methods can be used with a GLMM or LMM to choose between models with various random intercepts and/or random slopes and to choose fixed effects to keep in final model.
-
-Here are two approaches :
+Recall the two approaches :
 
 - an **information theoretic approach** (e.g., AICc - Workshop 5)
 - a **frequentist approach** (where the significance of each term is evaluated using a likelihood ratio test; LRT, with the `anova()` function)
