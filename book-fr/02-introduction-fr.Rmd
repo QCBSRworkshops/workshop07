@@ -30,8 +30,6 @@ Regardez les graphiques et essayez d'obtenir une idée de ce qui se passe. Deux 
 - **3.** Comment ces relations peuvent-elles différer?
 
 ```{r, echo = TRUE, eval = FALSE}
-library(ggplot2)
-
 #Chargez le jeu de données dans R 
 fish.data <- read.csv('data/qcbs_w7_data.csv', stringsAsFactors = TRUE) # Cette ligne variera en fonction de l'endroit où vos données sont enregistrées.
 
