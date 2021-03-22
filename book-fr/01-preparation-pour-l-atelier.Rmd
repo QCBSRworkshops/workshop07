@@ -1,5 +1,6 @@
 # (PART\*) Modèles linéaires à effets mixtes (MLM) en `R` {-}
 
+
 # Objectifs d'apprentissage
 
 Les modèles à effets mixtes permettent aux écologistes de surmonter un certain nombre de limitations liées aux modèles linéaires traditionnels. 
