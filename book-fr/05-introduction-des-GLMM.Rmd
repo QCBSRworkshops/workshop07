@@ -326,7 +326,9 @@ coefplot2(mpl1, ptype = "vcov", intercept = TRUE, main = "Random effect variance
 
 Ici, nous pouvons voir que certains effets aléatoires présentent une plus grande variance que d'autres. 
 
-::: La variance des effets aléatoires (σ2i) représente la variance moyenne des effets aléatoires du modèle. Puisque cette variance reflète la variance "moyenne" des effets aléatoires pour les modèles mixtes, elle est également appropriée pour les modèles avec des structures d'effets aléatoires plus complexes, comme les pentes aléatoires ou les effets aléatoires imbriqués. :::
+:::explanation 
+La variance des effets aléatoires (σ2i) représente la variance moyenne des effets aléatoires du modèle. Puisque cette variance reflète la variance "moyenne" des effets aléatoires pour les modèles mixtes, elle est également appropriée pour les modèles avec des structures d'effets aléatoires plus complexes, comme les pentes aléatoires ou les effets aléatoires imbriqués. 
+:::
 
 
 ```{r, echo = TRUE, eval = TRUE}
@@ -334,7 +336,9 @@ Ici, nous pouvons voir que certains effets aléatoires présentent une plus gran
 coefplot2(mpl1, intercept = TRUE, main = "Fixed effect coefficient")
 ```
 
-::: La variance des effets fixes (σ2f) est la variance de la matrice-multiplication β∗X (vecteur de paramètres par matrice de modèle) :: :
+:::explanation 
+La variance des effets fixes (σ2f) est la variance de la matrice-multiplication β∗X (vecteur de paramètres par matrice de modèle) 
+:::
 
 *Notez: Les barres d'erreur sont visibles seulement pour les effets fixes, car `glmer()` ne modélise pas d'incertitude pour les effets aléatoires.*
 

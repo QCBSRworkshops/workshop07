@@ -317,14 +317,18 @@ coefplot2(mpl1, ptype = "vcov", intercept = TRUE, main = "Random effect variance
 
 Here we can see that some random effects exhibit greater variance than others. 
 
-::: The random effect variance (σ2i) represents the mean random effect variance of the model. Since this variance reflects the "average" random effects variance for mixed models, it is also appropriate for models with more complex random effects structures, like random slopes or nested random effects. :::
+:::explanation 
+The random effect variance (σ2i) represents the mean random effect variance of the model. Since this variance reflects the "average" random effects variance for mixed models, it is also appropriate for models with more complex random effects structures, like random slopes or nested random effects. 
+:::
 
 ```{r, echo = TRUE, eval = TRUE}
 # Fixed effects
 coefplot2(mpl1, intercept = TRUE, main = "Fixed effect coefficient")
 ```
 
-::: The fixed effects variance (σ2f) is the variance of the matrix-multiplication β∗X (parameter vector by model matrix). :::
+:::explanation 
+The fixed effects variance (σ2f) is the variance of the matrix-multiplication β∗X (parameter vector by model matrix).
+:::
 
 *Note: error bars are only shown for the fixed effects because `glmer()` doesn't model uncertainty for random effects.*
 
