@@ -1,5 +1,6 @@
 # (PART\*) Linear mixed models (LMM) in `R` {-}
 
+
 # Learning objectives
 
 Mixed effects models allow ecologists to overcome a number of limitations associated with traditional linear models.
