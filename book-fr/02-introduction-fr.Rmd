@@ -30,10 +30,6 @@ Observez les graphiques puis evaluez ce que vous observez. Quelques questions cl
 
 **Comment ces relations pourraient-elles différer?**  
 
-```{r, echo = FALSE}
-library(ggplot2)
-```
-
 
 ```{r, echo = TRUE, eval = TRUE}
 # Chargez le jeu de données
@@ -51,7 +47,6 @@ fig <- theme_bw() +
         legend.background=element_blank(),
         legend.key=element_blank(),
         panel.border = element_rect(colour="black", fill = NA))
-
 
 # Explorez les données graphiquement!
 

@@ -74,10 +74,6 @@ dat.tf <- within(dat.tf,
 
 Maintenant, visualisons:
 
-```{r, echo = FALSE, include = FALSE}
-library(ggplot2)
-```
-
 
 ```{r, echo = TRUE, eval = TRUE}
 # Boxplot of total fruits vs genotype x nutrient x clipping interaction
@@ -162,7 +158,6 @@ Pour lancer un GLMM dans `R`, nous faisons appel à la fonction `glmer()` de la 
 ## GLMM Poisson
 # Nous avons besoin d'un modèle qui tient compte de la surdispersion.
 # Commençons avec un modèle Poisson
-library(lme4) # la fonction glmer() nous permet de faire le GLMM
 mp1 <- glmer(total.fruits ~ nutrient*amd + rack + status +
              (1|popu)+
              (1|gen),
@@ -304,8 +299,6 @@ On constate une faible variation **inter-génotype** :
 - Les différences entre les génotypes semblent induites par le génotype 34
 
 ```{r, echo = TRUE, eval = TRUE}
-library(gridExtra)
-library(lattice)
 # dotplot code
 pp <- list(layout.widths = list(left.padding = 0, right.padding = 0),
            layout.heights = list(top.padding = 0, bottom.padding = 0))

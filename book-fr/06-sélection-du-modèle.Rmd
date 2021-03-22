@@ -15,7 +15,6 @@ En voici deux:
 Nous dérivons d'abord les modèles potentiels et les comparons en utilisant l'AICc:
 
 ```{r, echo = TRUE, eval = TRUE}
-library(lme4)
 mpl1 <- glmer(total.fruits ~ nutrient*amd + rack + status +
               (1|X) +
               (1|popu)+
