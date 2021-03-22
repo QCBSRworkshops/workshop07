@@ -312,7 +312,7 @@ lmer(Biodiv ~ Productivity + (1 | Forest / Site))
 
 dat.tf <- read.csv("data/banta_totalfruits.csv")
 
-Dans cet ensemble de données, les en-têtes de colonne sont définis comme suit:
+# Dans cet ensemble de données, les en-têtes de colonne sont définis comme suit:
 # popu: facteur avec un niveau pour chaque population
 # gen: facteur avec un niveau pour chaque génotype
 # nutrient: facteur avec niveau bas (valeur = 1) ou haut (valeur = 8)
@@ -348,7 +348,7 @@ ggplot(data = dat.tf,
   theme_bw() + theme(axis.text.x = element_blank()) +
   stat_summary(fun = mean, geom = "point", colour = "red")
 
-Figure diagnostique de variances par groupe vs moyennes par groupe (genotype x nutrient x clipping grouping). 
+# Figure diagnostique de variances par groupe vs moyennes par groupe (genotype x nutrient x clipping grouping). 
 # Code pour créer la figure: https://github.com/QCBSRworkshops/workshop07/blob/main/pres-fr/data/glmm_e.r
 
 # On remarque beaucoup de variation entre les variances des échantillons dans les données transformées 
@@ -384,7 +384,7 @@ mvec <- 0:120
 lines(mvec, predict(Lfit, mvec), col = 5)
 text(118, 2000, "loess", col = 5)
 
-GLMM Poisson
+# GLMM Poisson
 # Nous avons besoin d'un modèle qui tient compte de la surdispersion.
 # Commençons avec un modèle Poisson
 mp1 <- glmer(total.fruits ~ nutrient*amd + rack + status +
@@ -398,7 +398,7 @@ source(file = "data/glmm_funs.R")
 overdisp_fun(mp1)
 # Le rapport est significativement > 1
 
-GLMM binomial négatif utilisant la fonction glmer.nb()
+# GLMM binomial négatif utilisant la fonction glmer.nb()
 mnb1 <- glmer.nb(total.fruits ~ nutrient*amd + rack + status +
                  (1|popu)+
                  (1|gen),
@@ -410,7 +410,7 @@ mnb1 <- glmer.nb(total.fruits ~ nutrient*amd + rack + status +
 overdisp_fun(mnb1)
 # Le rapport est beaucoup plus près de 1 mais la valeur de p < 0.05
 
-GLMM Poisson-lognormale
+# GLMM Poisson-lognormale
 
 # Cette variable est déjà dans vos données "dat.tf", mais voici comment la créer.
 dat.tf$X <- 1:nrow(dat.tf)
