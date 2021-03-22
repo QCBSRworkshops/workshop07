@@ -318,7 +318,7 @@ lmer(Biodiv ~ Productivity + (1 | Forest / Site))
 
 dat.tf <- read.csv("data/banta_totalfruits.csv")
 
-In this dataset, the column headers are defined as:
+# In this dataset, the column headers are defined as:
 # popu factor with a level for each population
 # gen factor with a level for each genotype
 # nutrient factor with levels for low (value = 1) or high (value = 8)
@@ -352,7 +352,7 @@ ggplot(data = dat.tf, aes(factor(x = gna), y = log(total.fruits + 1))) +
   stat_summary(fun = mean, geom = "point", colour = "red")
 
 
-Run a diagnostic lot of the group variances vs group means (genotype x nutrient x clipping grouping). 
+# Run a diagnostic lot of the group variances vs group means (genotype x nutrient x clipping grouping). 
 # Code used to produce the plot : https://github.com/QCBSRworkshops/workshop07/blob/main/pres-fr/data/glmm_e.r
 # Substantial variation among the sample variances on the transformed data
 # For example, among genotypes:
@@ -387,7 +387,7 @@ mvec <- 0:120
 lines(mvec, predict(Lfit, mvec), col = 5)
 text(118, 2000, "loess", col = 5)
 
-Poisson GLMM
+# Poisson GLMM
 # Given the mean-variance relationship, we will most likely need a model with over-dispersion.
 # To understand why, let's start with a Poisson model.
 mp1 <- glmer(total.fruits ~ nutrient*amd + rack + status +
@@ -401,7 +401,7 @@ source(file = "data/glmm_funs.R") # This line will vary depending on where your 
 overdisp_fun(mp1)
 # Ratio is significantly > 1
 
-Negative binomial GLMM using the function glmer.nb()
+# Negative binomial GLMM using the function glmer.nb()
 mnb1 <- glmer.nb(total.fruits ~ nutrient*amd + rack + status +
                  (1|popu)+
                  (1|gen),
@@ -413,7 +413,7 @@ mnb1 <- glmer.nb(total.fruits ~ nutrient*amd + rack + status +
 overdisp_fun(mnb1)
 # Ratio is now much closer to 1 although p < 0.05
 
-Poisson-lognormal GLMM
+# Poisson-lognormal GLMM
 
 # This variable is already in your data "dat.tf", but here is how we create it :
 dat.tf$X <- 1:nrow(dat.tf)

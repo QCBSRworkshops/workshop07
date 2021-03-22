@@ -295,12 +295,12 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li>Finally, a quadratic relationship between the variance and the mean (i.e. <span class="math inline">\(Var = µ(1 + α) or µ(1 + µ/k)\)</span>) is characteristic of overdispersed data that is driven by an underlying heterogeneity among samples. In this case, the negative binomial (Poisson-gamma) would be more appropriate.</li>
 </ol></li>
 </ul>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="choose-an-error-distribution.html#cb72-1"></a><span class="co">## Run a diagnostic lot of the group variances vs group means</span></span>
-<span id="cb72-2"><a href="choose-an-error-distribution.html#cb72-2"></a><span class="co">## (genotype x nutrient x clipping grouping).  Code used to</span></span>
-<span id="cb72-3"><a href="choose-an-error-distribution.html#cb72-3"></a><span class="co">## produce the plot :</span></span>
-<span id="cb72-4"><a href="choose-an-error-distribution.html#cb72-4"></a><span class="co">## https://github.com/QCBSRworkshops/workshop07/blob/main/pres-fr/data/glmm_e.r</span></span>
-<span id="cb72-5"><a href="choose-an-error-distribution.html#cb72-5"></a><span class="co">## Substantial variation among the sample variances on the</span></span>
-<span id="cb72-6"><a href="choose-an-error-distribution.html#cb72-6"></a><span class="co">## transformed data For example, among genotypes:</span></span>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="choose-an-error-distribution.html#cb72-1"></a><span class="co"># Run a diagnostic lot of the group variances vs group means</span></span>
+<span id="cb72-2"><a href="choose-an-error-distribution.html#cb72-2"></a><span class="co"># (genotype x nutrient x clipping grouping).  Code used to</span></span>
+<span id="cb72-3"><a href="choose-an-error-distribution.html#cb72-3"></a><span class="co"># produce the plot :</span></span>
+<span id="cb72-4"><a href="choose-an-error-distribution.html#cb72-4"></a><span class="co"># https://github.com/QCBSRworkshops/workshop07/blob/main/pres-fr/data/glmm_e.r</span></span>
+<span id="cb72-5"><a href="choose-an-error-distribution.html#cb72-5"></a><span class="co"># Substantial variation among the sample variances on the</span></span>
+<span id="cb72-6"><a href="choose-an-error-distribution.html#cb72-6"></a><span class="co"># transformed data For example, among genotypes:</span></span>
 <span id="cb72-7"><a href="choose-an-error-distribution.html#cb72-7"></a>grpVars &lt;-<span class="st"> </span><span class="kw">tapply</span>(dat.tf<span class="op">$</span>total.fruits, dat.tf<span class="op">$</span>gna, var)</span>
 <span id="cb72-8"><a href="choose-an-error-distribution.html#cb72-8"></a></span>
 <span id="cb72-9"><a href="choose-an-error-distribution.html#cb72-9"></a>grpMeans &lt;-<span class="st"> </span><span class="kw">tapply</span>(dat.tf<span class="op">$</span>total.fruits, dat.tf<span class="op">$</span>gna, mean)</span>
