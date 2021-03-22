@@ -31,7 +31,7 @@
   
   <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
 <link rel="prev" href="glmm-binomiale-négative.html"/>
-<link rel="next" href="sélection-du-modèle.html"/>
+<link rel="next" href="modèle-final.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -198,10 +198,12 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="14" data-path="choisir-la-distribution-des-erreurs.html"><a href="choisir-la-distribution-des-erreurs.html"><i class="fa fa-check"></i><b>14</b> Choisir la distribution des erreurs</a></li>
 <li class="chapter" data-level="15" data-path="glmm-poisson.html"><a href="glmm-poisson.html"><i class="fa fa-check"></i><b>15</b> GLMM Poisson</a></li>
 <li class="chapter" data-level="16" data-path="glmm-binomiale-négative.html"><a href="glmm-binomiale-négative.html"><i class="fa fa-check"></i><b>16</b> GLMM binomiale négative</a></li>
-<li class="chapter" data-level="17" data-path="glmm-poisson-lognormale.html"><a href="glmm-poisson-lognormale.html"><i class="fa fa-check"></i><b>17</b> GLMM Poisson-lognormale</a></li>
-<li class="part"><span><b>Sélection du modèle</b></span></li>
-<li class="chapter" data-level="18" data-path="sélection-du-modèle.html"><a href="sélection-du-modèle.html"><i class="fa fa-check"></i><b>18</b> Sélection du modèle</a><ul>
-<li class="chapter" data-level="18.1" data-path="sélection-du-modèle.html"><a href="sélection-du-modèle.html#défi-9"><i class="fa fa-check"></i><b>18.1</b> Défi 9</a></li>
+<li class="chapter" data-level="17" data-path="glmm-poisson-lognormale.html"><a href="glmm-poisson-lognormale.html"><i class="fa fa-check"></i><b>17</b> GLMM Poisson-lognormale</a><ul>
+<li class="chapter" data-level="17.1" data-path="glmm-poisson-lognormale.html"><a href="glmm-poisson-lognormale.html#intercepts-aléatoires"><i class="fa fa-check"></i><b>17.1</b> Intercepts aléatoires</a></li>
+<li class="chapter" data-level="17.2" data-path="glmm-poisson-lognormale.html"><a href="glmm-poisson-lognormale.html#représentation-graphique-des-paramètres-du-modèle"><i class="fa fa-check"></i><b>17.2</b> Représentation graphique des paramètres du modèle</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="modèle-final.html"><a href="modèle-final.html"><i class="fa fa-check"></i><b>18</b> Modèle final</a><ul>
+<li class="chapter" data-level="18.1" data-path="modèle-final.html"><a href="modèle-final.html#défi-9"><i class="fa fa-check"></i><b>18.1</b> Défi 9</a></li>
 </ul></li>
 <li class="part"><span><b>Ressources additionnelles par LMM et GLMM</b></span></li>
 <li class="chapter" data-level="19" data-path="ressources-additionnelles.html"><a href="ressources-additionnelles.html"><i class="fa fa-check"></i><b>19</b> Ressources additionnelles</a></li>
@@ -242,8 +244,13 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="glmm-poisson-lognormale" class="section level1">
 <h1><span class="header-section-number">Chapitre 17</span> GLMM Poisson-lognormale</h1>
-<p>Une deuxième option pour une distribution où la variance augmente plus rapidement avec la moyenne est la distribution <strong>Poisson-lognormale</strong>.</p>
-<p>On réalise cette distribution en ajoutant un <strong>effet aléatoire de niveau d’observation</strong> dans le modèle.</p>
+<p>Une deuxième option pour une distribution où la variance augmente plus rapidement avec la moyenne est la distribution <strong>Poisson-lognormale</strong>. Ce modèle place effectivement une priorité lognormale sur <span class="math inline">\(εi\)</span>.</p>
+<p>Une distribution Poisson-lognormale avec une moyenne de <span class="math inline">\(µ\)</span> et une variance antérieure lognormale de <span class="math inline">\(σ2\)</span> a une variance:</p>
+<p><span class="math inline">\(var(y) = µ + µ2 [exp(σ2) - 1]\)</span></p>
+<p>En revanche, nous avons vu que la distribution binomiale négative (Poisson-gamma) était donné par:</p>
+<p><span class="math inline">\(var(y) = µ + µ2/k\)</span></p>
+<p>En générale, la variance <span class="math inline">\(σ2\)</span> dans la distribution Poisson-lognormal dépendra du niveau de regroupement que nous sélectionnons (i.e. au niveau individuel, génotype ou de la population). Donc, le modèle de Poisson-lognormal nous permet d’assigner l’agrégation observée à différentes sources d’hétérogénéité.</p>
+<p>Pour mettre en œuvre le <strong>effet aléatoire au niveau de l’observation</strong>, nous allons l’évaluer au niveau individuel. Pour ce faire, il suffit de placer un <strong>effet aléatoire au niveau des observations</strong> dans la formule du modèle.</p>
 <p>Voir Harrison (2014) pour plus de détails <a href="https://doi.org/10.7717/peerj.616" class="uri">https://doi.org/10.7717/peerj.616</a>.</p>
 <p>Pour ce faire, nous créons tout d’abord une variable nommée <code>X</code>:</p>
 <div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="glmm-poisson-lognormale.html#cb82-1"></a><span class="co"># GLMM Poisson-lognormale</span></span>
@@ -265,29 +272,75 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb86-2"><a href="glmm-poisson-lognormale.html#cb86-2"></a><span class="co"># &lt; 1</span></span></code></pre></div>
 <p><strong>Le rapport est maintenant conforme avec notre critère, soit &lt; 1!</strong></p>
 <hr />
-<p><strong>Maintenant que nous avons choisi notre distribution d’erreur, visualisons les paramètres du modèle.</strong></p>
+<div id="intercepts-aléatoires" class="section level2">
+<h2><span class="header-section-number">17.1</span> Intercepts aléatoires</h2>
+<p>Maintenant que nous avons la distribution d’erreur appropriée, nous pouvons tester l’importance des interceptes aléatoires (pour population et génotype) en comparant des modèles nichés <strong>avec</strong> et <strong>sans</strong> les effets aléatoires d’intérêt en utilisant soit:</p>
+<ul>
+<li><p><em>1. L’approche théorique d’information (tel que le Critère d’Information d’Akaike; AIC)</em>, qui, comme nous l’avons vu apres examine plusieurs hypothèses concurrentes (modèles) simultanément pour identifier le modèle avec le pouvoir prédictif le plus élevé compte tenu des données. Nous allons encore une fois utiliser le AICc pour corriger les petites tailles d’échantillon.</p></li>
+<li><p><em>2. L’approche fréquentiste (test d’hypothèse nulle traditionnelle)</em>, où deux modèles nichés sont comparés en utilisant le tests de rapport de vraisemblance de la fonction anova(). Il est important de noter qu’avec cette approche, nous testons une hypothèse nulle d’une variance de zéro, mais étant donné que nous ne pouvons pas avoir un écart négatif, nous testons le paramètre à la limite de sa région réalisable. Par conséquent, la valeur de p rapporté est environ le double de ce qu’elle devrait être (c. nous avons tronquée la moitié des valeurs possibles ; celles qui tombent en dessous de 0).</p></li>
+</ul>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="glmm-poisson-lognormale.html#cb87-1"></a><span class="co"># popu seulement</span></span>
+<span id="cb87-2"><a href="glmm-poisson-lognormale.html#cb87-2"></a>mpl1.popu &lt;-<span class="st"> </span><span class="kw">glmer</span>(total.fruits <span class="op">~</span><span class="st"> </span>nutrient <span class="op">*</span><span class="st"> </span>amd <span class="op">+</span><span class="st"> </span>rack <span class="op">+</span><span class="st"> </span>status <span class="op">+</span><span class="st"> </span></span>
+<span id="cb87-3"><a href="glmm-poisson-lognormale.html#cb87-3"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>X) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>popu), <span class="dt">data =</span> dat.tf, <span class="dt">family =</span> <span class="st">&quot;poisson&quot;</span>, </span>
+<span id="cb87-4"><a href="glmm-poisson-lognormale.html#cb87-4"></a>    <span class="dt">control =</span> <span class="kw">glmerControl</span>(<span class="dt">optimizer =</span> <span class="st">&quot;bobyqa&quot;</span>))</span>
+<span id="cb87-5"><a href="glmm-poisson-lognormale.html#cb87-5"></a></span>
+<span id="cb87-6"><a href="glmm-poisson-lognormale.html#cb87-6"></a><span class="co"># gen seulement</span></span>
+<span id="cb87-7"><a href="glmm-poisson-lognormale.html#cb87-7"></a>mpl1.gen &lt;-<span class="st"> </span><span class="kw">glmer</span>(total.fruits <span class="op">~</span><span class="st"> </span>nutrient <span class="op">*</span><span class="st"> </span>amd <span class="op">+</span><span class="st"> </span>rack <span class="op">+</span><span class="st"> </span>status <span class="op">+</span><span class="st"> </span></span>
+<span id="cb87-8"><a href="glmm-poisson-lognormale.html#cb87-8"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>X) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>gen), <span class="dt">data =</span> dat.tf, <span class="dt">family =</span> <span class="st">&quot;poisson&quot;</span>, <span class="dt">control =</span> <span class="kw">glmerControl</span>(<span class="dt">optimizer =</span> <span class="st">&quot;bobyqa&quot;</span>))</span>
+<span id="cb87-9"><a href="glmm-poisson-lognormale.html#cb87-9"></a></span>
+<span id="cb87-10"><a href="glmm-poisson-lognormale.html#cb87-10"></a><span class="co"># Approche AICc</span></span>
+<span id="cb87-11"><a href="glmm-poisson-lognormale.html#cb87-11"></a><span class="kw">ICtab</span>(mpl1, mpl1.popu, mpl1.gen, <span class="dt">type =</span> <span class="kw">c</span>(<span class="st">&quot;AICc&quot;</span>))</span></code></pre></div>
+<pre><code>##           dAICc df
+## mpl1       0.0  10
+## mpl1.popu  2.0  9 
+## mpl1.gen  16.1  9</code></pre>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="glmm-poisson-lognormale.html#cb89-1"></a><span class="co"># Approche fréquentiste (Likelihood Ratio Test)</span></span>
+<span id="cb89-2"><a href="glmm-poisson-lognormale.html#cb89-2"></a><span class="kw">anova</span>(mpl1, mpl1.popu)</span></code></pre></div>
+<pre><code>## Data: dat.tf
+## Models:
+## mpl1.popu: total.fruits ~ nutrient * amd + rack + status + (1 | X) + (1 | 
+## mpl1.popu:     popu)
+## mpl1: total.fruits ~ nutrient * amd + rack + status + (1 | X) + (1 | 
+## mpl1:     popu) + (1 | gen)
+##           npar    AIC    BIC  logLik deviance  Chisq Df Pr(&gt;Chisq)  
+## mpl1.popu    9 5017.4 5057.4 -2499.7   4999.4                       
+## mpl1        10 5015.4 5059.8 -2497.7   4995.4 4.0639  1    0.04381 *
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="glmm-poisson-lognormale.html#cb91-1"></a><span class="kw">anova</span>(mpl1, mpl1.gen)</span></code></pre></div>
+<pre><code>## Data: dat.tf
+## Models:
+## mpl1.gen: total.fruits ~ nutrient * amd + rack + status + (1 | X) + (1 | 
+## mpl1.gen:     gen)
+## mpl1: total.fruits ~ nutrient * amd + rack + status + (1 | X) + (1 | 
+## mpl1:     popu) + (1 | gen)
+##          npar    AIC    BIC  logLik deviance  Chisq Df Pr(&gt;Chisq)    
+## mpl1.gen    9 5031.5 5071.5 -2506.8   5013.5                         
+## mpl1       10 5015.4 5059.8 -2497.7   4995.4 18.177  1  2.014e-05 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>Notez que le modèle sans l’intercept aléatoire pour génotype est à moins de deux unités AICc du modèle complet, ce qui indique que les deux modèles sont tout aussi plausibles (i.e. peu de soutien pour inclure un intercept aléatoire pour le génotype). Toutefois, lorsque nous utilisons la comparaison de vraisemblance de modèles nichés (anova()), et corrigeons pour les valeurs p gonflés par un facteur de 2, nous trouvons que dans les deux cas, p &lt;0,05. <strong>Donc le modèle avec les deux effets aléatoires (mpl1) est sélectionné.</strong></p>
+<hr />
+</div>
+<div id="représentation-graphique-des-paramètres-du-modèle" class="section level2">
+<h2><span class="header-section-number">17.2</span> Représentation graphique des paramètres du modèle</h2>
+<p><strong>Maintenant que nous avons choisi notre modèle, visualisons les paramètres du modèle.</strong></p>
 <p>Peut être obtenu en utilisant la fonction <code>coefplot2()</code>de la librairie <code>coefplot2</code>:</p>
 <p><em>Notez: Cette librairie n’est pas sur le CRAN! On utilise la librairie <code>remotes</code> pour l’installer à partir de GitHub.</em></p>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="glmm-poisson-lognormale.html#cb87-1"></a><span class="co"># Visualisons les paramètres du modèle</span></span>
-<span id="cb87-2"><a href="glmm-poisson-lognormale.html#cb87-2"></a></span>
-<span id="cb87-3"><a href="glmm-poisson-lognormale.html#cb87-3"></a><span class="co"># Cette librairie n&#39;est pas sur le CRAN! On utilise la</span></span>
-<span id="cb87-4"><a href="glmm-poisson-lognormale.html#cb87-4"></a><span class="co"># librairie `remotes` pour l&#39;installer à partir de GitHub.</span></span>
-<span id="cb87-5"><a href="glmm-poisson-lognormale.html#cb87-5"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&quot;coefplot2&quot;</span>)) remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;palday/coefplot2&quot;</span>, </span>
-<span id="cb87-6"><a href="glmm-poisson-lognormale.html#cb87-6"></a>    <span class="dt">subdir =</span> <span class="st">&quot;pkg&quot;</span>)</span></code></pre></div>
-<pre><code>## Loading required package: coefplot2</code></pre>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="glmm-poisson-lognormale.html#cb93-1"></a><span class="co"># Visualisons les paramètres du modèle</span></span>
+<span id="cb93-2"><a href="glmm-poisson-lognormale.html#cb93-2"></a></span>
+<span id="cb93-3"><a href="glmm-poisson-lognormale.html#cb93-3"></a><span class="co"># Cette librairie n&#39;est pas sur le CRAN! On utilise la</span></span>
+<span id="cb93-4"><a href="glmm-poisson-lognormale.html#cb93-4"></a><span class="co"># librairie `remotes` pour l&#39;installer à partir de GitHub.</span></span>
+<span id="cb93-5"><a href="glmm-poisson-lognormale.html#cb93-5"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&quot;coefplot2&quot;</span>)) remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;palday/coefplot2&quot;</span>, </span>
+<span id="cb93-6"><a href="glmm-poisson-lognormale.html#cb93-6"></a>    <span class="dt">subdir =</span> <span class="st">&quot;pkg&quot;</span>)</span></code></pre></div>
 <pre><code>## Warning in library(package, lib.loc = lib.loc, character.only = TRUE,
 ## logical.return = TRUE, : there is no package called &#39;coefplot2&#39;</code></pre>
-<pre><code>## Using bundled GitHub PAT. Please add your own PAT to the env var `GITHUB_PAT`</code></pre>
-<pre><code>## Downloading GitHub repo palday/coefplot2@HEAD</code></pre>
 <pre><code>## reshape (NA -&gt; 0.8.8 ) [CRAN]
-## coda    (NA -&gt; 0.19-4) [CRAN]</code></pre>
-<pre><code>## Installing 2 packages: reshape, coda</code></pre>
-<pre><code>## Installing packages into &#39;/home/runner/work/_temp/Library&#39;
-## (as &#39;lib&#39; is unspecified)</code></pre>
-<pre><code>##   
-   checking for file ‘/tmp/Rtmp9cwuku/remotes344b207afa07/palday-coefplot2-23b7dcb/pkg/DESCRIPTION’ ...
+## coda    (NA -&gt; 0.19-4) [CRAN]
+##   
+   checking for file ‘/tmp/RtmpvmaYI2/remotes346d22e4e5bb/palday-coefplot2-23b7dcb/pkg/DESCRIPTION’ ...
   
-✔  checking for file ‘/tmp/Rtmp9cwuku/remotes344b207afa07/palday-coefplot2-23b7dcb/pkg/DESCRIPTION’
+✔  checking for file ‘/tmp/RtmpvmaYI2/remotes346d22e4e5bb/palday-coefplot2-23b7dcb/pkg/DESCRIPTION’
 ## 
   
 ─  preparing ‘coefplot2’:
@@ -309,16 +362,16 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
   
    
 ## </code></pre>
-<pre><code>## Installing package into &#39;/home/runner/work/_temp/Library&#39;
-## (as &#39;lib&#39; is unspecified)</code></pre>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="glmm-poisson-lognormale.html#cb97-1"></a><span class="kw">library</span>(coefplot2)</span></code></pre></div>
-<pre><code>## Loading required package: coda</code></pre>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="glmm-poisson-lognormale.html#cb99-1"></a><span class="co"># Effets aléatoires</span></span>
-<span id="cb99-2"><a href="glmm-poisson-lognormale.html#cb99-2"></a><span class="kw">coefplot2</span>(mpl1, <span class="dt">ptype =</span> <span class="st">&quot;vcov&quot;</span>, <span class="dt">intercept =</span> <span class="ot">TRUE</span>, <span class="dt">main =</span> <span class="st">&quot;Random effect variance&quot;</span>)</span></code></pre></div>
-<p><img src="book-fr_files/figure-html/unnamed-chunk-45-1.png" width="672" /></p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="glmm-poisson-lognormale.html#cb100-1"></a><span class="co"># Effets fixes</span></span>
-<span id="cb100-2"><a href="glmm-poisson-lognormale.html#cb100-2"></a><span class="kw">coefplot2</span>(mpl1, <span class="dt">intercept =</span> <span class="ot">TRUE</span>, <span class="dt">main =</span> <span class="st">&quot;Fixed effect coefficient&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="glmm-poisson-lognormale.html#cb96-1"></a><span class="kw">library</span>(coefplot2)</span></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="glmm-poisson-lognormale.html#cb97-1"></a><span class="co"># Effets aléatoires</span></span>
+<span id="cb97-2"><a href="glmm-poisson-lognormale.html#cb97-2"></a><span class="kw">coefplot2</span>(mpl1, <span class="dt">ptype =</span> <span class="st">&quot;vcov&quot;</span>, <span class="dt">intercept =</span> <span class="ot">TRUE</span>, <span class="dt">main =</span> <span class="st">&quot;Random effect variance&quot;</span>)</span></code></pre></div>
 <p><img src="book-fr_files/figure-html/unnamed-chunk-46-1.png" width="672" /></p>
+<p>Ici, nous pouvons voir que certains effets aléatoires présentent une plus grande variance que d’autres.</p>
+<p>::: La variance des effets aléatoires (σ2i) représente la variance moyenne des effets aléatoires du modèle. Puisque cette variance reflète la variance “moyenne” des effets aléatoires pour les modèles mixtes, elle est également appropriée pour les modèles avec des structures d’effets aléatoires plus complexes, comme les pentes aléatoires ou les effets aléatoires imbriqués. :::</p>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="glmm-poisson-lognormale.html#cb98-1"></a><span class="co"># Effets fixes</span></span>
+<span id="cb98-2"><a href="glmm-poisson-lognormale.html#cb98-2"></a><span class="kw">coefplot2</span>(mpl1, <span class="dt">intercept =</span> <span class="ot">TRUE</span>, <span class="dt">main =</span> <span class="st">&quot;Fixed effect coefficient&quot;</span>)</span></code></pre></div>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
+<p>::: La variance des effets fixes (σ2f) est la variance de la matrice-multiplication β∗X (vecteur de paramètres par matrice de modèle) :: :</p>
 <p><em>Notez: Les barres d’erreur sont visibles seulement pour les effets fixes, car <code>glmer()</code> ne modélise pas d’incertitude pour les effets aléatoires.</em></p>
 <hr />
 <p><strong>Visualisation des effets aléatoires</strong></p>
@@ -331,19 +384,17 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>Les différences entre les génotypes semblent induites par le génotype 34</li>
 </ul>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="glmm-poisson-lognormale.html#cb101-1"></a><span class="co"># dotplot code</span></span>
-<span id="cb101-2"><a href="glmm-poisson-lognormale.html#cb101-2"></a>pp &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">layout.widths =</span> <span class="kw">list</span>(<span class="dt">left.padding =</span> <span class="dv">0</span>, <span class="dt">right.padding =</span> <span class="dv">0</span>), </span>
-<span id="cb101-3"><a href="glmm-poisson-lognormale.html#cb101-3"></a>    <span class="dt">layout.heights =</span> <span class="kw">list</span>(<span class="dt">top.padding =</span> <span class="dv">0</span>, <span class="dt">bottom.padding =</span> <span class="dv">0</span>))</span>
-<span id="cb101-4"><a href="glmm-poisson-lognormale.html#cb101-4"></a>r2 &lt;-<span class="st"> </span><span class="kw">ranef</span>(mpl1, <span class="dt">condVar =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb101-5"><a href="glmm-poisson-lognormale.html#cb101-5"></a>d2 &lt;-<span class="st"> </span><span class="kw">dotplot</span>(r2, <span class="dt">par.settings =</span> pp)</span>
-<span id="cb101-6"><a href="glmm-poisson-lognormale.html#cb101-6"></a></span>
-<span id="cb101-7"><a href="glmm-poisson-lognormale.html#cb101-7"></a><span class="kw">grid.arrange</span>(d2<span class="op">$</span>gen, d2<span class="op">$</span>popu, <span class="dt">nrow =</span> <span class="dv">1</span>)</span></code></pre></div>
-<p><img src="book-fr_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="glmm-poisson-lognormale.html#cb99-1"></a><span class="co"># dotplot code</span></span>
+<span id="cb99-2"><a href="glmm-poisson-lognormale.html#cb99-2"></a>pp &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">layout.widths =</span> <span class="kw">list</span>(<span class="dt">left.padding =</span> <span class="dv">0</span>, <span class="dt">right.padding =</span> <span class="dv">0</span>), </span>
+<span id="cb99-3"><a href="glmm-poisson-lognormale.html#cb99-3"></a>    <span class="dt">layout.heights =</span> <span class="kw">list</span>(<span class="dt">top.padding =</span> <span class="dv">0</span>, <span class="dt">bottom.padding =</span> <span class="dv">0</span>))</span>
+<span id="cb99-4"><a href="glmm-poisson-lognormale.html#cb99-4"></a>r2 &lt;-<span class="st"> </span><span class="kw">ranef</span>(mpl1, <span class="dt">condVar =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb99-5"><a href="glmm-poisson-lognormale.html#cb99-5"></a>d2 &lt;-<span class="st"> </span><span class="kw">dotplot</span>(r2, <span class="dt">par.settings =</span> pp)</span>
+<span id="cb99-6"><a href="glmm-poisson-lognormale.html#cb99-6"></a></span>
+<span id="cb99-7"><a href="glmm-poisson-lognormale.html#cb99-7"></a><span class="kw">grid.arrange</span>(d2<span class="op">$</span>gen, d2<span class="op">$</span>popu, <span class="dt">nrow =</span> <span class="dv">1</span>)</span></code></pre></div>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
 
 </div>
-
-
-
+</div>
 <hr>
 <center> 
   <div class="footer">
@@ -356,7 +407,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
         </div>
       </div>
 <a href="glmm-binomiale-négative.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="sélection-du-modèle.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="modèle-final.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

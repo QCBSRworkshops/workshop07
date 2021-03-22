@@ -427,6 +427,26 @@ control = glmerControl(optimizer = "bobyqa"))
 overdisp_fun(mpl1)
 # Le rapport est maintenant conforme avec notre critère, soit < 1
 
+# popu seulement
+mpl1.popu <- glmer(total.fruits ~ nutrient*amd + rack + status + 
+                     (1|X) +
+                     (1|popu), 
+                     data=dat.tf, family="poisson", control=glmerControl(optimizer="bobyqa"))
+ 
+# gen seulement
+mpl1.gen <-glmer(total.fruits ~ nutrient*amd + rack + status + 
+                   (1|X) +
+                   (1|gen), 
+                   data=dat.tf, family="poisson", control=glmerControl(optimizer="bobyqa"))
+ 
+# Approche AICc
+ICtab(mpl1, mpl1.popu, mpl1.gen, type = c("AICc"))
+
+# Approche fréquentiste (Likelihood Ratio Test)
+anova(mpl1,mpl1.popu)
+
+anova(mpl1,mpl1.gen)
+
 # Visualisons les paramètres du modèle
 
 # Cette librairie n'est pas sur le CRAN! On utilise la librairie `remotes` pour l'installer à partir de GitHub.

@@ -46,7 +46,9 @@ choisir-la-distribution-des-erreurs
 glmm-poisson
 glmm-binomiale-négative
 glmm-poisson-lognormale
-sélection-du-modèle
+intercepts-aléatoires
+représentation-graphique-des-paramètres-du-modèle
+modèle-final
 défi-9
 ressources-additionnelles
 references
