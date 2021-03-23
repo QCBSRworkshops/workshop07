@@ -489,7 +489,10 @@ Let's take a closer look at our final model using the `summary()` function. How 
 # Let's take a closer look at our final model using the `summary()` function. 
 (summ_M8 <- summary(M8))
 ```
+
 **Let's go section by section and try to understand what we are looking at.**
+
+The output is broken up into descriptions of the **Random effects** (things we allow to vary based on the normal distribution) and **Fixed effects** (things we estimate in the same way as classical regression):
 
 <ins> Random effects: </ins>
 
@@ -501,17 +504,20 @@ Let's take a closer look at our final model using the `summary()` function. How 
 
 - `Corr` the correlation between the random interpet and the random slope for a given grouping factor (see [this dicussion](https://stats.stackexchange.com/questions/320978/understanding-and-coding-random-intercept-correlation-lmer)).
 
----
 
 <ins> Fixed effects: </ins>
 
 This part presents the fixed effect estimates. The value of the t statistics [(Student test)](https://en.wikipedia.org/wiki/T-statistic) is shown **without the p-value** (it is a decision from the package authors, see why in [this discussion](https://stats.stackexchange.com/questions/185360/t-value-associated-with-nlme-lme4)).
   
-This statistics could be used as it is. You could also calculate the 95% confidence interval (CI) with this equation:
+These statistics could be used as it is. You could also calculate the 95% confidence interval (CI) with this equation:
     
 $$ CI = Estimate \pm 1.96*Std.Error $$
     
 If 0 is in the interval, then the parameter is not significantly different from zero at a threshold of $\alpha$ = 0.05.
+
+![](images/fig_32_w5.png)
+
+Using our example: To determine if the slope (and therefore the effect of length on trophic position) is significantly different from zero you first have to calculate the confidence interval (CI) for the slope parameter (estimate for Z_Length in the fixed effects section = 0.4223). The CI = Standard Error of the estimate x 1.96 plus or minus the parameter estimate. If the CI overlaps with zero, then the slope is not significantly different from zero at the 0.05 level.
 
 ---
 
