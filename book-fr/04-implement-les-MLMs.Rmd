@@ -486,6 +486,8 @@ Regardons de plus près notre modèle final en utilisant la fonction `summary()`
 
 **Allons-y section par section et essayons de comprendre ce que nous regardons.**
 
+La sortie est divisée en descriptions des effets aléatoires (ce qui peut varier en fonction de la distribution normale) et les effets fixes (ce que nous estimons comme pour une régression classique) :
+
 <ins> Effets aléatoires: </ins>
 
 - `Groups`: facteurs de regroupement
@@ -496,8 +498,6 @@ Regardons de plus près notre modèle final en utilisant la fonction `summary()`
 
 - `Corr` indique la corrélation entre la pente aléatoire et l'ordonnée à l'origine aléatoire pour un groupement donné (voir [cette discussion](https://stats.stackexchange.com/questions/320978/understanding-and-coding-random-intercept-correlation-lmer))
 
-
----
 
 <ins> Effets fixes: </ins>
 
@@ -510,6 +510,10 @@ $$ IC = Estimate \pm 1.96*Std.Error $$
     
 Si 0 est dans cet interval, alors le paramètre n’est pas significativement
 différente de zéro au seuil $\alpha$ = 0.05.
+
+![](images/fig_32_w5.png)
+
+En utilisant notre exemple: Pour déterminer si la pente, et donc l'effet de la longueur sur la position trophique, est significativement différente de zéro, vous devez d'abord calculer l'intervalle de confiance (IC) du paramètre de la pente (estimation pour Z_Length dans la section des effets fixes = 0,4223). CI = l'erreur-type de l'estimation x 1,96 plus ou moins l'estimation du paramètre. Si l’IC inclut zéro, la pente n’est pas significativement différente de zéro au seuil de 0,05.
 
 ---
 
