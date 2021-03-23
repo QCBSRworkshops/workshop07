@@ -280,6 +280,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## optimizer (nloptwrap) convergence code: 0 (OK)
 ## boundary (singular) fit: see ?isSingular</code></pre>
 <p><strong>Let’s go section by section and try to understand what we are looking at.</strong></p>
+<p>The output is broken up into descriptions of the <strong>Random effects</strong> (things we allow to vary based on the normal distribution) and <strong>Fixed effects</strong> (things we estimate in the same way as classical regression):</p>
 <ins>
 Random effects:
 </ins>
@@ -289,14 +290,15 @@ Random effects:
 <li><p><code>Variance</code> the variance of the estimated effect (<code>Std.Dev.</code> is the standard deviation of this estimate)</p></li>
 <li><p><code>Corr</code> the correlation between the random interpet and the random slope for a given grouping factor (see <a href="https://stats.stackexchange.com/questions/320978/understanding-and-coding-random-intercept-correlation-lmer">this dicussion</a>).</p></li>
 </ul>
-<hr />
 <ins>
 Fixed effects:
 </ins>
 <p>This part presents the fixed effect estimates. The value of the t statistics <a href="https://en.wikipedia.org/wiki/T-statistic">(Student test)</a> is shown <strong>without the p-value</strong> (it is a decision from the package authors, see why in <a href="https://stats.stackexchange.com/questions/185360/t-value-associated-with-nlme-lme4">this discussion</a>).</p>
-<p>This statistics could be used as it is. You could also calculate the 95% confidence interval (CI) with this equation:</p>
+<p>These statistics could be used as it is. You could also calculate the 95% confidence interval (CI) with this equation:</p>
 <p><span class="math display">\[ CI = Estimate \pm 1.96*Std.Error \]</span></p>
 <p>If 0 is in the interval, then the parameter is not significantly different from zero at a threshold of <span class="math inline">\(\alpha\)</span> = 0.05.</p>
+<p><img src="images/fig_32_w5.png" /></p>
+<p>Using our example: To determine if the slope (and therefore the effect of length on trophic position) is significantly different from zero you first have to calculate the confidence interval (CI) for the slope parameter (estimate for Z_Length in the fixed effects section = 0.4223). The CI = Standard Error of the estimate x 1.96 plus or minus the parameter estimate. If the CI overlaps with zero, then the slope is not significantly different from zero at the 0.05 level.</p>
 <hr />
 <p><strong>Some useful functions</strong></p>
 <ul>
