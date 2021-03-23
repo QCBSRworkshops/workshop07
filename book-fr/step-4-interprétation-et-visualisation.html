@@ -280,6 +280,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## optimizer (nloptwrap) convergence code: 0 (OK)
 ## boundary (singular) fit: see ?isSingular</code></pre>
 <p><strong>Allons-y section par section et essayons de comprendre ce que nous regardons.</strong></p>
+<p>La sortie est divisée en descriptions des effets aléatoires (ce qui peut varier en fonction de la distribution normale) et les effets fixes (ce que nous estimons comme pour une régression classique) :</p>
 <ins>
 Effets aléatoires:
 </ins>
@@ -289,7 +290,6 @@ Effets aléatoires:
 <li><p><code>Variance</code> la variance estimée de l’effet (<code>Std.Dev.</code> est l’écart type de cette valeur)</p></li>
 <li><p><code>Corr</code> indique la corrélation entre la pente aléatoire et l’ordonnée à l’origine aléatoire pour un groupement donné (voir <a href="https://stats.stackexchange.com/questions/320978/understanding-and-coding-random-intercept-correlation-lmer">cette discussion</a>)</p></li>
 </ul>
-<hr />
 <ins>
 Effets fixes:
 </ins>
@@ -299,6 +299,8 @@ l’intervalle de confiance (IC) à 95% avec cette table en utilisant:</p>
 <p><span class="math display">\[ IC = Estimate \pm 1.96*Std.Error \]</span></p>
 <p>Si 0 est dans cet interval, alors le paramètre n’est pas significativement
 différente de zéro au seuil <span class="math inline">\(\alpha\)</span> = 0.05.</p>
+<p><img src="images/fig_32_w5.png" /></p>
+<p>En utilisant notre exemple: Pour déterminer si la pente, et donc l’effet de la longueur sur la position trophique, est significativement différente de zéro, vous devez d’abord calculer l’intervalle de confiance (IC) du paramètre de la pente (estimation pour Z_Length dans la section des effets fixes = 0,4223). CI = l’erreur-type de l’estimation x 1,96 plus ou moins l’estimation du paramètre. Si l’IC inclut zéro, la pente n’est pas significativement différente de zéro au seuil de 0,05.</p>
 <hr />
 <p><strong>Quelques fonctions utiles</strong></p>
 <ul>
