@@ -16,7 +16,7 @@ output:
 ---
 class: inverse, center, middle
 
-```{r setup, echo = FALSE, echo = FALSE, message=FALSE, warning=FALSE, results=0}
+```{r setup, echo = FALSE, include = FALSE, message=FALSE, warning=FALSE, results=0}
 knitr::opts_chunk$set(
   comment = "#",
   collapse = TRUE,
@@ -35,7 +35,7 @@ options(repos = structure(
 
 # Install xaringanExtra
 
-if(nzchar(system.file(package = "xaringanExtra")) == FALSE) {remotes::install_github("gadenbuie/xaringanExtra", upgrade = "always")}
+if(nzchar(system.file(package = "xaringanExtra")) == FALSE) {remotes::install_github("gadenbuie/xaringanExtra", upgrade = "always", quiet = TRUE)}
 
 # Include copy-to-clipboard icons
 
