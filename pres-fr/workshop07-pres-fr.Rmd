@@ -55,13 +55,17 @@ mypar = list(mar = c(3, 3, 1, 0.5), mgp = c(1.6, 0.3, 0), tck = -.02)
 ```{r install_pkgs, message = FALSE, warning = FALSE, include = FALSE, results = 0}
 # Standard procedure to check and install packages and their dependencies, if needed
 
-list.of.packages <- c("ggplot2", 
-                   "lme4", 
-                   "MuMIn", 
-                   'MASS', 
-                   'vcdExtra', 
-                   'bbmle', 
-                   'DescTools')
+list.of.packages <- c("lme4",
+                      "AICcmodavg",
+                      "MASS",
+                      "vcdExtra",
+                      "bbmle", 
+                      "MuMIn",
+                      "ggplot2",
+                      "DescTools",
+                      "remotes",
+                      "gridExtra",
+                      "lattice")
 
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 
@@ -130,13 +134,18 @@ Pour suivre cet atelier, il est nécessaire d'avoir téléchargé et installé l
 Vous devez également utiliser les paquets suivants :
 
 
-* [ggplot2](https://cran.r-project.org/package=ggplot2)
-* [lme4](https://cran.r-project.org/package=lme4)
-* [MuMIn](https://cran.r-project.org/package=MuMIn)
-* [MASS](https://cran.r-project.org/package=MASS)
-* [vcdExtra](https://cran.r-project.org/package=vcdExtra)
-* [bbmle](https://cran.r-project.org/package=bbmle)
-* [DescTools](https://cran.r-project.org/package=DescTools)
+* [lme4](http://cran.r-project.org/web/packages/lme4/index.html)
+* [AICcmodavg](http://cran.r-project.org/web/packages/AICcmodavg/index.html)
+* [MASS](http://cran.r-project.org/web/packages/MASS/index.html)
+* [vcdExtra](http://cran.r-project.org/web/packages/vcdExtra/index.html)
+* [bbmle](http://cran.r-project.org/web/packages/bbmle/index.html)
+* [MuMIn](http://cran.r-project.org/web/packages/MuMIn/index.html)
+* [ggplot2](http://cran.r-project.org/web/packages/ggplot2/index.html)
+* [DescTools](http://cran.r-project.org/web/packages/DescTools/index.html)
+* [remotes](http://cran.r-project.org/web/packages/remotes/index.html)
+* [gridExtra](http://cran.r-project.org/web/packages/gridExtra/index.html)
+* [lattice](http://cran.r-project.org/web/packages/lattice/index.html)
+
 
 ]
 
@@ -145,17 +154,23 @@ Vous devez également utiliser les paquets suivants :
 Pour les installer à partir du CRAN, exécutez :
 
 ```{r eval = FALSE}
-install.packages(
-  c("ggplot2", 
-    "lme4", 
-    "MuMIn", 
-    'MASS', 
-    'vcdExtra', 
-    'bbmle', 
-    'DescTools')
-)
+install.packages(c("lme4",
+                      "AICcmodavg",
+                      "MASS",
+                      "vcdExtra",
+                      "bbmle", 
+                      "MuMIn",
+                      "ggplot2",
+                      "DescTools",
+                      "remotes",
+                      "gridExtra",
+                      "lattice"))
 ```
 ]
+
+---
+
+# Matériel requis
 
 <br>
 
