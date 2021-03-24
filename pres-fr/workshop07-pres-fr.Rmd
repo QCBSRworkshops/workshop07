@@ -154,19 +154,23 @@ Vous devez également utiliser les paquets suivants :
 Pour les installer à partir du CRAN, exécutez :
 
 ```{r eval = FALSE}
-install.packages("lme4")
-install.packages("AICcmodavg")
-install.packages("MASS")
-install.packages("vcdExtra")
-install.packages("bbmle")
-install.packages("MuMIn")
-install.packages("ggplot2")
-install.packages("DescTools")
-install.packages("remotes")
-install.packages("gridExtra")
-install.packages("lattice")
+install.packages(c("lme4",
+                      "AICcmodavg",
+                      "MASS",
+                      "vcdExtra",
+                      "bbmle", 
+                      "MuMIn",
+                      "ggplot2",
+                      "DescTools",
+                      "remotes",
+                      "gridExtra",
+                      "lattice"))
 ```
 ]
+
+---
+
+# Matériel requis
 
 <br>
 
