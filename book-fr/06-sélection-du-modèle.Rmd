@@ -1,0 +1,131 @@
+
+# Modèle final
+
+Les même méthodes peuvent être utilisées avec un GLMM ou un LMM pour choisir entre des modèles avec différentes ordonnées à l'origine et/ou pentes aléatoires ainsi que pour choisir les effets fixes à conserver dans le modèle final.
+
+En voici deux:
+
+- une **approche de la théorie de l'information** (e.g., AICc - Atelier 5)
+- une **approche fréquentiste** (où l'importance de chaque terme est évaluée en faisant un test de rapport de vraisemblance; LRT, avec la fonction `anova()`)
+
+---
+
+Nous dérivons d'abord les modèles potentiels et les comparons en utilisant l'AICc:
+
+```{r, echo = TRUE, eval = TRUE}
+mpl1 <- glmer(total.fruits ~ nutrient*amd + rack + status +
+              (1|X) +
+              (1|popu)+
+              (1|gen),
+data = dat.tf, family = "poisson",
+control = glmerControl(optimizer = "bobyqa"))
+
+mpl2 <- update(mpl1, . ~ . - rack) # modèle sans rack
+mpl3 <- update(mpl1, . ~ . - status) # modèle sans status
+mpl4 <- update(mpl1, . ~ . - amd:nutrient) # modèle sans interaction amd:nutrient
+
+aic_tab  <- MuMIn::model.sel(mpl1, mpl2, mpl3, mpl4)
+(round(aic_table <- aic_tab[ , c("AICc", "delta", "df")], digits = 2))
+```
+
+*Nous ne couvrons pas tous les modèles possibles ci-dessus, cependant, l'interaction `amd:nutriments` ne peut être évaluée que si les effets additifs de amd et de nutriments sont présents dans le modèle.*
+
+Nous pouvons aussi utiliser les fonctions `drop1()` et `dfun()` pour évaluer nos effets fixes (`dfun()` convertit les valeurs AIC retournées par `drop1()` en valeurs $\Delta$AIC)
+
+```{r, echo = TRUE, eval = TRUE}
+dd_LRT <- drop1(mpl1, test = "Chisq")
+(dd_AIC <- dfun(drop1(mpl1)))
+```
+
+- Fort effet de **rack** (dAIC = 55.08 si on enlève cette variable)
+- Effets de **status** et de l'**interaction** sont faibles (dAIC < 2)
+
+---
+
+Commençons par **enlever l'interaction non significative** afin de tester les effets principaux de nutriments et d'herbivorie.
+
+```{r, echo = TRUE, eval = TRUE}
+mpl2 <- update(mpl1, . ~ . - amd:nutrient)
+
+mpl3 <- update(mpl2, . ~ . - rack) # pas de rack ou d'interaction
+mpl4 <- update(mpl2, . ~ . - status) # pas de status ou d'interaction
+mpl5 <- update(mpl2, . ~ . - nutrient) # pas de nutrient ou d'interaction
+mpl6 <- update(mpl2, . ~ . - amd) # pas d'herbivorie ou d'interaction
+```
+
+Sélectionnez le meilleur modèle avec la méthode de votre choix:
+
+<ins> Méthode par AICc </ins>
+
+```{r, echo = TRUE, eval = TRUE}
+aic_tab2  <- MuMIn::model.sel(mpl2, mpl3, mpl4, mpl5, mpl6)
+(round(aic_table2 <- aic_tab2[ , c("AICc", "delta", "df")], digits = 2))
+```
+
+<ins> Méthode avec `drop1()` </ins>
+
+```{r, echo = TRUE, eval = TRUE}
+dd_LRT2 <- drop1(mpl2, test = "Chisq")
+dd_AIC2 <- dfun(drop1(mpl2))
+```
+
+**Quels sont nos constats ?**
+
+Les **nutriments** et l'**herbivorie** ont un effet important (grand changement d'AIC de $135.6$ (`mpl5`) et $10.2$ (`mpl6`) si l'un ou l'autre sont supprimés, respectivement).
+
+
+**Notre modèle final inclut donc :**
+
+Effets fixes
+* nutriments, 
+* herbivorie
+* la variable nuisance de rack. 
+
+Effets aléatoires 
+* effet du niveau d'observation `(1|X)` 
+* populations `(1|popu)` 
+* génotypes `(1|gen)`
+
+## Défi 9 
+
+En utilisant l'ensemble de données `inverts` (temps de développement larvaire (`PLD`) de 74 espèces d'invertébrés et vertébrés marins élevés à différentes températures et temps), répondez aux questions suivantes:
+
+- Quel est l'effet du type d'alimentation et du climat (**effets fixes**) sur `PLD`?
+- Est-ce que cette relation varie selon les taxons (**effets aléatoires**)?
+- Quelle est la **meilleure famille de distributions** pour ces données?
+- Finalement, une fois que vous avez déterminé la meilleure famille de distribution, re-évaluez vos effets fixes et aléatoires.
+
+
+#### **Défi 9 Solution:** {-}
+
+```{r, echo = TRUE, eval = TRUE}
+# inverts <- read.csv('data/inverts.csv', header = TRUE)
+# head(inverts)
+# table(inverts$temp, inverts$feeding.type)
+
+# mod.glm <- glm(PLD ~ temp + feeding.type, family = poisson(), data = inverts)
+# summary(mod.glm)
+# drop1(mod.glm, test = "Chisq")
+
+# boxplot(PLD ~ temp,  data = inverts)
+# boxplot(PLD ~ feeding.type,  data = inverts)
+
+# boxplot(predict(mod.glm, type = "response")~inverts$temp)
+
+# plot()
+
+# modglm <- glm(PLD ~ temp + feeding.type, family = poisson(), data = inverts)
+
+# r2 <- ranef(mpl1, condVar = TRUE)
+# d2 <- dotplot(r2, par.settings = pp)
+
+# plot(aggregate(PLD ~ taxon, FUN = mean, data = inverts)[,2], aggregate(PLD ~ taxon, FUN = var, data = inverts)[,2], pch = 19)
+# abline(a = 0, b = 1, lty = 2)
+
+# mod.glmer <- glmer.nb(PLD ~ temp + feeding.type + (1|taxon), data = inverts)
+# mod.glm <- glm.nb(PLD ~ temp + feeding.type, family = poisson(), data = inverts)
+
+# plot(aggregate(PLD ~ taxon, FUN = var, data = inverts)[,2], aggregate(PLD ~ taxon, FUN = mean, data = inverts)[,2])
+# abline(a = 0, b = 1, lty = 2 )
+```
+

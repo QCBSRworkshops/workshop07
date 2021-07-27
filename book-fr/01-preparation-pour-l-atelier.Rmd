@@ -1,0 +1,77 @@
+# (PART\*) Modèles linéaires à effets mixtes (MLM) en `R` {-}
+
+
+# Objectifs d'apprentissage
+
+Les modèles à effets mixtes permettent aux écologistes de surmonter un certain nombre de limitations liées aux modèles linéaires traditionnels. 
+
+Dans cet atelier, vous apprendrez à déterminer si vous devez utiliser un modèle à effets mixtes pour analyser vos données. En particulier, nous allons:
+
+**1.** Décrire les modèles (généralisés) à effets mixtes
+
+**2.** Identifier les situations dans lesquelles l'utilisation d'effets mixtes est appropriée
+
+**3.** Construire des modèles linéaires mixtes avec `R`
+
+**4.** Exécuter des modèles linéaires généralisés mixtes de base avec `R`
+
+**5.** Valider, interpréter et visualiser les modèles mixtes avec `R`
+
+
+# Préparez-vous pour cet atelier
+
+Pour vous préparer pour cet atelier, téléchargez et installez les dernières versions de RStudio et de `R`. Télécharger également les données et quelques fonctions additionnelles que nous utiliserons au cours de cet atelier:
+
+-    [Script R ](https://qcbsrworkshops.github.io/workshop07/book-fr/workshop07-script-fr.R)
+-    [Données: Poissons](https://raw.githubusercontent.com/QCBSRworkshops/workshop07/main/book-fr/data/qcbs_w7_data.csv)
+-    [Données: Arabidopsis](https://raw.githubusercontent.com/QCBSRworkshops/workshop07/main/book-fr/data/banta_totalfruits.csv)
+-    [Données: Invertébrés](https://raw.githubusercontent.com/QCBSRworkshops/workshop07/main/book-fr/data/inverts.csv)
+-    [glmm_funs](https://raw.githubusercontent.com/QCBSRworkshops/workshop07/main/book-fr/data/glmm_funs.R) (Code pour la section sur les GLMMs)
+
+
+Cet atelier nécessite les paquets `R` suivants:
+
+-    [lme4](http://cran.r-project.org/web/packages/lme4/index.html)
+-    [AICcmodavg](http://cran.r-project.org/web/packages/AICcmodavg/index.html)
+-    [MASS](http://cran.r-project.org/web/packages/MASS/index.html)
+-    [vcdExtra](http://cran.r-project.org/web/packages/vcdExtra/index.html)
+-    [bbmle](http://cran.r-project.org/web/packages/bbmle/index.html)
+-    [MuMIn](http://cran.r-project.org/web/packages/MuMIn/index.html)
+-    [ggplot2](http://cran.r-project.org/web/packages/ggplot2/index.html)
+-    [DescTools](http://cran.r-project.org/web/packages/DescTools/index.html)
+-    [remotes](http://cran.r-project.org/web/packages/remotes/index.html)
+-    [gridExtra](http://cran.r-project.org/web/packages/gridExtra/index.html)
+-    [lattice](http://cran.r-project.org/web/packages/lattice/index.html)
+
+Pour les installer à partir de CRAN, roulez:
+
+```{r, echo = TRUE, eval = TRUE, message=FALSE, warning=FALSE}
+install.packages("lme4")
+install.packages("AICcmodavg")
+install.packages("MASS")
+install.packages("vcdExtra")
+install.packages("bbmle")
+install.packages("MuMIn")
+install.packages("ggplot2")
+install.packages("DescTools")
+install.packages("remotes")
+install.packages("gridExtra")
+install.packages("lattice")
+```
+
+Ensuite, chargez ces paquets:
+
+```{r, echo = TRUE, eval = TRUE, message=FALSE, warning=FALSE}
+library(lme4)
+library(AICcmodavg)
+library(MASS)
+library(vcdExtra)
+library(bbmle)
+library(MuMIn)
+library(ggplot2)
+library(DescTools)
+library(remotes)
+library(gridExtra)
+library(lattice)
+```
+
