@@ -6,12 +6,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapitre 13 Introduction aux GLMM | Atelier 7: Modèles linéaires et généralisés linéaires mixtes</title>
   <meta name="description" content="Modèles linéaires et généralisés linéaires mixtes" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapitre 13 Introduction aux GLMM | Atelier 7: Modèles linéaires et généralisés linéaires mixtes" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://github.com/qcbsRworkshops/" />
-  <meta property="og:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
+  <meta property="og:image" content="https://github.com/qcbsRworkshops//assets/images/logo/csbq_logo_accueil.png" />
   <meta property="og:description" content="Modèles linéaires et généralisés linéaires mixtes" />
   <meta name="github-repo" content="qcbsRworkshops/workshop09" />
 
@@ -19,7 +19,7 @@
   <meta name="twitter:title" content="Chapitre 13 Introduction aux GLMM | Atelier 7: Modèles linéaires et généralisés linéaires mixtes" />
   
   <meta name="twitter:description" content="Modèles linéaires et généralisés linéaires mixtes" />
-  <meta name="twitter:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
+  <meta name="twitter:image" content="https://github.com/qcbsRworkshops//assets/images/logo/csbq_logo_accueil.png" />
 
 <meta name="author" content="Développé et entretenu par les contributeurs et les contributrices de la Série d’ateliers R du CSBQ." />
 
@@ -50,6 +50,8 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -115,6 +117,7 @@ code span.va { color: #000000; } /* Variable */
 code span.vs { color: #4e9a06; } /* VerbatimString */
 code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="assets/qcbs-style.css" type="text/css" />
 </head>
@@ -256,13 +259,13 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>Chargez les données <code>Arabidopsis</code> <code>banta_totalfruits.csv</code> dans <code>R</code>.</p>
 <div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="introduction-aux-glmm.html#cb69-1"></a>dat.tf &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/banta_totalfruits.csv&quot;</span>)</span>
 <span id="cb69-2"><a href="introduction-aux-glmm.html#cb69-2"></a></span>
-<span id="cb69-3"><a href="introduction-aux-glmm.html#cb69-3"></a><span class="co"># Dans cet ensemble de données, les en-têtes de colonne sont</span></span>
-<span id="cb69-4"><a href="introduction-aux-glmm.html#cb69-4"></a><span class="co"># définis comme suit: popu: facteur avec un niveau pour</span></span>
-<span id="cb69-5"><a href="introduction-aux-glmm.html#cb69-5"></a><span class="co"># chaque population gen: facteur avec un niveau pour chaque</span></span>
-<span id="cb69-6"><a href="introduction-aux-glmm.html#cb69-6"></a><span class="co"># génotype nutrient: facteur avec niveau bas (valeur = 1) ou</span></span>
-<span id="cb69-7"><a href="introduction-aux-glmm.html#cb69-7"></a><span class="co"># haut (valeur = 8) amd: facteur précisant l&#39;absence ou la</span></span>
-<span id="cb69-8"><a href="introduction-aux-glmm.html#cb69-8"></a><span class="co"># présence d&#39;herbivorie total.fruits: nombre entier indiquant</span></span>
-<span id="cb69-9"><a href="introduction-aux-glmm.html#cb69-9"></a><span class="co"># le nombre de fruits par plante</span></span></code></pre></div>
+<span id="cb69-3"><a href="introduction-aux-glmm.html#cb69-3"></a><span class="co"># Dans cet ensemble de données, les en-têtes de colonne</span></span>
+<span id="cb69-4"><a href="introduction-aux-glmm.html#cb69-4"></a><span class="co"># sont définis comme suit: popu: facteur avec un niveau</span></span>
+<span id="cb69-5"><a href="introduction-aux-glmm.html#cb69-5"></a><span class="co"># pour chaque population gen: facteur avec un niveau pour</span></span>
+<span id="cb69-6"><a href="introduction-aux-glmm.html#cb69-6"></a><span class="co"># chaque génotype nutrient: facteur avec niveau bas (valeur</span></span>
+<span id="cb69-7"><a href="introduction-aux-glmm.html#cb69-7"></a><span class="co"># = 1) ou haut (valeur = 8) amd: facteur précisant</span></span>
+<span id="cb69-8"><a href="introduction-aux-glmm.html#cb69-8"></a><span class="co"># l&#39;absence ou la présence d&#39;herbivorie total.fruits:</span></span>
+<span id="cb69-9"><a href="introduction-aux-glmm.html#cb69-9"></a><span class="co"># nombre entier indiquant le nombre de fruits par plante</span></span></code></pre></div>
 </div>
 <hr>
 <center> 
@@ -299,6 +302,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": false
 },
 "fontsettings": {
