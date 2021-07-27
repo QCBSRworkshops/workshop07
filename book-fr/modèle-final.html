@@ -255,16 +255,16 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <hr />
 <p>Nous dérivons d’abord les modèles potentiels et les comparons en utilisant l’AICc:</p>
-<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="modèle-final.html#cb107-1"></a>mpl1 &lt;-<span class="st"> </span><span class="kw">glmer</span>(total.fruits <span class="op">~</span><span class="st"> </span>nutrient <span class="op">*</span><span class="st"> </span>amd <span class="op">+</span><span class="st"> </span>rack <span class="op">+</span><span class="st"> </span>status <span class="op">+</span></span>
-<span id="cb107-2"><a href="modèle-final.html#cb107-2"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>X) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>popu) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>gen), <span class="dt">data =</span> dat.tf, <span class="dt">family =</span> <span class="st">&quot;poisson&quot;</span>,</span>
-<span id="cb107-3"><a href="modèle-final.html#cb107-3"></a>    <span class="dt">control =</span> <span class="kw">glmerControl</span>(<span class="dt">optimizer =</span> <span class="st">&quot;bobyqa&quot;</span>))</span>
-<span id="cb107-4"><a href="modèle-final.html#cb107-4"></a></span>
-<span id="cb107-5"><a href="modèle-final.html#cb107-5"></a>mpl2 &lt;-<span class="st"> </span><span class="kw">update</span>(mpl1, . <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>rack)  <span class="co"># modèle sans rack</span></span>
-<span id="cb107-6"><a href="modèle-final.html#cb107-6"></a>mpl3 &lt;-<span class="st"> </span><span class="kw">update</span>(mpl1, . <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>status)  <span class="co"># modèle sans status</span></span>
-<span id="cb107-7"><a href="modèle-final.html#cb107-7"></a>mpl4 &lt;-<span class="st"> </span><span class="kw">update</span>(mpl1, . <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>amd<span class="op">:</span>nutrient)  <span class="co"># modèle sans interaction amd:nutrient</span></span>
-<span id="cb107-8"><a href="modèle-final.html#cb107-8"></a></span>
-<span id="cb107-9"><a href="modèle-final.html#cb107-9"></a>aic_tab &lt;-<span class="st"> </span>MuMIn<span class="op">::</span><span class="kw">model.sel</span>(mpl1, mpl2, mpl3, mpl4)</span>
-<span id="cb107-10"><a href="modèle-final.html#cb107-10"></a>(<span class="kw">round</span>(aic_table &lt;-<span class="st"> </span>aic_tab[, <span class="kw">c</span>(<span class="st">&quot;AICc&quot;</span>, <span class="st">&quot;delta&quot;</span>, <span class="st">&quot;df&quot;</span>)], <span class="dt">digits =</span> <span class="dv">2</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="modèle-final.html#cb100-1"></a>mpl1 &lt;-<span class="st"> </span><span class="kw">glmer</span>(total.fruits <span class="op">~</span><span class="st"> </span>nutrient <span class="op">*</span><span class="st"> </span>amd <span class="op">+</span><span class="st"> </span>rack <span class="op">+</span><span class="st"> </span>status <span class="op">+</span></span>
+<span id="cb100-2"><a href="modèle-final.html#cb100-2"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>X) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>popu) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>gen), <span class="dt">data =</span> dat.tf, <span class="dt">family =</span> <span class="st">&quot;poisson&quot;</span>,</span>
+<span id="cb100-3"><a href="modèle-final.html#cb100-3"></a>    <span class="dt">control =</span> <span class="kw">glmerControl</span>(<span class="dt">optimizer =</span> <span class="st">&quot;bobyqa&quot;</span>))</span>
+<span id="cb100-4"><a href="modèle-final.html#cb100-4"></a></span>
+<span id="cb100-5"><a href="modèle-final.html#cb100-5"></a>mpl2 &lt;-<span class="st"> </span><span class="kw">update</span>(mpl1, . <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>rack)  <span class="co"># modèle sans rack</span></span>
+<span id="cb100-6"><a href="modèle-final.html#cb100-6"></a>mpl3 &lt;-<span class="st"> </span><span class="kw">update</span>(mpl1, . <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>status)  <span class="co"># modèle sans status</span></span>
+<span id="cb100-7"><a href="modèle-final.html#cb100-7"></a>mpl4 &lt;-<span class="st"> </span><span class="kw">update</span>(mpl1, . <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>amd<span class="op">:</span>nutrient)  <span class="co"># modèle sans interaction amd:nutrient</span></span>
+<span id="cb100-8"><a href="modèle-final.html#cb100-8"></a></span>
+<span id="cb100-9"><a href="modèle-final.html#cb100-9"></a>aic_tab &lt;-<span class="st"> </span>MuMIn<span class="op">::</span><span class="kw">model.sel</span>(mpl1, mpl2, mpl3, mpl4)</span>
+<span id="cb100-10"><a href="modèle-final.html#cb100-10"></a>(<span class="kw">round</span>(aic_table &lt;-<span class="st"> </span>aic_tab[, <span class="kw">c</span>(<span class="st">&quot;AICc&quot;</span>, <span class="st">&quot;delta&quot;</span>, <span class="st">&quot;df&quot;</span>)], <span class="dt">digits =</span> <span class="dv">2</span>))</span></code></pre></div>
 <pre><code>##         AICc delta df
 ## mpl1 5015.73  0.00 10
 ## mpl4 5017.11  1.38  9
@@ -272,8 +272,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## mpl2 5070.75 55.02  9</code></pre>
 <p><em>Nous ne couvrons pas tous les modèles possibles ci-dessus, cependant, l’interaction <code>amd:nutriments</code> ne peut être évaluée que si les effets additifs de amd et de nutriments sont présents dans le modèle.</em></p>
 <p>Nous pouvons aussi utiliser les fonctions <code>drop1()</code> et <code>dfun()</code> pour évaluer nos effets fixes (<code>dfun()</code> convertit les valeurs AIC retournées par <code>drop1()</code> en valeurs <span class="math inline">\(\Delta\)</span>AIC)</p>
-<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="modèle-final.html#cb109-1"></a>dd_LRT &lt;-<span class="st"> </span><span class="kw">drop1</span>(mpl1, <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>)</span>
-<span id="cb109-2"><a href="modèle-final.html#cb109-2"></a>(dd_AIC &lt;-<span class="st"> </span><span class="kw">dfun</span>(<span class="kw">drop1</span>(mpl1)))</span></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="modèle-final.html#cb102-1"></a>dd_LRT &lt;-<span class="st"> </span><span class="kw">drop1</span>(mpl1, <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>)</span>
+<span id="cb102-2"><a href="modèle-final.html#cb102-2"></a>(dd_AIC &lt;-<span class="st"> </span><span class="kw">dfun</span>(<span class="kw">drop1</span>(mpl1)))</span></code></pre></div>
 <pre><code>## Single term deletions
 ## 
 ## Model:
@@ -290,18 +290,18 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <hr />
 <p>Commençons par <strong>enlever l’interaction non significative</strong> afin de tester les effets principaux de nutriments et d’herbivorie.</p>
-<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="modèle-final.html#cb111-1"></a>mpl2 &lt;-<span class="st"> </span><span class="kw">update</span>(mpl1, . <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>amd<span class="op">:</span>nutrient)</span>
-<span id="cb111-2"><a href="modèle-final.html#cb111-2"></a></span>
-<span id="cb111-3"><a href="modèle-final.html#cb111-3"></a>mpl3 &lt;-<span class="st"> </span><span class="kw">update</span>(mpl2, . <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>rack)  <span class="co"># pas de rack ou d&#39;interaction</span></span>
-<span id="cb111-4"><a href="modèle-final.html#cb111-4"></a>mpl4 &lt;-<span class="st"> </span><span class="kw">update</span>(mpl2, . <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>status)  <span class="co"># pas de status ou d&#39;interaction</span></span>
-<span id="cb111-5"><a href="modèle-final.html#cb111-5"></a>mpl5 &lt;-<span class="st"> </span><span class="kw">update</span>(mpl2, . <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>nutrient)  <span class="co"># pas de nutrient ou d&#39;interaction</span></span>
-<span id="cb111-6"><a href="modèle-final.html#cb111-6"></a>mpl6 &lt;-<span class="st"> </span><span class="kw">update</span>(mpl2, . <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>amd)  <span class="co"># pas d&#39;herbivorie ou d&#39;interaction</span></span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="modèle-final.html#cb104-1"></a>mpl2 &lt;-<span class="st"> </span><span class="kw">update</span>(mpl1, . <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>amd<span class="op">:</span>nutrient)</span>
+<span id="cb104-2"><a href="modèle-final.html#cb104-2"></a></span>
+<span id="cb104-3"><a href="modèle-final.html#cb104-3"></a>mpl3 &lt;-<span class="st"> </span><span class="kw">update</span>(mpl2, . <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>rack)  <span class="co"># pas de rack ou d&#39;interaction</span></span>
+<span id="cb104-4"><a href="modèle-final.html#cb104-4"></a>mpl4 &lt;-<span class="st"> </span><span class="kw">update</span>(mpl2, . <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>status)  <span class="co"># pas de status ou d&#39;interaction</span></span>
+<span id="cb104-5"><a href="modèle-final.html#cb104-5"></a>mpl5 &lt;-<span class="st"> </span><span class="kw">update</span>(mpl2, . <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>nutrient)  <span class="co"># pas de nutrient ou d&#39;interaction</span></span>
+<span id="cb104-6"><a href="modèle-final.html#cb104-6"></a>mpl6 &lt;-<span class="st"> </span><span class="kw">update</span>(mpl2, . <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>amd)  <span class="co"># pas d&#39;herbivorie ou d&#39;interaction</span></span></code></pre></div>
 <p>Sélectionnez le meilleur modèle avec la méthode de votre choix:</p>
 <ins>
 Méthode par AICc
 </ins>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="modèle-final.html#cb112-1"></a>aic_tab2 &lt;-<span class="st"> </span>MuMIn<span class="op">::</span><span class="kw">model.sel</span>(mpl2, mpl3, mpl4, mpl5, mpl6)</span>
-<span id="cb112-2"><a href="modèle-final.html#cb112-2"></a>(<span class="kw">round</span>(aic_table2 &lt;-<span class="st"> </span>aic_tab2[, <span class="kw">c</span>(<span class="st">&quot;AICc&quot;</span>, <span class="st">&quot;delta&quot;</span>, <span class="st">&quot;df&quot;</span>)], <span class="dt">digits =</span> <span class="dv">2</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="modèle-final.html#cb105-1"></a>aic_tab2 &lt;-<span class="st"> </span>MuMIn<span class="op">::</span><span class="kw">model.sel</span>(mpl2, mpl3, mpl4, mpl5, mpl6)</span>
+<span id="cb105-2"><a href="modèle-final.html#cb105-2"></a>(<span class="kw">round</span>(aic_table2 &lt;-<span class="st"> </span>aic_tab2[, <span class="kw">c</span>(<span class="st">&quot;AICc&quot;</span>, <span class="st">&quot;delta&quot;</span>, <span class="st">&quot;df&quot;</span>)], <span class="dt">digits =</span> <span class="dv">2</span>))</span></code></pre></div>
 <pre><code>##         AICc  delta df
 ## mpl2 5017.11   0.00  9
 ## mpl4 5018.28   1.17  7
@@ -311,8 +311,8 @@ Méthode par AICc
 <ins>
 Méthode avec <code>drop1()</code>
 </ins>
-<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="modèle-final.html#cb114-1"></a>dd_LRT2 &lt;-<span class="st"> </span><span class="kw">drop1</span>(mpl2, <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>)</span>
-<span id="cb114-2"><a href="modèle-final.html#cb114-2"></a>dd_AIC2 &lt;-<span class="st"> </span><span class="kw">dfun</span>(<span class="kw">drop1</span>(mpl2))</span></code></pre></div>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="modèle-final.html#cb107-1"></a>dd_LRT2 &lt;-<span class="st"> </span><span class="kw">drop1</span>(mpl2, <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>)</span>
+<span id="cb107-2"><a href="modèle-final.html#cb107-2"></a>dd_AIC2 &lt;-<span class="st"> </span><span class="kw">dfun</span>(<span class="kw">drop1</span>(mpl2))</span></code></pre></div>
 <p><strong>Quels sont nos constats ?</strong></p>
 <p>Les <strong>nutriments</strong> et l’<strong>herbivorie</strong> ont un effet important (grand changement d’AIC de <span class="math inline">\(135.6\)</span> (<code>mpl5</code>) et <span class="math inline">\(10.2\)</span> (<code>mpl6</code>) si l’un ou l’autre sont supprimés, respectivement).</p>
 <p><strong>Notre modèle final inclut donc :</strong></p>
@@ -335,37 +335,37 @@ Méthode avec <code>drop1()</code>
 </ul>
 <div id="défi-9-solution" class="section level4 unnumbered">
 <h4><strong>Défi 9 Solution:</strong></h4>
-<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="modèle-final.html#cb115-1"></a><span class="co"># inverts &lt;- read.csv(&#39;data/inverts.csv&#39;, header = TRUE)</span></span>
-<span id="cb115-2"><a href="modèle-final.html#cb115-2"></a><span class="co"># head(inverts) table(inverts$temp, inverts$feeding.type)</span></span>
-<span id="cb115-3"><a href="modèle-final.html#cb115-3"></a></span>
-<span id="cb115-4"><a href="modèle-final.html#cb115-4"></a><span class="co"># mod.glm &lt;- glm(PLD ~ temp + feeding.type, family =</span></span>
-<span id="cb115-5"><a href="modèle-final.html#cb115-5"></a><span class="co"># poisson(), data = inverts) summary(mod.glm)</span></span>
-<span id="cb115-6"><a href="modèle-final.html#cb115-6"></a><span class="co"># drop1(mod.glm, test = &#39;Chisq&#39;)</span></span>
-<span id="cb115-7"><a href="modèle-final.html#cb115-7"></a></span>
-<span id="cb115-8"><a href="modèle-final.html#cb115-8"></a><span class="co"># boxplot(PLD ~ temp, data = inverts) boxplot(PLD ~</span></span>
-<span id="cb115-9"><a href="modèle-final.html#cb115-9"></a><span class="co"># feeding.type, data = inverts)</span></span>
-<span id="cb115-10"><a href="modèle-final.html#cb115-10"></a></span>
-<span id="cb115-11"><a href="modèle-final.html#cb115-11"></a><span class="co"># boxplot(predict(mod.glm, type = &#39;response&#39;)~inverts$temp)</span></span>
-<span id="cb115-12"><a href="modèle-final.html#cb115-12"></a></span>
-<span id="cb115-13"><a href="modèle-final.html#cb115-13"></a><span class="co"># plot()</span></span>
-<span id="cb115-14"><a href="modèle-final.html#cb115-14"></a></span>
-<span id="cb115-15"><a href="modèle-final.html#cb115-15"></a><span class="co"># modglm &lt;- glm(PLD ~ temp + feeding.type, family =</span></span>
-<span id="cb115-16"><a href="modèle-final.html#cb115-16"></a><span class="co"># poisson(), data = inverts)</span></span>
-<span id="cb115-17"><a href="modèle-final.html#cb115-17"></a></span>
-<span id="cb115-18"><a href="modèle-final.html#cb115-18"></a><span class="co"># r2 &lt;- ranef(mpl1, condVar = TRUE) d2 &lt;- dotplot(r2,</span></span>
-<span id="cb115-19"><a href="modèle-final.html#cb115-19"></a><span class="co"># par.settings = pp)</span></span>
-<span id="cb115-20"><a href="modèle-final.html#cb115-20"></a></span>
-<span id="cb115-21"><a href="modèle-final.html#cb115-21"></a><span class="co"># plot(aggregate(PLD ~ taxon, FUN = mean, data =</span></span>
-<span id="cb115-22"><a href="modèle-final.html#cb115-22"></a><span class="co"># inverts)[,2], aggregate(PLD ~ taxon, FUN = var, data =</span></span>
-<span id="cb115-23"><a href="modèle-final.html#cb115-23"></a><span class="co"># inverts)[,2], pch = 19) abline(a = 0, b = 1, lty = 2)</span></span>
-<span id="cb115-24"><a href="modèle-final.html#cb115-24"></a></span>
-<span id="cb115-25"><a href="modèle-final.html#cb115-25"></a><span class="co"># mod.glmer &lt;- glmer.nb(PLD ~ temp + feeding.type +</span></span>
-<span id="cb115-26"><a href="modèle-final.html#cb115-26"></a><span class="co"># (1|taxon), data = inverts) mod.glm &lt;- glm.nb(PLD ~ temp +</span></span>
-<span id="cb115-27"><a href="modèle-final.html#cb115-27"></a><span class="co"># feeding.type, family = poisson(), data = inverts)</span></span>
-<span id="cb115-28"><a href="modèle-final.html#cb115-28"></a></span>
-<span id="cb115-29"><a href="modèle-final.html#cb115-29"></a><span class="co"># plot(aggregate(PLD ~ taxon, FUN = var, data =</span></span>
-<span id="cb115-30"><a href="modèle-final.html#cb115-30"></a><span class="co"># inverts)[,2], aggregate(PLD ~ taxon, FUN = mean, data =</span></span>
-<span id="cb115-31"><a href="modèle-final.html#cb115-31"></a><span class="co"># inverts)[,2]) abline(a = 0, b = 1, lty = 2 )</span></span></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="modèle-final.html#cb108-1"></a><span class="co"># inverts &lt;- read.csv(&#39;data/inverts.csv&#39;, header = TRUE)</span></span>
+<span id="cb108-2"><a href="modèle-final.html#cb108-2"></a><span class="co"># head(inverts) table(inverts$temp, inverts$feeding.type)</span></span>
+<span id="cb108-3"><a href="modèle-final.html#cb108-3"></a></span>
+<span id="cb108-4"><a href="modèle-final.html#cb108-4"></a><span class="co"># mod.glm &lt;- glm(PLD ~ temp + feeding.type, family =</span></span>
+<span id="cb108-5"><a href="modèle-final.html#cb108-5"></a><span class="co"># poisson(), data = inverts) summary(mod.glm)</span></span>
+<span id="cb108-6"><a href="modèle-final.html#cb108-6"></a><span class="co"># drop1(mod.glm, test = &#39;Chisq&#39;)</span></span>
+<span id="cb108-7"><a href="modèle-final.html#cb108-7"></a></span>
+<span id="cb108-8"><a href="modèle-final.html#cb108-8"></a><span class="co"># boxplot(PLD ~ temp, data = inverts) boxplot(PLD ~</span></span>
+<span id="cb108-9"><a href="modèle-final.html#cb108-9"></a><span class="co"># feeding.type, data = inverts)</span></span>
+<span id="cb108-10"><a href="modèle-final.html#cb108-10"></a></span>
+<span id="cb108-11"><a href="modèle-final.html#cb108-11"></a><span class="co"># boxplot(predict(mod.glm, type = &#39;response&#39;)~inverts$temp)</span></span>
+<span id="cb108-12"><a href="modèle-final.html#cb108-12"></a></span>
+<span id="cb108-13"><a href="modèle-final.html#cb108-13"></a><span class="co"># plot()</span></span>
+<span id="cb108-14"><a href="modèle-final.html#cb108-14"></a></span>
+<span id="cb108-15"><a href="modèle-final.html#cb108-15"></a><span class="co"># modglm &lt;- glm(PLD ~ temp + feeding.type, family =</span></span>
+<span id="cb108-16"><a href="modèle-final.html#cb108-16"></a><span class="co"># poisson(), data = inverts)</span></span>
+<span id="cb108-17"><a href="modèle-final.html#cb108-17"></a></span>
+<span id="cb108-18"><a href="modèle-final.html#cb108-18"></a><span class="co"># r2 &lt;- ranef(mpl1, condVar = TRUE) d2 &lt;- dotplot(r2,</span></span>
+<span id="cb108-19"><a href="modèle-final.html#cb108-19"></a><span class="co"># par.settings = pp)</span></span>
+<span id="cb108-20"><a href="modèle-final.html#cb108-20"></a></span>
+<span id="cb108-21"><a href="modèle-final.html#cb108-21"></a><span class="co"># plot(aggregate(PLD ~ taxon, FUN = mean, data =</span></span>
+<span id="cb108-22"><a href="modèle-final.html#cb108-22"></a><span class="co"># inverts)[,2], aggregate(PLD ~ taxon, FUN = var, data =</span></span>
+<span id="cb108-23"><a href="modèle-final.html#cb108-23"></a><span class="co"># inverts)[,2], pch = 19) abline(a = 0, b = 1, lty = 2)</span></span>
+<span id="cb108-24"><a href="modèle-final.html#cb108-24"></a></span>
+<span id="cb108-25"><a href="modèle-final.html#cb108-25"></a><span class="co"># mod.glmer &lt;- glmer.nb(PLD ~ temp + feeding.type +</span></span>
+<span id="cb108-26"><a href="modèle-final.html#cb108-26"></a><span class="co"># (1|taxon), data = inverts) mod.glm &lt;- glm.nb(PLD ~ temp +</span></span>
+<span id="cb108-27"><a href="modèle-final.html#cb108-27"></a><span class="co"># feeding.type, family = poisson(), data = inverts)</span></span>
+<span id="cb108-28"><a href="modèle-final.html#cb108-28"></a></span>
+<span id="cb108-29"><a href="modèle-final.html#cb108-29"></a><span class="co"># plot(aggregate(PLD ~ taxon, FUN = var, data =</span></span>
+<span id="cb108-30"><a href="modèle-final.html#cb108-30"></a><span class="co"># inverts)[,2], aggregate(PLD ~ taxon, FUN = mean, data =</span></span>
+<span id="cb108-31"><a href="modèle-final.html#cb108-31"></a><span class="co"># inverts)[,2]) abline(a = 0, b = 1, lty = 2 )</span></span></code></pre></div>
 
 </div>
 </div>
