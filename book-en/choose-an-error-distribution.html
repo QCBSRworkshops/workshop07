@@ -6,12 +6,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 14 Choose an error distribution | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)</title>
   <meta name="description" content="Linear and generalized linear mixed models (LMM and GLMM)" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 14 Choose an error distribution | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://github.com/qcbsRworkshops/" />
-  <meta property="og:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
+  <meta property="og:image" content="https://github.com/qcbsRworkshops//assets/images/logo/csbq_logo_accueil.png" />
   <meta property="og:description" content="Linear and generalized linear mixed models (LMM and GLMM)" />
   <meta name="github-repo" content="qcbsRworkshops/workshop09" />
 
@@ -19,7 +19,7 @@
   <meta name="twitter:title" content="Chapter 14 Choose an error distribution | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)" />
   
   <meta name="twitter:description" content="Linear and generalized linear mixed models (LMM and GLMM)" />
-  <meta name="twitter:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
+  <meta name="twitter:image" content="https://github.com/qcbsRworkshops//assets/images/logo/csbq_logo_accueil.png" />
 
 <meta name="author" content="Developed and maintained by the contributors of the QCBS R Workshop Series" />
 
@@ -50,6 +50,8 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -115,6 +117,7 @@ code span.va { color: #000000; } /* Variable */
 code span.vs { color: #4e9a06; } /* VerbatimString */
 code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="assets/qcbs-style.css" type="text/css" />
 </head>
@@ -248,11 +251,11 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>In the Arabidopsis dataset, the response variable is count data which suggests we need a <strong>Poisson distribution</strong> (i.e. the variance is equal to the mean).</p>
 <p>Let’s take a look:</p>
 <div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="choose-an-error-distribution.html#cb69-1"></a><span class="co"># Before we go any further, we need to select an error</span></span>
-<span id="cb69-2"><a href="choose-an-error-distribution.html#cb69-2"></a><span class="co"># distribution. This choice will be informed by the structure</span></span>
-<span id="cb69-3"><a href="choose-an-error-distribution.html#cb69-3"></a><span class="co"># of our data.  Our response variable is count data which</span></span>
-<span id="cb69-4"><a href="choose-an-error-distribution.html#cb69-4"></a><span class="co"># suggests we need a Poisson distribution (i.e. the variance</span></span>
-<span id="cb69-5"><a href="choose-an-error-distribution.html#cb69-5"></a><span class="co"># is equal to the mean).</span></span>
-<span id="cb69-6"><a href="choose-an-error-distribution.html#cb69-6"></a><span class="kw">hist</span>(dat.tf<span class="op">$</span>total.fruits, <span class="dt">breaks =</span> <span class="dv">50</span>, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;&quot;</span>, </span>
+<span id="cb69-2"><a href="choose-an-error-distribution.html#cb69-2"></a><span class="co"># distribution. This choice will be informed by the</span></span>
+<span id="cb69-3"><a href="choose-an-error-distribution.html#cb69-3"></a><span class="co"># structure of our data.  Our response variable is count</span></span>
+<span id="cb69-4"><a href="choose-an-error-distribution.html#cb69-4"></a><span class="co"># data which suggests we need a Poisson distribution (i.e.</span></span>
+<span id="cb69-5"><a href="choose-an-error-distribution.html#cb69-5"></a><span class="co"># the variance is equal to the mean).</span></span>
+<span id="cb69-6"><a href="choose-an-error-distribution.html#cb69-6"></a><span class="kw">hist</span>(dat.tf<span class="op">$</span>total.fruits, <span class="dt">breaks =</span> <span class="dv">50</span>, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;&quot;</span>,</span>
 <span id="cb69-7"><a href="choose-an-error-distribution.html#cb69-7"></a>    <span class="dt">xlab =</span> <span class="st">&quot;Total fruits&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Count&quot;</span>)</span></code></pre></div>
 <p><img src="book-en_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
 <p>However, as we will soon see, the variance increases with the mean much more rapidly than expected under the Poisson distribution…</p>
@@ -297,9 +300,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li>Finally, a quadratic relationship between the variance and the mean (i.e. <span class="math inline">\(Var = µ(1 + α) or µ(1 + µ/k)\)</span>) is characteristic of overdispersed data that is driven by an underlying heterogeneity among samples. In this case, the negative binomial (Poisson-gamma) would be more appropriate.</li>
 </ol></li>
 </ul>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="choose-an-error-distribution.html#cb72-1"></a><span class="co"># Run a diagnostic lot of the group variances vs group means</span></span>
-<span id="cb72-2"><a href="choose-an-error-distribution.html#cb72-2"></a><span class="co"># (genotype x nutrient x clipping grouping).  Code used to</span></span>
-<span id="cb72-3"><a href="choose-an-error-distribution.html#cb72-3"></a><span class="co"># produce the plot :</span></span>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="choose-an-error-distribution.html#cb72-1"></a><span class="co"># Run a diagnostic lot of the group variances vs group</span></span>
+<span id="cb72-2"><a href="choose-an-error-distribution.html#cb72-2"></a><span class="co"># means (genotype x nutrient x clipping grouping).  Code</span></span>
+<span id="cb72-3"><a href="choose-an-error-distribution.html#cb72-3"></a><span class="co"># used to produce the plot :</span></span>
 <span id="cb72-4"><a href="choose-an-error-distribution.html#cb72-4"></a><span class="co"># https://github.com/QCBSRworkshops/workshop07/blob/main/pres-fr/data/glmm_e.r</span></span>
 <span id="cb72-5"><a href="choose-an-error-distribution.html#cb72-5"></a><span class="co"># Substantial variation among the sample variances on the</span></span>
 <span id="cb72-6"><a href="choose-an-error-distribution.html#cb72-6"></a><span class="co"># transformed data For example, among genotypes:</span></span>
@@ -326,12 +329,12 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb72-27"><a href="choose-an-error-distribution.html#cb72-27"></a><span class="kw">abline</span>(<span class="dt">a =</span> <span class="dv">0</span>, <span class="dt">b =</span> <span class="dv">1</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span>
 <span id="cb72-28"><a href="choose-an-error-distribution.html#cb72-28"></a><span class="kw">text</span>(<span class="dv">105</span>, <span class="dv">500</span>, <span class="st">&quot;Poisson&quot;</span>)</span>
 <span id="cb72-29"><a href="choose-an-error-distribution.html#cb72-29"></a><span class="kw">curve</span>(phi.fit <span class="op">*</span><span class="st"> </span>x, <span class="dt">col =</span> <span class="dv">2</span>, <span class="dt">add =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb72-30"><a href="choose-an-error-distribution.html#cb72-30"></a><span class="co"># bquote() is used to substitute numeric values in equations</span></span>
-<span id="cb72-31"><a href="choose-an-error-distribution.html#cb72-31"></a><span class="co"># with symbols</span></span>
-<span id="cb72-32"><a href="choose-an-error-distribution.html#cb72-32"></a><span class="kw">text</span>(<span class="dv">110</span>, <span class="dv">3900</span>, <span class="kw">bquote</span>(<span class="kw">paste</span>(<span class="st">&quot;QP: &quot;</span>, sigma<span class="op">^</span><span class="dv">2</span> <span class="op">==</span><span class="st"> </span>.(<span class="kw">round</span>(phi.fit, </span>
+<span id="cb72-30"><a href="choose-an-error-distribution.html#cb72-30"></a><span class="co"># bquote() is used to substitute numeric values in</span></span>
+<span id="cb72-31"><a href="choose-an-error-distribution.html#cb72-31"></a><span class="co"># equations with symbols</span></span>
+<span id="cb72-32"><a href="choose-an-error-distribution.html#cb72-32"></a><span class="kw">text</span>(<span class="dv">110</span>, <span class="dv">3900</span>, <span class="kw">bquote</span>(<span class="kw">paste</span>(<span class="st">&quot;QP: &quot;</span>, sigma<span class="op">^</span><span class="dv">2</span> <span class="op">==</span><span class="st"> </span>.(<span class="kw">round</span>(phi.fit,</span>
 <span id="cb72-33"><a href="choose-an-error-distribution.html#cb72-33"></a>    <span class="dv">1</span>)) <span class="op">*</span><span class="st"> </span>mu)), <span class="dt">col =</span> <span class="dv">2</span>)</span>
 <span id="cb72-34"><a href="choose-an-error-distribution.html#cb72-34"></a><span class="kw">curve</span>(x <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>x<span class="op">/</span>k.fit), <span class="dt">col =</span> <span class="dv">4</span>, <span class="dt">add =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb72-35"><a href="choose-an-error-distribution.html#cb72-35"></a><span class="kw">text</span>(<span class="dv">104</span>, <span class="dv">7200</span>, <span class="kw">paste</span>(<span class="st">&quot;NB: k = &quot;</span>, <span class="kw">round</span>(k.fit, <span class="dv">1</span>), <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>), </span>
+<span id="cb72-35"><a href="choose-an-error-distribution.html#cb72-35"></a><span class="kw">text</span>(<span class="dv">104</span>, <span class="dv">7200</span>, <span class="kw">paste</span>(<span class="st">&quot;NB: k = &quot;</span>, <span class="kw">round</span>(k.fit, <span class="dv">1</span>), <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>),</span>
 <span id="cb72-36"><a href="choose-an-error-distribution.html#cb72-36"></a>    <span class="dt">col =</span> <span class="dv">4</span>)</span>
 <span id="cb72-37"><a href="choose-an-error-distribution.html#cb72-37"></a>mvec &lt;-<span class="st"> </span><span class="dv">0</span><span class="op">:</span><span class="dv">120</span></span>
 <span id="cb72-38"><a href="choose-an-error-distribution.html#cb72-38"></a><span class="kw">lines</span>(mvec, <span class="kw">predict</span>(Lfit, mvec), <span class="dt">col =</span> <span class="dv">5</span>)</span>
@@ -374,6 +377,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": false
 },
 "fontsettings": {

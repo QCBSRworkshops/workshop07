@@ -6,12 +6,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 13 Introduction to GLMM | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)</title>
   <meta name="description" content="Linear and generalized linear mixed models (LMM and GLMM)" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 13 Introduction to GLMM | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://github.com/qcbsRworkshops/" />
-  <meta property="og:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
+  <meta property="og:image" content="https://github.com/qcbsRworkshops//assets/images/logo/csbq_logo_accueil.png" />
   <meta property="og:description" content="Linear and generalized linear mixed models (LMM and GLMM)" />
   <meta name="github-repo" content="qcbsRworkshops/workshop09" />
 
@@ -19,7 +19,7 @@
   <meta name="twitter:title" content="Chapter 13 Introduction to GLMM | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)" />
   
   <meta name="twitter:description" content="Linear and generalized linear mixed models (LMM and GLMM)" />
-  <meta name="twitter:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
+  <meta name="twitter:image" content="https://github.com/qcbsRworkshops//assets/images/logo/csbq_logo_accueil.png" />
 
 <meta name="author" content="Developed and maintained by the contributors of the QCBS R Workshop Series" />
 
@@ -50,6 +50,8 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -115,6 +117,7 @@ code span.va { color: #000000; } /* Variable */
 code span.vs { color: #4e9a06; } /* VerbatimString */
 code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="assets/qcbs-style.css" type="text/css" />
 </head>
@@ -258,10 +261,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb68-2"><a href="introduction-to-glmm.html#cb68-2"></a></span>
 <span id="cb68-3"><a href="introduction-to-glmm.html#cb68-3"></a><span class="co"># In this dataset, the column headers are defined as: popu</span></span>
 <span id="cb68-4"><a href="introduction-to-glmm.html#cb68-4"></a><span class="co"># factor with a level for each population gen factor with a</span></span>
-<span id="cb68-5"><a href="introduction-to-glmm.html#cb68-5"></a><span class="co"># level for each genotype nutrient factor with levels for low</span></span>
-<span id="cb68-6"><a href="introduction-to-glmm.html#cb68-6"></a><span class="co"># (value = 1) or high (value = 8) amd factor with levels for</span></span>
-<span id="cb68-7"><a href="introduction-to-glmm.html#cb68-7"></a><span class="co"># no damage or simulated herbivory total.fruits integer</span></span>
-<span id="cb68-8"><a href="introduction-to-glmm.html#cb68-8"></a><span class="co"># indicating the number of fruits per plant</span></span></code></pre></div>
+<span id="cb68-5"><a href="introduction-to-glmm.html#cb68-5"></a><span class="co"># level for each genotype nutrient factor with levels for</span></span>
+<span id="cb68-6"><a href="introduction-to-glmm.html#cb68-6"></a><span class="co"># low (value = 1) or high (value = 8) amd factor with</span></span>
+<span id="cb68-7"><a href="introduction-to-glmm.html#cb68-7"></a><span class="co"># levels for no damage or simulated herbivory total.fruits</span></span>
+<span id="cb68-8"><a href="introduction-to-glmm.html#cb68-8"></a><span class="co"># integer indicating the number of fruits per plant</span></span></code></pre></div>
 </div>
 <hr>
 <center> 
@@ -298,6 +301,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": false
 },
 "fontsettings": {

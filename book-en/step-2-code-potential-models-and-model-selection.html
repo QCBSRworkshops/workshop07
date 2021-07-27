@@ -6,12 +6,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 10 Step 2. Code potential models and model selection | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)</title>
   <meta name="description" content="Linear and generalized linear mixed models (LMM and GLMM)" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 10 Step 2. Code potential models and model selection | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://github.com/qcbsRworkshops/" />
-  <meta property="og:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
+  <meta property="og:image" content="https://github.com/qcbsRworkshops//assets/images/logo/csbq_logo_accueil.png" />
   <meta property="og:description" content="Linear and generalized linear mixed models (LMM and GLMM)" />
   <meta name="github-repo" content="qcbsRworkshops/workshop09" />
 
@@ -19,7 +19,7 @@
   <meta name="twitter:title" content="Chapter 10 Step 2. Code potential models and model selection | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)" />
   
   <meta name="twitter:description" content="Linear and generalized linear mixed models (LMM and GLMM)" />
-  <meta name="twitter:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
+  <meta name="twitter:image" content="https://github.com/qcbsRworkshops//assets/images/logo/csbq_logo_accueil.png" />
 
 <meta name="author" content="Developed and maintained by the contributors of the QCBS R Workshop Series" />
 
@@ -50,6 +50,8 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -115,6 +117,7 @@ code span.va { color: #000000; } /* Variable */
 code span.vs { color: #4e9a06; } /* VerbatimString */
 code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="assets/qcbs-style.css" type="text/css" />
 </head>
@@ -247,7 +250,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>Translate this model…</strong></p>
 <p><span class="math display">\[TP_{ijk} \sim Length_i + Lake_j + Species_k + \epsilon_{ijk}\]</span></p>
 <p><strong>… into R code</strong></p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="step-2-code-potential-models-and-model-selection.html#cb15-1"></a><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Fish_Species), <span class="dt">data =</span> fish.data, </span>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="step-2-code-potential-models-and-model-selection.html#cb15-1"></a><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Fish_Species), <span class="dt">data =</span> fish.data,</span>
 <span id="cb15-2"><a href="step-2-code-potential-models-and-model-selection.html#cb15-2"></a>    <span class="dt">REML =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML [&#39;lmerMod&#39;]
 ## Formula: Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species)
@@ -298,10 +301,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div id="challenge-4" class="section level2">
 <h2><span class="header-section-number">10.3</span> Challenge 4</h2>
 <p>Re-write the following code so that the <strong>slopes</strong> of the relationship between trophic position and body length <strong>vary by lake and species</strong>:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="step-2-code-potential-models-and-model-selection.html#cb17-1"></a><span class="co"># Challenge 4: Can you re-write this code so that the slopes</span></span>
-<span id="cb17-2"><a href="step-2-code-potential-models-and-model-selection.html#cb17-2"></a><span class="co"># between trophic position and body length vary by lake and</span></span>
-<span id="cb17-3"><a href="step-2-code-potential-models-and-model-selection.html#cb17-3"></a><span class="co"># species?</span></span>
-<span id="cb17-4"><a href="step-2-code-potential-models-and-model-selection.html#cb17-4"></a><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Fish_Species), <span class="dt">data =</span> fish.data, </span>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="step-2-code-potential-models-and-model-selection.html#cb17-1"></a><span class="co"># Challenge 4: Can you re-write this code so that the</span></span>
+<span id="cb17-2"><a href="step-2-code-potential-models-and-model-selection.html#cb17-2"></a><span class="co"># slopes between trophic position and body length vary by</span></span>
+<span id="cb17-3"><a href="step-2-code-potential-models-and-model-selection.html#cb17-3"></a><span class="co"># lake and species?</span></span>
+<span id="cb17-4"><a href="step-2-code-potential-models-and-model-selection.html#cb17-4"></a><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Fish_Species), <span class="dt">data =</span> fish.data,</span>
 <span id="cb17-5"><a href="step-2-code-potential-models-and-model-selection.html#cb17-5"></a>    <span class="dt">REML =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML [&#39;lmerMod&#39;]
 ## Formula: Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species)
@@ -320,7 +323,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div id="challenge-4-solution" class="section level4 unnumbered">
 <h4><strong>Challenge 4 Solution:</strong></h4>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="step-2-code-potential-models-and-model-selection.html#cb19-1"></a><span class="co"># Challenge 4 solution:</span></span>
-<span id="cb19-2"><a href="step-2-code-potential-models-and-model-selection.html#cb19-2"></a><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Lake) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span></span>
+<span id="cb19-2"><a href="step-2-code-potential-models-and-model-selection.html#cb19-2"></a><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Lake) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span></span>
 <span id="cb19-3"><a href="step-2-code-potential-models-and-model-selection.html#cb19-3"></a><span class="st">    </span>Fish_Species), <span class="dt">data =</span> fish.data, <span class="dt">REML =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <pre><code>## boundary (singular) fit: see ?isSingular</code></pre>
 <pre><code>## Linear mixed model fit by REML [&#39;lmerMod&#39;]
@@ -347,9 +350,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">10.4</span> Challenge 5</h2>
 <p>To determine if you have built the best mixed model based on your prior knowledge, you should compare this <em>a priori</em> model to other alternative models.</p>
 <p>With the dataset you are working on, there are several alternative models that might better fit your data. For challenge 5, make a list of 7 alternative models that could be compared to this one:</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="step-2-code-potential-models-and-model-selection.html#cb22-1"></a><span class="co"># Challenge 5: Make a list of 7 alternative models that could</span></span>
-<span id="cb22-2"><a href="step-2-code-potential-models-and-model-selection.html#cb22-2"></a><span class="co"># be compared to this initial model:</span></span>
-<span id="cb22-3"><a href="step-2-code-potential-models-and-model-selection.html#cb22-3"></a><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Fish_Species), <span class="dt">data =</span> fish.data, </span>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="step-2-code-potential-models-and-model-selection.html#cb22-1"></a><span class="co"># Challenge 5: Make a list of 7 alternative models that</span></span>
+<span id="cb22-2"><a href="step-2-code-potential-models-and-model-selection.html#cb22-2"></a><span class="co"># could be compared to this initial model:</span></span>
+<span id="cb22-3"><a href="step-2-code-potential-models-and-model-selection.html#cb22-3"></a><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Fish_Species), <span class="dt">data =</span> fish.data,</span>
 <span id="cb22-4"><a href="step-2-code-potential-models-and-model-selection.html#cb22-4"></a>    <span class="dt">REML =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML [&#39;lmerMod&#39;]
 ## Formula: Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species)
@@ -373,40 +376,40 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb24-2"><a href="step-2-code-potential-models-and-model-selection.html#cb24-2"></a>M0 &lt;-<span class="st"> </span><span class="kw">lm</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length, <span class="dt">data =</span> fish.data)</span></code></pre></div>
 <p>In order to compare this model to the LMMs, it is important to <strong>change the estimation method to ML (<code>REML=FALSE</code>)</strong> for all other models because <code>lm()</code> does not use the same estimation method as <code>lmer()</code>.</p>
 <p>Let’s look at the other models you could have written (note <code>REML = FALSE</code>):</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="step-2-code-potential-models-and-model-selection.html#cb25-1"></a><span class="co"># Challenge 5 solution, other potential models Note that REML</span></span>
-<span id="cb25-2"><a href="step-2-code-potential-models-and-model-selection.html#cb25-2"></a><span class="co"># = FALSE in order to compare with the basic linear model</span></span>
-<span id="cb25-3"><a href="step-2-code-potential-models-and-model-selection.html#cb25-3"></a><span class="co"># where estimation method = ML</span></span>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="step-2-code-potential-models-and-model-selection.html#cb25-1"></a><span class="co"># Challenge 5 solution, other potential models Note that</span></span>
+<span id="cb25-2"><a href="step-2-code-potential-models-and-model-selection.html#cb25-2"></a><span class="co"># REML = FALSE in order to compare with the basic linear</span></span>
+<span id="cb25-3"><a href="step-2-code-potential-models-and-model-selection.html#cb25-3"></a><span class="co"># model where estimation method = ML</span></span>
 <span id="cb25-4"><a href="step-2-code-potential-models-and-model-selection.html#cb25-4"></a></span>
 <span id="cb25-5"><a href="step-2-code-potential-models-and-model-selection.html#cb25-5"></a><span class="co"># Basic linear model / Linear model with no random effects</span></span>
 <span id="cb25-6"><a href="step-2-code-potential-models-and-model-selection.html#cb25-6"></a>M0 &lt;-<span class="st"> </span><span class="kw">lm</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length, <span class="dt">data =</span> fish.data)</span>
 <span id="cb25-7"><a href="step-2-code-potential-models-and-model-selection.html#cb25-7"></a><span class="co"># Full model with varying intercepts</span></span>
-<span id="cb25-8"><a href="step-2-code-potential-models-and-model-selection.html#cb25-8"></a>M1 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Fish_Species) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake), </span>
+<span id="cb25-8"><a href="step-2-code-potential-models-and-model-selection.html#cb25-8"></a>M1 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Fish_Species) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake),</span>
 <span id="cb25-9"><a href="step-2-code-potential-models-and-model-selection.html#cb25-9"></a>    <span class="dt">data =</span> fish.data, <span class="dt">REML =</span> <span class="ot">FALSE</span>)</span>
 <span id="cb25-10"><a href="step-2-code-potential-models-and-model-selection.html#cb25-10"></a><span class="co"># Full model with varying intercepts and slopes</span></span>
-<span id="cb25-11"><a href="step-2-code-potential-models-and-model-selection.html#cb25-11"></a>M2 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Fish_Species) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb25-11"><a href="step-2-code-potential-models-and-model-selection.html#cb25-11"></a>M2 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Fish_Species) <span class="op">+</span></span>
 <span id="cb25-12"><a href="step-2-code-potential-models-and-model-selection.html#cb25-12"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Lake), <span class="dt">data =</span> fish.data, <span class="dt">REML =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <pre><code>## boundary (singular) fit: see ?isSingular</code></pre>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="step-2-code-potential-models-and-model-selection.html#cb27-1"></a><span class="co"># No Lake, varying intercepts only</span></span>
-<span id="cb27-2"><a href="step-2-code-potential-models-and-model-selection.html#cb27-2"></a>M3 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Fish_Species), <span class="dt">data =</span> fish.data, </span>
+<span id="cb27-2"><a href="step-2-code-potential-models-and-model-selection.html#cb27-2"></a>M3 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Fish_Species), <span class="dt">data =</span> fish.data,</span>
 <span id="cb27-3"><a href="step-2-code-potential-models-and-model-selection.html#cb27-3"></a>    <span class="dt">REML =</span> <span class="ot">FALSE</span>)</span>
 <span id="cb27-4"><a href="step-2-code-potential-models-and-model-selection.html#cb27-4"></a><span class="co"># No Species, varying intercepts only</span></span>
 <span id="cb27-5"><a href="step-2-code-potential-models-and-model-selection.html#cb27-5"></a>M4 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake), <span class="dt">data =</span> fish.data, <span class="dt">REML =</span> <span class="ot">FALSE</span>)</span>
 <span id="cb27-6"><a href="step-2-code-potential-models-and-model-selection.html#cb27-6"></a><span class="co"># No Lake, varying intercepts and slopes</span></span>
-<span id="cb27-7"><a href="step-2-code-potential-models-and-model-selection.html#cb27-7"></a>M5 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Fish_Species), <span class="dt">data =</span> fish.data, </span>
+<span id="cb27-7"><a href="step-2-code-potential-models-and-model-selection.html#cb27-7"></a>M5 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Fish_Species), <span class="dt">data =</span> fish.data,</span>
 <span id="cb27-8"><a href="step-2-code-potential-models-and-model-selection.html#cb27-8"></a>    <span class="dt">REML =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <pre><code>## boundary (singular) fit: see ?isSingular</code></pre>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="step-2-code-potential-models-and-model-selection.html#cb29-1"></a><span class="co"># No Species, varying intercepts and slopes</span></span>
-<span id="cb29-2"><a href="step-2-code-potential-models-and-model-selection.html#cb29-2"></a>M6 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Lake), <span class="dt">data =</span> fish.data, </span>
+<span id="cb29-2"><a href="step-2-code-potential-models-and-model-selection.html#cb29-2"></a>M6 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Lake), <span class="dt">data =</span> fish.data,</span>
 <span id="cb29-3"><a href="step-2-code-potential-models-and-model-selection.html#cb29-3"></a>    <span class="dt">REML =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <pre><code>## boundary (singular) fit: see ?isSingular</code></pre>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="step-2-code-potential-models-and-model-selection.html#cb31-1"></a><span class="co"># Full model with varying intercepts and slopes only varying</span></span>
-<span id="cb31-2"><a href="step-2-code-potential-models-and-model-selection.html#cb31-2"></a><span class="co"># by lake</span></span>
-<span id="cb31-3"><a href="step-2-code-potential-models-and-model-selection.html#cb31-3"></a>M7 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Fish_Species) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span></span>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="step-2-code-potential-models-and-model-selection.html#cb31-1"></a><span class="co"># Full model with varying intercepts and slopes only</span></span>
+<span id="cb31-2"><a href="step-2-code-potential-models-and-model-selection.html#cb31-2"></a><span class="co"># varying by lake</span></span>
+<span id="cb31-3"><a href="step-2-code-potential-models-and-model-selection.html#cb31-3"></a>M7 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Fish_Species) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span></span>
 <span id="cb31-4"><a href="step-2-code-potential-models-and-model-selection.html#cb31-4"></a><span class="st">    </span>Lake), <span class="dt">data =</span> fish.data, <span class="dt">REML =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <pre><code>## boundary (singular) fit: see ?isSingular</code></pre>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="step-2-code-potential-models-and-model-selection.html#cb33-1"></a><span class="co"># Full model with varying intercepts and slopes only varying</span></span>
-<span id="cb33-2"><a href="step-2-code-potential-models-and-model-selection.html#cb33-2"></a><span class="co"># by species</span></span>
-<span id="cb33-3"><a href="step-2-code-potential-models-and-model-selection.html#cb33-3"></a>M8 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Fish_Species) <span class="op">+</span><span class="st"> </span></span>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="step-2-code-potential-models-and-model-selection.html#cb33-1"></a><span class="co"># Full model with varying intercepts and slopes only</span></span>
+<span id="cb33-2"><a href="step-2-code-potential-models-and-model-selection.html#cb33-2"></a><span class="co"># varying by species</span></span>
+<span id="cb33-3"><a href="step-2-code-potential-models-and-model-selection.html#cb33-3"></a>M8 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Fish_Species) <span class="op">+</span></span>
 <span id="cb33-4"><a href="step-2-code-potential-models-and-model-selection.html#cb33-4"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake), <span class="dt">data =</span> fish.data, <span class="dt">REML =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <pre><code>## boundary (singular) fit: see ?isSingular</code></pre>
 <p><strong>When fitting LMMs with <code>lmer()</code>, you may encounter some errors or warnings such as:</strong></p>
@@ -429,14 +432,14 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## [1] 77.30499</code></pre>
 <p>To group all AICc values into a single table, use <code>MuMIn::model.sel()</code> to calculate AICc for each model (along with other outputs) and then select only the columns of interest to print in a table.</p>
 <div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="step-2-code-potential-models-and-model-selection.html#cb37-1"></a><span class="co"># To group all AICc values into a single table, we can use</span></span>
-<span id="cb37-2"><a href="step-2-code-potential-models-and-model-selection.html#cb37-2"></a><span class="co"># MuMIn::model.sel() to calculate AICc for each model (along</span></span>
-<span id="cb37-3"><a href="step-2-code-potential-models-and-model-selection.html#cb37-3"></a><span class="co"># with other outputs)</span></span>
-<span id="cb37-4"><a href="step-2-code-potential-models-and-model-selection.html#cb37-4"></a>AIC.table &lt;-<span class="st"> </span>MuMIn<span class="op">::</span><span class="kw">model.sel</span>(M0, M1, M2, M3, M4, M5, M6, M7, </span>
+<span id="cb37-2"><a href="step-2-code-potential-models-and-model-selection.html#cb37-2"></a><span class="co"># MuMIn::model.sel() to calculate AICc for each model</span></span>
+<span id="cb37-3"><a href="step-2-code-potential-models-and-model-selection.html#cb37-3"></a><span class="co"># (along with other outputs)</span></span>
+<span id="cb37-4"><a href="step-2-code-potential-models-and-model-selection.html#cb37-4"></a>AIC.table &lt;-<span class="st"> </span>MuMIn<span class="op">::</span><span class="kw">model.sel</span>(M0, M1, M2, M3, M4, M5, M6, M7,</span>
 <span id="cb37-5"><a href="step-2-code-potential-models-and-model-selection.html#cb37-5"></a>    M8)</span>
 <span id="cb37-6"><a href="step-2-code-potential-models-and-model-selection.html#cb37-6"></a></span>
 <span id="cb37-7"><a href="step-2-code-potential-models-and-model-selection.html#cb37-7"></a><span class="co"># Then we can select only the columns of interest to print</span></span>
-<span id="cb37-8"><a href="step-2-code-potential-models-and-model-selection.html#cb37-8"></a><span class="co"># into a table `df` is the degree of freedom `logLik` is the</span></span>
-<span id="cb37-9"><a href="step-2-code-potential-models-and-model-selection.html#cb37-9"></a><span class="co"># loglikelihood `delta` is the AICc difference with the</span></span>
+<span id="cb37-8"><a href="step-2-code-potential-models-and-model-selection.html#cb37-8"></a><span class="co"># into a table `df` is the degree of freedom `logLik` is</span></span>
+<span id="cb37-9"><a href="step-2-code-potential-models-and-model-selection.html#cb37-9"></a><span class="co"># the loglikelihood `delta` is the AICc difference with the</span></span>
 <span id="cb37-10"><a href="step-2-code-potential-models-and-model-selection.html#cb37-10"></a><span class="co"># lowest value</span></span>
 <span id="cb37-11"><a href="step-2-code-potential-models-and-model-selection.html#cb37-11"></a>(AIC.table &lt;-<span class="st"> </span>AIC.table[, <span class="kw">c</span>(<span class="st">&quot;df&quot;</span>, <span class="st">&quot;logLik&quot;</span>, <span class="st">&quot;AICc&quot;</span>, <span class="st">&quot;delta&quot;</span>)])</span></code></pre></div>
 <pre><code>##    df      logLik      AICc      delta
@@ -449,8 +452,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## M4  4 -224.715763 457.66010 425.813076
 ## M6  6 -224.671201 461.82795 429.980930
 ## M0  3 -236.861362 479.85909 448.012065</code></pre>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="step-2-code-potential-models-and-model-selection.html#cb39-1"></a><span class="co"># For more information on the other outputs/results returned</span></span>
-<span id="cb39-2"><a href="step-2-code-potential-models-and-model-selection.html#cb39-2"></a><span class="co"># by the function `model.sel()`, see `?model.sel`.</span></span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="step-2-code-potential-models-and-model-selection.html#cb39-1"></a><span class="co"># For more information on the other outputs/results</span></span>
+<span id="cb39-2"><a href="step-2-code-potential-models-and-model-selection.html#cb39-2"></a><span class="co"># returned by the function `model.sel()`, see `?model.sel`.</span></span></code></pre></div>
 <p>Where:</p>
 <ul>
 <li><code>df</code> is the degree of freedom</li>
@@ -466,14 +469,14 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li>Let’s take a closer look at M8 and M2. We can exclude other models because they have such higher AICc.</li>
 </ul>
 <p><em>Note that we use now REML (i.e. <code>REML = TRUE</code>) as we are comparing two models with nested random effects and the same fixed effect structure.</em></p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="step-2-code-potential-models-and-model-selection.html#cb40-1"></a><span class="co"># Let&#39;s take a closer look at M8 and M2. We can exclude other</span></span>
-<span id="cb40-2"><a href="step-2-code-potential-models-and-model-selection.html#cb40-2"></a><span class="co"># model because they have such higher AICc Because we are</span></span>
-<span id="cb40-3"><a href="step-2-code-potential-models-and-model-selection.html#cb40-3"></a><span class="co"># comparing two mixed effect models, we can set `REML = TRUE`</span></span>
-<span id="cb40-4"><a href="step-2-code-potential-models-and-model-selection.html#cb40-4"></a><span class="co"># when generating M8 and M2</span></span>
-<span id="cb40-5"><a href="step-2-code-potential-models-and-model-selection.html#cb40-5"></a>M8 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Fish_Species) <span class="op">+</span><span class="st"> </span></span>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="step-2-code-potential-models-and-model-selection.html#cb40-1"></a><span class="co"># Let&#39;s take a closer look at M8 and M2. We can exclude</span></span>
+<span id="cb40-2"><a href="step-2-code-potential-models-and-model-selection.html#cb40-2"></a><span class="co"># other model because they have such higher AICc Because we</span></span>
+<span id="cb40-3"><a href="step-2-code-potential-models-and-model-selection.html#cb40-3"></a><span class="co"># are comparing two mixed effect models, we can set `REML =</span></span>
+<span id="cb40-4"><a href="step-2-code-potential-models-and-model-selection.html#cb40-4"></a><span class="co"># TRUE` when generating M8 and M2</span></span>
+<span id="cb40-5"><a href="step-2-code-potential-models-and-model-selection.html#cb40-5"></a>M8 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Fish_Species) <span class="op">+</span></span>
 <span id="cb40-6"><a href="step-2-code-potential-models-and-model-selection.html#cb40-6"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake), <span class="dt">data =</span> fish.data, <span class="dt">REML =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <pre><code>## boundary (singular) fit: see ?isSingular</code></pre>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="step-2-code-potential-models-and-model-selection.html#cb42-1"></a>M2 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Fish_Species) <span class="op">+</span><span class="st"> </span></span>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="step-2-code-potential-models-and-model-selection.html#cb42-1"></a>M2 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Fish_Species) <span class="op">+</span></span>
 <span id="cb42-2"><a href="step-2-code-potential-models-and-model-selection.html#cb42-2"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Lake), <span class="dt">data =</span> fish.data, <span class="dt">REML =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <pre><code>## boundary (singular) fit: see ?isSingular</code></pre>
 <div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="step-2-code-potential-models-and-model-selection.html#cb44-1"></a><span class="co"># Now let&#39;s print a table in order to compare M2 and M8</span></span>
@@ -486,21 +489,21 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>What is the structure of the best model?</strong></p>
 <div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="step-2-code-potential-models-and-model-selection.html#cb46-1"></a><span class="co"># Let&#39;s take a look at the best model again, what is it&#39;s</span></span>
 <span id="cb46-2"><a href="step-2-code-potential-models-and-model-selection.html#cb46-2"></a><span class="co"># structure?</span></span>
-<span id="cb46-3"><a href="step-2-code-potential-models-and-model-selection.html#cb46-3"></a>M8 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Fish_Species) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb46-3"><a href="step-2-code-potential-models-and-model-selection.html#cb46-3"></a>M8 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Fish_Species) <span class="op">+</span></span>
 <span id="cb46-4"><a href="step-2-code-potential-models-and-model-selection.html#cb46-4"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake), <span class="dt">data =</span> fish.data, <span class="dt">REML =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <pre><code>## boundary (singular) fit: see ?isSingular</code></pre>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="step-2-code-potential-models-and-model-selection.html#cb48-1"></a><span class="co"># Both the intercepts and slopes of the relationship between</span></span>
-<span id="cb48-2"><a href="step-2-code-potential-models-and-model-selection.html#cb48-2"></a><span class="co"># trophic position and length may vary by fish species, but</span></span>
-<span id="cb48-3"><a href="step-2-code-potential-models-and-model-selection.html#cb48-3"></a><span class="co"># only the intercepts may vary by lake.</span></span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="step-2-code-potential-models-and-model-selection.html#cb48-1"></a><span class="co"># Both the intercepts and slopes of the relationship</span></span>
+<span id="cb48-2"><a href="step-2-code-potential-models-and-model-selection.html#cb48-2"></a><span class="co"># between trophic position and length may vary by fish</span></span>
+<span id="cb48-3"><a href="step-2-code-potential-models-and-model-selection.html#cb48-3"></a><span class="co"># species, but only the intercepts may vary by lake.</span></span></code></pre></div>
 <p>Both the intercepts and slopes of the relationship between trophic position and length may vary by fish species, but only the intercepts may vary by lake.</p>
 <div class="two-col">
 <p><img src="images/fig_9_w5.png" /><br />
 <img src="images/fig_8_w5.png" /></p>
 </div>
 <p>Once the best model is selected, the estimation method must be reset to <code>REML = TRUE</code>.</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="step-2-code-potential-models-and-model-selection.html#cb49-1"></a><span class="co"># Once the best model is selected, the estimation method must</span></span>
-<span id="cb49-2"><a href="step-2-code-potential-models-and-model-selection.html#cb49-2"></a><span class="co"># be reset to `REML = TRUE`.</span></span>
-<span id="cb49-3"><a href="step-2-code-potential-models-and-model-selection.html#cb49-3"></a>M8 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Fish_Species) <span class="op">+</span><span class="st"> </span></span>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="step-2-code-potential-models-and-model-selection.html#cb49-1"></a><span class="co"># Once the best model is selected, the estimation method</span></span>
+<span id="cb49-2"><a href="step-2-code-potential-models-and-model-selection.html#cb49-2"></a><span class="co"># must be reset to `REML = TRUE`.</span></span>
+<span id="cb49-3"><a href="step-2-code-potential-models-and-model-selection.html#cb49-3"></a>M8 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Fish_Species) <span class="op">+</span></span>
 <span id="cb49-4"><a href="step-2-code-potential-models-and-model-selection.html#cb49-4"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake), <span class="dt">data =</span> fish.data, <span class="dt">REML =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <pre><code>## boundary (singular) fit: see ?isSingular</code></pre>
 </div>
@@ -540,6 +543,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": false
 },
 "fontsettings": {

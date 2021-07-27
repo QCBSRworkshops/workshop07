@@ -6,12 +6,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 11 Step 3. Model validation | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)</title>
   <meta name="description" content="Linear and generalized linear mixed models (LMM and GLMM)" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 11 Step 3. Model validation | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://github.com/qcbsRworkshops/" />
-  <meta property="og:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
+  <meta property="og:image" content="https://github.com/qcbsRworkshops//assets/images/logo/csbq_logo_accueil.png" />
   <meta property="og:description" content="Linear and generalized linear mixed models (LMM and GLMM)" />
   <meta name="github-repo" content="qcbsRworkshops/workshop09" />
 
@@ -19,7 +19,7 @@
   <meta name="twitter:title" content="Chapter 11 Step 3. Model validation | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)" />
   
   <meta name="twitter:description" content="Linear and generalized linear mixed models (LMM and GLMM)" />
-  <meta name="twitter:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
+  <meta name="twitter:image" content="https://github.com/qcbsRworkshops//assets/images/logo/csbq_logo_accueil.png" />
 
 <meta name="author" content="Developed and maintained by the contributors of the QCBS R Workshop Series" />
 
@@ -50,6 +50,8 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -115,6 +117,7 @@ code span.va { color: #000000; } /* Variable */
 code span.vs { color: #4e9a06; } /* VerbatimString */
 code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="assets/qcbs-style.css" type="text/css" />
 </head>
@@ -286,7 +289,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb53-5"><a href="step-3-model-validation.html#cb53-5"></a><span class="kw">plot</span>(<span class="kw">resid</span>(M8) <span class="op">~</span><span class="st"> </span>fish.data<span class="op">$</span>Z_Length, <span class="dt">xlab =</span> <span class="st">&quot;Length&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Normalized residuals&quot;</span>)</span>
 <span id="cb53-6"><a href="step-3-model-validation.html#cb53-6"></a><span class="kw">abline</span>(<span class="dt">h =</span> <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span>
 <span id="cb53-7"><a href="step-3-model-validation.html#cb53-7"></a></span>
-<span id="cb53-8"><a href="step-3-model-validation.html#cb53-8"></a><span class="kw">boxplot</span>(<span class="kw">resid</span>(M8) <span class="op">~</span><span class="st"> </span>Fish_Species, <span class="dt">data =</span> fish.data, <span class="dt">xlab =</span> <span class="st">&quot;Species&quot;</span>, </span>
+<span id="cb53-8"><a href="step-3-model-validation.html#cb53-8"></a><span class="kw">boxplot</span>(<span class="kw">resid</span>(M8) <span class="op">~</span><span class="st"> </span>Fish_Species, <span class="dt">data =</span> fish.data, <span class="dt">xlab =</span> <span class="st">&quot;Species&quot;</span>,</span>
 <span id="cb53-9"><a href="step-3-model-validation.html#cb53-9"></a>    <span class="dt">ylab =</span> <span class="st">&quot;Normalized residuals&quot;</span>)</span>
 <span id="cb53-10"><a href="step-3-model-validation.html#cb53-10"></a><span class="kw">abline</span>(<span class="dt">h =</span> <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span>
 <span id="cb53-11"><a href="step-3-model-validation.html#cb53-11"></a></span>
@@ -295,9 +298,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="book-en_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
 <div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="step-3-model-validation.html#cb54-1"></a><span class="co"># Homogeneous dispersion of the residuals around 0 means no</span></span>
 <span id="cb54-2"><a href="step-3-model-validation.html#cb54-2"></a><span class="co"># pattern of residuals depending on the variable, therefore</span></span>
-<span id="cb54-3"><a href="step-3-model-validation.html#cb54-3"></a><span class="co"># the assumption is respected!  Note: The clusters are due to</span></span>
-<span id="cb54-4"><a href="step-3-model-validation.html#cb54-4"></a><span class="co"># the data structure, where fish of only 5 size classes</span></span>
-<span id="cb54-5"><a href="step-3-model-validation.html#cb54-5"></a><span class="co"># (large, small, and three groups in between) were captured.</span></span></code></pre></div>
+<span id="cb54-3"><a href="step-3-model-validation.html#cb54-3"></a><span class="co"># the assumption is respected!  Note: The clusters are due</span></span>
+<span id="cb54-4"><a href="step-3-model-validation.html#cb54-4"></a><span class="co"># to the data structure, where fish of only 5 size classes</span></span>
+<span id="cb54-5"><a href="step-3-model-validation.html#cb54-5"></a><span class="co"># (large, small, and three groups in between) were</span></span>
+<span id="cb54-6"><a href="step-3-model-validation.html#cb54-6"></a><span class="co"># captured.</span></span></code></pre></div>
 <p><strong>Homogeneous dispersion of the residuals around 0 means no pattern of residuals depending on the variable, therefore the assumption is respected!</strong></p>
 <p><em>Note: The clusters are due to the data structure, where fish of only 5 size classes (large, small, and three groups in between) were captured.</em></p>
 <p>Now, we should (2) plot residuals vs each covariate not included in the model.</p>
@@ -307,8 +311,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">11.3</span> 3. Check the normality of the model residuals</h2>
 <p>Now we will check the normality of the model residuals as residuals following a normal distribution indicate that the model is not biased.</p>
 <div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="step-3-model-validation.html#cb55-1"></a><span class="co"># Check the normality of the model residuals as residuals</span></span>
-<span id="cb55-2"><a href="step-3-model-validation.html#cb55-2"></a><span class="co"># following a normal distribution indicate that the model is</span></span>
-<span id="cb55-3"><a href="step-3-model-validation.html#cb55-3"></a><span class="co"># not biased.</span></span>
+<span id="cb55-2"><a href="step-3-model-validation.html#cb55-2"></a><span class="co"># following a normal distribution indicate that the model</span></span>
+<span id="cb55-3"><a href="step-3-model-validation.html#cb55-3"></a><span class="co"># is not biased.</span></span>
 <span id="cb55-4"><a href="step-3-model-validation.html#cb55-4"></a><span class="kw">hist</span>(<span class="kw">resid</span>(M8))</span></code></pre></div>
 <p><img src="book-en_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
 <div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="step-3-model-validation.html#cb56-1"></a><span class="co"># The residuals are normal! This means our model is not</span></span>
@@ -351,6 +355,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": false
 },
 "fontsettings": {

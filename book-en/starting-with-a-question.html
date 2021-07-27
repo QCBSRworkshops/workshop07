@@ -6,12 +6,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 4 Starting with a question | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)</title>
   <meta name="description" content="Linear and generalized linear mixed models (LMM and GLMM)" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 4 Starting with a question | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://github.com/qcbsRworkshops/" />
-  <meta property="og:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
+  <meta property="og:image" content="https://github.com/qcbsRworkshops//assets/images/logo/csbq_logo_accueil.png" />
   <meta property="og:description" content="Linear and generalized linear mixed models (LMM and GLMM)" />
   <meta name="github-repo" content="qcbsRworkshops/workshop09" />
 
@@ -19,7 +19,7 @@
   <meta name="twitter:title" content="Chapter 4 Starting with a question | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)" />
   
   <meta name="twitter:description" content="Linear and generalized linear mixed models (LMM and GLMM)" />
-  <meta name="twitter:image" content="https://github.com/qcbsRworkshops/assets/images/logo/csbq_logo_accueil.png" />
+  <meta name="twitter:image" content="https://github.com/qcbsRworkshops//assets/images/logo/csbq_logo_accueil.png" />
 
 <meta name="author" content="Developed and maintained by the contributors of the QCBS R Workshop Series" />
 
@@ -50,6 +50,8 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -115,6 +117,7 @@ code span.va { color: #000000; } /* Variable */
 code span.vs { color: #4e9a06; } /* VerbatimString */
 code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="assets/qcbs-style.css" type="text/css" />
 </head>
@@ -263,15 +266,15 @@ Observe each plot and try to get a sense of what is occurring. A few key questio
 </ul>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="starting-with-a-question.html#cb3-1"></a><span class="co"># Load the dataset</span></span>
 <span id="cb3-2"><a href="starting-with-a-question.html#cb3-2"></a>fish.data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/qcbs_w7_data.csv&quot;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb3-3"><a href="starting-with-a-question.html#cb3-3"></a><span class="co"># This line will vary depending on where your data is saved.</span></span>
-<span id="cb3-4"><a href="starting-with-a-question.html#cb3-4"></a><span class="co"># Check your working directory with getwd() and change it, if</span></span>
-<span id="cb3-5"><a href="starting-with-a-question.html#cb3-5"></a><span class="co"># needed, with setwd()</span></span>
+<span id="cb3-3"><a href="starting-with-a-question.html#cb3-3"></a><span class="co"># This line will vary depending on where your data is</span></span>
+<span id="cb3-4"><a href="starting-with-a-question.html#cb3-4"></a><span class="co"># saved.  Check your working directory with getwd() and</span></span>
+<span id="cb3-5"><a href="starting-with-a-question.html#cb3-5"></a><span class="co"># change it, if needed, with setwd()</span></span>
 <span id="cb3-6"><a href="starting-with-a-question.html#cb3-6"></a></span>
 <span id="cb3-7"><a href="starting-with-a-question.html#cb3-7"></a><span class="co"># Simple theme for all ggplot figures we produce after this</span></span>
-<span id="cb3-8"><a href="starting-with-a-question.html#cb3-8"></a>fig &lt;-<span class="st"> </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(), </span>
-<span id="cb3-9"><a href="starting-with-a-question.html#cb3-9"></a>    <span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(), </span>
-<span id="cb3-10"><a href="starting-with-a-question.html#cb3-10"></a>    <span class="dt">strip.background =</span> <span class="kw">element_blank</span>(), <span class="dt">strip.text.y =</span> <span class="kw">element_text</span>(), </span>
-<span id="cb3-11"><a href="starting-with-a-question.html#cb3-11"></a>    <span class="dt">legend.background =</span> <span class="kw">element_blank</span>(), <span class="dt">legend.key =</span> <span class="kw">element_blank</span>(), </span>
+<span id="cb3-8"><a href="starting-with-a-question.html#cb3-8"></a>fig &lt;-<span class="st"> </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),</span>
+<span id="cb3-9"><a href="starting-with-a-question.html#cb3-9"></a>    <span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(),</span>
+<span id="cb3-10"><a href="starting-with-a-question.html#cb3-10"></a>    <span class="dt">strip.background =</span> <span class="kw">element_blank</span>(), <span class="dt">strip.text.y =</span> <span class="kw">element_text</span>(),</span>
+<span id="cb3-11"><a href="starting-with-a-question.html#cb3-11"></a>    <span class="dt">legend.background =</span> <span class="kw">element_blank</span>(), <span class="dt">legend.key =</span> <span class="kw">element_blank</span>(),</span>
 <span id="cb3-12"><a href="starting-with-a-question.html#cb3-12"></a>    <span class="dt">panel.border =</span> <span class="kw">element_rect</span>(<span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill =</span> <span class="ot">NA</span>))</span>
 <span id="cb3-13"><a href="starting-with-a-question.html#cb3-13"></a></span>
 <span id="cb3-14"><a href="starting-with-a-question.html#cb3-14"></a></span>
@@ -281,15 +284,15 @@ Observe each plot and try to get a sense of what is occurring. A few key questio
 <span id="cb3-18"><a href="starting-with-a-question.html#cb3-18"></a>plot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(Fish_Length, Trophic_Pos), <span class="dt">data =</span> fish.data)</span>
 <span id="cb3-19"><a href="starting-with-a-question.html#cb3-19"></a></span>
 <span id="cb3-20"><a href="starting-with-a-question.html#cb3-20"></a><span class="co"># Plot 1 - All data</span></span>
-<span id="cb3-21"><a href="starting-with-a-question.html#cb3-21"></a>plot <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Length (mm)&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Trophic Position&quot;</span>, </span>
+<span id="cb3-21"><a href="starting-with-a-question.html#cb3-21"></a>plot <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Length (mm)&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Trophic Position&quot;</span>,</span>
 <span id="cb3-22"><a href="starting-with-a-question.html#cb3-22"></a>    <span class="dt">title =</span> <span class="st">&quot;All Data&quot;</span>) <span class="op">+</span><span class="st"> </span>fig</span></code></pre></div>
 <p><img src="book-en_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="starting-with-a-question.html#cb4-1"></a><span class="co"># Plot 2 - By species</span></span>
-<span id="cb4-2"><a href="starting-with-a-question.html#cb4-2"></a>plot <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">facet_wrap</span>(<span class="op">~</span>Fish_Species) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Length (mm)&quot;</span>, </span>
+<span id="cb4-2"><a href="starting-with-a-question.html#cb4-2"></a>plot <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">facet_wrap</span>(<span class="op">~</span>Fish_Species) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Length (mm)&quot;</span>,</span>
 <span id="cb4-3"><a href="starting-with-a-question.html#cb4-3"></a>    <span class="dt">y =</span> <span class="st">&quot;Trophic Position&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;By Species&quot;</span>) <span class="op">+</span><span class="st"> </span>fig</span></code></pre></div>
 <p><img src="book-en_files/figure-html/unnamed-chunk-5-2.png" width="672" /></p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="starting-with-a-question.html#cb5-1"></a><span class="co"># Plot 3 – By lake</span></span>
-<span id="cb5-2"><a href="starting-with-a-question.html#cb5-2"></a>plot <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">facet_wrap</span>(<span class="op">~</span>Lake) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Length (mm)&quot;</span>, </span>
+<span id="cb5-2"><a href="starting-with-a-question.html#cb5-2"></a>plot <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">facet_wrap</span>(<span class="op">~</span>Lake) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Length (mm)&quot;</span>,</span>
 <span id="cb5-3"><a href="starting-with-a-question.html#cb5-3"></a>    <span class="dt">y =</span> <span class="st">&quot;Trophic Position&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;By Lake&quot;</span>) <span class="op">+</span><span class="st"> </span>fig</span></code></pre></div>
 <p><img src="book-en_files/figure-html/unnamed-chunk-5-3.png" width="672" /></p>
 <hr />
@@ -336,6 +339,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": false
 },
 "fontsettings": {
