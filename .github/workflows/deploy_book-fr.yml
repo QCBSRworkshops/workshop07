@@ -121,12 +121,11 @@ jobs:
          name: book-fr # optional
          # Destination path
          path: book-fr/ # optional
-
       - name: 💎 Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
           token: ${{ secrets.ACCESS_TOKEN }}
           branch: gh-pages # The branch the action should deploy to.
-          folder: book-fr/
+          folder: book-fr/_book/
           target-folder: book-fr # The folder the action should deploy
           clean: true
