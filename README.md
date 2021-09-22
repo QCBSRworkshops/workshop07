@@ -27,16 +27,19 @@ FR | [![badge](https://img.shields.io/static/v1?style=flat-square&label=Diapos&m
 
 # Contributors | Contributeurs et contributrices 
 
+This workshop was originally developed by Catherine Baltazar, Dalal Hanna, Jacob Ziegler. Content about GLMMs was developed by Cédric Frenette Dussault, Vincent Fugère, Thomas Lamy, Zofia Taranu.
+
 Since 2014, several QCBS members contributed to consistently and collaboratively develop and update this workshop, as part of the *Learning and Development Award* from the Québec Centre for Biodiversity Science. They were:
 
 |      2022 - 2021 - 2020     |      2019 - 2018 - 2017     |      2016 - 2015 - 2014      |
 |:---------------------------:|:---------------------------:|:----------------------------:|
-| [Maxime Fraser Franco]()    |     [Nicolas Pinceloup]()   | [Catherine Baltazar]() |
-|  [Hassen Allegue]()         |      [Marie Hélène Brice]()  |        [Dalal Hanna]()       |
-|     [Linley Sherin]()       | [...]()                     |       [Jacob Ziegler]()       |
-| [Pedro Henrique P. Braga]() |                             |      [...]()      |
-|   [Katherine Hébert]()      |                             |                              |
-|   [Kevin Cazelles]()        |                             |                              |
+| Maxime Fraser Franco    |     Nicolas Pinceloup   | Catherine Baltazar |
+|  Hassen Allegue         |      Marie Hélène Brice  |        Dalal Hanna       |
+|     Linley Sherin       |                      |       Jacob Ziegler       |
+| Pedro Henrique P. Braga |                             |      Cédric Frenette Dussault  |
+|   Katherine Hébert      |                             |    Vincent Fugère         |
+|   Kevin Cazelles        |                             |    Thomas Lamy      |
+|           |                             |    Zofia Taranu      |
 
 # Development status
 
