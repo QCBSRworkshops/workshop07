@@ -89,6 +89,6 @@ Under construction.
 
 ```{r include=FALSE}
 library(knitr)
-opts_chunk$set(tidy.opts = list(width.cutoff = 60),
-               tidy = TRUE)
+opts_chunk$set(tidy.opts = list(width.cutoff = 60), tidy = TRUE)
+options(repos = list(CRAN="http://cran.rstudio.com/")) # set mirror
 ```
