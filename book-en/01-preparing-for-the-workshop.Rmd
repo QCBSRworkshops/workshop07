@@ -48,7 +48,7 @@ To install them from CRAN, run:
 
 ```{r, echo = TRUE, eval = TRUE, message=FALSE, warning=FALSE}
 install.packages("lme4")
-install.packages("AICcmodavg")
+#install.packages("AICcmodavg")
 install.packages("MASS")
 install.packages("vcdExtra")
 install.packages("bbmle")
@@ -64,7 +64,7 @@ To load these packages, run:
 
 ```{r, echo = TRUE, eval = TRUE, message=FALSE, warning=FALSE}
 library(lme4)
-library(AICcmodavg)
+#library(AICcmodavg)
 library(MASS)
 library(vcdExtra)
 library(bbmle)
