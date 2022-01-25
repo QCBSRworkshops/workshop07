@@ -31,6 +31,8 @@ jobs:
   presentation-fr-job:
     name: Render the presentation for this workshop
     runs-on: ubuntu-latest
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     defaults:
       run:
         working-directory: pres-fr
