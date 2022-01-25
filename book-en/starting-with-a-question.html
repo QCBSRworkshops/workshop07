@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 4 Starting with a question | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)</title>
   <meta name="description" content="Linear and generalized linear mixed models (LMM and GLMM)" />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 4 Starting with a question | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)" />
   <meta property="og:type" content="book" />
@@ -32,7 +32,8 @@
   <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
 <link rel="prev" href="why-choose-mixed-models.html"/>
 <link rel="next" href="analyzing-the-data.html"/>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -40,7 +41,6 @@
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
 
 
 
@@ -157,9 +157,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.2" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#option-2-lump-everything-together"><i class="fa fa-check"></i><b>5.2</b> Option 2: Lump everything together</a></li>
 <li class="chapter" data-level="5.3" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#option-3-is-there-a-third-option"><i class="fa fa-check"></i><b>5.3</b> Option 3: Is there a third option?</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="fixed-vs-random-effects.html"><a href="fixed-vs-random-effects.html"><i class="fa fa-check"></i><b>6</b> Fixed vs. random effects</a><ul>
-<li class="chapter" data-level="6.1" data-path="fixed-vs-random-effects.html"><a href="fixed-vs-random-effects.html#fixed-effects-deterministic-processes"><i class="fa fa-check"></i><b>6.1</b> Fixed effects: deterministic processes</a></li>
-<li class="chapter" data-level="6.2" data-path="fixed-vs-random-effects.html"><a href="fixed-vs-random-effects.html#random-effects-stochastic-processes"><i class="fa fa-check"></i><b>6.2</b> Random effects: stochastic processes</a></li>
+<li class="chapter" data-level="6" data-path="fixed-vs.-random-effects.html"><a href="fixed-vs.-random-effects.html"><i class="fa fa-check"></i><b>6</b> Fixed vs. random effects</a><ul>
+<li class="chapter" data-level="6.1" data-path="fixed-vs.-random-effects.html"><a href="fixed-vs.-random-effects.html#fixed-effects-deterministic-processes"><i class="fa fa-check"></i><b>6.1</b> Fixed effects: deterministic processes</a></li>
+<li class="chapter" data-level="6.2" data-path="fixed-vs.-random-effects.html"><a href="fixed-vs.-random-effects.html#random-effects-stochastic-processes"><i class="fa fa-check"></i><b>6.2</b> Random effects: stochastic processes</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="how-do-lmms-work.html"><a href="how-do-lmms-work.html"><i class="fa fa-check"></i><b>7</b> How do LMMs work?</a><ul>
 <li class="chapter" data-level="7.1" data-path="how-do-lmms-work.html"><a href="how-do-lmms-work.html#parameters-are-varied"><i class="fa fa-check"></i><b>7.1</b> Parameters are varied</a><ul>
@@ -171,30 +171,30 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>Implementing LMM in <code>R</code></b></span></li>
 <li class="chapter" data-level="8" data-path="mixed-model-protocol.html"><a href="mixed-model-protocol.html"><i class="fa fa-check"></i><b>8</b> Mixed model protocol</a></li>
-<li class="chapter" data-level="9" data-path="step-1-a-priori-model-building.html"><a href="step-1-a-priori-model-building.html"><i class="fa fa-check"></i><b>9</b> Step 1. <em>A priori</em> model building</a><ul>
-<li class="chapter" data-level="9.1" data-path="step-1-a-priori-model-building.html"><a href="step-1-a-priori-model-building.html#check-data-structure"><i class="fa fa-check"></i><b>9.1</b> Check data structure</a></li>
-<li class="chapter" data-level="9.2" data-path="step-1-a-priori-model-building.html"><a href="step-1-a-priori-model-building.html#check-collinearity"><i class="fa fa-check"></i><b>9.2</b> Check collinearity</a></li>
-<li class="chapter" data-level="9.3" data-path="step-1-a-priori-model-building.html"><a href="step-1-a-priori-model-building.html#challenge-3"><i class="fa fa-check"></i><b>9.3</b> Challenge 3</a></li>
-<li class="chapter" data-level="9.4" data-path="step-1-a-priori-model-building.html"><a href="step-1-a-priori-model-building.html#consider-scale"><i class="fa fa-check"></i><b>9.4</b> Consider scale</a></li>
-<li class="chapter" data-level="9.5" data-path="step-1-a-priori-model-building.html"><a href="step-1-a-priori-model-building.html#do-you-need-a-lmm"><i class="fa fa-check"></i><b>9.5</b> Do you need a LMM?</a></li>
+<li class="chapter" data-level="9" data-path="step-1.-a-priori-model-building.html"><a href="step-1.-a-priori-model-building.html"><i class="fa fa-check"></i><b>9</b> Step 1. <em>A priori</em> model building</a><ul>
+<li class="chapter" data-level="9.1" data-path="step-1.-a-priori-model-building.html"><a href="step-1.-a-priori-model-building.html#check-data-structure"><i class="fa fa-check"></i><b>9.1</b> Check data structure</a></li>
+<li class="chapter" data-level="9.2" data-path="step-1.-a-priori-model-building.html"><a href="step-1.-a-priori-model-building.html#check-collinearity"><i class="fa fa-check"></i><b>9.2</b> Check collinearity</a></li>
+<li class="chapter" data-level="9.3" data-path="step-1.-a-priori-model-building.html"><a href="step-1.-a-priori-model-building.html#challenge-3"><i class="fa fa-check"></i><b>9.3</b> Challenge 3</a></li>
+<li class="chapter" data-level="9.4" data-path="step-1.-a-priori-model-building.html"><a href="step-1.-a-priori-model-building.html#consider-scale"><i class="fa fa-check"></i><b>9.4</b> Consider scale</a></li>
+<li class="chapter" data-level="9.5" data-path="step-1.-a-priori-model-building.html"><a href="step-1.-a-priori-model-building.html#do-you-need-a-lmm"><i class="fa fa-check"></i><b>9.5</b> Do you need a LMM?</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="step-2-code-potential-models-and-model-selection.html"><a href="step-2-code-potential-models-and-model-selection.html"><i class="fa fa-check"></i><b>10</b> Step 2. Code potential models and model selection</a><ul>
-<li class="chapter" data-level="10.1" data-path="step-2-code-potential-models-and-model-selection.html"><a href="step-2-code-potential-models-and-model-selection.html#estimation-methods"><i class="fa fa-check"></i><b>10.1</b> Estimation methods</a></li>
-<li class="chapter" data-level="10.2" data-path="step-2-code-potential-models-and-model-selection.html"><a href="step-2-code-potential-models-and-model-selection.html#different-model-structures"><i class="fa fa-check"></i><b>10.2</b> Different model structures</a></li>
-<li class="chapter" data-level="10.3" data-path="step-2-code-potential-models-and-model-selection.html"><a href="step-2-code-potential-models-and-model-selection.html#challenge-4"><i class="fa fa-check"></i><b>10.3</b> Challenge 4</a></li>
-<li class="chapter" data-level="10.4" data-path="step-2-code-potential-models-and-model-selection.html"><a href="step-2-code-potential-models-and-model-selection.html#challenge-5"><i class="fa fa-check"></i><b>10.4</b> Challenge 5</a></li>
-<li class="chapter" data-level="10.5" data-path="step-2-code-potential-models-and-model-selection.html"><a href="step-2-code-potential-models-and-model-selection.html#comparing-models"><i class="fa fa-check"></i><b>10.5</b> Comparing models</a></li>
+<li class="chapter" data-level="10" data-path="step-2.-code-potential-models-and-model-selection.html"><a href="step-2.-code-potential-models-and-model-selection.html"><i class="fa fa-check"></i><b>10</b> Step 2. Code potential models and model selection</a><ul>
+<li class="chapter" data-level="10.1" data-path="step-2.-code-potential-models-and-model-selection.html"><a href="step-2.-code-potential-models-and-model-selection.html#estimation-methods"><i class="fa fa-check"></i><b>10.1</b> Estimation methods</a></li>
+<li class="chapter" data-level="10.2" data-path="step-2.-code-potential-models-and-model-selection.html"><a href="step-2.-code-potential-models-and-model-selection.html#different-model-structures"><i class="fa fa-check"></i><b>10.2</b> Different model structures</a></li>
+<li class="chapter" data-level="10.3" data-path="step-2.-code-potential-models-and-model-selection.html"><a href="step-2.-code-potential-models-and-model-selection.html#challenge-4"><i class="fa fa-check"></i><b>10.3</b> Challenge 4</a></li>
+<li class="chapter" data-level="10.4" data-path="step-2.-code-potential-models-and-model-selection.html"><a href="step-2.-code-potential-models-and-model-selection.html#challenge-5"><i class="fa fa-check"></i><b>10.4</b> Challenge 5</a></li>
+<li class="chapter" data-level="10.5" data-path="step-2.-code-potential-models-and-model-selection.html"><a href="step-2.-code-potential-models-and-model-selection.html#comparing-models"><i class="fa fa-check"></i><b>10.5</b> Comparing models</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="step-3-model-validation.html"><a href="step-3-model-validation.html"><i class="fa fa-check"></i><b>11</b> Step 3. Model validation</a><ul>
-<li class="chapter" data-level="11.1" data-path="step-3-model-validation.html"><a href="step-3-model-validation.html#check-the-homogeneity-of-the-variance"><i class="fa fa-check"></i><b>11.1</b> 1. Check the homogeneity of the variance</a></li>
-<li class="chapter" data-level="11.2" data-path="step-3-model-validation.html"><a href="step-3-model-validation.html#check-the-independence-of-the-model-residuals-with-each-covariate"><i class="fa fa-check"></i><b>11.2</b> 2. Check the independence of the model residuals with each covariate</a></li>
-<li class="chapter" data-level="11.3" data-path="step-3-model-validation.html"><a href="step-3-model-validation.html#check-the-normality-of-the-model-residuals"><i class="fa fa-check"></i><b>11.3</b> 3. Check the normality of the model residuals</a></li>
+<li class="chapter" data-level="11" data-path="step-3.-model-validation.html"><a href="step-3.-model-validation.html"><i class="fa fa-check"></i><b>11</b> Step 3. Model validation</a><ul>
+<li class="chapter" data-level="11.1" data-path="step-3.-model-validation.html"><a href="step-3.-model-validation.html#check-the-homogeneity-of-the-variance"><i class="fa fa-check"></i><b>11.1</b> 1. Check the homogeneity of the variance</a></li>
+<li class="chapter" data-level="11.2" data-path="step-3.-model-validation.html"><a href="step-3.-model-validation.html#check-the-independence-of-the-model-residuals-with-each-covariate"><i class="fa fa-check"></i><b>11.2</b> 2. Check the independence of the model residuals with each covariate</a></li>
+<li class="chapter" data-level="11.3" data-path="step-3.-model-validation.html"><a href="step-3.-model-validation.html#check-the-normality-of-the-model-residuals"><i class="fa fa-check"></i><b>11.3</b> 3. Check the normality of the model residuals</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="step-4-interpretation-and-visualization.html"><a href="step-4-interpretation-and-visualization.html"><i class="fa fa-check"></i><b>12</b> Step 4. Interpretation and visualization</a><ul>
-<li class="chapter" data-level="12.1" data-path="step-4-interpretation-and-visualization.html"><a href="step-4-interpretation-and-visualization.html#interpreting-our-model"><i class="fa fa-check"></i><b>12.1</b> Interpreting our model</a></li>
-<li class="chapter" data-level="12.2" data-path="step-4-interpretation-and-visualization.html"><a href="step-4-interpretation-and-visualization.html#challenge-6"><i class="fa fa-check"></i><b>12.2</b> Challenge 6</a></li>
-<li class="chapter" data-level="12.3" data-path="step-4-interpretation-and-visualization.html"><a href="step-4-interpretation-and-visualization.html#challenge-7"><i class="fa fa-check"></i><b>12.3</b> Challenge 7</a></li>
-<li class="chapter" data-level="12.4" data-path="step-4-interpretation-and-visualization.html"><a href="step-4-interpretation-and-visualization.html#challenge-8"><i class="fa fa-check"></i><b>12.4</b> Challenge 8</a></li>
+<li class="chapter" data-level="12" data-path="step-4.-interpretation-and-visualization.html"><a href="step-4.-interpretation-and-visualization.html"><i class="fa fa-check"></i><b>12</b> Step 4. Interpretation and visualization</a><ul>
+<li class="chapter" data-level="12.1" data-path="step-4.-interpretation-and-visualization.html"><a href="step-4.-interpretation-and-visualization.html#interpreting-our-model"><i class="fa fa-check"></i><b>12.1</b> Interpreting our model</a></li>
+<li class="chapter" data-level="12.2" data-path="step-4.-interpretation-and-visualization.html"><a href="step-4.-interpretation-and-visualization.html#challenge-6"><i class="fa fa-check"></i><b>12.2</b> Challenge 6</a></li>
+<li class="chapter" data-level="12.3" data-path="step-4.-interpretation-and-visualization.html"><a href="step-4.-interpretation-and-visualization.html#challenge-7"><i class="fa fa-check"></i><b>12.3</b> Challenge 7</a></li>
+<li class="chapter" data-level="12.4" data-path="step-4.-interpretation-and-visualization.html"><a href="step-4.-interpretation-and-visualization.html#challenge-8"><i class="fa fa-check"></i><b>12.4</b> Challenge 8</a></li>
 </ul></li>
 <li class="part"><span><b>Generalized linear mixed models (GLMM) in <code>R</code></b></span></li>
 <li class="chapter" data-level="13" data-path="introduction-to-glmm.html"><a href="introduction-to-glmm.html"><i class="fa fa-check"></i><b>13</b> Introduction to GLMM</a></li>
@@ -241,10 +241,11 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </head>
 
 
-
+<!-- 
 <div class="hero-image-container"> 
   <img class= "hero-image" src="assets/images/jean-philippe-delberghe-75xPHEQBmvA-unsplash_hero_image.jpg">
 </div>
+--!>
 <div id="starting-with-a-question" class="section level1">
 <h1><span class="header-section-number">Chapter 4</span> Starting with a question</h1>
 <p>Before we dive in, let’s start by considering an example dataset and proposing a research question.</p>
@@ -320,7 +321,6 @@ Observe each plot and try to get a sense of what is occurring. A few key questio
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -360,6 +360,10 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section"
 }
