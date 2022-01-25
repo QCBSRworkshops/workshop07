@@ -1,7 +1,6 @@
 ##Section: 01-preparing-for-the-workshop.R 
 
 install.packages("lme4")
-#install.packages("AICcmodavg")
 install.packages("MASS")
 install.packages("vcdExtra")
 install.packages("bbmle")
@@ -13,7 +12,6 @@ install.packages("gridExtra")
 install.packages("lattice")
 
 library(lme4)
-#library(AICcmodavg)
 library(MASS)
 library(vcdExtra)
 library(bbmle)

@@ -260,7 +260,6 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>This workshop requires the following <code>R</code> packages:</p>
 <ul>
 <li><a href="http://cran.r-project.org/web/packages/lme4/index.html">lme4</a></li>
-<li><a href="http://cran.r-project.org/web/packages/AICcmodavg/index.html">AICcmodavg</a></li>
 <li><a href="http://cran.r-project.org/web/packages/MASS/index.html">MASS</a></li>
 <li><a href="http://cran.r-project.org/web/packages/vcdExtra/index.html">vcdExtra</a></li>
 <li><a href="http://cran.r-project.org/web/packages/bbmle/index.html">bbmle</a></li>
@@ -273,28 +272,26 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>To install them from CRAN, run:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="preparing-for-the-workshop.html#cb1-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;lme4&quot;</span>)</span>
-<span id="cb1-2"><a href="preparing-for-the-workshop.html#cb1-2"></a><span class="co"># install.packages(&#39;AICcmodavg&#39;)</span></span>
-<span id="cb1-3"><a href="preparing-for-the-workshop.html#cb1-3"></a><span class="kw">install.packages</span>(<span class="st">&quot;MASS&quot;</span>)</span>
-<span id="cb1-4"><a href="preparing-for-the-workshop.html#cb1-4"></a><span class="kw">install.packages</span>(<span class="st">&quot;vcdExtra&quot;</span>)</span>
-<span id="cb1-5"><a href="preparing-for-the-workshop.html#cb1-5"></a><span class="kw">install.packages</span>(<span class="st">&quot;bbmle&quot;</span>)</span>
-<span id="cb1-6"><a href="preparing-for-the-workshop.html#cb1-6"></a><span class="kw">install.packages</span>(<span class="st">&quot;MuMIn&quot;</span>)</span>
-<span id="cb1-7"><a href="preparing-for-the-workshop.html#cb1-7"></a><span class="kw">install.packages</span>(<span class="st">&quot;ggplot2&quot;</span>)</span>
-<span id="cb1-8"><a href="preparing-for-the-workshop.html#cb1-8"></a><span class="kw">install.packages</span>(<span class="st">&quot;DescTools&quot;</span>)</span>
-<span id="cb1-9"><a href="preparing-for-the-workshop.html#cb1-9"></a><span class="kw">install.packages</span>(<span class="st">&quot;remotes&quot;</span>)</span>
-<span id="cb1-10"><a href="preparing-for-the-workshop.html#cb1-10"></a><span class="kw">install.packages</span>(<span class="st">&quot;gridExtra&quot;</span>)</span>
-<span id="cb1-11"><a href="preparing-for-the-workshop.html#cb1-11"></a><span class="kw">install.packages</span>(<span class="st">&quot;lattice&quot;</span>)</span></code></pre></div>
+<span id="cb1-2"><a href="preparing-for-the-workshop.html#cb1-2"></a><span class="kw">install.packages</span>(<span class="st">&quot;MASS&quot;</span>)</span>
+<span id="cb1-3"><a href="preparing-for-the-workshop.html#cb1-3"></a><span class="kw">install.packages</span>(<span class="st">&quot;vcdExtra&quot;</span>)</span>
+<span id="cb1-4"><a href="preparing-for-the-workshop.html#cb1-4"></a><span class="kw">install.packages</span>(<span class="st">&quot;bbmle&quot;</span>)</span>
+<span id="cb1-5"><a href="preparing-for-the-workshop.html#cb1-5"></a><span class="kw">install.packages</span>(<span class="st">&quot;MuMIn&quot;</span>)</span>
+<span id="cb1-6"><a href="preparing-for-the-workshop.html#cb1-6"></a><span class="kw">install.packages</span>(<span class="st">&quot;ggplot2&quot;</span>)</span>
+<span id="cb1-7"><a href="preparing-for-the-workshop.html#cb1-7"></a><span class="kw">install.packages</span>(<span class="st">&quot;DescTools&quot;</span>)</span>
+<span id="cb1-8"><a href="preparing-for-the-workshop.html#cb1-8"></a><span class="kw">install.packages</span>(<span class="st">&quot;remotes&quot;</span>)</span>
+<span id="cb1-9"><a href="preparing-for-the-workshop.html#cb1-9"></a><span class="kw">install.packages</span>(<span class="st">&quot;gridExtra&quot;</span>)</span>
+<span id="cb1-10"><a href="preparing-for-the-workshop.html#cb1-10"></a><span class="kw">install.packages</span>(<span class="st">&quot;lattice&quot;</span>)</span></code></pre></div>
 <p>To load these packages, run:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="preparing-for-the-workshop.html#cb2-1"></a><span class="kw">library</span>(lme4)</span>
-<span id="cb2-2"><a href="preparing-for-the-workshop.html#cb2-2"></a><span class="co"># library(AICcmodavg)</span></span>
-<span id="cb2-3"><a href="preparing-for-the-workshop.html#cb2-3"></a><span class="kw">library</span>(MASS)</span>
-<span id="cb2-4"><a href="preparing-for-the-workshop.html#cb2-4"></a><span class="kw">library</span>(vcdExtra)</span>
-<span id="cb2-5"><a href="preparing-for-the-workshop.html#cb2-5"></a><span class="kw">library</span>(bbmle)</span>
-<span id="cb2-6"><a href="preparing-for-the-workshop.html#cb2-6"></a><span class="kw">library</span>(MuMIn)</span>
-<span id="cb2-7"><a href="preparing-for-the-workshop.html#cb2-7"></a><span class="kw">library</span>(ggplot2)</span>
-<span id="cb2-8"><a href="preparing-for-the-workshop.html#cb2-8"></a><span class="kw">library</span>(DescTools)</span>
-<span id="cb2-9"><a href="preparing-for-the-workshop.html#cb2-9"></a><span class="kw">library</span>(remotes)</span>
-<span id="cb2-10"><a href="preparing-for-the-workshop.html#cb2-10"></a><span class="kw">library</span>(gridExtra)</span>
-<span id="cb2-11"><a href="preparing-for-the-workshop.html#cb2-11"></a><span class="kw">library</span>(lattice)</span></code></pre></div>
+<span id="cb2-2"><a href="preparing-for-the-workshop.html#cb2-2"></a><span class="kw">library</span>(MASS)</span>
+<span id="cb2-3"><a href="preparing-for-the-workshop.html#cb2-3"></a><span class="kw">library</span>(vcdExtra)</span>
+<span id="cb2-4"><a href="preparing-for-the-workshop.html#cb2-4"></a><span class="kw">library</span>(bbmle)</span>
+<span id="cb2-5"><a href="preparing-for-the-workshop.html#cb2-5"></a><span class="kw">library</span>(MuMIn)</span>
+<span id="cb2-6"><a href="preparing-for-the-workshop.html#cb2-6"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb2-7"><a href="preparing-for-the-workshop.html#cb2-7"></a><span class="kw">library</span>(DescTools)</span>
+<span id="cb2-8"><a href="preparing-for-the-workshop.html#cb2-8"></a><span class="kw">library</span>(remotes)</span>
+<span id="cb2-9"><a href="preparing-for-the-workshop.html#cb2-9"></a><span class="kw">library</span>(gridExtra)</span>
+<span id="cb2-10"><a href="preparing-for-the-workshop.html#cb2-10"></a><span class="kw">library</span>(lattice)</span></code></pre></div>
 
 </div>
 <hr>
