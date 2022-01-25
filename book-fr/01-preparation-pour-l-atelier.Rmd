@@ -32,7 +32,6 @@ Pour vous préparer pour cet atelier, téléchargez et installez les dernières 
 Cet atelier nécessite les paquets `R` suivants:
 
 -    [lme4](http://cran.r-project.org/web/packages/lme4/index.html)
--    [AICcmodavg](http://cran.r-project.org/web/packages/AICcmodavg/index.html)
 -    [MASS](http://cran.r-project.org/web/packages/MASS/index.html)
 -    [vcdExtra](http://cran.r-project.org/web/packages/vcdExtra/index.html)
 -    [bbmle](http://cran.r-project.org/web/packages/bbmle/index.html)
@@ -47,7 +46,6 @@ Pour les installer à partir de CRAN, roulez:
 
 ```{r, echo = TRUE, eval = TRUE, message=FALSE, warning=FALSE}
 install.packages("lme4")
-install.packages("AICcmodavg")
 install.packages("MASS")
 install.packages("vcdExtra")
 install.packages("bbmle")
@@ -63,7 +61,6 @@ Ensuite, chargez ces paquets:
 
 ```{r, echo = TRUE, eval = TRUE, message=FALSE, warning=FALSE}
 library(lme4)
-library(AICcmodavg)
 library(MASS)
 library(vcdExtra)
 library(bbmle)

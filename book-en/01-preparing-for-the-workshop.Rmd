@@ -33,7 +33,6 @@ You can save these files by clicking on the links above, and right click + save 
 This workshop requires the following `R` packages:
 
 -    [lme4](http://cran.r-project.org/web/packages/lme4/index.html)
--    [AICcmodavg](http://cran.r-project.org/web/packages/AICcmodavg/index.html)
 -    [MASS](http://cran.r-project.org/web/packages/MASS/index.html)
 -    [vcdExtra](http://cran.r-project.org/web/packages/vcdExtra/index.html)
 -    [bbmle](http://cran.r-project.org/web/packages/bbmle/index.html)
@@ -48,7 +47,6 @@ To install them from CRAN, run:
 
 ```{r, echo = TRUE, eval = TRUE, message=FALSE, warning=FALSE}
 install.packages("lme4")
-install.packages("AICcmodavg")
 install.packages("MASS")
 install.packages("vcdExtra")
 install.packages("bbmle")
@@ -64,7 +62,6 @@ To load these packages, run:
 
 ```{r, echo = TRUE, eval = TRUE, message=FALSE, warning=FALSE}
 library(lme4)
-library(AICcmodavg)
 library(MASS)
 library(vcdExtra)
 library(bbmle)
