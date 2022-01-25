@@ -56,7 +56,6 @@ mypar = list(mar = c(3, 3, 1, 0.5), mgp = c(1.6, 0.3, 0), tck = -.02)
 # Standard procedure to check and install packages and their dependencies, if needed
 
 list.of.packages <- c("lme4",
-                      "AICcmodavg",
                       "MASS",
                       "vcdExtra",
                       "bbmle", 
@@ -135,7 +134,6 @@ Vous devez également utiliser les paquets suivants :
 
 
 * [lme4](http://cran.r-project.org/web/packages/lme4/index.html)
-* [AICcmodavg](http://cran.r-project.org/web/packages/AICcmodavg/index.html)
 * [MASS](http://cran.r-project.org/web/packages/MASS/index.html)
 * [vcdExtra](http://cran.r-project.org/web/packages/vcdExtra/index.html)
 * [bbmle](http://cran.r-project.org/web/packages/bbmle/index.html)
@@ -155,7 +153,6 @@ Pour les installer à partir du CRAN, exécutez :
 
 ```{r eval = FALSE}
 install.packages(c("lme4",
-                      "AICcmodavg",
                       "MASS",
                       "vcdExtra",
                       "bbmle", 

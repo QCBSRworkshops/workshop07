@@ -1,7 +1,5 @@
-base
 Matrix
 lme4
-AICcmodavg
 MASS
 vcd
 gnm
