@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapitre 2 Préparez-vous pour cet atelier | Atelier 7: Modèles linéaires et généralisés linéaires mixtes</title>
   <meta name="description" content="Modèles linéaires et généralisés linéaires mixtes" />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapitre 2 Préparez-vous pour cet atelier | Atelier 7: Modèles linéaires et généralisés linéaires mixtes" />
   <meta property="og:type" content="book" />
@@ -32,7 +32,8 @@
   <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
 <link rel="prev" href="objectifs-dapprentissage.html"/>
 <link rel="next" href="pourquoi-choisir-un-mlm.html"/>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -40,7 +41,6 @@
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
 
 
 
@@ -171,30 +171,30 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="part"><span><b>Implémenter un MLM dans <code>R</code></b></span></li>
 <li class="chapter" data-level="8" data-path="le-protocole-pour-implémenter-des-modèles-à-effets-mixtes-dans-r.html"><a href="le-protocole-pour-implémenter-des-modèles-à-effets-mixtes-dans-r.html"><i class="fa fa-check"></i><b>8</b> Le protocole pour implémenter des modèles à effets mixtes dans <code>R</code></a></li>
-<li class="chapter" data-level="9" data-path="étape-1-construction-du-modèle-a-priori.html"><a href="étape-1-construction-du-modèle-a-priori.html"><i class="fa fa-check"></i><b>9</b> Étape 1. Construction du modèle <em>a priori</em></a><ul>
-<li class="chapter" data-level="9.1" data-path="étape-1-construction-du-modèle-a-priori.html"><a href="étape-1-construction-du-modèle-a-priori.html#exploration-des-données"><i class="fa fa-check"></i><b>9.1</b> Exploration des données</a></li>
-<li class="chapter" data-level="9.2" data-path="étape-1-construction-du-modèle-a-priori.html"><a href="étape-1-construction-du-modèle-a-priori.html#vérifier-la-colinéarité"><i class="fa fa-check"></i><b>9.2</b> Vérifier la colinéarité</a></li>
-<li class="chapter" data-level="9.3" data-path="étape-1-construction-du-modèle-a-priori.html"><a href="étape-1-construction-du-modèle-a-priori.html#défi-3"><i class="fa fa-check"></i><b>9.3</b> Défi 3</a></li>
-<li class="chapter" data-level="9.4" data-path="étape-1-construction-du-modèle-a-priori.html"><a href="étape-1-construction-du-modèle-a-priori.html#considérez-léchelle"><i class="fa fa-check"></i><b>9.4</b> Considérez l’échelle</a></li>
-<li class="chapter" data-level="9.5" data-path="étape-1-construction-du-modèle-a-priori.html"><a href="étape-1-construction-du-modèle-a-priori.html#avez-vous-besoin-dun-mlm"><i class="fa fa-check"></i><b>9.5</b> Avez-vous besoin d’un MLM?</a></li>
+<li class="chapter" data-level="9" data-path="étape-1.-construction-du-modèle-a-priori.html"><a href="étape-1.-construction-du-modèle-a-priori.html"><i class="fa fa-check"></i><b>9</b> Étape 1. Construction du modèle <em>a priori</em></a><ul>
+<li class="chapter" data-level="9.1" data-path="étape-1.-construction-du-modèle-a-priori.html"><a href="étape-1.-construction-du-modèle-a-priori.html#exploration-des-données"><i class="fa fa-check"></i><b>9.1</b> Exploration des données</a></li>
+<li class="chapter" data-level="9.2" data-path="étape-1.-construction-du-modèle-a-priori.html"><a href="étape-1.-construction-du-modèle-a-priori.html#vérifier-la-colinéarité"><i class="fa fa-check"></i><b>9.2</b> Vérifier la colinéarité</a></li>
+<li class="chapter" data-level="9.3" data-path="étape-1.-construction-du-modèle-a-priori.html"><a href="étape-1.-construction-du-modèle-a-priori.html#défi-3"><i class="fa fa-check"></i><b>9.3</b> Défi 3</a></li>
+<li class="chapter" data-level="9.4" data-path="étape-1.-construction-du-modèle-a-priori.html"><a href="étape-1.-construction-du-modèle-a-priori.html#considérez-léchelle"><i class="fa fa-check"></i><b>9.4</b> Considérez l’échelle</a></li>
+<li class="chapter" data-level="9.5" data-path="étape-1.-construction-du-modèle-a-priori.html"><a href="étape-1.-construction-du-modèle-a-priori.html#avez-vous-besoin-dun-mlm"><i class="fa fa-check"></i><b>9.5</b> Avez-vous besoin d’un MLM?</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="étape-2-coder-le-modèle.html"><a href="étape-2-coder-le-modèle.html"><i class="fa fa-check"></i><b>10</b> Étape 2. Coder le modèle</a><ul>
-<li class="chapter" data-level="10.1" data-path="étape-2-coder-le-modèle.html"><a href="étape-2-coder-le-modèle.html#note-sur-les-méthodes-destimation"><i class="fa fa-check"></i><b>10.1</b> Note sur les méthodes d’estimation</a></li>
-<li class="chapter" data-level="10.2" data-path="étape-2-coder-le-modèle.html"><a href="étape-2-coder-le-modèle.html#différentes-structures-de-modèles"><i class="fa fa-check"></i><b>10.2</b> Différentes structures de modèles</a></li>
-<li class="chapter" data-level="10.3" data-path="étape-2-coder-le-modèle.html"><a href="étape-2-coder-le-modèle.html#défi-4"><i class="fa fa-check"></i><b>10.3</b> Défi 4</a></li>
-<li class="chapter" data-level="10.4" data-path="étape-2-coder-le-modèle.html"><a href="étape-2-coder-le-modèle.html#défi-5"><i class="fa fa-check"></i><b>10.4</b> Défi 5</a></li>
-<li class="chapter" data-level="10.5" data-path="étape-2-coder-le-modèle.html"><a href="étape-2-coder-le-modèle.html#comparing-models"><i class="fa fa-check"></i><b>10.5</b> Comparing models</a></li>
+<li class="chapter" data-level="10" data-path="étape-2.-coder-le-modèle.html"><a href="étape-2.-coder-le-modèle.html"><i class="fa fa-check"></i><b>10</b> Étape 2. Coder le modèle</a><ul>
+<li class="chapter" data-level="10.1" data-path="étape-2.-coder-le-modèle.html"><a href="étape-2.-coder-le-modèle.html#note-sur-les-méthodes-destimation"><i class="fa fa-check"></i><b>10.1</b> Note sur les méthodes d’estimation</a></li>
+<li class="chapter" data-level="10.2" data-path="étape-2.-coder-le-modèle.html"><a href="étape-2.-coder-le-modèle.html#différentes-structures-de-modèles"><i class="fa fa-check"></i><b>10.2</b> Différentes structures de modèles</a></li>
+<li class="chapter" data-level="10.3" data-path="étape-2.-coder-le-modèle.html"><a href="étape-2.-coder-le-modèle.html#défi-4"><i class="fa fa-check"></i><b>10.3</b> Défi 4</a></li>
+<li class="chapter" data-level="10.4" data-path="étape-2.-coder-le-modèle.html"><a href="étape-2.-coder-le-modèle.html#défi-5"><i class="fa fa-check"></i><b>10.4</b> Défi 5</a></li>
+<li class="chapter" data-level="10.5" data-path="étape-2.-coder-le-modèle.html"><a href="étape-2.-coder-le-modèle.html#comparing-models"><i class="fa fa-check"></i><b>10.5</b> Comparing models</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="step-3-validation-du-modèle.html"><a href="step-3-validation-du-modèle.html"><i class="fa fa-check"></i><b>11</b> Step 3. Validation du modèle</a><ul>
-<li class="chapter" data-level="11.1" data-path="step-3-validation-du-modèle.html"><a href="step-3-validation-du-modèle.html#vérifier-lhomogénéité-de-la-variance"><i class="fa fa-check"></i><b>11.1</b> 1. Vérifier l’homogénéité de la variance</a></li>
-<li class="chapter" data-level="11.2" data-path="step-3-validation-du-modèle.html"><a href="step-3-validation-du-modèle.html#vérifier-lindépendance-des-résidus"><i class="fa fa-check"></i><b>11.2</b> 2. Vérifier l’indépendance des résidus</a></li>
-<li class="chapter" data-level="11.3" data-path="step-3-validation-du-modèle.html"><a href="step-3-validation-du-modèle.html#vérifier-la-normalité"><i class="fa fa-check"></i><b>11.3</b> 3. Vérifier la normalité</a></li>
+<li class="chapter" data-level="11" data-path="step-3.-validation-du-modèle.html"><a href="step-3.-validation-du-modèle.html"><i class="fa fa-check"></i><b>11</b> Step 3. Validation du modèle</a><ul>
+<li class="chapter" data-level="11.1" data-path="step-3.-validation-du-modèle.html"><a href="step-3.-validation-du-modèle.html#vérifier-lhomogénéité-de-la-variance"><i class="fa fa-check"></i><b>11.1</b> 1. Vérifier l’homogénéité de la variance</a></li>
+<li class="chapter" data-level="11.2" data-path="step-3.-validation-du-modèle.html"><a href="step-3.-validation-du-modèle.html#vérifier-lindépendance-des-résidus"><i class="fa fa-check"></i><b>11.2</b> 2. Vérifier l’indépendance des résidus</a></li>
+<li class="chapter" data-level="11.3" data-path="step-3.-validation-du-modèle.html"><a href="step-3.-validation-du-modèle.html#vérifier-la-normalité"><i class="fa fa-check"></i><b>11.3</b> 3. Vérifier la normalité</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="step-4-interprétation-et-visualisation.html"><a href="step-4-interprétation-et-visualisation.html"><i class="fa fa-check"></i><b>12</b> Step 4. Interprétation et visualisation</a><ul>
-<li class="chapter" data-level="12.1" data-path="step-4-interprétation-et-visualisation.html"><a href="step-4-interprétation-et-visualisation.html#interprétation-de-notre-modèle"><i class="fa fa-check"></i><b>12.1</b> Interprétation de notre modèle</a></li>
-<li class="chapter" data-level="12.2" data-path="step-4-interprétation-et-visualisation.html"><a href="step-4-interprétation-et-visualisation.html#défi-6"><i class="fa fa-check"></i><b>12.2</b> Défi 6</a></li>
-<li class="chapter" data-level="12.3" data-path="step-4-interprétation-et-visualisation.html"><a href="step-4-interprétation-et-visualisation.html#défi-7"><i class="fa fa-check"></i><b>12.3</b> Défi 7</a></li>
-<li class="chapter" data-level="12.4" data-path="step-4-interprétation-et-visualisation.html"><a href="step-4-interprétation-et-visualisation.html#défi-8"><i class="fa fa-check"></i><b>12.4</b> Défi 8</a></li>
+<li class="chapter" data-level="12" data-path="step-4.-interprétation-et-visualisation.html"><a href="step-4.-interprétation-et-visualisation.html"><i class="fa fa-check"></i><b>12</b> Step 4. Interprétation et visualisation</a><ul>
+<li class="chapter" data-level="12.1" data-path="step-4.-interprétation-et-visualisation.html"><a href="step-4.-interprétation-et-visualisation.html#interprétation-de-notre-modèle"><i class="fa fa-check"></i><b>12.1</b> Interprétation de notre modèle</a></li>
+<li class="chapter" data-level="12.2" data-path="step-4.-interprétation-et-visualisation.html"><a href="step-4.-interprétation-et-visualisation.html#défi-6"><i class="fa fa-check"></i><b>12.2</b> Défi 6</a></li>
+<li class="chapter" data-level="12.3" data-path="step-4.-interprétation-et-visualisation.html"><a href="step-4.-interprétation-et-visualisation.html#défi-7"><i class="fa fa-check"></i><b>12.3</b> Défi 7</a></li>
+<li class="chapter" data-level="12.4" data-path="step-4.-interprétation-et-visualisation.html"><a href="step-4.-interprétation-et-visualisation.html#défi-8"><i class="fa fa-check"></i><b>12.4</b> Défi 8</a></li>
 </ul></li>
 <li class="part"><span><b>Modèles Linéaires Généralisés Mixtes (GLMMs) en <code>R</code></b></span></li>
 <li class="chapter" data-level="13" data-path="introduction-aux-glmm.html"><a href="introduction-aux-glmm.html"><i class="fa fa-check"></i><b>13</b> Introduction aux GLMM</a></li>
@@ -241,10 +241,11 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </head>
 
 
-
+<!-- 
 <div class="hero-image-container"> 
   <img class= "hero-image" src="assets/images/jean-philippe-delberghe-75xPHEQBmvA-unsplash_hero_image.jpg">
 </div>
+--!>
 <div id="préparez-vous-pour-cet-atelier" class="section level1">
 <h1><span class="header-section-number">Chapitre 2</span> Préparez-vous pour cet atelier</h1>
 <p>Pour vous préparer pour cet atelier, téléchargez et installez les dernières versions de RStudio et de <code>R</code>. Télécharger également les données et quelques fonctions additionnelles que nous utiliserons au cours de cet atelier:</p>
@@ -258,7 +259,6 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>Cet atelier nécessite les paquets <code>R</code> suivants:</p>
 <ul>
 <li><a href="http://cran.r-project.org/web/packages/lme4/index.html">lme4</a></li>
-<li><a href="http://cran.r-project.org/web/packages/AICcmodavg/index.html">AICcmodavg</a></li>
 <li><a href="http://cran.r-project.org/web/packages/MASS/index.html">MASS</a></li>
 <li><a href="http://cran.r-project.org/web/packages/vcdExtra/index.html">vcdExtra</a></li>
 <li><a href="http://cran.r-project.org/web/packages/bbmle/index.html">bbmle</a></li>
@@ -271,28 +271,26 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>Pour les installer à partir de CRAN, roulez:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="préparez-vous-pour-cet-atelier.html#cb1-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;lme4&quot;</span>)</span>
-<span id="cb1-2"><a href="préparez-vous-pour-cet-atelier.html#cb1-2"></a><span class="kw">install.packages</span>(<span class="st">&quot;AICcmodavg&quot;</span>)</span>
-<span id="cb1-3"><a href="préparez-vous-pour-cet-atelier.html#cb1-3"></a><span class="kw">install.packages</span>(<span class="st">&quot;MASS&quot;</span>)</span>
-<span id="cb1-4"><a href="préparez-vous-pour-cet-atelier.html#cb1-4"></a><span class="kw">install.packages</span>(<span class="st">&quot;vcdExtra&quot;</span>)</span>
-<span id="cb1-5"><a href="préparez-vous-pour-cet-atelier.html#cb1-5"></a><span class="kw">install.packages</span>(<span class="st">&quot;bbmle&quot;</span>)</span>
-<span id="cb1-6"><a href="préparez-vous-pour-cet-atelier.html#cb1-6"></a><span class="kw">install.packages</span>(<span class="st">&quot;MuMIn&quot;</span>)</span>
-<span id="cb1-7"><a href="préparez-vous-pour-cet-atelier.html#cb1-7"></a><span class="kw">install.packages</span>(<span class="st">&quot;ggplot2&quot;</span>)</span>
-<span id="cb1-8"><a href="préparez-vous-pour-cet-atelier.html#cb1-8"></a><span class="kw">install.packages</span>(<span class="st">&quot;DescTools&quot;</span>)</span>
-<span id="cb1-9"><a href="préparez-vous-pour-cet-atelier.html#cb1-9"></a><span class="kw">install.packages</span>(<span class="st">&quot;remotes&quot;</span>)</span>
-<span id="cb1-10"><a href="préparez-vous-pour-cet-atelier.html#cb1-10"></a><span class="kw">install.packages</span>(<span class="st">&quot;gridExtra&quot;</span>)</span>
-<span id="cb1-11"><a href="préparez-vous-pour-cet-atelier.html#cb1-11"></a><span class="kw">install.packages</span>(<span class="st">&quot;lattice&quot;</span>)</span></code></pre></div>
+<span id="cb1-2"><a href="préparez-vous-pour-cet-atelier.html#cb1-2"></a><span class="kw">install.packages</span>(<span class="st">&quot;MASS&quot;</span>)</span>
+<span id="cb1-3"><a href="préparez-vous-pour-cet-atelier.html#cb1-3"></a><span class="kw">install.packages</span>(<span class="st">&quot;vcdExtra&quot;</span>)</span>
+<span id="cb1-4"><a href="préparez-vous-pour-cet-atelier.html#cb1-4"></a><span class="kw">install.packages</span>(<span class="st">&quot;bbmle&quot;</span>)</span>
+<span id="cb1-5"><a href="préparez-vous-pour-cet-atelier.html#cb1-5"></a><span class="kw">install.packages</span>(<span class="st">&quot;MuMIn&quot;</span>)</span>
+<span id="cb1-6"><a href="préparez-vous-pour-cet-atelier.html#cb1-6"></a><span class="kw">install.packages</span>(<span class="st">&quot;ggplot2&quot;</span>)</span>
+<span id="cb1-7"><a href="préparez-vous-pour-cet-atelier.html#cb1-7"></a><span class="kw">install.packages</span>(<span class="st">&quot;DescTools&quot;</span>)</span>
+<span id="cb1-8"><a href="préparez-vous-pour-cet-atelier.html#cb1-8"></a><span class="kw">install.packages</span>(<span class="st">&quot;remotes&quot;</span>)</span>
+<span id="cb1-9"><a href="préparez-vous-pour-cet-atelier.html#cb1-9"></a><span class="kw">install.packages</span>(<span class="st">&quot;gridExtra&quot;</span>)</span>
+<span id="cb1-10"><a href="préparez-vous-pour-cet-atelier.html#cb1-10"></a><span class="kw">install.packages</span>(<span class="st">&quot;lattice&quot;</span>)</span></code></pre></div>
 <p>Ensuite, chargez ces paquets:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="préparez-vous-pour-cet-atelier.html#cb2-1"></a><span class="kw">library</span>(lme4)</span>
-<span id="cb2-2"><a href="préparez-vous-pour-cet-atelier.html#cb2-2"></a><span class="kw">library</span>(AICcmodavg)</span>
-<span id="cb2-3"><a href="préparez-vous-pour-cet-atelier.html#cb2-3"></a><span class="kw">library</span>(MASS)</span>
-<span id="cb2-4"><a href="préparez-vous-pour-cet-atelier.html#cb2-4"></a><span class="kw">library</span>(vcdExtra)</span>
-<span id="cb2-5"><a href="préparez-vous-pour-cet-atelier.html#cb2-5"></a><span class="kw">library</span>(bbmle)</span>
-<span id="cb2-6"><a href="préparez-vous-pour-cet-atelier.html#cb2-6"></a><span class="kw">library</span>(MuMIn)</span>
-<span id="cb2-7"><a href="préparez-vous-pour-cet-atelier.html#cb2-7"></a><span class="kw">library</span>(ggplot2)</span>
-<span id="cb2-8"><a href="préparez-vous-pour-cet-atelier.html#cb2-8"></a><span class="kw">library</span>(DescTools)</span>
-<span id="cb2-9"><a href="préparez-vous-pour-cet-atelier.html#cb2-9"></a><span class="kw">library</span>(remotes)</span>
-<span id="cb2-10"><a href="préparez-vous-pour-cet-atelier.html#cb2-10"></a><span class="kw">library</span>(gridExtra)</span>
-<span id="cb2-11"><a href="préparez-vous-pour-cet-atelier.html#cb2-11"></a><span class="kw">library</span>(lattice)</span></code></pre></div>
+<span id="cb2-2"><a href="préparez-vous-pour-cet-atelier.html#cb2-2"></a><span class="kw">library</span>(MASS)</span>
+<span id="cb2-3"><a href="préparez-vous-pour-cet-atelier.html#cb2-3"></a><span class="kw">library</span>(vcdExtra)</span>
+<span id="cb2-4"><a href="préparez-vous-pour-cet-atelier.html#cb2-4"></a><span class="kw">library</span>(bbmle)</span>
+<span id="cb2-5"><a href="préparez-vous-pour-cet-atelier.html#cb2-5"></a><span class="kw">library</span>(MuMIn)</span>
+<span id="cb2-6"><a href="préparez-vous-pour-cet-atelier.html#cb2-6"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb2-7"><a href="préparez-vous-pour-cet-atelier.html#cb2-7"></a><span class="kw">library</span>(DescTools)</span>
+<span id="cb2-8"><a href="préparez-vous-pour-cet-atelier.html#cb2-8"></a><span class="kw">library</span>(remotes)</span>
+<span id="cb2-9"><a href="préparez-vous-pour-cet-atelier.html#cb2-9"></a><span class="kw">library</span>(gridExtra)</span>
+<span id="cb2-10"><a href="préparez-vous-pour-cet-atelier.html#cb2-10"></a><span class="kw">library</span>(lattice)</span></code></pre></div>
 
 </div>
 <hr>
@@ -311,7 +309,6 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -351,6 +348,10 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section"
 }
