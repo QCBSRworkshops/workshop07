@@ -78,47 +78,14 @@ lapply(list.of.packages, require, character.only = TRUE, quietly = TRUE)
 
 # About this workshop
 
-[![badge](https://img.shields.io/static/v1?style=for-the-badge&label=repo&message=dev&color=6f42c1&logo=github)](https://github.com/QCBSRworkshops/workshop07)
-[![badge](https://img.shields.io/static/v1?style=for-the-badge&label=wiki&message=07&logo=wikipedia)](https://wiki.qcbs.ca/r_workshop6)
-[![badge](https://img.shields.io/static/v1?style=for-the-badge&label=Slides&message=07&color=red&logo=html5)](https://qcbsrworkshops.github.io/workshop07/workshop07-en/workshop07-en.html)
-[![badge](https://img.shields.io/static/v1?style=for-the-badge&label=Slides&message=07&color=red&logo=adobe-acrobat-reader)](https://qcbsrworkshops.github.io/workshop07/workshop07-en/workshop07-en.pdf)
-[![badge](https://img.shields.io/static/v1?style=for-the-badge&label=script&message=07&color=2a50b8&logo=r)](https://qcbsrworkshops.github.io/workshop07/workshop07-en/workshop07-en.R)
+[![badge](https://img.shields.io/static/v1?style=flat-square&label=Slides&message=07&color=red&logo=html5)](https://r.qcbs.ca/workshop07/pres-en/workshop07-pres-en.html) 
+[![badge](https://img.shields.io/static/v1?style=flat-square&label=book&message=07&logo=github)](https://r.qcbs.ca/workshop07/book-en/index.html) 
+[![badge](https://img.shields.io/static/v1?style=flat-square&label=script&message=07&color=2a50b8&logo=r)](https://r.qcbs.ca/workshop07/book-en/workshop07-script-en.R) 
+[![badge](https://img.shields.io/static/v1?style=flat-square&label=repo&message=dev&color=6f42c1&logo=github)](https://github.com/QCBSRworkshops/workshop07) 
 
----
+???
+Note: Communicate to the participants that all the materials for this workshop is available on the R workshops website, and that there is an additional 'bookdown' with additional text. There is a lot of content for this workshop, so participants will be able to review the concepts they understood a bit less after on their own after the workshop.
 
-<p style="font-size:75%">
-
-.center[
-**Contributors to the development of this workshop**
-
-by modifying and improving its content as part of the <br> *Le*arning *a*nd *D*evelopment *A*ward
-]
-
-
-.pull-left[
-.right[
-
- **2022** - **2021** - **2020**
-
-
-
-]
-]
-
-.pull-right[
-.left[
-**2019** - **2018** - **2017**
-
-
-
-**2016** - **2015** - **2014**
-
-
-
-]
-
-]
-</p>
 
 ---
 
@@ -161,6 +128,8 @@ install.packages(c("lme4",
                       "lattice"))
 ```
 ]
+
+??? Note: To save time: (1) Ask the participants to install the packages before the workshop, (2) Don't wait that everyone managed to install every packages and help the students that did not manage to install some packages during challenge #1.
 
 ---
 
@@ -230,6 +199,8 @@ Introduction to the example dataset
 **2.** Open the example dataset in `R`
 
 **3.** Reproduce the plots 1 to 3 from the script. Observe the plots and try to get a sense of what you see
+
+Note: Should not be super long, they have the script to make the plots. You can almost just give them time to think while you help participants with installing packages. If there is none, you can just skip the time to think, and simply have a group discussion plot by plot.
 
 ---
 # Solution ![:cube]()
@@ -305,6 +276,8 @@ plot + geom_point() + facet_wrap(~ Lake) + xlab("Length (mm)") + ylab("Trophic P
 
 * Unbalanced study/experimental design
 
+???
+Note: Use the workshop data as example. We have data on fish body length and trophic level that are structured through 3 species and 6 lakes. This creates a hierarchical structure in the data.
 
 ---
 exclude: true
@@ -422,6 +395,12 @@ Data comes from :
 
 We wish to make conclusions about the levels of the factor or about the relationship between the response variable and the predictor.
 
+<br>
+
+*Example: We are interested of in the effect of a treatment (e.g. clear cut) on a response variable (e.g. species richness). The variable treatment is the factor with two levels: clear cut or not.*
+
+??? 
+Note: Emphasize that we gathered data for all levels of the factor that are of interest. We are not interested in other possible levels.
 
 ---
 # Why choose mixed models?
@@ -434,6 +413,12 @@ We wish to make conclusions about the levels of the factor or about the relation
 
 * Enable us to structure the error process
 
+<br>
+
+*Example: We sampled fishes in 6 out of 15 lakes of a region. The variable lake is the factor with 15 levels. We sampled 6 of them, but we aim to make inference about the variability across all the lakes of the region.*
+
+??? 
+Note: Emphasize that we gathered data for a random sample of all levels of the factor. We are interested in all possible levels.
 
 ---
 # Why choose mixed models?
@@ -455,12 +440,17 @@ We wish to make conclusions about the levels of the factor or about the relation
 .pull-right[![](images/fig_9_w5.png)]
 <br>
 
-* It is assumed that the intercepts/slopes come from a normal distribution
-* The model estimates a general intercept and/or slope with a standard deviation for each random effect (i.e. the normal distribution)
+* It is assumed that the intercepts/slopes come from a normal distribution.
+
+* The model estimates a general intercept and/or slope with a standard deviation for each random effect (i.e. the normal distribution).
+
 <br><br>
 
 This avoids estimating an intercept and a slope for each species (+2 parameters per species) = **saves degrees of freedom** (less parameter estimation is needed)
 
+
+???
+Note: This is pretty important, you can spend some time explaining that instead of having independent slopes and/or intercepts for each levels, we assume that they come from a normal distribution.  Make sure that they understand.
 
 ---
 # Random intercept
@@ -470,10 +460,11 @@ This avoids estimating an intercept and a slope for each species (+2 parameters 
 <p>
 <img style="float: right; width:50%;margin: 1%" src="images/fig_7_w5.png">
 
-It is assumed that the intercepts come from a normal distribution
+It is assumed that the intercepts come from a normal distribution. 
 
-Only need to estimate the mean and standard deviation of the normal distribution instead of 3 intercepts, i.e. one for each species</p>
+Only need to estimate the mean and standard deviation of the normal distribution instead of 3 intercepts, i.e. one for each species. </p>
 
+<br>
 <br>
 
 .comment[Note that the more levels your factor has, the more accurately the mean and standard deviation of the normal distribution will be estimated. Three levels may be a little low, but easier to visualize!]
@@ -485,11 +476,11 @@ Only need to estimate the mean and standard deviation of the normal distribution
 
 <p>
 <img style="float: right; width:50%;margin: 1%" src="images/fig_8_w5.png">
-Same principle for lakes
+Same principle for lakes. 
 
-Estimate 2 parameters (mean and standard deviation) instead of 6 intercepts.
+Estimate 2 parameters (mean and standard deviation) instead of 6 intercepts. 
 
-This saves degrees of freedom (less parameter estimation is needed)
+This saves degrees of freedom (less parameter estimation is needed). 
 </p>
 
 
@@ -501,9 +492,9 @@ This saves degrees of freedom (less parameter estimation is needed)
 
 <p>
 <img style="float: right; width:50%;margin: 1%" src="images/fig_9_w5.png">
-The same principle applies to slopes that vary according to a given factor, just more difficult to visualize
+The same principle applies to slopes that vary according to a given factor, just more difficult to visualize. 
 
-As for intercepts, only the mean and standard deviation of the slopes are estimated instead of three distinct slopes.
+As for intercepts, only the mean and standard deviation of the slopes are estimated instead of three distinct slopes. 
 </p>
 
 
@@ -536,7 +527,7 @@ Thus, the ICC informs us of the **extent** to which the average trophic position
 
 ???
 
-Note: _Tell the audience that mathematical notations may vary according to the article/book and according to how the model equation was written._
+Note: Tell the audience that mathematical notations may vary according to the article/book and according to how the model equation was written.
 
 
 ---
@@ -1707,8 +1698,28 @@ hist(dat.tf$total.fruits, breaks = 50, col = 'blue', main = '',
      xlab = 'Total fruits', ylab = 'Count')
 ```
 
-However, as we will soon see, the variance increases with the mean much more rapidly than expected under the Poisson distribution...
+However, as we will soon see, the variance increases with the mean much more rapidly than expected under the Poisson distribution... In other words, the data is *overdispersed*.
 
+---
+# Overdispersion: Review
+For a Poisson distribution, $var[y] = μ$. However, in practice the apparent
+variance of the data often exceeds $μ$, reflecting *overdispersion* in the model parameters.
+
+<br>
+
+Overdispersion arises because the mean $μ$ innately varies,
+even when all the explanatory variables are fixed, or because the
+events that are being counted are positively correlated.
+
+<br>
+
+.center[*Are you able to think of a situation in biology that can cause overdispersion?*]
+
+<br>
+
+**Why should we care about overdispersion?**
+
+>Tests on the explanatory variables will generally appear to be more significant and confidence intervals for the parameters will be narrower than warranted by the data!
 
 ---
 # Exploring variance
@@ -1793,7 +1804,6 @@ mvec <- 0:120
 lines(mvec, predict(Lfit, mvec), col = 5)
 text(118, 2000, "loess", col = 5)
 ```
-
 
 ---
 # Poisson GLMM
