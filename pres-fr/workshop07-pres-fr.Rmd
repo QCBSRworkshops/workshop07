@@ -890,9 +890,12 @@ lmer(Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species),
 - `(1 | Lake)` effet aléatoire par lac à l'intercept
 - `(1 + Z_Length | Lake)` effet aléatoire par lac à l'intercept et la pente en réponse à la longueur corporelle (NB: (`Z_Length | Lake)` donne le même résultat)
 - `(-1 + Z_Length | Lake)` pour avoir uniquement l'effet aléatoire sur la pente
-- `(1 | Lake) + (1 | Species)`  pour des effets aléatoires croisés
-- `(1 | Lake:Fish_Species)` pour utiliser l'interaction entre 2 facteurs groupant
+- `(1 | Lake) + (1 | Species)`  pour des effets aléatoires croisés (ex: l'effet de l'espèce i ne varie pas entre les lacs)
+- `(1 | Lake:Fish_Species)` pour utiliser l'interaction entre 2 facteurs groupant (ex: l'effet de l'espèce i varie d'un lac à l'autre)
 - si votre jeu de données inclus des effets nichés, vous pouvez utiliser `/` pour les déclarer, e.g. `(1 | facteur1 / facteur2)` si `facteur2` est niché dans `facteur1` ([voir ![:faic](stack-exchange)](https://stats.stackexchange.com/questions/228800/crossed-vs-nested-random-effects-how-do-they-differ-and-how-are-they-specified))
+
+???
+Note: S'assurer de bien faire la distinction entre effets croisés (sans interaction), avec interaction et nichés.
 
 ---
 # Note sur les méthodes d'estimation
