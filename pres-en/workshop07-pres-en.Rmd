@@ -594,6 +594,12 @@ the points coming from the same lake are treated independently because little co
 
 **Q2.** Fish trophic positions are similar within lakes but different among lakes
 
+
+???
+
+Note: For this challenge, you can create a zoom poll. It should not take too much time.
+
+
 ---
 # Solution ![:cube]()
 
@@ -617,6 +623,10 @@ https://doi.org/10.1111/j.1469-185X.2010.00141.x
 Nakagawa *et al.* (2017)
 https://doi.org/10.1098/rsif.2017.0213
 
+
+???
+
+Note: Repeat that the ICC measure the % of the variance explained by the random factor (variation between classes) and that the larger the difference between classes, the larger the confidence interval for the global slope and intercept will be large.
 
 ---
 # How to implement mixed models in R?
@@ -646,7 +656,12 @@ https://doi.org/10.1098/rsif.2017.0213
 
 * So we want a model that looks like this:
 
-$$PT_{ijk} \sim Length_i + Lake_j + Species_k + \epsilon_{ijk}$$
+$$TP_{ijk} \sim Length_i + Lake_j + Species_k + \epsilon_{ijk}$$
+
+???
+
+Note: Describe the equation. The trophic position of a fish is a function of body length, the lake and the species of the individual. The last term is the error term (the difference between the expected trophic position and the true trophic position).
+
 
 ---
 # Step 1. Data exploration
@@ -660,6 +675,10 @@ str(fish.data)
 
 It is recommended to clean up your working space (`rm.list()`) before building a model.
 
+???
+
+Note: You can go fairly quickly for step 1 (slides 37-50). The participants should be relatively familiar with data exploration.
+
 ---
 # Step 1. Data exploration
 
@@ -671,13 +690,20 @@ table(fish.data[ , c("Lake", "Fish_Species")])
 
 This dataset is perfectly balanced, but **mixed models can be used to analyze unbalanced experimental plans**, as it is often the case in ecology!
 
+???
+
+Note: Explain what is a balanced vs unbalanced dataset (i.e. equal number of samples accross classes).
+
 ---
 # Step 1. Data exploration
 
 **Look at the distribution of continuous variables:**
 
-```{r, fig.width=10, fig.height=4}
+``` {r include = FALSE}
 par(mfrow = c(1, 2), mar = c(4, 4, 1, 1))
+```
+
+``` {r, fig.width=10, fig.height=4}
 hist(fish.data$Fish_Length, xlab = "Length (mm)", main = "")
 hist(fish.data$Trophic_Pos, xlab = "Trophic position", main = "")
 ```
@@ -699,7 +725,7 @@ plot(fish.data)
 cor(var1, var2)
 ```
 
-Here an [example of collinearity](https://yetanotheriteration.netlify.app/2018/01/high-collinearity-effect-in-regressions/).
+Here is an [example of collinearity](https://yetanotheriteration.netlify.app/2018/01/high-collinearity-effect-in-regressions/).
 
 ---
 # Challenge 3 ![:cube]()
@@ -710,6 +736,9 @@ What additional measures could we have taken in the field that could have been s
 
 > An example is fish body mass - this variable is strongly correlated with fish length. Therefore, we do not want to include these two variables in the same model.
 
+???
+
+Note: The challenge should be quick. It's mostly for cutting the lecture and interacting with the audience.
 
 ---
 # Step 1. Data exploration
@@ -826,7 +855,7 @@ abline(0, 0, lty = 2)
 
 <br>
 
-**Step 4 -** Model interpretation and visualization
+**Step 4.** Model interpretation and visualization
 
 ---
 # Step 2. Code potential models
@@ -835,7 +864,7 @@ abline(0, 0, lty = 2)
 
 $$PT_{ijk} \sim Length_i + Lake_j + Species_k + \epsilon_{ijk}$$
 
-**... in R code**
+**... into R code**
 
 ```{r, include = FALSE}
 library(lme4)
@@ -854,28 +883,6 @@ lmer(Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species),
 * `REML = TRUE` ![:faic](arrow-right) estimation method
 
 ---
-# Note on estimation methods
-
-REML (*Restricted Maximum Likelihood*) is the default method in `lmer` (see `?lmer`).
-
-The *Maximum Likelihood* (ML) method underestimate model variances by a factor of $(n-k)/n$, where $k$ is the number of fixed effects.
-
-The REML method corrects for this bias.
-
-See this [article](https://towardsdatascience.com/maximum-likelihood-ml-vs-reml-78cf79bef2cf) for more information on the difference between ML and REML.
-
----
-# Note on estimation methods
-
-**Remember that you should use :**
-
-* **REML** to compare models with **nested random effects** and the same fixed effect structure
-
-* **ML** to compare models with **nested fixed effects** and the same random effect structure
-
-* **ML** to compare models **with and without random effects**
-
----
 # Step 2. Code potential models
 
 **What if we want the slopes to vary?**
@@ -889,13 +896,43 @@ See this [article](https://towardsdatascience.com/maximum-likelihood-ml-vs-reml-
 
 **Different structures for the model :**
 
-- `(1 | Lake)` random effect by lake at the intrecept
+- `(1 | Lake)` random effect by lake at the intercept
 - `(1 + Z_Length | Lake)` random effect by lake at the intercept and slope in response to the body length (NB: (`Z_Length | Lake)` gives the same random structure)
 - `(-1 + Z_Length | Lake)` to have only the random effect at the slope
 - `(1 | Lake) + (1 | Species)`  for crossed random effects
 - `(1 | Lake:Fish_Species)` for the interaction between 2 random effects
 
 - If your dataset includes nested random effects, you could use `/` to specify them, e.g. `(1 | factor1 / factor2)` if `factor2` is nested in `factor1` ([see ![:faic](stack-exchange)](https://stats.stackexchange.com/questions/228800/crossed-vs-nested-random-effects-how-do-they-differ-and-how-are-they-specified))
+
+---
+# Note on estimation methods
+
+REML (*Restricted Maximum Likelihood*) is the default method in `lmer` (see `?lmer`).
+
+The *Maximum Likelihood* (ML) method underestimates model variances by a factor of $(n-k)/n$, where $k$ is the number of fixed effects.
+
+The REML method corrects for this bias.
+
+See this [article](https://towardsdatascience.com/maximum-likelihood-ml-vs-reml-78cf79bef2cf) for more information on the difference between ML and REML.
+
+???
+
+Note:Explain that the estimation methods is the algorithm used to estimate the parameters (slopes, intercepts) of the model. Specify that they don't need to understand the details, but they can get more information if they follow the hyperlink. The next slides summarize the main point they should know about.
+
+---
+# Note on estimation methods
+
+**Remember that you should use :**
+
+* **REML** to compare models with different **random effect** structure and the same fixed effect structure
+
+* **ML** to compare models with different **fixed effect** structure and the same random effect structure
+
+* **ML** to compare models **with random effects** to models **without random effects**
+
+???
+
+Note: This is probably hard to understand, but you can specify that the next few challenges should help them understand the use of each estimation methods
 
 ---
 # Challenge 4 ![:cube]()

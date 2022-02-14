@@ -586,6 +586,10 @@ Les points provenant d'un même lac sont traités indépendamment car **peu corr
 
 **Q2.** Les positions trophiques des poissons sont similaires dans les lacs mais différentes entre les lacs
 
+???
+
+Note: Pour ce défi, vous pouvez créer un sondage Zoom. Cela ne devrait pas être trop long.
+
 ---
 # Solution ![:cube]()
 
@@ -610,6 +614,10 @@ Nakagawa et Schielzeth (2013)
 https://doi.org/10.1111/j.1469-185X.2010.00141.x
 Nakagawa *et al.* (2017) 
 https://doi.org/10.1098/rsif.2017.0213
+
+???
+
+Note: Répéter que le CCI mesure le ratio de la variance "expliquée" par le facteur aléatoire. De plus, plus les intervalles de confiance pour l'ordonnée à l'origine et la pente globale est grande, plus la variation interclasse est grande.
 
 
 ---
@@ -641,6 +649,11 @@ https://doi.org/10.1098/rsif.2017.0213
 * Donc nous voulons un modèle qui ressemble a ceci:
 
 $$PT_{ijk} \sim Longueur_i + Lac_j + Espèce_k + \varepsilon_{ijk}$$
+
+???
+
+Note: Décrire chaque élément de l'équation. La position trophique est prédite par la longueur, le lac de provenance et l'espèce du poisson. Le dernier terme décrit l'erreur entre la position trophique prédites par les variables explicatives et la vraie position trophique.
+
 ---
 # Étape 1. exploration des données
 
@@ -653,6 +666,10 @@ str(fish.data)
 
 Il est recommandé de faire le ménage de votre espace de travail (`rm.list()`) avant de construire un modèle.
 
+???
+
+Note: Vous pouvez aller relativement rapidement pour l'étape 1 (diapositives 37-50). Les participants devraient être relativement à l'aise avec ces étapes.
+
 ---
 # Étape 1. exploration des données
 
@@ -664,13 +681,20 @@ table(fish.data[ , c("Lake", "Fish_Species")])
 
 Ce jeu de données est parfaitement équilibré, mais les **modèles mixtes peuvent analyser des designs expérimentaux non équilibrés**, comme c'est souvent le cas en écologie!
 
+???
+
+Note: Expliquer ce qu'est un jeu de données équilibré vs non équilibrés (c-a-d. le nombre d'échantillons dans chaque classe.)
+
 ---
 # Étape 1. exploration des données
 
 **Regardez la distribution des variables continues**
 
-```{r, fig.width=10, fig.height=4}
+```{r include = FALSE}
 par(mfrow=c(1,2), mar = c(4,4,1,1))
+```
+
+```{r, fig.width=10, fig.height=4}
 hist(fish.data$Fish_Length, xlab = "Length (mm)", main = "")
 hist(fish.data$Trophic_Pos, xlab = "Trophic position", main = "")
 ```
@@ -702,6 +726,11 @@ Quelles mesures supplémentaires aurions-nous pu prendre sur le terrain et qui a
 --
 
 > Un exemple est la masse du poisson – c’est une variable fortement corrélée avec la longueur du poisson. Par conséquent, nous ne voulons pas inclure ces deux variables dans le même modèle.
+
+
+???
+
+Note: Ce défi est principalement pour interagir un peu avec les participants. Poser la question à l'audience, et ça ne devrait pas être trop long.
 
 ---
 # Étape 1. exploration des données
@@ -845,28 +874,6 @@ lmer(Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species),
 * `REML = TRUE` ![:faic](arrow-right) méthode d'estimation
 
 ---
-# Note sur les méthodes d'estimation
-
-REML (*Restricted Maximum Likelihood*) est la méthode par défaut dans la fonction `lmer` (voir `?lmer`).
-
-La méthode de maximum de vraisemblance (ML, pour *Maximum Likelihood*) sous-estime les variances du modèle par un facteur $(n-k) / n$, ou $k$ est le nombre d'effes fixes. 
-
-La méthode REML corrige pour ce biais.
-
-Consultez cet [article](https://towardsdatascience.com/maximum-likelihood-ml-vs-reml-78cf79bef2cf) pour plus d'information sur la différence entre ML et REML.
-
----
-# Note sur les méthodes d'estimation
-
-**On devrait utiliser :**
-
-* **REML** pour comparer des modèles avec des **effets aléatoires nichés** et la même structure d'effets fixes
-
-* **ML** pour comparer des modèles avec des **effets fixes nichés** et la même structure d'effets aléatoires
-
-* **ML** pour comparer des modèles **avec et sans effets aléatoires**
-
----
 # Étape 2. coder le modèle
 
 **Comment faire si on souhaite que la pente puisse varier?**
@@ -886,6 +893,36 @@ Consultez cet [article](https://towardsdatascience.com/maximum-likelihood-ml-vs-
 - `(1 | Lake) + (1 | Species)`  pour des effets aléatoires croisés
 - `(1 | Lake:Fish_Species)` pour utiliser l'interaction entre 2 facteurs groupant
 - si votre jeu de données inclus des effets nichés, vous pouvez utiliser `/` pour les déclarer, e.g. `(1 | facteur1 / facteur2)` si `facteur2` est niché dans `facteur1` ([voir ![:faic](stack-exchange)](https://stats.stackexchange.com/questions/228800/crossed-vs-nested-random-effects-how-do-they-differ-and-how-are-they-specified))
+
+---
+# Note sur les méthodes d'estimation
+
+REML (*Restricted Maximum Likelihood*) est la méthode par défaut dans la fonction `lmer` (voir `?lmer`).
+
+La méthode de maximum de vraisemblance (ML, pour *Maximum Likelihood*) sous-estime les variances du modèle par un facteur $(n-k) / n$, ou $k$ est le nombre d'effes fixes. 
+
+La méthode REML corrige pour ce biais.
+
+Consultez cet [article](https://towardsdatascience.com/maximum-likelihood-ml-vs-reml-78cf79bef2cf) pour plus d'information sur la différence entre ML et REML.
+
+???
+
+Note: Dire que la méthode d'estimation est l'algorithme utiliser pour estimer les paramètres du modèles (ordonnées à l'origine, pentes). Expliquer qu'ils n'ont pas besoin de comprendre l'algorithme en détail, mais qu'ils peuvent suivre le lien pour plus d'informations. La prochaine diapositive résume ce qu'ils devraient savoir.
+
+---
+# Note sur les méthodes d'estimation
+
+**On devrait utiliser :**
+
+* **REML** pour comparer des modèles avec différentes structure **d'effets aléatoires** et la même structure d'effets fixes.
+
+* **ML** pour comparer des modèles avec différentes structure **d'effets fixes** et la même structure d'effets aléatoires
+
+* **ML** pour comparer des modèles **avec effets aléatoires** à des modèles **sans effets aléatoires**
+
+???
+
+Note: Cela peut sembler complexe, mais les deux prochains défis devraient aider les participants à comprendre les utilisations des difféerentes méthodes d'estimation.
 
 ---
 # Défi 4 ![:cube]()
