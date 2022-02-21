@@ -976,6 +976,12 @@ lmer(Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species),
 
 .comment[Note: If we had different fixed effects between the models or a model without random effects, we would have to specify `REML = FALSE` to compare with likelihood methods like AIC.]
 
+???
+
+Note: To determine if you have built the best mixed model based on your prior knowledge, you should compare this a priori model to other alternative models.
+
+With the dataset you are working on, there are several alternative models that might better fit your data.
+
 ---
 # Solution ![:cube]()
 
@@ -1038,7 +1044,15 @@ Here a [list](https://rdrr.io/cran/lme4/man/troubleshooting.html) of possible pr
 
 * `AICc` corrects for bias created by small sample sizes.
 
+To find the AICc value of a model, use:
+
+```{r}
+library(MuMIn)
+MuMIn::AICc(M1)
+```
+
 ---
+exclude: true
 # Step 2. Model selection
 
 To find the AICc value of a model, use:
@@ -1062,6 +1076,10 @@ AIC.table  <- MuMIn::model.sel(M0, M1, M2, M3, M4, M5, M6, M7, M8)
 * `delta` is the AICc difference with the lowest value
 
 We only displayed part of the results returned by the function `model.sel()`, see `?model.sel` for more information.
+
+???
+
+Note: Then we can select only the columns of interest to print into a table `df` is the degree of freedom `logLik` is the loglikelihood `delta` is the AICc difference with the lowest value.
 
 ---
 # Step 2. Model selection
@@ -1226,14 +1244,21 @@ Homogeneous dispersion of the residuals ![:faic](arrow-right) the assumption is 
 ![](images/resid-plots.gif)
 ]
 
+???
+
+Note: Heteroscedasticity refers to the circumstance in which the variability of a variable is unequal across the range of values of a second variable that predicts it.
+
+A scatterplot of these variables will often create a cone-like shape, as the scatter (or variability) of the dependent variable widens or narrows as the value of the independent variable increases. The inverse of heteroscedasticity is homoscedasticity, which indicates that a dependent variable variability is equal across values of an independent variable.
 ---
 # Step 3. Model validation
 
 **3.2 Check the independence of the model residuals with each covariate**
 
-```{r, fig.width=11, fig.height=4.5, eval = FALSE}
+```{r echo = F, eval = T}
 par(mfrow = c(1,3), mar=c(4,4,.5,.5))
+```
 
+```{r, fig.width=11, fig.height=4.5, eval = FALSE}
 plot(resid(M8) ~ fish.data$Z_Length,
      xlab = "Length", ylab = "Normalized residuals")
 abline(h = 0, lty = 2)
@@ -1252,8 +1277,12 @@ abline(h = 0, lty = 2)
 
 **3.2 Check the independence of the model residuals with each covariate**
 
-```{r, fig.width=12, fig.height=4.5, echo = FALSE}
+
+```{r echo = F, eval = T}
 par(mfrow = c(1,3), mar=c(4,4,.5,.5), cex.lab = 1.5)
+```
+
+```{r, fig.width=12, fig.height=4.5, echo = FALSE}
 plot(resid(M8) ~ fish.data$Z_Length, xlab = "Length", ylab = "Normalized residuals")
 abline(h = 0, lty = 2)
 boxplot(resid(M8) ~ Fish_Species, data = fish.data, xlab = "Species", ylab = "")
@@ -1314,6 +1343,9 @@ hist(resid(M8))
 (summ_M8 <- summary(M8))
 ```
 
+???
+
+Note: Let’s take a closer look at our final model using the summary() function. How can we interpret this information?
 ---
 # Step 4. Interpretation and visualization
 
@@ -1330,6 +1362,12 @@ hist(resid(M8))
   - or the name of the variable on which the random slope is estimated (`Z_length` in this example)
 - `Variance` the variance of the estimated effect (`Std.Dev.` is the standard deviation of this estimate)
 - `Corr` the correlation between the random interpet and the random slope for a given grouping factor (see [this dicussion ![:faic](stack-exchange)](https://stats.stackexchange.com/questions/320978/understanding-and-coding-random-intercept-correlation-lmer))
+
+???
+
+Note: Let’s go section by section and try to understand what we are looking at.
+
+The output is broken up into descriptions of the Random effects (things we allow to vary based on the normal distribution) and Fixed effects (things we estimate in the same way as classical regression).
 
 ---
 # Step 4. Interpretation and visualization
@@ -1387,6 +1425,7 @@ If the 95% confidence interval of the slope ($slope ± SE * 1.96$) includes zero
 
 2. Is the slope of Z_Length significantly different from 0?
 
+
 ---
 # Solution ![:cube]()
 
@@ -1401,11 +1440,15 @@ If the 95% confidence interval of the slope ($slope ± SE * 1.96$) includes zero
 2. Is the slope of Z_Length significantly different from 0?
 
   - Yes, because the CI [0.2459, 0.5987] does not include 0
+  
+???
+
+Note: If the 95% confidence interval of the slope includes zero, the slope (here = 0.4223), and therefore the effect of length on trophic position, is not significantly different from zero at the alpha threshold of 0.05.
 
 ---
 # Challenge 7 ![:cube]()
 
-It is possible to visualize graphically the different intercepts and slopes of the model to better interpret the results
+It is possible to visualize graphically the different intercepts and slopes of the model to better interpret the results.
 
 Take 2 minutes to think about different ways to represent the results of M8.
 
@@ -1597,6 +1640,7 @@ Mixed models are very useful for taking into account the complex structure of ec
 ]
 
 ---
+exclude: true
 # Challenge 8 ![:cube]()
 
 **Situation:**
@@ -1610,6 +1654,8 @@ Mixed models are very useful for taking into account the complex structure of ec
 .alert[What mixed model could you use for this dataset?]
 
 ---
+exclude: true
+
 # Solution!![:cube]()
 
 ```{r, eval = FALSE}
@@ -1691,7 +1737,6 @@ exclude: true
 
 **Extension of GLMs to account for additional structure in dataset**
 
-Follows similar steps introduced in LMM Workshop :
 
 **1.** Incorporate random effects (like LMMs)
 
@@ -1710,22 +1755,25 @@ _Include 2-3 slides recalling GLM_
 
 Import the `Arabidopsis` dataset `banta_totalfruits.csv` into `R`.
 
-```{r, echo = F}
+```{r}
 dat.tf <- read.csv("data/banta_totalfruits.csv")
 ```
+Description: data on genetic variation in responses to fertilization and simulated herbivory in *Arabidopsis*.
+For more details see https://www.rdocumentation.org/packages/lme4/versions/1.1-27.1/topics/Arabidopsis
 
-```r
-dat.tf <- read.csv("banta_totalfruits.csv")
-```
-```r
-# popu factor with a level for each population
-# gen factor with a level for each genotype
-# nutrient factor with levels for low (value = 1) or high (value = 8)
-# amd factor with levels for no damage or simulated herbivory
-# total.fruits integer indicating the number of fruits per plant
+```{r}
+# In this dataset, the column headers are defined as:
+
+# reg: region (e.g. NL for Netherlands)
+# popu: factor with a level for each population 
+# gen: factor with a level for each genotype
+# rack: a nuisance factor with 2 levels, one for each of two greenhouse racks
+# nutrient: factor with levels for low (value = 1) or high (value = 8)
+# amd: factor with levels for no damage or simulated herbivory
+# total.fruits: integer indicating the number of fruits per plant
 ```
 
-The effect of nutrient availability and herbivory (**fixed effects**) on the fruit production (**response variable**) of Arabidopsis thaliana was evaluated by measuring 625 plants across 9 different populations, each comprised of 2 to 3 different genotypes (**random effects**)
+The effect of nutrient availability and herbivory (**fixed effects**) on the fruit production (**response variable**) of *Arabidopsis thaliana* was evaluated by measuring 625 plants across 9 different populations, each comprised of 2 to 3 different genotypes (**random effects**)
 
 
 ---
@@ -1739,7 +1787,9 @@ hist(dat.tf$total.fruits, breaks = 50, col = 'blue', main = '',
      xlab = 'Total fruits', ylab = 'Count')
 ```
 
-However, as we will soon see, the variance increases with the mean much more rapidly than expected under the Poisson distribution... In other words, the data is *overdispersed*.
+Read more about error distributions [here](http://ganymede.nmsu.edu/holtz/a535/ay535notes/node3.html) 
+
+However, as we will soon see, the variance increases with the mean much more rapidly than expected under the Poisson distribution... In other words, the data is *overdispersed*. 
 
 ---
 # Overdispersion: Review
@@ -1761,7 +1811,6 @@ events that are being counted are positively correlated.
 **Why should we care about overdispersion?**
 
 >Tests on the explanatory variables will generally appear to be more significant and confidence intervals for the parameters will be narrower than warranted by the data!
-
 ---
 # Exploring variance
 
@@ -1852,6 +1901,8 @@ text(118, 2000, "loess", col = 5)
 **Given the mean-variance relationship, we will most likely need a model with overdispersion.**
 
 To understand why, let's start with a Poisson model.
+
+An assumption that must be fulfilled on Poisson distribution is the mean value of data equals to the variance value (or so-called equidispersion). If the variance value is greater than the mean value, it is called **overdispersion**.
 
 --
 
@@ -2002,6 +2053,9 @@ coefplot2(mpl1, intercept = TRUE, main = "Fixed effect coefficient")
 
 .comment[Note: error bars are only shown for the fixed effects because `glmer()` does not model uncertainty for random effects.]
 
+???
+
+Note: The random effect variance (σ2i) represents the mean random effect variance of the model. Since this variance reflects the “average” random effects variance for mixed models, it is also appropriate for models with more complex random effects structures, like random slopes or nested random effects. The fixed effects variance (σ2f) is the variance of the matrix-multiplication β∗X (parameter vector by model matrix).
 
 ---
 # Poisson-lognormal GLMM
@@ -2021,7 +2075,7 @@ We observe mild differences **among genotypes** :
 
 - Difference among genotypes largely driven by genotype 34
 
-```r
+```{r}
 library(gridExtra)
 library(lattice)
 # dotplot code
@@ -2103,30 +2157,31 @@ dd_LRT <- drop1(mpl1, test = "Chisq")
 
 
 ---
-# Model selection
+# Model creation
 Let's start by **removing the non-significant interaction** term to test main effects of nutrient and clipping
 ```{r}
 mpl2 <- update(mpl1, . ~ . - amd:nutrient)
 
-mpl3 <- update(mpl2, . ~ . - rack) # pas de rack ou d'interaction
-mpl4 <- update(mpl2, . ~ . - status) # pas de status ou d'interaction
-mpl5 <- update(mpl2, . ~ . - nutrient) # pas de nutrient ou d'interaction
-mpl6 <- update(mpl2, . ~ . - amd) # pas d'herbivorie ou d'interaction
+mpl3 <- update(mpl2, . ~ . - rack) # without rack or interaction
+mpl4 <- update(mpl2, . ~ . - status) # without status or interaction
+mpl5 <- update(mpl2, . ~ . - nutrient) # without nutrient or interaction
+mpl6 <- update(mpl2, . ~ . - amd) # without herbivory or interaction
 ```
 
-Choose the method you want to select the best model :
-.pull-left2[ Method with AICc
+---
+Choose the method you want to select the best model:
+
+**Method with AICc**
 ```{r}
 aic_tab2  <- MuMIn::model.sel(mpl2, mpl3, mpl4, mpl5, mpl6)
 (round(aic_table2 <- aic_tab2[ , c("AICc", "delta", "df")], digits = 2))
 ```
-]
-.pull-right2[ Method with `drop1()`
+
+**Method with `drop1()`**
 ```{r}
 dd_LRT2 <- drop1(mpl2, test = "Chisq")
 dd_AIC2 <- dfun(drop1(mpl2))
 ```
-]
 
 
 ---
@@ -2152,7 +2207,7 @@ Random effects
 
 
 ---
-# Challenge 9 ![:cube]()
+# Challenge 8 ![:cube]()
 
 Use the `inverts` dataset (larval development times (`PLD`) of 74 marine invertebrate and vertebrate species reared at different temperatures and time), answer the following questions:
 
