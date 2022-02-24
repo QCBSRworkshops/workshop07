@@ -2164,7 +2164,7 @@ dd_LRT <- drop1(mpl1, test = "Chisq")
 
 
 ---
-# Model creation
+# Model selection
 Let's start by **removing the non-significant interaction** term to test main effects of nutrient and clipping
 ```{r}
 mpl2 <- update(mpl1, . ~ . - amd:nutrient)
@@ -2176,6 +2176,7 @@ mpl6 <- update(mpl2, . ~ . - amd) # without herbivory or interaction
 ```
 
 ---
+# Model selection
 Choose the method you want to select the best model:
 
 **Method with AICc**

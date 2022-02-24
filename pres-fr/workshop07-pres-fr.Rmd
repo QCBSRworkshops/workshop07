@@ -2115,7 +2115,10 @@ mpl4 <- update(mpl2, . ~ . - status) # pas de status ou d'interaction
 mpl5 <- update(mpl2, . ~ . - nutrient) # pas de nutrient ou d'interaction
 mpl6 <- update(mpl2, . ~ . - amd) # pas d'herbivorie ou d'interaction
 ```
+---
 
+---
+# Sélection du modèle
 Sélectionnez le meilleur modèle avec la méthode de votre choix :
 .pull-left2[ Méthode par AICc
 ```{r}
