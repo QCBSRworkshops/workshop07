@@ -798,9 +798,12 @@ lm.test.resid <- rstandard(lm.test)
 
 Représentez graphiquement la valeur des résidus en fonction des niveaux des facteurs
 
-```{r, fig.width=10, fig.height=5, eval = FALSE}
-par(mfrow=c(1,2))
+``` {r include = FALSE}
+par(mfrow = c(1, 2))
+```
 
+
+```{r, fig.width=10, fig.height=5, eval = FALSE}
 plot(lm.test.resid ~ as.factor(fish.data$Fish_Species),
      xlab = "Species", ylab = "Standardized residuals")
 
@@ -948,7 +951,7 @@ lmer(Z_TP ~ Z_Length + (1 + Z_Length | Lake) + (1 + Z_Length | Fish_Species),
 ---
 # Étape 2. sélectionner le meilleur modèle
 
-* Pour déterminer si vous avez construit le meilleur modèle mixte basé sur vos connaissances a priori, vous devez comparer ce modèle aux autres modèles alternatifs.
+* Pour déterminer si vous avez construit le meilleur modèle mixte basé sur vos connaissances *a priori*, vous devez comparer ce modèle aux autres modèles alternatifs.
 
 * Avec le jeu de données sur lequel vous travaillez, il y a plusieurs modèles alternatifs qui pourraient mieux correspondre à vos données.
 
@@ -965,6 +968,9 @@ lmer(Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species),
 
 .comment[Note : si nous avions différents effets fixes entre les modèles ou un modèle sans effects aléatoires, nous aurions dû indiquer `REML = FALSE` pour les comparer avec une méthode de vraisemblance comme l'AIC.]
 
+???
+
+Note: Pour savoir si le modèle que vous avez construis basé sur vos connaissances a priori est le meilleur, vous devez le comparer à des modèles avec une structure alternative. Il existe de nombreux modèles alternatifs qui peuvent être construit à partir de la base de données avec laquelle vous travailler.
 
 ---
 # Solution ![:cube]()
@@ -1059,7 +1065,6 @@ AIC.table  <- MuMIn::model.sel(M0, M1, M2, M3, M4, M5, M6, M7, M8)
 
 Nous avons seulement affiché une partie des résultats retourné par la fonction `model.sel()`, voir `?model.sel` pour plus d'information.
 
-
 ---
 # Étape 2. sélectionner le meilleur modèle
 
@@ -1092,7 +1097,6 @@ MuMIn::model.sel(M2,M8)[ , c("df", "logLik", "AICc", "delta")]
 Le modèle `M8` semble être le meilleur modèle parmi ceux qu'on a testé.
 
 Notez qu'on utilise maintenant REML (i.e. `REML=TRUE`) vu qu'on compare deux modèles avec des effets aléatoires nichés et avec la même structure d'effets fixes. 
-
 
 ---
 # Étape 2. sélectionner le meilleur modèle
@@ -1207,8 +1211,11 @@ exclude: true
 
 **3.1 Vérifier l'homogénéité de la variance**
 
-```{r, fig.width=4.5, fig.height=4.5, echo = -1}
+```{r include = FALSE}
 par(mar=c(4,4,.5,.5))
+```
+
+```{r, fig.width=4.5, fig.height=4.5, echo = -1}
 plot(resid(M8) ~ fitted(M8), 
      xlab = 'Valeurs prédites', 
      ylab = 'Résidus normalisés')
@@ -1227,15 +1234,19 @@ abline(h = 0, lty = 2)
 ![](images/resid-plots.gif)
 ]
 
+???
 
+Note: L'hétéroscedasticité est lorsque la variance des résidus du modèles (i.e., erreur) varient avec une variable explicative. Lorsque l'on graphe les résidus avec une variable explicative, nous observons une forme conique des résidus comme les examples ci-dessous. L'inverse d'hétéoscedasticité est l'homoscedaticité. L'homoscedaticité est lorsque la variance des résidus ne varient pas avec les variables explicatives. C'est ce qu'on veut!
 ---
 # Étape 3. validation du modèle
 
 **3.2 Vérifier l'indépendance des résidus avec chaque covariable**
 
-```{r, fig.width=11, fig.height=4.5, eval = FALSE}
+```{r include = FALSE}
 par(mfrow = c(1,3), mar=c(4,4,.5,.5))
+```
 
+```{r, fig.width=11, fig.height=4.5, eval = FALSE}
 plot(resid(M8) ~ fish.data$Z_Length, 
      xlab = "Longueur", ylab = "Résidus normalisés")
 abline(h = 0, lty = 2)
@@ -1321,6 +1332,9 @@ hist(resid(M8))
 (summ_M8 <- summary(M8))
 ```
 
+???
+
+Note: Prenons un moment pour explorer un peu plus notre modèle final à l'aide de la fonction summary(). Comment pouvons-nous interpréter ces informations?
 
 ---
 # Étape 4. interprétation et visualisation
@@ -1357,6 +1371,11 @@ $$ IC = Estimate \pm 1.96*Std.Error $$
 Si 0 est dans cet interval, alors le paramètre n’est pas significativement
 différente de zéro au seuil $\alpha$ = 0.05.
 
+???
+
+Note: Passer section par section pour bien comprendre ce qui est présenter.
+
+La sortie est divisé en deux: la description des facteurs aléatoires et les facteurs fixes.
 
 ---
 # Étape 4. interprétation et visualisation
@@ -1397,6 +1416,9 @@ différente de zéro au seuil $\alpha$ = 0.05.
 
   - Oui, car l'IC [0.2459, 0.5987] n'inclut pas 0
 
+???
+
+Note: L'intervalle de confiance de la pente n'inclue pas 0 (0 = aucun effet), la pente est donc significativement différente de 0. Cela signifie que la longueur du poisson influence sa position trophique (un plus long poisson a, en moyenne, un plus haut niveau trophique). Est-ce que ça fait du sens? Oui, les gros poissons mangent les petits poissons.
 
 ---
 # Défi 7 ![:cube]()
@@ -1605,6 +1627,7 @@ Les modèles mixtes sont très utiles pour prendre en compte la structure comple
 
 
 ---
+exclude: true
 # Défi 8 ![:cube]()
 
 **Situation:**
@@ -1619,6 +1642,7 @@ Les modèles mixtes sont très utiles pour prendre en compte la structure comple
 
 
 ---
+exclude: true
 # Solution ![:cube]()
 
 ```{r, eval = FALSE}
@@ -1693,10 +1717,12 @@ Chargez les données `Arabidopsis` `banta_totalfruits.csv` dans `R`.
 dat.tf <- read.csv("data/banta_totalfruits.csv")
 ```
 
-```r
-dat.tf <- read.csv("banta_totalfruits.csv")
-```
-```r
+Cette base de données décrit la réponse génétique de l'espèce `Arabidopsis` à la fertilisation et l'herbivorie. 
+
+Pour plus de détails, vous pouvez consulter [ceci](https://www.rdocumentation.org/packages/lme4/versions/1.1-27.1/topics/Arabidopsis)
+
+
+```{r}
 # popu facteur avec un niveau pour chaque population
 # gen facteur avec un niveau pour chaque génotype
 # nutrient facteur avec niveau bas (valeur = 1) ou haut (valeur = 8)
@@ -1717,6 +1743,9 @@ par(mypar);par(cex = 1.4)
 hist(dat.tf$total.fruits, breaks = 50, col = 'blue', main = '',
      xlab = 'Fruits totaux', ylab = 'Compte')
 ```
+
+Vous pouvez lire plus sur la distribution des erreurs [ici](http://ganymede.nmsu.edu/holtz/a535/ay535notes/node3.html) 
+
 Cependant, comme nous le verrons, la variance de chaque groupe augmente beaucoup plus rapidement que prévu... Cela indique que les données sont surdispersées.
 
 ---
@@ -1738,8 +1767,7 @@ les événements qui sont comptés sont corrélés positivement.
 
 **Pourquoi devrions-nous nous intéresser à la surdispersion?**
 
-> Les tests sur les variables explicatives apparaîtront généralement plus significatifs et les intervalles de confiance des paramètres seront plus étroits
-que les données ne le justifierait!
+> Les tests sur les variables explicatives apparaîtront généralement plus significatifs et les intervalles de confiance des paramètres seront plus étroits que les données ne le justifierait!
 
 ---
 # Exploration de la variance
@@ -2126,7 +2154,7 @@ Effets aléatoires
 
 
 ---
-# Défi 9 ![:cube]()
+# Défi 8 ![:cube]()
 
 En utilisant l'ensemble de données `inverts` (temps de développement larvaire (`PLD`) de 74 espèces d'invertébrés et vertébrés marins élevés à différentes températures et temps), répondez aux questions suivantes:
 

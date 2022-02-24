@@ -807,8 +807,11 @@ lm.test.resid <- rstandard(lm.test)
 
 Plot the residuals against the levels of the potential random factors
 
-```{r, fig.width = 10, fig.height = 5, eval = FALSE}
+``` {r include = FALSE}
 par(mfrow = c(1, 2))
+```
+
+```{r, fig.width = 10, fig.height = 5, eval = FALSE}
 
 plot(lm.test.resid ~ as.factor(fish.data$Fish_Species),
      xlab = "Species", ylab = "Standardized residuals")
@@ -978,9 +981,7 @@ lmer(Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species),
 
 ???
 
-Note: To determine if you have built the best mixed model based on your prior knowledge, you should compare this a priori model to other alternative models.
-
-With the dataset you are working on, there are several alternative models that might better fit your data.
+Note: To determine if you have built the best mixed model based on your prior knowledge, you should compare this a priori model to other alternative models. With the dataset you are working on, there are several alternative models that might better fit your data.
 
 ---
 # Solution ![:cube]()
@@ -1225,8 +1226,11 @@ exclude: true
 
 **3.1 Check the homogeneity of the variance**
 
-```{r, fig.width=4.5, fig.height=4.5, echo = -1}
+```{r include = FALSE}
 par(mar=c(4,4,.5,.5))
+```
+
+```{r, fig.width=4.5, fig.height=4.5, echo = -1}
 plot(resid(M8) ~ fitted(M8),
      xlab = 'Predicted values',
      ylab = 'Normalized residuals')
@@ -1737,6 +1741,7 @@ exclude: true
 
 **Extension of GLMs to account for additional structure in dataset**
 
+Follows similar steps introduced in LMM section :
 
 **1.** Incorporate random effects (like LMMs)
 
@@ -1758,8 +1763,9 @@ Import the `Arabidopsis` dataset `banta_totalfruits.csv` into `R`.
 ```{r}
 dat.tf <- read.csv("data/banta_totalfruits.csv")
 ```
+
 Description: data on genetic variation in responses to fertilization and simulated herbivory in *Arabidopsis*.
-For more details see https://www.rdocumentation.org/packages/lme4/versions/1.1-27.1/topics/Arabidopsis
+For more details see [here](https://www.rdocumentation.org/packages/lme4/versions/1.1-27.1/topics/Arabidopsis)
 
 ```{r}
 # In this dataset, the column headers are defined as:
@@ -1811,6 +1817,7 @@ events that are being counted are positively correlated.
 **Why should we care about overdispersion?**
 
 >Tests on the explanatory variables will generally appear to be more significant and confidence intervals for the parameters will be narrower than warranted by the data!
+
 ---
 # Exploring variance
 
