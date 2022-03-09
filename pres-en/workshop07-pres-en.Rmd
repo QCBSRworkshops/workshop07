@@ -78,47 +78,14 @@ lapply(list.of.packages, require, character.only = TRUE, quietly = TRUE)
 
 # About this workshop
 
-[![badge](https://img.shields.io/static/v1?style=for-the-badge&label=repo&message=dev&color=6f42c1&logo=github)](https://github.com/QCBSRworkshops/workshop07)
-[![badge](https://img.shields.io/static/v1?style=for-the-badge&label=wiki&message=07&logo=wikipedia)](https://wiki.qcbs.ca/r_workshop6)
-[![badge](https://img.shields.io/static/v1?style=for-the-badge&label=Slides&message=07&color=red&logo=html5)](https://qcbsrworkshops.github.io/workshop07/workshop07-en/workshop07-en.html)
-[![badge](https://img.shields.io/static/v1?style=for-the-badge&label=Slides&message=07&color=red&logo=adobe-acrobat-reader)](https://qcbsrworkshops.github.io/workshop07/workshop07-en/workshop07-en.pdf)
-[![badge](https://img.shields.io/static/v1?style=for-the-badge&label=script&message=07&color=2a50b8&logo=r)](https://qcbsrworkshops.github.io/workshop07/workshop07-en/workshop07-en.R)
+[![badge](https://img.shields.io/static/v1?style=flat-square&label=Slides&message=07&color=red&logo=html5)](https://r.qcbs.ca/workshop07/pres-en/workshop07-pres-en.html) 
+[![badge](https://img.shields.io/static/v1?style=flat-square&label=book&message=07&logo=github)](https://r.qcbs.ca/workshop07/book-en/index.html) 
+[![badge](https://img.shields.io/static/v1?style=flat-square&label=script&message=07&color=2a50b8&logo=r)](https://r.qcbs.ca/workshop07/book-en/workshop07-script-en.R) 
+[![badge](https://img.shields.io/static/v1?style=flat-square&label=repo&message=dev&color=6f42c1&logo=github)](https://github.com/QCBSRworkshops/workshop07) 
 
----
+???
+Note: Communicate to the participants that all the materials for this workshop is available on the R workshops website, and that there is an additional 'bookdown' with additional text. There is a lot of content for this workshop, so participants will be able to review the concepts they understood a bit less after on their own after the workshop.
 
-<p style="font-size:75%">
-
-.center[
-**Contributors to the development of this workshop**
-
-by modifying and improving its content as part of the <br> *Le*arning *a*nd *D*evelopment *A*ward
-]
-
-
-.pull-left[
-.right[
-
- **2022** - **2021** - **2020**
-
-
-
-]
-]
-
-.pull-right[
-.left[
-**2019** - **2018** - **2017**
-
-
-
-**2016** - **2015** - **2014**
-
-
-
-]
-
-]
-</p>
 
 ---
 
@@ -161,6 +128,8 @@ install.packages(c("lme4",
                       "lattice"))
 ```
 ]
+
+??? Note: To save time: (1) Ask the participants to install the packages before the workshop, (2) Don't wait that everyone managed to install every packages and help the students that did not manage to install some packages during challenge #1.
 
 ---
 
@@ -230,6 +199,8 @@ Introduction to the example dataset
 **2.** Open the example dataset in `R`
 
 **3.** Reproduce the plots 1 to 3 from the script. Observe the plots and try to get a sense of what you see
+
+Note: Should not be super long, they have the script to make the plots. You can almost just give them time to think while you help participants with installing packages. If there is none, you can just skip the time to think, and simply have a group discussion plot by plot.
 
 ---
 # Solution ![:cube]()
@@ -305,6 +276,8 @@ plot + geom_point() + facet_wrap(~ Lake) + xlab("Length (mm)") + ylab("Trophic P
 
 * Unbalanced study/experimental design
 
+???
+Note: Use the workshop data as example. We have data on fish body length and trophic level that are structured through 3 species and 6 lakes. This creates a hierarchical structure in the data.
 
 ---
 exclude: true
@@ -422,6 +395,12 @@ Data comes from :
 
 We wish to make conclusions about the levels of the factor or about the relationship between the response variable and the predictor.
 
+<br>
+
+*Example: We are interested of in the effect of a treatment (e.g. clear cut) on a response variable (e.g. species richness). The variable treatment is the factor with two levels: clear cut or not.*
+
+??? 
+Note: Emphasize that we gathered data for all levels of the factor that are of interest. We are not interested in other possible levels.
 
 ---
 # Why choose mixed models?
@@ -434,6 +413,12 @@ We wish to make conclusions about the levels of the factor or about the relation
 
 * Enable us to structure the error process
 
+<br>
+
+*Example: We sampled fishes in 6 out of 15 lakes of a region. The variable lake is the factor with 15 levels. We sampled 6 of them, but we aim to make inference about the variability across all the lakes of the region.*
+
+??? 
+Note: Emphasize that we gathered data for a random sample of all levels of the factor. We are interested in all possible levels.
 
 ---
 # Why choose mixed models?
@@ -455,12 +440,17 @@ We wish to make conclusions about the levels of the factor or about the relation
 .pull-right[![](images/fig_9_w5.png)]
 <br>
 
-* It is assumed that the intercepts/slopes come from a normal distribution
-* The model estimates a general intercept and/or slope with a standard deviation for each random effect (i.e. the normal distribution)
+* It is assumed that the intercepts/slopes come from a normal distribution.
+
+* The model estimates a general intercept and/or slope with a standard deviation for each random effect (i.e. the normal distribution).
+
 <br><br>
 
 This avoids estimating an intercept and a slope for each species (+2 parameters per species) = **saves degrees of freedom** (less parameter estimation is needed)
 
+
+???
+Note: This is pretty important, you can spend some time explaining that instead of having independent slopes and/or intercepts for each levels, we assume that they come from a normal distribution.  Make sure that they understand.
 
 ---
 # Random intercept
@@ -470,10 +460,11 @@ This avoids estimating an intercept and a slope for each species (+2 parameters 
 <p>
 <img style="float: right; width:50%;margin: 1%" src="images/fig_7_w5.png">
 
-It is assumed that the intercepts come from a normal distribution
+It is assumed that the intercepts come from a normal distribution. 
 
-Only need to estimate the mean and standard deviation of the normal distribution instead of 3 intercepts, i.e. one for each species</p>
+Only need to estimate the mean and standard deviation of the normal distribution instead of 3 intercepts, i.e. one for each species. </p>
 
+<br>
 <br>
 
 .comment[Note that the more levels your factor has, the more accurately the mean and standard deviation of the normal distribution will be estimated. Three levels may be a little low, but easier to visualize!]
@@ -485,11 +476,11 @@ Only need to estimate the mean and standard deviation of the normal distribution
 
 <p>
 <img style="float: right; width:50%;margin: 1%" src="images/fig_8_w5.png">
-Same principle for lakes
+Same principle for lakes. 
 
-Estimate 2 parameters (mean and standard deviation) instead of 6 intercepts.
+Estimate 2 parameters (mean and standard deviation) instead of 6 intercepts. 
 
-This saves degrees of freedom (less parameter estimation is needed)
+This saves degrees of freedom (less parameter estimation is needed). 
 </p>
 
 
@@ -501,9 +492,9 @@ This saves degrees of freedom (less parameter estimation is needed)
 
 <p>
 <img style="float: right; width:50%;margin: 1%" src="images/fig_9_w5.png">
-The same principle applies to slopes that vary according to a given factor, just more difficult to visualize
+The same principle applies to slopes that vary according to a given factor, just more difficult to visualize. 
 
-As for intercepts, only the mean and standard deviation of the slopes are estimated instead of three distinct slopes.
+As for intercepts, only the mean and standard deviation of the slopes are estimated instead of three distinct slopes. 
 </p>
 
 
@@ -536,7 +527,7 @@ Thus, the ICC informs us of the **extent** to which the average trophic position
 
 ???
 
-Note: _Tell the audience that mathematical notations may vary according to the article/book and according to how the model equation was written._
+Note: Tell the audience that mathematical notations may vary according to the article/book and according to how the model equation was written.
 
 
 ---
@@ -603,6 +594,12 @@ the points coming from the same lake are treated independently because little co
 
 **Q2.** Fish trophic positions are similar within lakes but different among lakes
 
+
+???
+
+Note: For this challenge, you can create a zoom poll. It should not take too much time.
+
+
 ---
 # Solution ![:cube]()
 
@@ -626,6 +623,10 @@ https://doi.org/10.1111/j.1469-185X.2010.00141.x
 Nakagawa *et al.* (2017)
 https://doi.org/10.1098/rsif.2017.0213
 
+
+???
+
+Note: Repeat that the ICC measure the % of the variance explained by the random factor (variation between classes) and that the larger the difference between classes, the larger the confidence interval for the global slope and intercept will be large.
 
 ---
 # How to implement mixed models in R?
@@ -655,7 +656,12 @@ https://doi.org/10.1098/rsif.2017.0213
 
 * So we want a model that looks like this:
 
-$$PT_{ijk} \sim Length_i + Lake_j + Species_k + \epsilon_{ijk}$$
+$$TP_{ijk} \sim Length_i + Lake_j + Species_k + \epsilon_{ijk}$$
+
+???
+
+Note: Describe the equation. The trophic position of a fish is a function of body length, the lake and the species of the individual. The last term is the error term (the difference between the expected trophic position and the true trophic position).
+
 
 ---
 # Step 1. Data exploration
@@ -669,6 +675,10 @@ str(fish.data)
 
 It is recommended to clean up your working space (`rm.list()`) before building a model.
 
+???
+
+Note: You can go fairly quickly for step 1 (slides 37-50). The participants should be relatively familiar with data exploration.
+
 ---
 # Step 1. Data exploration
 
@@ -680,13 +690,20 @@ table(fish.data[ , c("Lake", "Fish_Species")])
 
 This dataset is perfectly balanced, but **mixed models can be used to analyze unbalanced experimental plans**, as it is often the case in ecology!
 
+???
+
+Note: Explain what is a balanced vs unbalanced dataset (i.e. equal number of samples accross classes).
+
 ---
 # Step 1. Data exploration
 
 **Look at the distribution of continuous variables:**
 
-```{r, fig.width=10, fig.height=4}
+``` {r include = FALSE}
 par(mfrow = c(1, 2), mar = c(4, 4, 1, 1))
+```
+
+``` {r, fig.width=10, fig.height=4}
 hist(fish.data$Fish_Length, xlab = "Length (mm)", main = "")
 hist(fish.data$Trophic_Pos, xlab = "Trophic position", main = "")
 ```
@@ -708,7 +725,7 @@ plot(fish.data)
 cor(var1, var2)
 ```
 
-Here an [example of collinearity](https://yetanotheriteration.netlify.app/2018/01/high-collinearity-effect-in-regressions/).
+Here is an [example of collinearity](https://yetanotheriteration.netlify.app/2018/01/high-collinearity-effect-in-regressions/).
 
 ---
 # Challenge 3 ![:cube]()
@@ -719,6 +736,9 @@ What additional measures could we have taken in the field that could have been s
 
 > An example is fish body mass - this variable is strongly correlated with fish length. Therefore, we do not want to include these two variables in the same model.
 
+???
+
+Note: The challenge should be quick. It's mostly for cutting the lecture and interacting with the audience.
 
 ---
 # Step 1. Data exploration
@@ -787,8 +807,11 @@ lm.test.resid <- rstandard(lm.test)
 
 Plot the residuals against the levels of the potential random factors
 
-```{r, fig.width = 10, fig.height = 5, eval = FALSE}
+``` {r include = FALSE}
 par(mfrow = c(1, 2))
+```
+
+```{r, fig.width = 10, fig.height = 5, eval = FALSE}
 
 plot(lm.test.resid ~ as.factor(fish.data$Fish_Species),
      xlab = "Species", ylab = "Standardized residuals")
@@ -835,7 +858,7 @@ abline(0, 0, lty = 2)
 
 <br>
 
-**Step 4 -** Model interpretation and visualization
+**Step 4.** Model interpretation and visualization
 
 ---
 # Step 2. Code potential models
@@ -844,7 +867,7 @@ abline(0, 0, lty = 2)
 
 $$PT_{ijk} \sim Length_i + Lake_j + Species_k + \epsilon_{ijk}$$
 
-**... in R code**
+**... into R code**
 
 ```{r, include = FALSE}
 library(lme4)
@@ -863,28 +886,6 @@ lmer(Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species),
 * `REML = TRUE` ![:faic](arrow-right) estimation method
 
 ---
-# Note on estimation methods
-
-REML (*Restricted Maximum Likelihood*) is the default method in `lmer` (see `?lmer`).
-
-The *Maximum Likelihood* (ML) method underestimate model variances by a factor of $(n-k)/n$, where $k$ is the number of fixed effects.
-
-The REML method corrects for this bias.
-
-See this [article](https://towardsdatascience.com/maximum-likelihood-ml-vs-reml-78cf79bef2cf) for more information on the difference between ML and REML.
-
----
-# Note on estimation methods
-
-**Remember that you should use :**
-
-* **REML** to compare models with **nested random effects** and the same fixed effect structure
-
-* **ML** to compare models with **nested fixed effects** and the same random effect structure
-
-* **ML** to compare models **with and without random effects**
-
----
 # Step 2. Code potential models
 
 **What if we want the slopes to vary?**
@@ -898,13 +899,47 @@ See this [article](https://towardsdatascience.com/maximum-likelihood-ml-vs-reml-
 
 **Different structures for the model :**
 
-- `(1 | Lake)` random effect by lake at the intrecept
+- `(1 | Lake)` random effect by lake at the intercept
 - `(1 + Z_Length | Lake)` random effect by lake at the intercept and slope in response to the body length (NB: (`Z_Length | Lake)` gives the same random structure)
 - `(-1 + Z_Length | Lake)` to have only the random effect at the slope
-- `(1 | Lake) + (1 | Species)`  for crossed random effects
-- `(1 | Lake:Fish_Species)` for the interaction between 2 random effects
+- `(1 | Lake) + (1 | Species)`  for crossed random effects (e.g., the effect of species i is the same across lakes)
+- `(1 | Lake:Fish_Species)` for the interaction between 2 random effects (e.g., the effect of species i change across lakes)
 
-- If your dataset includes nested random effects, you could use `/` to specify them, e.g. `(1 | factor1 / factor2)` if `factor2` is nested in `factor1` ([see ![:faic](stack-exchange)](https://stats.stackexchange.com/questions/228800/crossed-vs-nested-random-effects-how-do-they-differ-and-how-are-they-specified))
+- If your dataset includes nested random effects (e.g., if we had an random effect for lakes nested in a random effect for the region where the lake is), you could use `/` to specify them, e.g. `(1 | factor1 / factor2)` if `factor2` is nested in `factor1` ([see ![:faic](stack-exchange)](https://stats.stackexchange.com/questions/228800/crossed-vs-nested-random-effects-how-do-they-differ-and-how-are-they-specified))
+
+
+???
+Note: Make sure to make the distinction between crossed random effects, interactions between random effects and nested random effects.
+
+---
+# Note on estimation methods
+
+REML (*Restricted Maximum Likelihood*) is the default method in `lmer` (see `?lmer`).
+
+The *Maximum Likelihood* (ML) method underestimates model variances by a factor of $(n-k)/n$, where $k$ is the number of fixed effects.
+
+The REML method corrects for this bias.
+
+See this [article](https://towardsdatascience.com/maximum-likelihood-ml-vs-reml-78cf79bef2cf) for more information on the difference between ML and REML.
+
+???
+
+Note:Explain that the estimation methods is the algorithm used to estimate the parameters (slopes, intercepts) of the model. Specify that they don't need to understand the details, but they can get more information if they follow the hyperlink. The next slides summarize the main point they should know about.
+
+---
+# Note on estimation methods
+
+**Remember that you should use :**
+
+* **REML** to compare models with different **random effect** structure and the same fixed effect structure
+
+* **ML** to compare models with different **fixed effect** structure and the same random effect structure
+
+* **ML** to compare models **with random effects** to models **without random effects**
+
+???
+
+Note: This is probably hard to understand, but you can specify that the next few challenges should help them understand the use of each estimation methods
 
 ---
 # Challenge 4 ![:cube]()
@@ -943,6 +978,10 @@ lmer(Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species),
 ```
 
 .comment[Note: If we had different fixed effects between the models or a model without random effects, we would have to specify `REML = FALSE` to compare with likelihood methods like AIC.]
+
+???
+
+Note: To determine if you have built the best mixed model based on your prior knowledge, you should compare this a priori model to other alternative models. With the dataset you are working on, there are several alternative models that might better fit your data.
 
 ---
 # Solution ![:cube]()
@@ -1006,7 +1045,15 @@ Here a [list](https://rdrr.io/cran/lme4/man/troubleshooting.html) of possible pr
 
 * `AICc` corrects for bias created by small sample sizes.
 
+To find the AICc value of a model, use:
+
+```{r}
+library(MuMIn)
+MuMIn::AICc(M1)
+```
+
 ---
+exclude: true
 # Step 2. Model selection
 
 To find the AICc value of a model, use:
@@ -1030,6 +1077,10 @@ AIC.table  <- MuMIn::model.sel(M0, M1, M2, M3, M4, M5, M6, M7, M8)
 * `delta` is the AICc difference with the lowest value
 
 We only displayed part of the results returned by the function `model.sel()`, see `?model.sel` for more information.
+
+???
+
+Note: Then we can select only the columns of interest to print into a table `df` is the degree of freedom `logLik` is the loglikelihood `delta` is the AICc difference with the lowest value.
 
 ---
 # Step 2. Model selection
@@ -1175,8 +1226,11 @@ exclude: true
 
 **3.1 Check the homogeneity of the variance**
 
-```{r, fig.width=4.5, fig.height=4.5, echo = -1}
+```{r include = FALSE}
 par(mar=c(4,4,.5,.5))
+```
+
+```{r, fig.width=4.5, fig.height=4.5, echo = -1}
 plot(resid(M8) ~ fitted(M8),
      xlab = 'Predicted values',
      ylab = 'Normalized residuals')
@@ -1194,14 +1248,21 @@ Homogeneous dispersion of the residuals ![:faic](arrow-right) the assumption is 
 ![](images/resid-plots.gif)
 ]
 
+???
+
+Note: Heteroscedasticity refers to the circumstance in which the variability of a variable is unequal across the range of values of a second variable that predicts it.
+
+A scatterplot of these variables will often create a cone-like shape, as the scatter (or variability) of the dependent variable widens or narrows as the value of the independent variable increases. The inverse of heteroscedasticity is homoscedasticity, which indicates that a dependent variable variability is equal across values of an independent variable.
 ---
 # Step 3. Model validation
 
 **3.2 Check the independence of the model residuals with each covariate**
 
-```{r, fig.width=11, fig.height=4.5, eval = FALSE}
+```{r echo = F, eval = T}
 par(mfrow = c(1,3), mar=c(4,4,.5,.5))
+```
 
+```{r, fig.width=11, fig.height=4.5, eval = FALSE}
 plot(resid(M8) ~ fish.data$Z_Length,
      xlab = "Length", ylab = "Normalized residuals")
 abline(h = 0, lty = 2)
@@ -1220,8 +1281,12 @@ abline(h = 0, lty = 2)
 
 **3.2 Check the independence of the model residuals with each covariate**
 
-```{r, fig.width=12, fig.height=4.5, echo = FALSE}
+
+```{r echo = F, eval = T}
 par(mfrow = c(1,3), mar=c(4,4,.5,.5), cex.lab = 1.5)
+```
+
+```{r, fig.width=12, fig.height=4.5, echo = FALSE}
 plot(resid(M8) ~ fish.data$Z_Length, xlab = "Length", ylab = "Normalized residuals")
 abline(h = 0, lty = 2)
 boxplot(resid(M8) ~ Fish_Species, data = fish.data, xlab = "Species", ylab = "")
@@ -1282,6 +1347,9 @@ hist(resid(M8))
 (summ_M8 <- summary(M8))
 ```
 
+???
+
+Note: Let’s take a closer look at our final model using the summary() function. How can we interpret this information?
 ---
 # Step 4. Interpretation and visualization
 
@@ -1298,6 +1366,12 @@ hist(resid(M8))
   - or the name of the variable on which the random slope is estimated (`Z_length` in this example)
 - `Variance` the variance of the estimated effect (`Std.Dev.` is the standard deviation of this estimate)
 - `Corr` the correlation between the random interpet and the random slope for a given grouping factor (see [this dicussion ![:faic](stack-exchange)](https://stats.stackexchange.com/questions/320978/understanding-and-coding-random-intercept-correlation-lmer))
+
+???
+
+Note: Let’s go section by section and try to understand what we are looking at.
+
+The output is broken up into descriptions of the Random effects (things we allow to vary based on the normal distribution) and Fixed effects (things we estimate in the same way as classical regression).
 
 ---
 # Step 4. Interpretation and visualization
@@ -1355,6 +1429,7 @@ If the 95% confidence interval of the slope ($slope ± SE * 1.96$) includes zero
 
 2. Is the slope of Z_Length significantly different from 0?
 
+
 ---
 # Solution ![:cube]()
 
@@ -1369,11 +1444,15 @@ If the 95% confidence interval of the slope ($slope ± SE * 1.96$) includes zero
 2. Is the slope of Z_Length significantly different from 0?
 
   - Yes, because the CI [0.2459, 0.5987] does not include 0
+  
+???
+
+Note: If the 95% confidence interval of the slope includes zero, the slope (here = 0.4223), and therefore the effect of length on trophic position, is not significantly different from zero at the alpha threshold of 0.05.
 
 ---
 # Challenge 7 ![:cube]()
 
-It is possible to visualize graphically the different intercepts and slopes of the model to better interpret the results
+It is possible to visualize graphically the different intercepts and slopes of the model to better interpret the results.
 
 Take 2 minutes to think about different ways to represent the results of M8.
 
@@ -1565,6 +1644,7 @@ Mixed models are very useful for taking into account the complex structure of ec
 ]
 
 ---
+exclude: true
 # Challenge 8 ![:cube]()
 
 **Situation:**
@@ -1578,6 +1658,8 @@ Mixed models are very useful for taking into account the complex structure of ec
 .alert[What mixed model could you use for this dataset?]
 
 ---
+exclude: true
+
 # Solution!![:cube]()
 
 ```{r, eval = FALSE}
@@ -1659,7 +1741,7 @@ exclude: true
 
 **Extension of GLMs to account for additional structure in dataset**
 
-Follows similar steps introduced in LMM Workshop :
+Follows similar steps introduced in LMM section :
 
 **1.** Incorporate random effects (like LMMs)
 
@@ -1678,22 +1760,26 @@ _Include 2-3 slides recalling GLM_
 
 Import the `Arabidopsis` dataset `banta_totalfruits.csv` into `R`.
 
-```{r, echo = F}
+```{r}
 dat.tf <- read.csv("data/banta_totalfruits.csv")
 ```
 
-```r
-dat.tf <- read.csv("banta_totalfruits.csv")
-```
-```r
-# popu factor with a level for each population
-# gen factor with a level for each genotype
-# nutrient factor with levels for low (value = 1) or high (value = 8)
-# amd factor with levels for no damage or simulated herbivory
-# total.fruits integer indicating the number of fruits per plant
+Description: data on genetic variation in responses to fertilization and simulated herbivory in *Arabidopsis*.
+For more details see [here](https://www.rdocumentation.org/packages/lme4/versions/1.1-27.1/topics/Arabidopsis)
+
+```{r}
+# In this dataset, the column headers are defined as:
+
+# reg: region (e.g. NL for Netherlands)
+# popu: factor with a level for each population 
+# gen: factor with a level for each genotype
+# rack: a nuisance factor with 2 levels, one for each of two greenhouse racks
+# nutrient: factor with levels for low (value = 1) or high (value = 8)
+# amd: factor with levels for no damage or simulated herbivory
+# total.fruits: integer indicating the number of fruits per plant
 ```
 
-The effect of nutrient availability and herbivory (**fixed effects**) on the fruit production (**response variable**) of Arabidopsis thaliana was evaluated by measuring 625 plants across 9 different populations, each comprised of 2 to 3 different genotypes (**random effects**)
+The effect of nutrient availability and herbivory (**fixed effects**) on the fruit production (**response variable**) of *Arabidopsis thaliana* was evaluated by measuring 625 plants across 9 different populations, each comprised of 2 to 3 different genotypes (**random effects**)
 
 
 ---
@@ -1707,8 +1793,30 @@ hist(dat.tf$total.fruits, breaks = 50, col = 'blue', main = '',
      xlab = 'Total fruits', ylab = 'Count')
 ```
 
-However, as we will soon see, the variance increases with the mean much more rapidly than expected under the Poisson distribution...
+Read more about error distributions [here](http://ganymede.nmsu.edu/holtz/a535/ay535notes/node3.html) 
 
+However, as we will soon see, the variance increases with the mean much more rapidly than expected under the Poisson distribution... In other words, the data is *overdispersed*. 
+
+---
+# Overdispersion: Review
+For a Poisson distribution, $var[y] = μ$. However, in practice the apparent
+variance of the data often exceeds $μ$, reflecting *overdispersion* in the model parameters.
+
+<br>
+
+Overdispersion arises because the mean $μ$ innately varies,
+even when all the explanatory variables are fixed, or because the
+events that are being counted are positively correlated.
+
+<br>
+
+.center[*Are you able to think of a situation in biology that can cause overdispersion?*]
+
+<br>
+
+**Why should we care about overdispersion?**
+
+>Tests on the explanatory variables will generally appear to be more significant and confidence intervals for the parameters will be narrower than warranted by the data!
 
 ---
 # Exploring variance
@@ -1794,13 +1902,14 @@ lines(mvec, predict(Lfit, mvec), col = 5)
 text(118, 2000, "loess", col = 5)
 ```
 
-
 ---
 # Poisson GLMM
 
 **Given the mean-variance relationship, we will most likely need a model with overdispersion.**
 
 To understand why, let's start with a Poisson model.
+
+An assumption that must be fulfilled on Poisson distribution is the mean value of data equals to the variance value (or so-called equidispersion). If the variance value is greater than the mean value, it is called **overdispersion**.
 
 --
 
@@ -1951,6 +2060,9 @@ coefplot2(mpl1, intercept = TRUE, main = "Fixed effect coefficient")
 
 .comment[Note: error bars are only shown for the fixed effects because `glmer()` does not model uncertainty for random effects.]
 
+???
+
+Note: The random effect variance (σ2i) represents the mean random effect variance of the model. Since this variance reflects the “average” random effects variance for mixed models, it is also appropriate for models with more complex random effects structures, like random slopes or nested random effects. The fixed effects variance (σ2f) is the variance of the matrix-multiplication β∗X (parameter vector by model matrix).
 
 ---
 # Poisson-lognormal GLMM
@@ -1970,7 +2082,7 @@ We observe mild differences **among genotypes** :
 
 - Difference among genotypes largely driven by genotype 34
 
-```r
+```{r}
 library(gridExtra)
 library(lattice)
 # dotplot code
@@ -2057,25 +2169,27 @@ Let's start by **removing the non-significant interaction** term to test main ef
 ```{r}
 mpl2 <- update(mpl1, . ~ . - amd:nutrient)
 
-mpl3 <- update(mpl2, . ~ . - rack) # pas de rack ou d'interaction
-mpl4 <- update(mpl2, . ~ . - status) # pas de status ou d'interaction
-mpl5 <- update(mpl2, . ~ . - nutrient) # pas de nutrient ou d'interaction
-mpl6 <- update(mpl2, . ~ . - amd) # pas d'herbivorie ou d'interaction
+mpl3 <- update(mpl2, . ~ . - rack) # without rack or interaction
+mpl4 <- update(mpl2, . ~ . - status) # without status or interaction
+mpl5 <- update(mpl2, . ~ . - nutrient) # without nutrient or interaction
+mpl6 <- update(mpl2, . ~ . - amd) # without herbivory or interaction
 ```
 
-Choose the method you want to select the best model :
-.pull-left2[ Method with AICc
+---
+# Model selection
+Choose the method you want to select the best model:
+
+**Method with AICc**
 ```{r}
 aic_tab2  <- MuMIn::model.sel(mpl2, mpl3, mpl4, mpl5, mpl6)
 (round(aic_table2 <- aic_tab2[ , c("AICc", "delta", "df")], digits = 2))
 ```
-]
-.pull-right2[ Method with `drop1()`
+
+**Method with `drop1()`**
 ```{r}
 dd_LRT2 <- drop1(mpl2, test = "Chisq")
 dd_AIC2 <- dfun(drop1(mpl2))
 ```
-]
 
 
 ---
@@ -2101,7 +2215,7 @@ Random effects
 
 
 ---
-# Challenge 9 ![:cube]()
+# Challenge 8 ![:cube]()
 
 Use the `inverts` dataset (larval development times (`PLD`) of 74 marine invertebrate and vertebrate species reared at different temperatures and time), answer the following questions:
 

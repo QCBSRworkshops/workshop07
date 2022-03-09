@@ -81,47 +81,13 @@ lapply(list.of.packages, require, character.only = TRUE, quietly = TRUE)
 
 # À propos de cet atelier
 
-[![badge](https://img.shields.io/static/v1?style=for-the-badge&label=repo&message=dev&color=6f42c1&logo=github)](https://github.com/QCBSRworkshops/workshop07)
-[![badge](https://img.shields.io/static/v1?style=for-the-badge&label=wiki&message=07&logo=wikipedia)](https://wiki.qcbs.ca/r_atelier6)
-[![badge](https://img.shields.io/static/v1?style=for-the-badge&label=diapos&message=07&color=red&logo=html5)](https://qcbsrworkshops.github.io/workshop07/pres-fr/workshop07-pres-fr.html)
-[![badge](https://img.shields.io/static/v1?style=for-the-badge&label=diapos&message=07&color=red&logo=adobe-acrobat-reader)](https://qcbsrworkshops.github.io/workshop07/workshop07-fr/workshop07-fr.pdf)
-[![badge](https://img.shields.io/static/v1?style=for-the-badge&label=script&message=07&color=2a50b8&logo=r)](https://qcbsrworkshops.github.io/workshop07/workshop07-fr/workshop07-fr.R)
+[![badge](https://img.shields.io/static/v1?style=flat-square&label=Diapos&message=07&color=red&logo=html5)](https://r.qcbs.ca/workshop07/pres-fr/workshop07-pres-fr.html) 
+[![badge](https://img.shields.io/static/v1?style=flat-square&label=livre&message=07&logo=github)](https://r.qcbs.ca/workshop07/book-fr/index.html) 
+[![badge](https://img.shields.io/static/v1?style=flat-square&label=script&message=07&color=2a50b8&logo=r)](https://r.qcbs.ca/workshop07/book-fr/workshop07-script-fr.R) 
+[![badge](https://img.shields.io/static/v1?style=flat-square&label=repo&message=dev&color=6f42c1&logo=github)](https://github.com/QCBSRworkshops/workshop07) 
 
----
-
-<p style="font-size:75%">
-
-.center[
-**Contributeurs et contributrices au développement de cet atelier**
-
-en modifiant et en améliorant son contenu dans le cadre du <br>Prix d'apprentissage et du développement (*Le*arning *a*nd *D*evelopment *A*ward*).
-]
-
-
-.pull-left[
-.right[
-
- **2022** - **2021** - **2020**
-
-
-
-]
-]
-
-.pull-right[
-.left[
-**2019** - **2018** - **2017**
-
-
-
-**2016** - **2015** - **2014**
-
-
-
-]
-
-]
-</p>
+???
+Note: Rappeler aux participants que le matériel de l'atelier est disponible sur le site web des ateliers R et qu'il y a un 'Bookdown' avec du texte supplémentaire. Le contenu de l'atelier est plutôt lourd, donc ils pourront retourner aux notes et les diapositives de l'atelier pour revisiter les concepts qu'ils auront moins bien compris.
 
 ---
 
@@ -164,6 +130,9 @@ install.packages(c("lme4",
                       "lattice"))
 ```
 ]
+
+??? 
+Note: Pour sauver du temps: (1) Demander aux participants d'installer les paquets avant l'atelier. (2) Ne pas attendre que tout le monde réussisse à les installer, et aider ceux qui ont rencontrer des problèmes lors du défi #1.
 
 ---
 
@@ -229,6 +198,8 @@ Pour répondre, nous utiliserons un jeu de données où la longueur corporelle d
 
 **3.** Reproduisez les graphiques 1 à 3 (dans le script) de la relation entre la position trophique et la taille. Observez les graphiques puis evaluez ce que vous observez.
 
+???
+Note: Ce défi devrait être assez rapide. Peut-être simplement accorder un peu de temps de réflexion individuel pendant que vous aidez les participants qui ont eu de la difficulté à installer les paquets. Si il y en a aucun, vous pouvez simplement avoir une discussion de groupe un graphique à la fois.
 
 ---
 exclude: true
@@ -329,6 +300,8 @@ plot + geom_point() + facet_wrap(~ Lake) + xlab("Longueur (mm)") + ylab("Positio
 
 * Échantillons non équilibrés
 
+???
+Note: Utiliser la base de données comme example. Nous avons des données de longueur de poissons et de niveau toophique pour 3 espèces et 6 lacs: cela créer une structure hiérarchique où nous avons un niveau divisant les données par espèces et un autre par lac.
 
 ---
 # Pourquoi choisir un MLM?
@@ -430,6 +403,13 @@ Les données proviennent :
 
 On souhaite émettre des conclusions à propos des niveaux du facteur ou de la relation entre le prédicteur et la variable réponse.
 
+<br>
+
+*Exemple: Nous sommes intéressés par l'effet des coupes à blanc sur la richesse en espèce. La variable coupe est le facteur à deux niveaux: forêt coupé à blanc ou non coupé.*
+
+??? 
+Note: Mettre l'emphase sur le fait que nous avons échantillonné tous les niveaux d'intérêts du facteurs. Nous ne sommes pas intéressés par les autres niveaux non échantillonnés.
+
 ---
 # Pourquoi choisir un MLM?
 
@@ -439,6 +419,12 @@ On souhaite émettre des conclusions à propos des niveaux du facteur ou de la r
 
 * Permet de structurer le processus d'erreur
 
+<br>
+
+*Exemple: Nous échantillons des poissons dans 6 de 15 lacs d'une région. La variable lac est le facteur avec 15 niveaux. Bien que nous n'avons qu'échantillonner 6 niveaux, nous voulons pouoir faire des conclusions sur la variabilité entre tous les lacs de la région.*
+
+??? 
+Note: Mettre l'emphase sur le fait que nous n'avons pas nécessairement des données pour tous les niveaux d'intérêt du facteur aléatoire. 
 
 ---
 # Pourquoi choisir un MLM?
@@ -466,6 +452,9 @@ On souhaite émettre des conclusions à propos des niveaux du facteur ou de la r
 
 Évite d'estimer une ordonnée à l'origine et une pente par espèce (+2 paramètres par espèce) = **économise des degrés de liberté** (moins de paramètres estimés).
 
+???
+Note: Cela est assez important. Passez du temps pour bien expliquer the l'on assume the l'ordonnée et/ou la pente de chaque niveau proviennent d'une même distribution (ils ne sont pas totalement indépendent), ce qui permet de réduire le nombre de paramètres à estimer par le modèle.
+
 ---
 # Effet aléatoire sur l'ordonnée à l'origine
 <br>
@@ -474,27 +463,22 @@ On souhaite émettre des conclusions à propos des niveaux du facteur ou de la r
 
 On fait la supposition que les ordonnées à l'origine proviennent d'une distribution normale. 
 
-On a seulement besoin d'estimer la moyenne (ordonnée à l'origine générale) et l'écart type de la distribution normale (effet aléatoire) au lieu d'estimer une ordonnée à l'origine par espèce (ce qui ajouterait 2 paramètres).
+On a seulement besoin d'estimer la moyenne (ordonnée à l'origine générale) et l'écart type de la distribution normale (effet aléatoire) au lieu d'estimer une ordonnée à l'origine par espèce (ce qui ajouterait 2 paramètres). 
 
 <br><br>
 
 Au lieu d'estimer d'estimer une ordonnée à l'origine par espèce (3 paramètres), on en estime une générale ainsi qu'un effet aléatoire (2 paramètres). Avec $n$ espèce, dans le premier cas on estime $n-1$ paramètres alors qu'on reste à 2 paramètres dans le second cas!
-
-???
-
-Note: (MFF) Cette diapo est difficile à comprendre. Je me demande si il y aurait une façon de mieux décrire le second paragraphe.
-
 
 ---
 # Effet aléatoire sur l'ordonnée à l'origine
 <br><br>
 
 <img style="float: right; width:50%;margin: 1%" src="images/fig_8_w5.png">
-Même principe pour les lacs
+Même principe pour les lacs. 
 
-Estime 2 paramètres (moyenne et écart-type) au lieu de 6 ordonnées à l'origine.
+Estime 2 paramètres (moyenne et écart-type) au lieu de 6 ordonnées à l'origine. 
 
-Cela **économise des degrés de liberté** (moins d’estimation de paramètres sont nécessaires)
+Cela **économise des degrés de liberté** (moins d’estimation de paramètres sont nécessaires). 
 
 
 ---
@@ -502,9 +486,9 @@ Cela **économise des degrés de liberté** (moins d’estimation de paramètres
 <br><br>
 
 <img style="float: right; width:50%;margin: 1%" src="images/fig_9_w5.png">
-Le même principe s’applique aux pentes qui varient selon un facteur donné.
+Le même principe s’applique aux pentes qui varient selon un facteur donné. 
 
-Comme pour les ordonnées à l'origine, seuls la moyenne et l’écart-type des pentes sont estimés au lieu de trois pentes distinctes.
+Comme pour les ordonnées à l'origine, seuls la moyenne et l’écart-type des pentes sont estimés au lieu de trois pentes distinctes. 
 
 
 ---
@@ -535,7 +519,7 @@ Le CCI nous informe donc **à quel point** la position trophique moyenne entre c
 
 ???
 
-Note: _Dire que différentes notations sont possibles selon le livre/article et comment l'équation du modèle est écrite._
+Note: Dire que différentes notations sont possibles selon le livre/article et comment l'équation du modèle est écrite.
 
 
 ---
@@ -602,6 +586,10 @@ Les points provenant d'un même lac sont traités indépendamment car **peu corr
 
 **Q2.** Les positions trophiques des poissons sont similaires dans les lacs mais différentes entre les lacs
 
+???
+
+Note: Pour ce défi, vous pouvez créer un sondage Zoom. Cela ne devrait pas être trop long.
+
 ---
 # Solution ![:cube]()
 
@@ -626,6 +614,10 @@ Nakagawa et Schielzeth (2013)
 https://doi.org/10.1111/j.1469-185X.2010.00141.x
 Nakagawa *et al.* (2017) 
 https://doi.org/10.1098/rsif.2017.0213
+
+???
+
+Note: Répéter que le CCI mesure le ratio de la variance "expliquée" par le facteur aléatoire. De plus, plus les intervalles de confiance pour l'ordonnée à l'origine et la pente globale est grande, plus la variation interclasse est grande.
 
 
 ---
@@ -657,6 +649,11 @@ https://doi.org/10.1098/rsif.2017.0213
 * Donc nous voulons un modèle qui ressemble a ceci:
 
 $$PT_{ijk} \sim Longueur_i + Lac_j + Espèce_k + \varepsilon_{ijk}$$
+
+???
+
+Note: Décrire chaque élément de l'équation. La position trophique est prédite par la longueur, le lac de provenance et l'espèce du poisson. Le dernier terme décrit l'erreur entre la position trophique prédites par les variables explicatives et la vraie position trophique.
+
 ---
 # Étape 1. exploration des données
 
@@ -669,6 +666,10 @@ str(fish.data)
 
 Il est recommandé de faire le ménage de votre espace de travail (`rm.list()`) avant de construire un modèle.
 
+???
+
+Note: Vous pouvez aller relativement rapidement pour l'étape 1 (diapositives 37-50). Les participants devraient être relativement à l'aise avec ces étapes.
+
 ---
 # Étape 1. exploration des données
 
@@ -680,13 +681,20 @@ table(fish.data[ , c("Lake", "Fish_Species")])
 
 Ce jeu de données est parfaitement équilibré, mais les **modèles mixtes peuvent analyser des designs expérimentaux non équilibrés**, comme c'est souvent le cas en écologie!
 
+???
+
+Note: Expliquer ce qu'est un jeu de données équilibré vs non équilibrés (c-a-d. le nombre d'échantillons dans chaque classe.)
+
 ---
 # Étape 1. exploration des données
 
 **Regardez la distribution des variables continues**
 
-```{r, fig.width=10, fig.height=4}
+```{r include = FALSE}
 par(mfrow=c(1,2), mar = c(4,4,1,1))
+```
+
+```{r, fig.width=10, fig.height=4}
 hist(fish.data$Fish_Length, xlab = "Length (mm)", main = "")
 hist(fish.data$Trophic_Pos, xlab = "Trophic position", main = "")
 ```
@@ -718,6 +726,11 @@ Quelles mesures supplémentaires aurions-nous pu prendre sur le terrain et qui a
 --
 
 > Un exemple est la masse du poisson – c’est une variable fortement corrélée avec la longueur du poisson. Par conséquent, nous ne voulons pas inclure ces deux variables dans le même modèle.
+
+
+???
+
+Note: Ce défi est principalement pour interagir un peu avec les participants. Poser la question à l'audience, et ça ne devrait pas être trop long.
 
 ---
 # Étape 1. exploration des données
@@ -785,9 +798,12 @@ lm.test.resid <- rstandard(lm.test)
 
 Représentez graphiquement la valeur des résidus en fonction des niveaux des facteurs
 
-```{r, fig.width=10, fig.height=5, eval = FALSE}
-par(mfrow=c(1,2))
+``` {r include = FALSE}
+par(mfrow = c(1, 2))
+```
 
+
+```{r, fig.width=10, fig.height=5, eval = FALSE}
 plot(lm.test.resid ~ as.factor(fish.data$Fish_Species),
      xlab = "Species", ylab = "Standardized residuals")
 
@@ -861,28 +877,6 @@ lmer(Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species),
 * `REML = TRUE` ![:faic](arrow-right) méthode d'estimation
 
 ---
-# Note sur les méthodes d'estimation
-
-REML (*Restricted Maximum Likelihood*) est la méthode par défaut dans la fonction `lmer` (voir `?lmer`).
-
-La méthode de maximum de vraisemblance (ML, pour *Maximum Likelihood*) sous-estime les variances du modèle par un facteur $(n-k) / n$, ou $k$ est le nombre d'effes fixes. 
-
-La méthode REML corrige pour ce biais.
-
-Consultez cet [article](https://towardsdatascience.com/maximum-likelihood-ml-vs-reml-78cf79bef2cf) pour plus d'information sur la différence entre ML et REML.
-
----
-# Note sur les méthodes d'estimation
-
-**On devrait utiliser :**
-
-* **REML** pour comparer des modèles avec des **effets aléatoires nichés** et la même structure d'effets fixes
-
-* **ML** pour comparer des modèles avec des **effets fixes nichés** et la même structure d'effets aléatoires
-
-* **ML** pour comparer des modèles **avec et sans effets aléatoires**
-
----
 # Étape 2. coder le modèle
 
 **Comment faire si on souhaite que la pente puisse varier?**
@@ -899,9 +893,42 @@ Consultez cet [article](https://towardsdatascience.com/maximum-likelihood-ml-vs-
 - `(1 | Lake)` effet aléatoire par lac à l'intercept
 - `(1 + Z_Length | Lake)` effet aléatoire par lac à l'intercept et la pente en réponse à la longueur corporelle (NB: (`Z_Length | Lake)` donne le même résultat)
 - `(-1 + Z_Length | Lake)` pour avoir uniquement l'effet aléatoire sur la pente
-- `(1 | Lake) + (1 | Species)`  pour des effets aléatoires croisés
-- `(1 | Lake:Fish_Species)` pour utiliser l'interaction entre 2 facteurs groupant
+- `(1 | Lake) + (1 | Species)`  pour des effets aléatoires croisés (ex: l'effet de l'espèce i ne varie pas entre les lacs)
+- `(1 | Lake:Fish_Species)` pour utiliser l'interaction entre 2 facteurs groupant (ex: l'effet de l'espèce i varie d'un lac à l'autre)
 - si votre jeu de données inclus des effets nichés, vous pouvez utiliser `/` pour les déclarer, e.g. `(1 | facteur1 / facteur2)` si `facteur2` est niché dans `facteur1` ([voir ![:faic](stack-exchange)](https://stats.stackexchange.com/questions/228800/crossed-vs-nested-random-effects-how-do-they-differ-and-how-are-they-specified))
+
+???
+Note: S'assurer de bien faire la distinction entre effets croisés (sans interaction), avec interaction et nichés.
+
+---
+# Note sur les méthodes d'estimation
+
+REML (*Restricted Maximum Likelihood*) est la méthode par défaut dans la fonction `lmer` (voir `?lmer`).
+
+La méthode de maximum de vraisemblance (ML, pour *Maximum Likelihood*) sous-estime les variances du modèle par un facteur $(n-k) / n$, ou $k$ est le nombre d'effes fixes. 
+
+La méthode REML corrige pour ce biais.
+
+Consultez cet [article](https://towardsdatascience.com/maximum-likelihood-ml-vs-reml-78cf79bef2cf) pour plus d'information sur la différence entre ML et REML.
+
+???
+
+Note: Dire que la méthode d'estimation est l'algorithme utiliser pour estimer les paramètres du modèles (ordonnées à l'origine, pentes). Expliquer qu'ils n'ont pas besoin de comprendre l'algorithme en détail, mais qu'ils peuvent suivre le lien pour plus d'informations. La prochaine diapositive résume ce qu'ils devraient savoir.
+
+---
+# Note sur les méthodes d'estimation
+
+**On devrait utiliser :**
+
+* **REML** pour comparer des modèles avec différentes structure **d'effets aléatoires** et la même structure d'effets fixes.
+
+* **ML** pour comparer des modèles avec différentes structure **d'effets fixes** et la même structure d'effets aléatoires
+
+* **ML** pour comparer des modèles **avec effets aléatoires** à des modèles **sans effets aléatoires**
+
+???
+
+Note: Cela peut sembler complexe, mais les deux prochains défis devraient aider les participants à comprendre les utilisations des difféerentes méthodes d'estimation.
 
 ---
 # Défi 4 ![:cube]()
@@ -924,7 +951,7 @@ lmer(Z_TP ~ Z_Length + (1 + Z_Length | Lake) + (1 + Z_Length | Fish_Species),
 ---
 # Étape 2. sélectionner le meilleur modèle
 
-* Pour déterminer si vous avez construit le meilleur modèle mixte basé sur vos connaissances a priori, vous devez comparer ce modèle aux autres modèles alternatifs.
+* Pour déterminer si vous avez construit le meilleur modèle mixte basé sur vos connaissances *a priori*, vous devez comparer ce modèle aux autres modèles alternatifs.
 
 * Avec le jeu de données sur lequel vous travaillez, il y a plusieurs modèles alternatifs qui pourraient mieux correspondre à vos données.
 
@@ -941,6 +968,9 @@ lmer(Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species),
 
 .comment[Note : si nous avions différents effets fixes entre les modèles ou un modèle sans effects aléatoires, nous aurions dû indiquer `REML = FALSE` pour les comparer avec une méthode de vraisemblance comme l'AIC.]
 
+???
+
+Note: Pour savoir si le modèle que vous avez construis basé sur vos connaissances a priori est le meilleur, vous devez le comparer à des modèles avec une structure alternative. Il existe de nombreux modèles alternatifs qui peuvent être construit à partir de la base de données avec laquelle vous travailler.
 
 ---
 # Solution ![:cube]()
@@ -1035,7 +1065,6 @@ AIC.table  <- MuMIn::model.sel(M0, M1, M2, M3, M4, M5, M6, M7, M8)
 
 Nous avons seulement affiché une partie des résultats retourné par la fonction `model.sel()`, voir `?model.sel` pour plus d'information.
 
-
 ---
 # Étape 2. sélectionner le meilleur modèle
 
@@ -1068,7 +1097,6 @@ MuMIn::model.sel(M2,M8)[ , c("df", "logLik", "AICc", "delta")]
 Le modèle `M8` semble être le meilleur modèle parmi ceux qu'on a testé.
 
 Notez qu'on utilise maintenant REML (i.e. `REML=TRUE`) vu qu'on compare deux modèles avec des effets aléatoires nichés et avec la même structure d'effets fixes. 
-
 
 ---
 # Étape 2. sélectionner le meilleur modèle
@@ -1183,8 +1211,11 @@ exclude: true
 
 **3.1 Vérifier l'homogénéité de la variance**
 
-```{r, fig.width=4.5, fig.height=4.5, echo = -1}
+```{r include = FALSE}
 par(mar=c(4,4,.5,.5))
+```
+
+```{r, fig.width=4.5, fig.height=4.5, echo = -1}
 plot(resid(M8) ~ fitted(M8), 
      xlab = 'Valeurs prédites', 
      ylab = 'Résidus normalisés')
@@ -1203,15 +1234,19 @@ abline(h = 0, lty = 2)
 ![](images/resid-plots.gif)
 ]
 
+???
 
+Note: L'hétéroscedasticité est lorsque la variance des résidus du modèles (i.e., erreur) varient avec une variable explicative. Lorsque l'on graphe les résidus avec une variable explicative, nous observons une forme conique des résidus comme les examples ci-dessous. L'inverse d'hétéoscedasticité est l'homoscedaticité. L'homoscedaticité est lorsque la variance des résidus ne varient pas avec les variables explicatives. C'est ce qu'on veut!
 ---
 # Étape 3. validation du modèle
 
 **3.2 Vérifier l'indépendance des résidus avec chaque covariable**
 
-```{r, fig.width=11, fig.height=4.5, eval = FALSE}
+```{r include = FALSE}
 par(mfrow = c(1,3), mar=c(4,4,.5,.5))
+```
 
+```{r, fig.width=11, fig.height=4.5, eval = FALSE}
 plot(resid(M8) ~ fish.data$Z_Length, 
      xlab = "Longueur", ylab = "Résidus normalisés")
 abline(h = 0, lty = 2)
@@ -1297,6 +1332,9 @@ hist(resid(M8))
 (summ_M8 <- summary(M8))
 ```
 
+???
+
+Note: Prenons un moment pour explorer un peu plus notre modèle final à l'aide de la fonction summary(). Comment pouvons-nous interpréter ces informations?
 
 ---
 # Étape 4. interprétation et visualisation
@@ -1333,6 +1371,11 @@ $$ IC = Estimate \pm 1.96*Std.Error $$
 Si 0 est dans cet interval, alors le paramètre n’est pas significativement
 différente de zéro au seuil $\alpha$ = 0.05.
 
+???
+
+Note: Passer section par section pour bien comprendre ce qui est présenter.
+
+La sortie est divisé en deux: la description des facteurs aléatoires et les facteurs fixes.
 
 ---
 # Étape 4. interprétation et visualisation
@@ -1373,6 +1416,9 @@ différente de zéro au seuil $\alpha$ = 0.05.
 
   - Oui, car l'IC [0.2459, 0.5987] n'inclut pas 0
 
+???
+
+Note: L'intervalle de confiance de la pente n'inclue pas 0 (0 = aucun effet), la pente est donc significativement différente de 0. Cela signifie que la longueur du poisson influence sa position trophique (un plus long poisson a, en moyenne, un plus haut niveau trophique). Est-ce que ça fait du sens? Oui, les gros poissons mangent les petits poissons.
 
 ---
 # Défi 7 ![:cube]()
@@ -1581,6 +1627,7 @@ Les modèles mixtes sont très utiles pour prendre en compte la structure comple
 
 
 ---
+exclude: true
 # Défi 8 ![:cube]()
 
 **Situation:**
@@ -1595,6 +1642,7 @@ Les modèles mixtes sont très utiles pour prendre en compte la structure comple
 
 
 ---
+exclude: true
 # Solution ![:cube]()
 
 ```{r, eval = FALSE}
@@ -1669,10 +1717,12 @@ Chargez les données `Arabidopsis` `banta_totalfruits.csv` dans `R`.
 dat.tf <- read.csv("data/banta_totalfruits.csv")
 ```
 
-```r
-dat.tf <- read.csv("banta_totalfruits.csv")
-```
-```r
+Cette base de données décrit la réponse génétique de l'espèce `Arabidopsis` à la fertilisation et l'herbivorie. 
+
+Pour plus de détails, vous pouvez consulter [ceci](https://www.rdocumentation.org/packages/lme4/versions/1.1-27.1/topics/Arabidopsis)
+
+
+```{r}
 # popu facteur avec un niveau pour chaque population
 # gen facteur avec un niveau pour chaque génotype
 # nutrient facteur avec niveau bas (valeur = 1) ou haut (valeur = 8)
@@ -1693,8 +1743,31 @@ par(mypar);par(cex = 1.4)
 hist(dat.tf$total.fruits, breaks = 50, col = 'blue', main = '',
      xlab = 'Fruits totaux', ylab = 'Compte')
 ```
-Cependant, comme nous le verrons, la variance de chaque groupe augmente beaucoup plus rapidement que prévu...
 
+Vous pouvez lire plus sur la distribution des erreurs [ici](http://ganymede.nmsu.edu/holtz/a535/ay535notes/node3.html) 
+
+Cependant, comme nous le verrons, la variance de chaque groupe augmente beaucoup plus rapidement que prévu... Cela indique que les données sont surdispersées.
+
+---
+# Surdispersion: rappel
+
+Pour une distribution Poisson, $var[y] = μ$. En pratique, cependant, on constate que la variance des données dépasse souvent $μ$, indiquant une *surdispersion* dans les paramètres du modèle.
+
+<br>
+
+La surdispersion est due au fait que la moyenne $μ$ varie intrinsèquement,
+même lorsque toutes les variables explicatives sont fixes, ou parce que le
+les événements qui sont comptés sont corrélés positivement.
+
+<br>
+
+.center [*Pouvez-vous penser à une situation en biologie qui peut provoquer la surdispersion?*]
+
+<br>
+
+**Pourquoi devrions-nous nous intéresser à la surdispersion?**
+
+> Les tests sur les variables explicatives apparaîtront généralement plus significatifs et les intervalles de confiance des paramètres seront plus étroits que les données ne le justifierait!
 
 ---
 # Exploration de la variance
@@ -2042,7 +2115,10 @@ mpl4 <- update(mpl2, . ~ . - status) # pas de status ou d'interaction
 mpl5 <- update(mpl2, . ~ . - nutrient) # pas de nutrient ou d'interaction
 mpl6 <- update(mpl2, . ~ . - amd) # pas d'herbivorie ou d'interaction
 ```
+---
 
+---
+# Sélection du modèle
 Sélectionnez le meilleur modèle avec la méthode de votre choix :
 .pull-left2[ Méthode par AICc
 ```{r}
@@ -2081,7 +2157,7 @@ Effets aléatoires
 
 
 ---
-# Défi 9 ![:cube]()
+# Défi 8 ![:cube]()
 
 En utilisant l'ensemble de données `inverts` (temps de développement larvaire (`PLD`) de 74 espèces d'invertébrés et vertébrés marins élevés à différentes températures et temps), répondez aux questions suivantes:
 
