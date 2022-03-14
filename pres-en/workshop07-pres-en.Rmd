@@ -89,6 +89,68 @@ Note: Communicate to the participants that all the materials for this workshop i
 
 ---
 
+<p style="font-size:75%">
+
+.center[
+**Contributors au developpement de cet atelier**
+
+by modifying and improving its content as part of the <br> *Le*arning *a*nd *D*evelopment *A*ward
+]
+
+
+.pull-left[
+.right[
+
+ **2022** - **2021** - **2020**
+
+[Maxime Fraser Franco]()
+<br>
+[Hassen Allegue]()
+<br>
+[Linley Sherin]()
+<br>
+[Pedro Henrique P. Braga]()
+<br>
+[Katherine Hébert]()
+<br>
+[Kevin Cazelles]()
+<br>
+[Janaína Serrano]()
+<br>
+[Dominique Caron]()
+]
+]
+
+.pull-right[
+.left[
+**2019** - **2018** - **2017**
+
+[Nicolas Princeloup]()
+<br>
+[Marie Hélène Brice]()
+
+**2016** - **2015** - **2014**
+
+[Catherine Baltazar]()
+<br>
+[Dalal Hanna]()
+<br>
+[Jacob Ziegler]()
+<br>
+[Cédric Frenette Dussault]()
+<br>
+[Vincent Fugère]()
+<br>
+[Thomas Lamy]()
+<br>
+[Zofia Taranu]()
+
+]
+]
+</p>
+
+---
+
 # Required material
 
 To follow this workshop, you are required to have downloaded and installed the latest [RStudio](https://rstudio.com/products/rstudio/download/#download) and [R](https://cran.rstudio.com/) versions.
