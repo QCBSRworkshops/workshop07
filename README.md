@@ -43,7 +43,7 @@ Since 2014, several QCBS members contributed to consistently and collaboratively
 |:---------------------------:|:---------------------------:|:----------------------------:|
 | Maxime Fraser Franco    |     Nicolas Pinceloup    | Catherine Baltazar |
 |  Hassen Allegue         |      Marie Hélène Brice  |        Dalal Hanna       |
-|     Linley Sherin       |     Kevin Cazelles       |       Jacob Ziegler       |
+|     Linley Sherin       |                          |       Jacob Ziegler       |
 | Pedro Henrique P. Braga |                          |      Cédric Frenette Dussault  |
 |   Katherine Hébert      |                          |    Vincent Fugère         |
 |   Kevin Cazelles        |                          |    Thomas Lamy      |
