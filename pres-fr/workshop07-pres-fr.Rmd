@@ -2171,39 +2171,37 @@ En utilisant l'ensemble de données `inverts` (temps de développement larvaire 
 # Solution ![:cube]()
 
 ```{R, eval = FALSE}
-# inverts <- read.csv('data/inverts.csv', header = TRUE)
-# head(inverts)
-# table(inverts$temp, inverts$feeding.type)
+inverts <- read.csv('data/inverts.csv', header = TRUE)
+head(inverts)
+table(inverts$temp, inverts$feeding.type)
 
-# mod.glm <- glm(PLD ~ temp + feeding.type, family = poisson(), data = inverts)
-# summary(mod.glm)
-# drop1(mod.glm, test = "Chisq")
+mod.glm <- glm(PLD ~ temp + feeding.type, family = poisson(), data = inverts)
+summary(mod.glm)
+drop1(mod.glm, test = "Chisq")
 
-# boxplot(PLD ~ temp,  data = inverts)
-# boxplot(PLD ~ feeding.type ,  data = inverts)
+boxplot(PLD ~ temp,  data = inverts)
+boxplot(PLD ~ feeding.type ,  data = inverts)
 
-# boxplot(predict(mod.glm, type = "response")~inverts$temp)
+boxplot(predict(mod.glm, type = "response")~inverts$temp)
 
-# plot()
-
-# modglm <- glm(PLD ~ temp + feeding.type, family = poisson(), data = inverts)
+modglm <- glm(PLD ~ temp + feeding.type, family = poisson(), data = inverts)
 ```
 
 
 ---
 # Solution ![:cube]()
 ```{R, eval = FALSE}
-# r2 <- ranef(mpl1, condVar = TRUE)
-# d2 <- dotplot(r2, par.settings = pp)
+r2 <- ranef(mpl1, condVar = TRUE)
+d2 <- dotplot(r2, par.settings = pp)
 
-# plot(aggregate(PLD ~ taxon, FUN = mean, data = inverts)[,2], aggregate(PLD ~ taxon, FUN = var, data = inverts)[,2], pch = 19)
-# abline(a = 0, b = 1, lty = 2)
+plot(aggregate(PLD ~ taxon, FUN = mean, data = inverts)[,2], aggregate(PLD ~ taxon, FUN = var, data = inverts)[,2], pch = 19)
+abline(a = 0, b = 1, lty = 2)
 
-# mod.glmer <- glmer.nb(PLD ~ temp + feeding.type + (1|taxon), data = inverts)
-# mod.glm <- glm.nb(PLD ~ temp + feeding.type, family = poisson(), data = inverts)
+mod.glmer <- glmer.nb(PLD ~ temp + feeding.type + (1|taxon), data = inverts)
+mod.glm <- glm.nb(PLD ~ temp + feeding.type, family = poisson(), data = inverts)
 
-# plot(aggregate(PLD ~ taxon, FUN = var, data = inverts)[,2], aggregate(PLD ~ taxon, FUN = mean, data = inverts)[,2])
-# abline(a = 0, b = 1, lty = 2 )
+plot(aggregate(PLD ~ taxon, FUN = var, data = inverts)[,2], aggregate(PLD ~ taxon, FUN = mean, data = inverts)[,2])
+abline(a = 0, b = 1, lty = 2 )
 ```
 
 
