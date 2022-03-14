@@ -131,7 +131,7 @@ install.packages(c("lme4",
 ```
 ]
 
-??? 
+???
 Note: Pour sauver du temps: (1) Demander aux participants d'installer les paquets avant l'atelier. (2) Ne pas attendre que tout le monde réussisse à les installer, et aider ceux qui ont rencontrer des problèmes lors du défi #1.
 
 ---
@@ -407,7 +407,7 @@ On souhaite émettre des conclusions à propos des niveaux du facteur ou de la r
 
 *Exemple: Nous sommes intéressés par l'effet des coupes à blanc sur la richesse en espèce. La variable coupe est le facteur à deux niveaux: forêt coupé à blanc ou non coupé.*
 
-??? 
+???
 Note: Mettre l'emphase sur le fait que nous avons échantillonné tous les niveaux d'intérêts du facteurs. Nous ne sommes pas intéressés par les autres niveaux non échantillonnés.
 
 ---
@@ -423,7 +423,7 @@ Note: Mettre l'emphase sur le fait que nous avons échantillonné tous les nivea
 
 *Exemple: Nous échantillons des poissons dans 6 de 15 lacs d'une région. La variable lac est le facteur avec 15 niveaux. Bien que nous n'avons qu'échantillonner 6 niveaux, nous voulons pouoir faire des conclusions sur la variabilité entre tous les lacs de la région.*
 
-??? 
+???
 Note: Mettre l'emphase sur le fait que nous n'avons pas nécessairement des données pour tous les niveaux d'intérêt du facteur aléatoire. 
 
 ---
@@ -690,14 +690,17 @@ Note: Expliquer ce qu'est un jeu de données équilibré vs non équilibrés (c-
 
 **Regardez la distribution des variables continues**
 
-```{r include = FALSE}
-par(mfrow=c(1,2), mar = c(4,4,1,1))
+``` {r, fig.width = 10, fig.height = 5, eval = FALSE,}
+hist(fish.data$Fish_Length, xlab = "Longueur (mm)", main = "")
+hist(fish.data$Trophic_Pos, xlab = "Position trophique", main = "")
 ```
 
-```{r, fig.width=10, fig.height=4}
-hist(fish.data$Fish_Length, xlab = "Length (mm)", main = "")
-hist(fish.data$Trophic_Pos, xlab = "Trophic position", main = "")
+``` {r, fig.width = 10, fig.height = 5, echo = FALSE}
+par(mfrow = c(1, 2), mar = c(4, 4, 1, 1))
+hist(fish.data$Fish_Length, xlab = "Longueur (mm)", main = "")
+hist(fish.data$Trophic_Pos, xlab = "Position trophique", main = "")
 ```
+
 
 Des déviations majeures pourraient causer des problèmes d'hétéroscédasticité. Si nécessaire, faites des transformations. Dans ce cas-ci, **les données semblent correctes**.
 
@@ -1211,11 +1214,8 @@ exclude: true
 
 **3.1 Vérifier l'homogénéité de la variance**
 
-```{r include = FALSE}
-par(mar=c(4,4,.5,.5))
-```
-
 ```{r, fig.width=4.5, fig.height=4.5, echo = -1}
+par(mar=c(4,4,.5,.5))
 plot(resid(M8) ~ fitted(M8), 
      xlab = 'Valeurs prédites', 
      ylab = 'Résidus normalisés')
@@ -1723,11 +1723,14 @@ Pour plus de détails, vous pouvez consulter [ceci](https://www.rdocumentation.o
 
 
 ```{r}
-# popu facteur avec un niveau pour chaque population
-# gen facteur avec un niveau pour chaque génotype
-# nutrient facteur avec niveau bas (valeur = 1) ou haut (valeur = 8)
-# amd facteur précisant l'absence ou la présence d'herbivorie
-# total.fruits nombre entier indiquant le nombre de fruits par plante
+# Voici la descrition des colonnes de ce jeu de données:
+
+# reg: facteur avec un niveau pour chaque région
+# popu: facteur avec un niveau pour chaque population
+# gen: facteur avec un niveau pour chaque génotype
+# nutrient: facteur avec niveau bas (valeur = 1) ou haut (valeur = 8)
+# amd: facteur précisant l'absence ou la présence d'herbivorie
+# total.fruits: nombre entier indiquant le nombre de fruits par plante
 ```
 
 L'effet de la disponibilité de nutriments et d'herbivorie (**effets fixes**) sur la production de fruits d'*Arabidopsis thaliana* (**variable réponse**) a été évalué en mesurant 625 plantes à travers neuf populations différentes, constituées chacune de 2 à 3 génotypes (**effets aléatoires**).
@@ -1761,7 +1764,7 @@ les événements qui sont comptés sont corrélés positivement.
 
 <br>
 
-.center [*Pouvez-vous penser à une situation en biologie qui peut provoquer la surdispersion?*]
+.center[*Pouvez-vous penser à une situation en biologie qui peut provoquer la surdispersion?*]
 
 <br>
 
@@ -2116,23 +2119,20 @@ mpl5 <- update(mpl2, . ~ . - nutrient) # pas de nutrient ou d'interaction
 mpl6 <- update(mpl2, . ~ . - amd) # pas d'herbivorie ou d'interaction
 ```
 ---
-
----
 # Sélection du modèle
 Sélectionnez le meilleur modèle avec la méthode de votre choix :
-.pull-left2[ Méthode par AICc
+
+**Méthode par `AICc`** 
 ```{r}
 aic_tab2  <- MuMIn::model.sel(mpl2, mpl3, mpl4, mpl5, mpl6)
 (round(aic_table2 <- aic_tab2[ , c("AICc", "delta", "df")], digits = 2))
 ```
-]
-.pull-right2[ Méthode avec `drop1()`
+
+**Méthode avec `drop1()`** 
 ```{r}
 dd_LRT2 <- drop1(mpl2, test = "Chisq")
 dd_AIC2 <- dfun(drop1(mpl2))
 ```
-]
-
 
 ---
 # Sélection du modèle
