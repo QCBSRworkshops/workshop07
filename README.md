@@ -41,13 +41,14 @@ Since 2014, several QCBS members contributed to consistently and collaboratively
 
 |      2022 - 2021 - 2020     |      2019 - 2018 - 2017     |      2016 - 2015 - 2014      |
 |:---------------------------:|:---------------------------:|:----------------------------:|
-| Maxime Fraser Franco    |     Nicolas Pinceloup   | Catherine Baltazar |
+| Maxime Fraser Franco    |     Nicolas Pinceloup    | Catherine Baltazar |
 |  Hassen Allegue         |      Marie Hélène Brice  |        Dalal Hanna       |
-|     Linley Sherin       |                      |       Jacob Ziegler       |
-| Pedro Henrique P. Braga |                             |      Cédric Frenette Dussault  |
-|   Katherine Hébert      |                             |    Vincent Fugère         |
-|   Kevin Cazelles        |                             |    Thomas Lamy      |
-|           |                             |    Zofia Taranu      |
+|     Linley Sherin       |     Kevin Cazelles       |       Jacob Ziegler       |
+| Pedro Henrique P. Braga |                          |      Cédric Frenette Dussault  |
+|   Katherine Hébert      |                          |    Vincent Fugère         |
+|   Kevin Cazelles        |                          |    Thomas Lamy      |
+|    Janaína Serrano      |                          |    Zofia Taranu      |
+|    Dominique Caron      |                          |                              |
 
 # Development status
 
