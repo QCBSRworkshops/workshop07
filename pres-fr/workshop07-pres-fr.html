@@ -45,6 +45,68 @@ Note: Rappeler aux participants que le matériel de l'atelier est disponible sur
 
 ---
 
+&lt;p style="font-size:75%"&gt;
+
+.center[
+**Participants au développement**
+
+en modifiant et améliorant le matériel dans le cadre des &lt;br&gt; *P*rix d’*A*pprentissage et de *D*éveloppement
+]
+
+
+.pull-left[
+.right[
+
+ **2022** - **2021** - **2020**
+
+[Maxime Fraser Franco]()
+&lt;br&gt;
+[Hassen Allegue]()
+&lt;br&gt;
+[Linley Sherin]()
+&lt;br&gt;
+[Pedro Henrique P. Braga]()
+&lt;br&gt;
+[Katherine Hébert]()
+&lt;br&gt;
+[Kevin Cazelles]()
+&lt;br&gt;
+[Janaína Serrano]()
+&lt;br&gt;
+[Dominique Caron]()
+]
+]
+
+.pull-right[
+.left[
+**2019** - **2018** - **2017**
+
+[Nicolas Princeloup]()
+&lt;br&gt;
+[Marie Hélène Brice]()
+
+**2016** - **2015** - **2014**
+
+[Catherine Baltazar]()
+&lt;br&gt;
+[Dalal Hanna]()
+&lt;br&gt;
+[Jacob Ziegler]()
+&lt;br&gt;
+[Cédric Frenette Dussault]()
+&lt;br&gt;
+[Vincent Fugère]()
+&lt;br&gt;
+[Thomas Lamy]()
+&lt;br&gt;
+[Zofia Taranu]()
+
+]
+]
+&lt;/p&gt;
+
+---
+
 # Matériel requis
 
 Pour suivre cet atelier, il est nécessaire d'avoir téléchargé et installé les dernières versions de [RStudio](https://rstudio.com/products/rstudio/download/#download) et de [R](https://cran.rstudio.com/).
@@ -86,7 +148,7 @@ install.packages(c("lme4",
 ```
 ]
 
-??? 
+???
 Note: Pour sauver du temps: (1) Demander aux participants d'installer les paquets avant l'atelier. (2) Ne pas attendre que tout le monde réussisse à les installer, et aider ceux qui ont rencontrer des problèmes lors du défi #1.
 
 ---
@@ -344,7 +406,7 @@ On souhaite émettre des conclusions à propos des niveaux du facteur ou de la r
 
 *Exemple: Nous sommes intéressés par l'effet des coupes à blanc sur la richesse en espèce. La variable coupe est le facteur à deux niveaux: forêt coupé à blanc ou non coupé.*
 
-??? 
+???
 Note: Mettre l'emphase sur le fait que nous avons échantillonné tous les niveaux d'intérêts du facteurs. Nous ne sommes pas intéressés par les autres niveaux non échantillonnés.
 
 ---
@@ -360,7 +422,7 @@ Note: Mettre l'emphase sur le fait que nous avons échantillonné tous les nivea
 
 *Exemple: Nous échantillons des poissons dans 6 de 15 lacs d'une région. La variable lac est le facteur avec 15 niveaux. Bien que nous n'avons qu'échantillonner 6 niveaux, nous voulons pouoir faire des conclusions sur la variabilité entre tous les lacs de la région.*
 
-??? 
+???
 Note: Mettre l'emphase sur le fait que nous n'avons pas nécessairement des données pour tous les niveaux d'intérêt du facteur aléatoire. 
 
 ---
@@ -643,19 +705,13 @@ Note: Expliquer ce qu'est un jeu de données équilibré vs non équilibrés (c-
 **Regardez la distribution des variables continues**
 
 
-
-
 ```r
-hist(fish.data$Fish_Length, xlab = "Length (mm)", main = "")
+hist(fish.data$Fish_Length, xlab = "Longueur (mm)", main = "")
+hist(fish.data$Trophic_Pos, xlab = "Position trophique", main = "")
 ```
 
 &lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-9-1.png" width="720" style="display: block; margin: auto;" /&gt;
 
-```r
-hist(fish.data$Trophic_Pos, xlab = "Trophic position", main = "")
-```
-
-&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-9-2.png" width="720" style="display: block; margin: auto;" /&gt;
 
 Des déviations majeures pourraient causer des problèmes d'hétéroscédasticité. Si nécessaire, faites des transformations. Dans ce cas-ci, **les données semblent correctes**.
 
@@ -1230,13 +1286,14 @@ exclude: true
 **3.1 Vérifier l'homogénéité de la variance**
 
 
-
-
 ```r
+plot(resid(M8) ~ fitted(M8), 
+     xlab = 'Valeurs prédites', 
+     ylab = 'Résidus normalisés')
 abline(h = 0, lty = 2)
 ```
 
-&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-32-1.png" width="324" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-31-1.png" width="324" style="display: block; margin: auto;" /&gt;
 
 Étendue homogène des résidus ![:faic](arrow-right) la supposition est respectée!
 
@@ -1281,7 +1338,7 @@ abline(h = 0, lty = 2)
 
 **3.2 Vérifier l'indépendance des résidus avec chaque covariable**
 
-&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-35-1.png" width="864" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-34-1.png" width="864" style="display: block; margin: auto;" /&gt;
 
 Étendue homogène des résidus autour de 0 ![:faic](arrow-right) pas de patron des résidus en fonction de la variable, la supposition est respectée!
 
@@ -1312,7 +1369,7 @@ abline(h = 0, lty = 2)
 hist(resid(M8))
 ```
 
-&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-36-1.png" width="360" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-35-1.png" width="360" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -1562,7 +1619,7 @@ Plot_AllData + geom_abline(intercept = summ_M8$coefficients[1,1],
 # Solution ![:cube]()
 
 a) Figure avec toutes les données regroupées
-&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-41-1.png" width="432" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-40-1.png" width="432" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -1600,7 +1657,7 @@ Plot_BySpecies +
 
 b) Figure par espèce
 
-&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-43-1.png" width="576" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-42-1.png" width="576" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -1637,7 +1694,7 @@ Plot_ByLake +
 # Solution ![:cube]()
 
 c) Figure par lac
-&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-45-1.png" width="576" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-44-1.png" width="576" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -1751,11 +1808,14 @@ Pour plus de détails, vous pouvez consulter [ceci](https://www.rdocumentation.o
 
 
 ```r
-# popu facteur avec un niveau pour chaque population
-# gen facteur avec un niveau pour chaque génotype
-# nutrient facteur avec niveau bas (valeur = 1) ou haut (valeur = 8)
-# amd facteur précisant l'absence ou la présence d'herbivorie
-# total.fruits nombre entier indiquant le nombre de fruits par plante
+# Voici la descrition des colonnes de ce jeu de données:
+
+# reg: facteur avec un niveau pour chaque région
+# popu: facteur avec un niveau pour chaque population
+# gen: facteur avec un niveau pour chaque génotype
+# nutrient: facteur avec niveau bas (valeur = 1) ou haut (valeur = 8)
+# amd: facteur précisant l'absence ou la présence d'herbivorie
+# total.fruits: nombre entier indiquant le nombre de fruits par plante
 ```
 
 L'effet de la disponibilité de nutriments et d'herbivorie (**effets fixes**) sur la production de fruits d'*Arabidopsis thaliana* (**variable réponse**) a été évalué en mesurant 625 plantes à travers neuf populations différentes, constituées chacune de 2 à 3 génotypes (**effets aléatoires**).
@@ -1766,7 +1826,7 @@ L'effet de la disponibilité de nutriments et d'herbivorie (**effets fixes**) su
 
 La variable réponse constitue des données d'abondance, donc nous devons choisir une **distribution de Poisson** (i.e variance égale à la moyenne)
 
-&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-50-1.png" width="432" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-49-1.png" width="432" style="display: block; margin: auto;" /&gt;
 
 Vous pouvez lire plus sur la distribution des erreurs [ici](http://ganymede.nmsu.edu/holtz/a535/ay535notes/node3.html) 
 
@@ -1785,7 +1845,7 @@ les événements qui sont comptés sont corrélés positivement.
 
 &lt;br&gt;
 
-.center [*Pouvez-vous penser à une situation en biologie qui peut provoquer la surdispersion?*]
+.center[*Pouvez-vous penser à une situation en biologie qui peut provoquer la surdispersion?*]
 
 &lt;br&gt;
 
@@ -1830,7 +1890,7 @@ ggplot(data = dat.tf, aes(factor(x = gna), y = log(total.fruits + 1))) +
   stat_summary(fun = mean, geom = "point", colour = "red")
 ```
 
-&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-52-1.png" width="576" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-51-1.png" width="576" style="display: block; margin: auto;" /&gt;
 ]
 
 .comment[De même, la variance du total de fruits montre une grande hétérogénéité entre les populations (population x nutriments x herbivorie).]
@@ -1843,7 +1903,7 @@ Comme nous venons de le voir, il existe une importante hétérogénéité parmi 
 
 Si nous représentons graphiquement les **écarts vs moyennes par groupes** (génotypes x nutriment x herbivorie), on voit que la distribution de Poisson est la moins appropriée (i.e. car les écarts augmentent beaucoup plus vite que la moyenne).
 
-&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-53-1.png" width="576" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-52-1.png" width="576" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -2004,7 +2064,7 @@ library(coefplot2)
 coefplot2(mpl1, ptype = "vcov", intercept = TRUE, main = "Variance des effets aléatoires")
 ```
 
-&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-61-1.png" width="432" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-60-1.png" width="432" style="display: block; margin: auto;" /&gt;
 ]
 .pull-right[
 
@@ -2013,7 +2073,7 @@ coefplot2(mpl1, ptype = "vcov", intercept = TRUE, main = "Variance des effets al
 coefplot2(mpl1, intercept = TRUE, main = "Coefficients des effets fixes")
 ```
 
-&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-62-1.png" width="432" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-61-1.png" width="432" style="display: block; margin: auto;" /&gt;
 ]
 
 .comment[Note : barres d'erreur visibles seulement pour les effets fixes car `glmer()` ne modélise pas d'incertitude pour les effets aléatoires.]
@@ -2054,7 +2114,7 @@ grid.arrange(d2$gen, d2$popu, nrow = 1)
 
 &lt;br&gt;
 
-&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-63-1.png" width="648" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-62-1.png" width="648" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -2136,11 +2196,10 @@ mpl5 &lt;- update(mpl2, . ~ . - nutrient) # pas de nutrient ou d'interaction
 mpl6 &lt;- update(mpl2, . ~ . - amd) # pas d'herbivorie ou d'interaction
 ```
 ---
-
----
 # Sélection du modèle
 Sélectionnez le meilleur modèle avec la méthode de votre choix :
-.pull-left2[ Méthode par AICc
+
+**Méthode par `AICc`** 
 
 ```r
 aic_tab2  &lt;- MuMIn::model.sel(mpl2, mpl3, mpl4, mpl5, mpl6)
@@ -2152,15 +2211,13 @@ aic_tab2  &lt;- MuMIn::model.sel(mpl2, mpl3, mpl4, mpl5, mpl6)
 # mpl3 5071.28  54.17  8
 # mpl5 5152.74 135.63  8
 ```
-]
-.pull-right2[ Méthode avec `drop1()`
+
+**Méthode avec `drop1()`** 
 
 ```r
 dd_LRT2 &lt;- drop1(mpl2, test = "Chisq")
 dd_AIC2 &lt;- dfun(drop1(mpl2))
 ```
-]
-
 
 ---
 # Sélection du modèle
@@ -2200,22 +2257,20 @@ En utilisant l'ensemble de données `inverts` (temps de développement larvaire 
 
 
 ```r
-# inverts &lt;- read.csv('data/inverts.csv', header = TRUE)
-# head(inverts)
-# table(inverts$temp, inverts$feeding.type)
+inverts &lt;- read.csv('data/inverts.csv', header = TRUE)
+head(inverts)
+table(inverts$temp, inverts$feeding.type)
 
-# mod.glm &lt;- glm(PLD ~ temp + feeding.type, family = poisson(), data = inverts)
-# summary(mod.glm)
-# drop1(mod.glm, test = "Chisq")
+mod.glm &lt;- glm(PLD ~ temp + feeding.type, family = poisson(), data = inverts)
+summary(mod.glm)
+drop1(mod.glm, test = "Chisq")
 
-# boxplot(PLD ~ temp,  data = inverts)
-# boxplot(PLD ~ feeding.type ,  data = inverts)
+boxplot(PLD ~ temp,  data = inverts)
+boxplot(PLD ~ feeding.type ,  data = inverts)
 
-# boxplot(predict(mod.glm, type = "response")~inverts$temp)
+boxplot(predict(mod.glm, type = "response")~inverts$temp)
 
-# plot()
-
-# modglm &lt;- glm(PLD ~ temp + feeding.type, family = poisson(), data = inverts)
+modglm &lt;- glm(PLD ~ temp + feeding.type, family = poisson(), data = inverts)
 ```
 
 
@@ -2223,17 +2278,17 @@ En utilisant l'ensemble de données `inverts` (temps de développement larvaire 
 # Solution ![:cube]()
 
 ```r
-# r2 &lt;- ranef(mpl1, condVar = TRUE)
-# d2 &lt;- dotplot(r2, par.settings = pp)
+r2 &lt;- ranef(mpl1, condVar = TRUE)
+d2 &lt;- dotplot(r2, par.settings = pp)
 
-# plot(aggregate(PLD ~ taxon, FUN = mean, data = inverts)[,2], aggregate(PLD ~ taxon, FUN = var, data = inverts)[,2], pch = 19)
-# abline(a = 0, b = 1, lty = 2)
+plot(aggregate(PLD ~ taxon, FUN = mean, data = inverts)[,2], aggregate(PLD ~ taxon, FUN = var, data = inverts)[,2], pch = 19)
+abline(a = 0, b = 1, lty = 2)
 
-# mod.glmer &lt;- glmer.nb(PLD ~ temp + feeding.type + (1|taxon), data = inverts)
-# mod.glm &lt;- glm.nb(PLD ~ temp + feeding.type, family = poisson(), data = inverts)
+mod.glmer &lt;- glmer.nb(PLD ~ temp + feeding.type + (1|taxon), data = inverts)
+mod.glm &lt;- glm.nb(PLD ~ temp + feeding.type, family = poisson(), data = inverts)
 
-# plot(aggregate(PLD ~ taxon, FUN = var, data = inverts)[,2], aggregate(PLD ~ taxon, FUN = mean, data = inverts)[,2])
-# abline(a = 0, b = 1, lty = 2 )
+plot(aggregate(PLD ~ taxon, FUN = var, data = inverts)[,2], aggregate(PLD ~ taxon, FUN = mean, data = inverts)[,2])
+abline(a = 0, b = 1, lty = 2 )
 ```
 
 
