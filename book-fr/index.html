@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Atelier 7: Modèles linéaires et généralisés linéaires mixtes</title>
   <meta name="description" content="Modèles linéaires et généralisés linéaires mixtes" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.25 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Atelier 7: Modèles linéaires et généralisés linéaires mixtes" />
   <meta property="og:type" content="book" />
-  <meta property="og:url" content="https://github.com/qcbsRworkshops/" />
   <meta property="og:image" content="https://github.com/qcbsRworkshops//assets/images/logo/csbq_logo_accueil.png" />
   <meta property="og:description" content="Modèles linéaires et généralisés linéaires mixtes" />
   <meta name="github-repo" content="qcbsRworkshops/workshop09" />
@@ -50,8 +49,9 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -136,81 +136,81 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <link rel="icon" type="image/png" href="assets/images/favicon.ico"/>
 
 <li class="divider"></li>
-<li class="part"><span><b>Série d’ateliers R du CSBQ</b></span></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Préface</a><ul>
-<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#code-de-conduite"><i class="fa fa-check"></i><b>0.1</b> Code de conduite</a><ul>
-<li class="chapter" data-level="0.1.1" data-path="index.html"><a href="index.html#comportement-attendu"><i class="fa fa-check"></i><b>0.1.1</b> Comportement attendu</a></li>
-<li class="chapter" data-level="0.1.2" data-path="index.html"><a href="index.html#comportements-inacceptables"><i class="fa fa-check"></i><b>0.1.2</b> Comportements inacceptables</a></li>
+<li class="part"><span><b>Série d’ateliers R du CSBQ<span></span></b></span></li>
+<li><a href="index.html#préface">Préface<span></span></a><ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>0.1</b> Code de conduite<span></span></a><ul>
+<li class="chapter" data-level="0.1.1" data-path="index.html"><a href="index.html#comportement-attendu"><i class="fa fa-check"></i><b>0.1.1</b> Comportement attendu<span></span></a></li>
+<li class="chapter" data-level="0.1.2" data-path="index.html"><a href="index.html#comportements-inacceptables"><i class="fa fa-check"></i><b>0.1.2</b> Comportements inacceptables<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#contributeurs-et-contributrices"><i class="fa fa-check"></i><b>0.2</b> Contributeurs et contributrices</a></li>
-<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#contribuez-à-la-série"><i class="fa fa-check"></i><b>0.3</b> Contribuez à la série!</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#contributeurs-et-contributrices"><i class="fa fa-check"></i><b>0.2</b> Contributeurs et contributrices<span></span></a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#contribuez-à-la-série"><i class="fa fa-check"></i><b>0.3</b> Contribuez à la série!<span></span></a></li>
 </ul></li>
-<li class="part"><span><b>Modèles linéaires à effets mixtes (MLM) en <code>R</code></b></span></li>
-<li class="chapter" data-level="1" data-path="objectifs-dapprentissage.html"><a href="objectifs-dapprentissage.html"><i class="fa fa-check"></i><b>1</b> Objectifs d’apprentissage</a></li>
-<li class="chapter" data-level="2" data-path="préparez-vous-pour-cet-atelier.html"><a href="préparez-vous-pour-cet-atelier.html"><i class="fa fa-check"></i><b>2</b> Préparez-vous pour cet atelier</a></li>
-<li class="chapter" data-level="3" data-path="pourquoi-choisir-un-mlm.html"><a href="pourquoi-choisir-un-mlm.html"><i class="fa fa-check"></i><b>3</b> Pourquoi choisir un MLM?</a></li>
-<li class="chapter" data-level="4" data-path="commencer-par-une-question.html"><a href="commencer-par-une-question.html"><i class="fa fa-check"></i><b>4</b> Commencer par une question</a><ul>
-<li class="chapter" data-level="4.1" data-path="commencer-par-une-question.html"><a href="commencer-par-une-question.html#défi-1"><i class="fa fa-check"></i><b>4.1</b> Défi 1</a></li>
+<li class="part"><span><b>Modèles linéaires à effets mixtes (MLM) en <code>R</code><span></span></b></span></li>
+<li class="chapter" data-level="1" data-path="objectifs-dapprentissage.html"><a href="objectifs-dapprentissage.html"><i class="fa fa-check"></i><b>1</b> Objectifs d’apprentissage<span></span></a></li>
+<li class="chapter" data-level="2" data-path="préparez-vous-pour-cet-atelier.html"><a href="préparez-vous-pour-cet-atelier.html"><i class="fa fa-check"></i><b>2</b> Préparez-vous pour cet atelier<span></span></a></li>
+<li class="chapter" data-level="3" data-path="pourquoi-choisir-un-mlm.html"><a href="pourquoi-choisir-un-mlm.html"><i class="fa fa-check"></i><b>3</b> Pourquoi choisir un MLM?<span></span></a></li>
+<li class="chapter" data-level="4" data-path="commencer-par-une-question.html"><a href="commencer-par-une-question.html"><i class="fa fa-check"></i><b>4</b> Commencer par une question<span></span></a><ul>
+<li class="chapter" data-level="4.1" data-path="commencer-par-une-question.html"><a href="commencer-par-une-question.html#défi-1"><i class="fa fa-check"></i><b>4.1</b> Défi 1<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="analyse-des-données.html"><a href="analyse-des-données.html"><i class="fa fa-check"></i><b>5</b> Analyse des données</a><ul>
-<li class="chapter" data-level="5.1" data-path="analyse-des-données.html"><a href="analyse-des-données.html#option-1-nombreuses-analyses-séparées"><i class="fa fa-check"></i><b>5.1</b> Option 1: Nombreuses analyses séparées</a></li>
-<li class="chapter" data-level="5.2" data-path="analyse-des-données.html"><a href="analyse-des-données.html#option-2-une-analyse-groupée"><i class="fa fa-check"></i><b>5.2</b> Option 2: Une analyse groupée</a></li>
-<li class="chapter" data-level="5.3" data-path="analyse-des-données.html"><a href="analyse-des-données.html#option-3-est-ce-quon-a-une-autre-option"><i class="fa fa-check"></i><b>5.3</b> Option 3: Est-ce qu’on a une autre option?</a></li>
+<li class="chapter" data-level="5" data-path="analyse-des-données.html"><a href="analyse-des-données.html"><i class="fa fa-check"></i><b>5</b> Analyse des données<span></span></a><ul>
+<li class="chapter" data-level="5.1" data-path="analyse-des-données.html"><a href="analyse-des-données.html#option-1-nombreuses-analyses-séparées"><i class="fa fa-check"></i><b>5.1</b> Option 1: Nombreuses analyses séparées<span></span></a></li>
+<li class="chapter" data-level="5.2" data-path="analyse-des-données.html"><a href="analyse-des-données.html#option-2-une-analyse-groupée"><i class="fa fa-check"></i><b>5.2</b> Option 2: Une analyse groupée<span></span></a></li>
+<li class="chapter" data-level="5.3" data-path="analyse-des-données.html"><a href="analyse-des-données.html#option-3-est-ce-quon-a-une-autre-option"><i class="fa fa-check"></i><b>5.3</b> Option 3: Est-ce qu’on a une autre option?<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="effets-fixes-vs-effets-aléatoires.html"><a href="effets-fixes-vs-effets-aléatoires.html"><i class="fa fa-check"></i><b>6</b> Effets fixes vs effets aléatoires</a><ul>
-<li class="chapter" data-level="6.1" data-path="effets-fixes-vs-effets-aléatoires.html"><a href="effets-fixes-vs-effets-aléatoires.html#effet-fixe-processus-déterministes"><i class="fa fa-check"></i><b>6.1</b> Effet fixe: processus déterministes</a></li>
-<li class="chapter" data-level="6.2" data-path="effets-fixes-vs-effets-aléatoires.html"><a href="effets-fixes-vs-effets-aléatoires.html#effet-aléatoire-processus-stochastiques"><i class="fa fa-check"></i><b>6.2</b> Effet aléatoire: processus stochastiques</a></li>
+<li class="chapter" data-level="6" data-path="effets-fixes-vs-effets-aléatoires.html"><a href="effets-fixes-vs-effets-aléatoires.html"><i class="fa fa-check"></i><b>6</b> Effets fixes vs effets aléatoires<span></span></a><ul>
+<li class="chapter" data-level="6.1" data-path="effets-fixes-vs-effets-aléatoires.html"><a href="effets-fixes-vs-effets-aléatoires.html#effet-fixe-processus-déterministes"><i class="fa fa-check"></i><b>6.1</b> Effet fixe: processus déterministes<span></span></a></li>
+<li class="chapter" data-level="6.2" data-path="effets-fixes-vs-effets-aléatoires.html"><a href="effets-fixes-vs-effets-aléatoires.html#effet-aléatoire-processus-stochastiques"><i class="fa fa-check"></i><b>6.2</b> Effet aléatoire: processus stochastiques<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="comment-fonctionnent-les-mlms.html"><a href="comment-fonctionnent-les-mlms.html"><i class="fa fa-check"></i><b>7</b> Comment fonctionnent les MLMs?</a><ul>
-<li class="chapter" data-level="7.1" data-path="comment-fonctionnent-les-mlms.html"><a href="comment-fonctionnent-les-mlms.html#les-paramètres-peuvent-varier"><i class="fa fa-check"></i><b>7.1</b> Les paramètres peuvent varier</a><ul>
-<li class="chapter" data-level="" data-path="comment-fonctionnent-les-mlms.html"><a href="comment-fonctionnent-les-mlms.html#ordonnée-à-lorigine"><i class="fa fa-check"></i>Ordonnée à l’origine:</a></li>
-<li class="chapter" data-level="" data-path="comment-fonctionnent-les-mlms.html"><a href="comment-fonctionnent-les-mlms.html#pentes"><i class="fa fa-check"></i>Pentes</a></li>
+<li class="chapter" data-level="7" data-path="comment-fonctionnent-les-mlms.html"><a href="comment-fonctionnent-les-mlms.html"><i class="fa fa-check"></i><b>7</b> Comment fonctionnent les MLMs?<span></span></a><ul>
+<li class="chapter" data-level="7.1" data-path="comment-fonctionnent-les-mlms.html"><a href="comment-fonctionnent-les-mlms.html#les-paramètres-peuvent-varier"><i class="fa fa-check"></i><b>7.1</b> Les paramètres peuvent varier<span></span></a><ul>
+<li><a href="comment-fonctionnent-les-mlms.html#ordonnée-à-lorigine">Ordonnée à l’origine:<span></span></a></li>
+<li><a href="comment-fonctionnent-les-mlms.html#pentes">Pentes<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="comment-fonctionnent-les-mlms.html"><a href="comment-fonctionnent-les-mlms.html#tenir-compte-de-la-structure-des-données"><i class="fa fa-check"></i><b>7.2</b> Tenir compte de la structure des données</a></li>
-<li class="chapter" data-level="7.3" data-path="comment-fonctionnent-les-mlms.html"><a href="comment-fonctionnent-les-mlms.html#défi-2"><i class="fa fa-check"></i><b>7.3</b> Défi 2</a></li>
+<li class="chapter" data-level="7.2" data-path="comment-fonctionnent-les-mlms.html"><a href="comment-fonctionnent-les-mlms.html#tenir-compte-de-la-structure-des-données"><i class="fa fa-check"></i><b>7.2</b> Tenir compte de la structure des données<span></span></a></li>
+<li class="chapter" data-level="7.3" data-path="comment-fonctionnent-les-mlms.html"><a href="comment-fonctionnent-les-mlms.html#défi-2"><i class="fa fa-check"></i><b>7.3</b> Défi 2<span></span></a></li>
 </ul></li>
-<li class="part"><span><b>Implémenter un MLM dans <code>R</code></b></span></li>
-<li class="chapter" data-level="8" data-path="le-protocole-pour-implémenter-des-modèles-à-effets-mixtes-dans-r.html"><a href="le-protocole-pour-implémenter-des-modèles-à-effets-mixtes-dans-r.html"><i class="fa fa-check"></i><b>8</b> Le protocole pour implémenter des modèles à effets mixtes dans <code>R</code></a></li>
-<li class="chapter" data-level="9" data-path="étape-1.-construction-du-modèle-a-priori.html"><a href="étape-1.-construction-du-modèle-a-priori.html"><i class="fa fa-check"></i><b>9</b> Étape 1. Construction du modèle <em>a priori</em></a><ul>
-<li class="chapter" data-level="9.1" data-path="étape-1.-construction-du-modèle-a-priori.html"><a href="étape-1.-construction-du-modèle-a-priori.html#exploration-des-données"><i class="fa fa-check"></i><b>9.1</b> Exploration des données</a></li>
-<li class="chapter" data-level="9.2" data-path="étape-1.-construction-du-modèle-a-priori.html"><a href="étape-1.-construction-du-modèle-a-priori.html#vérifier-la-colinéarité"><i class="fa fa-check"></i><b>9.2</b> Vérifier la colinéarité</a></li>
-<li class="chapter" data-level="9.3" data-path="étape-1.-construction-du-modèle-a-priori.html"><a href="étape-1.-construction-du-modèle-a-priori.html#défi-3"><i class="fa fa-check"></i><b>9.3</b> Défi 3</a></li>
-<li class="chapter" data-level="9.4" data-path="étape-1.-construction-du-modèle-a-priori.html"><a href="étape-1.-construction-du-modèle-a-priori.html#considérez-léchelle"><i class="fa fa-check"></i><b>9.4</b> Considérez l’échelle</a></li>
-<li class="chapter" data-level="9.5" data-path="étape-1.-construction-du-modèle-a-priori.html"><a href="étape-1.-construction-du-modèle-a-priori.html#avez-vous-besoin-dun-mlm"><i class="fa fa-check"></i><b>9.5</b> Avez-vous besoin d’un MLM?</a></li>
+<li class="part"><span><b>Implémenter un MLM dans <code>R</code><span></span></b></span></li>
+<li class="chapter" data-level="8" data-path="le-protocole-pour-implémenter-des-modèles-à-effets-mixtes-dans-r.html"><a href="le-protocole-pour-implémenter-des-modèles-à-effets-mixtes-dans-r.html"><i class="fa fa-check"></i><b>8</b> Le protocole pour implémenter des modèles à effets mixtes dans <code>R</code><span></span></a></li>
+<li class="chapter" data-level="9" data-path="étape-1.-construction-du-modèle-a-priori.html"><a href="étape-1.-construction-du-modèle-a-priori.html"><i class="fa fa-check"></i><b>9</b> Étape 1. Construction du modèle <em>a priori</em><span></span></a><ul>
+<li class="chapter" data-level="9.1" data-path="étape-1.-construction-du-modèle-a-priori.html"><a href="étape-1.-construction-du-modèle-a-priori.html#exploration-des-données"><i class="fa fa-check"></i><b>9.1</b> Exploration des données<span></span></a></li>
+<li class="chapter" data-level="9.2" data-path="étape-1.-construction-du-modèle-a-priori.html"><a href="étape-1.-construction-du-modèle-a-priori.html#vérifier-la-colinéarité"><i class="fa fa-check"></i><b>9.2</b> Vérifier la colinéarité<span></span></a></li>
+<li class="chapter" data-level="9.3" data-path="étape-1.-construction-du-modèle-a-priori.html"><a href="étape-1.-construction-du-modèle-a-priori.html#défi-3"><i class="fa fa-check"></i><b>9.3</b> Défi 3<span></span></a></li>
+<li class="chapter" data-level="9.4" data-path="étape-1.-construction-du-modèle-a-priori.html"><a href="étape-1.-construction-du-modèle-a-priori.html#considérez-léchelle"><i class="fa fa-check"></i><b>9.4</b> Considérez l’échelle<span></span></a></li>
+<li class="chapter" data-level="9.5" data-path="étape-1.-construction-du-modèle-a-priori.html"><a href="étape-1.-construction-du-modèle-a-priori.html#avez-vous-besoin-dun-mlm"><i class="fa fa-check"></i><b>9.5</b> Avez-vous besoin d’un MLM?<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="étape-2.-coder-le-modèle.html"><a href="étape-2.-coder-le-modèle.html"><i class="fa fa-check"></i><b>10</b> Étape 2. Coder le modèle</a><ul>
-<li class="chapter" data-level="10.1" data-path="étape-2.-coder-le-modèle.html"><a href="étape-2.-coder-le-modèle.html#note-sur-les-méthodes-destimation"><i class="fa fa-check"></i><b>10.1</b> Note sur les méthodes d’estimation</a></li>
-<li class="chapter" data-level="10.2" data-path="étape-2.-coder-le-modèle.html"><a href="étape-2.-coder-le-modèle.html#différentes-structures-de-modèles"><i class="fa fa-check"></i><b>10.2</b> Différentes structures de modèles</a></li>
-<li class="chapter" data-level="10.3" data-path="étape-2.-coder-le-modèle.html"><a href="étape-2.-coder-le-modèle.html#défi-4"><i class="fa fa-check"></i><b>10.3</b> Défi 4</a></li>
-<li class="chapter" data-level="10.4" data-path="étape-2.-coder-le-modèle.html"><a href="étape-2.-coder-le-modèle.html#défi-5"><i class="fa fa-check"></i><b>10.4</b> Défi 5</a></li>
-<li class="chapter" data-level="10.5" data-path="étape-2.-coder-le-modèle.html"><a href="étape-2.-coder-le-modèle.html#comparing-models"><i class="fa fa-check"></i><b>10.5</b> Comparing models</a></li>
+<li class="chapter" data-level="10" data-path="étape-2.-coder-le-modèle.html"><a href="étape-2.-coder-le-modèle.html"><i class="fa fa-check"></i><b>10</b> Étape 2. Coder le modèle<span></span></a><ul>
+<li class="chapter" data-level="10.1" data-path="étape-2.-coder-le-modèle.html"><a href="étape-2.-coder-le-modèle.html#note-sur-les-méthodes-destimation"><i class="fa fa-check"></i><b>10.1</b> Note sur les méthodes d’estimation<span></span></a></li>
+<li class="chapter" data-level="10.2" data-path="étape-2.-coder-le-modèle.html"><a href="étape-2.-coder-le-modèle.html#différentes-structures-de-modèles"><i class="fa fa-check"></i><b>10.2</b> Différentes structures de modèles<span></span></a></li>
+<li class="chapter" data-level="10.3" data-path="étape-2.-coder-le-modèle.html"><a href="étape-2.-coder-le-modèle.html#défi-4"><i class="fa fa-check"></i><b>10.3</b> Défi 4<span></span></a></li>
+<li class="chapter" data-level="10.4" data-path="étape-2.-coder-le-modèle.html"><a href="étape-2.-coder-le-modèle.html#défi-5"><i class="fa fa-check"></i><b>10.4</b> Défi 5<span></span></a></li>
+<li class="chapter" data-level="10.5" data-path="étape-2.-coder-le-modèle.html"><a href="étape-2.-coder-le-modèle.html#comparing-models"><i class="fa fa-check"></i><b>10.5</b> Comparing models<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="step-3.-validation-du-modèle.html"><a href="step-3.-validation-du-modèle.html"><i class="fa fa-check"></i><b>11</b> Step 3. Validation du modèle</a><ul>
-<li class="chapter" data-level="11.1" data-path="step-3.-validation-du-modèle.html"><a href="step-3.-validation-du-modèle.html#vérifier-lhomogénéité-de-la-variance"><i class="fa fa-check"></i><b>11.1</b> 1. Vérifier l’homogénéité de la variance</a></li>
-<li class="chapter" data-level="11.2" data-path="step-3.-validation-du-modèle.html"><a href="step-3.-validation-du-modèle.html#vérifier-lindépendance-des-résidus"><i class="fa fa-check"></i><b>11.2</b> 2. Vérifier l’indépendance des résidus</a></li>
-<li class="chapter" data-level="11.3" data-path="step-3.-validation-du-modèle.html"><a href="step-3.-validation-du-modèle.html#vérifier-la-normalité"><i class="fa fa-check"></i><b>11.3</b> 3. Vérifier la normalité</a></li>
+<li class="chapter" data-level="11" data-path="step-3.-validation-du-modèle.html"><a href="step-3.-validation-du-modèle.html"><i class="fa fa-check"></i><b>11</b> Step 3. Validation du modèle<span></span></a><ul>
+<li class="chapter" data-level="11.1" data-path="step-3.-validation-du-modèle.html"><a href="step-3.-validation-du-modèle.html#vérifier-lhomogénéité-de-la-variance"><i class="fa fa-check"></i><b>11.1</b> 1. Vérifier l’homogénéité de la variance<span></span></a></li>
+<li class="chapter" data-level="11.2" data-path="step-3.-validation-du-modèle.html"><a href="step-3.-validation-du-modèle.html#vérifier-lindépendance-des-résidus"><i class="fa fa-check"></i><b>11.2</b> 2. Vérifier l’indépendance des résidus<span></span></a></li>
+<li class="chapter" data-level="11.3" data-path="step-3.-validation-du-modèle.html"><a href="step-3.-validation-du-modèle.html#vérifier-la-normalité"><i class="fa fa-check"></i><b>11.3</b> 3. Vérifier la normalité<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="step-4.-interprétation-et-visualisation.html"><a href="step-4.-interprétation-et-visualisation.html"><i class="fa fa-check"></i><b>12</b> Step 4. Interprétation et visualisation</a><ul>
-<li class="chapter" data-level="12.1" data-path="step-4.-interprétation-et-visualisation.html"><a href="step-4.-interprétation-et-visualisation.html#interprétation-de-notre-modèle"><i class="fa fa-check"></i><b>12.1</b> Interprétation de notre modèle</a></li>
-<li class="chapter" data-level="12.2" data-path="step-4.-interprétation-et-visualisation.html"><a href="step-4.-interprétation-et-visualisation.html#défi-6"><i class="fa fa-check"></i><b>12.2</b> Défi 6</a></li>
-<li class="chapter" data-level="12.3" data-path="step-4.-interprétation-et-visualisation.html"><a href="step-4.-interprétation-et-visualisation.html#défi-7"><i class="fa fa-check"></i><b>12.3</b> Défi 7</a></li>
-<li class="chapter" data-level="12.4" data-path="step-4.-interprétation-et-visualisation.html"><a href="step-4.-interprétation-et-visualisation.html#défi-8"><i class="fa fa-check"></i><b>12.4</b> Défi 8</a></li>
+<li class="chapter" data-level="12" data-path="step-4.-interprétation-et-visualisation.html"><a href="step-4.-interprétation-et-visualisation.html"><i class="fa fa-check"></i><b>12</b> Step 4. Interprétation et visualisation<span></span></a><ul>
+<li class="chapter" data-level="12.1" data-path="step-4.-interprétation-et-visualisation.html"><a href="step-4.-interprétation-et-visualisation.html#interprétation-de-notre-modèle"><i class="fa fa-check"></i><b>12.1</b> Interprétation de notre modèle<span></span></a></li>
+<li class="chapter" data-level="12.2" data-path="step-4.-interprétation-et-visualisation.html"><a href="step-4.-interprétation-et-visualisation.html#défi-6"><i class="fa fa-check"></i><b>12.2</b> Défi 6<span></span></a></li>
+<li class="chapter" data-level="12.3" data-path="step-4.-interprétation-et-visualisation.html"><a href="step-4.-interprétation-et-visualisation.html#défi-7"><i class="fa fa-check"></i><b>12.3</b> Défi 7<span></span></a></li>
+<li class="chapter" data-level="12.4" data-path="step-4.-interprétation-et-visualisation.html"><a href="step-4.-interprétation-et-visualisation.html#défi-8"><i class="fa fa-check"></i><b>12.4</b> Défi 8<span></span></a></li>
 </ul></li>
-<li class="part"><span><b>Modèles Linéaires Généralisés Mixtes (GLMMs) en <code>R</code></b></span></li>
-<li class="chapter" data-level="13" data-path="introduction-aux-glmm.html"><a href="introduction-aux-glmm.html"><i class="fa fa-check"></i><b>13</b> Introduction aux GLMM</a></li>
-<li class="chapter" data-level="14" data-path="choisir-la-distribution-des-erreurs.html"><a href="choisir-la-distribution-des-erreurs.html"><i class="fa fa-check"></i><b>14</b> Choisir la distribution des erreurs</a></li>
-<li class="chapter" data-level="15" data-path="glmm-poisson.html"><a href="glmm-poisson.html"><i class="fa fa-check"></i><b>15</b> GLMM Poisson</a></li>
-<li class="chapter" data-level="16" data-path="glmm-binomiale-négative.html"><a href="glmm-binomiale-négative.html"><i class="fa fa-check"></i><b>16</b> GLMM binomiale négative</a></li>
-<li class="chapter" data-level="17" data-path="glmm-poisson-lognormale.html"><a href="glmm-poisson-lognormale.html"><i class="fa fa-check"></i><b>17</b> GLMM Poisson-lognormale</a><ul>
-<li class="chapter" data-level="17.1" data-path="glmm-poisson-lognormale.html"><a href="glmm-poisson-lognormale.html#intercepts-aléatoires"><i class="fa fa-check"></i><b>17.1</b> Intercepts aléatoires</a></li>
-<li class="chapter" data-level="17.2" data-path="glmm-poisson-lognormale.html"><a href="glmm-poisson-lognormale.html#représentation-graphique-des-paramètres-du-modèle"><i class="fa fa-check"></i><b>17.2</b> Représentation graphique des paramètres du modèle</a></li>
+<li class="part"><span><b>Modèles Linéaires Généralisés Mixtes (GLMMs) en <code>R</code><span></span></b></span></li>
+<li class="chapter" data-level="13" data-path="introduction-aux-glmm.html"><a href="introduction-aux-glmm.html"><i class="fa fa-check"></i><b>13</b> Introduction aux GLMM<span></span></a></li>
+<li class="chapter" data-level="14" data-path="choisir-la-distribution-des-erreurs.html"><a href="choisir-la-distribution-des-erreurs.html"><i class="fa fa-check"></i><b>14</b> Choisir la distribution des erreurs<span></span></a></li>
+<li class="chapter" data-level="15" data-path="glmm-poisson.html"><a href="glmm-poisson.html"><i class="fa fa-check"></i><b>15</b> GLMM Poisson<span></span></a></li>
+<li class="chapter" data-level="16" data-path="glmm-binomiale-négative.html"><a href="glmm-binomiale-négative.html"><i class="fa fa-check"></i><b>16</b> GLMM binomiale négative<span></span></a></li>
+<li class="chapter" data-level="17" data-path="glmm-poisson-lognormale.html"><a href="glmm-poisson-lognormale.html"><i class="fa fa-check"></i><b>17</b> GLMM Poisson-lognormale<span></span></a><ul>
+<li class="chapter" data-level="17.1" data-path="glmm-poisson-lognormale.html"><a href="glmm-poisson-lognormale.html#intercepts-aléatoires"><i class="fa fa-check"></i><b>17.1</b> Intercepts aléatoires<span></span></a></li>
+<li class="chapter" data-level="17.2" data-path="glmm-poisson-lognormale.html"><a href="glmm-poisson-lognormale.html#représentation-graphique-des-paramètres-du-modèle"><i class="fa fa-check"></i><b>17.2</b> Représentation graphique des paramètres du modèle<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="18" data-path="modèle-final.html"><a href="modèle-final.html"><i class="fa fa-check"></i><b>18</b> Modèle final</a><ul>
-<li class="chapter" data-level="18.1" data-path="modèle-final.html"><a href="modèle-final.html#défi-9"><i class="fa fa-check"></i><b>18.1</b> Défi 9</a></li>
+<li class="chapter" data-level="18" data-path="modèle-final.html"><a href="modèle-final.html"><i class="fa fa-check"></i><b>18</b> Modèle final<span></span></a><ul>
+<li class="chapter" data-level="18.1" data-path="modèle-final.html"><a href="modèle-final.html#défi-9"><i class="fa fa-check"></i><b>18.1</b> Défi 9<span></span></a></li>
 </ul></li>
-<li class="part"><span><b>Ressources additionnelles par LMM et GLMM</b></span></li>
-<li class="chapter" data-level="19" data-path="ressources-additionnelles.html"><a href="ressources-additionnelles.html"><i class="fa fa-check"></i><b>19</b> Ressources additionnelles</a></li>
-<li class="chapter" data-level="20" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>20</b> References</a></li>
+<li class="part"><span><b>Ressources additionnelles par LMM et GLMM<span></span></b></span></li>
+<li class="chapter" data-level="19" data-path="ressources-additionnelles.html"><a href="ressources-additionnelles.html"><i class="fa fa-check"></i><b>19</b> Ressources additionnelles<span></span></a></li>
+<li class="chapter" data-level="20" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>20</b> References<span></span></a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/qcbsRworkshops" target="blank">QCBS R Workshop Series</a></li>
 
@@ -250,21 +250,21 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <h1 class="title">Atelier 7: Modèles linéaires et généralisés linéaires mixtes</h1>
 <h2 class="subtitle"><em>Série d’ateliers R du CSBQ</em></h2>
 <p class="author"><em>Développé et entretenu par les contributeurs et les contributrices de la Série d’ateliers R du CSBQ<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</em></p>
-<p class="date"><em>2022-01-25 16:34:02</em></p>
+<p class="date"><em>2022-03-23 22:07:41</em></p>
 </div>
-<div id="préface" class="section level1 unnumbered">
-<h1>Préface</h1>
+<div id="préface" class="section level1 unnumbered hasAnchor">
+<h1>Préface<a href="index.html#préface" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>La <strong>Série d’ateliers R du CSBQ</strong> est une série de 10 ateliers qui guide les participants à travers les étapes nécessaires à l’utilisation de R pour un large éventail d’analyses statistiques pertinentes pour la recherche en biologie et en écologie. Ces ateliers en accès libre ont été créés par des membres du CSBQ, à la fois pour les membres du CSBQ et pour la communauté au sens large.</p>
 <p>Le contenu de cet atelier a été revu par plusieurs membres du CSBQ. Si vous souhaitez suggérer des modifications, veuillez contacter les coordinateurs de la série actuelle, dont la liste figure sur la page principale de Github</p>
-<div id="code-de-conduite" class="section level2">
-<h2><span class="header-section-number">0.1</span> Code de conduite</h2>
+<div id="code-de-conduite" class="section level2 hasAnchor">
+<h2><span class="header-section-number">0.1</span> Code de conduite<a href="index.html#code-de-conduite" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>La Série d’ateliers R du CSBQ et le Symposium R du CSBQ sont des lieux dédiés à fournir un environnement accueillant et favorable à toutes les personnes, indépendamment de leurs origines ou de leur identité.</p>
 <p>Les participants, les présentateurs et les organisateurs de la série d’ateliers et d’autres activités connexes acceptent le présent code de conduite lorsqu’ils assistent à des activités liées aux ateliers.</p>
 <p>Nous ne tolérons pas les comportements irrespectueux ou qui excluent, intimident ou gênent les autres.</p>
 <p>Nous ne tolérons pas la discrimination ou le harcèlement fondés sur des caractéristiques telles que, mais sans s’y limiter, l’identité et l’expression du genre, l’orientation sexuelle, le handicap, l’apparence physique, la taille du corps, la citoyenneté, la nationalité, les origines ethniques ou sociales, la grossesse, le statut familial, les informations génétiques, la religion ou les convictions (ou l’absence de celles-ci), l’appartenance à une minorité nationale, la propriété, l’âge, l’éducation, le statut socio-économique, les choix techniques et le niveau d’expérience.</p>
 <p>Il s’applique à tous les espaces gérés par l’atelier ou affiliés à celui-ci, y compris, mais sans s’y limiter, les ateliers, les listes de diffusion et les forums en ligne tels que GitHub, Slack et Twitter.</p>
-<div id="comportement-attendu" class="section level3">
-<h3><span class="header-section-number">0.1.1</span> Comportement attendu</h3>
+<div id="comportement-attendu" class="section level3 hasAnchor">
+<h3><span class="header-section-number">0.1.1</span> Comportement attendu<a href="index.html#comportement-attendu" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Tous les participants sont tenus de faire preuve de respect et de courtoisie envers les autres. Toutes les interactions doivent être professionnelles, quelle que soit la plateforme utilisée : en ligne ou en personne.</p>
 <p>Afin de favoriser un environnement d’apprentissage positif et professionnel, nous encourageons les types de comportements suivants dans tous les événements et plates-formes des ateliers :</p>
 <ul>
@@ -275,8 +275,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li>Faire preuve de courtoisie et de respect envers les autres membres de la communauté.</li>
 </ul>
 </div>
-<div id="comportements-inacceptables" class="section level3">
-<h3><span class="header-section-number">0.1.2</span> Comportements inacceptables</h3>
+<div id="comportements-inacceptables" class="section level3 hasAnchor">
+<h3><span class="header-section-number">0.1.2</span> Comportements inacceptables<a href="index.html#comportements-inacceptables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Voici quelques exemples de comportements inacceptables de la part des participants à tout événement ou plateforme d’atelier :</p>
 <ul>
 <li>les commentaires écrits ou verbaux qui ont pour effet d’exclure des personnes sur la base de leur appartenance à un groupe spécifique ;</li>
@@ -293,15 +293,15 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 </div>
 </div>
-<div id="contributeurs-et-contributrices" class="section level2">
-<h2><span class="header-section-number">0.2</span> Contributeurs et contributrices</h2>
+<div id="contributeurs-et-contributrices" class="section level2 hasAnchor">
+<h2><span class="header-section-number">0.2</span> Contributeurs et contributrices<a href="index.html#contributeurs-et-contributrices" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Développé à l’origine par :</p>
 <p>A contribué à modifier la présentation :</p>
 <p>Contribution avec des changements à la documentation écrite :</p>
 <p>Contribution en signalant des problèmes et en suggérant des modifications :</p>
 </div>
-<div id="contribuez-à-la-série" class="section level2">
-<h2><span class="header-section-number">0.3</span> Contribuez à la série!</h2>
+<div id="contribuez-à-la-série" class="section level2 hasAnchor">
+<h2><span class="header-section-number">0.3</span> Contribuez à la série!<a href="index.html#contribuez-à-la-série" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>En construction.</p>
 
 </div>
