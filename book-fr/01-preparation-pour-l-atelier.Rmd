@@ -20,6 +20,23 @@ Dans cet atelier, vous apprendrez à déterminer si vous devez utiliser un modè
 
 # Préparez-vous pour cet atelier
 
+```{r eval=FALSE, echo=FALSE, purl=TRUE}
+##### Avis ###
+###                                                                             #
+### Ceci est un script généré automatiquement basé sur les morceaux de code du  #
+### livre pour cet atelier.                                                     #
+###                                                                             #
+### Il est minimalement annoté pour permettre aux participants de fournir leurs #
+### commentaires : une pratique que nous encourageons vivement.                 #
+###                                                                             #
+### Notez que les solutions aux défis sont également incluses dans ce script.   #
+### Lorsque vous résolvez les défis par vous-méme, essayez de ne pas parcourir  #
+### le code et de regarder les solutions.                                       #
+###                                                                             # 
+### Bon codage !                                                               #
+
+```
+
 Pour vous préparer pour cet atelier, téléchargez et installez les dernières versions de RStudio et de `R`. Télécharger également les données et quelques fonctions additionnelles que nous utiliserons au cours de cet atelier:
 
 -    [Script R ](https://qcbsrworkshops.github.io/workshop07/book-fr/workshop07-script-fr.R)
