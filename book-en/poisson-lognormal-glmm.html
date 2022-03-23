@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 17 Poisson-lognormal GLMM | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)</title>
   <meta name="description" content="Linear and generalized linear mixed models (LMM and GLMM)" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.25 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 17 Poisson-lognormal GLMM | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)" />
   <meta property="og:type" content="book" />
-  <meta property="og:url" content="https://github.com/qcbsRworkshops/" />
   <meta property="og:image" content="https://github.com/qcbsRworkshops//assets/images/logo/csbq_logo_accueil.png" />
   <meta property="og:description" content="Linear and generalized linear mixed models (LMM and GLMM)" />
   <meta name="github-repo" content="qcbsRworkshops/workshop09" />
@@ -50,8 +49,9 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -136,81 +136,81 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <link rel="icon" type="image/png" href="assets/images/favicon.ico"/>
 
 <li class="divider"></li>
-<li class="part"><span><b>QCBS R Workshop Series</b></span></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
-<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#code-of-conduct"><i class="fa fa-check"></i><b>0.1</b> Code of conduct</a><ul>
-<li class="chapter" data-level="0.1.1" data-path="index.html"><a href="index.html#expected-behaviour"><i class="fa fa-check"></i><b>0.1.1</b> Expected behaviour</a></li>
-<li class="chapter" data-level="0.1.2" data-path="index.html"><a href="index.html#unacceptable-behaviour"><i class="fa fa-check"></i><b>0.1.2</b> Unacceptable behaviour</a></li>
+<li class="part"><span><b>QCBS R Workshop Series<span></span></b></span></li>
+<li><a href="index.html#preface">Preface<span></span></a><ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>0.1</b> Code of conduct<span></span></a><ul>
+<li class="chapter" data-level="0.1.1" data-path="index.html"><a href="index.html#expected-behaviour"><i class="fa fa-check"></i><b>0.1.1</b> Expected behaviour<span></span></a></li>
+<li class="chapter" data-level="0.1.2" data-path="index.html"><a href="index.html#unacceptable-behaviour"><i class="fa fa-check"></i><b>0.1.2</b> Unacceptable behaviour<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#contributors"><i class="fa fa-check"></i><b>0.2</b> Contributors</a></li>
-<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#contributing"><i class="fa fa-check"></i><b>0.3</b> Contributing</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#contributors"><i class="fa fa-check"></i><b>0.2</b> Contributors<span></span></a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#contributing"><i class="fa fa-check"></i><b>0.3</b> Contributing<span></span></a></li>
 </ul></li>
-<li class="part"><span><b>Linear mixed models (LMM) in <code>R</code></b></span></li>
-<li class="chapter" data-level="1" data-path="learning-objectives.html"><a href="learning-objectives.html"><i class="fa fa-check"></i><b>1</b> Learning objectives</a></li>
-<li class="chapter" data-level="2" data-path="preparing-for-the-workshop.html"><a href="preparing-for-the-workshop.html"><i class="fa fa-check"></i><b>2</b> Preparing for the workshop</a></li>
-<li class="chapter" data-level="3" data-path="why-choose-mixed-models.html"><a href="why-choose-mixed-models.html"><i class="fa fa-check"></i><b>3</b> Why choose mixed models?</a></li>
-<li class="chapter" data-level="4" data-path="starting-with-a-question.html"><a href="starting-with-a-question.html"><i class="fa fa-check"></i><b>4</b> Starting with a question</a><ul>
-<li class="chapter" data-level="4.1" data-path="starting-with-a-question.html"><a href="starting-with-a-question.html#challenge-1"><i class="fa fa-check"></i><b>4.1</b> Challenge 1</a></li>
+<li class="part"><span><b>Linear mixed models (LMM) in <code>R</code><span></span></b></span></li>
+<li class="chapter" data-level="1" data-path="learning-objectives.html"><a href="learning-objectives.html"><i class="fa fa-check"></i><b>1</b> Learning objectives<span></span></a></li>
+<li class="chapter" data-level="2" data-path="preparing-for-the-workshop.html"><a href="preparing-for-the-workshop.html"><i class="fa fa-check"></i><b>2</b> Preparing for the workshop<span></span></a></li>
+<li class="chapter" data-level="3" data-path="why-choose-mixed-models.html"><a href="why-choose-mixed-models.html"><i class="fa fa-check"></i><b>3</b> Why choose mixed models?<span></span></a></li>
+<li class="chapter" data-level="4" data-path="starting-with-a-question.html"><a href="starting-with-a-question.html"><i class="fa fa-check"></i><b>4</b> Starting with a question<span></span></a><ul>
+<li class="chapter" data-level="4.1" data-path="starting-with-a-question.html"><a href="starting-with-a-question.html#challenge-1"><i class="fa fa-check"></i><b>4.1</b> Challenge 1<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html"><i class="fa fa-check"></i><b>5</b> Analyzing the data</a><ul>
-<li class="chapter" data-level="5.1" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#option-1-separate"><i class="fa fa-check"></i><b>5.1</b> Option 1: Separate</a></li>
-<li class="chapter" data-level="5.2" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#option-2-lump-everything-together"><i class="fa fa-check"></i><b>5.2</b> Option 2: Lump everything together</a></li>
-<li class="chapter" data-level="5.3" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#option-3-is-there-a-third-option"><i class="fa fa-check"></i><b>5.3</b> Option 3: Is there a third option?</a></li>
+<li class="chapter" data-level="5" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html"><i class="fa fa-check"></i><b>5</b> Analyzing the data<span></span></a><ul>
+<li class="chapter" data-level="5.1" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#option-1-separate"><i class="fa fa-check"></i><b>5.1</b> Option 1: Separate<span></span></a></li>
+<li class="chapter" data-level="5.2" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#option-2-lump-everything-together"><i class="fa fa-check"></i><b>5.2</b> Option 2: Lump everything together<span></span></a></li>
+<li class="chapter" data-level="5.3" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#option-3-is-there-a-third-option"><i class="fa fa-check"></i><b>5.3</b> Option 3: Is there a third option?<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="fixed-vs.-random-effects.html"><a href="fixed-vs.-random-effects.html"><i class="fa fa-check"></i><b>6</b> Fixed vs. random effects</a><ul>
-<li class="chapter" data-level="6.1" data-path="fixed-vs.-random-effects.html"><a href="fixed-vs.-random-effects.html#fixed-effects-deterministic-processes"><i class="fa fa-check"></i><b>6.1</b> Fixed effects: deterministic processes</a></li>
-<li class="chapter" data-level="6.2" data-path="fixed-vs.-random-effects.html"><a href="fixed-vs.-random-effects.html#random-effects-stochastic-processes"><i class="fa fa-check"></i><b>6.2</b> Random effects: stochastic processes</a></li>
+<li class="chapter" data-level="6" data-path="fixed-vs.-random-effects.html"><a href="fixed-vs.-random-effects.html"><i class="fa fa-check"></i><b>6</b> Fixed vs. random effects<span></span></a><ul>
+<li class="chapter" data-level="6.1" data-path="fixed-vs.-random-effects.html"><a href="fixed-vs.-random-effects.html#fixed-effects-deterministic-processes"><i class="fa fa-check"></i><b>6.1</b> Fixed effects: deterministic processes<span></span></a></li>
+<li class="chapter" data-level="6.2" data-path="fixed-vs.-random-effects.html"><a href="fixed-vs.-random-effects.html#random-effects-stochastic-processes"><i class="fa fa-check"></i><b>6.2</b> Random effects: stochastic processes<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="how-do-lmms-work.html"><a href="how-do-lmms-work.html"><i class="fa fa-check"></i><b>7</b> How do LMMs work?</a><ul>
-<li class="chapter" data-level="7.1" data-path="how-do-lmms-work.html"><a href="how-do-lmms-work.html#parameters-are-varied"><i class="fa fa-check"></i><b>7.1</b> Parameters are varied</a><ul>
-<li class="chapter" data-level="" data-path="how-do-lmms-work.html"><a href="how-do-lmms-work.html#intercepts"><i class="fa fa-check"></i>Intercepts:</a></li>
-<li class="chapter" data-level="" data-path="how-do-lmms-work.html"><a href="how-do-lmms-work.html#slopes"><i class="fa fa-check"></i>Slopes:</a></li>
+<li class="chapter" data-level="7" data-path="how-do-lmms-work.html"><a href="how-do-lmms-work.html"><i class="fa fa-check"></i><b>7</b> How do LMMs work?<span></span></a><ul>
+<li class="chapter" data-level="7.1" data-path="how-do-lmms-work.html"><a href="how-do-lmms-work.html#parameters-are-varied"><i class="fa fa-check"></i><b>7.1</b> Parameters are varied<span></span></a><ul>
+<li><a href="how-do-lmms-work.html#intercepts">Intercepts:<span></span></a></li>
+<li><a href="how-do-lmms-work.html#slopes">Slopes:<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="how-do-lmms-work.html"><a href="how-do-lmms-work.html#data-structure-is-taken-into-account"><i class="fa fa-check"></i><b>7.2</b> Data structure is taken into account</a></li>
-<li class="chapter" data-level="7.3" data-path="how-do-lmms-work.html"><a href="how-do-lmms-work.html#challenge-2"><i class="fa fa-check"></i><b>7.3</b> Challenge 2</a></li>
+<li class="chapter" data-level="7.2" data-path="how-do-lmms-work.html"><a href="how-do-lmms-work.html#data-structure-is-taken-into-account"><i class="fa fa-check"></i><b>7.2</b> Data structure is taken into account<span></span></a></li>
+<li class="chapter" data-level="7.3" data-path="how-do-lmms-work.html"><a href="how-do-lmms-work.html#challenge-2"><i class="fa fa-check"></i><b>7.3</b> Challenge 2<span></span></a></li>
 </ul></li>
-<li class="part"><span><b>Implementing LMM in <code>R</code></b></span></li>
-<li class="chapter" data-level="8" data-path="mixed-model-protocol.html"><a href="mixed-model-protocol.html"><i class="fa fa-check"></i><b>8</b> Mixed model protocol</a></li>
-<li class="chapter" data-level="9" data-path="step-1.-a-priori-model-building.html"><a href="step-1.-a-priori-model-building.html"><i class="fa fa-check"></i><b>9</b> Step 1. <em>A priori</em> model building</a><ul>
-<li class="chapter" data-level="9.1" data-path="step-1.-a-priori-model-building.html"><a href="step-1.-a-priori-model-building.html#check-data-structure"><i class="fa fa-check"></i><b>9.1</b> Check data structure</a></li>
-<li class="chapter" data-level="9.2" data-path="step-1.-a-priori-model-building.html"><a href="step-1.-a-priori-model-building.html#check-collinearity"><i class="fa fa-check"></i><b>9.2</b> Check collinearity</a></li>
-<li class="chapter" data-level="9.3" data-path="step-1.-a-priori-model-building.html"><a href="step-1.-a-priori-model-building.html#challenge-3"><i class="fa fa-check"></i><b>9.3</b> Challenge 3</a></li>
-<li class="chapter" data-level="9.4" data-path="step-1.-a-priori-model-building.html"><a href="step-1.-a-priori-model-building.html#consider-scale"><i class="fa fa-check"></i><b>9.4</b> Consider scale</a></li>
-<li class="chapter" data-level="9.5" data-path="step-1.-a-priori-model-building.html"><a href="step-1.-a-priori-model-building.html#do-you-need-a-lmm"><i class="fa fa-check"></i><b>9.5</b> Do you need a LMM?</a></li>
+<li class="part"><span><b>Implementing LMM in <code>R</code><span></span></b></span></li>
+<li class="chapter" data-level="8" data-path="mixed-model-protocol.html"><a href="mixed-model-protocol.html"><i class="fa fa-check"></i><b>8</b> Mixed model protocol<span></span></a></li>
+<li class="chapter" data-level="9" data-path="step-1.-a-priori-model-building.html"><a href="step-1.-a-priori-model-building.html"><i class="fa fa-check"></i><b>9</b> Step 1. <em>A priori</em> model building<span></span></a><ul>
+<li class="chapter" data-level="9.1" data-path="step-1.-a-priori-model-building.html"><a href="step-1.-a-priori-model-building.html#check-data-structure"><i class="fa fa-check"></i><b>9.1</b> Check data structure<span></span></a></li>
+<li class="chapter" data-level="9.2" data-path="step-1.-a-priori-model-building.html"><a href="step-1.-a-priori-model-building.html#check-collinearity"><i class="fa fa-check"></i><b>9.2</b> Check collinearity<span></span></a></li>
+<li class="chapter" data-level="9.3" data-path="step-1.-a-priori-model-building.html"><a href="step-1.-a-priori-model-building.html#challenge-3"><i class="fa fa-check"></i><b>9.3</b> Challenge 3<span></span></a></li>
+<li class="chapter" data-level="9.4" data-path="step-1.-a-priori-model-building.html"><a href="step-1.-a-priori-model-building.html#consider-scale"><i class="fa fa-check"></i><b>9.4</b> Consider scale<span></span></a></li>
+<li class="chapter" data-level="9.5" data-path="step-1.-a-priori-model-building.html"><a href="step-1.-a-priori-model-building.html#do-you-need-a-lmm"><i class="fa fa-check"></i><b>9.5</b> Do you need a LMM?<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="step-2.-code-potential-models-and-model-selection.html"><a href="step-2.-code-potential-models-and-model-selection.html"><i class="fa fa-check"></i><b>10</b> Step 2. Code potential models and model selection</a><ul>
-<li class="chapter" data-level="10.1" data-path="step-2.-code-potential-models-and-model-selection.html"><a href="step-2.-code-potential-models-and-model-selection.html#estimation-methods"><i class="fa fa-check"></i><b>10.1</b> Estimation methods</a></li>
-<li class="chapter" data-level="10.2" data-path="step-2.-code-potential-models-and-model-selection.html"><a href="step-2.-code-potential-models-and-model-selection.html#different-model-structures"><i class="fa fa-check"></i><b>10.2</b> Different model structures</a></li>
-<li class="chapter" data-level="10.3" data-path="step-2.-code-potential-models-and-model-selection.html"><a href="step-2.-code-potential-models-and-model-selection.html#challenge-4"><i class="fa fa-check"></i><b>10.3</b> Challenge 4</a></li>
-<li class="chapter" data-level="10.4" data-path="step-2.-code-potential-models-and-model-selection.html"><a href="step-2.-code-potential-models-and-model-selection.html#challenge-5"><i class="fa fa-check"></i><b>10.4</b> Challenge 5</a></li>
-<li class="chapter" data-level="10.5" data-path="step-2.-code-potential-models-and-model-selection.html"><a href="step-2.-code-potential-models-and-model-selection.html#comparing-models"><i class="fa fa-check"></i><b>10.5</b> Comparing models</a></li>
+<li class="chapter" data-level="10" data-path="step-2.-code-potential-models-and-model-selection.html"><a href="step-2.-code-potential-models-and-model-selection.html"><i class="fa fa-check"></i><b>10</b> Step 2. Code potential models and model selection<span></span></a><ul>
+<li class="chapter" data-level="10.1" data-path="step-2.-code-potential-models-and-model-selection.html"><a href="step-2.-code-potential-models-and-model-selection.html#estimation-methods"><i class="fa fa-check"></i><b>10.1</b> Estimation methods<span></span></a></li>
+<li class="chapter" data-level="10.2" data-path="step-2.-code-potential-models-and-model-selection.html"><a href="step-2.-code-potential-models-and-model-selection.html#different-model-structures"><i class="fa fa-check"></i><b>10.2</b> Different model structures<span></span></a></li>
+<li class="chapter" data-level="10.3" data-path="step-2.-code-potential-models-and-model-selection.html"><a href="step-2.-code-potential-models-and-model-selection.html#challenge-4"><i class="fa fa-check"></i><b>10.3</b> Challenge 4<span></span></a></li>
+<li class="chapter" data-level="10.4" data-path="step-2.-code-potential-models-and-model-selection.html"><a href="step-2.-code-potential-models-and-model-selection.html#challenge-5"><i class="fa fa-check"></i><b>10.4</b> Challenge 5<span></span></a></li>
+<li class="chapter" data-level="10.5" data-path="step-2.-code-potential-models-and-model-selection.html"><a href="step-2.-code-potential-models-and-model-selection.html#comparing-models"><i class="fa fa-check"></i><b>10.5</b> Comparing models<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="step-3.-model-validation.html"><a href="step-3.-model-validation.html"><i class="fa fa-check"></i><b>11</b> Step 3. Model validation</a><ul>
-<li class="chapter" data-level="11.1" data-path="step-3.-model-validation.html"><a href="step-3.-model-validation.html#check-the-homogeneity-of-the-variance"><i class="fa fa-check"></i><b>11.1</b> 1. Check the homogeneity of the variance</a></li>
-<li class="chapter" data-level="11.2" data-path="step-3.-model-validation.html"><a href="step-3.-model-validation.html#check-the-independence-of-the-model-residuals-with-each-covariate"><i class="fa fa-check"></i><b>11.2</b> 2. Check the independence of the model residuals with each covariate</a></li>
-<li class="chapter" data-level="11.3" data-path="step-3.-model-validation.html"><a href="step-3.-model-validation.html#check-the-normality-of-the-model-residuals"><i class="fa fa-check"></i><b>11.3</b> 3. Check the normality of the model residuals</a></li>
+<li class="chapter" data-level="11" data-path="step-3.-model-validation.html"><a href="step-3.-model-validation.html"><i class="fa fa-check"></i><b>11</b> Step 3. Model validation<span></span></a><ul>
+<li class="chapter" data-level="11.1" data-path="step-3.-model-validation.html"><a href="step-3.-model-validation.html#check-the-homogeneity-of-the-variance"><i class="fa fa-check"></i><b>11.1</b> 1. Check the homogeneity of the variance<span></span></a></li>
+<li class="chapter" data-level="11.2" data-path="step-3.-model-validation.html"><a href="step-3.-model-validation.html#check-the-independence-of-the-model-residuals-with-each-covariate"><i class="fa fa-check"></i><b>11.2</b> 2. Check the independence of the model residuals with each covariate<span></span></a></li>
+<li class="chapter" data-level="11.3" data-path="step-3.-model-validation.html"><a href="step-3.-model-validation.html#check-the-normality-of-the-model-residuals"><i class="fa fa-check"></i><b>11.3</b> 3. Check the normality of the model residuals<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="step-4.-interpretation-and-visualization.html"><a href="step-4.-interpretation-and-visualization.html"><i class="fa fa-check"></i><b>12</b> Step 4. Interpretation and visualization</a><ul>
-<li class="chapter" data-level="12.1" data-path="step-4.-interpretation-and-visualization.html"><a href="step-4.-interpretation-and-visualization.html#interpreting-our-model"><i class="fa fa-check"></i><b>12.1</b> Interpreting our model</a></li>
-<li class="chapter" data-level="12.2" data-path="step-4.-interpretation-and-visualization.html"><a href="step-4.-interpretation-and-visualization.html#challenge-6"><i class="fa fa-check"></i><b>12.2</b> Challenge 6</a></li>
-<li class="chapter" data-level="12.3" data-path="step-4.-interpretation-and-visualization.html"><a href="step-4.-interpretation-and-visualization.html#challenge-7"><i class="fa fa-check"></i><b>12.3</b> Challenge 7</a></li>
-<li class="chapter" data-level="12.4" data-path="step-4.-interpretation-and-visualization.html"><a href="step-4.-interpretation-and-visualization.html#challenge-8"><i class="fa fa-check"></i><b>12.4</b> Challenge 8</a></li>
+<li class="chapter" data-level="12" data-path="step-4.-interpretation-and-visualization.html"><a href="step-4.-interpretation-and-visualization.html"><i class="fa fa-check"></i><b>12</b> Step 4. Interpretation and visualization<span></span></a><ul>
+<li class="chapter" data-level="12.1" data-path="step-4.-interpretation-and-visualization.html"><a href="step-4.-interpretation-and-visualization.html#interpreting-our-model"><i class="fa fa-check"></i><b>12.1</b> Interpreting our model<span></span></a></li>
+<li class="chapter" data-level="12.2" data-path="step-4.-interpretation-and-visualization.html"><a href="step-4.-interpretation-and-visualization.html#challenge-6"><i class="fa fa-check"></i><b>12.2</b> Challenge 6<span></span></a></li>
+<li class="chapter" data-level="12.3" data-path="step-4.-interpretation-and-visualization.html"><a href="step-4.-interpretation-and-visualization.html#challenge-7"><i class="fa fa-check"></i><b>12.3</b> Challenge 7<span></span></a></li>
+<li class="chapter" data-level="12.4" data-path="step-4.-interpretation-and-visualization.html"><a href="step-4.-interpretation-and-visualization.html#challenge-8"><i class="fa fa-check"></i><b>12.4</b> Challenge 8<span></span></a></li>
 </ul></li>
-<li class="part"><span><b>Generalized linear mixed models (GLMM) in <code>R</code></b></span></li>
-<li class="chapter" data-level="13" data-path="introduction-to-glmm.html"><a href="introduction-to-glmm.html"><i class="fa fa-check"></i><b>13</b> Introduction to GLMM</a></li>
-<li class="chapter" data-level="14" data-path="choose-an-error-distribution.html"><a href="choose-an-error-distribution.html"><i class="fa fa-check"></i><b>14</b> Choose an error distribution</a></li>
-<li class="chapter" data-level="15" data-path="poisson-glmm.html"><a href="poisson-glmm.html"><i class="fa fa-check"></i><b>15</b> Poisson GLMM</a></li>
-<li class="chapter" data-level="16" data-path="negative-binomial-glmm.html"><a href="negative-binomial-glmm.html"><i class="fa fa-check"></i><b>16</b> Negative binomial GLMM</a></li>
-<li class="chapter" data-level="17" data-path="poisson-lognormal-glmm.html"><a href="poisson-lognormal-glmm.html"><i class="fa fa-check"></i><b>17</b> Poisson-lognormal GLMM</a><ul>
-<li class="chapter" data-level="17.1" data-path="poisson-lognormal-glmm.html"><a href="poisson-lognormal-glmm.html#random-intercepts"><i class="fa fa-check"></i><b>17.1</b> Random intercepts</a></li>
-<li class="chapter" data-level="17.2" data-path="poisson-lognormal-glmm.html"><a href="poisson-lognormal-glmm.html#parameter-plots"><i class="fa fa-check"></i><b>17.2</b> Parameter plots</a></li>
+<li class="part"><span><b>Generalized linear mixed models (GLMM) in <code>R</code><span></span></b></span></li>
+<li class="chapter" data-level="13" data-path="introduction-to-glmm.html"><a href="introduction-to-glmm.html"><i class="fa fa-check"></i><b>13</b> Introduction to GLMM<span></span></a></li>
+<li class="chapter" data-level="14" data-path="choose-an-error-distribution.html"><a href="choose-an-error-distribution.html"><i class="fa fa-check"></i><b>14</b> Choose an error distribution<span></span></a></li>
+<li class="chapter" data-level="15" data-path="poisson-glmm.html"><a href="poisson-glmm.html"><i class="fa fa-check"></i><b>15</b> Poisson GLMM<span></span></a></li>
+<li class="chapter" data-level="16" data-path="negative-binomial-glmm.html"><a href="negative-binomial-glmm.html"><i class="fa fa-check"></i><b>16</b> Negative binomial GLMM<span></span></a></li>
+<li class="chapter" data-level="17" data-path="poisson-lognormal-glmm.html"><a href="poisson-lognormal-glmm.html"><i class="fa fa-check"></i><b>17</b> Poisson-lognormal GLMM<span></span></a><ul>
+<li class="chapter" data-level="17.1" data-path="poisson-lognormal-glmm.html"><a href="poisson-lognormal-glmm.html#random-intercepts"><i class="fa fa-check"></i><b>17.1</b> Random intercepts<span></span></a></li>
+<li class="chapter" data-level="17.2" data-path="poisson-lognormal-glmm.html"><a href="poisson-lognormal-glmm.html#parameter-plots"><i class="fa fa-check"></i><b>17.2</b> Parameter plots<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="18" data-path="final-model.html"><a href="final-model.html"><i class="fa fa-check"></i><b>18</b> Final model</a><ul>
-<li class="chapter" data-level="18.1" data-path="final-model.html"><a href="final-model.html#challenge-9"><i class="fa fa-check"></i><b>18.1</b> Challenge 9</a></li>
+<li class="chapter" data-level="18" data-path="final-model.html"><a href="final-model.html"><i class="fa fa-check"></i><b>18</b> Final model<span></span></a><ul>
+<li class="chapter" data-level="18.1" data-path="final-model.html"><a href="final-model.html#challenge-9"><i class="fa fa-check"></i><b>18.1</b> Challenge 9<span></span></a></li>
 </ul></li>
-<li class="part"><span><b>Additional LMM and GLMM resources</b></span></li>
-<li class="chapter" data-level="19" data-path="additional-resources.html"><a href="additional-resources.html"><i class="fa fa-check"></i><b>19</b> Additional resources</a></li>
-<li class="chapter" data-level="20" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>20</b> References</a></li>
+<li class="part"><span><b>Additional LMM and GLMM resources<span></span></b></span></li>
+<li class="chapter" data-level="19" data-path="additional-resources.html"><a href="additional-resources.html"><i class="fa fa-check"></i><b>19</b> Additional resources<span></span></a></li>
+<li class="chapter" data-level="20" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>20</b> References<span></span></a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/qcbsRworkshops" target="blank">QCBS R Workshop Series</a></li>
 
@@ -246,8 +246,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
   <img class= "hero-image" src="assets/images/jean-philippe-delberghe-75xPHEQBmvA-unsplash_hero_image.jpg">
 </div>
 --!>
-<div id="poisson-lognormal-glmm" class="section level1">
-<h1><span class="header-section-number">Chapter 17</span> Poisson-lognormal GLMM</h1>
+<div id="poisson-lognormal-glmm" class="section level1 hasAnchor">
+<h1><span class="header-section-number">Chapter 17</span> Poisson-lognormal GLMM<a href="poisson-lognormal-glmm.html#poisson-lognormal-glmm" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>A second option for a distribution where the variance increases more rapidly with the mean is the <strong>Poisson-lognormal</strong> distribution. This model effectively places a lognormal prior on <span class="math inline">\(εi\)</span>.</p>
 <p>A Poisson-lognormal distribution with mean <span class="math inline">\(µ\)</span> and lognormal prior variance <span class="math inline">\(σ2\)</span> has variance:</p>
 <p><span class="math inline">\(var(y) = µ + µ2 [exp(σ2) - 1]\)</span></p>
@@ -275,8 +275,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="poisson-lognormal-glmm.html#cb85-1"></a><span class="co"># Ratio now meets our criterion, thus, &lt; 1</span></span></code></pre></div>
 <p><strong>Ratio is not &lt;1 and meets our criterion!</strong></p>
 <hr />
-<div id="random-intercepts" class="section level2">
-<h2><span class="header-section-number">17.1</span> Random intercepts</h2>
+<div id="random-intercepts" class="section level2 hasAnchor">
+<h2><span class="header-section-number">17.1</span> Random intercepts<a href="poisson-lognormal-glmm.html#random-intercepts" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Now that we have the appropriate error distribution, we can test the importance of the random intercepts (for population and genotype) by comparing nested models <strong>with</strong> and <strong>without</strong> the random effects of interest using either:</p>
 <ul>
 <li><p><em>1. An information theoretic approach (such as, Akaike Information Criterion; AIC)</em>, which examines several competing hypotheses (models) simultaneously to identify the model with the highest predictive power given the data. As before, we will use the AICc to correct for small sample sizes.</p></li>
@@ -321,8 +321,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>The model without the random intercept for genotype is within 2 AICc units of the full model, which indicates that they are equally plausible (i.e., little evidence for including a random intercept for genotype). However, when using the Likelihood approach, and keeping in mind the boundary effect (p-values are inflated by a factor of 2), we note that p « 0.05 in both anova tests. <strong>Thus the model with both random terms (mpl1) is selected.</strong></p>
 <hr />
 </div>
-<div id="parameter-plots" class="section level2">
-<h2><span class="header-section-number">17.2</span> Parameter plots</h2>
+<div id="parameter-plots" class="section level2 hasAnchor">
+<h2><span class="header-section-number">17.2</span> Parameter plots<a href="poisson-lognormal-glmm.html#parameter-plots" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><strong>Now that we’ve chosen our model, let’s visualize the model parameters with parameter plots.</strong></p>
 <p>A graphical representation of the model parameters can be obtained using the <code>coefplot2()</code> function from the <code>coefplot2</code> package :</p>
 <p><em>Note: This package is not on CRAN! We install it from GitHub using the remotes package.</em></p>
@@ -333,14 +333,14 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="poisson-lognormal-glmm.html#cb95-1"></a><span class="kw">library</span>(coefplot2)</span></code></pre></div>
 <div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="poisson-lognormal-glmm.html#cb96-1"></a><span class="co"># Variance terms</span></span>
 <span id="cb96-2"><a href="poisson-lognormal-glmm.html#cb96-2"></a><span class="kw">coefplot2</span>(mpl1, <span class="dt">ptype =</span> <span class="st">&quot;vcov&quot;</span>, <span class="dt">intercept =</span> <span class="ot">TRUE</span>, <span class="dt">main =</span> <span class="st">&quot;Random effect variance&quot;</span>)</span></code></pre></div>
-<p><img src="book-en_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
+<p><img src="book-en_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
 <p>Here we can see that some random effects exhibit greater variance than others.</p>
 <div class="explanation">
 <p>The random effect variance (σ2i) represents the mean random effect variance of the model. Since this variance reflects the “average” random effects variance for mixed models, it is also appropriate for models with more complex random effects structures, like random slopes or nested random effects.</p>
 </div>
 <div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="poisson-lognormal-glmm.html#cb97-1"></a><span class="co"># Fixed effects</span></span>
 <span id="cb97-2"><a href="poisson-lognormal-glmm.html#cb97-2"></a><span class="kw">coefplot2</span>(mpl1, <span class="dt">intercept =</span> <span class="ot">TRUE</span>, <span class="dt">main =</span> <span class="st">&quot;Fixed effect coefficient&quot;</span>)</span></code></pre></div>
-<p><img src="book-en_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
+<p><img src="book-en_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
 <div class="explanation">
 <p>The fixed effects variance (σ2f) is the variance of the matrix-multiplication β∗X (parameter vector by model matrix).</p>
 </div>
@@ -355,7 +355,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb98-5"><a href="poisson-lognormal-glmm.html#cb98-5"></a>d2 &lt;-<span class="st"> </span><span class="kw">dotplot</span>(r2, <span class="dt">par.settings =</span> pp)</span>
 <span id="cb98-6"><a href="poisson-lognormal-glmm.html#cb98-6"></a></span>
 <span id="cb98-7"><a href="poisson-lognormal-glmm.html#cb98-7"></a><span class="kw">grid.arrange</span>(d2<span class="op">$</span>gen, d2<span class="op">$</span>popu, <span class="dt">nrow =</span> <span class="dv">1</span>)</span></code></pre></div>
-<p><img src="book-en_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
+<p><img src="book-en_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
 <p>From this plot, we observe differences <strong>among population</strong>, where Spanish populations (SP) have larger values than Swedish (SW) or Dutch (NL) populations.</p>
 <p>We also observe mild differences <strong>among genotypes</strong>, where difference among genotypes seem to be largely driven by genotype 34.</p>
 

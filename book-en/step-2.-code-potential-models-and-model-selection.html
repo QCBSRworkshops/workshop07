@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 10 Step 2. Code potential models and model selection | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)</title>
   <meta name="description" content="Linear and generalized linear mixed models (LMM and GLMM)" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.25 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 10 Step 2. Code potential models and model selection | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)" />
   <meta property="og:type" content="book" />
-  <meta property="og:url" content="https://github.com/qcbsRworkshops/" />
   <meta property="og:image" content="https://github.com/qcbsRworkshops//assets/images/logo/csbq_logo_accueil.png" />
   <meta property="og:description" content="Linear and generalized linear mixed models (LMM and GLMM)" />
   <meta name="github-repo" content="qcbsRworkshops/workshop09" />
@@ -50,8 +49,9 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -136,81 +136,81 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <link rel="icon" type="image/png" href="assets/images/favicon.ico"/>
 
 <li class="divider"></li>
-<li class="part"><span><b>QCBS R Workshop Series</b></span></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
-<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#code-of-conduct"><i class="fa fa-check"></i><b>0.1</b> Code of conduct</a><ul>
-<li class="chapter" data-level="0.1.1" data-path="index.html"><a href="index.html#expected-behaviour"><i class="fa fa-check"></i><b>0.1.1</b> Expected behaviour</a></li>
-<li class="chapter" data-level="0.1.2" data-path="index.html"><a href="index.html#unacceptable-behaviour"><i class="fa fa-check"></i><b>0.1.2</b> Unacceptable behaviour</a></li>
+<li class="part"><span><b>QCBS R Workshop Series<span></span></b></span></li>
+<li><a href="index.html#preface">Preface<span></span></a><ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>0.1</b> Code of conduct<span></span></a><ul>
+<li class="chapter" data-level="0.1.1" data-path="index.html"><a href="index.html#expected-behaviour"><i class="fa fa-check"></i><b>0.1.1</b> Expected behaviour<span></span></a></li>
+<li class="chapter" data-level="0.1.2" data-path="index.html"><a href="index.html#unacceptable-behaviour"><i class="fa fa-check"></i><b>0.1.2</b> Unacceptable behaviour<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#contributors"><i class="fa fa-check"></i><b>0.2</b> Contributors</a></li>
-<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#contributing"><i class="fa fa-check"></i><b>0.3</b> Contributing</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#contributors"><i class="fa fa-check"></i><b>0.2</b> Contributors<span></span></a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#contributing"><i class="fa fa-check"></i><b>0.3</b> Contributing<span></span></a></li>
 </ul></li>
-<li class="part"><span><b>Linear mixed models (LMM) in <code>R</code></b></span></li>
-<li class="chapter" data-level="1" data-path="learning-objectives.html"><a href="learning-objectives.html"><i class="fa fa-check"></i><b>1</b> Learning objectives</a></li>
-<li class="chapter" data-level="2" data-path="preparing-for-the-workshop.html"><a href="preparing-for-the-workshop.html"><i class="fa fa-check"></i><b>2</b> Preparing for the workshop</a></li>
-<li class="chapter" data-level="3" data-path="why-choose-mixed-models.html"><a href="why-choose-mixed-models.html"><i class="fa fa-check"></i><b>3</b> Why choose mixed models?</a></li>
-<li class="chapter" data-level="4" data-path="starting-with-a-question.html"><a href="starting-with-a-question.html"><i class="fa fa-check"></i><b>4</b> Starting with a question</a><ul>
-<li class="chapter" data-level="4.1" data-path="starting-with-a-question.html"><a href="starting-with-a-question.html#challenge-1"><i class="fa fa-check"></i><b>4.1</b> Challenge 1</a></li>
+<li class="part"><span><b>Linear mixed models (LMM) in <code>R</code><span></span></b></span></li>
+<li class="chapter" data-level="1" data-path="learning-objectives.html"><a href="learning-objectives.html"><i class="fa fa-check"></i><b>1</b> Learning objectives<span></span></a></li>
+<li class="chapter" data-level="2" data-path="preparing-for-the-workshop.html"><a href="preparing-for-the-workshop.html"><i class="fa fa-check"></i><b>2</b> Preparing for the workshop<span></span></a></li>
+<li class="chapter" data-level="3" data-path="why-choose-mixed-models.html"><a href="why-choose-mixed-models.html"><i class="fa fa-check"></i><b>3</b> Why choose mixed models?<span></span></a></li>
+<li class="chapter" data-level="4" data-path="starting-with-a-question.html"><a href="starting-with-a-question.html"><i class="fa fa-check"></i><b>4</b> Starting with a question<span></span></a><ul>
+<li class="chapter" data-level="4.1" data-path="starting-with-a-question.html"><a href="starting-with-a-question.html#challenge-1"><i class="fa fa-check"></i><b>4.1</b> Challenge 1<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html"><i class="fa fa-check"></i><b>5</b> Analyzing the data</a><ul>
-<li class="chapter" data-level="5.1" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#option-1-separate"><i class="fa fa-check"></i><b>5.1</b> Option 1: Separate</a></li>
-<li class="chapter" data-level="5.2" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#option-2-lump-everything-together"><i class="fa fa-check"></i><b>5.2</b> Option 2: Lump everything together</a></li>
-<li class="chapter" data-level="5.3" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#option-3-is-there-a-third-option"><i class="fa fa-check"></i><b>5.3</b> Option 3: Is there a third option?</a></li>
+<li class="chapter" data-level="5" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html"><i class="fa fa-check"></i><b>5</b> Analyzing the data<span></span></a><ul>
+<li class="chapter" data-level="5.1" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#option-1-separate"><i class="fa fa-check"></i><b>5.1</b> Option 1: Separate<span></span></a></li>
+<li class="chapter" data-level="5.2" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#option-2-lump-everything-together"><i class="fa fa-check"></i><b>5.2</b> Option 2: Lump everything together<span></span></a></li>
+<li class="chapter" data-level="5.3" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#option-3-is-there-a-third-option"><i class="fa fa-check"></i><b>5.3</b> Option 3: Is there a third option?<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="fixed-vs.-random-effects.html"><a href="fixed-vs.-random-effects.html"><i class="fa fa-check"></i><b>6</b> Fixed vs. random effects</a><ul>
-<li class="chapter" data-level="6.1" data-path="fixed-vs.-random-effects.html"><a href="fixed-vs.-random-effects.html#fixed-effects-deterministic-processes"><i class="fa fa-check"></i><b>6.1</b> Fixed effects: deterministic processes</a></li>
-<li class="chapter" data-level="6.2" data-path="fixed-vs.-random-effects.html"><a href="fixed-vs.-random-effects.html#random-effects-stochastic-processes"><i class="fa fa-check"></i><b>6.2</b> Random effects: stochastic processes</a></li>
+<li class="chapter" data-level="6" data-path="fixed-vs.-random-effects.html"><a href="fixed-vs.-random-effects.html"><i class="fa fa-check"></i><b>6</b> Fixed vs. random effects<span></span></a><ul>
+<li class="chapter" data-level="6.1" data-path="fixed-vs.-random-effects.html"><a href="fixed-vs.-random-effects.html#fixed-effects-deterministic-processes"><i class="fa fa-check"></i><b>6.1</b> Fixed effects: deterministic processes<span></span></a></li>
+<li class="chapter" data-level="6.2" data-path="fixed-vs.-random-effects.html"><a href="fixed-vs.-random-effects.html#random-effects-stochastic-processes"><i class="fa fa-check"></i><b>6.2</b> Random effects: stochastic processes<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="how-do-lmms-work.html"><a href="how-do-lmms-work.html"><i class="fa fa-check"></i><b>7</b> How do LMMs work?</a><ul>
-<li class="chapter" data-level="7.1" data-path="how-do-lmms-work.html"><a href="how-do-lmms-work.html#parameters-are-varied"><i class="fa fa-check"></i><b>7.1</b> Parameters are varied</a><ul>
-<li class="chapter" data-level="" data-path="how-do-lmms-work.html"><a href="how-do-lmms-work.html#intercepts"><i class="fa fa-check"></i>Intercepts:</a></li>
-<li class="chapter" data-level="" data-path="how-do-lmms-work.html"><a href="how-do-lmms-work.html#slopes"><i class="fa fa-check"></i>Slopes:</a></li>
+<li class="chapter" data-level="7" data-path="how-do-lmms-work.html"><a href="how-do-lmms-work.html"><i class="fa fa-check"></i><b>7</b> How do LMMs work?<span></span></a><ul>
+<li class="chapter" data-level="7.1" data-path="how-do-lmms-work.html"><a href="how-do-lmms-work.html#parameters-are-varied"><i class="fa fa-check"></i><b>7.1</b> Parameters are varied<span></span></a><ul>
+<li><a href="how-do-lmms-work.html#intercepts">Intercepts:<span></span></a></li>
+<li><a href="how-do-lmms-work.html#slopes">Slopes:<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="how-do-lmms-work.html"><a href="how-do-lmms-work.html#data-structure-is-taken-into-account"><i class="fa fa-check"></i><b>7.2</b> Data structure is taken into account</a></li>
-<li class="chapter" data-level="7.3" data-path="how-do-lmms-work.html"><a href="how-do-lmms-work.html#challenge-2"><i class="fa fa-check"></i><b>7.3</b> Challenge 2</a></li>
+<li class="chapter" data-level="7.2" data-path="how-do-lmms-work.html"><a href="how-do-lmms-work.html#data-structure-is-taken-into-account"><i class="fa fa-check"></i><b>7.2</b> Data structure is taken into account<span></span></a></li>
+<li class="chapter" data-level="7.3" data-path="how-do-lmms-work.html"><a href="how-do-lmms-work.html#challenge-2"><i class="fa fa-check"></i><b>7.3</b> Challenge 2<span></span></a></li>
 </ul></li>
-<li class="part"><span><b>Implementing LMM in <code>R</code></b></span></li>
-<li class="chapter" data-level="8" data-path="mixed-model-protocol.html"><a href="mixed-model-protocol.html"><i class="fa fa-check"></i><b>8</b> Mixed model protocol</a></li>
-<li class="chapter" data-level="9" data-path="step-1.-a-priori-model-building.html"><a href="step-1.-a-priori-model-building.html"><i class="fa fa-check"></i><b>9</b> Step 1. <em>A priori</em> model building</a><ul>
-<li class="chapter" data-level="9.1" data-path="step-1.-a-priori-model-building.html"><a href="step-1.-a-priori-model-building.html#check-data-structure"><i class="fa fa-check"></i><b>9.1</b> Check data structure</a></li>
-<li class="chapter" data-level="9.2" data-path="step-1.-a-priori-model-building.html"><a href="step-1.-a-priori-model-building.html#check-collinearity"><i class="fa fa-check"></i><b>9.2</b> Check collinearity</a></li>
-<li class="chapter" data-level="9.3" data-path="step-1.-a-priori-model-building.html"><a href="step-1.-a-priori-model-building.html#challenge-3"><i class="fa fa-check"></i><b>9.3</b> Challenge 3</a></li>
-<li class="chapter" data-level="9.4" data-path="step-1.-a-priori-model-building.html"><a href="step-1.-a-priori-model-building.html#consider-scale"><i class="fa fa-check"></i><b>9.4</b> Consider scale</a></li>
-<li class="chapter" data-level="9.5" data-path="step-1.-a-priori-model-building.html"><a href="step-1.-a-priori-model-building.html#do-you-need-a-lmm"><i class="fa fa-check"></i><b>9.5</b> Do you need a LMM?</a></li>
+<li class="part"><span><b>Implementing LMM in <code>R</code><span></span></b></span></li>
+<li class="chapter" data-level="8" data-path="mixed-model-protocol.html"><a href="mixed-model-protocol.html"><i class="fa fa-check"></i><b>8</b> Mixed model protocol<span></span></a></li>
+<li class="chapter" data-level="9" data-path="step-1.-a-priori-model-building.html"><a href="step-1.-a-priori-model-building.html"><i class="fa fa-check"></i><b>9</b> Step 1. <em>A priori</em> model building<span></span></a><ul>
+<li class="chapter" data-level="9.1" data-path="step-1.-a-priori-model-building.html"><a href="step-1.-a-priori-model-building.html#check-data-structure"><i class="fa fa-check"></i><b>9.1</b> Check data structure<span></span></a></li>
+<li class="chapter" data-level="9.2" data-path="step-1.-a-priori-model-building.html"><a href="step-1.-a-priori-model-building.html#check-collinearity"><i class="fa fa-check"></i><b>9.2</b> Check collinearity<span></span></a></li>
+<li class="chapter" data-level="9.3" data-path="step-1.-a-priori-model-building.html"><a href="step-1.-a-priori-model-building.html#challenge-3"><i class="fa fa-check"></i><b>9.3</b> Challenge 3<span></span></a></li>
+<li class="chapter" data-level="9.4" data-path="step-1.-a-priori-model-building.html"><a href="step-1.-a-priori-model-building.html#consider-scale"><i class="fa fa-check"></i><b>9.4</b> Consider scale<span></span></a></li>
+<li class="chapter" data-level="9.5" data-path="step-1.-a-priori-model-building.html"><a href="step-1.-a-priori-model-building.html#do-you-need-a-lmm"><i class="fa fa-check"></i><b>9.5</b> Do you need a LMM?<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="step-2.-code-potential-models-and-model-selection.html"><a href="step-2.-code-potential-models-and-model-selection.html"><i class="fa fa-check"></i><b>10</b> Step 2. Code potential models and model selection</a><ul>
-<li class="chapter" data-level="10.1" data-path="step-2.-code-potential-models-and-model-selection.html"><a href="step-2.-code-potential-models-and-model-selection.html#estimation-methods"><i class="fa fa-check"></i><b>10.1</b> Estimation methods</a></li>
-<li class="chapter" data-level="10.2" data-path="step-2.-code-potential-models-and-model-selection.html"><a href="step-2.-code-potential-models-and-model-selection.html#different-model-structures"><i class="fa fa-check"></i><b>10.2</b> Different model structures</a></li>
-<li class="chapter" data-level="10.3" data-path="step-2.-code-potential-models-and-model-selection.html"><a href="step-2.-code-potential-models-and-model-selection.html#challenge-4"><i class="fa fa-check"></i><b>10.3</b> Challenge 4</a></li>
-<li class="chapter" data-level="10.4" data-path="step-2.-code-potential-models-and-model-selection.html"><a href="step-2.-code-potential-models-and-model-selection.html#challenge-5"><i class="fa fa-check"></i><b>10.4</b> Challenge 5</a></li>
-<li class="chapter" data-level="10.5" data-path="step-2.-code-potential-models-and-model-selection.html"><a href="step-2.-code-potential-models-and-model-selection.html#comparing-models"><i class="fa fa-check"></i><b>10.5</b> Comparing models</a></li>
+<li class="chapter" data-level="10" data-path="step-2.-code-potential-models-and-model-selection.html"><a href="step-2.-code-potential-models-and-model-selection.html"><i class="fa fa-check"></i><b>10</b> Step 2. Code potential models and model selection<span></span></a><ul>
+<li class="chapter" data-level="10.1" data-path="step-2.-code-potential-models-and-model-selection.html"><a href="step-2.-code-potential-models-and-model-selection.html#estimation-methods"><i class="fa fa-check"></i><b>10.1</b> Estimation methods<span></span></a></li>
+<li class="chapter" data-level="10.2" data-path="step-2.-code-potential-models-and-model-selection.html"><a href="step-2.-code-potential-models-and-model-selection.html#different-model-structures"><i class="fa fa-check"></i><b>10.2</b> Different model structures<span></span></a></li>
+<li class="chapter" data-level="10.3" data-path="step-2.-code-potential-models-and-model-selection.html"><a href="step-2.-code-potential-models-and-model-selection.html#challenge-4"><i class="fa fa-check"></i><b>10.3</b> Challenge 4<span></span></a></li>
+<li class="chapter" data-level="10.4" data-path="step-2.-code-potential-models-and-model-selection.html"><a href="step-2.-code-potential-models-and-model-selection.html#challenge-5"><i class="fa fa-check"></i><b>10.4</b> Challenge 5<span></span></a></li>
+<li class="chapter" data-level="10.5" data-path="step-2.-code-potential-models-and-model-selection.html"><a href="step-2.-code-potential-models-and-model-selection.html#comparing-models"><i class="fa fa-check"></i><b>10.5</b> Comparing models<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="step-3.-model-validation.html"><a href="step-3.-model-validation.html"><i class="fa fa-check"></i><b>11</b> Step 3. Model validation</a><ul>
-<li class="chapter" data-level="11.1" data-path="step-3.-model-validation.html"><a href="step-3.-model-validation.html#check-the-homogeneity-of-the-variance"><i class="fa fa-check"></i><b>11.1</b> 1. Check the homogeneity of the variance</a></li>
-<li class="chapter" data-level="11.2" data-path="step-3.-model-validation.html"><a href="step-3.-model-validation.html#check-the-independence-of-the-model-residuals-with-each-covariate"><i class="fa fa-check"></i><b>11.2</b> 2. Check the independence of the model residuals with each covariate</a></li>
-<li class="chapter" data-level="11.3" data-path="step-3.-model-validation.html"><a href="step-3.-model-validation.html#check-the-normality-of-the-model-residuals"><i class="fa fa-check"></i><b>11.3</b> 3. Check the normality of the model residuals</a></li>
+<li class="chapter" data-level="11" data-path="step-3.-model-validation.html"><a href="step-3.-model-validation.html"><i class="fa fa-check"></i><b>11</b> Step 3. Model validation<span></span></a><ul>
+<li class="chapter" data-level="11.1" data-path="step-3.-model-validation.html"><a href="step-3.-model-validation.html#check-the-homogeneity-of-the-variance"><i class="fa fa-check"></i><b>11.1</b> 1. Check the homogeneity of the variance<span></span></a></li>
+<li class="chapter" data-level="11.2" data-path="step-3.-model-validation.html"><a href="step-3.-model-validation.html#check-the-independence-of-the-model-residuals-with-each-covariate"><i class="fa fa-check"></i><b>11.2</b> 2. Check the independence of the model residuals with each covariate<span></span></a></li>
+<li class="chapter" data-level="11.3" data-path="step-3.-model-validation.html"><a href="step-3.-model-validation.html#check-the-normality-of-the-model-residuals"><i class="fa fa-check"></i><b>11.3</b> 3. Check the normality of the model residuals<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="step-4.-interpretation-and-visualization.html"><a href="step-4.-interpretation-and-visualization.html"><i class="fa fa-check"></i><b>12</b> Step 4. Interpretation and visualization</a><ul>
-<li class="chapter" data-level="12.1" data-path="step-4.-interpretation-and-visualization.html"><a href="step-4.-interpretation-and-visualization.html#interpreting-our-model"><i class="fa fa-check"></i><b>12.1</b> Interpreting our model</a></li>
-<li class="chapter" data-level="12.2" data-path="step-4.-interpretation-and-visualization.html"><a href="step-4.-interpretation-and-visualization.html#challenge-6"><i class="fa fa-check"></i><b>12.2</b> Challenge 6</a></li>
-<li class="chapter" data-level="12.3" data-path="step-4.-interpretation-and-visualization.html"><a href="step-4.-interpretation-and-visualization.html#challenge-7"><i class="fa fa-check"></i><b>12.3</b> Challenge 7</a></li>
-<li class="chapter" data-level="12.4" data-path="step-4.-interpretation-and-visualization.html"><a href="step-4.-interpretation-and-visualization.html#challenge-8"><i class="fa fa-check"></i><b>12.4</b> Challenge 8</a></li>
+<li class="chapter" data-level="12" data-path="step-4.-interpretation-and-visualization.html"><a href="step-4.-interpretation-and-visualization.html"><i class="fa fa-check"></i><b>12</b> Step 4. Interpretation and visualization<span></span></a><ul>
+<li class="chapter" data-level="12.1" data-path="step-4.-interpretation-and-visualization.html"><a href="step-4.-interpretation-and-visualization.html#interpreting-our-model"><i class="fa fa-check"></i><b>12.1</b> Interpreting our model<span></span></a></li>
+<li class="chapter" data-level="12.2" data-path="step-4.-interpretation-and-visualization.html"><a href="step-4.-interpretation-and-visualization.html#challenge-6"><i class="fa fa-check"></i><b>12.2</b> Challenge 6<span></span></a></li>
+<li class="chapter" data-level="12.3" data-path="step-4.-interpretation-and-visualization.html"><a href="step-4.-interpretation-and-visualization.html#challenge-7"><i class="fa fa-check"></i><b>12.3</b> Challenge 7<span></span></a></li>
+<li class="chapter" data-level="12.4" data-path="step-4.-interpretation-and-visualization.html"><a href="step-4.-interpretation-and-visualization.html#challenge-8"><i class="fa fa-check"></i><b>12.4</b> Challenge 8<span></span></a></li>
 </ul></li>
-<li class="part"><span><b>Generalized linear mixed models (GLMM) in <code>R</code></b></span></li>
-<li class="chapter" data-level="13" data-path="introduction-to-glmm.html"><a href="introduction-to-glmm.html"><i class="fa fa-check"></i><b>13</b> Introduction to GLMM</a></li>
-<li class="chapter" data-level="14" data-path="choose-an-error-distribution.html"><a href="choose-an-error-distribution.html"><i class="fa fa-check"></i><b>14</b> Choose an error distribution</a></li>
-<li class="chapter" data-level="15" data-path="poisson-glmm.html"><a href="poisson-glmm.html"><i class="fa fa-check"></i><b>15</b> Poisson GLMM</a></li>
-<li class="chapter" data-level="16" data-path="negative-binomial-glmm.html"><a href="negative-binomial-glmm.html"><i class="fa fa-check"></i><b>16</b> Negative binomial GLMM</a></li>
-<li class="chapter" data-level="17" data-path="poisson-lognormal-glmm.html"><a href="poisson-lognormal-glmm.html"><i class="fa fa-check"></i><b>17</b> Poisson-lognormal GLMM</a><ul>
-<li class="chapter" data-level="17.1" data-path="poisson-lognormal-glmm.html"><a href="poisson-lognormal-glmm.html#random-intercepts"><i class="fa fa-check"></i><b>17.1</b> Random intercepts</a></li>
-<li class="chapter" data-level="17.2" data-path="poisson-lognormal-glmm.html"><a href="poisson-lognormal-glmm.html#parameter-plots"><i class="fa fa-check"></i><b>17.2</b> Parameter plots</a></li>
+<li class="part"><span><b>Generalized linear mixed models (GLMM) in <code>R</code><span></span></b></span></li>
+<li class="chapter" data-level="13" data-path="introduction-to-glmm.html"><a href="introduction-to-glmm.html"><i class="fa fa-check"></i><b>13</b> Introduction to GLMM<span></span></a></li>
+<li class="chapter" data-level="14" data-path="choose-an-error-distribution.html"><a href="choose-an-error-distribution.html"><i class="fa fa-check"></i><b>14</b> Choose an error distribution<span></span></a></li>
+<li class="chapter" data-level="15" data-path="poisson-glmm.html"><a href="poisson-glmm.html"><i class="fa fa-check"></i><b>15</b> Poisson GLMM<span></span></a></li>
+<li class="chapter" data-level="16" data-path="negative-binomial-glmm.html"><a href="negative-binomial-glmm.html"><i class="fa fa-check"></i><b>16</b> Negative binomial GLMM<span></span></a></li>
+<li class="chapter" data-level="17" data-path="poisson-lognormal-glmm.html"><a href="poisson-lognormal-glmm.html"><i class="fa fa-check"></i><b>17</b> Poisson-lognormal GLMM<span></span></a><ul>
+<li class="chapter" data-level="17.1" data-path="poisson-lognormal-glmm.html"><a href="poisson-lognormal-glmm.html#random-intercepts"><i class="fa fa-check"></i><b>17.1</b> Random intercepts<span></span></a></li>
+<li class="chapter" data-level="17.2" data-path="poisson-lognormal-glmm.html"><a href="poisson-lognormal-glmm.html#parameter-plots"><i class="fa fa-check"></i><b>17.2</b> Parameter plots<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="18" data-path="final-model.html"><a href="final-model.html"><i class="fa fa-check"></i><b>18</b> Final model</a><ul>
-<li class="chapter" data-level="18.1" data-path="final-model.html"><a href="final-model.html#challenge-9"><i class="fa fa-check"></i><b>18.1</b> Challenge 9</a></li>
+<li class="chapter" data-level="18" data-path="final-model.html"><a href="final-model.html"><i class="fa fa-check"></i><b>18</b> Final model<span></span></a><ul>
+<li class="chapter" data-level="18.1" data-path="final-model.html"><a href="final-model.html#challenge-9"><i class="fa fa-check"></i><b>18.1</b> Challenge 9<span></span></a></li>
 </ul></li>
-<li class="part"><span><b>Additional LMM and GLMM resources</b></span></li>
-<li class="chapter" data-level="19" data-path="additional-resources.html"><a href="additional-resources.html"><i class="fa fa-check"></i><b>19</b> Additional resources</a></li>
-<li class="chapter" data-level="20" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>20</b> References</a></li>
+<li class="part"><span><b>Additional LMM and GLMM resources<span></span></b></span></li>
+<li class="chapter" data-level="19" data-path="additional-resources.html"><a href="additional-resources.html"><i class="fa fa-check"></i><b>19</b> Additional resources<span></span></a></li>
+<li class="chapter" data-level="20" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>20</b> References<span></span></a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/qcbsRworkshops" target="blank">QCBS R Workshop Series</a></li>
 
@@ -246,8 +246,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
   <img class= "hero-image" src="assets/images/jean-philippe-delberghe-75xPHEQBmvA-unsplash_hero_image.jpg">
 </div>
 --!>
-<div id="step-2.-code-potential-models-and-model-selection" class="section level1">
-<h1><span class="header-section-number">Chapter 10</span> Step 2. Code potential models and model selection</h1>
+<div id="step-2.-code-potential-models-and-model-selection" class="section level1 hasAnchor">
+<h1><span class="header-section-number">Chapter 10</span> Step 2. Code potential models and model selection<a href="step-2.-code-potential-models-and-model-selection.html#step-2.-code-potential-models-and-model-selection" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p><strong>Translate this model…</strong></p>
 <p><span class="math display">\[TP_{ijk} \sim Length_i + Lake_j + Species_k + \epsilon_{ijk}\]</span></p>
 <p><strong>… into R code</strong></p>
@@ -272,8 +272,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li><code>(1 | Lake)</code> -&gt; indicate varying intercepts among lakes</li>
 <li><code>REML = TRUE</code> -&gt; estimation method</li>
 </ul>
-<div id="estimation-methods" class="section level2">
-<h2><span class="header-section-number">10.1</span> Estimation methods</h2>
+<div id="estimation-methods" class="section level2 hasAnchor">
+<h2><span class="header-section-number">10.1</span> Estimation methods<a href="step-2.-code-potential-models-and-model-selection.html#estimation-methods" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>REML (<em>Restricted Maximum Likelihood</em>) is the default method in <code>lmer</code> (see <code>?lmer</code>).</p>
 <p>The <em>Maximum Likelihood</em> (ML) method underestimate model variances by a factor of <span class="math inline">\((n-k)/n\)</span>, where <span class="math inline">\(k\)</span> is the number of fixed effects. The <em>REML</em> method corrects for this bias.</p>
 <p>REML estimates can be used when comparing models with the same fixed effects (i.e. nested models). However, if you are comparing models where the fixed effects differ among models then maximum likelihood should be used to fit parameters as this method is not dependent on the coefficients of the fixed effects. Fitting using maximum likelihood is done by setting <code>REML=FALSE</code> in the lmer command.</p>
@@ -285,8 +285,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li><p><strong>ML</strong> to compare models <strong>with and without random effects</strong></p></li>
 </ul>
 </div>
-<div id="different-model-structures" class="section level2">
-<h2><span class="header-section-number">10.2</span> Different model structures</h2>
+<div id="different-model-structures" class="section level2 hasAnchor">
+<h2><span class="header-section-number">10.2</span> Different model structures<a href="step-2.-code-potential-models-and-model-selection.html#different-model-structures" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><strong>What if we want the slopes to vary?</strong></p>
 <p><img src="images/fig_22_w5.png" /></p>
 <p><strong>Let’s look at different model structures:</strong></p>
@@ -299,8 +299,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li><p>If your dataset includes nested random effects, you could use <code>/</code> to specify them, e.g. <code>(1 | factor1 / factor2)</code> if <code>factor2</code> is nested in <code>factor1</code> (<a href="https://stats.stackexchange.com/questions/228800/crossed-vs-nested-random-effects-how-do-they-differ-and-how-are-they-specified">see stack-exchange</a>)</p></li>
 </ul>
 </div>
-<div id="challenge-4" class="section level2">
-<h2><span class="header-section-number">10.3</span> Challenge 4</h2>
+<div id="challenge-4" class="section level2 hasAnchor">
+<h2><span class="header-section-number">10.3</span> Challenge 4<a href="step-2.-code-potential-models-and-model-selection.html#challenge-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Re-write the following code so that the <strong>slopes</strong> of the relationship between trophic position and body length <strong>vary by lake and species</strong>:</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="step-2.-code-potential-models-and-model-selection.html#cb17-1"></a><span class="co"># Challenge 4: Can you re-write this code so that the</span></span>
 <span id="cb17-2"><a href="step-2.-code-potential-models-and-model-selection.html#cb17-2"></a><span class="co"># slopes between trophic position and body length vary by</span></span>
@@ -321,12 +321,12 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## (Intercept)     Z_Length  
 ##   9.752e-14    4.198e-01</code></pre>
 <hr />
-<div id="challenge-4-solution" class="section level4 unnumbered">
-<h4><strong>Challenge 4 Solution:</strong></h4>
+<div id="challenge-4-solution" class="section level4 unnumbered hasAnchor">
+<h4><strong>Challenge 4 Solution:</strong><a href="step-2.-code-potential-models-and-model-selection.html#challenge-4-solution" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="step-2.-code-potential-models-and-model-selection.html#cb19-1"></a><span class="co"># Challenge 4 solution:</span></span>
 <span id="cb19-2"><a href="step-2.-code-potential-models-and-model-selection.html#cb19-2"></a><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Lake) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span></span>
 <span id="cb19-3"><a href="step-2.-code-potential-models-and-model-selection.html#cb19-3"></a><span class="st">    </span>Fish_Species), <span class="dt">data =</span> fish.data, <span class="dt">REML =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
-<pre><code>## boundary (singular) fit: see ?isSingular</code></pre>
+<pre><code>## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
 <pre><code>## Linear mixed model fit by REML [&#39;lmerMod&#39;]
 ## Formula: 
 ## Z_TP ~ Z_Length + (1 + Z_Length | Lake) + (1 + Z_Length | Fish_Species)
@@ -347,8 +347,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <hr />
 </div>
 </div>
-<div id="challenge-5" class="section level2">
-<h2><span class="header-section-number">10.4</span> Challenge 5</h2>
+<div id="challenge-5" class="section level2 hasAnchor">
+<h2><span class="header-section-number">10.4</span> Challenge 5<a href="step-2.-code-potential-models-and-model-selection.html#challenge-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>To determine if you have built the best mixed model based on your prior knowledge, you should compare this <em>a priori</em> model to other alternative models.</p>
 <p>With the dataset you are working on, there are several alternative models that might better fit your data. For challenge 5, make a list of 7 alternative models that could be compared to this one:</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="step-2.-code-potential-models-and-model-selection.html#cb22-1"></a><span class="co"># Challenge 5: Make a list of 7 alternative models that</span></span>
@@ -370,8 +370,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ##   9.752e-14    4.198e-01</code></pre>
 <p><em>Note: If we had different fixed effects between the models or a model without random effects, we would have to specify <code>REML = FALSE</code> to compare with likelihood methods like AIC.</em></p>
 <hr />
-<div id="challenge-5-solution" class="section level4 unnumbered">
-<h4><strong>Challenge 5 Solution:</strong></h4>
+<div id="challenge-5-solution" class="section level4 unnumbered hasAnchor">
+<h4><strong>Challenge 5 Solution:</strong><a href="step-2.-code-potential-models-and-model-selection.html#challenge-5-solution" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>We first will also build the <strong>basic linear model</strong> <code>lm()</code> because it is always useful to see the variation in the AICc values (we will discuss these in more detail in the next section).</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="step-2.-code-potential-models-and-model-selection.html#cb24-1"></a><span class="co"># Challenge 5 solution: Basic linear model</span></span>
 <span id="cb24-2"><a href="step-2.-code-potential-models-and-model-selection.html#cb24-2"></a>M0 &lt;-<span class="st"> </span><span class="kw">lm</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length, <span class="dt">data =</span> fish.data)</span></code></pre></div>
@@ -389,7 +389,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb25-10"><a href="step-2.-code-potential-models-and-model-selection.html#cb25-10"></a><span class="co"># Full model with varying intercepts and slopes</span></span>
 <span id="cb25-11"><a href="step-2.-code-potential-models-and-model-selection.html#cb25-11"></a>M2 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Fish_Species) <span class="op">+</span></span>
 <span id="cb25-12"><a href="step-2.-code-potential-models-and-model-selection.html#cb25-12"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Lake), <span class="dt">data =</span> fish.data, <span class="dt">REML =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
-<pre><code>## boundary (singular) fit: see ?isSingular</code></pre>
+<pre><code>## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="step-2.-code-potential-models-and-model-selection.html#cb27-1"></a><span class="co"># No Lake, varying intercepts only</span></span>
 <span id="cb27-2"><a href="step-2.-code-potential-models-and-model-selection.html#cb27-2"></a>M3 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Fish_Species), <span class="dt">data =</span> fish.data,</span>
 <span id="cb27-3"><a href="step-2.-code-potential-models-and-model-selection.html#cb27-3"></a>    <span class="dt">REML =</span> <span class="ot">FALSE</span>)</span>
@@ -398,21 +398,21 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb27-6"><a href="step-2.-code-potential-models-and-model-selection.html#cb27-6"></a><span class="co"># No Lake, varying intercepts and slopes</span></span>
 <span id="cb27-7"><a href="step-2.-code-potential-models-and-model-selection.html#cb27-7"></a>M5 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Fish_Species), <span class="dt">data =</span> fish.data,</span>
 <span id="cb27-8"><a href="step-2.-code-potential-models-and-model-selection.html#cb27-8"></a>    <span class="dt">REML =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
-<pre><code>## boundary (singular) fit: see ?isSingular</code></pre>
+<pre><code>## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="step-2.-code-potential-models-and-model-selection.html#cb29-1"></a><span class="co"># No Species, varying intercepts and slopes</span></span>
 <span id="cb29-2"><a href="step-2.-code-potential-models-and-model-selection.html#cb29-2"></a>M6 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Lake), <span class="dt">data =</span> fish.data,</span>
 <span id="cb29-3"><a href="step-2.-code-potential-models-and-model-selection.html#cb29-3"></a>    <span class="dt">REML =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
-<pre><code>## boundary (singular) fit: see ?isSingular</code></pre>
+<pre><code>## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="step-2.-code-potential-models-and-model-selection.html#cb31-1"></a><span class="co"># Full model with varying intercepts and slopes only</span></span>
 <span id="cb31-2"><a href="step-2.-code-potential-models-and-model-selection.html#cb31-2"></a><span class="co"># varying by lake</span></span>
 <span id="cb31-3"><a href="step-2.-code-potential-models-and-model-selection.html#cb31-3"></a>M7 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Fish_Species) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span></span>
 <span id="cb31-4"><a href="step-2.-code-potential-models-and-model-selection.html#cb31-4"></a><span class="st">    </span>Lake), <span class="dt">data =</span> fish.data, <span class="dt">REML =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
-<pre><code>## boundary (singular) fit: see ?isSingular</code></pre>
+<pre><code>## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
 <div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="step-2.-code-potential-models-and-model-selection.html#cb33-1"></a><span class="co"># Full model with varying intercepts and slopes only</span></span>
 <span id="cb33-2"><a href="step-2.-code-potential-models-and-model-selection.html#cb33-2"></a><span class="co"># varying by species</span></span>
 <span id="cb33-3"><a href="step-2.-code-potential-models-and-model-selection.html#cb33-3"></a>M8 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Fish_Species) <span class="op">+</span></span>
 <span id="cb33-4"><a href="step-2.-code-potential-models-and-model-selection.html#cb33-4"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake), <span class="dt">data =</span> fish.data, <span class="dt">REML =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
-<pre><code>## boundary (singular) fit: see ?isSingular</code></pre>
+<pre><code>## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
 <p><strong>When fitting LMMs with <code>lmer()</code>, you may encounter some errors or warnings such as:</strong></p>
 <ul>
 <li><p><code>boundary (singular) fit: see ?isSingular</code>, see <a href="https://stats.stackexchange.com/questions/378939/dealing-with-singular-fit-in-mixed-models">this discussion on stack-exchange</a></p></li>
@@ -421,8 +421,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>Here a <a href="https://rdrr.io/cran/lme4/man/troubleshooting.html">list</a> of possible problems and how to troubleshoot them.</p>
 </div>
 </div>
-<div id="comparing-models" class="section level2">
-<h2><span class="header-section-number">10.5</span> Comparing models</h2>
+<div id="comparing-models" class="section level2 hasAnchor">
+<h2><span class="header-section-number">10.5</span> Comparing models<a href="step-2.-code-potential-models-and-model-selection.html#comparing-models" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Now that we have a list of potential models, we want to compare them to each other to select the one(s) with the highest predictive power given the data.</p>
 <p>Models can be compared by using the <code>AICc</code> function from the<code>MuMIn</code> package. The Akaike Information Criterion (AIC) is a <strong>measure of model quality</strong> that can be used to compare models.</p>
 <p><code>AICc</code> corrects for bias created by small sample sizes.</p>
@@ -476,10 +476,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb40-4"><a href="step-2.-code-potential-models-and-model-selection.html#cb40-4"></a><span class="co"># TRUE` when generating M8 and M2</span></span>
 <span id="cb40-5"><a href="step-2.-code-potential-models-and-model-selection.html#cb40-5"></a>M8 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Fish_Species) <span class="op">+</span></span>
 <span id="cb40-6"><a href="step-2.-code-potential-models-and-model-selection.html#cb40-6"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake), <span class="dt">data =</span> fish.data, <span class="dt">REML =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
-<pre><code>## boundary (singular) fit: see ?isSingular</code></pre>
+<pre><code>## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="step-2.-code-potential-models-and-model-selection.html#cb42-1"></a>M2 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Fish_Species) <span class="op">+</span></span>
 <span id="cb42-2"><a href="step-2.-code-potential-models-and-model-selection.html#cb42-2"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Lake), <span class="dt">data =</span> fish.data, <span class="dt">REML =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
-<pre><code>## boundary (singular) fit: see ?isSingular</code></pre>
+<pre><code>## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
 <div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="step-2.-code-potential-models-and-model-selection.html#cb44-1"></a><span class="co"># Now let&#39;s print a table in order to compare M2 and M8</span></span>
 <span id="cb44-2"><a href="step-2.-code-potential-models-and-model-selection.html#cb44-2"></a>MuMIn<span class="op">::</span><span class="kw">model.sel</span>(M2, M8)[, <span class="kw">c</span>(<span class="st">&quot;df&quot;</span>, <span class="st">&quot;logLik&quot;</span>, <span class="st">&quot;AICc&quot;</span>, <span class="st">&quot;delta&quot;</span>)]</span></code></pre></div>
 <pre><code>##    df    logLik     AICc    delta
@@ -492,7 +492,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb46-2"><a href="step-2.-code-potential-models-and-model-selection.html#cb46-2"></a><span class="co"># structure?</span></span>
 <span id="cb46-3"><a href="step-2.-code-potential-models-and-model-selection.html#cb46-3"></a>M8 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Fish_Species) <span class="op">+</span></span>
 <span id="cb46-4"><a href="step-2.-code-potential-models-and-model-selection.html#cb46-4"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake), <span class="dt">data =</span> fish.data, <span class="dt">REML =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
-<pre><code>## boundary (singular) fit: see ?isSingular</code></pre>
+<pre><code>## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
 <div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="step-2.-code-potential-models-and-model-selection.html#cb48-1"></a><span class="co"># Both the intercepts and slopes of the relationship</span></span>
 <span id="cb48-2"><a href="step-2.-code-potential-models-and-model-selection.html#cb48-2"></a><span class="co"># between trophic position and length may vary by fish</span></span>
 <span id="cb48-3"><a href="step-2.-code-potential-models-and-model-selection.html#cb48-3"></a><span class="co"># species, but only the intercepts may vary by lake.</span></span></code></pre></div>
@@ -506,7 +506,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb49-2"><a href="step-2.-code-potential-models-and-model-selection.html#cb49-2"></a><span class="co"># must be reset to `REML = TRUE`.</span></span>
 <span id="cb49-3"><a href="step-2.-code-potential-models-and-model-selection.html#cb49-3"></a>M8 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Fish_Species) <span class="op">+</span></span>
 <span id="cb49-4"><a href="step-2.-code-potential-models-and-model-selection.html#cb49-4"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake), <span class="dt">data =</span> fish.data, <span class="dt">REML =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
-<pre><code>## boundary (singular) fit: see ?isSingular</code></pre>
+<pre><code>## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
 </div>
 </div>
 <hr>
