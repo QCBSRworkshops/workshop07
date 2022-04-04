@@ -191,6 +191,14 @@ install.packages(c("lme4",
 ```
 ]
 
+<br>
+
+We will also use the following data sets:
+
+- <a href="https://r.qcbs.ca/workshop07/pres-en/data/fishdata.csv">fishdata.csv</a> 
+- <a href="https://r.qcbs.ca/workshop07/pres-en/data/arabidopsis.csv">arabidopsis.csv</a>
+- <a href="https://r.qcbs.ca/workshop07/pres-en/data/inverts.csv">inverts.csv</a>
+
 ???
 Note: To save time: (1) Ask the participants to install the packages before the workshop, (2) Don't wait that everyone managed to install every packages and help the students that did not manage to install some packages during challenge #1.
 
@@ -272,7 +280,7 @@ Note: Should not be super long, they have the script to make the plots. You can 
 
 ```{r, echo = FALSE}
 library(ggplot2)
-fish.data <- read.csv('data/qcbs_w7_data.csv', stringsAsFactors = TRUE)
+fish.data <- read.csv('data/fishdata.csv', stringsAsFactors = TRUE)
 
 # simple theme
 fig <- theme_bw() + theme(panel.grid.minor = element_blank(),
@@ -729,7 +737,7 @@ Note: Describe the equation. The trophic position of a fish is a function of bod
 **Does the data have the right structure?**
 
 ```{r}
-fish.data <- read.csv('data/qcbs_w7_data.csv')
+fish.data <- read.csv('data/fishdata.csv')
 str(fish.data)
 ```
 
@@ -1804,10 +1812,10 @@ _Include 2-3 slides recalling GLM_
 ---
 # Implementing GLMMs in R
 
-Import the `Arabidopsis` dataset `banta_totalfruits.csv` into `R`.
+Import the `Arabidopsis` dataset `arabidopsis.csv` into `R`.
 
 ```{r}
-dat.tf <- read.csv("data/banta_totalfruits.csv")
+dat.tf <- read.csv("data/arabidopsis.csv")
 ```
 
 Description: data on genetic variation in responses to fertilization and simulated herbivory in *Arabidopsis*.

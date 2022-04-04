@@ -149,6 +149,14 @@ install.packages(c("lme4",
 ```
 ]
 
+&lt;br&gt;
+
+We will also use the following data sets:
+
+- &lt;a href="https://r.qcbs.ca/workshop07/pres-en/data/fishdata.csv"&gt;fishdata.csv&lt;/a&gt; 
+- &lt;a href="https://r.qcbs.ca/workshop07/pres-en/data/arabidopsis.csv"&gt;arabidopsis.csv&lt;/a&gt;
+- &lt;a href="https://r.qcbs.ca/workshop07/pres-en/data/inverts.csv"&gt;inverts.csv&lt;/a&gt;
+
 ???
 Note: To save time: (1) Ask the participants to install the packages before the workshop, (2) Don't wait that everyone managed to install every packages and help the students that did not manage to install some packages during challenge #1.
 
@@ -662,7 +670,7 @@ Note: Describe the equation. The trophic position of a fish is a function of bod
 
 
 ```r
-fish.data &lt;- read.csv('data/qcbs_w7_data.csv')
+fish.data &lt;- read.csv('data/fishdata.csv')
 str(fish.data)
 # 'data.frame':	180 obs. of  4 variables:
 #  $ Lake        : chr  "L1" "L1" "L1" "L1" ...
@@ -1827,11 +1835,11 @@ _Include 2-3 slides recalling GLM_
 ---
 # Implementing GLMMs in R
 
-Import the `Arabidopsis` dataset `banta_totalfruits.csv` into `R`.
+Import the `Arabidopsis` dataset `arabidopsis.csv` into `R`.
 
 
 ```r
-dat.tf &lt;- read.csv("data/banta_totalfruits.csv")
+dat.tf &lt;- read.csv("data/arabidopsis.csv")
 ```
 
 Description: data on genetic variation in responses to fertilization and simulated herbivory in *Arabidopsis*.
