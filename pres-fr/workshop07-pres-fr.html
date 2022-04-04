@@ -148,6 +148,14 @@ install.packages(c("lme4",
 ```
 ]
 
+&lt;br&gt;
+
+Nous utiliserons aussi ces jeux de données:
+
+- &lt;a href="https://r.qcbs.ca/workshop07/pres-en/data/fishdata.csv"&gt;fishdata.csv&lt;/a&gt; 
+- &lt;a href="https://r.qcbs.ca/workshop07/pres-en/data/arabidopsis.csv"&gt;arabidopsis.csv&lt;/a&gt;
+- &lt;a href="https://r.qcbs.ca/workshop07/pres-en/data/inverts.csv"&gt;inverts.csv&lt;/a&gt;
+
 ???
 Note: Pour sauver du temps: (1) Demander aux participants d'installer les paquets avant l'atelier. (2) Ne pas attendre que tout le monde réussisse à les installer, et aider ceux qui ont rencontrer des problèmes lors du défi #1.
 
@@ -230,22 +238,12 @@ exclude: true
 
 **3.** Visualisez la relation entre taille et position trophique
 
---
-exclude: true
+---
+# Solution ![:cube]()
+
 &lt;br&gt;
 
-
-```r
-fish.data &lt;- read.csv('data/qcbs_w7_data.csv', stringsAsFactors = TRUE)
-head(fish.data)
-#   Lake Fish_Species Fish_Length Trophic_Pos
-# 1   L1           S1    105.1501    2.602388
-# 2   L1           S1    194.5708    2.703522
-# 3   L1           S1    294.3636    2.742878
-# 4   L1           S1    413.5295    2.737743
-# 5   L1           S1    237.4739    2.785936
-# 6   L1           S1    107.9315    2.723862
-```
+&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-2-1.png" width="432" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -262,14 +260,6 @@ head(fish.data)
 &lt;br&gt;
 
 &lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-4-1.png" width="432" style="display: block; margin: auto;" /&gt;
-
-
----
-# Solution ![:cube]()
-
-&lt;br&gt;
-
-&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-5-1.png" width="432" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -660,7 +650,7 @@ Note: Décrire chaque élément de l'équation. La position trophique est prédi
 
 
 ```r
-fish.data &lt;- read.csv('data/qcbs_w7_data.csv')
+fish.data &lt;- read.csv('data/fishdata.csv')
 str(fish.data)
 # 'data.frame':	180 obs. of  4 variables:
 #  $ Lake        : chr  "L1" "L1" "L1" "L1" ...
@@ -710,7 +700,7 @@ hist(fish.data$Fish_Length, xlab = "Longueur (mm)", main = "")
 hist(fish.data$Trophic_Pos, xlab = "Position trophique", main = "")
 ```
 
-&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-9-1.png" width="720" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-8-1.png" width="720" style="display: block; margin: auto;" /&gt;
 
 
 Des déviations majeures pourraient causer des problèmes d'hétéroscédasticité. Si nécessaire, faites des transformations. Dans ce cas-ci, **les données semblent correctes**.
@@ -837,7 +827,7 @@ abline(0, 0, lty = 2)
 
 Représentez graphiquement la valeur des résidus en fonction des niveaux des facteurs
 
-&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-16-1.png" width="720" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-15-1.png" width="720" style="display: block; margin: auto;" /&gt;
 
 .alert[Ces patrons suggèrent qu'il y a de la variance résiduelle qui pourrait être expliquée par ces facteurs, et ils devraient donc être inclus dans le modèle]
 
@@ -1293,7 +1283,7 @@ plot(resid(M8) ~ fitted(M8),
 abline(h = 0, lty = 2)
 ```
 
-&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-31-1.png" width="324" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-30-1.png" width="324" style="display: block; margin: auto;" /&gt;
 
 Étendue homogène des résidus ![:faic](arrow-right) la supposition est respectée!
 
@@ -1338,7 +1328,7 @@ abline(h = 0, lty = 2)
 
 **3.2 Vérifier l'indépendance des résidus avec chaque covariable**
 
-&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-34-1.png" width="864" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-33-1.png" width="864" style="display: block; margin: auto;" /&gt;
 
 Étendue homogène des résidus autour de 0 ![:faic](arrow-right) pas de patron des résidus en fonction de la variable, la supposition est respectée!
 
@@ -1369,7 +1359,7 @@ abline(h = 0, lty = 2)
 hist(resid(M8))
 ```
 
-&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-35-1.png" width="360" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-34-1.png" width="360" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -1619,7 +1609,7 @@ Plot_AllData + geom_abline(intercept = summ_M8$coefficients[1,1],
 # Solution ![:cube]()
 
 a) Figure avec toutes les données regroupées
-&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-40-1.png" width="432" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-39-1.png" width="432" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -1657,7 +1647,7 @@ Plot_BySpecies +
 
 b) Figure par espèce
 
-&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-42-1.png" width="576" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-41-1.png" width="576" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -1694,7 +1684,7 @@ Plot_ByLake +
 # Solution ![:cube]()
 
 c) Figure par lac
-&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-44-1.png" width="576" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-43-1.png" width="576" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -1797,7 +1787,7 @@ Suivent les étapes similaires à celles introduites lors de la section sur les 
 ---
 # Comment modéliser un GLMM avec R
 
-Chargez les données `Arabidopsis` `banta_totalfruits.csv` dans `R`.
+Chargez les données `Arabidopsis` `arabidopsis.csv` dans `R`.
 
 
 
@@ -1826,7 +1816,7 @@ L'effet de la disponibilité de nutriments et d'herbivorie (**effets fixes**) su
 
 La variable réponse constitue des données d'abondance, donc nous devons choisir une **distribution de Poisson** (i.e variance égale à la moyenne)
 
-&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-49-1.png" width="432" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-48-1.png" width="432" style="display: block; margin: auto;" /&gt;
 
 Vous pouvez lire plus sur la distribution des erreurs [ici](http://ganymede.nmsu.edu/holtz/a535/ay535notes/node3.html) 
 
@@ -1890,7 +1880,7 @@ ggplot(data = dat.tf, aes(factor(x = gna), y = log(total.fruits + 1))) +
   stat_summary(fun = mean, geom = "point", colour = "red")
 ```
 
-&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-51-1.png" width="576" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-50-1.png" width="576" style="display: block; margin: auto;" /&gt;
 ]
 
 .comment[De même, la variance du total de fruits montre une grande hétérogénéité entre les populations (population x nutriments x herbivorie).]
@@ -1903,7 +1893,7 @@ Comme nous venons de le voir, il existe une importante hétérogénéité parmi 
 
 Si nous représentons graphiquement les **écarts vs moyennes par groupes** (génotypes x nutriment x herbivorie), on voit que la distribution de Poisson est la moins appropriée (i.e. car les écarts augmentent beaucoup plus vite que la moyenne).
 
-&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-52-1.png" width="576" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-51-1.png" width="576" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -2064,7 +2054,7 @@ library(coefplot2)
 coefplot2(mpl1, ptype = "vcov", intercept = TRUE, main = "Variance des effets aléatoires")
 ```
 
-&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-60-1.png" width="432" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-59-1.png" width="432" style="display: block; margin: auto;" /&gt;
 ]
 .pull-right[
 
@@ -2073,7 +2063,7 @@ coefplot2(mpl1, ptype = "vcov", intercept = TRUE, main = "Variance des effets al
 coefplot2(mpl1, intercept = TRUE, main = "Coefficients des effets fixes")
 ```
 
-&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-61-1.png" width="432" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-60-1.png" width="432" style="display: block; margin: auto;" /&gt;
 ]
 
 .comment[Note : barres d'erreur visibles seulement pour les effets fixes car `glmer()` ne modélise pas d'incertitude pour les effets aléatoires.]
@@ -2114,7 +2104,7 @@ grid.arrange(d2$gen, d2$popu, nrow = 1)
 
 &lt;br&gt;
 
-&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-62-1.png" width="648" style="display: block; margin: auto;" /&gt;
+&lt;img src="workshop07-pres-fr_files/figure-html/unnamed-chunk-61-1.png" width="648" style="display: block; margin: auto;" /&gt;
 
 
 ---
