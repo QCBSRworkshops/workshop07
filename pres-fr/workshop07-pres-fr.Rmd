@@ -193,6 +193,14 @@ install.packages(c("lme4",
 ```
 ]
 
+<br>
+
+Nous utiliserons aussi ces jeux de données:
+
+- <a href="https://r.qcbs.ca/workshop07/pres-en/data/fishdata.csv">fishdata.csv</a> 
+- <a href="https://r.qcbs.ca/workshop07/pres-en/data/arabidopsis.csv">arabidopsis.csv</a>
+- <a href="https://r.qcbs.ca/workshop07/pres-en/data/inverts.csv">inverts.csv</a>
+
 ???
 Note: Pour sauver du temps: (1) Demander aux participants d'installer les paquets avant l'atelier. (2) Ne pas attendre que tout le monde réussisse à les installer, et aider ceux qui ont rencontrer des problèmes lors du défi #1.
 
@@ -275,23 +283,13 @@ exclude: true
 
 **3.** Visualisez la relation entre taille et position trophique
 
---
-exclude: true
-<br>
-
-```{r, eval = TRUE}
-fish.data <- read.csv('data/qcbs_w7_data.csv', stringsAsFactors = TRUE)
-head(fish.data)
-```
-
-
 ---
 # Solution ![:cube]()
 
 <br>
 
 ```{r, echo = FALSE}
-fish.data <- read.csv('data/qcbs_w7_data.csv', stringsAsFactors = TRUE)
+fish.data <- read.csv('data/fishdata.csv', stringsAsFactors = TRUE)
 
 # thème simplifié
 fig <- theme_bw() + theme(panel.grid.minor = element_blank(),
@@ -722,7 +720,7 @@ Note: Décrire chaque élément de l'équation. La position trophique est prédi
 **Les données ont-elles la bonne structure?**
 
 ```{r}
-fish.data <- read.csv('data/qcbs_w7_data.csv')
+fish.data <- read.csv('data/fishdata.csv')
 str(fish.data)
 ```
 
@@ -1773,10 +1771,10 @@ Suivent les étapes similaires à celles introduites lors de la section sur les 
 ---
 # Comment modéliser un GLMM avec R
 
-Chargez les données `Arabidopsis` `banta_totalfruits.csv` dans `R`.
+Chargez les données `Arabidopsis` `arabidopsis.csv` dans `R`.
 
 ```{r, echo = FALSE}
-dat.tf <- read.csv("data/banta_totalfruits.csv")
+dat.tf <- read.csv("data/arabidopsis.csv")
 ```
 
 Cette base de données décrit la réponse génétique de l'espèce `Arabidopsis` à la fertilisation et l'herbivorie. 
