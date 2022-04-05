@@ -89,3 +89,8 @@ library(gridExtra)
 library(lattice)
 ```
 
+Vous pouvez aussi charger les fonctions spécifiques de cet atelier en utilisant:
+
+```{r, echo = TRUE, eval = F, message=FALSE, warning=FALSE}
+source("data/glmm_funs.R")
+```
