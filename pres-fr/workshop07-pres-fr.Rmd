@@ -214,20 +214,16 @@ Nous utiliserons aussi ces jeux de données:
 
 .pull-left2[
 Tout au long de cet atelier, il y aura une série de **défis** que vous pouvez reconnaître par ce rubix cube.
-
 ]
 
 .pull-right2[
+
 .center[
 ![:scale 45%](images/rubicub.png)
 
 ]
 
 ]
-
-<br>
-
-<br>
 
 .center[
 **Lors de ces défis, n'hésitez pas à collaborer !**.
