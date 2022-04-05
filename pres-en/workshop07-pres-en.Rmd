@@ -191,13 +191,6 @@ install.packages(c("lme4",
 ```
 ]
 
-<br>
-
-We will also use the following data sets:
-
-- <a href="https://r.qcbs.ca/workshop07/pres-en/data/fishdata.csv">fishdata.csv</a> 
-- <a href="https://r.qcbs.ca/workshop07/pres-en/data/arabidopsis.csv">arabidopsis.csv</a>
-- <a href="https://r.qcbs.ca/workshop07/pres-en/data/inverts.csv">inverts.csv</a>
 
 ???
 Note: To save time: (1) Ask the participants to install the packages before the workshop, (2) Don't wait that everyone managed to install every packages and help the students that did not manage to install some packages during challenge #1.
@@ -206,7 +199,16 @@ Note: To save time: (1) Ask the participants to install the packages before the 
 
 # Required material
 
+.pull-left2[
+We will also use the following data sets:
+
+- <a href="https://r.qcbs.ca/workshop07/pres-en/data/fishdata.csv">fishdata.csv</a> 
+- <a href="https://r.qcbs.ca/workshop07/pres-en/data/arabidopsis.csv">arabidopsis.csv</a>
+- <a href="https://r.qcbs.ca/workshop07/pres-en/data/inverts.csv">inverts.csv</a>
+]
+
 <br>
+
 .pull-left2[
 Throughout this workshop, there will be a series of **challenges** that you can recognize by this rubix cube.
 ]
