@@ -202,36 +202,28 @@ Note: Pour sauver du temps: (1) Demander aux participants d'installer les paquet
 
 # Matériel requis
 
-<br>
-
+.pull-left2[
 Nous utiliserons aussi ces jeux de données:
 
 - <a href="https://r.qcbs.ca/workshop07/pres-en/data/fishdata.csv">fishdata.csv</a> 
 - <a href="https://r.qcbs.ca/workshop07/pres-en/data/arabidopsis.csv">arabidopsis.csv</a>
 - <a href="https://r.qcbs.ca/workshop07/pres-en/data/inverts.csv">inverts.csv</a>
-
----
-
-# Matériel requis
+]
 
 <br>
 
 .pull-left2[
 Tout au long de cet atelier, il y aura une série de **défis** que vous pouvez reconnaître par ce rubix cube.
-
 ]
 
 .pull-right2[
+
 .center[
 ![:scale 45%](images/rubicub.png)
 
 ]
 
 ]
-
-<br>
-
-<br>
 
 .center[
 **Lors de ces défis, n'hésitez pas à collaborer !**.
