@@ -199,19 +199,16 @@ Note: To save time: (1) Ask the participants to install the packages before the 
 
 # Required material
 
-<br>
-
+.pull-left2[
 We will also use the following data sets:
 
 - <a href="https://r.qcbs.ca/workshop07/pres-en/data/fishdata.csv">fishdata.csv</a> 
 - <a href="https://r.qcbs.ca/workshop07/pres-en/data/arabidopsis.csv">arabidopsis.csv</a>
 - <a href="https://r.qcbs.ca/workshop07/pres-en/data/inverts.csv">inverts.csv</a>
-
----
-
-# Required material
+]
 
 <br>
+
 .pull-left2[
 Throughout this workshop, there will be a series of **challenges** that you can recognize by this rubix cube.
 ]
