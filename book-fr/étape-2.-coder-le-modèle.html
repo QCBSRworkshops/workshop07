@@ -251,8 +251,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>Traduisons notre modèle…</strong></p>
 <p><span class="math display">\[PT_{ijk} \sim Longueur_i + Lac_j + Espèce_k + \varepsilon_{ijk}\]</span></p>
 <p><strong>… en code R</strong></p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="étape-2.-coder-le-modèle.html#cb16-1"></a><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Fish_Species), <span class="dt">data =</span> fish.data,</span>
-<span id="cb16-2"><a href="étape-2.-coder-le-modèle.html#cb16-2"></a>    <span class="dt">REML =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="étape-2.-coder-le-modèle.html#cb17-1"></a><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Fish_Species), <span class="dt">data =</span> fish.data,</span>
+<span id="cb17-2"><a href="étape-2.-coder-le-modèle.html#cb17-2"></a>    <span class="dt">REML =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML [&#39;lmerMod&#39;]
 ## Formula: Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species)
 ##    Data: fish.data
@@ -302,12 +302,12 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div id="défi-4" class="section level2 hasAnchor">
 <h2><span class="header-section-number">10.3</span> Défi 4<a href="étape-2.-coder-le-modèle.html#défi-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Réécrivez le code suivant de façon à ce que les <strong>pentes</strong> de la relation position trophique en fonction de longueur corporelle <strong>varient par lac et par espèces</strong>:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="étape-2.-coder-le-modèle.html#cb18-1"></a><span class="co"># Défi 4: Réécrivez le code suivant de façon à ce que les</span></span>
-<span id="cb18-2"><a href="étape-2.-coder-le-modèle.html#cb18-2"></a><span class="co"># **pentes** de la relation position trophique en fonction</span></span>
-<span id="cb18-3"><a href="étape-2.-coder-le-modèle.html#cb18-3"></a><span class="co"># de longueur corporelle **varient par lac et par</span></span>
-<span id="cb18-4"><a href="étape-2.-coder-le-modèle.html#cb18-4"></a><span class="co"># espèces**:</span></span>
-<span id="cb18-5"><a href="étape-2.-coder-le-modèle.html#cb18-5"></a><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Fish_Species), <span class="dt">data =</span> fish.data,</span>
-<span id="cb18-6"><a href="étape-2.-coder-le-modèle.html#cb18-6"></a>    <span class="dt">REML =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="étape-2.-coder-le-modèle.html#cb19-1"></a><span class="co"># Défi 4: Réécrivez le code suivant de façon à ce que les</span></span>
+<span id="cb19-2"><a href="étape-2.-coder-le-modèle.html#cb19-2"></a><span class="co"># **pentes** de la relation position trophique en fonction</span></span>
+<span id="cb19-3"><a href="étape-2.-coder-le-modèle.html#cb19-3"></a><span class="co"># de longueur corporelle **varient par lac et par</span></span>
+<span id="cb19-4"><a href="étape-2.-coder-le-modèle.html#cb19-4"></a><span class="co"># espèces**:</span></span>
+<span id="cb19-5"><a href="étape-2.-coder-le-modèle.html#cb19-5"></a><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Fish_Species), <span class="dt">data =</span> fish.data,</span>
+<span id="cb19-6"><a href="étape-2.-coder-le-modèle.html#cb19-6"></a>    <span class="dt">REML =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML [&#39;lmerMod&#39;]
 ## Formula: Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species)
 ##    Data: fish.data
@@ -324,9 +324,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <hr />
 <div id="défi-4-solution" class="section level4 unnumbered hasAnchor">
 <h4><strong>Défi 4 Solution:</strong><a href="étape-2.-coder-le-modèle.html#défi-4-solution" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="étape-2.-coder-le-modèle.html#cb20-1"></a><span class="co"># Défi 4 Solution:</span></span>
-<span id="cb20-2"><a href="étape-2.-coder-le-modèle.html#cb20-2"></a><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Lake) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span></span>
-<span id="cb20-3"><a href="étape-2.-coder-le-modèle.html#cb20-3"></a><span class="st">    </span>Fish_Species), <span class="dt">data =</span> fish.data, <span class="dt">REML =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="étape-2.-coder-le-modèle.html#cb21-1"></a><span class="co"># Défi 4 Solution:</span></span>
+<span id="cb21-2"><a href="étape-2.-coder-le-modèle.html#cb21-2"></a><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Lake) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span></span>
+<span id="cb21-3"><a href="étape-2.-coder-le-modèle.html#cb21-3"></a><span class="st">    </span>Fish_Species), <span class="dt">data =</span> fish.data, <span class="dt">REML =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <pre><code>## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
 <pre><code>## Linear mixed model fit by REML [&#39;lmerMod&#39;]
 ## Formula: 
@@ -352,10 +352,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">10.4</span> Défi 5<a href="étape-2.-coder-le-modèle.html#défi-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Pour déterminer si vous avez construit le meilleur modèle mixte sur la base de vos connaissances préalables, vous devez comparer ce modèle <em>a priori</em> à d’autres modèles alternatifs.</p>
 <p>Avec l’ensemble de données sur lequel vous travaillez, il existe plusieurs modèles alternatifs qui pourraient mieux s’adapter à vos données. Pour le défi 5, faites une liste de 7 modèles alternatifs qui pourraient être comparés à celui-ci:</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="étape-2.-coder-le-modèle.html#cb23-1"></a><span class="co"># Défi 5 : Faites une liste de 7 modèles alternatifs qui</span></span>
-<span id="cb23-2"><a href="étape-2.-coder-le-modèle.html#cb23-2"></a><span class="co"># pourraient être comparés à ce modèle initial:</span></span>
-<span id="cb23-3"><a href="étape-2.-coder-le-modèle.html#cb23-3"></a><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Fish_Species), <span class="dt">data =</span> fish.data,</span>
-<span id="cb23-4"><a href="étape-2.-coder-le-modèle.html#cb23-4"></a>    <span class="dt">REML =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="étape-2.-coder-le-modèle.html#cb24-1"></a><span class="co"># Défi 5 : Faites une liste de 7 modèles alternatifs qui</span></span>
+<span id="cb24-2"><a href="étape-2.-coder-le-modèle.html#cb24-2"></a><span class="co"># pourraient être comparés à ce modèle initial:</span></span>
+<span id="cb24-3"><a href="étape-2.-coder-le-modèle.html#cb24-3"></a><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Fish_Species), <span class="dt">data =</span> fish.data,</span>
+<span id="cb24-4"><a href="étape-2.-coder-le-modèle.html#cb24-4"></a>    <span class="dt">REML =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML [&#39;lmerMod&#39;]
 ## Formula: Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species)
 ##    Data: fish.data
@@ -374,50 +374,50 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div id="défi-5-solution" class="section level4 unnumbered hasAnchor">
 <h4><strong>Défi 5 Solution:</strong><a href="étape-2.-coder-le-modèle.html#défi-5-solution" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Nous allons aussi construire le <strong>modèle linéaire de base</strong> <code>lm()</code> parce qu’il est toujours utile de voir la variation dans les valeurs de AICc.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="étape-2.-coder-le-modèle.html#cb25-1"></a><span class="co"># Solution du défi 5: Modèle linéaire de base</span></span>
-<span id="cb25-2"><a href="étape-2.-coder-le-modèle.html#cb25-2"></a>M0 &lt;-<span class="st"> </span><span class="kw">lm</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length, <span class="dt">data =</span> fish.data)</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="étape-2.-coder-le-modèle.html#cb26-1"></a><span class="co"># Solution du défi 5: Modèle linéaire de base</span></span>
+<span id="cb26-2"><a href="étape-2.-coder-le-modèle.html#cb26-2"></a>M0 &lt;-<span class="st"> </span><span class="kw">lm</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length, <span class="dt">data =</span> fish.data)</span></code></pre></div>
 <p>A fin de comparer ce modèle aux LMMs, il est important de <strong>changer la méthode d’estimation en ML (<code>REML=FALSE</code>)</strong> pour tous les autres modèles car <code>lm()</code> n’utilise pas la même méthode d’estimation que <code>lmer()</code>.</p>
 <p>Examinons les autres modèles que vous auriez pu écrire (notez <code>REML = FALSE</code>):</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="étape-2.-coder-le-modèle.html#cb26-1"></a><span class="co"># Solution du défi 5, autres modèles potentiels Notez que</span></span>
-<span id="cb26-2"><a href="étape-2.-coder-le-modèle.html#cb26-2"></a><span class="co"># REML = FALSE afin de comparer avec le modèle linéaire de</span></span>
-<span id="cb26-3"><a href="étape-2.-coder-le-modèle.html#cb26-3"></a><span class="co"># base où la méthode d&#39;estimation = ML.</span></span>
-<span id="cb26-4"><a href="étape-2.-coder-le-modèle.html#cb26-4"></a></span>
-<span id="cb26-5"><a href="étape-2.-coder-le-modèle.html#cb26-5"></a><span class="co"># Modele linéaire de base</span></span>
-<span id="cb26-6"><a href="étape-2.-coder-le-modèle.html#cb26-6"></a>M0 &lt;-<span class="st"> </span><span class="kw">lm</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length, <span class="dt">data =</span> fish.data)</span>
-<span id="cb26-7"><a href="étape-2.-coder-le-modèle.html#cb26-7"></a><span class="co"># modèle complet avec variation des ordonnées à l&#39;origine</span></span>
-<span id="cb26-8"><a href="étape-2.-coder-le-modèle.html#cb26-8"></a>M1 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Fish_Species) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake),</span>
-<span id="cb26-9"><a href="étape-2.-coder-le-modèle.html#cb26-9"></a>    <span class="dt">data =</span> fish.data, <span class="dt">REML =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb26-10"><a href="étape-2.-coder-le-modèle.html#cb26-10"></a><span class="co"># modèle complet avec variation des ordonnées à l&#39;origine</span></span>
-<span id="cb26-11"><a href="étape-2.-coder-le-modèle.html#cb26-11"></a><span class="co"># et de pentes</span></span>
-<span id="cb26-12"><a href="étape-2.-coder-le-modèle.html#cb26-12"></a>M2 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Fish_Species) <span class="op">+</span></span>
-<span id="cb26-13"><a href="étape-2.-coder-le-modèle.html#cb26-13"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Lake), <span class="dt">data =</span> fish.data, <span class="dt">REML =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="étape-2.-coder-le-modèle.html#cb27-1"></a><span class="co"># Solution du défi 5, autres modèles potentiels Notez que</span></span>
+<span id="cb27-2"><a href="étape-2.-coder-le-modèle.html#cb27-2"></a><span class="co"># REML = FALSE afin de comparer avec le modèle linéaire de</span></span>
+<span id="cb27-3"><a href="étape-2.-coder-le-modèle.html#cb27-3"></a><span class="co"># base où la méthode d&#39;estimation = ML.</span></span>
+<span id="cb27-4"><a href="étape-2.-coder-le-modèle.html#cb27-4"></a></span>
+<span id="cb27-5"><a href="étape-2.-coder-le-modèle.html#cb27-5"></a><span class="co"># Modele linéaire de base</span></span>
+<span id="cb27-6"><a href="étape-2.-coder-le-modèle.html#cb27-6"></a>M0 &lt;-<span class="st"> </span><span class="kw">lm</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length, <span class="dt">data =</span> fish.data)</span>
+<span id="cb27-7"><a href="étape-2.-coder-le-modèle.html#cb27-7"></a><span class="co"># modèle complet avec variation des ordonnées à l&#39;origine</span></span>
+<span id="cb27-8"><a href="étape-2.-coder-le-modèle.html#cb27-8"></a>M1 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Fish_Species) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake),</span>
+<span id="cb27-9"><a href="étape-2.-coder-le-modèle.html#cb27-9"></a>    <span class="dt">data =</span> fish.data, <span class="dt">REML =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb27-10"><a href="étape-2.-coder-le-modèle.html#cb27-10"></a><span class="co"># modèle complet avec variation des ordonnées à l&#39;origine</span></span>
+<span id="cb27-11"><a href="étape-2.-coder-le-modèle.html#cb27-11"></a><span class="co"># et de pentes</span></span>
+<span id="cb27-12"><a href="étape-2.-coder-le-modèle.html#cb27-12"></a>M2 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Fish_Species) <span class="op">+</span></span>
+<span id="cb27-13"><a href="étape-2.-coder-le-modèle.html#cb27-13"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Lake), <span class="dt">data =</span> fish.data, <span class="dt">REML =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <pre><code>## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="étape-2.-coder-le-modèle.html#cb28-1"></a><span class="co"># Pas d&#39;effet lac, les ordonnées à l&#39;origine varient par</span></span>
-<span id="cb28-2"><a href="étape-2.-coder-le-modèle.html#cb28-2"></a><span class="co"># espèces</span></span>
-<span id="cb28-3"><a href="étape-2.-coder-le-modèle.html#cb28-3"></a>M3 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Fish_Species), <span class="dt">data =</span> fish.data,</span>
-<span id="cb28-4"><a href="étape-2.-coder-le-modèle.html#cb28-4"></a>    <span class="dt">REML =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb28-5"><a href="étape-2.-coder-le-modèle.html#cb28-5"></a><span class="co"># Pas d&#39;effet espèces, les ordonnées à l&#39;origine varient</span></span>
-<span id="cb28-6"><a href="étape-2.-coder-le-modèle.html#cb28-6"></a><span class="co"># par lac</span></span>
-<span id="cb28-7"><a href="étape-2.-coder-le-modèle.html#cb28-7"></a>M4 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake), <span class="dt">data =</span> fish.data, <span class="dt">REML =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb28-8"><a href="étape-2.-coder-le-modèle.html#cb28-8"></a><span class="co"># Pas d&#39;effet de lac, les ordonnées à l&#39;origine et les</span></span>
-<span id="cb28-9"><a href="étape-2.-coder-le-modèle.html#cb28-9"></a><span class="co"># pentes varient par espèces</span></span>
-<span id="cb28-10"><a href="étape-2.-coder-le-modèle.html#cb28-10"></a>M5 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Fish_Species), <span class="dt">data =</span> fish.data,</span>
-<span id="cb28-11"><a href="étape-2.-coder-le-modèle.html#cb28-11"></a>    <span class="dt">REML =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="étape-2.-coder-le-modèle.html#cb29-1"></a><span class="co"># Pas d&#39;effet lac, les ordonnées à l&#39;origine varient par</span></span>
+<span id="cb29-2"><a href="étape-2.-coder-le-modèle.html#cb29-2"></a><span class="co"># espèces</span></span>
+<span id="cb29-3"><a href="étape-2.-coder-le-modèle.html#cb29-3"></a>M3 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Fish_Species), <span class="dt">data =</span> fish.data,</span>
+<span id="cb29-4"><a href="étape-2.-coder-le-modèle.html#cb29-4"></a>    <span class="dt">REML =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb29-5"><a href="étape-2.-coder-le-modèle.html#cb29-5"></a><span class="co"># Pas d&#39;effet espèces, les ordonnées à l&#39;origine varient</span></span>
+<span id="cb29-6"><a href="étape-2.-coder-le-modèle.html#cb29-6"></a><span class="co"># par lac</span></span>
+<span id="cb29-7"><a href="étape-2.-coder-le-modèle.html#cb29-7"></a>M4 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake), <span class="dt">data =</span> fish.data, <span class="dt">REML =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb29-8"><a href="étape-2.-coder-le-modèle.html#cb29-8"></a><span class="co"># Pas d&#39;effet de lac, les ordonnées à l&#39;origine et les</span></span>
+<span id="cb29-9"><a href="étape-2.-coder-le-modèle.html#cb29-9"></a><span class="co"># pentes varient par espèces</span></span>
+<span id="cb29-10"><a href="étape-2.-coder-le-modèle.html#cb29-10"></a>M5 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Fish_Species), <span class="dt">data =</span> fish.data,</span>
+<span id="cb29-11"><a href="étape-2.-coder-le-modèle.html#cb29-11"></a>    <span class="dt">REML =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <pre><code>## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="étape-2.-coder-le-modèle.html#cb30-1"></a><span class="co"># Pas d&#39;effet de l&#39;espèces, les ordonnées à l&#39;origine et</span></span>
-<span id="cb30-2"><a href="étape-2.-coder-le-modèle.html#cb30-2"></a><span class="co"># les pentes varient par lac</span></span>
-<span id="cb30-3"><a href="étape-2.-coder-le-modèle.html#cb30-3"></a>M6 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Lake), <span class="dt">data =</span> fish.data,</span>
-<span id="cb30-4"><a href="étape-2.-coder-le-modèle.html#cb30-4"></a>    <span class="dt">REML =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="étape-2.-coder-le-modèle.html#cb31-1"></a><span class="co"># Pas d&#39;effet de l&#39;espèces, les ordonnées à l&#39;origine et</span></span>
+<span id="cb31-2"><a href="étape-2.-coder-le-modèle.html#cb31-2"></a><span class="co"># les pentes varient par lac</span></span>
+<span id="cb31-3"><a href="étape-2.-coder-le-modèle.html#cb31-3"></a>M6 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Lake), <span class="dt">data =</span> fish.data,</span>
+<span id="cb31-4"><a href="étape-2.-coder-le-modèle.html#cb31-4"></a>    <span class="dt">REML =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <pre><code>## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="étape-2.-coder-le-modèle.html#cb32-1"></a><span class="co"># modèle complet, variation d&#39;ordonnée à l&#39;origine et pente</span></span>
-<span id="cb32-2"><a href="étape-2.-coder-le-modèle.html#cb32-2"></a><span class="co"># par lac</span></span>
-<span id="cb32-3"><a href="étape-2.-coder-le-modèle.html#cb32-3"></a>M7 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Fish_Species) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span></span>
-<span id="cb32-4"><a href="étape-2.-coder-le-modèle.html#cb32-4"></a><span class="st">    </span>Lake), <span class="dt">data =</span> fish.data, <span class="dt">REML =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="étape-2.-coder-le-modèle.html#cb33-1"></a><span class="co"># modèle complet, variation d&#39;ordonnée à l&#39;origine et pente</span></span>
+<span id="cb33-2"><a href="étape-2.-coder-le-modèle.html#cb33-2"></a><span class="co"># par lac</span></span>
+<span id="cb33-3"><a href="étape-2.-coder-le-modèle.html#cb33-3"></a>M7 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Fish_Species) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span></span>
+<span id="cb33-4"><a href="étape-2.-coder-le-modèle.html#cb33-4"></a><span class="st">    </span>Lake), <span class="dt">data =</span> fish.data, <span class="dt">REML =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <pre><code>## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="étape-2.-coder-le-modèle.html#cb34-1"></a><span class="co"># modèle complet, variation d&#39;ordonnée à l&#39;origine et pente</span></span>
-<span id="cb34-2"><a href="étape-2.-coder-le-modèle.html#cb34-2"></a><span class="co"># par espèces</span></span>
-<span id="cb34-3"><a href="étape-2.-coder-le-modèle.html#cb34-3"></a>M8 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Fish_Species) <span class="op">+</span></span>
-<span id="cb34-4"><a href="étape-2.-coder-le-modèle.html#cb34-4"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake), <span class="dt">data =</span> fish.data, <span class="dt">REML =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="étape-2.-coder-le-modèle.html#cb35-1"></a><span class="co"># modèle complet, variation d&#39;ordonnée à l&#39;origine et pente</span></span>
+<span id="cb35-2"><a href="étape-2.-coder-le-modèle.html#cb35-2"></a><span class="co"># par espèces</span></span>
+<span id="cb35-3"><a href="étape-2.-coder-le-modèle.html#cb35-3"></a>M8 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Fish_Species) <span class="op">+</span></span>
+<span id="cb35-4"><a href="étape-2.-coder-le-modèle.html#cb35-4"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake), <span class="dt">data =</span> fish.data, <span class="dt">REML =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <pre><code>## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
 <p><strong>Lorsqu’on ajuste des MLM avec <code>lmer()</code>, il est possible de faire face à certaines erreurs our avertissements comme:</strong></p>
 <ul>
@@ -433,22 +433,22 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>Les modèles peuvent être comparés en utilisant la fonction <code>AICc</code> provenant du package <code>MuMIn</code>. Le critère d’information Akaike (AIC) est une <strong>mesure de qualité du modèle</strong> pouvant être utilisée pour comparer les modèles.</p>
 <p><code>AICc</code> corrige pour le biais créé par les faibles tailles d’échantillon.</p>
 <p>Pour trouver la valeur AICc d’un modèle, utilisez:</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="étape-2.-coder-le-modèle.html#cb36-1"></a><span class="co"># Trouver la valeur AICc pour notre premier modèle (Modèle</span></span>
-<span id="cb36-2"><a href="étape-2.-coder-le-modèle.html#cb36-2"></a><span class="co"># linéaire de base) avec le paquet MuMIn</span></span>
-<span id="cb36-3"><a href="étape-2.-coder-le-modèle.html#cb36-3"></a>MuMIn<span class="op">::</span><span class="kw">AICc</span>(M1)</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="étape-2.-coder-le-modèle.html#cb37-1"></a><span class="co"># Trouver la valeur AICc pour notre premier modèle (Modèle</span></span>
+<span id="cb37-2"><a href="étape-2.-coder-le-modèle.html#cb37-2"></a><span class="co"># linéaire de base) avec le paquet MuMIn</span></span>
+<span id="cb37-3"><a href="étape-2.-coder-le-modèle.html#cb37-3"></a>MuMIn<span class="op">::</span><span class="kw">AICc</span>(M1)</span></code></pre></div>
 <pre><code>## [1] 77.30499</code></pre>
 <p>Pour regrouper toutes les valeurs de l’AICc dans un seul tableau, utilisez <code>MuMIn::model.sel()</code> pour calculer l’AICc pour chaque modèle (avec d’autres sorties) et ensuite sélectionnez seulement les colonnes d’intérêt pour les imprimer dans un tableau.</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="étape-2.-coder-le-modèle.html#cb38-1"></a><span class="co"># Pour regrouper toutes les valeurs de l&#39;AICc dans un seul</span></span>
-<span id="cb38-2"><a href="étape-2.-coder-le-modèle.html#cb38-2"></a><span class="co"># tableau, utilisez `MuMIn::model.sel()` pour calculer</span></span>
-<span id="cb38-3"><a href="étape-2.-coder-le-modèle.html#cb38-3"></a><span class="co"># l&#39;AICc pour chaque modèle (avec d&#39;autres sorties) et</span></span>
-<span id="cb38-4"><a href="étape-2.-coder-le-modèle.html#cb38-4"></a><span class="co"># ensuite sélectionnez seulement les colonnes d&#39;intérêt</span></span>
-<span id="cb38-5"><a href="étape-2.-coder-le-modèle.html#cb38-5"></a><span class="co"># pour les imprimer dans un tableau.</span></span>
-<span id="cb38-6"><a href="étape-2.-coder-le-modèle.html#cb38-6"></a>AIC.table &lt;-<span class="st"> </span>MuMIn<span class="op">::</span><span class="kw">model.sel</span>(M0, M1, M2, M3, M4, M5, M6, M7,</span>
-<span id="cb38-7"><a href="étape-2.-coder-le-modèle.html#cb38-7"></a>    M8)</span>
-<span id="cb38-8"><a href="étape-2.-coder-le-modèle.html#cb38-8"></a><span class="co"># `df` est le degré de liberté `logLik` est le log de la</span></span>
-<span id="cb38-9"><a href="étape-2.-coder-le-modèle.html#cb38-9"></a><span class="co"># vraisemblance `delta` est la différence d&#39;AICc avec la</span></span>
-<span id="cb38-10"><a href="étape-2.-coder-le-modèle.html#cb38-10"></a><span class="co"># valeur la plus petite</span></span>
-<span id="cb38-11"><a href="étape-2.-coder-le-modèle.html#cb38-11"></a>(AIC.table &lt;-<span class="st"> </span>AIC.table[, <span class="kw">c</span>(<span class="st">&quot;df&quot;</span>, <span class="st">&quot;logLik&quot;</span>, <span class="st">&quot;AICc&quot;</span>, <span class="st">&quot;delta&quot;</span>)])</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="étape-2.-coder-le-modèle.html#cb39-1"></a><span class="co"># Pour regrouper toutes les valeurs de l&#39;AICc dans un seul</span></span>
+<span id="cb39-2"><a href="étape-2.-coder-le-modèle.html#cb39-2"></a><span class="co"># tableau, utilisez `MuMIn::model.sel()` pour calculer</span></span>
+<span id="cb39-3"><a href="étape-2.-coder-le-modèle.html#cb39-3"></a><span class="co"># l&#39;AICc pour chaque modèle (avec d&#39;autres sorties) et</span></span>
+<span id="cb39-4"><a href="étape-2.-coder-le-modèle.html#cb39-4"></a><span class="co"># ensuite sélectionnez seulement les colonnes d&#39;intérêt</span></span>
+<span id="cb39-5"><a href="étape-2.-coder-le-modèle.html#cb39-5"></a><span class="co"># pour les imprimer dans un tableau.</span></span>
+<span id="cb39-6"><a href="étape-2.-coder-le-modèle.html#cb39-6"></a>AIC.table &lt;-<span class="st"> </span>MuMIn<span class="op">::</span><span class="kw">model.sel</span>(M0, M1, M2, M3, M4, M5, M6, M7,</span>
+<span id="cb39-7"><a href="étape-2.-coder-le-modèle.html#cb39-7"></a>    M8)</span>
+<span id="cb39-8"><a href="étape-2.-coder-le-modèle.html#cb39-8"></a><span class="co"># `df` est le degré de liberté `logLik` est le log de la</span></span>
+<span id="cb39-9"><a href="étape-2.-coder-le-modèle.html#cb39-9"></a><span class="co"># vraisemblance `delta` est la différence d&#39;AICc avec la</span></span>
+<span id="cb39-10"><a href="étape-2.-coder-le-modèle.html#cb39-10"></a><span class="co"># valeur la plus petite</span></span>
+<span id="cb39-11"><a href="étape-2.-coder-le-modèle.html#cb39-11"></a>(AIC.table &lt;-<span class="st"> </span>AIC.table[, <span class="kw">c</span>(<span class="st">&quot;df&quot;</span>, <span class="st">&quot;logLik&quot;</span>, <span class="st">&quot;AICc&quot;</span>, <span class="st">&quot;delta&quot;</span>)])</span></code></pre></div>
 <pre><code>##    df      logLik      AICc      delta
 ## M8  7   -8.597929  31.84702   0.000000
 ## M2  9   -8.216019  35.49086   3.643839
@@ -459,9 +459,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## M4  4 -224.715763 457.66010 425.813076
 ## M6  6 -224.671201 461.82795 429.980930
 ## M0  3 -236.861362 479.85909 448.012065</code></pre>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="étape-2.-coder-le-modèle.html#cb40-1"></a><span class="co"># Pour plus d&#39;informations sur les autres sorties ou</span></span>
-<span id="cb40-2"><a href="étape-2.-coder-le-modèle.html#cb40-2"></a><span class="co"># résultats de la fonction model.sel(), roulez</span></span>
-<span id="cb40-3"><a href="étape-2.-coder-le-modèle.html#cb40-3"></a><span class="co"># `?model.sel`.</span></span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="étape-2.-coder-le-modèle.html#cb41-1"></a><span class="co"># Pour plus d&#39;informations sur les autres sorties ou</span></span>
+<span id="cb41-2"><a href="étape-2.-coder-le-modèle.html#cb41-2"></a><span class="co"># résultats de la fonction model.sel(), roulez</span></span>
+<span id="cb41-3"><a href="étape-2.-coder-le-modèle.html#cb41-3"></a><span class="co"># `?model.sel`.</span></span></code></pre></div>
 <p>Où:</p>
 <ul>
 <li><code>df</code> montre les degrés de liberté</li>
@@ -477,43 +477,43 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li>Examinons de plus proche M8 and M2. On peut exclure les autres modèles, car ils ont des AICc beaucoup plus élevés.</li>
 </ul>
 <p><em>Notez qu’on utilise maintenant REML (i.e. <code>REML=TRUE</code>) puisqu’on compare deux modèles avec des effets aléatoires nichés et avec la même structure d’effets fixes.</em></p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="étape-2.-coder-le-modèle.html#cb41-1"></a><span class="co"># Examinons de plus proche M8 and M2 (les autres modèlesont</span></span>
-<span id="cb41-2"><a href="étape-2.-coder-le-modèle.html#cb41-2"></a><span class="co"># des AICc beaucoup plus élevés) `REML = TRUE` parce qu&#39;on</span></span>
-<span id="cb41-3"><a href="étape-2.-coder-le-modèle.html#cb41-3"></a><span class="co"># compare deux modèles avec des effets aléatoires nichés et</span></span>
-<span id="cb41-4"><a href="étape-2.-coder-le-modèle.html#cb41-4"></a><span class="co"># avec la même structure d&#39;effets fixes</span></span>
-<span id="cb41-5"><a href="étape-2.-coder-le-modèle.html#cb41-5"></a>M8 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Fish_Species) <span class="op">+</span></span>
-<span id="cb41-6"><a href="étape-2.-coder-le-modèle.html#cb41-6"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake), <span class="dt">data =</span> fish.data, <span class="dt">REML =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="étape-2.-coder-le-modèle.html#cb42-1"></a><span class="co"># Examinons de plus proche M8 and M2 (les autres modèlesont</span></span>
+<span id="cb42-2"><a href="étape-2.-coder-le-modèle.html#cb42-2"></a><span class="co"># des AICc beaucoup plus élevés) `REML = TRUE` parce qu&#39;on</span></span>
+<span id="cb42-3"><a href="étape-2.-coder-le-modèle.html#cb42-3"></a><span class="co"># compare deux modèles avec des effets aléatoires nichés et</span></span>
+<span id="cb42-4"><a href="étape-2.-coder-le-modèle.html#cb42-4"></a><span class="co"># avec la même structure d&#39;effets fixes</span></span>
+<span id="cb42-5"><a href="étape-2.-coder-le-modèle.html#cb42-5"></a>M8 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Fish_Species) <span class="op">+</span></span>
+<span id="cb42-6"><a href="étape-2.-coder-le-modèle.html#cb42-6"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake), <span class="dt">data =</span> fish.data, <span class="dt">REML =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <pre><code>## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="étape-2.-coder-le-modèle.html#cb43-1"></a>M2 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Fish_Species) <span class="op">+</span></span>
-<span id="cb43-2"><a href="étape-2.-coder-le-modèle.html#cb43-2"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Lake), <span class="dt">data =</span> fish.data, <span class="dt">REML =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="étape-2.-coder-le-modèle.html#cb44-1"></a>M2 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Fish_Species) <span class="op">+</span></span>
+<span id="cb44-2"><a href="étape-2.-coder-le-modèle.html#cb44-2"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Lake), <span class="dt">data =</span> fish.data, <span class="dt">REML =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <pre><code>## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="étape-2.-coder-le-modèle.html#cb45-1"></a><span class="co"># Sortonz un tableau pour comparer M2 et M8</span></span>
-<span id="cb45-2"><a href="étape-2.-coder-le-modèle.html#cb45-2"></a>MuMIn<span class="op">::</span><span class="kw">model.sel</span>(M2, M8)[, <span class="kw">c</span>(<span class="st">&quot;df&quot;</span>, <span class="st">&quot;logLik&quot;</span>, <span class="st">&quot;AICc&quot;</span>, <span class="st">&quot;delta&quot;</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="étape-2.-coder-le-modèle.html#cb46-1"></a><span class="co"># Sortonz un tableau pour comparer M2 et M8</span></span>
+<span id="cb46-2"><a href="étape-2.-coder-le-modèle.html#cb46-2"></a>MuMIn<span class="op">::</span><span class="kw">model.sel</span>(M2, M8)[, <span class="kw">c</span>(<span class="st">&quot;df&quot;</span>, <span class="st">&quot;logLik&quot;</span>, <span class="st">&quot;AICc&quot;</span>, <span class="st">&quot;delta&quot;</span>)]</span></code></pre></div>
 <pre><code>##    df    logLik     AICc    delta
 ## M8  7 -10.84011 36.33137 0.000000
 ## M2  9 -10.28932 39.63747 3.306098</code></pre>
 <p>Le modèle <code>M8</code> semble être le meilleur modèle parmi ceux qu’on a testé!</p>
 <hr />
 <p><strong>Quelle est la structure du meilleur modèle?</strong></p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="étape-2.-coder-le-modèle.html#cb47-1"></a><span class="co"># Regardons à nouveau le meilleur modèle, quelle est sa</span></span>
-<span id="cb47-2"><a href="étape-2.-coder-le-modèle.html#cb47-2"></a><span class="co"># structure?</span></span>
-<span id="cb47-3"><a href="étape-2.-coder-le-modèle.html#cb47-3"></a>M8 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Fish_Species) <span class="op">+</span></span>
-<span id="cb47-4"><a href="étape-2.-coder-le-modèle.html#cb47-4"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake), <span class="dt">data =</span> fish.data, <span class="dt">REML =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="étape-2.-coder-le-modèle.html#cb48-1"></a><span class="co"># Regardons à nouveau le meilleur modèle, quelle est sa</span></span>
+<span id="cb48-2"><a href="étape-2.-coder-le-modèle.html#cb48-2"></a><span class="co"># structure?</span></span>
+<span id="cb48-3"><a href="étape-2.-coder-le-modèle.html#cb48-3"></a>M8 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Fish_Species) <span class="op">+</span></span>
+<span id="cb48-4"><a href="étape-2.-coder-le-modèle.html#cb48-4"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake), <span class="dt">data =</span> fish.data, <span class="dt">REML =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <pre><code>## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="étape-2.-coder-le-modèle.html#cb49-1"></a><span class="co"># L&#39;ordonnée à l&#39;origine et l&#39;effet de la longueur sur la</span></span>
-<span id="cb49-2"><a href="étape-2.-coder-le-modèle.html#cb49-2"></a><span class="co"># position trophique peut varier selon l&#39;espèce de</span></span>
-<span id="cb49-3"><a href="étape-2.-coder-le-modèle.html#cb49-3"></a><span class="co"># poissons, mais seulement l&#39;ordonnée à l&#39;origine peut</span></span>
-<span id="cb49-4"><a href="étape-2.-coder-le-modèle.html#cb49-4"></a><span class="co"># varier par lac</span></span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="étape-2.-coder-le-modèle.html#cb50-1"></a><span class="co"># L&#39;ordonnée à l&#39;origine et l&#39;effet de la longueur sur la</span></span>
+<span id="cb50-2"><a href="étape-2.-coder-le-modèle.html#cb50-2"></a><span class="co"># position trophique peut varier selon l&#39;espèce de</span></span>
+<span id="cb50-3"><a href="étape-2.-coder-le-modèle.html#cb50-3"></a><span class="co"># poissons, mais seulement l&#39;ordonnée à l&#39;origine peut</span></span>
+<span id="cb50-4"><a href="étape-2.-coder-le-modèle.html#cb50-4"></a><span class="co"># varier par lac</span></span></code></pre></div>
 <p>L’ordonnée à l’origine et l’effet de la longueur sur la position trophique peut varier selon l’espèce de poissons, mais seulement l’ordonnée à l’origine peut varier par lac.</p>
 <div class="two-col">
 <p><img src="images/fig_9_w5.png" /><br />
 <img src="images/fig_8_w5.png" /></p>
 </div>
 <p>Une fois que le meilleur modèle est sélectionné, il faut remettre la méthode d’estimation a <code>REML = TRUE</code>.</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="étape-2.-coder-le-modèle.html#cb50-1"></a><span class="co"># Une fois que le meilleur modèle est sélectionné il faut</span></span>
-<span id="cb50-2"><a href="étape-2.-coder-le-modèle.html#cb50-2"></a><span class="co"># remettre la méthode d&#39;estimation a `REML = TRUE`</span></span>
-<span id="cb50-3"><a href="étape-2.-coder-le-modèle.html#cb50-3"></a>M8 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Fish_Species) <span class="op">+</span></span>
-<span id="cb50-4"><a href="étape-2.-coder-le-modèle.html#cb50-4"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake), <span class="dt">data =</span> fish.data, <span class="dt">REML =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="étape-2.-coder-le-modèle.html#cb51-1"></a><span class="co"># Une fois que le meilleur modèle est sélectionné il faut</span></span>
+<span id="cb51-2"><a href="étape-2.-coder-le-modèle.html#cb51-2"></a><span class="co"># remettre la méthode d&#39;estimation a `REML = TRUE`</span></span>
+<span id="cb51-3"><a href="étape-2.-coder-le-modèle.html#cb51-3"></a>M8 &lt;-<span class="st"> </span><span class="kw">lmer</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>Z_Length <span class="op">|</span><span class="st"> </span>Fish_Species) <span class="op">+</span></span>
+<span id="cb51-4"><a href="étape-2.-coder-le-modèle.html#cb51-4"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Lake), <span class="dt">data =</span> fish.data, <span class="dt">REML =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <pre><code>## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
 </div>
 </div>

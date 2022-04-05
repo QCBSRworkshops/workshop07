@@ -258,15 +258,15 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>Comme pour la partie LMM de cet atelier, nous allons travailler sur le matériel GLMM avec un ensemble de données afin de mieux comprendre le fonctionnement des GLMMs et comment les implémenter dans <code>R</code>.</p>
 <p>Dans le jeu de données <code>Arabidopsis</code>, l’effet de la disponibilité des nutriments et de l’herbivorie (<strong>effets fixes</strong>) sur la production de fruits (<strong>variable de réponse</strong>) d’<em>Arabidopsis thaliana</em> a été évalué en mesurant 625 plantes dans 9 populations différentes, chacune comprenant 2 à 3 génotypes différents (<strong>effets aléatoires</strong>).</p>
 <p>Chargez les données <code>Arabidopsis</code> <code>banta_totalfruits.csv</code> dans <code>R</code>.</p>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="introduction-aux-glmm.html#cb69-1"></a>dat.tf &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/banta_totalfruits.csv&quot;</span>)</span>
-<span id="cb69-2"><a href="introduction-aux-glmm.html#cb69-2"></a></span>
-<span id="cb69-3"><a href="introduction-aux-glmm.html#cb69-3"></a><span class="co"># Dans cet ensemble de données, les en-têtes de colonne</span></span>
-<span id="cb69-4"><a href="introduction-aux-glmm.html#cb69-4"></a><span class="co"># sont définis comme suit: popu: facteur avec un niveau</span></span>
-<span id="cb69-5"><a href="introduction-aux-glmm.html#cb69-5"></a><span class="co"># pour chaque population gen: facteur avec un niveau pour</span></span>
-<span id="cb69-6"><a href="introduction-aux-glmm.html#cb69-6"></a><span class="co"># chaque génotype nutrient: facteur avec niveau bas (valeur</span></span>
-<span id="cb69-7"><a href="introduction-aux-glmm.html#cb69-7"></a><span class="co"># = 1) ou haut (valeur = 8) amd: facteur précisant</span></span>
-<span id="cb69-8"><a href="introduction-aux-glmm.html#cb69-8"></a><span class="co"># l&#39;absence ou la présence d&#39;herbivorie total.fruits:</span></span>
-<span id="cb69-9"><a href="introduction-aux-glmm.html#cb69-9"></a><span class="co"># nombre entier indiquant le nombre de fruits par plante</span></span></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="introduction-aux-glmm.html#cb70-1"></a>dat.tf &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/banta_totalfruits.csv&quot;</span>)</span>
+<span id="cb70-2"><a href="introduction-aux-glmm.html#cb70-2"></a></span>
+<span id="cb70-3"><a href="introduction-aux-glmm.html#cb70-3"></a><span class="co"># Dans cet ensemble de données, les en-têtes de colonne</span></span>
+<span id="cb70-4"><a href="introduction-aux-glmm.html#cb70-4"></a><span class="co"># sont définis comme suit: popu: facteur avec un niveau</span></span>
+<span id="cb70-5"><a href="introduction-aux-glmm.html#cb70-5"></a><span class="co"># pour chaque population gen: facteur avec un niveau pour</span></span>
+<span id="cb70-6"><a href="introduction-aux-glmm.html#cb70-6"></a><span class="co"># chaque génotype nutrient: facteur avec niveau bas (valeur</span></span>
+<span id="cb70-7"><a href="introduction-aux-glmm.html#cb70-7"></a><span class="co"># = 1) ou haut (valeur = 8) amd: facteur précisant</span></span>
+<span id="cb70-8"><a href="introduction-aux-glmm.html#cb70-8"></a><span class="co"># l&#39;absence ou la présence d&#39;herbivorie total.fruits:</span></span>
+<span id="cb70-9"><a href="introduction-aux-glmm.html#cb70-9"></a><span class="co"># nombre entier indiquant le nombre de fruits par plante</span></span></code></pre></div>
 </div>
 <hr>
 <center> 

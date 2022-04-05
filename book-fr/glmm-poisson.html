@@ -251,25 +251,25 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>Compte tenu de la relation moyenne-variance, nous avons besoin d’un modèle qui tient compte de la surdispersion.</strong></p>
 <p>Pour comprendre pourquoi, commençons avec un modèle avec une distribution de Poisson.</p>
 <p>Pour lancer un GLMM dans <code>R</code>, nous faisons appel à la fonction <code>glmer()</code> de la librairie <code>lme4</code>:</p>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="glmm-poisson.html#cb74-1"></a><span class="co"># GLMM Poisson Nous avons besoin d&#39;un modèle qui tient</span></span>
-<span id="cb74-2"><a href="glmm-poisson.html#cb74-2"></a><span class="co"># compte de la surdispersion.  Commençons avec un modèle</span></span>
-<span id="cb74-3"><a href="glmm-poisson.html#cb74-3"></a><span class="co"># Poisson</span></span>
-<span id="cb74-4"><a href="glmm-poisson.html#cb74-4"></a>mp1 &lt;-<span class="st"> </span><span class="kw">glmer</span>(total.fruits <span class="op">~</span><span class="st"> </span>nutrient <span class="op">*</span><span class="st"> </span>amd <span class="op">+</span><span class="st"> </span>rack <span class="op">+</span><span class="st"> </span>status <span class="op">+</span></span>
-<span id="cb74-5"><a href="glmm-poisson.html#cb74-5"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>popu) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>gen), <span class="dt">data =</span> dat.tf, <span class="dt">family =</span> <span class="st">&quot;poisson&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="glmm-poisson.html#cb75-1"></a><span class="co"># GLMM Poisson Nous avons besoin d&#39;un modèle qui tient</span></span>
+<span id="cb75-2"><a href="glmm-poisson.html#cb75-2"></a><span class="co"># compte de la surdispersion.  Commençons avec un modèle</span></span>
+<span id="cb75-3"><a href="glmm-poisson.html#cb75-3"></a><span class="co"># Poisson</span></span>
+<span id="cb75-4"><a href="glmm-poisson.html#cb75-4"></a>mp1 &lt;-<span class="st"> </span><span class="kw">glmer</span>(total.fruits <span class="op">~</span><span class="st"> </span>nutrient <span class="op">*</span><span class="st"> </span>amd <span class="op">+</span><span class="st"> </span>rack <span class="op">+</span><span class="st"> </span>status <span class="op">+</span></span>
+<span id="cb75-5"><a href="glmm-poisson.html#cb75-5"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>popu) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>gen), <span class="dt">data =</span> dat.tf, <span class="dt">family =</span> <span class="st">&quot;poisson&quot;</span>)</span></code></pre></div>
 <p><strong>Effets aléatoires</strong> : <code>(1|popu)</code> et <code>(1|gen)</code>. Nous faisons varier les ordonnées à l’origine pour les différentes populations (<code>popu</code>) et génotypes (<code>gen</code>).</p>
 <hr />
 <p><strong>Vérification de la surdispersion</strong></p>
 <p>On vérifie la surdispersion en utilisant la fonction <code>overdisp_fun()</code> (Bolker <em>et al</em>. 2011) qui divise la déviance des résidus (de Pearson) par leurs degrés de liberté.</p>
 <p>La fonction teste si le <strong>rapport est plus grand que 1</strong>.</p>
 <p>Effectuons ce test:</p>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="glmm-poisson.html#cb75-1"></a><span class="co"># Téléchargez le code glmm_funs.R de la page wiki et</span></span>
-<span id="cb75-2"><a href="glmm-poisson.html#cb75-2"></a><span class="co"># exécutez la fonction dans R</span></span>
-<span id="cb75-3"><a href="glmm-poisson.html#cb75-3"></a><span class="kw">source</span>(<span class="dt">file =</span> <span class="st">&quot;data/glmm_funs.R&quot;</span>)</span>
-<span id="cb75-4"><a href="glmm-poisson.html#cb75-4"></a><span class="co"># Surdispersion?</span></span>
-<span id="cb75-5"><a href="glmm-poisson.html#cb75-5"></a><span class="kw">overdisp_fun</span>(mp1)</span></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="glmm-poisson.html#cb76-1"></a><span class="co"># Téléchargez le code glmm_funs.R de la page wiki et</span></span>
+<span id="cb76-2"><a href="glmm-poisson.html#cb76-2"></a><span class="co"># exécutez la fonction dans R</span></span>
+<span id="cb76-3"><a href="glmm-poisson.html#cb76-3"></a><span class="kw">source</span>(<span class="dt">file =</span> <span class="st">&quot;data/glmm_funs.R&quot;</span>)</span>
+<span id="cb76-4"><a href="glmm-poisson.html#cb76-4"></a><span class="co"># Surdispersion?</span></span>
+<span id="cb76-5"><a href="glmm-poisson.html#cb76-5"></a><span class="kw">overdisp_fun</span>(mp1)</span></code></pre></div>
 <pre><code>##       chisq       ratio           p        logp 
 ## 15755.86829    25.57771     0.00000 -6578.47025</code></pre>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="glmm-poisson.html#cb77-1"></a><span class="co"># Le rapport est significativement &gt; 1</span></span></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="glmm-poisson.html#cb78-1"></a><span class="co"># Le rapport est significativement &gt; 1</span></span></code></pre></div>
 <p><strong>Le rapport est significativement &gt; 1</strong></p>
 <p>Comme on s’y attendait, nous devons modéliser une <strong>distribution différente</strong> où la variance augmente plus rapidement que la moyenne.</p>
 </div>

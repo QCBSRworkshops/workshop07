@@ -251,45 +251,45 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>Nous devons maintenant choisir une distribution d’erreurs. Ce choix sera informé par la structure de nos données.</p>
 <p>La variable réponse constitue des données d’abondance, donc nous devons choisir une <strong>distribution de Poisson</strong> (i.e variance égale à la moyenne)</p>
 <p>Jetons-y un coup d’oeil:</p>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="choisir-la-distribution-des-erreurs.html#cb70-1"></a><span class="co"># Avant d&#39;aller plus loin, nous devons choisir une</span></span>
-<span id="cb70-2"><a href="choisir-la-distribution-des-erreurs.html#cb70-2"></a><span class="co"># distribution d&#39;erreurs. Ce choix sera guidé par la</span></span>
-<span id="cb70-3"><a href="choisir-la-distribution-des-erreurs.html#cb70-3"></a><span class="co"># structure de nos données.  Notre variable de réponse est</span></span>
-<span id="cb70-4"><a href="choisir-la-distribution-des-erreurs.html#cb70-4"></a><span class="co"># une donnée de comptage, ce qui suggère que nous avons</span></span>
-<span id="cb70-5"><a href="choisir-la-distribution-des-erreurs.html#cb70-5"></a><span class="co"># besoin d&#39;une distribution de Poisson (c&#39;est-à-dire que la</span></span>
-<span id="cb70-6"><a href="choisir-la-distribution-des-erreurs.html#cb70-6"></a><span class="co"># variance est égale à la moyenne).</span></span>
-<span id="cb70-7"><a href="choisir-la-distribution-des-erreurs.html#cb70-7"></a><span class="kw">hist</span>(dat.tf<span class="op">$</span>total.fruits, <span class="dt">breaks =</span> <span class="dv">50</span>, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;&quot;</span>,</span>
-<span id="cb70-8"><a href="choisir-la-distribution-des-erreurs.html#cb70-8"></a>    <span class="dt">xlab =</span> <span class="st">&quot;Total fruits&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Count&quot;</span>)</span></code></pre></div>
-<p><img src="book-fr_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="choisir-la-distribution-des-erreurs.html#cb71-1"></a><span class="co"># Avant d&#39;aller plus loin, nous devons choisir une</span></span>
+<span id="cb71-2"><a href="choisir-la-distribution-des-erreurs.html#cb71-2"></a><span class="co"># distribution d&#39;erreurs. Ce choix sera guidé par la</span></span>
+<span id="cb71-3"><a href="choisir-la-distribution-des-erreurs.html#cb71-3"></a><span class="co"># structure de nos données.  Notre variable de réponse est</span></span>
+<span id="cb71-4"><a href="choisir-la-distribution-des-erreurs.html#cb71-4"></a><span class="co"># une donnée de comptage, ce qui suggère que nous avons</span></span>
+<span id="cb71-5"><a href="choisir-la-distribution-des-erreurs.html#cb71-5"></a><span class="co"># besoin d&#39;une distribution de Poisson (c&#39;est-à-dire que la</span></span>
+<span id="cb71-6"><a href="choisir-la-distribution-des-erreurs.html#cb71-6"></a><span class="co"># variance est égale à la moyenne).</span></span>
+<span id="cb71-7"><a href="choisir-la-distribution-des-erreurs.html#cb71-7"></a><span class="kw">hist</span>(dat.tf<span class="op">$</span>total.fruits, <span class="dt">breaks =</span> <span class="dv">50</span>, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb71-8"><a href="choisir-la-distribution-des-erreurs.html#cb71-8"></a>    <span class="dt">xlab =</span> <span class="st">&quot;Total fruits&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Count&quot;</span>)</span></code></pre></div>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
 <p>Cependant, comme nous le verrons, la variance de chaque groupe augmente beaucoup plus rapidement que prévu…</p>
 <hr />
 <p><strong>Exploration de la variance </strong></p>
 <p>Examinons de plus près la variance au sein de nos données.</p>
 <p>Pour illustrer l’hétérogénéité de la variance, nous allons créer des <em>boxplots</em> du <strong>log</strong> du nombre total de fruits (<strong>variable réponse</strong>) par rapport aux différents facteurs environnementaux.</p>
 <p>Créons d’abord de nouvelles variables qui représentent toutes les combinaisons de <strong>nutriments</strong> x <strong>herbivorie</strong> x <strong>facteur aléatoire</strong>.</p>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="choisir-la-distribution-des-erreurs.html#cb71-1"></a><span class="co"># Explorons la variance dans nos données Créez de nouvelles</span></span>
-<span id="cb71-2"><a href="choisir-la-distribution-des-erreurs.html#cb71-2"></a><span class="co"># variables qui représentent chaque combinaison de</span></span>
-<span id="cb71-3"><a href="choisir-la-distribution-des-erreurs.html#cb71-3"></a><span class="co"># variables.</span></span>
-<span id="cb71-4"><a href="choisir-la-distribution-des-erreurs.html#cb71-4"></a>dat.tf &lt;-<span class="st"> </span><span class="kw">within</span>(dat.tf, {</span>
-<span id="cb71-5"><a href="choisir-la-distribution-des-erreurs.html#cb71-5"></a>    <span class="co"># genotype x nutrient x clipping</span></span>
-<span id="cb71-6"><a href="choisir-la-distribution-des-erreurs.html#cb71-6"></a>    gna &lt;-<span class="st"> </span><span class="kw">interaction</span>(gen, nutrient, amd)</span>
-<span id="cb71-7"><a href="choisir-la-distribution-des-erreurs.html#cb71-7"></a>    gna &lt;-<span class="st"> </span><span class="kw">reorder</span>(gna, total.fruits, mean)</span>
-<span id="cb71-8"><a href="choisir-la-distribution-des-erreurs.html#cb71-8"></a></span>
-<span id="cb71-9"><a href="choisir-la-distribution-des-erreurs.html#cb71-9"></a>    <span class="co"># population x nutrient x clipping</span></span>
-<span id="cb71-10"><a href="choisir-la-distribution-des-erreurs.html#cb71-10"></a>    pna &lt;-<span class="st"> </span><span class="kw">interaction</span>(popu, nutrient, amd)</span>
-<span id="cb71-11"><a href="choisir-la-distribution-des-erreurs.html#cb71-11"></a>    pna &lt;-<span class="st"> </span><span class="kw">reorder</span>(pna, total.fruits, mean)</span>
-<span id="cb71-12"><a href="choisir-la-distribution-des-erreurs.html#cb71-12"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="choisir-la-distribution-des-erreurs.html#cb72-1"></a><span class="co"># Explorons la variance dans nos données Créez de nouvelles</span></span>
+<span id="cb72-2"><a href="choisir-la-distribution-des-erreurs.html#cb72-2"></a><span class="co"># variables qui représentent chaque combinaison de</span></span>
+<span id="cb72-3"><a href="choisir-la-distribution-des-erreurs.html#cb72-3"></a><span class="co"># variables.</span></span>
+<span id="cb72-4"><a href="choisir-la-distribution-des-erreurs.html#cb72-4"></a>dat.tf &lt;-<span class="st"> </span><span class="kw">within</span>(dat.tf, {</span>
+<span id="cb72-5"><a href="choisir-la-distribution-des-erreurs.html#cb72-5"></a>    <span class="co"># genotype x nutrient x clipping</span></span>
+<span id="cb72-6"><a href="choisir-la-distribution-des-erreurs.html#cb72-6"></a>    gna &lt;-<span class="st"> </span><span class="kw">interaction</span>(gen, nutrient, amd)</span>
+<span id="cb72-7"><a href="choisir-la-distribution-des-erreurs.html#cb72-7"></a>    gna &lt;-<span class="st"> </span><span class="kw">reorder</span>(gna, total.fruits, mean)</span>
+<span id="cb72-8"><a href="choisir-la-distribution-des-erreurs.html#cb72-8"></a></span>
+<span id="cb72-9"><a href="choisir-la-distribution-des-erreurs.html#cb72-9"></a>    <span class="co"># population x nutrient x clipping</span></span>
+<span id="cb72-10"><a href="choisir-la-distribution-des-erreurs.html#cb72-10"></a>    pna &lt;-<span class="st"> </span><span class="kw">interaction</span>(popu, nutrient, amd)</span>
+<span id="cb72-11"><a href="choisir-la-distribution-des-erreurs.html#cb72-11"></a>    pna &lt;-<span class="st"> </span><span class="kw">reorder</span>(pna, total.fruits, mean)</span>
+<span id="cb72-12"><a href="choisir-la-distribution-des-erreurs.html#cb72-12"></a>})</span></code></pre></div>
 <p>Maintenant, visualisons:</p>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="choisir-la-distribution-des-erreurs.html#cb72-1"></a><span class="co"># Boxplot of total fruits vs genotype x nutrient x clipping interaction</span></span>
-<span id="cb72-2"><a href="choisir-la-distribution-des-erreurs.html#cb72-2"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> dat.tf, </span>
-<span id="cb72-3"><a href="choisir-la-distribution-des-erreurs.html#cb72-3"></a>       <span class="kw">aes</span>(<span class="kw">factor</span>(<span class="dt">x =</span> gna), <span class="dt">y =</span> <span class="kw">log</span>(total.fruits <span class="op">+</span><span class="st"> </span><span class="dv">1</span>))) <span class="op">+</span></span>
-<span id="cb72-4"><a href="choisir-la-distribution-des-erreurs.html#cb72-4"></a><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">colour =</span> <span class="st">&quot;skyblue2&quot;</span>, </span>
-<span id="cb72-5"><a href="choisir-la-distribution-des-erreurs.html#cb72-5"></a>               <span class="dt">outlier.shape =</span> <span class="dv">21</span>,</span>
-<span id="cb72-6"><a href="choisir-la-distribution-des-erreurs.html#cb72-6"></a>               <span class="dt">outlier.colour =</span> <span class="st">&quot;skyblue2&quot;</span>) <span class="op">+</span></span>
-<span id="cb72-7"><a href="choisir-la-distribution-des-erreurs.html#cb72-7"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;log (Total fruits)</span><span class="ch">\n</span><span class="st">&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="co"># \n creates a space after the title</span></span>
-<span id="cb72-8"><a href="choisir-la-distribution-des-erreurs.html#cb72-8"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">Genotype x nutrient x clipping&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="co"># space before the title</span></span>
-<span id="cb72-9"><a href="choisir-la-distribution-des-erreurs.html#cb72-9"></a><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_blank</span>()) <span class="op">+</span></span>
-<span id="cb72-10"><a href="choisir-la-distribution-des-erreurs.html#cb72-10"></a><span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun =</span> mean, <span class="dt">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
-<p><img src="book-fr_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="choisir-la-distribution-des-erreurs.html#cb73-1"></a><span class="co"># Boxplot of total fruits vs genotype x nutrient x clipping interaction</span></span>
+<span id="cb73-2"><a href="choisir-la-distribution-des-erreurs.html#cb73-2"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> dat.tf, </span>
+<span id="cb73-3"><a href="choisir-la-distribution-des-erreurs.html#cb73-3"></a>       <span class="kw">aes</span>(<span class="kw">factor</span>(<span class="dt">x =</span> gna), <span class="dt">y =</span> <span class="kw">log</span>(total.fruits <span class="op">+</span><span class="st"> </span><span class="dv">1</span>))) <span class="op">+</span></span>
+<span id="cb73-4"><a href="choisir-la-distribution-des-erreurs.html#cb73-4"></a><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">colour =</span> <span class="st">&quot;skyblue2&quot;</span>, </span>
+<span id="cb73-5"><a href="choisir-la-distribution-des-erreurs.html#cb73-5"></a>               <span class="dt">outlier.shape =</span> <span class="dv">21</span>,</span>
+<span id="cb73-6"><a href="choisir-la-distribution-des-erreurs.html#cb73-6"></a>               <span class="dt">outlier.colour =</span> <span class="st">&quot;skyblue2&quot;</span>) <span class="op">+</span></span>
+<span id="cb73-7"><a href="choisir-la-distribution-des-erreurs.html#cb73-7"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;log (Total fruits)</span><span class="ch">\n</span><span class="st">&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="co"># \n creates a space after the title</span></span>
+<span id="cb73-8"><a href="choisir-la-distribution-des-erreurs.html#cb73-8"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">Genotype x nutrient x clipping&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="co"># space before the title</span></span>
+<span id="cb73-9"><a href="choisir-la-distribution-des-erreurs.html#cb73-9"></a><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_blank</span>()) <span class="op">+</span></span>
+<span id="cb73-10"><a href="choisir-la-distribution-des-erreurs.html#cb73-10"></a><span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun =</span> mean, <span class="dt">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
 <p>De même, la variance du total de fruits montre une grande hétérogénéité entre les populations (population x nutriments x herbivorie).</p>
 <hr />
 <p><strong>Retour au choix de la distribution des erreurs</strong></p>
@@ -306,49 +306,49 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li>Enfin, une relation quadratique entre la variance et la moyenne (c. <span class="math inline">\(Var = \mu(1+\alpha) or \mu(1+\mu/k)\)</span>), est caractéristique des données surdispersées résultant d’une hétérogénéité sous-jacente entre les échantillons. Dans ce cas, la distribution binomiale négative (Poisson-gamma) serait plus appropriée.</li>
 </ol></li>
 </ul>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="choisir-la-distribution-des-erreurs.html#cb73-1"></a><span class="co"># Figure diagnostique de variances par groupe vs moyennes</span></span>
-<span id="cb73-2"><a href="choisir-la-distribution-des-erreurs.html#cb73-2"></a><span class="co"># par groupe (genotype x nutrient x clipping grouping).</span></span>
-<span id="cb73-3"><a href="choisir-la-distribution-des-erreurs.html#cb73-3"></a><span class="co"># Code pour créer la figure:</span></span>
-<span id="cb73-4"><a href="choisir-la-distribution-des-erreurs.html#cb73-4"></a><span class="co"># https://github.com/QCBSRworkshops/workshop07/blob/main/pres-fr/data/glmm_e.r</span></span>
-<span id="cb73-5"><a href="choisir-la-distribution-des-erreurs.html#cb73-5"></a></span>
-<span id="cb73-6"><a href="choisir-la-distribution-des-erreurs.html#cb73-6"></a><span class="co"># On remarque beaucoup de variation entre les variances des</span></span>
-<span id="cb73-7"><a href="choisir-la-distribution-des-erreurs.html#cb73-7"></a><span class="co"># échantillons dans les données transformées Par exemple,</span></span>
-<span id="cb73-8"><a href="choisir-la-distribution-des-erreurs.html#cb73-8"></a><span class="co"># entre génotypes:</span></span>
-<span id="cb73-9"><a href="choisir-la-distribution-des-erreurs.html#cb73-9"></a>grpVars &lt;-<span class="st"> </span><span class="kw">tapply</span>(dat.tf<span class="op">$</span>total.fruits, dat.tf<span class="op">$</span>gna, var)</span>
-<span id="cb73-10"><a href="choisir-la-distribution-des-erreurs.html#cb73-10"></a></span>
-<span id="cb73-11"><a href="choisir-la-distribution-des-erreurs.html#cb73-11"></a>grpMeans &lt;-<span class="st"> </span><span class="kw">tapply</span>(dat.tf<span class="op">$</span>total.fruits, dat.tf<span class="op">$</span>gna, mean)</span>
-<span id="cb73-12"><a href="choisir-la-distribution-des-erreurs.html#cb73-12"></a></span>
-<span id="cb73-13"><a href="choisir-la-distribution-des-erreurs.html#cb73-13"></a><span class="co"># Quasi-Poisson</span></span>
-<span id="cb73-14"><a href="choisir-la-distribution-des-erreurs.html#cb73-14"></a>lm1 &lt;-<span class="st"> </span><span class="kw">lm</span>(grpVars <span class="op">~</span><span class="st"> </span>grpMeans <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</span>
-<span id="cb73-15"><a href="choisir-la-distribution-des-erreurs.html#cb73-15"></a>phi.fit &lt;-<span class="st"> </span><span class="kw">coef</span>(lm1)</span>
-<span id="cb73-16"><a href="choisir-la-distribution-des-erreurs.html#cb73-16"></a><span class="co"># Le -1 specifie un modèle avec une ordonnée à l&#39;origine de</span></span>
-<span id="cb73-17"><a href="choisir-la-distribution-des-erreurs.html#cb73-17"></a><span class="co"># 0</span></span>
-<span id="cb73-18"><a href="choisir-la-distribution-des-erreurs.html#cb73-18"></a></span>
-<span id="cb73-19"><a href="choisir-la-distribution-des-erreurs.html#cb73-19"></a><span class="co"># Binomiale négative</span></span>
-<span id="cb73-20"><a href="choisir-la-distribution-des-erreurs.html#cb73-20"></a>lm2 &lt;-<span class="st"> </span><span class="kw">lm</span>(grpVars <span class="op">~</span><span class="st"> </span><span class="kw">I</span>(grpMeans<span class="op">^</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span><span class="kw">offset</span>(grpMeans) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</span>
-<span id="cb73-21"><a href="choisir-la-distribution-des-erreurs.html#cb73-21"></a>k.fit &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">/</span><span class="kw">coef</span>(lm2)</span>
-<span id="cb73-22"><a href="choisir-la-distribution-des-erreurs.html#cb73-22"></a><span class="co"># offset() spécifie qu&#39;on veut ajouter un terme pour les</span></span>
-<span id="cb73-23"><a href="choisir-la-distribution-des-erreurs.html#cb73-23"></a><span class="co"># moyennes de groupes avec un coefficient fixé à 1</span></span>
-<span id="cb73-24"><a href="choisir-la-distribution-des-erreurs.html#cb73-24"></a></span>
-<span id="cb73-25"><a href="choisir-la-distribution-des-erreurs.html#cb73-25"></a><span class="co"># Non-parametric loess fit</span></span>
-<span id="cb73-26"><a href="choisir-la-distribution-des-erreurs.html#cb73-26"></a>Lfit &lt;-<span class="st"> </span><span class="kw">loess</span>(grpVars <span class="op">~</span><span class="st"> </span>grpMeans)</span>
-<span id="cb73-27"><a href="choisir-la-distribution-des-erreurs.html#cb73-27"></a></span>
-<span id="cb73-28"><a href="choisir-la-distribution-des-erreurs.html#cb73-28"></a><span class="co"># La figure</span></span>
-<span id="cb73-29"><a href="choisir-la-distribution-des-erreurs.html#cb73-29"></a><span class="kw">plot</span>(grpVars <span class="op">~</span><span class="st"> </span>grpMeans, <span class="dt">xlab =</span> <span class="st">&quot;Group means&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Group variances&quot;</span>)</span>
-<span id="cb73-30"><a href="choisir-la-distribution-des-erreurs.html#cb73-30"></a><span class="kw">abline</span>(<span class="dt">a =</span> <span class="dv">0</span>, <span class="dt">b =</span> <span class="dv">1</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span>
-<span id="cb73-31"><a href="choisir-la-distribution-des-erreurs.html#cb73-31"></a><span class="kw">text</span>(<span class="dv">105</span>, <span class="dv">500</span>, <span class="st">&quot;Poisson&quot;</span>)</span>
-<span id="cb73-32"><a href="choisir-la-distribution-des-erreurs.html#cb73-32"></a><span class="kw">curve</span>(phi.fit <span class="op">*</span><span class="st"> </span>x, <span class="dt">col =</span> <span class="dv">2</span>, <span class="dt">add =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb73-33"><a href="choisir-la-distribution-des-erreurs.html#cb73-33"></a><span class="co"># bquote() remplace des valeurs numériques dans des</span></span>
-<span id="cb73-34"><a href="choisir-la-distribution-des-erreurs.html#cb73-34"></a><span class="co"># équations avec des symboles</span></span>
-<span id="cb73-35"><a href="choisir-la-distribution-des-erreurs.html#cb73-35"></a><span class="kw">text</span>(<span class="dv">110</span>, <span class="dv">3900</span>, <span class="kw">bquote</span>(<span class="kw">paste</span>(<span class="st">&quot;QP: &quot;</span>, sigma<span class="op">^</span><span class="dv">2</span> <span class="op">==</span><span class="st"> </span>.(<span class="kw">round</span>(phi.fit,</span>
-<span id="cb73-36"><a href="choisir-la-distribution-des-erreurs.html#cb73-36"></a>    <span class="dv">1</span>)) <span class="op">*</span><span class="st"> </span>mu)), <span class="dt">col =</span> <span class="dv">2</span>)</span>
-<span id="cb73-37"><a href="choisir-la-distribution-des-erreurs.html#cb73-37"></a><span class="kw">curve</span>(x <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>x<span class="op">/</span>k.fit), <span class="dt">col =</span> <span class="dv">4</span>, <span class="dt">add =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb73-38"><a href="choisir-la-distribution-des-erreurs.html#cb73-38"></a><span class="kw">text</span>(<span class="dv">104</span>, <span class="dv">7200</span>, <span class="kw">paste</span>(<span class="st">&quot;NB: k = &quot;</span>, <span class="kw">round</span>(k.fit, <span class="dv">1</span>), <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>),</span>
-<span id="cb73-39"><a href="choisir-la-distribution-des-erreurs.html#cb73-39"></a>    <span class="dt">col =</span> <span class="dv">4</span>)</span>
-<span id="cb73-40"><a href="choisir-la-distribution-des-erreurs.html#cb73-40"></a>mvec &lt;-<span class="st"> </span><span class="dv">0</span><span class="op">:</span><span class="dv">120</span></span>
-<span id="cb73-41"><a href="choisir-la-distribution-des-erreurs.html#cb73-41"></a><span class="kw">lines</span>(mvec, <span class="kw">predict</span>(Lfit, mvec), <span class="dt">col =</span> <span class="dv">5</span>)</span>
-<span id="cb73-42"><a href="choisir-la-distribution-des-erreurs.html#cb73-42"></a><span class="kw">text</span>(<span class="dv">118</span>, <span class="dv">2000</span>, <span class="st">&quot;loess&quot;</span>, <span class="dt">col =</span> <span class="dv">5</span>)</span></code></pre></div>
-<p><img src="book-fr_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="choisir-la-distribution-des-erreurs.html#cb74-1"></a><span class="co"># Figure diagnostique de variances par groupe vs moyennes</span></span>
+<span id="cb74-2"><a href="choisir-la-distribution-des-erreurs.html#cb74-2"></a><span class="co"># par groupe (genotype x nutrient x clipping grouping).</span></span>
+<span id="cb74-3"><a href="choisir-la-distribution-des-erreurs.html#cb74-3"></a><span class="co"># Code pour créer la figure:</span></span>
+<span id="cb74-4"><a href="choisir-la-distribution-des-erreurs.html#cb74-4"></a><span class="co"># https://github.com/QCBSRworkshops/workshop07/blob/main/pres-fr/data/glmm_e.r</span></span>
+<span id="cb74-5"><a href="choisir-la-distribution-des-erreurs.html#cb74-5"></a></span>
+<span id="cb74-6"><a href="choisir-la-distribution-des-erreurs.html#cb74-6"></a><span class="co"># On remarque beaucoup de variation entre les variances des</span></span>
+<span id="cb74-7"><a href="choisir-la-distribution-des-erreurs.html#cb74-7"></a><span class="co"># échantillons dans les données transformées Par exemple,</span></span>
+<span id="cb74-8"><a href="choisir-la-distribution-des-erreurs.html#cb74-8"></a><span class="co"># entre génotypes:</span></span>
+<span id="cb74-9"><a href="choisir-la-distribution-des-erreurs.html#cb74-9"></a>grpVars &lt;-<span class="st"> </span><span class="kw">tapply</span>(dat.tf<span class="op">$</span>total.fruits, dat.tf<span class="op">$</span>gna, var)</span>
+<span id="cb74-10"><a href="choisir-la-distribution-des-erreurs.html#cb74-10"></a></span>
+<span id="cb74-11"><a href="choisir-la-distribution-des-erreurs.html#cb74-11"></a>grpMeans &lt;-<span class="st"> </span><span class="kw">tapply</span>(dat.tf<span class="op">$</span>total.fruits, dat.tf<span class="op">$</span>gna, mean)</span>
+<span id="cb74-12"><a href="choisir-la-distribution-des-erreurs.html#cb74-12"></a></span>
+<span id="cb74-13"><a href="choisir-la-distribution-des-erreurs.html#cb74-13"></a><span class="co"># Quasi-Poisson</span></span>
+<span id="cb74-14"><a href="choisir-la-distribution-des-erreurs.html#cb74-14"></a>lm1 &lt;-<span class="st"> </span><span class="kw">lm</span>(grpVars <span class="op">~</span><span class="st"> </span>grpMeans <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</span>
+<span id="cb74-15"><a href="choisir-la-distribution-des-erreurs.html#cb74-15"></a>phi.fit &lt;-<span class="st"> </span><span class="kw">coef</span>(lm1)</span>
+<span id="cb74-16"><a href="choisir-la-distribution-des-erreurs.html#cb74-16"></a><span class="co"># Le -1 specifie un modèle avec une ordonnée à l&#39;origine de</span></span>
+<span id="cb74-17"><a href="choisir-la-distribution-des-erreurs.html#cb74-17"></a><span class="co"># 0</span></span>
+<span id="cb74-18"><a href="choisir-la-distribution-des-erreurs.html#cb74-18"></a></span>
+<span id="cb74-19"><a href="choisir-la-distribution-des-erreurs.html#cb74-19"></a><span class="co"># Binomiale négative</span></span>
+<span id="cb74-20"><a href="choisir-la-distribution-des-erreurs.html#cb74-20"></a>lm2 &lt;-<span class="st"> </span><span class="kw">lm</span>(grpVars <span class="op">~</span><span class="st"> </span><span class="kw">I</span>(grpMeans<span class="op">^</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span><span class="kw">offset</span>(grpMeans) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</span>
+<span id="cb74-21"><a href="choisir-la-distribution-des-erreurs.html#cb74-21"></a>k.fit &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">/</span><span class="kw">coef</span>(lm2)</span>
+<span id="cb74-22"><a href="choisir-la-distribution-des-erreurs.html#cb74-22"></a><span class="co"># offset() spécifie qu&#39;on veut ajouter un terme pour les</span></span>
+<span id="cb74-23"><a href="choisir-la-distribution-des-erreurs.html#cb74-23"></a><span class="co"># moyennes de groupes avec un coefficient fixé à 1</span></span>
+<span id="cb74-24"><a href="choisir-la-distribution-des-erreurs.html#cb74-24"></a></span>
+<span id="cb74-25"><a href="choisir-la-distribution-des-erreurs.html#cb74-25"></a><span class="co"># Non-parametric loess fit</span></span>
+<span id="cb74-26"><a href="choisir-la-distribution-des-erreurs.html#cb74-26"></a>Lfit &lt;-<span class="st"> </span><span class="kw">loess</span>(grpVars <span class="op">~</span><span class="st"> </span>grpMeans)</span>
+<span id="cb74-27"><a href="choisir-la-distribution-des-erreurs.html#cb74-27"></a></span>
+<span id="cb74-28"><a href="choisir-la-distribution-des-erreurs.html#cb74-28"></a><span class="co"># La figure</span></span>
+<span id="cb74-29"><a href="choisir-la-distribution-des-erreurs.html#cb74-29"></a><span class="kw">plot</span>(grpVars <span class="op">~</span><span class="st"> </span>grpMeans, <span class="dt">xlab =</span> <span class="st">&quot;Group means&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Group variances&quot;</span>)</span>
+<span id="cb74-30"><a href="choisir-la-distribution-des-erreurs.html#cb74-30"></a><span class="kw">abline</span>(<span class="dt">a =</span> <span class="dv">0</span>, <span class="dt">b =</span> <span class="dv">1</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb74-31"><a href="choisir-la-distribution-des-erreurs.html#cb74-31"></a><span class="kw">text</span>(<span class="dv">105</span>, <span class="dv">500</span>, <span class="st">&quot;Poisson&quot;</span>)</span>
+<span id="cb74-32"><a href="choisir-la-distribution-des-erreurs.html#cb74-32"></a><span class="kw">curve</span>(phi.fit <span class="op">*</span><span class="st"> </span>x, <span class="dt">col =</span> <span class="dv">2</span>, <span class="dt">add =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb74-33"><a href="choisir-la-distribution-des-erreurs.html#cb74-33"></a><span class="co"># bquote() remplace des valeurs numériques dans des</span></span>
+<span id="cb74-34"><a href="choisir-la-distribution-des-erreurs.html#cb74-34"></a><span class="co"># équations avec des symboles</span></span>
+<span id="cb74-35"><a href="choisir-la-distribution-des-erreurs.html#cb74-35"></a><span class="kw">text</span>(<span class="dv">110</span>, <span class="dv">3900</span>, <span class="kw">bquote</span>(<span class="kw">paste</span>(<span class="st">&quot;QP: &quot;</span>, sigma<span class="op">^</span><span class="dv">2</span> <span class="op">==</span><span class="st"> </span>.(<span class="kw">round</span>(phi.fit,</span>
+<span id="cb74-36"><a href="choisir-la-distribution-des-erreurs.html#cb74-36"></a>    <span class="dv">1</span>)) <span class="op">*</span><span class="st"> </span>mu)), <span class="dt">col =</span> <span class="dv">2</span>)</span>
+<span id="cb74-37"><a href="choisir-la-distribution-des-erreurs.html#cb74-37"></a><span class="kw">curve</span>(x <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>x<span class="op">/</span>k.fit), <span class="dt">col =</span> <span class="dv">4</span>, <span class="dt">add =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb74-38"><a href="choisir-la-distribution-des-erreurs.html#cb74-38"></a><span class="kw">text</span>(<span class="dv">104</span>, <span class="dv">7200</span>, <span class="kw">paste</span>(<span class="st">&quot;NB: k = &quot;</span>, <span class="kw">round</span>(k.fit, <span class="dv">1</span>), <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>),</span>
+<span id="cb74-39"><a href="choisir-la-distribution-des-erreurs.html#cb74-39"></a>    <span class="dt">col =</span> <span class="dv">4</span>)</span>
+<span id="cb74-40"><a href="choisir-la-distribution-des-erreurs.html#cb74-40"></a>mvec &lt;-<span class="st"> </span><span class="dv">0</span><span class="op">:</span><span class="dv">120</span></span>
+<span id="cb74-41"><a href="choisir-la-distribution-des-erreurs.html#cb74-41"></a><span class="kw">lines</span>(mvec, <span class="kw">predict</span>(Lfit, mvec), <span class="dt">col =</span> <span class="dv">5</span>)</span>
+<span id="cb74-42"><a href="choisir-la-distribution-des-erreurs.html#cb74-42"></a><span class="kw">text</span>(<span class="dv">118</span>, <span class="dv">2000</span>, <span class="st">&quot;loess&quot;</span>, <span class="dt">col =</span> <span class="dv">5</span>)</span></code></pre></div>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
 <p>La figure ci-dessus montre qu’un modèle linéaire quasi-Poisson sera peut-être mieux qu’une binomiale négative, mais il faudrait <em>continuer le processus de modélisation</em>.</p>
 </div>
 <hr>

@@ -37,6 +37,8 @@ library(remotes)
 library(gridExtra)
 library(lattice)
 
+source("data/glmm_funs.R")
+
 
 ##Section: 02-introduction-fr.R 
 

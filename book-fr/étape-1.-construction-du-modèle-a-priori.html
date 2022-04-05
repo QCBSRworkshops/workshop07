@@ -260,17 +260,17 @@ où:</p>
 <h2><span class="header-section-number">9.1</span> Exploration des données<a href="étape-1.-construction-du-modèle-a-priori.html#exploration-des-données" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><strong>Les données ont-elles la bonne structure?</strong></p>
 <p>Vérifiez la structure des données :</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="étape-1.-construction-du-modèle-a-priori.html#cb6-1"></a><span class="co"># Vérifiez la structure des données</span></span>
-<span id="cb6-2"><a href="étape-1.-construction-du-modèle-a-priori.html#cb6-2"></a><span class="kw">str</span>(fish.data)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="étape-1.-construction-du-modèle-a-priori.html#cb7-1"></a><span class="co"># Vérifiez la structure des données</span></span>
+<span id="cb7-2"><a href="étape-1.-construction-du-modèle-a-priori.html#cb7-2"></a><span class="kw">str</span>(fish.data)</span></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    180 obs. of  4 variables:
 ##  $ Lake        : Factor w/ 6 levels &quot;L1&quot;,&quot;L2&quot;,&quot;L3&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
 ##  $ Fish_Species: Factor w/ 3 levels &quot;S1&quot;,&quot;S2&quot;,&quot;S3&quot;: 1 1 1 1 1 1 1 1 1 1 ...
 ##  $ Fish_Length : num  105 195 294 414 237 ...
 ##  $ Trophic_Pos : num  2.6 2.7 2.74 2.74 2.79 ...</code></pre>
 <p>Observez maintenant la distribution des échantillons pour chaque facteur:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="étape-1.-construction-du-modèle-a-priori.html#cb8-1"></a><span class="co"># Observez la distribution des échantillons pour chaque</span></span>
-<span id="cb8-2"><a href="étape-1.-construction-du-modèle-a-priori.html#cb8-2"></a><span class="co"># facteur:</span></span>
-<span id="cb8-3"><a href="étape-1.-construction-du-modèle-a-priori.html#cb8-3"></a><span class="kw">table</span>(fish.data[, <span class="kw">c</span>(<span class="st">&quot;Lake&quot;</span>, <span class="st">&quot;Fish_Species&quot;</span>)])</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="étape-1.-construction-du-modèle-a-priori.html#cb9-1"></a><span class="co"># Observez la distribution des échantillons pour chaque</span></span>
+<span id="cb9-2"><a href="étape-1.-construction-du-modèle-a-priori.html#cb9-2"></a><span class="co"># facteur:</span></span>
+<span id="cb9-3"><a href="étape-1.-construction-du-modèle-a-priori.html#cb9-3"></a><span class="kw">table</span>(fish.data[, <span class="kw">c</span>(<span class="st">&quot;Lake&quot;</span>, <span class="st">&quot;Fish_Species&quot;</span>)])</span></code></pre></div>
 <pre><code>##     Fish_Species
 ## Lake S1 S2 S3
 ##   L1 10 10 10
@@ -281,10 +281,10 @@ où:</p>
 ##   L6 10 10 10</code></pre>
 <p>Ce jeu de données est parfaitement équilibré, mais les <strong>modèles mixtes peuvent analyser des designs expérimentaux non équilibrés</strong>, comme c’est souvent le cas en écologie!</p>
 <p>Regardez ensuite la distribution des variables continues:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="étape-1.-construction-du-modèle-a-priori.html#cb10-1"></a><span class="co"># Regardez la distribution des variables continues.</span></span>
-<span id="cb10-2"><a href="étape-1.-construction-du-modèle-a-priori.html#cb10-2"></a><span class="kw">hist</span>(fish.data<span class="op">$</span>Fish_Length, <span class="dt">xlab =</span> <span class="st">&quot;Length (mm)&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;&quot;</span>)</span>
-<span id="cb10-3"><a href="étape-1.-construction-du-modèle-a-priori.html#cb10-3"></a><span class="kw">hist</span>(fish.data<span class="op">$</span>Trophic_Pos, <span class="dt">xlab =</span> <span class="st">&quot;Trophic position&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
-<p><img src="book-fr_files/figure-html/unnamed-chunk-9-1.png" width="50%" /><img src="book-fr_files/figure-html/unnamed-chunk-9-2.png" width="50%" /></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="étape-1.-construction-du-modèle-a-priori.html#cb11-1"></a><span class="co"># Regardez la distribution des variables continues.</span></span>
+<span id="cb11-2"><a href="étape-1.-construction-du-modèle-a-priori.html#cb11-2"></a><span class="kw">hist</span>(fish.data<span class="op">$</span>Fish_Length, <span class="dt">xlab =</span> <span class="st">&quot;Length (mm)&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb11-3"><a href="étape-1.-construction-du-modèle-a-priori.html#cb11-3"></a><span class="kw">hist</span>(fish.data<span class="op">$</span>Trophic_Pos, <span class="dt">xlab =</span> <span class="st">&quot;Trophic position&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-10-1.png" width="50%" /><img src="book-fr_files/figure-html/unnamed-chunk-10-2.png" width="50%" /></p>
 <p>Des déviations majeures pourraient causer des problèmes d’hétéroscédasticité. Si nécessaire, faites des transformations. Dans ce cas-ci, <strong>les données semblent correctes</strong>.</p>
 <hr />
 </div>
@@ -316,11 +316,11 @@ où:</p>
 <p><span class="math display">\[z = \frac{x-moyenne(x)}{écart.type(x)}\]</span></p>
 <p>Considérez l’échelle des variables dans notre ensemble de données. La longueur corporelle est mesurée sur une <em>longue</em> échelle, tandis que la position trophique est mesurée sur une échelle qui est beaucoup plus courte.</p>
 <p>Parce que nos données ont des échelles très différentes, on applique la <strong>correction Z</strong></p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="étape-1.-construction-du-modèle-a-priori.html#cb11-1"></a><span class="co"># Longueur corrigée, &#39;à la main&#39;</span></span>
-<span id="cb11-2"><a href="étape-1.-construction-du-modèle-a-priori.html#cb11-2"></a>fish.data<span class="op">$</span>Z_Length &lt;-<span class="st"> </span>(fish.data<span class="op">$</span>Fish_Length <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(fish.data<span class="op">$</span>Fish_Length))<span class="op">/</span><span class="kw">sd</span>(fish.data<span class="op">$</span>Fish_Length)</span>
-<span id="cb11-3"><a href="étape-1.-construction-du-modèle-a-priori.html#cb11-3"></a></span>
-<span id="cb11-4"><a href="étape-1.-construction-du-modèle-a-priori.html#cb11-4"></a><span class="co"># Position trophique corrigée, avec la fonction scale</span></span>
-<span id="cb11-5"><a href="étape-1.-construction-du-modèle-a-priori.html#cb11-5"></a>fish.data<span class="op">$</span>Z_TP &lt;-<span class="st"> </span><span class="kw">scale</span>(fish.data<span class="op">$</span>Trophic_Pos)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="étape-1.-construction-du-modèle-a-priori.html#cb12-1"></a><span class="co"># Longueur corrigée, &#39;à la main&#39;</span></span>
+<span id="cb12-2"><a href="étape-1.-construction-du-modèle-a-priori.html#cb12-2"></a>fish.data<span class="op">$</span>Z_Length &lt;-<span class="st"> </span>(fish.data<span class="op">$</span>Fish_Length <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(fish.data<span class="op">$</span>Fish_Length))<span class="op">/</span><span class="kw">sd</span>(fish.data<span class="op">$</span>Fish_Length)</span>
+<span id="cb12-3"><a href="étape-1.-construction-du-modèle-a-priori.html#cb12-3"></a></span>
+<span id="cb12-4"><a href="étape-1.-construction-du-modèle-a-priori.html#cb12-4"></a><span class="co"># Position trophique corrigée, avec la fonction scale</span></span>
+<span id="cb12-5"><a href="étape-1.-construction-du-modèle-a-priori.html#cb12-5"></a>fish.data<span class="op">$</span>Z_TP &lt;-<span class="st"> </span><span class="kw">scale</span>(fish.data<span class="op">$</span>Trophic_Pos)</span></code></pre></div>
 <hr />
 </div>
 <div id="avez-vous-besoin-dun-mlm" class="section level2 hasAnchor">
@@ -340,20 +340,20 @@ où:</p>
 </ol></li>
 </ul>
 <p>Créer un modèle linéaire sans les facteurs</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="étape-1.-construction-du-modèle-a-priori.html#cb12-1"></a>lm.test &lt;-<span class="st"> </span><span class="kw">lm</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length, <span class="dt">data =</span> fish.data)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="étape-1.-construction-du-modèle-a-priori.html#cb13-1"></a>lm.test &lt;-<span class="st"> </span><span class="kw">lm</span>(Z_TP <span class="op">~</span><span class="st"> </span>Z_Length, <span class="dt">data =</span> fish.data)</span></code></pre></div>
 <p>Calculer les résidus de ce modèle linéaire</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="étape-1.-construction-du-modèle-a-priori.html#cb13-1"></a>lm.test.resid &lt;-<span class="st"> </span><span class="kw">rstandard</span>(lm.test)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="étape-1.-construction-du-modèle-a-priori.html#cb14-1"></a>lm.test.resid &lt;-<span class="st"> </span><span class="kw">rstandard</span>(lm.test)</span></code></pre></div>
 <p>Représentez graphiquement la valeur des résidus en fonction des niveaux des facteurs</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="étape-1.-construction-du-modèle-a-priori.html#cb14-1"></a><span class="kw">plot</span>(lm.test.resid <span class="op">~</span><span class="st"> </span><span class="kw">as.factor</span>(fish.data<span class="op">$</span>Fish_Species), <span class="dt">xlab =</span> <span class="st">&quot;Species&quot;</span>,</span>
-<span id="cb14-2"><a href="étape-1.-construction-du-modèle-a-priori.html#cb14-2"></a>    <span class="dt">ylab =</span> <span class="st">&quot;Standardized residuals&quot;</span>)</span>
-<span id="cb14-3"><a href="étape-1.-construction-du-modèle-a-priori.html#cb14-3"></a></span>
-<span id="cb14-4"><a href="étape-1.-construction-du-modèle-a-priori.html#cb14-4"></a><span class="kw">abline</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="book-fr_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="étape-1.-construction-du-modèle-a-priori.html#cb15-1"></a><span class="kw">plot</span>(lm.test.resid <span class="op">~</span><span class="st"> </span><span class="kw">as.factor</span>(fish.data<span class="op">$</span>Lake), <span class="dt">xlab =</span> <span class="st">&quot;Lake&quot;</span>,</span>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="étape-1.-construction-du-modèle-a-priori.html#cb15-1"></a><span class="kw">plot</span>(lm.test.resid <span class="op">~</span><span class="st"> </span><span class="kw">as.factor</span>(fish.data<span class="op">$</span>Fish_Species), <span class="dt">xlab =</span> <span class="st">&quot;Species&quot;</span>,</span>
 <span id="cb15-2"><a href="étape-1.-construction-du-modèle-a-priori.html#cb15-2"></a>    <span class="dt">ylab =</span> <span class="st">&quot;Standardized residuals&quot;</span>)</span>
 <span id="cb15-3"><a href="étape-1.-construction-du-modèle-a-priori.html#cb15-3"></a></span>
 <span id="cb15-4"><a href="étape-1.-construction-du-modèle-a-priori.html#cb15-4"></a><span class="kw">abline</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="book-fr_files/figure-html/unnamed-chunk-13-2.png" width="672" /></p>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="étape-1.-construction-du-modèle-a-priori.html#cb16-1"></a><span class="kw">plot</span>(lm.test.resid <span class="op">~</span><span class="st"> </span><span class="kw">as.factor</span>(fish.data<span class="op">$</span>Lake), <span class="dt">xlab =</span> <span class="st">&quot;Lake&quot;</span>,</span>
+<span id="cb16-2"><a href="étape-1.-construction-du-modèle-a-priori.html#cb16-2"></a>    <span class="dt">ylab =</span> <span class="st">&quot;Standardized residuals&quot;</span>)</span>
+<span id="cb16-3"><a href="étape-1.-construction-du-modèle-a-priori.html#cb16-3"></a></span>
+<span id="cb16-4"><a href="étape-1.-construction-du-modèle-a-priori.html#cb16-4"></a><span class="kw">abline</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="book-fr_files/figure-html/unnamed-chunk-14-2.png" width="672" /></p>
 <p>Les résidues semblent varier de façon non-aléatoire entre les espèces et entre les lacs. Ces patrons suggèrent qu’il y a de la variance résiduelle qui pourrait être expliquée par ces facteurs, et ils devraient donc être inclus dans le modèle!</p>
 </div>
 </div>
