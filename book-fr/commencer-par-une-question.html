@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapitre 4 Commencer par une question | Atelier 7: Modèles linéaires et généralisés linéaires mixtes</title>
   <meta name="description" content="Modèles linéaires et généralisés linéaires mixtes" />
-  <meta name="generator" content="bookdown 0.25 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapitre 4 Commencer par une question | Atelier 7: Modèles linéaires et généralisés linéaires mixtes" />
   <meta property="og:type" content="book" />
@@ -48,25 +48,24 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -86,7 +85,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {  background-color: #f8f8f8; }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ef2929; } /* Alert */
 code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
@@ -136,81 +135,94 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <link rel="icon" type="image/png" href="assets/images/favicon.ico"/>
 
 <li class="divider"></li>
-<li class="part"><span><b>Série d’ateliers R du CSBQ<span></span></b></span></li>
-<li><a href="index.html#préface">Préface<span></span></a><ul>
-<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>0.1</b> Code de conduite<span></span></a><ul>
-<li class="chapter" data-level="0.1.1" data-path="index.html"><a href="index.html#comportement-attendu"><i class="fa fa-check"></i><b>0.1.1</b> Comportement attendu<span></span></a></li>
-<li class="chapter" data-level="0.1.2" data-path="index.html"><a href="index.html#comportements-inacceptables"><i class="fa fa-check"></i><b>0.1.2</b> Comportements inacceptables<span></span></a></li>
+<li class="part"><span><b>Série d’ateliers R du CSBQ</b></span></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Préface</a>
+<ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#code-de-conduite"><i class="fa fa-check"></i><b>0.1</b> Code de conduite</a>
+<ul>
+<li class="chapter" data-level="0.1.1" data-path="index.html"><a href="index.html#comportement-attendu"><i class="fa fa-check"></i><b>0.1.1</b> Comportement attendu</a></li>
+<li class="chapter" data-level="0.1.2" data-path="index.html"><a href="index.html#comportements-inacceptables"><i class="fa fa-check"></i><b>0.1.2</b> Comportements inacceptables</a></li>
 </ul></li>
-<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#contributeurs-et-contributrices"><i class="fa fa-check"></i><b>0.2</b> Contributeurs et contributrices<span></span></a></li>
-<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#contribuez-à-la-série"><i class="fa fa-check"></i><b>0.3</b> Contribuez à la série!<span></span></a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#contributeurs-et-contributrices"><i class="fa fa-check"></i><b>0.2</b> Contributeurs et contributrices</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#contribuez-à-la-série"><i class="fa fa-check"></i><b>0.3</b> Contribuez à la série!</a></li>
 </ul></li>
-<li class="part"><span><b>Modèles linéaires à effets mixtes (MLM) en <code>R</code><span></span></b></span></li>
-<li class="chapter" data-level="1" data-path="objectifs-dapprentissage.html"><a href="objectifs-dapprentissage.html"><i class="fa fa-check"></i><b>1</b> Objectifs d’apprentissage<span></span></a></li>
-<li class="chapter" data-level="2" data-path="préparez-vous-pour-cet-atelier.html"><a href="préparez-vous-pour-cet-atelier.html"><i class="fa fa-check"></i><b>2</b> Préparez-vous pour cet atelier<span></span></a></li>
-<li class="chapter" data-level="3" data-path="pourquoi-choisir-un-mlm.html"><a href="pourquoi-choisir-un-mlm.html"><i class="fa fa-check"></i><b>3</b> Pourquoi choisir un MLM?<span></span></a></li>
-<li class="chapter" data-level="4" data-path="commencer-par-une-question.html"><a href="commencer-par-une-question.html"><i class="fa fa-check"></i><b>4</b> Commencer par une question<span></span></a><ul>
-<li class="chapter" data-level="4.1" data-path="commencer-par-une-question.html"><a href="commencer-par-une-question.html#défi-1"><i class="fa fa-check"></i><b>4.1</b> Défi 1<span></span></a></li>
+<li class="part"><span><b>Modèles linéaires à effets mixtes (MLM) en <code>R</code></b></span></li>
+<li class="chapter" data-level="1" data-path="objectifs-dapprentissage.html"><a href="objectifs-dapprentissage.html"><i class="fa fa-check"></i><b>1</b> Objectifs d’apprentissage</a></li>
+<li class="chapter" data-level="2" data-path="préparez-vous-pour-cet-atelier.html"><a href="préparez-vous-pour-cet-atelier.html"><i class="fa fa-check"></i><b>2</b> Préparez-vous pour cet atelier</a></li>
+<li class="chapter" data-level="3" data-path="pourquoi-choisir-un-mlm.html"><a href="pourquoi-choisir-un-mlm.html"><i class="fa fa-check"></i><b>3</b> Pourquoi choisir un MLM?</a></li>
+<li class="chapter" data-level="4" data-path="commencer-par-une-question.html"><a href="commencer-par-une-question.html"><i class="fa fa-check"></i><b>4</b> Commencer par une question</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="commencer-par-une-question.html"><a href="commencer-par-une-question.html#défi-1"><i class="fa fa-check"></i><b>4.1</b> Défi 1</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="analyse-des-données.html"><a href="analyse-des-données.html"><i class="fa fa-check"></i><b>5</b> Analyse des données<span></span></a><ul>
-<li class="chapter" data-level="5.1" data-path="analyse-des-données.html"><a href="analyse-des-données.html#option-1-nombreuses-analyses-séparées"><i class="fa fa-check"></i><b>5.1</b> Option 1: Nombreuses analyses séparées<span></span></a></li>
-<li class="chapter" data-level="5.2" data-path="analyse-des-données.html"><a href="analyse-des-données.html#option-2-une-analyse-groupée"><i class="fa fa-check"></i><b>5.2</b> Option 2: Une analyse groupée<span></span></a></li>
-<li class="chapter" data-level="5.3" data-path="analyse-des-données.html"><a href="analyse-des-données.html#option-3-est-ce-quon-a-une-autre-option"><i class="fa fa-check"></i><b>5.3</b> Option 3: Est-ce qu’on a une autre option?<span></span></a></li>
+<li class="chapter" data-level="5" data-path="analyse-des-données.html"><a href="analyse-des-données.html"><i class="fa fa-check"></i><b>5</b> Analyse des données</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="analyse-des-données.html"><a href="analyse-des-données.html#option-1-nombreuses-analyses-séparées"><i class="fa fa-check"></i><b>5.1</b> Option 1: Nombreuses analyses séparées</a></li>
+<li class="chapter" data-level="5.2" data-path="analyse-des-données.html"><a href="analyse-des-données.html#option-2-une-analyse-groupée"><i class="fa fa-check"></i><b>5.2</b> Option 2: Une analyse groupée</a></li>
+<li class="chapter" data-level="5.3" data-path="analyse-des-données.html"><a href="analyse-des-données.html#option-3-est-ce-quon-a-une-autre-option"><i class="fa fa-check"></i><b>5.3</b> Option 3: Est-ce qu’on a une autre option?</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="effets-fixes-vs-effets-aléatoires.html"><a href="effets-fixes-vs-effets-aléatoires.html"><i class="fa fa-check"></i><b>6</b> Effets fixes vs effets aléatoires<span></span></a><ul>
-<li class="chapter" data-level="6.1" data-path="effets-fixes-vs-effets-aléatoires.html"><a href="effets-fixes-vs-effets-aléatoires.html#effet-fixe-processus-déterministes"><i class="fa fa-check"></i><b>6.1</b> Effet fixe: processus déterministes<span></span></a></li>
-<li class="chapter" data-level="6.2" data-path="effets-fixes-vs-effets-aléatoires.html"><a href="effets-fixes-vs-effets-aléatoires.html#effet-aléatoire-processus-stochastiques"><i class="fa fa-check"></i><b>6.2</b> Effet aléatoire: processus stochastiques<span></span></a></li>
+<li class="chapter" data-level="6" data-path="effets-fixes-vs-effets-aléatoires.html"><a href="effets-fixes-vs-effets-aléatoires.html"><i class="fa fa-check"></i><b>6</b> Effets fixes vs effets aléatoires</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="effets-fixes-vs-effets-aléatoires.html"><a href="effets-fixes-vs-effets-aléatoires.html#effet-fixe-processus-déterministes"><i class="fa fa-check"></i><b>6.1</b> Effet fixe: processus déterministes</a></li>
+<li class="chapter" data-level="6.2" data-path="effets-fixes-vs-effets-aléatoires.html"><a href="effets-fixes-vs-effets-aléatoires.html#effet-aléatoire-processus-stochastiques"><i class="fa fa-check"></i><b>6.2</b> Effet aléatoire: processus stochastiques</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="comment-fonctionnent-les-mlms.html"><a href="comment-fonctionnent-les-mlms.html"><i class="fa fa-check"></i><b>7</b> Comment fonctionnent les MLMs?<span></span></a><ul>
-<li class="chapter" data-level="7.1" data-path="comment-fonctionnent-les-mlms.html"><a href="comment-fonctionnent-les-mlms.html#les-paramètres-peuvent-varier"><i class="fa fa-check"></i><b>7.1</b> Les paramètres peuvent varier<span></span></a><ul>
-<li><a href="comment-fonctionnent-les-mlms.html#ordonnée-à-lorigine">Ordonnée à l’origine:<span></span></a></li>
-<li><a href="comment-fonctionnent-les-mlms.html#pentes">Pentes<span></span></a></li>
+<li class="chapter" data-level="7" data-path="comment-fonctionnent-les-mlms.html"><a href="comment-fonctionnent-les-mlms.html"><i class="fa fa-check"></i><b>7</b> Comment fonctionnent les MLMs?</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="comment-fonctionnent-les-mlms.html"><a href="comment-fonctionnent-les-mlms.html#les-paramètres-peuvent-varier"><i class="fa fa-check"></i><b>7.1</b> Les paramètres peuvent varier</a>
+<ul>
+<li class="chapter" data-level="" data-path="comment-fonctionnent-les-mlms.html"><a href="comment-fonctionnent-les-mlms.html#ordonnée-à-lorigine"><i class="fa fa-check"></i>Ordonnée à l’origine:</a></li>
+<li class="chapter" data-level="" data-path="comment-fonctionnent-les-mlms.html"><a href="comment-fonctionnent-les-mlms.html#pentes"><i class="fa fa-check"></i>Pentes</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="comment-fonctionnent-les-mlms.html"><a href="comment-fonctionnent-les-mlms.html#tenir-compte-de-la-structure-des-données"><i class="fa fa-check"></i><b>7.2</b> Tenir compte de la structure des données<span></span></a></li>
-<li class="chapter" data-level="7.3" data-path="comment-fonctionnent-les-mlms.html"><a href="comment-fonctionnent-les-mlms.html#défi-2"><i class="fa fa-check"></i><b>7.3</b> Défi 2<span></span></a></li>
+<li class="chapter" data-level="7.2" data-path="comment-fonctionnent-les-mlms.html"><a href="comment-fonctionnent-les-mlms.html#tenir-compte-de-la-structure-des-données"><i class="fa fa-check"></i><b>7.2</b> Tenir compte de la structure des données</a></li>
+<li class="chapter" data-level="7.3" data-path="comment-fonctionnent-les-mlms.html"><a href="comment-fonctionnent-les-mlms.html#défi-2"><i class="fa fa-check"></i><b>7.3</b> Défi 2</a></li>
 </ul></li>
-<li class="part"><span><b>Implémenter un MLM dans <code>R</code><span></span></b></span></li>
-<li class="chapter" data-level="8" data-path="le-protocole-pour-implémenter-des-modèles-à-effets-mixtes-dans-r.html"><a href="le-protocole-pour-implémenter-des-modèles-à-effets-mixtes-dans-r.html"><i class="fa fa-check"></i><b>8</b> Le protocole pour implémenter des modèles à effets mixtes dans <code>R</code><span></span></a></li>
-<li class="chapter" data-level="9" data-path="étape-1.-construction-du-modèle-a-priori.html"><a href="étape-1.-construction-du-modèle-a-priori.html"><i class="fa fa-check"></i><b>9</b> Étape 1. Construction du modèle <em>a priori</em><span></span></a><ul>
-<li class="chapter" data-level="9.1" data-path="étape-1.-construction-du-modèle-a-priori.html"><a href="étape-1.-construction-du-modèle-a-priori.html#exploration-des-données"><i class="fa fa-check"></i><b>9.1</b> Exploration des données<span></span></a></li>
-<li class="chapter" data-level="9.2" data-path="étape-1.-construction-du-modèle-a-priori.html"><a href="étape-1.-construction-du-modèle-a-priori.html#vérifier-la-colinéarité"><i class="fa fa-check"></i><b>9.2</b> Vérifier la colinéarité<span></span></a></li>
-<li class="chapter" data-level="9.3" data-path="étape-1.-construction-du-modèle-a-priori.html"><a href="étape-1.-construction-du-modèle-a-priori.html#défi-3"><i class="fa fa-check"></i><b>9.3</b> Défi 3<span></span></a></li>
-<li class="chapter" data-level="9.4" data-path="étape-1.-construction-du-modèle-a-priori.html"><a href="étape-1.-construction-du-modèle-a-priori.html#considérez-léchelle"><i class="fa fa-check"></i><b>9.4</b> Considérez l’échelle<span></span></a></li>
-<li class="chapter" data-level="9.5" data-path="étape-1.-construction-du-modèle-a-priori.html"><a href="étape-1.-construction-du-modèle-a-priori.html#avez-vous-besoin-dun-mlm"><i class="fa fa-check"></i><b>9.5</b> Avez-vous besoin d’un MLM?<span></span></a></li>
+<li class="part"><span><b>Implémenter un MLM dans <code>R</code></b></span></li>
+<li class="chapter" data-level="8" data-path="le-protocole-pour-implémenter-des-modèles-à-effets-mixtes-dans-r.html"><a href="le-protocole-pour-implémenter-des-modèles-à-effets-mixtes-dans-r.html"><i class="fa fa-check"></i><b>8</b> Le protocole pour implémenter des modèles à effets mixtes dans <code>R</code></a></li>
+<li class="chapter" data-level="9" data-path="étape-1.-construction-du-modèle-a-priori.html"><a href="étape-1.-construction-du-modèle-a-priori.html"><i class="fa fa-check"></i><b>9</b> Étape 1. Construction du modèle <em>a priori</em></a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="étape-1.-construction-du-modèle-a-priori.html"><a href="étape-1.-construction-du-modèle-a-priori.html#exploration-des-données"><i class="fa fa-check"></i><b>9.1</b> Exploration des données</a></li>
+<li class="chapter" data-level="9.2" data-path="étape-1.-construction-du-modèle-a-priori.html"><a href="étape-1.-construction-du-modèle-a-priori.html#vérifier-la-colinéarité"><i class="fa fa-check"></i><b>9.2</b> Vérifier la colinéarité</a></li>
+<li class="chapter" data-level="9.3" data-path="étape-1.-construction-du-modèle-a-priori.html"><a href="étape-1.-construction-du-modèle-a-priori.html#défi-3"><i class="fa fa-check"></i><b>9.3</b> Défi 3</a></li>
+<li class="chapter" data-level="9.4" data-path="étape-1.-construction-du-modèle-a-priori.html"><a href="étape-1.-construction-du-modèle-a-priori.html#considérez-léchelle"><i class="fa fa-check"></i><b>9.4</b> Considérez l’échelle</a></li>
+<li class="chapter" data-level="9.5" data-path="étape-1.-construction-du-modèle-a-priori.html"><a href="étape-1.-construction-du-modèle-a-priori.html#avez-vous-besoin-dun-mlm"><i class="fa fa-check"></i><b>9.5</b> Avez-vous besoin d’un MLM?</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="étape-2.-coder-le-modèle.html"><a href="étape-2.-coder-le-modèle.html"><i class="fa fa-check"></i><b>10</b> Étape 2. Coder le modèle<span></span></a><ul>
-<li class="chapter" data-level="10.1" data-path="étape-2.-coder-le-modèle.html"><a href="étape-2.-coder-le-modèle.html#note-sur-les-méthodes-destimation"><i class="fa fa-check"></i><b>10.1</b> Note sur les méthodes d’estimation<span></span></a></li>
-<li class="chapter" data-level="10.2" data-path="étape-2.-coder-le-modèle.html"><a href="étape-2.-coder-le-modèle.html#différentes-structures-de-modèles"><i class="fa fa-check"></i><b>10.2</b> Différentes structures de modèles<span></span></a></li>
-<li class="chapter" data-level="10.3" data-path="étape-2.-coder-le-modèle.html"><a href="étape-2.-coder-le-modèle.html#défi-4"><i class="fa fa-check"></i><b>10.3</b> Défi 4<span></span></a></li>
-<li class="chapter" data-level="10.4" data-path="étape-2.-coder-le-modèle.html"><a href="étape-2.-coder-le-modèle.html#défi-5"><i class="fa fa-check"></i><b>10.4</b> Défi 5<span></span></a></li>
-<li class="chapter" data-level="10.5" data-path="étape-2.-coder-le-modèle.html"><a href="étape-2.-coder-le-modèle.html#comparing-models"><i class="fa fa-check"></i><b>10.5</b> Comparing models<span></span></a></li>
+<li class="chapter" data-level="10" data-path="étape-2.-coder-le-modèle.html"><a href="étape-2.-coder-le-modèle.html"><i class="fa fa-check"></i><b>10</b> Étape 2. Coder le modèle</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="étape-2.-coder-le-modèle.html"><a href="étape-2.-coder-le-modèle.html#note-sur-les-méthodes-destimation"><i class="fa fa-check"></i><b>10.1</b> Note sur les méthodes d’estimation</a></li>
+<li class="chapter" data-level="10.2" data-path="étape-2.-coder-le-modèle.html"><a href="étape-2.-coder-le-modèle.html#différentes-structures-de-modèles"><i class="fa fa-check"></i><b>10.2</b> Différentes structures de modèles</a></li>
+<li class="chapter" data-level="10.3" data-path="étape-2.-coder-le-modèle.html"><a href="étape-2.-coder-le-modèle.html#défi-4"><i class="fa fa-check"></i><b>10.3</b> Défi 4</a></li>
+<li class="chapter" data-level="10.4" data-path="étape-2.-coder-le-modèle.html"><a href="étape-2.-coder-le-modèle.html#défi-5"><i class="fa fa-check"></i><b>10.4</b> Défi 5</a></li>
+<li class="chapter" data-level="10.5" data-path="étape-2.-coder-le-modèle.html"><a href="étape-2.-coder-le-modèle.html#comparing-models"><i class="fa fa-check"></i><b>10.5</b> Comparing models</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="step-3.-validation-du-modèle.html"><a href="step-3.-validation-du-modèle.html"><i class="fa fa-check"></i><b>11</b> Step 3. Validation du modèle<span></span></a><ul>
-<li class="chapter" data-level="11.1" data-path="step-3.-validation-du-modèle.html"><a href="step-3.-validation-du-modèle.html#vérifier-lhomogénéité-de-la-variance"><i class="fa fa-check"></i><b>11.1</b> 1. Vérifier l’homogénéité de la variance<span></span></a></li>
-<li class="chapter" data-level="11.2" data-path="step-3.-validation-du-modèle.html"><a href="step-3.-validation-du-modèle.html#vérifier-lindépendance-des-résidus"><i class="fa fa-check"></i><b>11.2</b> 2. Vérifier l’indépendance des résidus<span></span></a></li>
-<li class="chapter" data-level="11.3" data-path="step-3.-validation-du-modèle.html"><a href="step-3.-validation-du-modèle.html#vérifier-la-normalité"><i class="fa fa-check"></i><b>11.3</b> 3. Vérifier la normalité<span></span></a></li>
+<li class="chapter" data-level="11" data-path="step-3.-validation-du-modèle.html"><a href="step-3.-validation-du-modèle.html"><i class="fa fa-check"></i><b>11</b> Step 3. Validation du modèle</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="step-3.-validation-du-modèle.html"><a href="step-3.-validation-du-modèle.html#vérifier-lhomogénéité-de-la-variance"><i class="fa fa-check"></i><b>11.1</b> 1. Vérifier l’homogénéité de la variance</a></li>
+<li class="chapter" data-level="11.2" data-path="step-3.-validation-du-modèle.html"><a href="step-3.-validation-du-modèle.html#vérifier-lindépendance-des-résidus"><i class="fa fa-check"></i><b>11.2</b> 2. Vérifier l’indépendance des résidus</a></li>
+<li class="chapter" data-level="11.3" data-path="step-3.-validation-du-modèle.html"><a href="step-3.-validation-du-modèle.html#vérifier-la-normalité"><i class="fa fa-check"></i><b>11.3</b> 3. Vérifier la normalité</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="step-4.-interprétation-et-visualisation.html"><a href="step-4.-interprétation-et-visualisation.html"><i class="fa fa-check"></i><b>12</b> Step 4. Interprétation et visualisation<span></span></a><ul>
-<li class="chapter" data-level="12.1" data-path="step-4.-interprétation-et-visualisation.html"><a href="step-4.-interprétation-et-visualisation.html#interprétation-de-notre-modèle"><i class="fa fa-check"></i><b>12.1</b> Interprétation de notre modèle<span></span></a></li>
-<li class="chapter" data-level="12.2" data-path="step-4.-interprétation-et-visualisation.html"><a href="step-4.-interprétation-et-visualisation.html#défi-6"><i class="fa fa-check"></i><b>12.2</b> Défi 6<span></span></a></li>
-<li class="chapter" data-level="12.3" data-path="step-4.-interprétation-et-visualisation.html"><a href="step-4.-interprétation-et-visualisation.html#défi-7"><i class="fa fa-check"></i><b>12.3</b> Défi 7<span></span></a></li>
-<li class="chapter" data-level="12.4" data-path="step-4.-interprétation-et-visualisation.html"><a href="step-4.-interprétation-et-visualisation.html#défi-8"><i class="fa fa-check"></i><b>12.4</b> Défi 8<span></span></a></li>
+<li class="chapter" data-level="12" data-path="step-4.-interprétation-et-visualisation.html"><a href="step-4.-interprétation-et-visualisation.html"><i class="fa fa-check"></i><b>12</b> Step 4. Interprétation et visualisation</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="step-4.-interprétation-et-visualisation.html"><a href="step-4.-interprétation-et-visualisation.html#interprétation-de-notre-modèle"><i class="fa fa-check"></i><b>12.1</b> Interprétation de notre modèle</a></li>
+<li class="chapter" data-level="12.2" data-path="step-4.-interprétation-et-visualisation.html"><a href="step-4.-interprétation-et-visualisation.html#défi-6"><i class="fa fa-check"></i><b>12.2</b> Défi 6</a></li>
+<li class="chapter" data-level="12.3" data-path="step-4.-interprétation-et-visualisation.html"><a href="step-4.-interprétation-et-visualisation.html#défi-7"><i class="fa fa-check"></i><b>12.3</b> Défi 7</a></li>
+<li class="chapter" data-level="12.4" data-path="step-4.-interprétation-et-visualisation.html"><a href="step-4.-interprétation-et-visualisation.html#défi-8"><i class="fa fa-check"></i><b>12.4</b> Défi 8</a></li>
 </ul></li>
-<li class="part"><span><b>Modèles Linéaires Généralisés Mixtes (GLMMs) en <code>R</code><span></span></b></span></li>
-<li class="chapter" data-level="13" data-path="introduction-aux-glmm.html"><a href="introduction-aux-glmm.html"><i class="fa fa-check"></i><b>13</b> Introduction aux GLMM<span></span></a></li>
-<li class="chapter" data-level="14" data-path="choisir-la-distribution-des-erreurs.html"><a href="choisir-la-distribution-des-erreurs.html"><i class="fa fa-check"></i><b>14</b> Choisir la distribution des erreurs<span></span></a></li>
-<li class="chapter" data-level="15" data-path="glmm-poisson.html"><a href="glmm-poisson.html"><i class="fa fa-check"></i><b>15</b> GLMM Poisson<span></span></a></li>
-<li class="chapter" data-level="16" data-path="glmm-binomiale-négative.html"><a href="glmm-binomiale-négative.html"><i class="fa fa-check"></i><b>16</b> GLMM binomiale négative<span></span></a></li>
-<li class="chapter" data-level="17" data-path="glmm-poisson-lognormale.html"><a href="glmm-poisson-lognormale.html"><i class="fa fa-check"></i><b>17</b> GLMM Poisson-lognormale<span></span></a><ul>
-<li class="chapter" data-level="17.1" data-path="glmm-poisson-lognormale.html"><a href="glmm-poisson-lognormale.html#intercepts-aléatoires"><i class="fa fa-check"></i><b>17.1</b> Intercepts aléatoires<span></span></a></li>
-<li class="chapter" data-level="17.2" data-path="glmm-poisson-lognormale.html"><a href="glmm-poisson-lognormale.html#représentation-graphique-des-paramètres-du-modèle"><i class="fa fa-check"></i><b>17.2</b> Représentation graphique des paramètres du modèle<span></span></a></li>
+<li class="part"><span><b>Modèles Linéaires Généralisés Mixtes (GLMMs) en <code>R</code></b></span></li>
+<li class="chapter" data-level="13" data-path="introduction-aux-glmm.html"><a href="introduction-aux-glmm.html"><i class="fa fa-check"></i><b>13</b> Introduction aux GLMM</a></li>
+<li class="chapter" data-level="14" data-path="choisir-la-distribution-des-erreurs.html"><a href="choisir-la-distribution-des-erreurs.html"><i class="fa fa-check"></i><b>14</b> Choisir la distribution des erreurs</a></li>
+<li class="chapter" data-level="15" data-path="glmm-poisson.html"><a href="glmm-poisson.html"><i class="fa fa-check"></i><b>15</b> GLMM Poisson</a></li>
+<li class="chapter" data-level="16" data-path="glmm-binomiale-négative.html"><a href="glmm-binomiale-négative.html"><i class="fa fa-check"></i><b>16</b> GLMM binomiale négative</a></li>
+<li class="chapter" data-level="17" data-path="glmm-poisson-lognormale.html"><a href="glmm-poisson-lognormale.html"><i class="fa fa-check"></i><b>17</b> GLMM Poisson-lognormale</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="glmm-poisson-lognormale.html"><a href="glmm-poisson-lognormale.html#intercepts-aléatoires"><i class="fa fa-check"></i><b>17.1</b> Intercepts aléatoires</a></li>
+<li class="chapter" data-level="17.2" data-path="glmm-poisson-lognormale.html"><a href="glmm-poisson-lognormale.html#représentation-graphique-des-paramètres-du-modèle"><i class="fa fa-check"></i><b>17.2</b> Représentation graphique des paramètres du modèle</a></li>
 </ul></li>
-<li class="chapter" data-level="18" data-path="modèle-final.html"><a href="modèle-final.html"><i class="fa fa-check"></i><b>18</b> Modèle final<span></span></a><ul>
-<li class="chapter" data-level="18.1" data-path="modèle-final.html"><a href="modèle-final.html#défi-9"><i class="fa fa-check"></i><b>18.1</b> Défi 9<span></span></a></li>
+<li class="chapter" data-level="18" data-path="modèle-final.html"><a href="modèle-final.html"><i class="fa fa-check"></i><b>18</b> Modèle final</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="modèle-final.html"><a href="modèle-final.html#défi-9"><i class="fa fa-check"></i><b>18.1</b> Défi 9</a></li>
 </ul></li>
-<li class="part"><span><b>Ressources additionnelles par LMM et GLMM<span></span></b></span></li>
-<li class="chapter" data-level="19" data-path="ressources-additionnelles.html"><a href="ressources-additionnelles.html"><i class="fa fa-check"></i><b>19</b> Ressources additionnelles<span></span></a></li>
-<li class="chapter" data-level="20" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>20</b> References<span></span></a></li>
+<li class="part"><span><b>Ressources additionnelles par LMM et GLMM</b></span></li>
+<li class="chapter" data-level="19" data-path="ressources-additionnelles.html"><a href="ressources-additionnelles.html"><i class="fa fa-check"></i><b>19</b> Ressources additionnelles</a></li>
+<li class="chapter" data-level="20" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>20</b> References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/qcbsRworkshops" target="blank">QCBS R Workshop Series</a></li>
 
@@ -246,7 +258,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
   <img class= "hero-image" src="assets/images/jean-philippe-delberghe-75xPHEQBmvA-unsplash_hero_image.jpg">
 </div>
 --!>
-<div id="commencer-par-une-question" class="section level1 hasAnchor">
+<div id="commencer-par-une-question" class="section level1 hasAnchor" number="4">
 <h1><span class="header-section-number">Chapitre 4</span> Commencer par une question<a href="commencer-par-une-question.html#commencer-par-une-question" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Avant de nous plonger dans le vif du sujet, commençons par se familiariser avec le jeu de données que nous utiliserons à titre d’exemple pour proposer une question de recherche.</p>
 <p>Le <a href="https://raw.githubusercontent.com/QCBSRworkshops/workshop07/main/book-fr/data/qcbs_w7_data.csv">jeu de données</a> que nous utiliserons porte sur les positions trophiques des poissons. Dans ce jeu de données, des données ont été collectées pour <strong>3</strong> espèces de poissons différentes (S1-3) avec <strong>10</strong> individus échantillonnés par espèce dans <strong>6</strong> lacs différents (L1-6). Les individus de chaque espèce ont été mesurés et présentent des variations dans leur longueur corporelle et leur position trophique.</p>
@@ -254,53 +266,53 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p><em>Notez: seulement trois individus sont montrés par espèce, mais en réalité il y a 10 individus par espèce.</em></p>
 <p><img src="images/fig_1_qcbs_wiki.png" /></p>
 <p>Une simple question à laquelle vous pourriez répondre avec ce jeu de données est <strong>est-ce que la position trophique des poissons augmente avec leur taille?</strong> Au cours de l’atelier, on tentera de répondre à cette question.</p>
-<div id="défi-1" class="section level2 hasAnchor">
+<div id="défi-1" class="section level2 hasAnchor" number="4.1">
 <h2><span class="header-section-number">4.1</span> Défi 1<a href="commencer-par-une-question.html#défi-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Pour notre premier défi, nous allons commencer à examiner notre jeu de données plus en profondeur. Reproduisez les graphiques 1-3 en utilisant le script ci-dessous et le jeu de données de poissons.</p>
 <p>Observez les graphiques puis evaluez ce que vous observez. Quelques questions clés sont:</p>
 <p><strong>1.</strong> Est-ce qu’on s’attend à ce que, pour <strong>toutes les espèces</strong>, la position trophique augmente avec la longueur corporelle? Exactement de la même façon?</p>
 <p><strong>2.</strong> S’attend-on à ce que la relation entre la position trophique et la longueur corporelle soit pareille <strong>entre les lacs</strong>?</p>
 <p><strong>Comment ces relations pourraient-elles différer?</strong></p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="commencer-par-une-question.html#cb4-1"></a><span class="co"># Chargez le jeu de données</span></span>
-<span id="cb4-2"><a href="commencer-par-une-question.html#cb4-2"></a>fish.data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/qcbs_w7_data.csv&#39;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">TRUE</span>) </span>
-<span id="cb4-3"><a href="commencer-par-une-question.html#cb4-3"></a><span class="co"># Cette ligne variera en fonction de l&#39;endroit où vos données sont enregistrées. </span></span>
-<span id="cb4-4"><a href="commencer-par-une-question.html#cb4-4"></a><span class="co">#Vérifiez votre répertoire de travail avec getwd(), et changez-le avec setwd() au besoin.</span></span>
-<span id="cb4-5"><a href="commencer-par-une-question.html#cb4-5"></a></span>
-<span id="cb4-6"><a href="commencer-par-une-question.html#cb4-6"></a><span class="co"># Format &#39;custom&#39; pour simplifier tous les figures ggplot produites par la suite</span></span>
-<span id="cb4-7"><a href="commencer-par-une-question.html#cb4-7"></a>fig &lt;-<span class="st"> </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb4-8"><a href="commencer-par-une-question.html#cb4-8"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.grid.minor=</span><span class="kw">element_blank</span>(), </span>
-<span id="cb4-9"><a href="commencer-par-une-question.html#cb4-9"></a>        <span class="dt">panel.grid.major=</span><span class="kw">element_blank</span>(), </span>
-<span id="cb4-10"><a href="commencer-par-une-question.html#cb4-10"></a>        <span class="dt">panel.background=</span><span class="kw">element_blank</span>(), </span>
-<span id="cb4-11"><a href="commencer-par-une-question.html#cb4-11"></a>        <span class="dt">strip.background=</span><span class="kw">element_blank</span>(), </span>
-<span id="cb4-12"><a href="commencer-par-une-question.html#cb4-12"></a>        <span class="dt">strip.text.y =</span> <span class="kw">element_text</span>(),</span>
-<span id="cb4-13"><a href="commencer-par-une-question.html#cb4-13"></a>        <span class="dt">legend.background=</span><span class="kw">element_blank</span>(),</span>
-<span id="cb4-14"><a href="commencer-par-une-question.html#cb4-14"></a>        <span class="dt">legend.key=</span><span class="kw">element_blank</span>(),</span>
-<span id="cb4-15"><a href="commencer-par-une-question.html#cb4-15"></a>        <span class="dt">panel.border =</span> <span class="kw">element_rect</span>(<span class="dt">colour=</span><span class="st">&quot;black&quot;</span>, <span class="dt">fill =</span> <span class="ot">NA</span>))</span>
-<span id="cb4-16"><a href="commencer-par-une-question.html#cb4-16"></a></span>
-<span id="cb4-17"><a href="commencer-par-une-question.html#cb4-17"></a><span class="co"># Explorez les données graphiquement!</span></span>
-<span id="cb4-18"><a href="commencer-par-une-question.html#cb4-18"></a></span>
-<span id="cb4-19"><a href="commencer-par-une-question.html#cb4-19"></a><span class="co"># Structure ggplot de base pour la relation qui nous intéresse</span></span>
-<span id="cb4-20"><a href="commencer-par-une-question.html#cb4-20"></a>plot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Fish_Length, <span class="dt">y =</span> Trophic_Pos), <span class="dt">data =</span> fish.data)</span>
-<span id="cb4-21"><a href="commencer-par-une-question.html#cb4-21"></a></span>
-<span id="cb4-22"><a href="commencer-par-une-question.html#cb4-22"></a><span class="co"># Graphique 1 - Toutes les données</span></span>
-<span id="cb4-23"><a href="commencer-par-une-question.html#cb4-23"></a>plot <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb4-24"><a href="commencer-par-une-question.html#cb4-24"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Longueur corporelle (mm)&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Position trophique&quot;</span>, </span>
-<span id="cb4-25"><a href="commencer-par-une-question.html#cb4-25"></a>       <span class="dt">title =</span> <span class="st">&quot;Toutes les données&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb4-26"><a href="commencer-par-une-question.html#cb4-26"></a><span class="st">  </span>fig <span class="co"># notre joli format ggplot!</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="commencer-par-une-question.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Chargez le jeu de données</span></span>
+<span id="cb4-2"><a href="commencer-par-une-question.html#cb4-2" aria-hidden="true" tabindex="-1"></a>fish.data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&#39;data/qcbs_w7_data.csv&#39;</span>, <span class="at">stringsAsFactors =</span> <span class="cn">TRUE</span>) </span>
+<span id="cb4-3"><a href="commencer-par-une-question.html#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Cette ligne variera en fonction de l&#39;endroit où vos données sont enregistrées. </span></span>
+<span id="cb4-4"><a href="commencer-par-une-question.html#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Vérifiez votre répertoire de travail avec getwd(), et changez-le avec setwd() au besoin.</span></span>
+<span id="cb4-5"><a href="commencer-par-une-question.html#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="commencer-par-une-question.html#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Format &#39;custom&#39; pour simplifier tous les figures ggplot produites par la suite</span></span>
+<span id="cb4-7"><a href="commencer-par-une-question.html#cb4-7" aria-hidden="true" tabindex="-1"></a>fig <span class="ot">&lt;-</span> <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb4-8"><a href="commencer-par-une-question.html#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.minor=</span><span class="fu">element_blank</span>(), </span>
+<span id="cb4-9"><a href="commencer-par-une-question.html#cb4-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major=</span><span class="fu">element_blank</span>(), </span>
+<span id="cb4-10"><a href="commencer-par-une-question.html#cb4-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.background=</span><span class="fu">element_blank</span>(), </span>
+<span id="cb4-11"><a href="commencer-par-une-question.html#cb4-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">strip.background=</span><span class="fu">element_blank</span>(), </span>
+<span id="cb4-12"><a href="commencer-par-une-question.html#cb4-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">strip.text.y =</span> <span class="fu">element_text</span>(),</span>
+<span id="cb4-13"><a href="commencer-par-une-question.html#cb4-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.background=</span><span class="fu">element_blank</span>(),</span>
+<span id="cb4-14"><a href="commencer-par-une-question.html#cb4-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.key=</span><span class="fu">element_blank</span>(),</span>
+<span id="cb4-15"><a href="commencer-par-une-question.html#cb4-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.border =</span> <span class="fu">element_rect</span>(<span class="at">colour=</span><span class="st">&quot;black&quot;</span>, <span class="at">fill =</span> <span class="cn">NA</span>))</span>
+<span id="cb4-16"><a href="commencer-par-une-question.html#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="commencer-par-une-question.html#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Explorez les données graphiquement!</span></span>
+<span id="cb4-18"><a href="commencer-par-une-question.html#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-19"><a href="commencer-par-une-question.html#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Structure ggplot de base pour la relation qui nous intéresse</span></span>
+<span id="cb4-20"><a href="commencer-par-une-question.html#cb4-20" aria-hidden="true" tabindex="-1"></a>plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Fish_Length, <span class="at">y =</span> Trophic_Pos), <span class="at">data =</span> fish.data)</span>
+<span id="cb4-21"><a href="commencer-par-une-question.html#cb4-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-22"><a href="commencer-par-une-question.html#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Graphique 1 - Toutes les données</span></span>
+<span id="cb4-23"><a href="commencer-par-une-question.html#cb4-23" aria-hidden="true" tabindex="-1"></a>plot <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb4-24"><a href="commencer-par-une-question.html#cb4-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Longueur corporelle (mm)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Position trophique&quot;</span>, </span>
+<span id="cb4-25"><a href="commencer-par-une-question.html#cb4-25" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Toutes les données&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb4-26"><a href="commencer-par-une-question.html#cb4-26" aria-hidden="true" tabindex="-1"></a>  fig <span class="co"># notre joli format ggplot!</span></span></code></pre></div>
 <p><img src="book-fr_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="commencer-par-une-question.html#cb5-1"></a><span class="co"># Graphique 2 - Par espèce</span></span>
-<span id="cb5-2"><a href="commencer-par-une-question.html#cb5-2"></a>plot <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb5-3"><a href="commencer-par-une-question.html#cb5-3"></a><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>Fish_Species) <span class="op">+</span><span class="st"> </span><span class="co"># séparer la visualisation par espèce</span></span>
-<span id="cb5-4"><a href="commencer-par-une-question.html#cb5-4"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Longueur corporelle (mm)&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Position trophique&quot;</span>, </span>
-<span id="cb5-5"><a href="commencer-par-une-question.html#cb5-5"></a>       <span class="dt">title =</span> <span class="st">&quot;Par espèce&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb5-6"><a href="commencer-par-une-question.html#cb5-6"></a><span class="st">  </span>fig</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="commencer-par-une-question.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Graphique 2 - Par espèce</span></span>
+<span id="cb5-2"><a href="commencer-par-une-question.html#cb5-2" aria-hidden="true" tabindex="-1"></a>plot <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb5-3"><a href="commencer-par-une-question.html#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> Fish_Species) <span class="sc">+</span> <span class="co"># séparer la visualisation par espèce</span></span>
+<span id="cb5-4"><a href="commencer-par-une-question.html#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Longueur corporelle (mm)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Position trophique&quot;</span>, </span>
+<span id="cb5-5"><a href="commencer-par-une-question.html#cb5-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Par espèce&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb5-6"><a href="commencer-par-une-question.html#cb5-6" aria-hidden="true" tabindex="-1"></a>  fig</span></code></pre></div>
 <p><img src="book-fr_files/figure-html/unnamed-chunk-7-2.png" width="672" /></p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="commencer-par-une-question.html#cb6-1"></a><span class="co"># Graphique 3 – Par lac </span></span>
-<span id="cb6-2"><a href="commencer-par-une-question.html#cb6-2"></a>plot <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb6-3"><a href="commencer-par-une-question.html#cb6-3"></a><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>Lake) <span class="op">+</span><span class="st"> </span><span class="co"># séparer la visualisation par lac</span></span>
-<span id="cb6-4"><a href="commencer-par-une-question.html#cb6-4"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Longueur corporelle (mm)&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Position trophique&quot;</span>, </span>
-<span id="cb6-5"><a href="commencer-par-une-question.html#cb6-5"></a>       <span class="dt">title =</span> <span class="st">&quot;Par lac&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb6-6"><a href="commencer-par-une-question.html#cb6-6"></a><span class="st">  </span>fig</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="commencer-par-une-question.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Graphique 3 – Par lac </span></span>
+<span id="cb6-2"><a href="commencer-par-une-question.html#cb6-2" aria-hidden="true" tabindex="-1"></a>plot <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb6-3"><a href="commencer-par-une-question.html#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> Lake) <span class="sc">+</span> <span class="co"># séparer la visualisation par lac</span></span>
+<span id="cb6-4"><a href="commencer-par-une-question.html#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Longueur corporelle (mm)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Position trophique&quot;</span>, </span>
+<span id="cb6-5"><a href="commencer-par-une-question.html#cb6-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Par lac&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb6-6"><a href="commencer-par-une-question.html#cb6-6" aria-hidden="true" tabindex="-1"></a>  fig</span></code></pre></div>
 <p><img src="book-fr_files/figure-html/unnamed-chunk-7-3.png" width="672" /></p>
 <hr />
 <div id="défi-1-solution" class="section level4 unnumbered hasAnchor">
@@ -383,7 +395,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

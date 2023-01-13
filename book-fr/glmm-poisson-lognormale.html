@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapitre 17 GLMM Poisson-lognormale | Atelier 7: Modèles linéaires et généralisés linéaires mixtes</title>
   <meta name="description" content="Modèles linéaires et généralisés linéaires mixtes" />
-  <meta name="generator" content="bookdown 0.25 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapitre 17 GLMM Poisson-lognormale | Atelier 7: Modèles linéaires et généralisés linéaires mixtes" />
   <meta property="og:type" content="book" />
@@ -48,25 +48,24 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -86,7 +85,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {  background-color: #f8f8f8; }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ef2929; } /* Alert */
 code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
@@ -136,81 +135,94 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <link rel="icon" type="image/png" href="assets/images/favicon.ico"/>
 
 <li class="divider"></li>
-<li class="part"><span><b>Série d’ateliers R du CSBQ<span></span></b></span></li>
-<li><a href="index.html#préface">Préface<span></span></a><ul>
-<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>0.1</b> Code de conduite<span></span></a><ul>
-<li class="chapter" data-level="0.1.1" data-path="index.html"><a href="index.html#comportement-attendu"><i class="fa fa-check"></i><b>0.1.1</b> Comportement attendu<span></span></a></li>
-<li class="chapter" data-level="0.1.2" data-path="index.html"><a href="index.html#comportements-inacceptables"><i class="fa fa-check"></i><b>0.1.2</b> Comportements inacceptables<span></span></a></li>
+<li class="part"><span><b>Série d’ateliers R du CSBQ</b></span></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Préface</a>
+<ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#code-de-conduite"><i class="fa fa-check"></i><b>0.1</b> Code de conduite</a>
+<ul>
+<li class="chapter" data-level="0.1.1" data-path="index.html"><a href="index.html#comportement-attendu"><i class="fa fa-check"></i><b>0.1.1</b> Comportement attendu</a></li>
+<li class="chapter" data-level="0.1.2" data-path="index.html"><a href="index.html#comportements-inacceptables"><i class="fa fa-check"></i><b>0.1.2</b> Comportements inacceptables</a></li>
 </ul></li>
-<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#contributeurs-et-contributrices"><i class="fa fa-check"></i><b>0.2</b> Contributeurs et contributrices<span></span></a></li>
-<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#contribuez-à-la-série"><i class="fa fa-check"></i><b>0.3</b> Contribuez à la série!<span></span></a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#contributeurs-et-contributrices"><i class="fa fa-check"></i><b>0.2</b> Contributeurs et contributrices</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#contribuez-à-la-série"><i class="fa fa-check"></i><b>0.3</b> Contribuez à la série!</a></li>
 </ul></li>
-<li class="part"><span><b>Modèles linéaires à effets mixtes (MLM) en <code>R</code><span></span></b></span></li>
-<li class="chapter" data-level="1" data-path="objectifs-dapprentissage.html"><a href="objectifs-dapprentissage.html"><i class="fa fa-check"></i><b>1</b> Objectifs d’apprentissage<span></span></a></li>
-<li class="chapter" data-level="2" data-path="préparez-vous-pour-cet-atelier.html"><a href="préparez-vous-pour-cet-atelier.html"><i class="fa fa-check"></i><b>2</b> Préparez-vous pour cet atelier<span></span></a></li>
-<li class="chapter" data-level="3" data-path="pourquoi-choisir-un-mlm.html"><a href="pourquoi-choisir-un-mlm.html"><i class="fa fa-check"></i><b>3</b> Pourquoi choisir un MLM?<span></span></a></li>
-<li class="chapter" data-level="4" data-path="commencer-par-une-question.html"><a href="commencer-par-une-question.html"><i class="fa fa-check"></i><b>4</b> Commencer par une question<span></span></a><ul>
-<li class="chapter" data-level="4.1" data-path="commencer-par-une-question.html"><a href="commencer-par-une-question.html#défi-1"><i class="fa fa-check"></i><b>4.1</b> Défi 1<span></span></a></li>
+<li class="part"><span><b>Modèles linéaires à effets mixtes (MLM) en <code>R</code></b></span></li>
+<li class="chapter" data-level="1" data-path="objectifs-dapprentissage.html"><a href="objectifs-dapprentissage.html"><i class="fa fa-check"></i><b>1</b> Objectifs d’apprentissage</a></li>
+<li class="chapter" data-level="2" data-path="préparez-vous-pour-cet-atelier.html"><a href="préparez-vous-pour-cet-atelier.html"><i class="fa fa-check"></i><b>2</b> Préparez-vous pour cet atelier</a></li>
+<li class="chapter" data-level="3" data-path="pourquoi-choisir-un-mlm.html"><a href="pourquoi-choisir-un-mlm.html"><i class="fa fa-check"></i><b>3</b> Pourquoi choisir un MLM?</a></li>
+<li class="chapter" data-level="4" data-path="commencer-par-une-question.html"><a href="commencer-par-une-question.html"><i class="fa fa-check"></i><b>4</b> Commencer par une question</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="commencer-par-une-question.html"><a href="commencer-par-une-question.html#défi-1"><i class="fa fa-check"></i><b>4.1</b> Défi 1</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="analyse-des-données.html"><a href="analyse-des-données.html"><i class="fa fa-check"></i><b>5</b> Analyse des données<span></span></a><ul>
-<li class="chapter" data-level="5.1" data-path="analyse-des-données.html"><a href="analyse-des-données.html#option-1-nombreuses-analyses-séparées"><i class="fa fa-check"></i><b>5.1</b> Option 1: Nombreuses analyses séparées<span></span></a></li>
-<li class="chapter" data-level="5.2" data-path="analyse-des-données.html"><a href="analyse-des-données.html#option-2-une-analyse-groupée"><i class="fa fa-check"></i><b>5.2</b> Option 2: Une analyse groupée<span></span></a></li>
-<li class="chapter" data-level="5.3" data-path="analyse-des-données.html"><a href="analyse-des-données.html#option-3-est-ce-quon-a-une-autre-option"><i class="fa fa-check"></i><b>5.3</b> Option 3: Est-ce qu’on a une autre option?<span></span></a></li>
+<li class="chapter" data-level="5" data-path="analyse-des-données.html"><a href="analyse-des-données.html"><i class="fa fa-check"></i><b>5</b> Analyse des données</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="analyse-des-données.html"><a href="analyse-des-données.html#option-1-nombreuses-analyses-séparées"><i class="fa fa-check"></i><b>5.1</b> Option 1: Nombreuses analyses séparées</a></li>
+<li class="chapter" data-level="5.2" data-path="analyse-des-données.html"><a href="analyse-des-données.html#option-2-une-analyse-groupée"><i class="fa fa-check"></i><b>5.2</b> Option 2: Une analyse groupée</a></li>
+<li class="chapter" data-level="5.3" data-path="analyse-des-données.html"><a href="analyse-des-données.html#option-3-est-ce-quon-a-une-autre-option"><i class="fa fa-check"></i><b>5.3</b> Option 3: Est-ce qu’on a une autre option?</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="effets-fixes-vs-effets-aléatoires.html"><a href="effets-fixes-vs-effets-aléatoires.html"><i class="fa fa-check"></i><b>6</b> Effets fixes vs effets aléatoires<span></span></a><ul>
-<li class="chapter" data-level="6.1" data-path="effets-fixes-vs-effets-aléatoires.html"><a href="effets-fixes-vs-effets-aléatoires.html#effet-fixe-processus-déterministes"><i class="fa fa-check"></i><b>6.1</b> Effet fixe: processus déterministes<span></span></a></li>
-<li class="chapter" data-level="6.2" data-path="effets-fixes-vs-effets-aléatoires.html"><a href="effets-fixes-vs-effets-aléatoires.html#effet-aléatoire-processus-stochastiques"><i class="fa fa-check"></i><b>6.2</b> Effet aléatoire: processus stochastiques<span></span></a></li>
+<li class="chapter" data-level="6" data-path="effets-fixes-vs-effets-aléatoires.html"><a href="effets-fixes-vs-effets-aléatoires.html"><i class="fa fa-check"></i><b>6</b> Effets fixes vs effets aléatoires</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="effets-fixes-vs-effets-aléatoires.html"><a href="effets-fixes-vs-effets-aléatoires.html#effet-fixe-processus-déterministes"><i class="fa fa-check"></i><b>6.1</b> Effet fixe: processus déterministes</a></li>
+<li class="chapter" data-level="6.2" data-path="effets-fixes-vs-effets-aléatoires.html"><a href="effets-fixes-vs-effets-aléatoires.html#effet-aléatoire-processus-stochastiques"><i class="fa fa-check"></i><b>6.2</b> Effet aléatoire: processus stochastiques</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="comment-fonctionnent-les-mlms.html"><a href="comment-fonctionnent-les-mlms.html"><i class="fa fa-check"></i><b>7</b> Comment fonctionnent les MLMs?<span></span></a><ul>
-<li class="chapter" data-level="7.1" data-path="comment-fonctionnent-les-mlms.html"><a href="comment-fonctionnent-les-mlms.html#les-paramètres-peuvent-varier"><i class="fa fa-check"></i><b>7.1</b> Les paramètres peuvent varier<span></span></a><ul>
-<li><a href="comment-fonctionnent-les-mlms.html#ordonnée-à-lorigine">Ordonnée à l’origine:<span></span></a></li>
-<li><a href="comment-fonctionnent-les-mlms.html#pentes">Pentes<span></span></a></li>
+<li class="chapter" data-level="7" data-path="comment-fonctionnent-les-mlms.html"><a href="comment-fonctionnent-les-mlms.html"><i class="fa fa-check"></i><b>7</b> Comment fonctionnent les MLMs?</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="comment-fonctionnent-les-mlms.html"><a href="comment-fonctionnent-les-mlms.html#les-paramètres-peuvent-varier"><i class="fa fa-check"></i><b>7.1</b> Les paramètres peuvent varier</a>
+<ul>
+<li class="chapter" data-level="" data-path="comment-fonctionnent-les-mlms.html"><a href="comment-fonctionnent-les-mlms.html#ordonnée-à-lorigine"><i class="fa fa-check"></i>Ordonnée à l’origine:</a></li>
+<li class="chapter" data-level="" data-path="comment-fonctionnent-les-mlms.html"><a href="comment-fonctionnent-les-mlms.html#pentes"><i class="fa fa-check"></i>Pentes</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="comment-fonctionnent-les-mlms.html"><a href="comment-fonctionnent-les-mlms.html#tenir-compte-de-la-structure-des-données"><i class="fa fa-check"></i><b>7.2</b> Tenir compte de la structure des données<span></span></a></li>
-<li class="chapter" data-level="7.3" data-path="comment-fonctionnent-les-mlms.html"><a href="comment-fonctionnent-les-mlms.html#défi-2"><i class="fa fa-check"></i><b>7.3</b> Défi 2<span></span></a></li>
+<li class="chapter" data-level="7.2" data-path="comment-fonctionnent-les-mlms.html"><a href="comment-fonctionnent-les-mlms.html#tenir-compte-de-la-structure-des-données"><i class="fa fa-check"></i><b>7.2</b> Tenir compte de la structure des données</a></li>
+<li class="chapter" data-level="7.3" data-path="comment-fonctionnent-les-mlms.html"><a href="comment-fonctionnent-les-mlms.html#défi-2"><i class="fa fa-check"></i><b>7.3</b> Défi 2</a></li>
 </ul></li>
-<li class="part"><span><b>Implémenter un MLM dans <code>R</code><span></span></b></span></li>
-<li class="chapter" data-level="8" data-path="le-protocole-pour-implémenter-des-modèles-à-effets-mixtes-dans-r.html"><a href="le-protocole-pour-implémenter-des-modèles-à-effets-mixtes-dans-r.html"><i class="fa fa-check"></i><b>8</b> Le protocole pour implémenter des modèles à effets mixtes dans <code>R</code><span></span></a></li>
-<li class="chapter" data-level="9" data-path="étape-1.-construction-du-modèle-a-priori.html"><a href="étape-1.-construction-du-modèle-a-priori.html"><i class="fa fa-check"></i><b>9</b> Étape 1. Construction du modèle <em>a priori</em><span></span></a><ul>
-<li class="chapter" data-level="9.1" data-path="étape-1.-construction-du-modèle-a-priori.html"><a href="étape-1.-construction-du-modèle-a-priori.html#exploration-des-données"><i class="fa fa-check"></i><b>9.1</b> Exploration des données<span></span></a></li>
-<li class="chapter" data-level="9.2" data-path="étape-1.-construction-du-modèle-a-priori.html"><a href="étape-1.-construction-du-modèle-a-priori.html#vérifier-la-colinéarité"><i class="fa fa-check"></i><b>9.2</b> Vérifier la colinéarité<span></span></a></li>
-<li class="chapter" data-level="9.3" data-path="étape-1.-construction-du-modèle-a-priori.html"><a href="étape-1.-construction-du-modèle-a-priori.html#défi-3"><i class="fa fa-check"></i><b>9.3</b> Défi 3<span></span></a></li>
-<li class="chapter" data-level="9.4" data-path="étape-1.-construction-du-modèle-a-priori.html"><a href="étape-1.-construction-du-modèle-a-priori.html#considérez-léchelle"><i class="fa fa-check"></i><b>9.4</b> Considérez l’échelle<span></span></a></li>
-<li class="chapter" data-level="9.5" data-path="étape-1.-construction-du-modèle-a-priori.html"><a href="étape-1.-construction-du-modèle-a-priori.html#avez-vous-besoin-dun-mlm"><i class="fa fa-check"></i><b>9.5</b> Avez-vous besoin d’un MLM?<span></span></a></li>
+<li class="part"><span><b>Implémenter un MLM dans <code>R</code></b></span></li>
+<li class="chapter" data-level="8" data-path="le-protocole-pour-implémenter-des-modèles-à-effets-mixtes-dans-r.html"><a href="le-protocole-pour-implémenter-des-modèles-à-effets-mixtes-dans-r.html"><i class="fa fa-check"></i><b>8</b> Le protocole pour implémenter des modèles à effets mixtes dans <code>R</code></a></li>
+<li class="chapter" data-level="9" data-path="étape-1.-construction-du-modèle-a-priori.html"><a href="étape-1.-construction-du-modèle-a-priori.html"><i class="fa fa-check"></i><b>9</b> Étape 1. Construction du modèle <em>a priori</em></a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="étape-1.-construction-du-modèle-a-priori.html"><a href="étape-1.-construction-du-modèle-a-priori.html#exploration-des-données"><i class="fa fa-check"></i><b>9.1</b> Exploration des données</a></li>
+<li class="chapter" data-level="9.2" data-path="étape-1.-construction-du-modèle-a-priori.html"><a href="étape-1.-construction-du-modèle-a-priori.html#vérifier-la-colinéarité"><i class="fa fa-check"></i><b>9.2</b> Vérifier la colinéarité</a></li>
+<li class="chapter" data-level="9.3" data-path="étape-1.-construction-du-modèle-a-priori.html"><a href="étape-1.-construction-du-modèle-a-priori.html#défi-3"><i class="fa fa-check"></i><b>9.3</b> Défi 3</a></li>
+<li class="chapter" data-level="9.4" data-path="étape-1.-construction-du-modèle-a-priori.html"><a href="étape-1.-construction-du-modèle-a-priori.html#considérez-léchelle"><i class="fa fa-check"></i><b>9.4</b> Considérez l’échelle</a></li>
+<li class="chapter" data-level="9.5" data-path="étape-1.-construction-du-modèle-a-priori.html"><a href="étape-1.-construction-du-modèle-a-priori.html#avez-vous-besoin-dun-mlm"><i class="fa fa-check"></i><b>9.5</b> Avez-vous besoin d’un MLM?</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="étape-2.-coder-le-modèle.html"><a href="étape-2.-coder-le-modèle.html"><i class="fa fa-check"></i><b>10</b> Étape 2. Coder le modèle<span></span></a><ul>
-<li class="chapter" data-level="10.1" data-path="étape-2.-coder-le-modèle.html"><a href="étape-2.-coder-le-modèle.html#note-sur-les-méthodes-destimation"><i class="fa fa-check"></i><b>10.1</b> Note sur les méthodes d’estimation<span></span></a></li>
-<li class="chapter" data-level="10.2" data-path="étape-2.-coder-le-modèle.html"><a href="étape-2.-coder-le-modèle.html#différentes-structures-de-modèles"><i class="fa fa-check"></i><b>10.2</b> Différentes structures de modèles<span></span></a></li>
-<li class="chapter" data-level="10.3" data-path="étape-2.-coder-le-modèle.html"><a href="étape-2.-coder-le-modèle.html#défi-4"><i class="fa fa-check"></i><b>10.3</b> Défi 4<span></span></a></li>
-<li class="chapter" data-level="10.4" data-path="étape-2.-coder-le-modèle.html"><a href="étape-2.-coder-le-modèle.html#défi-5"><i class="fa fa-check"></i><b>10.4</b> Défi 5<span></span></a></li>
-<li class="chapter" data-level="10.5" data-path="étape-2.-coder-le-modèle.html"><a href="étape-2.-coder-le-modèle.html#comparing-models"><i class="fa fa-check"></i><b>10.5</b> Comparing models<span></span></a></li>
+<li class="chapter" data-level="10" data-path="étape-2.-coder-le-modèle.html"><a href="étape-2.-coder-le-modèle.html"><i class="fa fa-check"></i><b>10</b> Étape 2. Coder le modèle</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="étape-2.-coder-le-modèle.html"><a href="étape-2.-coder-le-modèle.html#note-sur-les-méthodes-destimation"><i class="fa fa-check"></i><b>10.1</b> Note sur les méthodes d’estimation</a></li>
+<li class="chapter" data-level="10.2" data-path="étape-2.-coder-le-modèle.html"><a href="étape-2.-coder-le-modèle.html#différentes-structures-de-modèles"><i class="fa fa-check"></i><b>10.2</b> Différentes structures de modèles</a></li>
+<li class="chapter" data-level="10.3" data-path="étape-2.-coder-le-modèle.html"><a href="étape-2.-coder-le-modèle.html#défi-4"><i class="fa fa-check"></i><b>10.3</b> Défi 4</a></li>
+<li class="chapter" data-level="10.4" data-path="étape-2.-coder-le-modèle.html"><a href="étape-2.-coder-le-modèle.html#défi-5"><i class="fa fa-check"></i><b>10.4</b> Défi 5</a></li>
+<li class="chapter" data-level="10.5" data-path="étape-2.-coder-le-modèle.html"><a href="étape-2.-coder-le-modèle.html#comparing-models"><i class="fa fa-check"></i><b>10.5</b> Comparing models</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="step-3.-validation-du-modèle.html"><a href="step-3.-validation-du-modèle.html"><i class="fa fa-check"></i><b>11</b> Step 3. Validation du modèle<span></span></a><ul>
-<li class="chapter" data-level="11.1" data-path="step-3.-validation-du-modèle.html"><a href="step-3.-validation-du-modèle.html#vérifier-lhomogénéité-de-la-variance"><i class="fa fa-check"></i><b>11.1</b> 1. Vérifier l’homogénéité de la variance<span></span></a></li>
-<li class="chapter" data-level="11.2" data-path="step-3.-validation-du-modèle.html"><a href="step-3.-validation-du-modèle.html#vérifier-lindépendance-des-résidus"><i class="fa fa-check"></i><b>11.2</b> 2. Vérifier l’indépendance des résidus<span></span></a></li>
-<li class="chapter" data-level="11.3" data-path="step-3.-validation-du-modèle.html"><a href="step-3.-validation-du-modèle.html#vérifier-la-normalité"><i class="fa fa-check"></i><b>11.3</b> 3. Vérifier la normalité<span></span></a></li>
+<li class="chapter" data-level="11" data-path="step-3.-validation-du-modèle.html"><a href="step-3.-validation-du-modèle.html"><i class="fa fa-check"></i><b>11</b> Step 3. Validation du modèle</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="step-3.-validation-du-modèle.html"><a href="step-3.-validation-du-modèle.html#vérifier-lhomogénéité-de-la-variance"><i class="fa fa-check"></i><b>11.1</b> 1. Vérifier l’homogénéité de la variance</a></li>
+<li class="chapter" data-level="11.2" data-path="step-3.-validation-du-modèle.html"><a href="step-3.-validation-du-modèle.html#vérifier-lindépendance-des-résidus"><i class="fa fa-check"></i><b>11.2</b> 2. Vérifier l’indépendance des résidus</a></li>
+<li class="chapter" data-level="11.3" data-path="step-3.-validation-du-modèle.html"><a href="step-3.-validation-du-modèle.html#vérifier-la-normalité"><i class="fa fa-check"></i><b>11.3</b> 3. Vérifier la normalité</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="step-4.-interprétation-et-visualisation.html"><a href="step-4.-interprétation-et-visualisation.html"><i class="fa fa-check"></i><b>12</b> Step 4. Interprétation et visualisation<span></span></a><ul>
-<li class="chapter" data-level="12.1" data-path="step-4.-interprétation-et-visualisation.html"><a href="step-4.-interprétation-et-visualisation.html#interprétation-de-notre-modèle"><i class="fa fa-check"></i><b>12.1</b> Interprétation de notre modèle<span></span></a></li>
-<li class="chapter" data-level="12.2" data-path="step-4.-interprétation-et-visualisation.html"><a href="step-4.-interprétation-et-visualisation.html#défi-6"><i class="fa fa-check"></i><b>12.2</b> Défi 6<span></span></a></li>
-<li class="chapter" data-level="12.3" data-path="step-4.-interprétation-et-visualisation.html"><a href="step-4.-interprétation-et-visualisation.html#défi-7"><i class="fa fa-check"></i><b>12.3</b> Défi 7<span></span></a></li>
-<li class="chapter" data-level="12.4" data-path="step-4.-interprétation-et-visualisation.html"><a href="step-4.-interprétation-et-visualisation.html#défi-8"><i class="fa fa-check"></i><b>12.4</b> Défi 8<span></span></a></li>
+<li class="chapter" data-level="12" data-path="step-4.-interprétation-et-visualisation.html"><a href="step-4.-interprétation-et-visualisation.html"><i class="fa fa-check"></i><b>12</b> Step 4. Interprétation et visualisation</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="step-4.-interprétation-et-visualisation.html"><a href="step-4.-interprétation-et-visualisation.html#interprétation-de-notre-modèle"><i class="fa fa-check"></i><b>12.1</b> Interprétation de notre modèle</a></li>
+<li class="chapter" data-level="12.2" data-path="step-4.-interprétation-et-visualisation.html"><a href="step-4.-interprétation-et-visualisation.html#défi-6"><i class="fa fa-check"></i><b>12.2</b> Défi 6</a></li>
+<li class="chapter" data-level="12.3" data-path="step-4.-interprétation-et-visualisation.html"><a href="step-4.-interprétation-et-visualisation.html#défi-7"><i class="fa fa-check"></i><b>12.3</b> Défi 7</a></li>
+<li class="chapter" data-level="12.4" data-path="step-4.-interprétation-et-visualisation.html"><a href="step-4.-interprétation-et-visualisation.html#défi-8"><i class="fa fa-check"></i><b>12.4</b> Défi 8</a></li>
 </ul></li>
-<li class="part"><span><b>Modèles Linéaires Généralisés Mixtes (GLMMs) en <code>R</code><span></span></b></span></li>
-<li class="chapter" data-level="13" data-path="introduction-aux-glmm.html"><a href="introduction-aux-glmm.html"><i class="fa fa-check"></i><b>13</b> Introduction aux GLMM<span></span></a></li>
-<li class="chapter" data-level="14" data-path="choisir-la-distribution-des-erreurs.html"><a href="choisir-la-distribution-des-erreurs.html"><i class="fa fa-check"></i><b>14</b> Choisir la distribution des erreurs<span></span></a></li>
-<li class="chapter" data-level="15" data-path="glmm-poisson.html"><a href="glmm-poisson.html"><i class="fa fa-check"></i><b>15</b> GLMM Poisson<span></span></a></li>
-<li class="chapter" data-level="16" data-path="glmm-binomiale-négative.html"><a href="glmm-binomiale-négative.html"><i class="fa fa-check"></i><b>16</b> GLMM binomiale négative<span></span></a></li>
-<li class="chapter" data-level="17" data-path="glmm-poisson-lognormale.html"><a href="glmm-poisson-lognormale.html"><i class="fa fa-check"></i><b>17</b> GLMM Poisson-lognormale<span></span></a><ul>
-<li class="chapter" data-level="17.1" data-path="glmm-poisson-lognormale.html"><a href="glmm-poisson-lognormale.html#intercepts-aléatoires"><i class="fa fa-check"></i><b>17.1</b> Intercepts aléatoires<span></span></a></li>
-<li class="chapter" data-level="17.2" data-path="glmm-poisson-lognormale.html"><a href="glmm-poisson-lognormale.html#représentation-graphique-des-paramètres-du-modèle"><i class="fa fa-check"></i><b>17.2</b> Représentation graphique des paramètres du modèle<span></span></a></li>
+<li class="part"><span><b>Modèles Linéaires Généralisés Mixtes (GLMMs) en <code>R</code></b></span></li>
+<li class="chapter" data-level="13" data-path="introduction-aux-glmm.html"><a href="introduction-aux-glmm.html"><i class="fa fa-check"></i><b>13</b> Introduction aux GLMM</a></li>
+<li class="chapter" data-level="14" data-path="choisir-la-distribution-des-erreurs.html"><a href="choisir-la-distribution-des-erreurs.html"><i class="fa fa-check"></i><b>14</b> Choisir la distribution des erreurs</a></li>
+<li class="chapter" data-level="15" data-path="glmm-poisson.html"><a href="glmm-poisson.html"><i class="fa fa-check"></i><b>15</b> GLMM Poisson</a></li>
+<li class="chapter" data-level="16" data-path="glmm-binomiale-négative.html"><a href="glmm-binomiale-négative.html"><i class="fa fa-check"></i><b>16</b> GLMM binomiale négative</a></li>
+<li class="chapter" data-level="17" data-path="glmm-poisson-lognormale.html"><a href="glmm-poisson-lognormale.html"><i class="fa fa-check"></i><b>17</b> GLMM Poisson-lognormale</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="glmm-poisson-lognormale.html"><a href="glmm-poisson-lognormale.html#intercepts-aléatoires"><i class="fa fa-check"></i><b>17.1</b> Intercepts aléatoires</a></li>
+<li class="chapter" data-level="17.2" data-path="glmm-poisson-lognormale.html"><a href="glmm-poisson-lognormale.html#représentation-graphique-des-paramètres-du-modèle"><i class="fa fa-check"></i><b>17.2</b> Représentation graphique des paramètres du modèle</a></li>
 </ul></li>
-<li class="chapter" data-level="18" data-path="modèle-final.html"><a href="modèle-final.html"><i class="fa fa-check"></i><b>18</b> Modèle final<span></span></a><ul>
-<li class="chapter" data-level="18.1" data-path="modèle-final.html"><a href="modèle-final.html#défi-9"><i class="fa fa-check"></i><b>18.1</b> Défi 9<span></span></a></li>
+<li class="chapter" data-level="18" data-path="modèle-final.html"><a href="modèle-final.html"><i class="fa fa-check"></i><b>18</b> Modèle final</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="modèle-final.html"><a href="modèle-final.html#défi-9"><i class="fa fa-check"></i><b>18.1</b> Défi 9</a></li>
 </ul></li>
-<li class="part"><span><b>Ressources additionnelles par LMM et GLMM<span></span></b></span></li>
-<li class="chapter" data-level="19" data-path="ressources-additionnelles.html"><a href="ressources-additionnelles.html"><i class="fa fa-check"></i><b>19</b> Ressources additionnelles<span></span></a></li>
-<li class="chapter" data-level="20" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>20</b> References<span></span></a></li>
+<li class="part"><span><b>Ressources additionnelles par LMM et GLMM</b></span></li>
+<li class="chapter" data-level="19" data-path="ressources-additionnelles.html"><a href="ressources-additionnelles.html"><i class="fa fa-check"></i><b>19</b> Ressources additionnelles</a></li>
+<li class="chapter" data-level="20" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>20</b> References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/qcbsRworkshops" target="blank">QCBS R Workshop Series</a></li>
 
@@ -246,7 +258,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
   <img class= "hero-image" src="assets/images/jean-philippe-delberghe-75xPHEQBmvA-unsplash_hero_image.jpg">
 </div>
 --!>
-<div id="glmm-poisson-lognormale" class="section level1 hasAnchor">
+<div id="glmm-poisson-lognormale" class="section level1 hasAnchor" number="17">
 <h1><span class="header-section-number">Chapitre 17</span> GLMM Poisson-lognormale<a href="glmm-poisson-lognormale.html#glmm-poisson-lognormale" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Une deuxième option pour une distribution où la variance augmente plus rapidement avec la moyenne est la distribution <strong>Poisson-lognormale</strong>. Ce modèle place effectivement une priorité lognormale sur <span class="math inline">\(εi\)</span>.</p>
 <p>Une distribution Poisson-lognormale avec une moyenne de <span class="math inline">\(µ\)</span> et une variance antérieure lognormale de <span class="math inline">\(σ2\)</span> a une variance:</p>
@@ -257,49 +269,49 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>Pour mettre en œuvre le <strong>effet aléatoire au niveau de l’observation</strong>, nous allons l’évaluer au niveau individuel. Pour ce faire, il suffit de placer un <strong>effet aléatoire au niveau des observations</strong> dans la formule du modèle.</p>
 <p>Voir Harrison (2014) pour plus de détails <a href="https://doi.org/10.7717/peerj.616" class="uri">https://doi.org/10.7717/peerj.616</a>.</p>
 <p>Pour ce faire, nous créons tout d’abord une variable nommée <code>X</code>:</p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="glmm-poisson-lognormale.html#cb83-1"></a><span class="co"># GLMM Poisson-lognormale</span></span>
-<span id="cb83-2"><a href="glmm-poisson-lognormale.html#cb83-2"></a></span>
-<span id="cb83-3"><a href="glmm-poisson-lognormale.html#cb83-3"></a><span class="co"># Cette variable est déjà dans vos données &#39;dat.tf&#39;, mais</span></span>
-<span id="cb83-4"><a href="glmm-poisson-lognormale.html#cb83-4"></a><span class="co"># voici comment la créer.</span></span>
-<span id="cb83-5"><a href="glmm-poisson-lognormale.html#cb83-5"></a>dat.tf<span class="op">$</span>X &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(dat.tf)</span></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="glmm-poisson-lognormale.html#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="co"># GLMM Poisson-lognormale</span></span>
+<span id="cb83-2"><a href="glmm-poisson-lognormale.html#cb83-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-3"><a href="glmm-poisson-lognormale.html#cb83-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Cette variable est déjà dans vos données &#39;dat.tf&#39;, mais</span></span>
+<span id="cb83-4"><a href="glmm-poisson-lognormale.html#cb83-4" aria-hidden="true" tabindex="-1"></a><span class="co"># voici comment la créer.</span></span>
+<span id="cb83-5"><a href="glmm-poisson-lognormale.html#cb83-5" aria-hidden="true" tabindex="-1"></a>dat.tf<span class="sc">$</span>X <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(dat.tf)</span></code></pre></div>
 <p>On traite la surdispersion en ajoutant l’effet <code>(1|X)</code> dans la formule:</p>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="glmm-poisson-lognormale.html#cb84-1"></a><span class="co"># Tenir compte de la surdispersion</span></span>
-<span id="cb84-2"><a href="glmm-poisson-lognormale.html#cb84-2"></a>mpl1 &lt;-<span class="st"> </span><span class="kw">glmer</span>(total.fruits <span class="op">~</span><span class="st"> </span>nutrient <span class="op">*</span><span class="st"> </span>amd <span class="op">+</span><span class="st"> </span>rack <span class="op">+</span><span class="st"> </span>status <span class="op">+</span></span>
-<span id="cb84-3"><a href="glmm-poisson-lognormale.html#cb84-3"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>X) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>popu) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>gen), <span class="dt">data =</span> dat.tf, <span class="dt">family =</span> <span class="st">&quot;poisson&quot;</span>,</span>
-<span id="cb84-4"><a href="glmm-poisson-lognormale.html#cb84-4"></a>    <span class="dt">control =</span> <span class="kw">glmerControl</span>(<span class="dt">optimizer =</span> <span class="st">&quot;bobyqa&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="glmm-poisson-lognormale.html#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tenir compte de la surdispersion</span></span>
+<span id="cb84-2"><a href="glmm-poisson-lognormale.html#cb84-2" aria-hidden="true" tabindex="-1"></a>mpl1 <span class="ot">&lt;-</span> <span class="fu">glmer</span>(total.fruits <span class="sc">~</span> nutrient <span class="sc">*</span> amd <span class="sc">+</span> rack <span class="sc">+</span> status <span class="sc">+</span></span>
+<span id="cb84-3"><a href="glmm-poisson-lognormale.html#cb84-3" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">1</span> <span class="sc">|</span> X) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> popu) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> gen), <span class="at">data =</span> dat.tf, <span class="at">family =</span> <span class="st">&quot;poisson&quot;</span>,</span>
+<span id="cb84-4"><a href="glmm-poisson-lognormale.html#cb84-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">control =</span> <span class="fu">glmerControl</span>(<span class="at">optimizer =</span> <span class="st">&quot;bobyqa&quot;</span>))</span></code></pre></div>
 <p>On teste finalement pour la présence de surdispersion:</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="glmm-poisson-lognormale.html#cb85-1"></a><span class="co"># Surdispersion?</span></span>
-<span id="cb85-2"><a href="glmm-poisson-lognormale.html#cb85-2"></a><span class="kw">overdisp_fun</span>(mpl1)</span></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="glmm-poisson-lognormale.html#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Surdispersion?</span></span>
+<span id="cb85-2"><a href="glmm-poisson-lognormale.html#cb85-2" aria-hidden="true" tabindex="-1"></a><span class="fu">overdisp_fun</span>(mpl1)</span></code></pre></div>
 <pre><code>##         chisq         ratio             p          logp 
-##  1.775360e+02  2.886764e-01  1.000000e+00 -3.754681e-73</code></pre>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="glmm-poisson-lognormale.html#cb87-1"></a><span class="co"># Le rapport est maintenant conforme avec notre critère,</span></span>
-<span id="cb87-2"><a href="glmm-poisson-lognormale.html#cb87-2"></a><span class="co"># soit &lt; 1</span></span></code></pre></div>
+##  1.775360e+02  2.886764e-01  1.000000e+00 -3.754786e-73</code></pre>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="glmm-poisson-lognormale.html#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Le rapport est maintenant conforme avec notre critère,</span></span>
+<span id="cb87-2"><a href="glmm-poisson-lognormale.html#cb87-2" aria-hidden="true" tabindex="-1"></a><span class="co"># soit &lt; 1</span></span></code></pre></div>
 <p><strong>Le rapport est maintenant conforme avec notre critère, soit &lt; 1!</strong></p>
 <hr />
-<div id="intercepts-aléatoires" class="section level2 hasAnchor">
+<div id="intercepts-aléatoires" class="section level2 hasAnchor" number="17.1">
 <h2><span class="header-section-number">17.1</span> Intercepts aléatoires<a href="glmm-poisson-lognormale.html#intercepts-aléatoires" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Maintenant que nous avons la distribution d’erreur appropriée, nous pouvons tester l’importance des interceptes aléatoires (pour population et génotype) en comparant des modèles nichés <strong>avec</strong> et <strong>sans</strong> les effets aléatoires d’intérêt en utilisant soit:</p>
 <ul>
 <li><p><em>1. L’approche théorique d’information (tel que le Critère d’Information d’Akaike; AIC)</em>, qui, comme nous l’avons vu apres examine plusieurs hypothèses concurrentes (modèles) simultanément pour identifier le modèle avec le pouvoir prédictif le plus élevé compte tenu des données. Nous allons encore une fois utiliser le AICc pour corriger les petites tailles d’échantillon.</p></li>
 <li><p><em>2. L’approche fréquentiste (test d’hypothèse nulle traditionnelle)</em>, où deux modèles nichés sont comparés en utilisant le tests de rapport de vraisemblance de la fonction anova(). Il est important de noter qu’avec cette approche, nous testons une hypothèse nulle d’une variance de zéro, mais étant donné que nous ne pouvons pas avoir un écart négatif, nous testons le paramètre à la limite de sa région réalisable. Par conséquent, la valeur de p rapporté est environ le double de ce qu’elle devrait être (c. nous avons tronquée la moitié des valeurs possibles ; celles qui tombent en dessous de 0).</p></li>
 </ul>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="glmm-poisson-lognormale.html#cb88-1"></a><span class="co"># popu seulement</span></span>
-<span id="cb88-2"><a href="glmm-poisson-lognormale.html#cb88-2"></a>mpl1.popu &lt;-<span class="st"> </span><span class="kw">glmer</span>(total.fruits <span class="op">~</span><span class="st"> </span>nutrient <span class="op">*</span><span class="st"> </span>amd <span class="op">+</span><span class="st"> </span>rack <span class="op">+</span><span class="st"> </span>status <span class="op">+</span></span>
-<span id="cb88-3"><a href="glmm-poisson-lognormale.html#cb88-3"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>X) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>popu), <span class="dt">data =</span> dat.tf, <span class="dt">family =</span> <span class="st">&quot;poisson&quot;</span>,</span>
-<span id="cb88-4"><a href="glmm-poisson-lognormale.html#cb88-4"></a>    <span class="dt">control =</span> <span class="kw">glmerControl</span>(<span class="dt">optimizer =</span> <span class="st">&quot;bobyqa&quot;</span>))</span>
-<span id="cb88-5"><a href="glmm-poisson-lognormale.html#cb88-5"></a></span>
-<span id="cb88-6"><a href="glmm-poisson-lognormale.html#cb88-6"></a><span class="co"># gen seulement</span></span>
-<span id="cb88-7"><a href="glmm-poisson-lognormale.html#cb88-7"></a>mpl1.gen &lt;-<span class="st"> </span><span class="kw">glmer</span>(total.fruits <span class="op">~</span><span class="st"> </span>nutrient <span class="op">*</span><span class="st"> </span>amd <span class="op">+</span><span class="st"> </span>rack <span class="op">+</span><span class="st"> </span>status <span class="op">+</span></span>
-<span id="cb88-8"><a href="glmm-poisson-lognormale.html#cb88-8"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>X) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>gen), <span class="dt">data =</span> dat.tf, <span class="dt">family =</span> <span class="st">&quot;poisson&quot;</span>, <span class="dt">control =</span> <span class="kw">glmerControl</span>(<span class="dt">optimizer =</span> <span class="st">&quot;bobyqa&quot;</span>))</span>
-<span id="cb88-9"><a href="glmm-poisson-lognormale.html#cb88-9"></a></span>
-<span id="cb88-10"><a href="glmm-poisson-lognormale.html#cb88-10"></a><span class="co"># Approche AICc</span></span>
-<span id="cb88-11"><a href="glmm-poisson-lognormale.html#cb88-11"></a><span class="kw">ICtab</span>(mpl1, mpl1.popu, mpl1.gen, <span class="dt">type =</span> <span class="kw">c</span>(<span class="st">&quot;AICc&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="glmm-poisson-lognormale.html#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="co"># popu seulement</span></span>
+<span id="cb88-2"><a href="glmm-poisson-lognormale.html#cb88-2" aria-hidden="true" tabindex="-1"></a>mpl1.popu <span class="ot">&lt;-</span> <span class="fu">glmer</span>(total.fruits <span class="sc">~</span> nutrient <span class="sc">*</span> amd <span class="sc">+</span> rack <span class="sc">+</span> status <span class="sc">+</span></span>
+<span id="cb88-3"><a href="glmm-poisson-lognormale.html#cb88-3" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">1</span> <span class="sc">|</span> X) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> popu), <span class="at">data =</span> dat.tf, <span class="at">family =</span> <span class="st">&quot;poisson&quot;</span>,</span>
+<span id="cb88-4"><a href="glmm-poisson-lognormale.html#cb88-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">control =</span> <span class="fu">glmerControl</span>(<span class="at">optimizer =</span> <span class="st">&quot;bobyqa&quot;</span>))</span>
+<span id="cb88-5"><a href="glmm-poisson-lognormale.html#cb88-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-6"><a href="glmm-poisson-lognormale.html#cb88-6" aria-hidden="true" tabindex="-1"></a><span class="co"># gen seulement</span></span>
+<span id="cb88-7"><a href="glmm-poisson-lognormale.html#cb88-7" aria-hidden="true" tabindex="-1"></a>mpl1.gen <span class="ot">&lt;-</span> <span class="fu">glmer</span>(total.fruits <span class="sc">~</span> nutrient <span class="sc">*</span> amd <span class="sc">+</span> rack <span class="sc">+</span> status <span class="sc">+</span></span>
+<span id="cb88-8"><a href="glmm-poisson-lognormale.html#cb88-8" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">1</span> <span class="sc">|</span> X) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> gen), <span class="at">data =</span> dat.tf, <span class="at">family =</span> <span class="st">&quot;poisson&quot;</span>, <span class="at">control =</span> <span class="fu">glmerControl</span>(<span class="at">optimizer =</span> <span class="st">&quot;bobyqa&quot;</span>))</span>
+<span id="cb88-9"><a href="glmm-poisson-lognormale.html#cb88-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-10"><a href="glmm-poisson-lognormale.html#cb88-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Approche AICc</span></span>
+<span id="cb88-11"><a href="glmm-poisson-lognormale.html#cb88-11" aria-hidden="true" tabindex="-1"></a><span class="fu">ICtab</span>(mpl1, mpl1.popu, mpl1.gen, <span class="at">type =</span> <span class="fu">c</span>(<span class="st">&quot;AICc&quot;</span>))</span></code></pre></div>
 <pre><code>##           dAICc df
 ## mpl1       0.0  10
 ## mpl1.popu  2.0  9 
 ## mpl1.gen  16.1  9</code></pre>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="glmm-poisson-lognormale.html#cb90-1"></a><span class="co"># Approche fréquentiste (Likelihood Ratio Test)</span></span>
-<span id="cb90-2"><a href="glmm-poisson-lognormale.html#cb90-2"></a><span class="kw">anova</span>(mpl1, mpl1.popu)</span></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="glmm-poisson-lognormale.html#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Approche fréquentiste (Likelihood Ratio Test)</span></span>
+<span id="cb90-2"><a href="glmm-poisson-lognormale.html#cb90-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(mpl1, mpl1.popu)</span></code></pre></div>
 <pre><code>## Data: dat.tf
 ## Models:
 ## mpl1.popu: total.fruits ~ nutrient * amd + rack + status + (1 | X) + (1 | popu)
@@ -309,7 +321,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## mpl1        10 5015.4 5059.8 -2497.7   4995.4 4.0639  1    0.04381 *
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="glmm-poisson-lognormale.html#cb92-1"></a><span class="kw">anova</span>(mpl1, mpl1.gen)</span></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="glmm-poisson-lognormale.html#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(mpl1, mpl1.gen)</span></code></pre></div>
 <pre><code>## Data: dat.tf
 ## Models:
 ## mpl1.gen: total.fruits ~ nutrient * amd + rack + status + (1 | X) + (1 | gen)
@@ -322,29 +334,29 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>Notez que le modèle sans l’intercept aléatoire pour génotype est à moins de deux unités AICc du modèle complet, ce qui indique que les deux modèles sont tout aussi plausibles (i.e. peu de soutien pour inclure un intercept aléatoire pour le génotype). Toutefois, lorsque nous utilisons la comparaison de vraisemblance de modèles nichés (anova()), et corrigeons pour les valeurs p gonflés par un facteur de 2, nous trouvons que dans les deux cas, p &lt;0,05. <strong>Donc le modèle avec les deux effets aléatoires (mpl1) est sélectionné.</strong></p>
 <hr />
 </div>
-<div id="représentation-graphique-des-paramètres-du-modèle" class="section level2 hasAnchor">
+<div id="représentation-graphique-des-paramètres-du-modèle" class="section level2 hasAnchor" number="17.2">
 <h2><span class="header-section-number">17.2</span> Représentation graphique des paramètres du modèle<a href="glmm-poisson-lognormale.html#représentation-graphique-des-paramètres-du-modèle" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><strong>Maintenant que nous avons choisi notre modèle, visualisons les paramètres du modèle.</strong></p>
 <p>Peut être obtenu en utilisant la fonction <code>coefplot2()</code>de la librairie <code>coefplot2</code>:</p>
 <p><em>Notez: Cette librairie n’est pas sur le CRAN! On utilise la librairie <code>remotes</code> pour l’installer à partir de GitHub.</em></p>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="glmm-poisson-lognormale.html#cb94-1"></a><span class="co"># Visualisons les paramètres du modèle</span></span>
-<span id="cb94-2"><a href="glmm-poisson-lognormale.html#cb94-2"></a></span>
-<span id="cb94-3"><a href="glmm-poisson-lognormale.html#cb94-3"></a><span class="co"># Cette librairie n&#39;est pas sur le CRAN! On utilise la</span></span>
-<span id="cb94-4"><a href="glmm-poisson-lognormale.html#cb94-4"></a><span class="co"># librairie `remotes` pour l&#39;installer à partir de GitHub.</span></span>
-<span id="cb94-5"><a href="glmm-poisson-lognormale.html#cb94-5"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&quot;coefplot2&quot;</span>)) remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;palday/coefplot2&quot;</span>,</span>
-<span id="cb94-6"><a href="glmm-poisson-lognormale.html#cb94-6"></a>    <span class="dt">subdir =</span> <span class="st">&quot;pkg&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="glmm-poisson-lognormale.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualisons les paramètres du modèle</span></span>
+<span id="cb94-2"><a href="glmm-poisson-lognormale.html#cb94-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-3"><a href="glmm-poisson-lognormale.html#cb94-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Cette librairie n&#39;est pas sur le CRAN! On utilise la</span></span>
+<span id="cb94-4"><a href="glmm-poisson-lognormale.html#cb94-4" aria-hidden="true" tabindex="-1"></a><span class="co"># librairie `remotes` pour l&#39;installer à partir de GitHub.</span></span>
+<span id="cb94-5"><a href="glmm-poisson-lognormale.html#cb94-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&quot;coefplot2&quot;</span>)) remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;palday/coefplot2&quot;</span>,</span>
+<span id="cb94-6"><a href="glmm-poisson-lognormale.html#cb94-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">subdir =</span> <span class="st">&quot;pkg&quot;</span>)</span></code></pre></div>
 <pre><code>## Loading required package: coefplot2</code></pre>
 <pre><code>## Loading required package: coda</code></pre>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="glmm-poisson-lognormale.html#cb97-1"></a><span class="kw">library</span>(coefplot2)</span></code></pre></div>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="glmm-poisson-lognormale.html#cb98-1"></a><span class="co"># Effets aléatoires</span></span>
-<span id="cb98-2"><a href="glmm-poisson-lognormale.html#cb98-2"></a><span class="kw">coefplot2</span>(mpl1, <span class="dt">ptype =</span> <span class="st">&quot;vcov&quot;</span>, <span class="dt">intercept =</span> <span class="ot">TRUE</span>, <span class="dt">main =</span> <span class="st">&quot;Random effect variance&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="glmm-poisson-lognormale.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(coefplot2)</span></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="glmm-poisson-lognormale.html#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Effets aléatoires</span></span>
+<span id="cb98-2"><a href="glmm-poisson-lognormale.html#cb98-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coefplot2</span>(mpl1, <span class="at">ptype =</span> <span class="st">&quot;vcov&quot;</span>, <span class="at">intercept =</span> <span class="cn">TRUE</span>, <span class="at">main =</span> <span class="st">&quot;Random effect variance&quot;</span>)</span></code></pre></div>
 <p><img src="book-fr_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
 <p>Ici, nous pouvons voir que certains effets aléatoires présentent une plus grande variance que d’autres.</p>
 <div class="explanation">
 <p>La variance des effets aléatoires (σ2i) représente la variance moyenne des effets aléatoires du modèle. Puisque cette variance reflète la variance “moyenne” des effets aléatoires pour les modèles mixtes, elle est également appropriée pour les modèles avec des structures d’effets aléatoires plus complexes, comme les pentes aléatoires ou les effets aléatoires imbriqués.</p>
 </div>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="glmm-poisson-lognormale.html#cb99-1"></a><span class="co"># Effets fixes</span></span>
-<span id="cb99-2"><a href="glmm-poisson-lognormale.html#cb99-2"></a><span class="kw">coefplot2</span>(mpl1, <span class="dt">intercept =</span> <span class="ot">TRUE</span>, <span class="dt">main =</span> <span class="st">&quot;Fixed effect coefficient&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="glmm-poisson-lognormale.html#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Effets fixes</span></span>
+<span id="cb99-2"><a href="glmm-poisson-lognormale.html#cb99-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coefplot2</span>(mpl1, <span class="at">intercept =</span> <span class="cn">TRUE</span>, <span class="at">main =</span> <span class="st">&quot;Fixed effect coefficient&quot;</span>)</span></code></pre></div>
 <p><img src="book-fr_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
 <div class="explanation">
 <p>La variance des effets fixes (σ2f) est la variance de la matrice-multiplication β∗X (vecteur de paramètres par matrice de modèle)</p>
@@ -361,13 +373,13 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>Les différences entre les génotypes semblent induites par le génotype 34</li>
 </ul>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="glmm-poisson-lognormale.html#cb100-1"></a><span class="co"># dotplot code</span></span>
-<span id="cb100-2"><a href="glmm-poisson-lognormale.html#cb100-2"></a>pp &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">layout.widths =</span> <span class="kw">list</span>(<span class="dt">left.padding =</span> <span class="dv">0</span>, <span class="dt">right.padding =</span> <span class="dv">0</span>),</span>
-<span id="cb100-3"><a href="glmm-poisson-lognormale.html#cb100-3"></a>    <span class="dt">layout.heights =</span> <span class="kw">list</span>(<span class="dt">top.padding =</span> <span class="dv">0</span>, <span class="dt">bottom.padding =</span> <span class="dv">0</span>))</span>
-<span id="cb100-4"><a href="glmm-poisson-lognormale.html#cb100-4"></a>r2 &lt;-<span class="st"> </span><span class="kw">ranef</span>(mpl1, <span class="dt">condVar =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb100-5"><a href="glmm-poisson-lognormale.html#cb100-5"></a>d2 &lt;-<span class="st"> </span><span class="kw">dotplot</span>(r2, <span class="dt">par.settings =</span> pp)</span>
-<span id="cb100-6"><a href="glmm-poisson-lognormale.html#cb100-6"></a></span>
-<span id="cb100-7"><a href="glmm-poisson-lognormale.html#cb100-7"></a><span class="kw">grid.arrange</span>(d2<span class="op">$</span>gen, d2<span class="op">$</span>popu, <span class="dt">nrow =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="glmm-poisson-lognormale.html#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dotplot code</span></span>
+<span id="cb100-2"><a href="glmm-poisson-lognormale.html#cb100-2" aria-hidden="true" tabindex="-1"></a>pp <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">layout.widths =</span> <span class="fu">list</span>(<span class="at">left.padding =</span> <span class="dv">0</span>, <span class="at">right.padding =</span> <span class="dv">0</span>),</span>
+<span id="cb100-3"><a href="glmm-poisson-lognormale.html#cb100-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">layout.heights =</span> <span class="fu">list</span>(<span class="at">top.padding =</span> <span class="dv">0</span>, <span class="at">bottom.padding =</span> <span class="dv">0</span>))</span>
+<span id="cb100-4"><a href="glmm-poisson-lognormale.html#cb100-4" aria-hidden="true" tabindex="-1"></a>r2 <span class="ot">&lt;-</span> <span class="fu">ranef</span>(mpl1, <span class="at">condVar =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb100-5"><a href="glmm-poisson-lognormale.html#cb100-5" aria-hidden="true" tabindex="-1"></a>d2 <span class="ot">&lt;-</span> <span class="fu">dotplot</span>(r2, <span class="at">par.settings =</span> pp)</span>
+<span id="cb100-6"><a href="glmm-poisson-lognormale.html#cb100-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb100-7"><a href="glmm-poisson-lognormale.html#cb100-7" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(d2<span class="sc">$</span>gen, d2<span class="sc">$</span>popu, <span class="at">nrow =</span> <span class="dv">1</span>)</span></code></pre></div>
 <p><img src="book-fr_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
 
 </div>
@@ -444,7 +456,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');
