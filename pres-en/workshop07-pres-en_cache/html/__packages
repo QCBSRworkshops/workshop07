@@ -7,7 +7,6 @@ vcdExtra
 bbmle
 MuMIn
 ggplot2
-DescTools
 remotes
 gridExtra
 lattice
