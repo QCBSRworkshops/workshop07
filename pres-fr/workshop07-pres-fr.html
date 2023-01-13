@@ -4,6 +4,7 @@
     <title>Atelier 7: Modèles linéaires et généralisés linéaires mixtes</title>
     <meta charset="utf-8" />
     <meta name="author" content="Centre de la Science de la Biodiversité du Québec" />
+    <script src="assets/header-attrs-2.19/header-attrs.js"></script>
     <link href="assets/remark-css-0.0.1/default.css" rel="stylesheet" />
     <script src="assets/clipboard-2.0.6/clipboard.min.js"></script>
     <link href="assets/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.css" rel="stylesheet" />
@@ -20,9 +21,15 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
+.title[
 # Atelier 7: Modèles linéaires et généralisés linéaires mixtes
+]
+.subtitle[
 ## Série d’ateliers R du CSBQ
+]
+.author[
 ### Centre de la Science de la Biodiversité du Québec
+]
 
 ---
 
@@ -947,7 +954,7 @@ lmer(Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species),
 # Number of obs: 180, groups:  Lake, 6; Fish_Species, 3
 # Fixed Effects:
 # (Intercept)     Z_Length  
-#   9.752e-14    4.198e-01
+#   6.858e-14    4.198e-01
 ```
 
 ---
@@ -964,10 +971,10 @@ lmer(Z_TP ~ Z_Length + (1 + Z_Length | Lake) + (1 + Z_Length | Fish_Species),
 # REML criterion at convergence: 20.5786
 # Random effects:
 #  Groups       Name        Std.Dev. Corr 
-#  Lake         (Intercept) 0.45279       
-#               Z_Length    0.02378  -0.82
-#  Fish_Species (Intercept) 0.93103       
-#               Z_Length    0.15728  1.00 
+#  Lake         (Intercept) 0.45280       
+#               Z_Length    0.02379  -0.82
+#  Fish_Species (Intercept) 0.93097       
+#               Z_Length    0.15727  1.00 
 #  Residual                 0.22341       
 # Number of obs: 180, groups:  Lake, 6; Fish_Species, 3
 # Fixed Effects:
@@ -1093,9 +1100,9 @@ AIC.table  &lt;- MuMIn::model.sel(M0, M1, M2, M3, M4, M5, M6, M7, M8)
 (AIC.table &lt;- AIC.table[ , c("df", "logLik", "AICc", "delta")])
 #    df      logLik      AICc      delta
 # M8  7   -8.597929  31.84702   0.000000
-# M2  9   -8.216019  35.49086   3.643839
+# M2  9   -8.216010  35.49084   3.643823
 # M1  5  -33.480080  77.30499  45.457965
-# M7  7  -33.186374  81.02391  49.176890
+# M7  7  -33.186374  81.02391  49.176889
 # M5  6 -128.310995 269.10754 237.260517
 # M3  4 -134.532965 277.29450 245.447480
 # M4  4 -224.715763 457.66010 425.813076
@@ -1119,9 +1126,9 @@ Que signifient ces valeurs d'AICc ?
 AIC.table
 #    df      logLik      AICc      delta
 # M8  7   -8.597929  31.84702   0.000000
-# M2  9   -8.216019  35.49086   3.643839
+# M2  9   -8.216010  35.49084   3.643823
 # M1  5  -33.480080  77.30499  45.457965
-# M7  7  -33.186374  81.02391  49.176890
+# M7  7  -33.186374  81.02391  49.176889
 # M5  6 -128.310995 269.10754 237.260517
 # M3  4 -134.532965 277.29450 245.447480
 # M4  4 -224.715763 457.66010 425.813076
@@ -1394,20 +1401,20 @@ hist(resid(M8))
 # 
 # Scaled residuals: 
 #      Min       1Q   Median       3Q      Max 
-# -2.77187 -0.60166  0.05589  0.64239  2.27776 
+# -2.77185 -0.60165  0.05589  0.64239  2.27777 
 # 
 # Random effects:
 #  Groups       Name        Variance Std.Dev. Corr
-#  Lake         (Intercept) 0.20504  0.4528       
-#  Fish_Species (Intercept) 0.86715  0.9312       
-#               Z_Length    0.02466  0.1570   1.00
+#  Lake         (Intercept) 0.20505  0.4528       
+#  Fish_Species (Intercept) 0.86676  0.9310       
+#               Z_Length    0.02465  0.1570   1.00
 #  Residual                 0.05039  0.2245       
 # Number of obs: 180, groups:  Lake, 6; Fish_Species, 3
 # 
 # Fixed effects:
 #               Estimate Std. Error t value
-# (Intercept) -0.0009059  0.5687733  -0.002
-# Z_Length     0.4222697  0.0922117   4.579
+# (Intercept) -0.0009059  0.5686591  -0.002
+# Z_Length     0.4222698  0.0921927   4.580
 # 
 # Correlation of Fixed Effects:
 #          (Intr)
@@ -1535,12 +1542,12 @@ Pour faire ces figures, il nous faut:
 ```r
 summ_M8$coefficients
 #                  Estimate Std. Error      t value
-# (Intercept) -0.0009058974 0.56877327 -0.001592722
-# Z_Length     0.4222697238 0.09221166  4.579352788
+# (Intercept) -0.0009059101 0.56865914 -0.001593064
+# Z_Length     0.4222697624 0.09219268  4.580296200
 ```
 
-- Intercept = `\(-9.0589745\times 10^{-4}\)`
-- Pente = `\(0.4222697\)`
+- Intercept = `\(-9.0591014\times 10^{-4}\)`
+- Pente = `\(0.4222698\)`
 
 
 ---
@@ -1555,18 +1562,18 @@ Pour faire ces figures, il nous faut:
 coef(M8)
 # $Lake
 #     (Intercept)  Z_Length
-# L1 -0.085984071 0.4222697
-# L2  0.002205209 0.4222697
-# L3 -0.301816557 0.4222697
-# L4 -0.574039728 0.4222697
-# L5  0.218650140 0.4222697
-# L6  0.735549622 0.4222697
+# L1 -0.085984110 0.4222698
+# L2  0.002205189 0.4222698
+# L3 -0.301816663 0.4222698
+# L4 -0.574040006 0.4222698
+# L5  0.218650190 0.4222698
+# L6  0.735549939 0.4222698
 # 
 # $Fish_Species
 #    (Intercept)  Z_Length
-# S1  -1.0752985 0.2410746
-# S2   0.5597871 0.5168300
-# S3   0.5127938 0.5089046
+# S1  -1.0752976 0.2410721
+# S2   0.5597866 0.5168313
+# S3   0.5127933 0.5089059
 # 
 # attr(,"class")
 # [1] "coef.mer"
@@ -1934,7 +1941,7 @@ source(file = "data/glmm_funs.R")
 # Surdispersion?
 overdisp_fun(mp1)
 #       chisq       ratio           p        logp 
-# 15755.86829    25.57771     0.00000 -6578.47025
+# 15755.86835    25.57771     0.00000 -6578.47028
 ```
 --
 .alert[Le rapport est significativement &gt; 1]
@@ -1966,7 +1973,7 @@ On teste à nouveau pour la présence de surdispersion :
 # Surdispersion?
 overdisp_fun(mnb1)
 #         chisq         ratio             p          logp 
-# 721.034466390   1.170510497   0.002143424  -6.145350714
+# 721.034461131   1.170510489   0.002143425  -6.145350288
 ```
 
 .alert[Le rapport est beaucoup plus près de 1 mais la valeur de p &lt; 0.05]
@@ -2012,7 +2019,7 @@ On teste finalement pour la présence de surdispersion :
 ```r
 overdisp_fun(mpl1)
 #         chisq         ratio             p          logp 
-#  1.775360e+02  2.886764e-01  1.000000e+00 -3.754681e-73
+#  1.775360e+02  2.886764e-01  1.000000e+00 -3.754786e-73
 ```
 
 .alert[Le rapport est maintenant conforme avec notre critère, soit &lt; 1]
@@ -2359,6 +2366,19 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable
