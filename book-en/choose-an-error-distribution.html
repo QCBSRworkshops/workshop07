@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 14 Choose an error distribution | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)</title>
   <meta name="description" content="Linear and generalized linear mixed models (LMM and GLMM)" />
-  <meta name="generator" content="bookdown 0.25 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 14 Choose an error distribution | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)" />
   <meta property="og:type" content="book" />
@@ -48,25 +48,24 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -86,7 +85,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {  background-color: #f8f8f8; }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ef2929; } /* Alert */
 code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
@@ -136,81 +135,94 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <link rel="icon" type="image/png" href="assets/images/favicon.ico"/>
 
 <li class="divider"></li>
-<li class="part"><span><b>QCBS R Workshop Series<span></span></b></span></li>
-<li><a href="index.html#preface">Preface<span></span></a><ul>
-<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>0.1</b> Code of conduct<span></span></a><ul>
-<li class="chapter" data-level="0.1.1" data-path="index.html"><a href="index.html#expected-behaviour"><i class="fa fa-check"></i><b>0.1.1</b> Expected behaviour<span></span></a></li>
-<li class="chapter" data-level="0.1.2" data-path="index.html"><a href="index.html#unacceptable-behaviour"><i class="fa fa-check"></i><b>0.1.2</b> Unacceptable behaviour<span></span></a></li>
+<li class="part"><span><b>QCBS R Workshop Series</b></span></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#code-of-conduct"><i class="fa fa-check"></i><b>0.1</b> Code of conduct</a>
+<ul>
+<li class="chapter" data-level="0.1.1" data-path="index.html"><a href="index.html#expected-behaviour"><i class="fa fa-check"></i><b>0.1.1</b> Expected behaviour</a></li>
+<li class="chapter" data-level="0.1.2" data-path="index.html"><a href="index.html#unacceptable-behaviour"><i class="fa fa-check"></i><b>0.1.2</b> Unacceptable behaviour</a></li>
 </ul></li>
-<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#contributors"><i class="fa fa-check"></i><b>0.2</b> Contributors<span></span></a></li>
-<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#contributing"><i class="fa fa-check"></i><b>0.3</b> Contributing<span></span></a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#contributors"><i class="fa fa-check"></i><b>0.2</b> Contributors</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#contributing"><i class="fa fa-check"></i><b>0.3</b> Contributing</a></li>
 </ul></li>
-<li class="part"><span><b>Linear mixed models (LMM) in <code>R</code><span></span></b></span></li>
-<li class="chapter" data-level="1" data-path="learning-objectives.html"><a href="learning-objectives.html"><i class="fa fa-check"></i><b>1</b> Learning objectives<span></span></a></li>
-<li class="chapter" data-level="2" data-path="preparing-for-the-workshop.html"><a href="preparing-for-the-workshop.html"><i class="fa fa-check"></i><b>2</b> Preparing for the workshop<span></span></a></li>
-<li class="chapter" data-level="3" data-path="why-choose-mixed-models.html"><a href="why-choose-mixed-models.html"><i class="fa fa-check"></i><b>3</b> Why choose mixed models?<span></span></a></li>
-<li class="chapter" data-level="4" data-path="starting-with-a-question.html"><a href="starting-with-a-question.html"><i class="fa fa-check"></i><b>4</b> Starting with a question<span></span></a><ul>
-<li class="chapter" data-level="4.1" data-path="starting-with-a-question.html"><a href="starting-with-a-question.html#challenge-1"><i class="fa fa-check"></i><b>4.1</b> Challenge 1<span></span></a></li>
+<li class="part"><span><b>Linear mixed models (LMM) in <code>R</code></b></span></li>
+<li class="chapter" data-level="1" data-path="learning-objectives.html"><a href="learning-objectives.html"><i class="fa fa-check"></i><b>1</b> Learning objectives</a></li>
+<li class="chapter" data-level="2" data-path="preparing-for-the-workshop.html"><a href="preparing-for-the-workshop.html"><i class="fa fa-check"></i><b>2</b> Preparing for the workshop</a></li>
+<li class="chapter" data-level="3" data-path="why-choose-mixed-models.html"><a href="why-choose-mixed-models.html"><i class="fa fa-check"></i><b>3</b> Why choose mixed models?</a></li>
+<li class="chapter" data-level="4" data-path="starting-with-a-question.html"><a href="starting-with-a-question.html"><i class="fa fa-check"></i><b>4</b> Starting with a question</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="starting-with-a-question.html"><a href="starting-with-a-question.html#challenge-1"><i class="fa fa-check"></i><b>4.1</b> Challenge 1</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html"><i class="fa fa-check"></i><b>5</b> Analyzing the data<span></span></a><ul>
-<li class="chapter" data-level="5.1" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#option-1-separate"><i class="fa fa-check"></i><b>5.1</b> Option 1: Separate<span></span></a></li>
-<li class="chapter" data-level="5.2" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#option-2-lump-everything-together"><i class="fa fa-check"></i><b>5.2</b> Option 2: Lump everything together<span></span></a></li>
-<li class="chapter" data-level="5.3" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#option-3-is-there-a-third-option"><i class="fa fa-check"></i><b>5.3</b> Option 3: Is there a third option?<span></span></a></li>
+<li class="chapter" data-level="5" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html"><i class="fa fa-check"></i><b>5</b> Analyzing the data</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#option-1-separate"><i class="fa fa-check"></i><b>5.1</b> Option 1: Separate</a></li>
+<li class="chapter" data-level="5.2" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#option-2-lump-everything-together"><i class="fa fa-check"></i><b>5.2</b> Option 2: Lump everything together</a></li>
+<li class="chapter" data-level="5.3" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#option-3-is-there-a-third-option"><i class="fa fa-check"></i><b>5.3</b> Option 3: Is there a third option?</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="fixed-vs.-random-effects.html"><a href="fixed-vs.-random-effects.html"><i class="fa fa-check"></i><b>6</b> Fixed vs. random effects<span></span></a><ul>
-<li class="chapter" data-level="6.1" data-path="fixed-vs.-random-effects.html"><a href="fixed-vs.-random-effects.html#fixed-effects-deterministic-processes"><i class="fa fa-check"></i><b>6.1</b> Fixed effects: deterministic processes<span></span></a></li>
-<li class="chapter" data-level="6.2" data-path="fixed-vs.-random-effects.html"><a href="fixed-vs.-random-effects.html#random-effects-stochastic-processes"><i class="fa fa-check"></i><b>6.2</b> Random effects: stochastic processes<span></span></a></li>
+<li class="chapter" data-level="6" data-path="fixed-vs.-random-effects.html"><a href="fixed-vs.-random-effects.html"><i class="fa fa-check"></i><b>6</b> Fixed vs. random effects</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="fixed-vs.-random-effects.html"><a href="fixed-vs.-random-effects.html#fixed-effects-deterministic-processes"><i class="fa fa-check"></i><b>6.1</b> Fixed effects: deterministic processes</a></li>
+<li class="chapter" data-level="6.2" data-path="fixed-vs.-random-effects.html"><a href="fixed-vs.-random-effects.html#random-effects-stochastic-processes"><i class="fa fa-check"></i><b>6.2</b> Random effects: stochastic processes</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="how-do-lmms-work.html"><a href="how-do-lmms-work.html"><i class="fa fa-check"></i><b>7</b> How do LMMs work?<span></span></a><ul>
-<li class="chapter" data-level="7.1" data-path="how-do-lmms-work.html"><a href="how-do-lmms-work.html#parameters-are-varied"><i class="fa fa-check"></i><b>7.1</b> Parameters are varied<span></span></a><ul>
-<li><a href="how-do-lmms-work.html#intercepts">Intercepts:<span></span></a></li>
-<li><a href="how-do-lmms-work.html#slopes">Slopes:<span></span></a></li>
+<li class="chapter" data-level="7" data-path="how-do-lmms-work.html"><a href="how-do-lmms-work.html"><i class="fa fa-check"></i><b>7</b> How do LMMs work?</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="how-do-lmms-work.html"><a href="how-do-lmms-work.html#parameters-are-varied"><i class="fa fa-check"></i><b>7.1</b> Parameters are varied</a>
+<ul>
+<li class="chapter" data-level="" data-path="how-do-lmms-work.html"><a href="how-do-lmms-work.html#intercepts"><i class="fa fa-check"></i>Intercepts:</a></li>
+<li class="chapter" data-level="" data-path="how-do-lmms-work.html"><a href="how-do-lmms-work.html#slopes"><i class="fa fa-check"></i>Slopes:</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="how-do-lmms-work.html"><a href="how-do-lmms-work.html#data-structure-is-taken-into-account"><i class="fa fa-check"></i><b>7.2</b> Data structure is taken into account<span></span></a></li>
-<li class="chapter" data-level="7.3" data-path="how-do-lmms-work.html"><a href="how-do-lmms-work.html#challenge-2"><i class="fa fa-check"></i><b>7.3</b> Challenge 2<span></span></a></li>
+<li class="chapter" data-level="7.2" data-path="how-do-lmms-work.html"><a href="how-do-lmms-work.html#data-structure-is-taken-into-account"><i class="fa fa-check"></i><b>7.2</b> Data structure is taken into account</a></li>
+<li class="chapter" data-level="7.3" data-path="how-do-lmms-work.html"><a href="how-do-lmms-work.html#challenge-2"><i class="fa fa-check"></i><b>7.3</b> Challenge 2</a></li>
 </ul></li>
-<li class="part"><span><b>Implementing LMM in <code>R</code><span></span></b></span></li>
-<li class="chapter" data-level="8" data-path="mixed-model-protocol.html"><a href="mixed-model-protocol.html"><i class="fa fa-check"></i><b>8</b> Mixed model protocol<span></span></a></li>
-<li class="chapter" data-level="9" data-path="step-1.-a-priori-model-building.html"><a href="step-1.-a-priori-model-building.html"><i class="fa fa-check"></i><b>9</b> Step 1. <em>A priori</em> model building<span></span></a><ul>
-<li class="chapter" data-level="9.1" data-path="step-1.-a-priori-model-building.html"><a href="step-1.-a-priori-model-building.html#check-data-structure"><i class="fa fa-check"></i><b>9.1</b> Check data structure<span></span></a></li>
-<li class="chapter" data-level="9.2" data-path="step-1.-a-priori-model-building.html"><a href="step-1.-a-priori-model-building.html#check-collinearity"><i class="fa fa-check"></i><b>9.2</b> Check collinearity<span></span></a></li>
-<li class="chapter" data-level="9.3" data-path="step-1.-a-priori-model-building.html"><a href="step-1.-a-priori-model-building.html#challenge-3"><i class="fa fa-check"></i><b>9.3</b> Challenge 3<span></span></a></li>
-<li class="chapter" data-level="9.4" data-path="step-1.-a-priori-model-building.html"><a href="step-1.-a-priori-model-building.html#consider-scale"><i class="fa fa-check"></i><b>9.4</b> Consider scale<span></span></a></li>
-<li class="chapter" data-level="9.5" data-path="step-1.-a-priori-model-building.html"><a href="step-1.-a-priori-model-building.html#do-you-need-a-lmm"><i class="fa fa-check"></i><b>9.5</b> Do you need a LMM?<span></span></a></li>
+<li class="part"><span><b>Implementing LMM in <code>R</code></b></span></li>
+<li class="chapter" data-level="8" data-path="mixed-model-protocol.html"><a href="mixed-model-protocol.html"><i class="fa fa-check"></i><b>8</b> Mixed model protocol</a></li>
+<li class="chapter" data-level="9" data-path="step-1.-a-priori-model-building.html"><a href="step-1.-a-priori-model-building.html"><i class="fa fa-check"></i><b>9</b> Step 1. <em>A priori</em> model building</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="step-1.-a-priori-model-building.html"><a href="step-1.-a-priori-model-building.html#check-data-structure"><i class="fa fa-check"></i><b>9.1</b> Check data structure</a></li>
+<li class="chapter" data-level="9.2" data-path="step-1.-a-priori-model-building.html"><a href="step-1.-a-priori-model-building.html#check-collinearity"><i class="fa fa-check"></i><b>9.2</b> Check collinearity</a></li>
+<li class="chapter" data-level="9.3" data-path="step-1.-a-priori-model-building.html"><a href="step-1.-a-priori-model-building.html#challenge-3"><i class="fa fa-check"></i><b>9.3</b> Challenge 3</a></li>
+<li class="chapter" data-level="9.4" data-path="step-1.-a-priori-model-building.html"><a href="step-1.-a-priori-model-building.html#consider-scale"><i class="fa fa-check"></i><b>9.4</b> Consider scale</a></li>
+<li class="chapter" data-level="9.5" data-path="step-1.-a-priori-model-building.html"><a href="step-1.-a-priori-model-building.html#do-you-need-a-lmm"><i class="fa fa-check"></i><b>9.5</b> Do you need a LMM?</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="step-2.-code-potential-models-and-model-selection.html"><a href="step-2.-code-potential-models-and-model-selection.html"><i class="fa fa-check"></i><b>10</b> Step 2. Code potential models and model selection<span></span></a><ul>
-<li class="chapter" data-level="10.1" data-path="step-2.-code-potential-models-and-model-selection.html"><a href="step-2.-code-potential-models-and-model-selection.html#estimation-methods"><i class="fa fa-check"></i><b>10.1</b> Estimation methods<span></span></a></li>
-<li class="chapter" data-level="10.2" data-path="step-2.-code-potential-models-and-model-selection.html"><a href="step-2.-code-potential-models-and-model-selection.html#different-model-structures"><i class="fa fa-check"></i><b>10.2</b> Different model structures<span></span></a></li>
-<li class="chapter" data-level="10.3" data-path="step-2.-code-potential-models-and-model-selection.html"><a href="step-2.-code-potential-models-and-model-selection.html#challenge-4"><i class="fa fa-check"></i><b>10.3</b> Challenge 4<span></span></a></li>
-<li class="chapter" data-level="10.4" data-path="step-2.-code-potential-models-and-model-selection.html"><a href="step-2.-code-potential-models-and-model-selection.html#challenge-5"><i class="fa fa-check"></i><b>10.4</b> Challenge 5<span></span></a></li>
-<li class="chapter" data-level="10.5" data-path="step-2.-code-potential-models-and-model-selection.html"><a href="step-2.-code-potential-models-and-model-selection.html#comparing-models"><i class="fa fa-check"></i><b>10.5</b> Comparing models<span></span></a></li>
+<li class="chapter" data-level="10" data-path="step-2.-code-potential-models-and-model-selection.html"><a href="step-2.-code-potential-models-and-model-selection.html"><i class="fa fa-check"></i><b>10</b> Step 2. Code potential models and model selection</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="step-2.-code-potential-models-and-model-selection.html"><a href="step-2.-code-potential-models-and-model-selection.html#estimation-methods"><i class="fa fa-check"></i><b>10.1</b> Estimation methods</a></li>
+<li class="chapter" data-level="10.2" data-path="step-2.-code-potential-models-and-model-selection.html"><a href="step-2.-code-potential-models-and-model-selection.html#different-model-structures"><i class="fa fa-check"></i><b>10.2</b> Different model structures</a></li>
+<li class="chapter" data-level="10.3" data-path="step-2.-code-potential-models-and-model-selection.html"><a href="step-2.-code-potential-models-and-model-selection.html#challenge-4"><i class="fa fa-check"></i><b>10.3</b> Challenge 4</a></li>
+<li class="chapter" data-level="10.4" data-path="step-2.-code-potential-models-and-model-selection.html"><a href="step-2.-code-potential-models-and-model-selection.html#challenge-5"><i class="fa fa-check"></i><b>10.4</b> Challenge 5</a></li>
+<li class="chapter" data-level="10.5" data-path="step-2.-code-potential-models-and-model-selection.html"><a href="step-2.-code-potential-models-and-model-selection.html#comparing-models"><i class="fa fa-check"></i><b>10.5</b> Comparing models</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="step-3.-model-validation.html"><a href="step-3.-model-validation.html"><i class="fa fa-check"></i><b>11</b> Step 3. Model validation<span></span></a><ul>
-<li class="chapter" data-level="11.1" data-path="step-3.-model-validation.html"><a href="step-3.-model-validation.html#check-the-homogeneity-of-the-variance"><i class="fa fa-check"></i><b>11.1</b> 1. Check the homogeneity of the variance<span></span></a></li>
-<li class="chapter" data-level="11.2" data-path="step-3.-model-validation.html"><a href="step-3.-model-validation.html#check-the-independence-of-the-model-residuals-with-each-covariate"><i class="fa fa-check"></i><b>11.2</b> 2. Check the independence of the model residuals with each covariate<span></span></a></li>
-<li class="chapter" data-level="11.3" data-path="step-3.-model-validation.html"><a href="step-3.-model-validation.html#check-the-normality-of-the-model-residuals"><i class="fa fa-check"></i><b>11.3</b> 3. Check the normality of the model residuals<span></span></a></li>
+<li class="chapter" data-level="11" data-path="step-3.-model-validation.html"><a href="step-3.-model-validation.html"><i class="fa fa-check"></i><b>11</b> Step 3. Model validation</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="step-3.-model-validation.html"><a href="step-3.-model-validation.html#check-the-homogeneity-of-the-variance"><i class="fa fa-check"></i><b>11.1</b> 1. Check the homogeneity of the variance</a></li>
+<li class="chapter" data-level="11.2" data-path="step-3.-model-validation.html"><a href="step-3.-model-validation.html#check-the-independence-of-the-model-residuals-with-each-covariate"><i class="fa fa-check"></i><b>11.2</b> 2. Check the independence of the model residuals with each covariate</a></li>
+<li class="chapter" data-level="11.3" data-path="step-3.-model-validation.html"><a href="step-3.-model-validation.html#check-the-normality-of-the-model-residuals"><i class="fa fa-check"></i><b>11.3</b> 3. Check the normality of the model residuals</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="step-4.-interpretation-and-visualization.html"><a href="step-4.-interpretation-and-visualization.html"><i class="fa fa-check"></i><b>12</b> Step 4. Interpretation and visualization<span></span></a><ul>
-<li class="chapter" data-level="12.1" data-path="step-4.-interpretation-and-visualization.html"><a href="step-4.-interpretation-and-visualization.html#interpreting-our-model"><i class="fa fa-check"></i><b>12.1</b> Interpreting our model<span></span></a></li>
-<li class="chapter" data-level="12.2" data-path="step-4.-interpretation-and-visualization.html"><a href="step-4.-interpretation-and-visualization.html#challenge-6"><i class="fa fa-check"></i><b>12.2</b> Challenge 6<span></span></a></li>
-<li class="chapter" data-level="12.3" data-path="step-4.-interpretation-and-visualization.html"><a href="step-4.-interpretation-and-visualization.html#challenge-7"><i class="fa fa-check"></i><b>12.3</b> Challenge 7<span></span></a></li>
-<li class="chapter" data-level="12.4" data-path="step-4.-interpretation-and-visualization.html"><a href="step-4.-interpretation-and-visualization.html#challenge-8"><i class="fa fa-check"></i><b>12.4</b> Challenge 8<span></span></a></li>
+<li class="chapter" data-level="12" data-path="step-4.-interpretation-and-visualization.html"><a href="step-4.-interpretation-and-visualization.html"><i class="fa fa-check"></i><b>12</b> Step 4. Interpretation and visualization</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="step-4.-interpretation-and-visualization.html"><a href="step-4.-interpretation-and-visualization.html#interpreting-our-model"><i class="fa fa-check"></i><b>12.1</b> Interpreting our model</a></li>
+<li class="chapter" data-level="12.2" data-path="step-4.-interpretation-and-visualization.html"><a href="step-4.-interpretation-and-visualization.html#challenge-6"><i class="fa fa-check"></i><b>12.2</b> Challenge 6</a></li>
+<li class="chapter" data-level="12.3" data-path="step-4.-interpretation-and-visualization.html"><a href="step-4.-interpretation-and-visualization.html#challenge-7"><i class="fa fa-check"></i><b>12.3</b> Challenge 7</a></li>
+<li class="chapter" data-level="12.4" data-path="step-4.-interpretation-and-visualization.html"><a href="step-4.-interpretation-and-visualization.html#challenge-8"><i class="fa fa-check"></i><b>12.4</b> Challenge 8</a></li>
 </ul></li>
-<li class="part"><span><b>Generalized linear mixed models (GLMM) in <code>R</code><span></span></b></span></li>
-<li class="chapter" data-level="13" data-path="introduction-to-glmm.html"><a href="introduction-to-glmm.html"><i class="fa fa-check"></i><b>13</b> Introduction to GLMM<span></span></a></li>
-<li class="chapter" data-level="14" data-path="choose-an-error-distribution.html"><a href="choose-an-error-distribution.html"><i class="fa fa-check"></i><b>14</b> Choose an error distribution<span></span></a></li>
-<li class="chapter" data-level="15" data-path="poisson-glmm.html"><a href="poisson-glmm.html"><i class="fa fa-check"></i><b>15</b> Poisson GLMM<span></span></a></li>
-<li class="chapter" data-level="16" data-path="negative-binomial-glmm.html"><a href="negative-binomial-glmm.html"><i class="fa fa-check"></i><b>16</b> Negative binomial GLMM<span></span></a></li>
-<li class="chapter" data-level="17" data-path="poisson-lognormal-glmm.html"><a href="poisson-lognormal-glmm.html"><i class="fa fa-check"></i><b>17</b> Poisson-lognormal GLMM<span></span></a><ul>
-<li class="chapter" data-level="17.1" data-path="poisson-lognormal-glmm.html"><a href="poisson-lognormal-glmm.html#random-intercepts"><i class="fa fa-check"></i><b>17.1</b> Random intercepts<span></span></a></li>
-<li class="chapter" data-level="17.2" data-path="poisson-lognormal-glmm.html"><a href="poisson-lognormal-glmm.html#parameter-plots"><i class="fa fa-check"></i><b>17.2</b> Parameter plots<span></span></a></li>
+<li class="part"><span><b>Generalized linear mixed models (GLMM) in <code>R</code></b></span></li>
+<li class="chapter" data-level="13" data-path="introduction-to-glmm.html"><a href="introduction-to-glmm.html"><i class="fa fa-check"></i><b>13</b> Introduction to GLMM</a></li>
+<li class="chapter" data-level="14" data-path="choose-an-error-distribution.html"><a href="choose-an-error-distribution.html"><i class="fa fa-check"></i><b>14</b> Choose an error distribution</a></li>
+<li class="chapter" data-level="15" data-path="poisson-glmm.html"><a href="poisson-glmm.html"><i class="fa fa-check"></i><b>15</b> Poisson GLMM</a></li>
+<li class="chapter" data-level="16" data-path="negative-binomial-glmm.html"><a href="negative-binomial-glmm.html"><i class="fa fa-check"></i><b>16</b> Negative binomial GLMM</a></li>
+<li class="chapter" data-level="17" data-path="poisson-lognormal-glmm.html"><a href="poisson-lognormal-glmm.html"><i class="fa fa-check"></i><b>17</b> Poisson-lognormal GLMM</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="poisson-lognormal-glmm.html"><a href="poisson-lognormal-glmm.html#random-intercepts"><i class="fa fa-check"></i><b>17.1</b> Random intercepts</a></li>
+<li class="chapter" data-level="17.2" data-path="poisson-lognormal-glmm.html"><a href="poisson-lognormal-glmm.html#parameter-plots"><i class="fa fa-check"></i><b>17.2</b> Parameter plots</a></li>
 </ul></li>
-<li class="chapter" data-level="18" data-path="final-model.html"><a href="final-model.html"><i class="fa fa-check"></i><b>18</b> Final model<span></span></a><ul>
-<li class="chapter" data-level="18.1" data-path="final-model.html"><a href="final-model.html#challenge-9"><i class="fa fa-check"></i><b>18.1</b> Challenge 9<span></span></a></li>
+<li class="chapter" data-level="18" data-path="final-model.html"><a href="final-model.html"><i class="fa fa-check"></i><b>18</b> Final model</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="final-model.html"><a href="final-model.html#challenge-9"><i class="fa fa-check"></i><b>18.1</b> Challenge 9</a></li>
 </ul></li>
-<li class="part"><span><b>Additional LMM and GLMM resources<span></span></b></span></li>
-<li class="chapter" data-level="19" data-path="additional-resources.html"><a href="additional-resources.html"><i class="fa fa-check"></i><b>19</b> Additional resources<span></span></a></li>
-<li class="chapter" data-level="20" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>20</b> References<span></span></a></li>
+<li class="part"><span><b>Additional LMM and GLMM resources</b></span></li>
+<li class="chapter" data-level="19" data-path="additional-resources.html"><a href="additional-resources.html"><i class="fa fa-check"></i><b>19</b> Additional resources</a></li>
+<li class="chapter" data-level="20" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>20</b> References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/qcbsRworkshops" target="blank">QCBS R Workshop Series</a></li>
 
@@ -246,18 +258,18 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
   <img class= "hero-image" src="assets/images/jean-philippe-delberghe-75xPHEQBmvA-unsplash_hero_image.jpg">
 </div>
 --!>
-<div id="choose-an-error-distribution" class="section level1 hasAnchor">
+<div id="choose-an-error-distribution" class="section level1 hasAnchor" number="14">
 <h1><span class="header-section-number">Chapter 14</span> Choose an error distribution<a href="choose-an-error-distribution.html#choose-an-error-distribution" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Now we need to select an error distribution. This choice will be informed by the structure of our data.</p>
 <p>In the Arabidopsis dataset, the response variable is count data which suggests we need a <strong>Poisson distribution</strong> (i.e. the variance is equal to the mean).</p>
 <p>Let’s take a look:</p>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="choose-an-error-distribution.html#cb69-1"></a><span class="co"># Before we go any further, we need to select an error</span></span>
-<span id="cb69-2"><a href="choose-an-error-distribution.html#cb69-2"></a><span class="co"># distribution. This choice will be informed by the</span></span>
-<span id="cb69-3"><a href="choose-an-error-distribution.html#cb69-3"></a><span class="co"># structure of our data.  Our response variable is count</span></span>
-<span id="cb69-4"><a href="choose-an-error-distribution.html#cb69-4"></a><span class="co"># data which suggests we need a Poisson distribution (i.e.</span></span>
-<span id="cb69-5"><a href="choose-an-error-distribution.html#cb69-5"></a><span class="co"># the variance is equal to the mean).</span></span>
-<span id="cb69-6"><a href="choose-an-error-distribution.html#cb69-6"></a><span class="kw">hist</span>(dat.tf<span class="op">$</span>total.fruits, <span class="dt">breaks =</span> <span class="dv">50</span>, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;&quot;</span>,</span>
-<span id="cb69-7"><a href="choose-an-error-distribution.html#cb69-7"></a>    <span class="dt">xlab =</span> <span class="st">&quot;Total fruits&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Count&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="choose-an-error-distribution.html#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Before we go any further, we need to select an error</span></span>
+<span id="cb69-2"><a href="choose-an-error-distribution.html#cb69-2" aria-hidden="true" tabindex="-1"></a><span class="co"># distribution. This choice will be informed by the</span></span>
+<span id="cb69-3"><a href="choose-an-error-distribution.html#cb69-3" aria-hidden="true" tabindex="-1"></a><span class="co"># structure of our data.  Our response variable is count</span></span>
+<span id="cb69-4"><a href="choose-an-error-distribution.html#cb69-4" aria-hidden="true" tabindex="-1"></a><span class="co"># data which suggests we need a Poisson distribution (i.e.</span></span>
+<span id="cb69-5"><a href="choose-an-error-distribution.html#cb69-5" aria-hidden="true" tabindex="-1"></a><span class="co"># the variance is equal to the mean).</span></span>
+<span id="cb69-6"><a href="choose-an-error-distribution.html#cb69-6" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(dat.tf<span class="sc">$</span>total.fruits, <span class="at">breaks =</span> <span class="dv">50</span>, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">main =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb69-7"><a href="choose-an-error-distribution.html#cb69-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">xlab =</span> <span class="st">&quot;Total fruits&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Count&quot;</span>)</span></code></pre></div>
 <p><img src="book-en_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
 <p>However, as we will soon see, the variance increases with the mean much more rapidly than expected under the Poisson distribution…</p>
 <hr />
@@ -265,25 +277,25 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>Let’s take a closer look at the variance within our data.</p>
 <p>To illustrate heterogeneity in variance we will first create boxplots of the <strong>log</strong> of total fruit production (<strong>response variable</strong>) versus different environmental factors.</p>
 <p>Let’s create new variables that represent every combination of <strong>nutrient</strong> x <strong>clipping</strong> x <strong>random factor</strong></p>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="choose-an-error-distribution.html#cb70-1"></a><span class="co"># Let&#39;s explore the variance within our data Create new</span></span>
-<span id="cb70-2"><a href="choose-an-error-distribution.html#cb70-2"></a><span class="co"># variables that represent every combination of variables</span></span>
-<span id="cb70-3"><a href="choose-an-error-distribution.html#cb70-3"></a>dat.tf &lt;-<span class="st"> </span><span class="kw">within</span>(dat.tf, {</span>
-<span id="cb70-4"><a href="choose-an-error-distribution.html#cb70-4"></a>    <span class="co"># genotype x nutrient x clipping</span></span>
-<span id="cb70-5"><a href="choose-an-error-distribution.html#cb70-5"></a>    gna &lt;-<span class="st"> </span><span class="kw">interaction</span>(gen, nutrient, amd)</span>
-<span id="cb70-6"><a href="choose-an-error-distribution.html#cb70-6"></a>    gna &lt;-<span class="st"> </span><span class="kw">reorder</span>(gna, total.fruits, mean)</span>
-<span id="cb70-7"><a href="choose-an-error-distribution.html#cb70-7"></a>    <span class="co"># population x nutrient x clipping</span></span>
-<span id="cb70-8"><a href="choose-an-error-distribution.html#cb70-8"></a>    pna &lt;-<span class="st"> </span><span class="kw">interaction</span>(popu, nutrient, amd)</span>
-<span id="cb70-9"><a href="choose-an-error-distribution.html#cb70-9"></a>    pna &lt;-<span class="st"> </span><span class="kw">reorder</span>(pna, total.fruits, mean)</span>
-<span id="cb70-10"><a href="choose-an-error-distribution.html#cb70-10"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="choose-an-error-distribution.html#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Let&#39;s explore the variance within our data Create new</span></span>
+<span id="cb70-2"><a href="choose-an-error-distribution.html#cb70-2" aria-hidden="true" tabindex="-1"></a><span class="co"># variables that represent every combination of variables</span></span>
+<span id="cb70-3"><a href="choose-an-error-distribution.html#cb70-3" aria-hidden="true" tabindex="-1"></a>dat.tf <span class="ot">&lt;-</span> <span class="fu">within</span>(dat.tf, {</span>
+<span id="cb70-4"><a href="choose-an-error-distribution.html#cb70-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># genotype x nutrient x clipping</span></span>
+<span id="cb70-5"><a href="choose-an-error-distribution.html#cb70-5" aria-hidden="true" tabindex="-1"></a>    gna <span class="ot">&lt;-</span> <span class="fu">interaction</span>(gen, nutrient, amd)</span>
+<span id="cb70-6"><a href="choose-an-error-distribution.html#cb70-6" aria-hidden="true" tabindex="-1"></a>    gna <span class="ot">&lt;-</span> <span class="fu">reorder</span>(gna, total.fruits, mean)</span>
+<span id="cb70-7"><a href="choose-an-error-distribution.html#cb70-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># population x nutrient x clipping</span></span>
+<span id="cb70-8"><a href="choose-an-error-distribution.html#cb70-8" aria-hidden="true" tabindex="-1"></a>    pna <span class="ot">&lt;-</span> <span class="fu">interaction</span>(popu, nutrient, amd)</span>
+<span id="cb70-9"><a href="choose-an-error-distribution.html#cb70-9" aria-hidden="true" tabindex="-1"></a>    pna <span class="ot">&lt;-</span> <span class="fu">reorder</span>(pna, total.fruits, mean)</span>
+<span id="cb70-10"><a href="choose-an-error-distribution.html#cb70-10" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
 <p>Now let’s visualize:</p>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="choose-an-error-distribution.html#cb71-1"></a><span class="co"># Boxplot of total fruits vs genotype x nutrient x clipping interaction</span></span>
-<span id="cb71-2"><a href="choose-an-error-distribution.html#cb71-2"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> dat.tf, <span class="kw">aes</span>(<span class="kw">factor</span>(<span class="dt">x =</span> gna), <span class="dt">y =</span> <span class="kw">log</span>(total.fruits <span class="op">+</span><span class="st"> </span><span class="dv">1</span>))) <span class="op">+</span></span>
-<span id="cb71-3"><a href="choose-an-error-distribution.html#cb71-3"></a><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">colour =</span> <span class="st">&quot;skyblue2&quot;</span>, <span class="dt">outlier.shape =</span> <span class="dv">21</span>,</span>
-<span id="cb71-4"><a href="choose-an-error-distribution.html#cb71-4"></a>  <span class="dt">outlier.colour =</span> <span class="st">&quot;skyblue2&quot;</span>) <span class="op">+</span></span>
-<span id="cb71-5"><a href="choose-an-error-distribution.html#cb71-5"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;log (Total fruits)</span><span class="ch">\n</span><span class="st">&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="co"># \n creates a space after the title</span></span>
-<span id="cb71-6"><a href="choose-an-error-distribution.html#cb71-6"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">Genotype x nutrient x clipping&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="co"># space before the title</span></span>
-<span id="cb71-7"><a href="choose-an-error-distribution.html#cb71-7"></a><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_blank</span>()) <span class="op">+</span></span>
-<span id="cb71-8"><a href="choose-an-error-distribution.html#cb71-8"></a><span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun =</span> mean, <span class="dt">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="choose-an-error-distribution.html#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Boxplot of total fruits vs genotype x nutrient x clipping interaction</span></span>
+<span id="cb71-2"><a href="choose-an-error-distribution.html#cb71-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> dat.tf, <span class="fu">aes</span>(<span class="fu">factor</span>(<span class="at">x =</span> gna), <span class="at">y =</span> <span class="fu">log</span>(total.fruits <span class="sc">+</span> <span class="dv">1</span>))) <span class="sc">+</span></span>
+<span id="cb71-3"><a href="choose-an-error-distribution.html#cb71-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">colour =</span> <span class="st">&quot;skyblue2&quot;</span>, <span class="at">outlier.shape =</span> <span class="dv">21</span>,</span>
+<span id="cb71-4"><a href="choose-an-error-distribution.html#cb71-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">outlier.colour =</span> <span class="st">&quot;skyblue2&quot;</span>) <span class="sc">+</span></span>
+<span id="cb71-5"><a href="choose-an-error-distribution.html#cb71-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;log (Total fruits)</span><span class="sc">\n</span><span class="st">&quot;</span>) <span class="sc">+</span> <span class="co"># \n creates a space after the title</span></span>
+<span id="cb71-6"><a href="choose-an-error-distribution.html#cb71-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">Genotype x nutrient x clipping&quot;</span>) <span class="sc">+</span> <span class="co"># space before the title</span></span>
+<span id="cb71-7"><a href="choose-an-error-distribution.html#cb71-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
+<span id="cb71-8"><a href="choose-an-error-distribution.html#cb71-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="at">colour =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
 <p><img src="book-en_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
 <p>From this plot, we see that the variance of total fruits shows a large amount of heterogeneity among populations (population x nutrient x clipping interaction).</p>
 <hr />
@@ -301,45 +313,45 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li>Finally, a quadratic relationship between the variance and the mean (i.e. <span class="math inline">\(Var = µ(1 + α) or µ(1 + µ/k)\)</span>) is characteristic of overdispersed data that is driven by an underlying heterogeneity among samples. In this case, the negative binomial (Poisson-gamma) would be more appropriate.</li>
 </ol></li>
 </ul>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="choose-an-error-distribution.html#cb72-1"></a><span class="co"># Run a diagnostic lot of the group variances vs group</span></span>
-<span id="cb72-2"><a href="choose-an-error-distribution.html#cb72-2"></a><span class="co"># means (genotype x nutrient x clipping grouping).  Code</span></span>
-<span id="cb72-3"><a href="choose-an-error-distribution.html#cb72-3"></a><span class="co"># used to produce the plot :</span></span>
-<span id="cb72-4"><a href="choose-an-error-distribution.html#cb72-4"></a><span class="co"># https://github.com/QCBSRworkshops/workshop07/blob/main/pres-fr/data/glmm_e.r</span></span>
-<span id="cb72-5"><a href="choose-an-error-distribution.html#cb72-5"></a><span class="co"># Substantial variation among the sample variances on the</span></span>
-<span id="cb72-6"><a href="choose-an-error-distribution.html#cb72-6"></a><span class="co"># transformed data For example, among genotypes:</span></span>
-<span id="cb72-7"><a href="choose-an-error-distribution.html#cb72-7"></a>grpVars &lt;-<span class="st"> </span><span class="kw">tapply</span>(dat.tf<span class="op">$</span>total.fruits, dat.tf<span class="op">$</span>gna, var)</span>
-<span id="cb72-8"><a href="choose-an-error-distribution.html#cb72-8"></a></span>
-<span id="cb72-9"><a href="choose-an-error-distribution.html#cb72-9"></a>grpMeans &lt;-<span class="st"> </span><span class="kw">tapply</span>(dat.tf<span class="op">$</span>total.fruits, dat.tf<span class="op">$</span>gna, mean)</span>
-<span id="cb72-10"><a href="choose-an-error-distribution.html#cb72-10"></a></span>
-<span id="cb72-11"><a href="choose-an-error-distribution.html#cb72-11"></a><span class="co"># Quasi-Poisson</span></span>
-<span id="cb72-12"><a href="choose-an-error-distribution.html#cb72-12"></a>lm1 &lt;-<span class="st"> </span><span class="kw">lm</span>(grpVars <span class="op">~</span><span class="st"> </span>grpMeans <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</span>
-<span id="cb72-13"><a href="choose-an-error-distribution.html#cb72-13"></a>phi.fit &lt;-<span class="st"> </span><span class="kw">coef</span>(lm1)</span>
-<span id="cb72-14"><a href="choose-an-error-distribution.html#cb72-14"></a><span class="co"># The -1 specifies a model with the intercept set to zero</span></span>
-<span id="cb72-15"><a href="choose-an-error-distribution.html#cb72-15"></a></span>
-<span id="cb72-16"><a href="choose-an-error-distribution.html#cb72-16"></a><span class="co"># Negative binomial</span></span>
-<span id="cb72-17"><a href="choose-an-error-distribution.html#cb72-17"></a>lm2 &lt;-<span class="st"> </span><span class="kw">lm</span>(grpVars <span class="op">~</span><span class="st"> </span><span class="kw">I</span>(grpMeans<span class="op">^</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span><span class="kw">offset</span>(grpMeans) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</span>
-<span id="cb72-18"><a href="choose-an-error-distribution.html#cb72-18"></a>k.fit &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">/</span><span class="kw">coef</span>(lm2)</span>
-<span id="cb72-19"><a href="choose-an-error-distribution.html#cb72-19"></a><span class="co"># The offset() is used to specify that we want the group</span></span>
-<span id="cb72-20"><a href="choose-an-error-distribution.html#cb72-20"></a><span class="co"># means added as a term with its coefficient fixed to 1</span></span>
-<span id="cb72-21"><a href="choose-an-error-distribution.html#cb72-21"></a></span>
-<span id="cb72-22"><a href="choose-an-error-distribution.html#cb72-22"></a><span class="co"># Non-parametric loess fit</span></span>
-<span id="cb72-23"><a href="choose-an-error-distribution.html#cb72-23"></a>Lfit &lt;-<span class="st"> </span><span class="kw">loess</span>(grpVars <span class="op">~</span><span class="st"> </span>grpMeans)</span>
-<span id="cb72-24"><a href="choose-an-error-distribution.html#cb72-24"></a></span>
-<span id="cb72-25"><a href="choose-an-error-distribution.html#cb72-25"></a><span class="co"># The plot</span></span>
-<span id="cb72-26"><a href="choose-an-error-distribution.html#cb72-26"></a><span class="kw">plot</span>(grpVars <span class="op">~</span><span class="st"> </span>grpMeans, <span class="dt">xlab =</span> <span class="st">&quot;Group means&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Group variances&quot;</span>)</span>
-<span id="cb72-27"><a href="choose-an-error-distribution.html#cb72-27"></a><span class="kw">abline</span>(<span class="dt">a =</span> <span class="dv">0</span>, <span class="dt">b =</span> <span class="dv">1</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span>
-<span id="cb72-28"><a href="choose-an-error-distribution.html#cb72-28"></a><span class="kw">text</span>(<span class="dv">105</span>, <span class="dv">500</span>, <span class="st">&quot;Poisson&quot;</span>)</span>
-<span id="cb72-29"><a href="choose-an-error-distribution.html#cb72-29"></a><span class="kw">curve</span>(phi.fit <span class="op">*</span><span class="st"> </span>x, <span class="dt">col =</span> <span class="dv">2</span>, <span class="dt">add =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb72-30"><a href="choose-an-error-distribution.html#cb72-30"></a><span class="co"># bquote() is used to substitute numeric values in</span></span>
-<span id="cb72-31"><a href="choose-an-error-distribution.html#cb72-31"></a><span class="co"># equations with symbols</span></span>
-<span id="cb72-32"><a href="choose-an-error-distribution.html#cb72-32"></a><span class="kw">text</span>(<span class="dv">110</span>, <span class="dv">3900</span>, <span class="kw">bquote</span>(<span class="kw">paste</span>(<span class="st">&quot;QP: &quot;</span>, sigma<span class="op">^</span><span class="dv">2</span> <span class="op">==</span><span class="st"> </span>.(<span class="kw">round</span>(phi.fit,</span>
-<span id="cb72-33"><a href="choose-an-error-distribution.html#cb72-33"></a>    <span class="dv">1</span>)) <span class="op">*</span><span class="st"> </span>mu)), <span class="dt">col =</span> <span class="dv">2</span>)</span>
-<span id="cb72-34"><a href="choose-an-error-distribution.html#cb72-34"></a><span class="kw">curve</span>(x <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>x<span class="op">/</span>k.fit), <span class="dt">col =</span> <span class="dv">4</span>, <span class="dt">add =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb72-35"><a href="choose-an-error-distribution.html#cb72-35"></a><span class="kw">text</span>(<span class="dv">104</span>, <span class="dv">7200</span>, <span class="kw">paste</span>(<span class="st">&quot;NB: k = &quot;</span>, <span class="kw">round</span>(k.fit, <span class="dv">1</span>), <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>),</span>
-<span id="cb72-36"><a href="choose-an-error-distribution.html#cb72-36"></a>    <span class="dt">col =</span> <span class="dv">4</span>)</span>
-<span id="cb72-37"><a href="choose-an-error-distribution.html#cb72-37"></a>mvec &lt;-<span class="st"> </span><span class="dv">0</span><span class="op">:</span><span class="dv">120</span></span>
-<span id="cb72-38"><a href="choose-an-error-distribution.html#cb72-38"></a><span class="kw">lines</span>(mvec, <span class="kw">predict</span>(Lfit, mvec), <span class="dt">col =</span> <span class="dv">5</span>)</span>
-<span id="cb72-39"><a href="choose-an-error-distribution.html#cb72-39"></a><span class="kw">text</span>(<span class="dv">118</span>, <span class="dv">2000</span>, <span class="st">&quot;loess&quot;</span>, <span class="dt">col =</span> <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="choose-an-error-distribution.html#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run a diagnostic lot of the group variances vs group</span></span>
+<span id="cb72-2"><a href="choose-an-error-distribution.html#cb72-2" aria-hidden="true" tabindex="-1"></a><span class="co"># means (genotype x nutrient x clipping grouping).  Code</span></span>
+<span id="cb72-3"><a href="choose-an-error-distribution.html#cb72-3" aria-hidden="true" tabindex="-1"></a><span class="co"># used to produce the plot :</span></span>
+<span id="cb72-4"><a href="choose-an-error-distribution.html#cb72-4" aria-hidden="true" tabindex="-1"></a><span class="co"># https://github.com/QCBSRworkshops/workshop07/blob/main/pres-fr/data/glmm_e.r</span></span>
+<span id="cb72-5"><a href="choose-an-error-distribution.html#cb72-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Substantial variation among the sample variances on the</span></span>
+<span id="cb72-6"><a href="choose-an-error-distribution.html#cb72-6" aria-hidden="true" tabindex="-1"></a><span class="co"># transformed data For example, among genotypes:</span></span>
+<span id="cb72-7"><a href="choose-an-error-distribution.html#cb72-7" aria-hidden="true" tabindex="-1"></a>grpVars <span class="ot">&lt;-</span> <span class="fu">tapply</span>(dat.tf<span class="sc">$</span>total.fruits, dat.tf<span class="sc">$</span>gna, var)</span>
+<span id="cb72-8"><a href="choose-an-error-distribution.html#cb72-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-9"><a href="choose-an-error-distribution.html#cb72-9" aria-hidden="true" tabindex="-1"></a>grpMeans <span class="ot">&lt;-</span> <span class="fu">tapply</span>(dat.tf<span class="sc">$</span>total.fruits, dat.tf<span class="sc">$</span>gna, mean)</span>
+<span id="cb72-10"><a href="choose-an-error-distribution.html#cb72-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-11"><a href="choose-an-error-distribution.html#cb72-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Quasi-Poisson</span></span>
+<span id="cb72-12"><a href="choose-an-error-distribution.html#cb72-12" aria-hidden="true" tabindex="-1"></a>lm1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(grpVars <span class="sc">~</span> grpMeans <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb72-13"><a href="choose-an-error-distribution.html#cb72-13" aria-hidden="true" tabindex="-1"></a>phi.fit <span class="ot">&lt;-</span> <span class="fu">coef</span>(lm1)</span>
+<span id="cb72-14"><a href="choose-an-error-distribution.html#cb72-14" aria-hidden="true" tabindex="-1"></a><span class="co"># The -1 specifies a model with the intercept set to zero</span></span>
+<span id="cb72-15"><a href="choose-an-error-distribution.html#cb72-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-16"><a href="choose-an-error-distribution.html#cb72-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Negative binomial</span></span>
+<span id="cb72-17"><a href="choose-an-error-distribution.html#cb72-17" aria-hidden="true" tabindex="-1"></a>lm2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(grpVars <span class="sc">~</span> <span class="fu">I</span>(grpMeans<span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> <span class="fu">offset</span>(grpMeans) <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb72-18"><a href="choose-an-error-distribution.html#cb72-18" aria-hidden="true" tabindex="-1"></a>k.fit <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span><span class="fu">coef</span>(lm2)</span>
+<span id="cb72-19"><a href="choose-an-error-distribution.html#cb72-19" aria-hidden="true" tabindex="-1"></a><span class="co"># The offset() is used to specify that we want the group</span></span>
+<span id="cb72-20"><a href="choose-an-error-distribution.html#cb72-20" aria-hidden="true" tabindex="-1"></a><span class="co"># means added as a term with its coefficient fixed to 1</span></span>
+<span id="cb72-21"><a href="choose-an-error-distribution.html#cb72-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-22"><a href="choose-an-error-distribution.html#cb72-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Non-parametric loess fit</span></span>
+<span id="cb72-23"><a href="choose-an-error-distribution.html#cb72-23" aria-hidden="true" tabindex="-1"></a>Lfit <span class="ot">&lt;-</span> <span class="fu">loess</span>(grpVars <span class="sc">~</span> grpMeans)</span>
+<span id="cb72-24"><a href="choose-an-error-distribution.html#cb72-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-25"><a href="choose-an-error-distribution.html#cb72-25" aria-hidden="true" tabindex="-1"></a><span class="co"># The plot</span></span>
+<span id="cb72-26"><a href="choose-an-error-distribution.html#cb72-26" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(grpVars <span class="sc">~</span> grpMeans, <span class="at">xlab =</span> <span class="st">&quot;Group means&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Group variances&quot;</span>)</span>
+<span id="cb72-27"><a href="choose-an-error-distribution.html#cb72-27" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a =</span> <span class="dv">0</span>, <span class="at">b =</span> <span class="dv">1</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb72-28"><a href="choose-an-error-distribution.html#cb72-28" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">105</span>, <span class="dv">500</span>, <span class="st">&quot;Poisson&quot;</span>)</span>
+<span id="cb72-29"><a href="choose-an-error-distribution.html#cb72-29" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(phi.fit <span class="sc">*</span> x, <span class="at">col =</span> <span class="dv">2</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb72-30"><a href="choose-an-error-distribution.html#cb72-30" aria-hidden="true" tabindex="-1"></a><span class="co"># bquote() is used to substitute numeric values in</span></span>
+<span id="cb72-31"><a href="choose-an-error-distribution.html#cb72-31" aria-hidden="true" tabindex="-1"></a><span class="co"># equations with symbols</span></span>
+<span id="cb72-32"><a href="choose-an-error-distribution.html#cb72-32" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">110</span>, <span class="dv">3900</span>, <span class="fu">bquote</span>(<span class="fu">paste</span>(<span class="st">&quot;QP: &quot;</span>, sigma<span class="sc">^</span><span class="dv">2</span> <span class="sc">==</span> .(<span class="fu">round</span>(phi.fit,</span>
+<span id="cb72-33"><a href="choose-an-error-distribution.html#cb72-33" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span>)) <span class="sc">*</span> mu)), <span class="at">col =</span> <span class="dv">2</span>)</span>
+<span id="cb72-34"><a href="choose-an-error-distribution.html#cb72-34" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(x <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">+</span> x<span class="sc">/</span>k.fit), <span class="at">col =</span> <span class="dv">4</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb72-35"><a href="choose-an-error-distribution.html#cb72-35" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">104</span>, <span class="dv">7200</span>, <span class="fu">paste</span>(<span class="st">&quot;NB: k = &quot;</span>, <span class="fu">round</span>(k.fit, <span class="dv">1</span>), <span class="at">sep =</span> <span class="st">&quot;&quot;</span>),</span>
+<span id="cb72-36"><a href="choose-an-error-distribution.html#cb72-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">col =</span> <span class="dv">4</span>)</span>
+<span id="cb72-37"><a href="choose-an-error-distribution.html#cb72-37" aria-hidden="true" tabindex="-1"></a>mvec <span class="ot">&lt;-</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">120</span></span>
+<span id="cb72-38"><a href="choose-an-error-distribution.html#cb72-38" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(mvec, <span class="fu">predict</span>(Lfit, mvec), <span class="at">col =</span> <span class="dv">5</span>)</span>
+<span id="cb72-39"><a href="choose-an-error-distribution.html#cb72-39" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">118</span>, <span class="dv">2000</span>, <span class="st">&quot;loess&quot;</span>, <span class="at">col =</span> <span class="dv">5</span>)</span></code></pre></div>
 <p><img src="book-en_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
 <p>From the plot above we note that a linear quasi-Poisson may be better than the negative binomial, <em>but additional modeling is needed.</em></p>
 </div>
@@ -415,7 +427,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

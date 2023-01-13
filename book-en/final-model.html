@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 18 Final model | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)</title>
   <meta name="description" content="Linear and generalized linear mixed models (LMM and GLMM)" />
-  <meta name="generator" content="bookdown 0.25 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 18 Final model | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)" />
   <meta property="og:type" content="book" />
@@ -48,25 +48,24 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -86,7 +85,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {  background-color: #f8f8f8; }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ef2929; } /* Alert */
 code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
@@ -136,81 +135,94 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <link rel="icon" type="image/png" href="assets/images/favicon.ico"/>
 
 <li class="divider"></li>
-<li class="part"><span><b>QCBS R Workshop Series<span></span></b></span></li>
-<li><a href="index.html#preface">Preface<span></span></a><ul>
-<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>0.1</b> Code of conduct<span></span></a><ul>
-<li class="chapter" data-level="0.1.1" data-path="index.html"><a href="index.html#expected-behaviour"><i class="fa fa-check"></i><b>0.1.1</b> Expected behaviour<span></span></a></li>
-<li class="chapter" data-level="0.1.2" data-path="index.html"><a href="index.html#unacceptable-behaviour"><i class="fa fa-check"></i><b>0.1.2</b> Unacceptable behaviour<span></span></a></li>
+<li class="part"><span><b>QCBS R Workshop Series</b></span></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#code-of-conduct"><i class="fa fa-check"></i><b>0.1</b> Code of conduct</a>
+<ul>
+<li class="chapter" data-level="0.1.1" data-path="index.html"><a href="index.html#expected-behaviour"><i class="fa fa-check"></i><b>0.1.1</b> Expected behaviour</a></li>
+<li class="chapter" data-level="0.1.2" data-path="index.html"><a href="index.html#unacceptable-behaviour"><i class="fa fa-check"></i><b>0.1.2</b> Unacceptable behaviour</a></li>
 </ul></li>
-<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#contributors"><i class="fa fa-check"></i><b>0.2</b> Contributors<span></span></a></li>
-<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#contributing"><i class="fa fa-check"></i><b>0.3</b> Contributing<span></span></a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#contributors"><i class="fa fa-check"></i><b>0.2</b> Contributors</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#contributing"><i class="fa fa-check"></i><b>0.3</b> Contributing</a></li>
 </ul></li>
-<li class="part"><span><b>Linear mixed models (LMM) in <code>R</code><span></span></b></span></li>
-<li class="chapter" data-level="1" data-path="learning-objectives.html"><a href="learning-objectives.html"><i class="fa fa-check"></i><b>1</b> Learning objectives<span></span></a></li>
-<li class="chapter" data-level="2" data-path="preparing-for-the-workshop.html"><a href="preparing-for-the-workshop.html"><i class="fa fa-check"></i><b>2</b> Preparing for the workshop<span></span></a></li>
-<li class="chapter" data-level="3" data-path="why-choose-mixed-models.html"><a href="why-choose-mixed-models.html"><i class="fa fa-check"></i><b>3</b> Why choose mixed models?<span></span></a></li>
-<li class="chapter" data-level="4" data-path="starting-with-a-question.html"><a href="starting-with-a-question.html"><i class="fa fa-check"></i><b>4</b> Starting with a question<span></span></a><ul>
-<li class="chapter" data-level="4.1" data-path="starting-with-a-question.html"><a href="starting-with-a-question.html#challenge-1"><i class="fa fa-check"></i><b>4.1</b> Challenge 1<span></span></a></li>
+<li class="part"><span><b>Linear mixed models (LMM) in <code>R</code></b></span></li>
+<li class="chapter" data-level="1" data-path="learning-objectives.html"><a href="learning-objectives.html"><i class="fa fa-check"></i><b>1</b> Learning objectives</a></li>
+<li class="chapter" data-level="2" data-path="preparing-for-the-workshop.html"><a href="preparing-for-the-workshop.html"><i class="fa fa-check"></i><b>2</b> Preparing for the workshop</a></li>
+<li class="chapter" data-level="3" data-path="why-choose-mixed-models.html"><a href="why-choose-mixed-models.html"><i class="fa fa-check"></i><b>3</b> Why choose mixed models?</a></li>
+<li class="chapter" data-level="4" data-path="starting-with-a-question.html"><a href="starting-with-a-question.html"><i class="fa fa-check"></i><b>4</b> Starting with a question</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="starting-with-a-question.html"><a href="starting-with-a-question.html#challenge-1"><i class="fa fa-check"></i><b>4.1</b> Challenge 1</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html"><i class="fa fa-check"></i><b>5</b> Analyzing the data<span></span></a><ul>
-<li class="chapter" data-level="5.1" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#option-1-separate"><i class="fa fa-check"></i><b>5.1</b> Option 1: Separate<span></span></a></li>
-<li class="chapter" data-level="5.2" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#option-2-lump-everything-together"><i class="fa fa-check"></i><b>5.2</b> Option 2: Lump everything together<span></span></a></li>
-<li class="chapter" data-level="5.3" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#option-3-is-there-a-third-option"><i class="fa fa-check"></i><b>5.3</b> Option 3: Is there a third option?<span></span></a></li>
+<li class="chapter" data-level="5" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html"><i class="fa fa-check"></i><b>5</b> Analyzing the data</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#option-1-separate"><i class="fa fa-check"></i><b>5.1</b> Option 1: Separate</a></li>
+<li class="chapter" data-level="5.2" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#option-2-lump-everything-together"><i class="fa fa-check"></i><b>5.2</b> Option 2: Lump everything together</a></li>
+<li class="chapter" data-level="5.3" data-path="analyzing-the-data.html"><a href="analyzing-the-data.html#option-3-is-there-a-third-option"><i class="fa fa-check"></i><b>5.3</b> Option 3: Is there a third option?</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="fixed-vs.-random-effects.html"><a href="fixed-vs.-random-effects.html"><i class="fa fa-check"></i><b>6</b> Fixed vs. random effects<span></span></a><ul>
-<li class="chapter" data-level="6.1" data-path="fixed-vs.-random-effects.html"><a href="fixed-vs.-random-effects.html#fixed-effects-deterministic-processes"><i class="fa fa-check"></i><b>6.1</b> Fixed effects: deterministic processes<span></span></a></li>
-<li class="chapter" data-level="6.2" data-path="fixed-vs.-random-effects.html"><a href="fixed-vs.-random-effects.html#random-effects-stochastic-processes"><i class="fa fa-check"></i><b>6.2</b> Random effects: stochastic processes<span></span></a></li>
+<li class="chapter" data-level="6" data-path="fixed-vs.-random-effects.html"><a href="fixed-vs.-random-effects.html"><i class="fa fa-check"></i><b>6</b> Fixed vs. random effects</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="fixed-vs.-random-effects.html"><a href="fixed-vs.-random-effects.html#fixed-effects-deterministic-processes"><i class="fa fa-check"></i><b>6.1</b> Fixed effects: deterministic processes</a></li>
+<li class="chapter" data-level="6.2" data-path="fixed-vs.-random-effects.html"><a href="fixed-vs.-random-effects.html#random-effects-stochastic-processes"><i class="fa fa-check"></i><b>6.2</b> Random effects: stochastic processes</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="how-do-lmms-work.html"><a href="how-do-lmms-work.html"><i class="fa fa-check"></i><b>7</b> How do LMMs work?<span></span></a><ul>
-<li class="chapter" data-level="7.1" data-path="how-do-lmms-work.html"><a href="how-do-lmms-work.html#parameters-are-varied"><i class="fa fa-check"></i><b>7.1</b> Parameters are varied<span></span></a><ul>
-<li><a href="how-do-lmms-work.html#intercepts">Intercepts:<span></span></a></li>
-<li><a href="how-do-lmms-work.html#slopes">Slopes:<span></span></a></li>
+<li class="chapter" data-level="7" data-path="how-do-lmms-work.html"><a href="how-do-lmms-work.html"><i class="fa fa-check"></i><b>7</b> How do LMMs work?</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="how-do-lmms-work.html"><a href="how-do-lmms-work.html#parameters-are-varied"><i class="fa fa-check"></i><b>7.1</b> Parameters are varied</a>
+<ul>
+<li class="chapter" data-level="" data-path="how-do-lmms-work.html"><a href="how-do-lmms-work.html#intercepts"><i class="fa fa-check"></i>Intercepts:</a></li>
+<li class="chapter" data-level="" data-path="how-do-lmms-work.html"><a href="how-do-lmms-work.html#slopes"><i class="fa fa-check"></i>Slopes:</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="how-do-lmms-work.html"><a href="how-do-lmms-work.html#data-structure-is-taken-into-account"><i class="fa fa-check"></i><b>7.2</b> Data structure is taken into account<span></span></a></li>
-<li class="chapter" data-level="7.3" data-path="how-do-lmms-work.html"><a href="how-do-lmms-work.html#challenge-2"><i class="fa fa-check"></i><b>7.3</b> Challenge 2<span></span></a></li>
+<li class="chapter" data-level="7.2" data-path="how-do-lmms-work.html"><a href="how-do-lmms-work.html#data-structure-is-taken-into-account"><i class="fa fa-check"></i><b>7.2</b> Data structure is taken into account</a></li>
+<li class="chapter" data-level="7.3" data-path="how-do-lmms-work.html"><a href="how-do-lmms-work.html#challenge-2"><i class="fa fa-check"></i><b>7.3</b> Challenge 2</a></li>
 </ul></li>
-<li class="part"><span><b>Implementing LMM in <code>R</code><span></span></b></span></li>
-<li class="chapter" data-level="8" data-path="mixed-model-protocol.html"><a href="mixed-model-protocol.html"><i class="fa fa-check"></i><b>8</b> Mixed model protocol<span></span></a></li>
-<li class="chapter" data-level="9" data-path="step-1.-a-priori-model-building.html"><a href="step-1.-a-priori-model-building.html"><i class="fa fa-check"></i><b>9</b> Step 1. <em>A priori</em> model building<span></span></a><ul>
-<li class="chapter" data-level="9.1" data-path="step-1.-a-priori-model-building.html"><a href="step-1.-a-priori-model-building.html#check-data-structure"><i class="fa fa-check"></i><b>9.1</b> Check data structure<span></span></a></li>
-<li class="chapter" data-level="9.2" data-path="step-1.-a-priori-model-building.html"><a href="step-1.-a-priori-model-building.html#check-collinearity"><i class="fa fa-check"></i><b>9.2</b> Check collinearity<span></span></a></li>
-<li class="chapter" data-level="9.3" data-path="step-1.-a-priori-model-building.html"><a href="step-1.-a-priori-model-building.html#challenge-3"><i class="fa fa-check"></i><b>9.3</b> Challenge 3<span></span></a></li>
-<li class="chapter" data-level="9.4" data-path="step-1.-a-priori-model-building.html"><a href="step-1.-a-priori-model-building.html#consider-scale"><i class="fa fa-check"></i><b>9.4</b> Consider scale<span></span></a></li>
-<li class="chapter" data-level="9.5" data-path="step-1.-a-priori-model-building.html"><a href="step-1.-a-priori-model-building.html#do-you-need-a-lmm"><i class="fa fa-check"></i><b>9.5</b> Do you need a LMM?<span></span></a></li>
+<li class="part"><span><b>Implementing LMM in <code>R</code></b></span></li>
+<li class="chapter" data-level="8" data-path="mixed-model-protocol.html"><a href="mixed-model-protocol.html"><i class="fa fa-check"></i><b>8</b> Mixed model protocol</a></li>
+<li class="chapter" data-level="9" data-path="step-1.-a-priori-model-building.html"><a href="step-1.-a-priori-model-building.html"><i class="fa fa-check"></i><b>9</b> Step 1. <em>A priori</em> model building</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="step-1.-a-priori-model-building.html"><a href="step-1.-a-priori-model-building.html#check-data-structure"><i class="fa fa-check"></i><b>9.1</b> Check data structure</a></li>
+<li class="chapter" data-level="9.2" data-path="step-1.-a-priori-model-building.html"><a href="step-1.-a-priori-model-building.html#check-collinearity"><i class="fa fa-check"></i><b>9.2</b> Check collinearity</a></li>
+<li class="chapter" data-level="9.3" data-path="step-1.-a-priori-model-building.html"><a href="step-1.-a-priori-model-building.html#challenge-3"><i class="fa fa-check"></i><b>9.3</b> Challenge 3</a></li>
+<li class="chapter" data-level="9.4" data-path="step-1.-a-priori-model-building.html"><a href="step-1.-a-priori-model-building.html#consider-scale"><i class="fa fa-check"></i><b>9.4</b> Consider scale</a></li>
+<li class="chapter" data-level="9.5" data-path="step-1.-a-priori-model-building.html"><a href="step-1.-a-priori-model-building.html#do-you-need-a-lmm"><i class="fa fa-check"></i><b>9.5</b> Do you need a LMM?</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="step-2.-code-potential-models-and-model-selection.html"><a href="step-2.-code-potential-models-and-model-selection.html"><i class="fa fa-check"></i><b>10</b> Step 2. Code potential models and model selection<span></span></a><ul>
-<li class="chapter" data-level="10.1" data-path="step-2.-code-potential-models-and-model-selection.html"><a href="step-2.-code-potential-models-and-model-selection.html#estimation-methods"><i class="fa fa-check"></i><b>10.1</b> Estimation methods<span></span></a></li>
-<li class="chapter" data-level="10.2" data-path="step-2.-code-potential-models-and-model-selection.html"><a href="step-2.-code-potential-models-and-model-selection.html#different-model-structures"><i class="fa fa-check"></i><b>10.2</b> Different model structures<span></span></a></li>
-<li class="chapter" data-level="10.3" data-path="step-2.-code-potential-models-and-model-selection.html"><a href="step-2.-code-potential-models-and-model-selection.html#challenge-4"><i class="fa fa-check"></i><b>10.3</b> Challenge 4<span></span></a></li>
-<li class="chapter" data-level="10.4" data-path="step-2.-code-potential-models-and-model-selection.html"><a href="step-2.-code-potential-models-and-model-selection.html#challenge-5"><i class="fa fa-check"></i><b>10.4</b> Challenge 5<span></span></a></li>
-<li class="chapter" data-level="10.5" data-path="step-2.-code-potential-models-and-model-selection.html"><a href="step-2.-code-potential-models-and-model-selection.html#comparing-models"><i class="fa fa-check"></i><b>10.5</b> Comparing models<span></span></a></li>
+<li class="chapter" data-level="10" data-path="step-2.-code-potential-models-and-model-selection.html"><a href="step-2.-code-potential-models-and-model-selection.html"><i class="fa fa-check"></i><b>10</b> Step 2. Code potential models and model selection</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="step-2.-code-potential-models-and-model-selection.html"><a href="step-2.-code-potential-models-and-model-selection.html#estimation-methods"><i class="fa fa-check"></i><b>10.1</b> Estimation methods</a></li>
+<li class="chapter" data-level="10.2" data-path="step-2.-code-potential-models-and-model-selection.html"><a href="step-2.-code-potential-models-and-model-selection.html#different-model-structures"><i class="fa fa-check"></i><b>10.2</b> Different model structures</a></li>
+<li class="chapter" data-level="10.3" data-path="step-2.-code-potential-models-and-model-selection.html"><a href="step-2.-code-potential-models-and-model-selection.html#challenge-4"><i class="fa fa-check"></i><b>10.3</b> Challenge 4</a></li>
+<li class="chapter" data-level="10.4" data-path="step-2.-code-potential-models-and-model-selection.html"><a href="step-2.-code-potential-models-and-model-selection.html#challenge-5"><i class="fa fa-check"></i><b>10.4</b> Challenge 5</a></li>
+<li class="chapter" data-level="10.5" data-path="step-2.-code-potential-models-and-model-selection.html"><a href="step-2.-code-potential-models-and-model-selection.html#comparing-models"><i class="fa fa-check"></i><b>10.5</b> Comparing models</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="step-3.-model-validation.html"><a href="step-3.-model-validation.html"><i class="fa fa-check"></i><b>11</b> Step 3. Model validation<span></span></a><ul>
-<li class="chapter" data-level="11.1" data-path="step-3.-model-validation.html"><a href="step-3.-model-validation.html#check-the-homogeneity-of-the-variance"><i class="fa fa-check"></i><b>11.1</b> 1. Check the homogeneity of the variance<span></span></a></li>
-<li class="chapter" data-level="11.2" data-path="step-3.-model-validation.html"><a href="step-3.-model-validation.html#check-the-independence-of-the-model-residuals-with-each-covariate"><i class="fa fa-check"></i><b>11.2</b> 2. Check the independence of the model residuals with each covariate<span></span></a></li>
-<li class="chapter" data-level="11.3" data-path="step-3.-model-validation.html"><a href="step-3.-model-validation.html#check-the-normality-of-the-model-residuals"><i class="fa fa-check"></i><b>11.3</b> 3. Check the normality of the model residuals<span></span></a></li>
+<li class="chapter" data-level="11" data-path="step-3.-model-validation.html"><a href="step-3.-model-validation.html"><i class="fa fa-check"></i><b>11</b> Step 3. Model validation</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="step-3.-model-validation.html"><a href="step-3.-model-validation.html#check-the-homogeneity-of-the-variance"><i class="fa fa-check"></i><b>11.1</b> 1. Check the homogeneity of the variance</a></li>
+<li class="chapter" data-level="11.2" data-path="step-3.-model-validation.html"><a href="step-3.-model-validation.html#check-the-independence-of-the-model-residuals-with-each-covariate"><i class="fa fa-check"></i><b>11.2</b> 2. Check the independence of the model residuals with each covariate</a></li>
+<li class="chapter" data-level="11.3" data-path="step-3.-model-validation.html"><a href="step-3.-model-validation.html#check-the-normality-of-the-model-residuals"><i class="fa fa-check"></i><b>11.3</b> 3. Check the normality of the model residuals</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="step-4.-interpretation-and-visualization.html"><a href="step-4.-interpretation-and-visualization.html"><i class="fa fa-check"></i><b>12</b> Step 4. Interpretation and visualization<span></span></a><ul>
-<li class="chapter" data-level="12.1" data-path="step-4.-interpretation-and-visualization.html"><a href="step-4.-interpretation-and-visualization.html#interpreting-our-model"><i class="fa fa-check"></i><b>12.1</b> Interpreting our model<span></span></a></li>
-<li class="chapter" data-level="12.2" data-path="step-4.-interpretation-and-visualization.html"><a href="step-4.-interpretation-and-visualization.html#challenge-6"><i class="fa fa-check"></i><b>12.2</b> Challenge 6<span></span></a></li>
-<li class="chapter" data-level="12.3" data-path="step-4.-interpretation-and-visualization.html"><a href="step-4.-interpretation-and-visualization.html#challenge-7"><i class="fa fa-check"></i><b>12.3</b> Challenge 7<span></span></a></li>
-<li class="chapter" data-level="12.4" data-path="step-4.-interpretation-and-visualization.html"><a href="step-4.-interpretation-and-visualization.html#challenge-8"><i class="fa fa-check"></i><b>12.4</b> Challenge 8<span></span></a></li>
+<li class="chapter" data-level="12" data-path="step-4.-interpretation-and-visualization.html"><a href="step-4.-interpretation-and-visualization.html"><i class="fa fa-check"></i><b>12</b> Step 4. Interpretation and visualization</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="step-4.-interpretation-and-visualization.html"><a href="step-4.-interpretation-and-visualization.html#interpreting-our-model"><i class="fa fa-check"></i><b>12.1</b> Interpreting our model</a></li>
+<li class="chapter" data-level="12.2" data-path="step-4.-interpretation-and-visualization.html"><a href="step-4.-interpretation-and-visualization.html#challenge-6"><i class="fa fa-check"></i><b>12.2</b> Challenge 6</a></li>
+<li class="chapter" data-level="12.3" data-path="step-4.-interpretation-and-visualization.html"><a href="step-4.-interpretation-and-visualization.html#challenge-7"><i class="fa fa-check"></i><b>12.3</b> Challenge 7</a></li>
+<li class="chapter" data-level="12.4" data-path="step-4.-interpretation-and-visualization.html"><a href="step-4.-interpretation-and-visualization.html#challenge-8"><i class="fa fa-check"></i><b>12.4</b> Challenge 8</a></li>
 </ul></li>
-<li class="part"><span><b>Generalized linear mixed models (GLMM) in <code>R</code><span></span></b></span></li>
-<li class="chapter" data-level="13" data-path="introduction-to-glmm.html"><a href="introduction-to-glmm.html"><i class="fa fa-check"></i><b>13</b> Introduction to GLMM<span></span></a></li>
-<li class="chapter" data-level="14" data-path="choose-an-error-distribution.html"><a href="choose-an-error-distribution.html"><i class="fa fa-check"></i><b>14</b> Choose an error distribution<span></span></a></li>
-<li class="chapter" data-level="15" data-path="poisson-glmm.html"><a href="poisson-glmm.html"><i class="fa fa-check"></i><b>15</b> Poisson GLMM<span></span></a></li>
-<li class="chapter" data-level="16" data-path="negative-binomial-glmm.html"><a href="negative-binomial-glmm.html"><i class="fa fa-check"></i><b>16</b> Negative binomial GLMM<span></span></a></li>
-<li class="chapter" data-level="17" data-path="poisson-lognormal-glmm.html"><a href="poisson-lognormal-glmm.html"><i class="fa fa-check"></i><b>17</b> Poisson-lognormal GLMM<span></span></a><ul>
-<li class="chapter" data-level="17.1" data-path="poisson-lognormal-glmm.html"><a href="poisson-lognormal-glmm.html#random-intercepts"><i class="fa fa-check"></i><b>17.1</b> Random intercepts<span></span></a></li>
-<li class="chapter" data-level="17.2" data-path="poisson-lognormal-glmm.html"><a href="poisson-lognormal-glmm.html#parameter-plots"><i class="fa fa-check"></i><b>17.2</b> Parameter plots<span></span></a></li>
+<li class="part"><span><b>Generalized linear mixed models (GLMM) in <code>R</code></b></span></li>
+<li class="chapter" data-level="13" data-path="introduction-to-glmm.html"><a href="introduction-to-glmm.html"><i class="fa fa-check"></i><b>13</b> Introduction to GLMM</a></li>
+<li class="chapter" data-level="14" data-path="choose-an-error-distribution.html"><a href="choose-an-error-distribution.html"><i class="fa fa-check"></i><b>14</b> Choose an error distribution</a></li>
+<li class="chapter" data-level="15" data-path="poisson-glmm.html"><a href="poisson-glmm.html"><i class="fa fa-check"></i><b>15</b> Poisson GLMM</a></li>
+<li class="chapter" data-level="16" data-path="negative-binomial-glmm.html"><a href="negative-binomial-glmm.html"><i class="fa fa-check"></i><b>16</b> Negative binomial GLMM</a></li>
+<li class="chapter" data-level="17" data-path="poisson-lognormal-glmm.html"><a href="poisson-lognormal-glmm.html"><i class="fa fa-check"></i><b>17</b> Poisson-lognormal GLMM</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="poisson-lognormal-glmm.html"><a href="poisson-lognormal-glmm.html#random-intercepts"><i class="fa fa-check"></i><b>17.1</b> Random intercepts</a></li>
+<li class="chapter" data-level="17.2" data-path="poisson-lognormal-glmm.html"><a href="poisson-lognormal-glmm.html#parameter-plots"><i class="fa fa-check"></i><b>17.2</b> Parameter plots</a></li>
 </ul></li>
-<li class="chapter" data-level="18" data-path="final-model.html"><a href="final-model.html"><i class="fa fa-check"></i><b>18</b> Final model<span></span></a><ul>
-<li class="chapter" data-level="18.1" data-path="final-model.html"><a href="final-model.html#challenge-9"><i class="fa fa-check"></i><b>18.1</b> Challenge 9<span></span></a></li>
+<li class="chapter" data-level="18" data-path="final-model.html"><a href="final-model.html"><i class="fa fa-check"></i><b>18</b> Final model</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="final-model.html"><a href="final-model.html#challenge-9"><i class="fa fa-check"></i><b>18.1</b> Challenge 9</a></li>
 </ul></li>
-<li class="part"><span><b>Additional LMM and GLMM resources<span></span></b></span></li>
-<li class="chapter" data-level="19" data-path="additional-resources.html"><a href="additional-resources.html"><i class="fa fa-check"></i><b>19</b> Additional resources<span></span></a></li>
-<li class="chapter" data-level="20" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>20</b> References<span></span></a></li>
+<li class="part"><span><b>Additional LMM and GLMM resources</b></span></li>
+<li class="chapter" data-level="19" data-path="additional-resources.html"><a href="additional-resources.html"><i class="fa fa-check"></i><b>19</b> Additional resources</a></li>
+<li class="chapter" data-level="20" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>20</b> References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/qcbsRworkshops" target="blank">QCBS R Workshop Series</a></li>
 
@@ -246,7 +258,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
   <img class= "hero-image" src="assets/images/jean-philippe-delberghe-75xPHEQBmvA-unsplash_hero_image.jpg">
 </div>
 --!>
-<div id="final-model" class="section level1 hasAnchor">
+<div id="final-model" class="section level1 hasAnchor" number="18">
 <h1><span class="header-section-number">Chapter 18</span> Final model<a href="final-model.html#final-model" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>The same methods we just saw can be used with a GLMM or LMM to choose between models with various random intercepts and/or random slopes and to choose fixed effects to keep in final model.</p>
 <p>Recall the two approaches :</p>
@@ -256,16 +268,16 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <hr />
 <p>We first code potential models and compare them using AICc:</p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="final-model.html#cb99-1"></a>mpl1 &lt;-<span class="st"> </span><span class="kw">glmer</span>(total.fruits <span class="op">~</span><span class="st"> </span>nutrient <span class="op">*</span><span class="st"> </span>amd <span class="op">+</span><span class="st"> </span>rack <span class="op">+</span><span class="st"> </span>status <span class="op">+</span></span>
-<span id="cb99-2"><a href="final-model.html#cb99-2"></a><span class="st">    </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>X) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>popu) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>gen), <span class="dt">data =</span> dat.tf, <span class="dt">family =</span> <span class="st">&quot;poisson&quot;</span>,</span>
-<span id="cb99-3"><a href="final-model.html#cb99-3"></a>    <span class="dt">control =</span> <span class="kw">glmerControl</span>(<span class="dt">optimizer =</span> <span class="st">&quot;bobyqa&quot;</span>))</span>
-<span id="cb99-4"><a href="final-model.html#cb99-4"></a></span>
-<span id="cb99-5"><a href="final-model.html#cb99-5"></a>mpl2 &lt;-<span class="st"> </span><span class="kw">update</span>(mpl1, . <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>rack)  <span class="co"># model without rack</span></span>
-<span id="cb99-6"><a href="final-model.html#cb99-6"></a>mpl3 &lt;-<span class="st"> </span><span class="kw">update</span>(mpl1, . <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>status)  <span class="co"># model without status</span></span>
-<span id="cb99-7"><a href="final-model.html#cb99-7"></a>mpl4 &lt;-<span class="st"> </span><span class="kw">update</span>(mpl1, . <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>amd<span class="op">:</span>nutrient)  <span class="co"># without amd:nutrient interaction</span></span>
-<span id="cb99-8"><a href="final-model.html#cb99-8"></a></span>
-<span id="cb99-9"><a href="final-model.html#cb99-9"></a>aic_tab &lt;-<span class="st"> </span>MuMIn<span class="op">::</span><span class="kw">model.sel</span>(mpl1, mpl2, mpl3, mpl4)</span>
-<span id="cb99-10"><a href="final-model.html#cb99-10"></a>(<span class="kw">round</span>(aic_table &lt;-<span class="st"> </span>aic_tab[, <span class="kw">c</span>(<span class="st">&quot;AICc&quot;</span>, <span class="st">&quot;delta&quot;</span>, <span class="st">&quot;df&quot;</span>)], <span class="dt">digits =</span> <span class="dv">2</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="final-model.html#cb99-1" aria-hidden="true" tabindex="-1"></a>mpl1 <span class="ot">&lt;-</span> <span class="fu">glmer</span>(total.fruits <span class="sc">~</span> nutrient <span class="sc">*</span> amd <span class="sc">+</span> rack <span class="sc">+</span> status <span class="sc">+</span></span>
+<span id="cb99-2"><a href="final-model.html#cb99-2" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">1</span> <span class="sc">|</span> X) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> popu) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> gen), <span class="at">data =</span> dat.tf, <span class="at">family =</span> <span class="st">&quot;poisson&quot;</span>,</span>
+<span id="cb99-3"><a href="final-model.html#cb99-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">control =</span> <span class="fu">glmerControl</span>(<span class="at">optimizer =</span> <span class="st">&quot;bobyqa&quot;</span>))</span>
+<span id="cb99-4"><a href="final-model.html#cb99-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-5"><a href="final-model.html#cb99-5" aria-hidden="true" tabindex="-1"></a>mpl2 <span class="ot">&lt;-</span> <span class="fu">update</span>(mpl1, . <span class="sc">~</span> . <span class="sc">-</span> rack)  <span class="co"># model without rack</span></span>
+<span id="cb99-6"><a href="final-model.html#cb99-6" aria-hidden="true" tabindex="-1"></a>mpl3 <span class="ot">&lt;-</span> <span class="fu">update</span>(mpl1, . <span class="sc">~</span> . <span class="sc">-</span> status)  <span class="co"># model without status</span></span>
+<span id="cb99-7"><a href="final-model.html#cb99-7" aria-hidden="true" tabindex="-1"></a>mpl4 <span class="ot">&lt;-</span> <span class="fu">update</span>(mpl1, . <span class="sc">~</span> . <span class="sc">-</span> amd<span class="sc">:</span>nutrient)  <span class="co"># without amd:nutrient interaction</span></span>
+<span id="cb99-8"><a href="final-model.html#cb99-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-9"><a href="final-model.html#cb99-9" aria-hidden="true" tabindex="-1"></a>aic_tab <span class="ot">&lt;-</span> MuMIn<span class="sc">::</span><span class="fu">model.sel</span>(mpl1, mpl2, mpl3, mpl4)</span>
+<span id="cb99-10"><a href="final-model.html#cb99-10" aria-hidden="true" tabindex="-1"></a>(<span class="fu">round</span>(aic_table <span class="ot">&lt;-</span> aic_tab[, <span class="fu">c</span>(<span class="st">&quot;AICc&quot;</span>, <span class="st">&quot;delta&quot;</span>, <span class="st">&quot;df&quot;</span>)], <span class="at">digits =</span> <span class="dv">2</span>))</span></code></pre></div>
 <pre><code>##         AICc delta df
 ## mpl1 5015.73  0.00 10
 ## mpl4 5017.11  1.38  9
@@ -273,8 +285,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## mpl2 5070.75 55.02  9</code></pre>
 <p><em>Note: We do not cover all possible models above, however, the interaction <code>amd:nutrient</code> can only be evaluated if both amd and nutrient (i.e., the main effects) are included in the model.</em></p>
 <p>Alternatively, we can use <code>drop1()</code> and <code>dfun()</code> functions to evaluate our fixed effects (<code>dfun()</code> converts the AIC values returned by the <code>drop1()</code> into <span class="math inline">\(\Delta\)</span>AIC values)</p>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="final-model.html#cb101-1"></a>dd_LRT &lt;-<span class="st"> </span><span class="kw">drop1</span>(mpl1, <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>)</span>
-<span id="cb101-2"><a href="final-model.html#cb101-2"></a>(dd_AIC &lt;-<span class="st"> </span><span class="kw">dfun</span>(<span class="kw">drop1</span>(mpl1)))</span></code></pre></div>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="final-model.html#cb101-1" aria-hidden="true" tabindex="-1"></a>dd_LRT <span class="ot">&lt;-</span> <span class="fu">drop1</span>(mpl1, <span class="at">test =</span> <span class="st">&quot;Chisq&quot;</span>)</span>
+<span id="cb101-2"><a href="final-model.html#cb101-2" aria-hidden="true" tabindex="-1"></a>(dd_AIC <span class="ot">&lt;-</span> <span class="fu">dfun</span>(<span class="fu">drop1</span>(mpl1)))</span></code></pre></div>
 <pre><code>## Single term deletions
 ## 
 ## Model:
@@ -291,18 +303,18 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <hr />
 <p>Let’s start by <strong>removing the non-significant interaction</strong> term to test main effects of nutrient and clipping</p>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="final-model.html#cb103-1"></a>mpl2 &lt;-<span class="st"> </span><span class="kw">update</span>(mpl1, . <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>amd<span class="op">:</span>nutrient)</span>
-<span id="cb103-2"><a href="final-model.html#cb103-2"></a></span>
-<span id="cb103-3"><a href="final-model.html#cb103-3"></a>mpl3 &lt;-<span class="st"> </span><span class="kw">update</span>(mpl2, . <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>rack)  <span class="co"># pas de rack ou d&#39;interaction</span></span>
-<span id="cb103-4"><a href="final-model.html#cb103-4"></a>mpl4 &lt;-<span class="st"> </span><span class="kw">update</span>(mpl2, . <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>status)  <span class="co"># pas de status ou d&#39;interaction</span></span>
-<span id="cb103-5"><a href="final-model.html#cb103-5"></a>mpl5 &lt;-<span class="st"> </span><span class="kw">update</span>(mpl2, . <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>nutrient)  <span class="co"># pas de nutrient ou d&#39;interaction</span></span>
-<span id="cb103-6"><a href="final-model.html#cb103-6"></a>mpl6 &lt;-<span class="st"> </span><span class="kw">update</span>(mpl2, . <span class="op">~</span><span class="st"> </span>. <span class="op">-</span><span class="st"> </span>amd)  <span class="co"># pas d&#39;herbivorie ou d&#39;interaction</span></span></code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="final-model.html#cb103-1" aria-hidden="true" tabindex="-1"></a>mpl2 <span class="ot">&lt;-</span> <span class="fu">update</span>(mpl1, . <span class="sc">~</span> . <span class="sc">-</span> amd<span class="sc">:</span>nutrient)</span>
+<span id="cb103-2"><a href="final-model.html#cb103-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb103-3"><a href="final-model.html#cb103-3" aria-hidden="true" tabindex="-1"></a>mpl3 <span class="ot">&lt;-</span> <span class="fu">update</span>(mpl2, . <span class="sc">~</span> . <span class="sc">-</span> rack)  <span class="co"># pas de rack ou d&#39;interaction</span></span>
+<span id="cb103-4"><a href="final-model.html#cb103-4" aria-hidden="true" tabindex="-1"></a>mpl4 <span class="ot">&lt;-</span> <span class="fu">update</span>(mpl2, . <span class="sc">~</span> . <span class="sc">-</span> status)  <span class="co"># pas de status ou d&#39;interaction</span></span>
+<span id="cb103-5"><a href="final-model.html#cb103-5" aria-hidden="true" tabindex="-1"></a>mpl5 <span class="ot">&lt;-</span> <span class="fu">update</span>(mpl2, . <span class="sc">~</span> . <span class="sc">-</span> nutrient)  <span class="co"># pas de nutrient ou d&#39;interaction</span></span>
+<span id="cb103-6"><a href="final-model.html#cb103-6" aria-hidden="true" tabindex="-1"></a>mpl6 <span class="ot">&lt;-</span> <span class="fu">update</span>(mpl2, . <span class="sc">~</span> . <span class="sc">-</span> amd)  <span class="co"># pas d&#39;herbivorie ou d&#39;interaction</span></span></code></pre></div>
 <p>Choose the method you want to select the best model:</p>
 <ins>
 Method with AICc
 </ins>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="final-model.html#cb104-1"></a>aic_tab2 &lt;-<span class="st"> </span>MuMIn<span class="op">::</span><span class="kw">model.sel</span>(mpl2, mpl3, mpl4, mpl5, mpl6)</span>
-<span id="cb104-2"><a href="final-model.html#cb104-2"></a>(<span class="kw">round</span>(aic_table2 &lt;-<span class="st"> </span>aic_tab2[, <span class="kw">c</span>(<span class="st">&quot;AICc&quot;</span>, <span class="st">&quot;delta&quot;</span>, <span class="st">&quot;df&quot;</span>)], <span class="dt">digits =</span> <span class="dv">2</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="final-model.html#cb104-1" aria-hidden="true" tabindex="-1"></a>aic_tab2 <span class="ot">&lt;-</span> MuMIn<span class="sc">::</span><span class="fu">model.sel</span>(mpl2, mpl3, mpl4, mpl5, mpl6)</span>
+<span id="cb104-2"><a href="final-model.html#cb104-2" aria-hidden="true" tabindex="-1"></a>(<span class="fu">round</span>(aic_table2 <span class="ot">&lt;-</span> aic_tab2[, <span class="fu">c</span>(<span class="st">&quot;AICc&quot;</span>, <span class="st">&quot;delta&quot;</span>, <span class="st">&quot;df&quot;</span>)], <span class="at">digits =</span> <span class="dv">2</span>))</span></code></pre></div>
 <pre><code>##         AICc  delta df
 ## mpl2 5017.11   0.00  9
 ## mpl4 5018.28   1.17  7
@@ -312,8 +324,8 @@ Method with AICc
 <ins>
 Method with <code>drop1()</code>
 </ins>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="final-model.html#cb106-1"></a>dd_LRT2 &lt;-<span class="st"> </span><span class="kw">drop1</span>(mpl2, <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>)</span>
-<span id="cb106-2"><a href="final-model.html#cb106-2"></a>dd_AIC2 &lt;-<span class="st"> </span><span class="kw">dfun</span>(<span class="kw">drop1</span>(mpl2))</span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="final-model.html#cb106-1" aria-hidden="true" tabindex="-1"></a>dd_LRT2 <span class="ot">&lt;-</span> <span class="fu">drop1</span>(mpl2, <span class="at">test =</span> <span class="st">&quot;Chisq&quot;</span>)</span>
+<span id="cb106-2"><a href="final-model.html#cb106-2" aria-hidden="true" tabindex="-1"></a>dd_AIC2 <span class="ot">&lt;-</span> <span class="fu">dfun</span>(<span class="fu">drop1</span>(mpl2))</span></code></pre></div>
 <p><strong>What are our conclusions ?</strong></p>
 <p>Both the main effects of <strong>nutrient</strong> and <strong>clipping</strong> are strong (large change in AIC of <span class="math inline">\(135.6\)</span> (<code>mpl5</code>) and <span class="math inline">\(10.2\)</span> (<code>mpl6</code>) if either nutrient or clipping are dropped, respectively).</p>
 <p><strong>Our final model includes :</strong></p>
@@ -325,7 +337,7 @@ Method with <code>drop1()</code>
 * observation-level random effect <code>(1|X)</code>
 * populations <code>(1|popu)</code>
 * genotypes <code>(1|gen)</code></p>
-<div id="challenge-9" class="section level2 hasAnchor">
+<div id="challenge-9" class="section level2 hasAnchor" number="18.1">
 <h2><span class="header-section-number">18.1</span> Challenge 9<a href="final-model.html#challenge-9" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Use the <code>inverts</code> dataset (larval development times (<code>PLD</code>) of 74 marine invertebrate and vertebrate species reared at different temperatures and time), answer the following questions:</p>
 <ul>
@@ -344,37 +356,37 @@ Method with <code>drop1()</code>
 </ul>
 <div id="challenge-9-solution" class="section level4 unnumbered hasAnchor">
 <h4><strong>Challenge 9 Solution:</strong><a href="final-model.html#challenge-9-solution" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="final-model.html#cb107-1"></a><span class="co"># inverts &lt;- read.csv(&#39;data/inverts.csv&#39;, header = TRUE)</span></span>
-<span id="cb107-2"><a href="final-model.html#cb107-2"></a><span class="co"># head(inverts) table(inverts$temp, inverts$feeding.type)</span></span>
-<span id="cb107-3"><a href="final-model.html#cb107-3"></a></span>
-<span id="cb107-4"><a href="final-model.html#cb107-4"></a><span class="co"># mod.glm &lt;- glm(PLD ~ temp + feeding.type, family =</span></span>
-<span id="cb107-5"><a href="final-model.html#cb107-5"></a><span class="co"># poisson(), data = inverts) summary(mod.glm)</span></span>
-<span id="cb107-6"><a href="final-model.html#cb107-6"></a><span class="co"># drop1(mod.glm, test = &#39;Chisq&#39;)</span></span>
-<span id="cb107-7"><a href="final-model.html#cb107-7"></a></span>
-<span id="cb107-8"><a href="final-model.html#cb107-8"></a><span class="co"># boxplot(PLD ~ temp, data = inverts) boxplot(PLD ~</span></span>
-<span id="cb107-9"><a href="final-model.html#cb107-9"></a><span class="co"># feeding.type, data = inverts)</span></span>
-<span id="cb107-10"><a href="final-model.html#cb107-10"></a></span>
-<span id="cb107-11"><a href="final-model.html#cb107-11"></a><span class="co"># boxplot(predict(mod.glm, type = &#39;response&#39;)~inverts$temp)</span></span>
-<span id="cb107-12"><a href="final-model.html#cb107-12"></a></span>
-<span id="cb107-13"><a href="final-model.html#cb107-13"></a><span class="co"># plot()</span></span>
-<span id="cb107-14"><a href="final-model.html#cb107-14"></a></span>
-<span id="cb107-15"><a href="final-model.html#cb107-15"></a><span class="co"># modglm &lt;- glm(PLD ~ temp + feeding.type, family =</span></span>
-<span id="cb107-16"><a href="final-model.html#cb107-16"></a><span class="co"># poisson(), data = inverts)</span></span>
-<span id="cb107-17"><a href="final-model.html#cb107-17"></a></span>
-<span id="cb107-18"><a href="final-model.html#cb107-18"></a><span class="co"># r2 &lt;- ranef(mpl1, condVar = TRUE) d2 &lt;- dotplot(r2,</span></span>
-<span id="cb107-19"><a href="final-model.html#cb107-19"></a><span class="co"># par.settings = pp)</span></span>
-<span id="cb107-20"><a href="final-model.html#cb107-20"></a></span>
-<span id="cb107-21"><a href="final-model.html#cb107-21"></a><span class="co"># plot(aggregate(PLD ~ taxon, FUN = mean, data =</span></span>
-<span id="cb107-22"><a href="final-model.html#cb107-22"></a><span class="co"># inverts)[,2], aggregate(PLD ~ taxon, FUN = var, data =</span></span>
-<span id="cb107-23"><a href="final-model.html#cb107-23"></a><span class="co"># inverts)[,2], pch = 19) abline(a = 0, b = 1, lty = 2)</span></span>
-<span id="cb107-24"><a href="final-model.html#cb107-24"></a></span>
-<span id="cb107-25"><a href="final-model.html#cb107-25"></a><span class="co"># mod.glmer &lt;- glmer.nb(PLD ~ temp + feeding.type +</span></span>
-<span id="cb107-26"><a href="final-model.html#cb107-26"></a><span class="co"># (1|taxon), data = inverts) mod.glm &lt;- glm.nb(PLD ~ temp +</span></span>
-<span id="cb107-27"><a href="final-model.html#cb107-27"></a><span class="co"># feeding.type, family = poisson(), data = inverts)</span></span>
-<span id="cb107-28"><a href="final-model.html#cb107-28"></a></span>
-<span id="cb107-29"><a href="final-model.html#cb107-29"></a><span class="co"># plot(aggregate(PLD ~ taxon, FUN = var, data =</span></span>
-<span id="cb107-30"><a href="final-model.html#cb107-30"></a><span class="co"># inverts)[,2], aggregate(PLD ~ taxon, FUN = mean, data =</span></span>
-<span id="cb107-31"><a href="final-model.html#cb107-31"></a><span class="co"># inverts)[,2]) abline(a = 0, b = 1, lty = 2 )</span></span></code></pre></div>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="final-model.html#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="co"># inverts &lt;- read.csv(&#39;data/inverts.csv&#39;, header = TRUE)</span></span>
+<span id="cb107-2"><a href="final-model.html#cb107-2" aria-hidden="true" tabindex="-1"></a><span class="co"># head(inverts) table(inverts$temp, inverts$feeding.type)</span></span>
+<span id="cb107-3"><a href="final-model.html#cb107-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb107-4"><a href="final-model.html#cb107-4" aria-hidden="true" tabindex="-1"></a><span class="co"># mod.glm &lt;- glm(PLD ~ temp + feeding.type, family =</span></span>
+<span id="cb107-5"><a href="final-model.html#cb107-5" aria-hidden="true" tabindex="-1"></a><span class="co"># poisson(), data = inverts) summary(mod.glm)</span></span>
+<span id="cb107-6"><a href="final-model.html#cb107-6" aria-hidden="true" tabindex="-1"></a><span class="co"># drop1(mod.glm, test = &#39;Chisq&#39;)</span></span>
+<span id="cb107-7"><a href="final-model.html#cb107-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb107-8"><a href="final-model.html#cb107-8" aria-hidden="true" tabindex="-1"></a><span class="co"># boxplot(PLD ~ temp, data = inverts) boxplot(PLD ~</span></span>
+<span id="cb107-9"><a href="final-model.html#cb107-9" aria-hidden="true" tabindex="-1"></a><span class="co"># feeding.type, data = inverts)</span></span>
+<span id="cb107-10"><a href="final-model.html#cb107-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb107-11"><a href="final-model.html#cb107-11" aria-hidden="true" tabindex="-1"></a><span class="co"># boxplot(predict(mod.glm, type = &#39;response&#39;)~inverts$temp)</span></span>
+<span id="cb107-12"><a href="final-model.html#cb107-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb107-13"><a href="final-model.html#cb107-13" aria-hidden="true" tabindex="-1"></a><span class="co"># plot()</span></span>
+<span id="cb107-14"><a href="final-model.html#cb107-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb107-15"><a href="final-model.html#cb107-15" aria-hidden="true" tabindex="-1"></a><span class="co"># modglm &lt;- glm(PLD ~ temp + feeding.type, family =</span></span>
+<span id="cb107-16"><a href="final-model.html#cb107-16" aria-hidden="true" tabindex="-1"></a><span class="co"># poisson(), data = inverts)</span></span>
+<span id="cb107-17"><a href="final-model.html#cb107-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb107-18"><a href="final-model.html#cb107-18" aria-hidden="true" tabindex="-1"></a><span class="co"># r2 &lt;- ranef(mpl1, condVar = TRUE) d2 &lt;- dotplot(r2,</span></span>
+<span id="cb107-19"><a href="final-model.html#cb107-19" aria-hidden="true" tabindex="-1"></a><span class="co"># par.settings = pp)</span></span>
+<span id="cb107-20"><a href="final-model.html#cb107-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb107-21"><a href="final-model.html#cb107-21" aria-hidden="true" tabindex="-1"></a><span class="co"># plot(aggregate(PLD ~ taxon, FUN = mean, data =</span></span>
+<span id="cb107-22"><a href="final-model.html#cb107-22" aria-hidden="true" tabindex="-1"></a><span class="co"># inverts)[,2], aggregate(PLD ~ taxon, FUN = var, data =</span></span>
+<span id="cb107-23"><a href="final-model.html#cb107-23" aria-hidden="true" tabindex="-1"></a><span class="co"># inverts)[,2], pch = 19) abline(a = 0, b = 1, lty = 2)</span></span>
+<span id="cb107-24"><a href="final-model.html#cb107-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb107-25"><a href="final-model.html#cb107-25" aria-hidden="true" tabindex="-1"></a><span class="co"># mod.glmer &lt;- glmer.nb(PLD ~ temp + feeding.type +</span></span>
+<span id="cb107-26"><a href="final-model.html#cb107-26" aria-hidden="true" tabindex="-1"></a><span class="co"># (1|taxon), data = inverts) mod.glm &lt;- glm.nb(PLD ~ temp +</span></span>
+<span id="cb107-27"><a href="final-model.html#cb107-27" aria-hidden="true" tabindex="-1"></a><span class="co"># feeding.type, family = poisson(), data = inverts)</span></span>
+<span id="cb107-28"><a href="final-model.html#cb107-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb107-29"><a href="final-model.html#cb107-29" aria-hidden="true" tabindex="-1"></a><span class="co"># plot(aggregate(PLD ~ taxon, FUN = var, data =</span></span>
+<span id="cb107-30"><a href="final-model.html#cb107-30" aria-hidden="true" tabindex="-1"></a><span class="co"># inverts)[,2], aggregate(PLD ~ taxon, FUN = mean, data =</span></span>
+<span id="cb107-31"><a href="final-model.html#cb107-31" aria-hidden="true" tabindex="-1"></a><span class="co"># inverts)[,2]) abline(a = 0, b = 1, lty = 2 )</span></span></code></pre></div>
 
 </div>
 </div>
@@ -454,7 +466,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');
