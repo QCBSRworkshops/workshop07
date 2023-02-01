@@ -15,16 +15,18 @@
 #Bon codage !                                                               #
 
 
-install.packages("lme4")
-install.packages("MASS")
-install.packages("vcdExtra")
-install.packages("bbmle")
-install.packages("MuMIn")
-install.packages("ggplot2")
-install.packages("DescTools")
-install.packages("remotes")
-install.packages("gridExtra")
-install.packages("lattice")
+install.packages(c('lme4',
+                   'MASS',
+                   'vcdExtra', 
+                   'bbmle',
+                   'MuMIn',
+                   'ggplot2',
+                   'DescTools',
+                   'remotes',
+                   'gridExtra',
+                   'lattice'),
+                 repos = "http://cran.us.r-project.org",
+                 quiet = TRUE)
 
 library(lme4)
 library(MASS)
