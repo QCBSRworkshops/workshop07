@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 2 Preparing for the workshop | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)</title>
   <meta name="description" content="Linear and generalized linear mixed models (LMM and GLMM)" />
-  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 2 Preparing for the workshop | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)" />
   <meta property="og:type" content="book" />
@@ -283,16 +283,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="http://cran.r-project.org/web/packages/lattice/index.html">lattice</a></li>
 </ul>
 <p>To install them from CRAN, run:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="preparing-for-the-workshop.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;lme4&quot;</span>)</span>
-<span id="cb1-2"><a href="preparing-for-the-workshop.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;MASS&quot;</span>)</span>
-<span id="cb1-3"><a href="preparing-for-the-workshop.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;vcdExtra&quot;</span>)</span>
-<span id="cb1-4"><a href="preparing-for-the-workshop.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;bbmle&quot;</span>)</span>
-<span id="cb1-5"><a href="preparing-for-the-workshop.html#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;MuMIn&quot;</span>)</span>
-<span id="cb1-6"><a href="preparing-for-the-workshop.html#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;ggplot2&quot;</span>)</span>
-<span id="cb1-7"><a href="preparing-for-the-workshop.html#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;DescTools&quot;</span>)</span>
-<span id="cb1-8"><a href="preparing-for-the-workshop.html#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;remotes&quot;</span>)</span>
-<span id="cb1-9"><a href="preparing-for-the-workshop.html#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;gridExtra&quot;</span>)</span>
-<span id="cb1-10"><a href="preparing-for-the-workshop.html#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;lattice&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="preparing-for-the-workshop.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">&quot;lme4&quot;</span>, <span class="st">&quot;MASS&quot;</span>, <span class="st">&quot;vcdExtra&quot;</span>, <span class="st">&quot;bbmle&quot;</span>, <span class="st">&quot;MuMIn&quot;</span>,</span>
+<span id="cb1-2"><a href="preparing-for-the-workshop.html#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;ggplot2&quot;</span>, <span class="st">&quot;DescTools&quot;</span>, <span class="st">&quot;remotes&quot;</span>, <span class="st">&quot;gridExtra&quot;</span>, <span class="st">&quot;lattice&quot;</span>),</span>
+<span id="cb1-3"><a href="preparing-for-the-workshop.html#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">repos =</span> <span class="st">&quot;http://cran.us.r-project.org&quot;</span>, <span class="at">quiet =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p>To load these packages, run:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="preparing-for-the-workshop.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
 <span id="cb2-2"><a href="preparing-for-the-workshop.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>

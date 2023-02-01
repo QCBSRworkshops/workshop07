@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 17 Poisson-lognormal GLMM | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)</title>
   <meta name="description" content="Linear and generalized linear mixed models (LMM and GLMM)" />
-  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 17 Poisson-lognormal GLMM | Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)" />
   <meta property="og:type" content="book" />
@@ -341,17 +341,27 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="poisson-lognormal-glmm.html#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&quot;coefplot2&quot;</span>)) remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;palday/coefplot2&quot;</span>,</span>
 <span id="cb92-2"><a href="poisson-lognormal-glmm.html#cb92-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">subdir =</span> <span class="st">&quot;pkg&quot;</span>)</span></code></pre></div>
 <pre><code>## Loading required package: coefplot2</code></pre>
+<pre><code>## Warning in library(package, lib.loc = lib.loc, character.only = TRUE,
+## logical.return = TRUE, : there is no package called &#39;coefplot2&#39;</code></pre>
+<pre><code>## Using github PAT from envvar GITHUB_PAT</code></pre>
+<pre><code>## Downloading GitHub repo palday/coefplot2@HEAD</code></pre>
+<pre><code>## Installing 3 packages: plyr, reshape, coda</code></pre>
+<pre><code>## Installing packages into &#39;/home/runner/work/_temp/Library&#39;
+## (as &#39;lib&#39; is unspecified)</code></pre>
+<pre><code>## Running `R CMD build`...</code></pre>
+<pre><code>## Installing package into &#39;/home/runner/work/_temp/Library&#39;
+## (as &#39;lib&#39; is unspecified)</code></pre>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="poisson-lognormal-glmm.html#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(coefplot2)</span></code></pre></div>
 <pre><code>## Loading required package: coda</code></pre>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="poisson-lognormal-glmm.html#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(coefplot2)</span></code></pre></div>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="poisson-lognormal-glmm.html#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Variance terms</span></span>
-<span id="cb96-2"><a href="poisson-lognormal-glmm.html#cb96-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coefplot2</span>(mpl1, <span class="at">ptype =</span> <span class="st">&quot;vcov&quot;</span>, <span class="at">intercept =</span> <span class="cn">TRUE</span>, <span class="at">main =</span> <span class="st">&quot;Random effect variance&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="poisson-lognormal-glmm.html#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Variance terms</span></span>
+<span id="cb103-2"><a href="poisson-lognormal-glmm.html#cb103-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coefplot2</span>(mpl1, <span class="at">ptype =</span> <span class="st">&quot;vcov&quot;</span>, <span class="at">intercept =</span> <span class="cn">TRUE</span>, <span class="at">main =</span> <span class="st">&quot;Random effect variance&quot;</span>)</span></code></pre></div>
 <p><img src="book-en_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
 <p>Here we can see that some random effects exhibit greater variance than others.</p>
 <div class="explanation">
 <p>The random effect variance (σ2i) represents the mean random effect variance of the model. Since this variance reflects the “average” random effects variance for mixed models, it is also appropriate for models with more complex random effects structures, like random slopes or nested random effects.</p>
 </div>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="poisson-lognormal-glmm.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fixed effects</span></span>
-<span id="cb97-2"><a href="poisson-lognormal-glmm.html#cb97-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coefplot2</span>(mpl1, <span class="at">intercept =</span> <span class="cn">TRUE</span>, <span class="at">main =</span> <span class="st">&quot;Fixed effect coefficient&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="poisson-lognormal-glmm.html#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fixed effects</span></span>
+<span id="cb104-2"><a href="poisson-lognormal-glmm.html#cb104-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coefplot2</span>(mpl1, <span class="at">intercept =</span> <span class="cn">TRUE</span>, <span class="at">main =</span> <span class="st">&quot;Fixed effect coefficient&quot;</span>)</span></code></pre></div>
 <p><img src="book-en_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
 <div class="explanation">
 <p>The fixed effects variance (σ2f) is the variance of the matrix-multiplication β∗X (parameter vector by model matrix).</p>
@@ -360,13 +370,13 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <hr />
 <p><strong>Now let’s visualize the random effects</strong></p>
 <p>We can also extract the random effect (or group-level) deviations from the fixed intercept using <code>ranef()</code>. This will tell us how much the intercept is shifted up or down in particular <em>populations</em> or <em>genotypes</em> relative to the fixed intercept. The deviations can then be plotted using <code>dotplot()</code> from the <code>lattice</code> package, which will return a two-faceted plot for each random effect (i.e., popu and gen).</p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="poisson-lognormal-glmm.html#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dotplot code</span></span>
-<span id="cb98-2"><a href="poisson-lognormal-glmm.html#cb98-2" aria-hidden="true" tabindex="-1"></a>pp <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">layout.widths =</span> <span class="fu">list</span>(<span class="at">left.padding =</span> <span class="dv">0</span>, <span class="at">right.padding =</span> <span class="dv">0</span>),</span>
-<span id="cb98-3"><a href="poisson-lognormal-glmm.html#cb98-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">layout.heights =</span> <span class="fu">list</span>(<span class="at">top.padding =</span> <span class="dv">0</span>, <span class="at">bottom.padding =</span> <span class="dv">0</span>))</span>
-<span id="cb98-4"><a href="poisson-lognormal-glmm.html#cb98-4" aria-hidden="true" tabindex="-1"></a>r2 <span class="ot">&lt;-</span> <span class="fu">ranef</span>(mpl1, <span class="at">condVar =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb98-5"><a href="poisson-lognormal-glmm.html#cb98-5" aria-hidden="true" tabindex="-1"></a>d2 <span class="ot">&lt;-</span> <span class="fu">dotplot</span>(r2, <span class="at">par.settings =</span> pp)</span>
-<span id="cb98-6"><a href="poisson-lognormal-glmm.html#cb98-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb98-7"><a href="poisson-lognormal-glmm.html#cb98-7" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(d2<span class="sc">$</span>gen, d2<span class="sc">$</span>popu, <span class="at">nrow =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="poisson-lognormal-glmm.html#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dotplot code</span></span>
+<span id="cb105-2"><a href="poisson-lognormal-glmm.html#cb105-2" aria-hidden="true" tabindex="-1"></a>pp <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">layout.widths =</span> <span class="fu">list</span>(<span class="at">left.padding =</span> <span class="dv">0</span>, <span class="at">right.padding =</span> <span class="dv">0</span>),</span>
+<span id="cb105-3"><a href="poisson-lognormal-glmm.html#cb105-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">layout.heights =</span> <span class="fu">list</span>(<span class="at">top.padding =</span> <span class="dv">0</span>, <span class="at">bottom.padding =</span> <span class="dv">0</span>))</span>
+<span id="cb105-4"><a href="poisson-lognormal-glmm.html#cb105-4" aria-hidden="true" tabindex="-1"></a>r2 <span class="ot">&lt;-</span> <span class="fu">ranef</span>(mpl1, <span class="at">condVar =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb105-5"><a href="poisson-lognormal-glmm.html#cb105-5" aria-hidden="true" tabindex="-1"></a>d2 <span class="ot">&lt;-</span> <span class="fu">dotplot</span>(r2, <span class="at">par.settings =</span> pp)</span>
+<span id="cb105-6"><a href="poisson-lognormal-glmm.html#cb105-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb105-7"><a href="poisson-lognormal-glmm.html#cb105-7" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(d2<span class="sc">$</span>gen, d2<span class="sc">$</span>popu, <span class="at">nrow =</span> <span class="dv">1</span>)</span></code></pre></div>
 <p><img src="book-en_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
 <p>From this plot, we observe differences <strong>among population</strong>, where Spanish populations (SP) have larger values than Swedish (SW) or Dutch (NL) populations.</p>
 <p>We also observe mild differences <strong>among genotypes</strong>, where difference among genotypes seem to be largely driven by genotype 34.</p>
