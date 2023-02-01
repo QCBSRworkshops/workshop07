@@ -61,7 +61,7 @@ Cet atelier nécessite les paquets `R` suivants:
 
 Pour les installer à partir de CRAN, roulez:
 
-```{r, echo = TRUE, eval = TRUE, message=FALSE, warning=FALSE}
+```{r, echo = TRUE, eval = FALSE, message=FALSE, warning=FALSE}
 install.packages("lme4")
 install.packages("MASS")
 install.packages("vcdExtra")

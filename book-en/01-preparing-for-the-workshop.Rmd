@@ -62,7 +62,7 @@ This workshop requires the following `R` packages:
 
 To install them from CRAN, run:
 
-```{r, echo = TRUE, eval = TRUE, message=FALSE, warning=FALSE}
+```{r, echo = TRUE, eval = FALSE, message=FALSE, warning=FALSE}
 install.packages("lme4")
 install.packages("MASS")
 install.packages("vcdExtra")
