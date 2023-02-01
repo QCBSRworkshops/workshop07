@@ -63,16 +63,18 @@ This workshop requires the following `R` packages:
 To install them from CRAN, run:
 
 ```{r, echo = TRUE, eval = TRUE, message=FALSE, warning=FALSE}
-install.packages("lme4")
-install.packages("MASS")
-install.packages("vcdExtra")
-install.packages("bbmle")
-install.packages("MuMIn")
-install.packages("ggplot2")
-install.packages("DescTools")
-install.packages("remotes")
-install.packages("gridExtra")
-install.packages("lattice")
+install.packages(c('lme4',
+                   'MASS',
+                   'vcdExtra', 
+                   'bbmle',
+                   'MuMIn',
+                   'ggplot2',
+                   'DescTools',
+                   'remotes',
+                   'gridExtra',
+                   'lattice'),
+                 repos = "http://cran.us.r-project.org",
+                 quiet = TRUE)
 ```
 
 To load these packages, run:
