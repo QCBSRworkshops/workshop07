@@ -1096,11 +1096,7 @@ Voici une [liste](https://rdrr.io/cran/lme4/man/troubleshooting.html) de problè
 
 * Le critère d'information Akaike (AIC) est une **mesure de qualité du modèle** pouvant être utilisée pour comparer les modèles.
 
-* AICc corrige le biais créé par les faibles tailles d'échantillon.
-
-
----
-# Étape 2. sélectionner le meilleur modèle
+* `AICc` corrige le biais créé par les faibles tailles d'échantillon.
 
 Pour trouver la valeur AICc d'un modèle, utilisez :
 
@@ -1108,7 +1104,6 @@ Pour trouver la valeur AICc d'un modèle, utilisez :
 library(MuMIn)
 MuMIn::AICc(M1)
 ```
-
 
 ---
 # Étape 2. sélectionner le meilleur modèle
@@ -2255,7 +2250,7 @@ plot(aggregate(PLD ~ taxon, FUN = mean, data = inverts)[,2], aggregate(PLD ~ tax
 abline(a = 0, b = 1, lty = 2)
 
 mod.glmer <- glmer.nb(PLD ~ temp + feeding.type + (1|taxon), data = inverts)
-mod.glm <- glm.nb(PLD ~ temp + feeding.type, family = poisson(), data = inverts)
+mod.glm <- glm.nb(PLD ~ temp + feeding.type, data = inverts)
 
 plot(aggregate(PLD ~ taxon, FUN = var, data = inverts)[,2], aggregate(PLD ~ taxon, FUN = mean, data = inverts)[,2])
 abline(a = 0, b = 1, lty = 2 )

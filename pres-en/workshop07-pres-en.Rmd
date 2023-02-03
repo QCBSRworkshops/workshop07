@@ -1,7 +1,7 @@
 ---
 title: "Workshop 7: Linear and generalized linear mixed models (LMM and GLMM)"
 subtitle: "QCBS R Workshop Series"
-author: "Québec Centre for Biodiversity Science"
+author: "Quebec Centre for Biodiversity Science"
 output:
   xaringan::moon_reader:
     includes:
@@ -92,7 +92,7 @@ Note: Communicate to the participants that all the materials for this workshop i
 <p style="font-size:75%">
 
 .center[
-**Contributors au developpement de cet atelier**
+**Contributors to the development of this workshop**
 
 by modifying and improving its content as part of the <br> *Le*arning *a*nd *D*evelopment *A*ward
 ]
@@ -273,6 +273,7 @@ Introduction to the example dataset
 
 **3.** Reproduce the plots 1 to 3 from the script. Observe the plots and try to get a sense of what you see
 
+???
 Note: Should not be super long, they have the script to make the plots. You can almost just give them time to think while you help participants with installing packages. If there is none, you can just skip the time to think, and simply have a group discussion plot by plot.
 
 ---
@@ -2312,7 +2313,7 @@ plot(aggregate(PLD ~ taxon, FUN = mean, data = inverts)[,2], aggregate(PLD ~ tax
 abline(a = 0, b = 1, lty = 2)
 
 mod.glmer <- glmer.nb(PLD ~ temp + feeding.type + (1|taxon), data = inverts)
-mod.glm <- glm.nb(PLD ~ temp + feeding.type, family = poisson(), data = inverts)
+mod.glm <- glm.nb(PLD ~ temp + feeding.type, data = inverts)
 
 plot(aggregate(PLD ~ taxon, FUN = var, data = inverts)[,2], aggregate(PLD ~ taxon, FUN = mean, data = inverts)[,2])
 abline(a = 0, b = 1, lty = 2 )
