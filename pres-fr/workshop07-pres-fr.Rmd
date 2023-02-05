@@ -213,7 +213,7 @@ Nous utiliserons aussi ces jeux de données :
 <br>
 
 .pull-left2[
-Tout au long de cet atelier, il y aura une série de **défis** que vous pouvez reconnaître par ce rubix cube.
+Tout au long de cet atelier, il y aura une série de **défis** que vous pouvez reconnaître par ce cube rubix.
 ]
 
 .pull-right2[
@@ -264,7 +264,7 @@ Pour répondre, nous utiliserons un jeu de données où la longueur corporelle d
 
 **2.** Ouvrez le jeu de données dans `R`
 
-**3.** Reproduisez les graphiques 1 à 3 (dans le script) de la relation entre la position trophique et la taille. Observez les graphiques puis évaluez ce que vous observez.
+**3.** Reproduisez les graphiques 1 à 3 (dans le script) de la relation entre la position trophique et la taille. Observez les graphiques, puis évaluez ce que vous observez.
 
 ???
 Note: Ce défi devrait être assez rapide. Peut-être simplement accorder un peu de temps de réflexion individuel pendant que vous aidez les participants qui ont eu de la difficulté à installer les paquets. Si il y en a aucun, vous pouvez simplement avoir une discussion de groupe un graphique à la fois.
@@ -303,7 +303,7 @@ fig <- theme_bw() + theme(panel.grid.minor = element_blank(),
 plot <- ggplot(aes(Fish_Length, Trophic_Pos), data = fish.data)
 
 # Graphique 1 - Toutes les données
-plot + geom_point() + xlab("Longueur (mm)") + ylab("Position Trophique") + labs(title = "Toutes les données") + fig
+plot + geom_point() + xlab("Longueur (mm)") + ylab("Position trophique") + labs(title = "Toutes les données") + fig
 ```
 
 
@@ -314,7 +314,7 @@ plot + geom_point() + xlab("Longueur (mm)") + ylab("Position Trophique") + labs(
 
 ```{r, echo = FALSE}
 # Graphique 2 - Par espèce
-plot + geom_point() + facet_wrap(~ Fish_Species) + xlab("Longueur (mm)") + ylab("Position Trophique") +
+plot + geom_point() + facet_wrap(~ Fish_Species) + xlab("Longueur (mm)") + ylab("Position trophique") +
    labs(title = "Par espèce") + fig
 ```
 
@@ -326,7 +326,7 @@ plot + geom_point() + facet_wrap(~ Fish_Species) + xlab("Longueur (mm)") + ylab(
 
 ```{r, echo = FALSE}
 # Graphique 3 – Par lac
-plot + geom_point() + facet_wrap(~ Lake) + xlab("Longueur (mm)") + ylab("Position Trophique") +
+plot + geom_point() + facet_wrap(~ Lake) + xlab("Longueur (mm)") + ylab("Position trophique") +
    labs(title = "Par lac") + fig
 ```
 
@@ -356,7 +356,7 @@ plot + geom_point() + facet_wrap(~ Lake) + xlab("Longueur (mm)") + ylab("Positio
 
 * Plusieurs covariables et facteurs
 
-* Échantillons non équilibrés
+* Échantillons/design expérimental non équilibrés
 
 ???
 Note: Utiliser la base de données comme example. Nous avons des données de longueur de poissons et de niveau toophique pour 3 espèces et 6 lacs: cela créer une structure hiérarchique où nous avons un niveau divisant les données par espèces et un autre par lac.
@@ -372,7 +372,7 @@ Note: Utiliser la base de données comme example. Nous avons des données de lon
 
 **Option 1. Séparer**
 
-- Faire une analyse séparée pour chaque espèce et chaque lac
+- Faire une analyse séparée pour chaque espèce dans chaque lac
 
 <br>
 
@@ -391,11 +391,11 @@ Note: Utiliser la base de données comme example. Nous avons des données de lon
 <br>
 
 On pourrait faire une analyse pour chaque espèce :
-* Estimer 6 ordonnées à l'origine et 6 pentes pour chaque espèce (car 6 lacs)
+* Estimer 6 ordonnées à l'origine et 6 pentes pour chaque espèce (i.e. 6 lacs)
 
 * Taille d'échantillon *n* = 10 pour chaque analyse (i.e. 10 poissons/espèce/lac)
 
-* Peu de chances de détecter un effet à cause de la faible taille d’échantillon *n*
+* Peu de chances de détecter un effet en raison de la faible taille d’échantillon *n*
 ]
 
 
@@ -408,9 +408,9 @@ On pourrait faire une analyse pour chaque espèce :
 **Option 2. Regrouper**
 * Très grande taille d'échantillon!
 
-* Et la pseudoreplication? (les poissons d'un même lac et d'une même espèce sont corrélés)
+* Et la pseudoreplication? (les poissons d'un même lac et d'une même espèce pourraient être corrélés)
 
-* Beaucoup de bruit = Une partie pourrait être due aux **effets** de **l'espèce** et du **lac**
+* Il y a beaucoup de bruit dans les données! Une partie pourrait être expliquée par les **effets** de **l'espèce** et du **lac**.
 ]
 
 
@@ -423,9 +423,9 @@ Pour **notre question**, on veut seulement savoir s'il y a un **effet général 
 
 Par contre :
 
-* **Cette relation pourrait varier** par **espèce** à cause de différents taux de croissance et/ou par **lac** à cause de différences dans la disponibilité de nourriture 
+* **Cette relation pourrait varier** par **espèce** à cause de différents processus biologiques n'ayant pas été mesurés (ex: taux de croissance) et/ou par **lac** à cause de variables environnementales non-mesurées (ex: différences dans la disponibilité de nourriture).
 
-* **On doit contrôler** pour ces effets potentiels dans le modèle
+* **On doit contrôler** ces effets potentiels dans le modèle.
 
 --
 
@@ -433,9 +433,9 @@ Par contre :
 
 Les MLMs permettent de **séparer et regrouper** l'analyse. Ils:
 
-1. Prennent en compte la variabilité spécifique à chaque espèce et chaque lac (**séparer**) tout en calculant moins de paramètres
+1. Prennent en compte la variabilité spécifique à chaque espèce et chaque lac (**séparer**) tout en calculant moins de paramètres qu'une régression classique.
 
-2. Utilisent toutes les données disponibles (**regrouper**) tout en contrôlant les différences entre les lacs et les espèces (pseudo-replication)
+2. Utilisent toutes les données disponibles (**regrouper**) tout en contrôlant les différences entre les lacs et les espèces (pseudo-réplication).
 
 
 ---
@@ -463,7 +463,7 @@ On souhaite émettre des conclusions à propos des niveaux du facteur ou de la r
 
 <br>
 
-*Exemple: Nous sommes intéressés par l'effet des coupes à blanc sur la richesse en espèce. La variable coupe est le facteur à deux niveaux: forêt coupée à blanc ou non coupée.*
+*Exemple : Nous sommes intéressés par l'effet d'un traitement (ex: coupes à blanc) sur une variable réponse (ex: richesse spécifique). La variable traitement est le facteur à deux niveaux: forêt coupée à blanc ou non coupée.*
 
 ???
 Note: Mettre l'emphase sur le fait que nous avons échantillonné tous les niveaux d'intérêts du facteurs. Nous ne sommes pas intéressés par les autres niveaux non échantillonnés.
@@ -475,11 +475,13 @@ Note: Mettre l'emphase sur le fait que nous avons échantillonné tous les nivea
 
 * Seulement des **variables qualitatives** = facteur aléatoire
 
+* Les données ne comprennent qu'un échantillon aléatoire de tous les niveaux de facteurs possibles, tous d'intérêt
+
 * Permet de structurer le processus d'erreur
 
 <br>
 
-*Exemple: Nous échantillons des poissons dans 6 de 15 lacs d'une région. La variable lac est le facteur avec 15 niveaux. Bien que nous n'avons qu'échantillonné 6 niveaux, nous voulons pouvoir faire des conclusions sur la variabilité entre tous les lacs de la région.*
+*Exemple : Nous échantillons des poissons dans 6 de 15 lacs d'une région. La variable lac est le facteur avec 15 niveaux. Bien que nous n'avons qu'échantillonné 6 niveaux, nous voulons pouvoir faire des conclusions sur la variabilité entre tous les lacs de la région.*
 
 ???
 Note: Mettre l'emphase sur le fait que nous n'avons pas nécessairement des données pour tous les niveaux d'intérêt du facteur aléatoire. 
@@ -490,7 +492,7 @@ Note: Mettre l'emphase sur le fait que nous n'avons pas nécessairement des donn
 ### Comment fonctionnent les MLMs?
 <br>
 
-**A.** Permet aux ordonnées à l'origine et/ou aux pentes d'être considérées comme propres (c.-à.-d. de varier) à une population donnée (**effet aléatoire**), e.g. par lac et/ou par espèce.
+**A.** Les ordonnées à l'origine et/ou les pentes peuvent être considérées comme propres (c.-à.-d. variant en fonction de) à une population donnée (**effet aléatoire**) (ex: par lac et/ou par espèce).
 
 <br>
 
@@ -504,11 +506,11 @@ Note: Mettre l'emphase sur le fait que nous n'avons pas nécessairement des donn
 .pull-right[![](images/fig_9_w5.png)]
 <br>
 
-* On suppose que les ordonnées à l'origine et/ou les pentes proviennent d'une distribution normale
-* Le modèle estime une ordonnée à l'origine et/ou une pente moyenne ainsi que l'écart type de l'effet aléatoire (distribution normale) 
+* On suppose que les ordonnées à l'origine et les pentes proviennent d'une distribution normale.
+* Le modèle estime une ordonnée à l'origine et une pente moyenne ainsi que l'écart type de l'effet aléatoire (distribution normale). 
 <br><br>
 
-Évite d'estimer une ordonnée à l'origine et une pente par espèce (+2 paramètres par espèce) = **économise des degrés de liberté** (moins de paramètres estimés).
+Évite d'estimer une ordonnée à l'origine et une pente par espèce (+2 paramètres par espèce) = **économise des degrés de liberté** (moins de paramètres à estimer).
 
 ???
 Note: Cela est assez important. Passez du temps pour bien expliquer the l'on assume the l'ordonnée et/ou la pente de chaque niveau proviennent d'une même distribution (ils ne sont pas totalement indépendent), ce qui permet de réduire le nombre de paramètres à estimer par le modèle.
@@ -525,6 +527,10 @@ On a seulement besoin d'estimer la moyenne (ordonnée à l'origine générale) e
 
 <br><br>
 
+.comment[Notez que plus votre facteur a de niveaux, plus la moyenne et l'écart-type de la distribution normale seront estimés avec précision. Trois niveaux est un peu faible, mais c'est certainement plus facile à visualiser !]
+
+???
+J'ai enlevé ceci pour rajouter la note présente dans la présentation en anglais.
 Au lieu d'estimer une ordonnée à l'origine par espèce (3 paramètres), on en estime une générale ainsi qu'un effet aléatoire (2 paramètres). Avec $n$ espèce, dans le premier cas on estime $n-1$ paramètres alors qu'on reste à 2 paramètres dans le second cas!
 
 ---
@@ -536,7 +542,7 @@ Même principe pour les lacs.
 
 Estime 2 paramètres (moyenne et écart-type) au lieu de 6 ordonnées à l'origine. 
 
-Cela **économise des degrés de liberté** (moins d’estimations de paramètres sont nécessaires). 
+Cela **économise des degrés de liberté** (moins de paramètres à estimer). 
 
 
 ---
@@ -554,9 +560,9 @@ Comme pour les ordonnées à l'origine, seuls la moyenne et l’écart-type des 
 <br>
 **Qu'arrive-t-il si j'ai peu d'échantillons (faible $n$) pour un niveau des facteurs?**
 
-Si une espèce ou un lac est peu représenté dans les données, le modèle va accorder plus d'importance au modèle groupé pour estimer l'ordonnée à l'origine et la pente de cette espèce ou de ce lac (Processus de « shrinkage »).
+Si une espèce ou un lac est peu représenté dans les données, le modèle va accorder plus d'importance au modèle groupé pour estimer l'ordonnée à l'origine et la pente de cette espèce ou de ce lac (processus de « shrinkage »).
 
-Idéalement, avoir un minimum de $n$=3 par niveau d'un facteur.
+Idéalement, il faudrait avoir un minimum de $n$=3 par niveau d'un facteur.
 
 .center[![:scale 60%](images/fig_12_w5.png) ]
 
@@ -566,7 +572,7 @@ Idéalement, avoir un minimum de $n$=3 par niveau d'un facteur.
 <br>
 **Comment évaluer l'impact d'un effet aléatoire sur le modèle?**
 
-* Les intervalles de confiance des ordonnées à l'origine et des pentes **générales** sont ajustés pour tenir compte de la pseudo-replication basée sur le **coefficient de corrélation intra-classe (CCI)**
+* Les intervalles de confiance des ordonnées à l'origine et des pentes **générales** sont ajustés pour tenir compte de la pseudo-réplication basée sur le **coefficient de corrélation intra-classe (CCI)**.
 
 * Le CCI permet de savoir la proportion de variation dans la variable réponse qui est expliquée par l'effet aléatoire, tel que :
 
@@ -589,7 +595,7 @@ Note: Dire que différentes notations sont possibles selon le livre/article et c
 
 ![:scale 90%](images/CCIplot2_qcbs.png)
 
-Le % de variance (CCI) est élevé car **les espèces diffèrent fortement** dans leur position trophique moyenne.
+Le % de variance (CCI) est élevé, car **les espèces diffèrent fortement** dans leur position trophique moyenne.
 
 Les intervalles de confiance pour la pente et l'ordonnée à l'origine générale sont grands.
 ]
@@ -599,7 +605,7 @@ Les intervalles de confiance pour la pente et l'ordonnée à l'origine général
 
 ![:scale 85%](images/CCIplot_qcbs.png)
 
-Le % de variance (CCI) est faible car **les espèces diffèrent peu** dans leur position trophique moyenne.
+Le % de variance (CCI) est faible, car **les espèces diffèrent peu** dans leur position trophique moyenne.
 
 Les intervalles de confiance pour la pente et l'ordonnée à l'origine générale sont petits.
 ]
@@ -638,11 +644,11 @@ Les points provenant d'un même lac sont traités indépendamment car **peu corr
 
 **Comment le CCI et l'intervalle de confiance seront-ils affectés dans ces deux scénarios?**
 
-**Q1.** Les positions trophiques des poissons ne varient pas entre les lacs
+**Q1.** Les positions trophiques des poissons ne varient pas entre les lacs.
 
 <br>
 
-**Q2.** Les positions trophiques des poissons sont similaires dans les lacs, mais différentes entre les lacs
+**Q2.** Les positions trophiques des poissons sont similaires au sein d'un même lac, mais différentes entre les lacs.
 
 ???
 
@@ -653,7 +659,7 @@ Note: Pour ce défi, vous pouvez créer un sondage Zoom. Cela ne devrait pas êt
 
 <br>
 
-**Q1.** Les positions trophiques des poissons ne varient pas entre les lacs
+**Q1.** Les positions trophiques des poissons ne varient pas entre les lacs.
 
 .alert[R1. CCI faible, petits intervalles de confiance]
 
@@ -661,7 +667,7 @@ Note: Pour ce défi, vous pouvez créer un sondage Zoom. Cela ne devrait pas êt
 
 --
 
-**Q2.** Les positions trophiques des poissons sont similaires dans les lacs, mais différentes entre les lacs
+**Q2.** Les positions trophiques des poissons sont similaires au sein d'un même lac, mais différentes entre les lacs.
 
 .alert[R2. CCI élevé, grands intervalles de confiance]
 <br><br><br><br><br>
@@ -702,9 +708,9 @@ Note: Répéter que le CCI mesure le ratio de la variance "expliquée" par le fa
 
 **Modèle basé sur connaissance *a priori*:**
 
-* Nous voulons déterminer si la position trophique peut être prédite par la longueur corporelle, tout en prenant en compte la variation entre les espèces et les lacs
+* Nous voulons déterminer si la position trophique peut être prédite par la longueur corporelle, tout en prenant en compte la variation entre les espèces et les lacs.
 
-* Donc nous voulons un modèle qui ressemble à ceci:
+* Nous voulons donc un modèle qui ressemble à ceci :
 
 $$PT_{ijk} \sim Longueur_i + Lac_j + Espèce_k + \varepsilon_{ijk}$$
 
@@ -746,7 +752,7 @@ Note: Expliquer ce qu'est un jeu de données équilibré vs non équilibrés (c-
 ---
 # Étape 1. exploration des données
 
-**Regardez la distribution des variables continues**
+**Regardez la distribution des variables continues :**
 
 ``` {r, fig.width = 10, fig.height = 5, eval = FALSE,}
 hist(fish.data$Fish_Length, xlab = "Longueur (mm)", main = "")
@@ -769,7 +775,7 @@ Des déviations majeures pourraient causer des problèmes d'hétéroscédasticit
 
 Le problème avec les prédicteurs colinéaires est simplement qu'ils expliquent la même chose, alors leur effet sur la variable réponse sera confondu dans le modèle.
 
-Dans cet exemple, il n’y a pas de risque de colinéarité avec seulement une variable continue. Si vous aviez une autre variable continue (`Var2`), une façon simple de vérifier la colinéarité serait:
+Dans cet exemple, il n’y a pas de risque de colinéarité, car il y a seulement une variable continue. Si vous aviez une autre variable continue (`Var2`), une façon simple de vérifier la colinéarité serait :
 
 ```{r, eval = FALSE}
 plot(data)
@@ -817,7 +823,7 @@ $$z = \frac{x-moyenne(x)}{écart.type(x)}$$
 
 **Considérez l'échelle de vos données**
 
-Parce que nos données ont des échelles très différentes, on applique la **correction Z**
+Étant donné que nos données ont des échelles très différentes, on applique la **correction Z**.
 
 ```{r}
 # Longueur corrigée, "à la main"
@@ -919,7 +925,7 @@ abline(0, 0, lty = 2)
 
 $$PT_{ijk} \sim Longueur_i + Lac_j + Espèce_k + \varepsilon_{ijk}$$
 
-**... En code R**
+**... en code R**
 
 ```{r, include = FALSE}
 library(lme4)
@@ -934,13 +940,13 @@ lmer(Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species),
 --
 
 * `lmer` ![:faic](arrow-right) fonction "linear mixed model" du package `lme4`
-* `(1 | Lake)` ![:faic](arrow-right) indique que les intercepts peuvent varier entre les lacs
+* `(1 | Lake)` ![:faic](arrow-right) indique que les ordonnées à l'origine peuvent varier entre les lacs
 * `REML = TRUE` ![:faic](arrow-right) méthode d'estimation
 
 ---
 # Étape 2. coder le modèle
 
-**Comment faire si on souhaite que la pente puisse varier?**
+**Comment faire si on souhaite que les pentes puissent varier?**
 
 .center[
 ![](images/fig_22_w5.png)
@@ -951,12 +957,12 @@ lmer(Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species),
 
 **Différentes structures pour le modèle :**
 
-- `(1 | Lake)` effet aléatoire par lac à l'intercept
-- `(1 + Z_Length | Lake)` effet aléatoire par lac à l'intercept et la pente en réponse à la longueur corporelle (NB: (`Z_Length | Lake)` donne le même résultat)
+- `(1 | Lake)` effet aléatoire par lac à l'ordonnée à l'origine
+- `(1 + Z_Length | Lake)` effet aléatoire par lac à l'ordonnée à l'origine et la pente en réponse à la longueur corporelle (NB: `(Z_Length | Lake)` donne le même résultat)
 - `(-1 + Z_Length | Lake)` pour avoir uniquement l'effet aléatoire sur la pente
 - `(1 | Lake) + (1 | Species)`  pour des effets aléatoires croisés (ex: l'effet de l'espèce i ne varie pas entre les lacs)
 - `(1 | Lake:Fish_Species)` pour utiliser l'interaction entre 2 facteurs groupant (ex: l'effet de l'espèce i varie d'un lac à l'autre)
-- si votre jeu de données inclus des effets nichés, vous pouvez utiliser `/` pour les déclarer, e.g. `(1 | facteur1 / facteur2)` si `facteur2` est niché dans `facteur1` ([voir ![:faic](stack-exchange)](https://stats.stackexchange.com/questions/228800/crossed-vs-nested-random-effects-how-do-they-differ-and-how-are-they-specified))
+- Si votre jeu de données inclus des effets nichés, vous pouvez utiliser `/` pour les déclarer, e.g. `(1 | facteur1 / facteur2)` si `facteur2` est niché dans `facteur1` ([voir ![:faic](stack-exchange)](https://stats.stackexchange.com/questions/228800/crossed-vs-nested-random-effects-how-do-they-differ-and-how-are-they-specified)).
 
 ???
 Note: S'assurer de bien faire la distinction entre effets croisés (sans interaction), avec interaction et nichés.
@@ -966,9 +972,10 @@ Note: S'assurer de bien faire la distinction entre effets croisés (sans interac
 
 REML (*Restricted Maximum Likelihood*) est la méthode par défaut dans la fonction `lmer` (voir `?lmer`).
 
-La méthode de maximum de vraisemblance (ML, pour *Maximum Likelihood*) sous-estime les variances du modèle par un facteur $(n-k) / n$, ou $k$ est le nombre d'effets fixes. 
+La méthode de maximum de vraisemblance (ML, pour *Maximum Likelihood*) sous-estime les variances du modèle par un facteur $(n-k) / n$, où $k$ est le nombre d'effets fixes. 
 
 La méthode REML corrige ce biais.
+
 
 Consultez cet [article](https://towardsdatascience.com/maximum-likelihood-ml-vs-reml-78cf79bef2cf) pour plus d'information sur la différence entre ML et REML.
 
@@ -994,7 +1001,7 @@ Note: Cela peut sembler complexe, mais les deux prochains défis devraient aider
 ---
 # Défi 4 ![:cube]()
 
-Réécrivez le code suivant de façon à ce que les **pentes** de la relation position trophique en fonction de longueur corporelle **varient par lac et par espèce**:
+Réécrivez le code suivant de façon à ce que les **pentes** de la relation position trophique en fonction de longueur corporelle **varient par lac et par espèce** :
 
 ```{r}
 lmer(Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species),
@@ -1020,14 +1027,15 @@ lmer(Z_TP ~ Z_Length + (1 + Z_Length | Lake) + (1 + Z_Length | Fish_Species),
 ---
 # Défi 5 ![:cube]()
 
-Faites une liste de 7 modèles alternatifs qui pourraient être comparés à celui-ci:
+Faites une liste de 7 modèles alternatifs qui pourraient être comparés à celui-ci :
 
 ```{r, eval = FALSE}
 lmer(Z_TP ~ Z_Length + (1 | Lake) + (1 | Fish_Species),
      data = fish.data, REML = TRUE)
 ```
 
-.comment[Note : si nous avions différents effets fixes entre les modèles ou un modèle sans effets aléatoires, nous aurions eu besoin d'indiquer `REML = FALSE` pour les comparer avec une méthode de vraisemblance comme l'AIC.]
+
+.comment[Note : Si nous avions différents effets fixes entre les modèles ou un modèle sans effets aléatoires, nous aurions eu besoin d'indiquer `REML = FALSE` pour les comparer avec une méthode de vraisemblance comme l'AIC.]
 
 ???
 
@@ -1078,13 +1086,13 @@ M8 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake),
 ---
 # Solution ![:cube]()
 
-Lorsqu'on ajuste des MLM avec `lmer()`, il est possible de faire face à certaines erreurs ou avertissements comme: 
+Lorsqu'on ajuste des MLM avec `lmer()`, il est possible de faire face à certaines erreurs ou avertissements comme : 
 
 * `boundary (singular) fit: see ?isSingular`, voir [cette discussion ![:faic](stack-exchange)](https://stats.stackexchange.com/questions/378939/dealing-with-singular-fit-in-mixed-models)
 
 * `Model failed to converge with max|grad| ...`, voir [cette discussion ![:faic](stack-exchange)](https://stats.stackexchange.com/questions/242109/model-failed-to-converge-warning-in-lmer)
 
-Voici une [liste](https://rdrr.io/cran/lme4/man/troubleshooting.html) de problèmes possibles et comment les résoudre. 
+Voici une [liste](https://rdrr.io/cran/lme4/man/troubleshooting.html) de problèmes possibles et la façon de les résoudre. 
 
 
 ---
@@ -1164,7 +1172,7 @@ M8 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake),
            data = fish.data, REML = TRUE)
 ```
 
-L'intercept et l'effet de la longueur sur la position trophique peut varier selon l'espèce de poissons, mais seulement l'intercept peut varier par lac.
+Les ordonnées à l'origine et les pentes de l'effet de la longueur sur la position trophique peuvent varier selon l'espèce de poissons, mais seulement des ordonnées à l'origine peuvent varier par lac.
 
 .pull-left[![](images/fig_9_w5.png)]
 .pull-right[![](images/fig_8_w5.png)]
@@ -1173,7 +1181,7 @@ L'intercept et l'effet de la longueur sur la position trophique peut varier selo
 ---
 # Étape 2. sélectionner le meilleur modèle
 
-Une fois que le meilleur modèle est sélectionné, il faut remettre la méthode d'estimation à `REML = TRUE`
+Une fois que le meilleur modèle est sélectionné, il faut remettre la méthode d'estimation à `REML = TRUE`.
 
 ```{r}
 M8 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake),
@@ -1190,7 +1198,7 @@ Prenez 2 minutes avec votre voisin pour étudier la structure du modèle M2.
 
 Comment diffère-t-il de M8 d'un point de vue écologique?
 
-Pourquoi n'est il pas surprenant que sa valeur d'AICc était la deuxième meilleure?
+Pourquoi n'est-il pas surprenant que sa valeur d'AICc était la deuxième meilleure?
 
 ```{r, eval = FALSE}
 M8 <- lmer(Z_TP ~ Z_Length + (1 + Z_Length | Fish_Species) + (1 | Lake),
@@ -1248,18 +1256,18 @@ exclude: true
 <br>
 
 **3.1 Vérifier l'homogénéité de la variance**
-  - Faire un graphique des valeurs prédites en fonction des valeurs résiduelles
+  - Graphique des valeurs prédites en fonction des valeurs résiduelles
 
 <br>
 
 **3.2 Vérifier l'indépendance des résidus**
   - Graphique des résidus vs chaque covariable du modèle
-  - Graphique des résidus vs chaque covariable non incluse du modèle
+  - Graphique des résidus vs chaque covariable non incluse dans le modèle
 
 <br>
 
 **3.3 Vérifier la normalité**
-  - Histogramme
+  - Histogramme des résidus
 
 
 ---
@@ -1331,7 +1339,7 @@ abline(h = 0, lty = 2)
 
 Étendue homogène des résidus autour de 0 ![:faic](arrow-right) pas de patron des résidus en fonction de la variable, la supposition est respectée!
 
-.comment[Note : les regroupements de données sont dus à la structure des données, où des poissons de seulement 5 classes de taille  (grand, petit, et trois groupes entre les deux) étaient capturés.]
+.comment[Note : Les regroupements de données sont causés par la structure des données, où des poissons de seulement 5 classes de taille  (grand, petit, et trois groupes entre les deux) étaient capturés.]
 
 
 ---
@@ -1339,11 +1347,11 @@ abline(h = 0, lty = 2)
 
 **3.2 Vérifier l'indépendance des résidus avec chaque covariable**
 
-- Graphique des résidus vs chaque covariable non incluse du modèle
+- Graphique des résidus vs chaque covariable non incluse dans le modèle
 
   - Si vous observez des patrons dans ce graphique, vous saurez qu'il y a de la variation dans votre jeu de données qui pourrait être expliquée par ces covariables. Vous devriez considérer d'inclure ces variables dans votre modèle.
 
-  - Puisque dans notre cas, nous avons inclus toutes les variables mesurées dans notre modèle, nous ne pouvons pas faire cette étape.
+  - Étant donnée que nous avons inclus toutes les variables mesurées dans notre modèle, nous ne pouvons pas faire cette étape.
 
 
 ---
@@ -1351,7 +1359,7 @@ abline(h = 0, lty = 2)
 
 **3.3 Vérifier la normalité des résidus**
 
-* Des résidus suivant une distribution normale indiquent que le modèle n'est pas biaisé
+* Des résidus suivant une distribution normale indiquent que le modèle n'est pas biaisé.
 
 ```{r, fig.height=5, fig.width=5}
 hist(resid(M8))
