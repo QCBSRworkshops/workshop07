@@ -410,7 +410,7 @@ On pourrait faire une analyse pour chaque espèce :
 
 * Et la pseudoreplication? (les poissons d'un même lac et d'une même espèce pourraient être corrélés)
 
-* Il y a beaucoup de bruit dans les données! Une partie pourrait être expliquée par les **effets** de **l'espèce** et du **lac**.
+* Il y a beaucoup de bruit dans les données! Une partie pourrait être expliquée par les **différences** entre **les espèces** et les **lacs**.
 ]
 
 

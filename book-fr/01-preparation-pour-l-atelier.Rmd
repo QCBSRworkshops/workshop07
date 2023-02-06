@@ -37,7 +37,7 @@ Dans cet atelier, vous apprendrez à déterminer si vous devez utiliser un modè
 
 ```
 
-Pour vous préparer pour cet atelier, téléchargez et installez les dernières versions de RStudio et de `R`. Télécharger également les données et quelques fonctions additionnelles que nous utiliserons au cours de cet atelier:
+Pour vous préparer pour cet atelier, téléchargez et installez les dernières versions de RStudio et de `R`. Téléchargez également les données et quelques fonctions additionnelles que nous utiliserons au cours de cet atelier:
 
 -    [Script R ](https://qcbsrworkshops.github.io/workshop07/book-fr/workshop07-script-fr.R)
 -    [Données: Poissons](https://raw.githubusercontent.com/QCBSRworkshops/workshop07/main/book-fr/data/qcbs_w7_data.csv)
@@ -76,7 +76,7 @@ install.packages(c('lme4',
                  quiet = TRUE)
 ```
 
-Ensuite, chargez ces paquets:
+Ensuite, chargez ces packages:
 
 ```{r, echo = TRUE, eval = TRUE, message=FALSE, warning=FALSE}
 library(lme4)

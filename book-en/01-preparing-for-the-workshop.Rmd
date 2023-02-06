@@ -37,7 +37,7 @@ In this workshop, you will learn when it is important to use a **mixed effects m
 
 ```
 
-To prepare for this workshop, download and install the earliest RStudio and R versions. You should also download the data and some additional functions that we will use during this workshop:
+To prepare for this workshop, download and install the earliest RStudio and `R` versions. You should also download the data and some additional functions that we will use during this workshop:
 
 -    [R Script](https://qcbsrworkshops.github.io/workshop07/book-en/workshop07-script-en.R)
 -    [Fish data](https://raw.githubusercontent.com/QCBSRworkshops/workshop07/main/book-en/data/qcbs_w7_data.csv)
@@ -90,4 +90,10 @@ library(DescTools)
 library(remotes)
 library(gridExtra)
 library(lattice)
+```
+
+You can also load the specific functions of this workshop by using:
+
+```{r, echo = TRUE, eval = F, message=FALSE, warning=FALSE}
+source("data/glmm_funs.R")
 ```
