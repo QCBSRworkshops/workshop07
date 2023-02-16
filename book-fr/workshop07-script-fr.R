@@ -44,12 +44,13 @@ source("data/glmm_funs.R")
 
 ##Section: 02-introduction-fr.R 
 
+library(ggplot2)
 # Chargez le jeu de données
 fish.data <- read.csv('data/qcbs_w7_data.csv', stringsAsFactors = TRUE) 
 # Cette ligne variera en fonction de l'endroit où vos données sont enregistrées. 
-#Vérifiez votre répertoire de travail avec getwd(), et changez-le avec setwd() au besoin.
+# Vérifiez votre répertoire de travail avec getwd(), et changez-le avec setwd() au besoin.
 
-# Format 'custom' pour simplifier tous les figures ggplot produites par la suite
+# Format 'custom' pour simplifier toutes les figures ggplot produites par la suite
 fig <- theme_bw() + 
   theme(panel.grid.minor=element_blank(), 
         panel.grid.major=element_blank(), 

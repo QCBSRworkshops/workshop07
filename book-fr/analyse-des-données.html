@@ -263,7 +263,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>Nous savons que les données écologiques et biologiques sont souvent complexes. De nombreux ensembles de données comprennent:</p>
 <ul>
 <li>Une structure hiérarchique des données</li>
-<li>Nombreuses covariables et facteurs de regroupement</li>
+<li>Plusieurs covariables et facteurs de regroupement</li>
 <li>Une étude ou un plan expérimental non équilibré</li>
 </ul>
 <p>Alors, comment pouvons-nous analyser nos données?</p>
@@ -284,11 +284,11 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div id="option-2-une-analyse-groupée" class="section level2 hasAnchor" number="5.2">
 <h2><span class="header-section-number">5.2</span> Option 2: Une analyse groupée<a href="analyse-des-données.html#option-2-une-analyse-groupée" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Une autre façon d’analyser ces données est de faire une seule analyse en ignorant les variables espèce et lac.</p>
-<p>Voici à quoi cela ressemblerait pour <em>toutes</em> nos données dans <em>tous</em> les lacs à la fois</p>
+<p>Voici à quoi cela ressemblerait pour <em>toutes</em> nos données dans <em>tous</em> les lacs à la fois:</p>
 <p><img src="images/fig_6_w5.png" /></p>
 <p>Remarquez que vous avez maintenant une taille d’échantillon énorme et beaucoup moins de paramètres à estimer!</p>
 <p>Mais qu’en est-il de la pseudo-réplication? Les poissons d’un même lac et d’une même espèce peuvent être corrélés.</p>
-<p>De plus, regardez tout ce bruit dans les données! Une partie pourrait être due à des <strong>différences</strong> entre les <strong>espèces</strong> et les <strong>lacs</strong>.</p>
+<p>De plus, regardez tout ce bruit dans les données! Une partie pourrait être causée par des <strong>différences</strong> entre les <strong>espèces</strong> et les <strong>lacs</strong>.</p>
 </div>
 <div id="option-3-est-ce-quon-a-une-autre-option" class="section level2 hasAnchor" number="5.3">
 <h2><span class="header-section-number">5.3</span> Option 3: Est-ce qu’on a une autre option?<a href="analyse-des-données.html#option-3-est-ce-quon-a-une-autre-option" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -296,14 +296,14 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>Cependant, cette relation peut différer légèrement entre les <strong>espèces</strong> en raison de processus biologiques non mesurés (par exemple, le taux de croissance) ou entre les <strong>lacs</strong> en raison de variables environnementales non mesurées. Mais cette variation ne nous intéresse pas, nous devons donc trouver un moyen de <strong>contrôler</strong> ces effets potentiels tout en maximisant l’utilisation de nos données. C’est pourquoi la séparation et le regroupement seuls ne sont pas des options satisfaisantes.</p>
 <p>Cela nous amène aux modèles mixtes! Les MLMs sont un compromis entre séparer et regrouper. Ils:</p>
 <ul>
-<li>Prennent en compte la variabilité spécifique à chaque espèce et chaque lac (<strong>séparer</strong>) tout en calculant moins de paramètres qu’une régression classique.</li>
-<li>Utilisent toutes les données disponibles (<strong>regrouper</strong>) tout en contrôlant les différences entre les lacs et les espèces (pseudo-replication).</li>
+<li>prennent en compte la variabilité spécifique à chaque espèce et chaque lac (<strong>séparer</strong>) tout en calculant moins de paramètres qu’une régression classique;</li>
+<li>utilisent toutes les données disponibles (<strong>regrouper</strong>) tout en contrôlant les différences entre les lacs et les espèces (pseudo-réplication).</li>
 </ul>
 <p>Ce faisant, ils:</p>
 <ul>
 <li>permettent d’utiliser toutes les données disponibles au lieu d’utiliser les moyennes d’un échantillon non indépendant;</li>
-<li>tiennent compte de la structure des données (par exemple, des quadrats imbriqués dans des sites imbriqués dans des forêts) ;</li>
-<li>permettent aux relations de varier en fonction de différents facteurs de regroupement (également appelés effets aléatoires) ;</li>
+<li>tiennent compte de la structure des données (par exemple, des quadrats imbriqués dans des sites imbriqués dans des forêts);</li>
+<li>permettent aux relations de varier en fonction de différents facteurs de regroupement (également appelés effets aléatoires);</li>
 <li>nécessitent moins d’estimations de paramètres que la régression classique, ce qui vous fait gagner des degrés de liberté.</li>
 </ul>
 <p>Mais comment font-ils tout cela? Entrons dans le vif du sujet!</p>

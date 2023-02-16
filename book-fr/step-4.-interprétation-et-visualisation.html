@@ -275,20 +275,20 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## Scaled residuals: 
 ##      Min       1Q   Median       3Q      Max 
-## -2.77185 -0.60165  0.05589  0.64239  2.27777 
+## -2.77187 -0.60166  0.05589  0.64239  2.27776 
 ## 
 ## Random effects:
 ##  Groups       Name        Variance Std.Dev. Corr
-##  Lake         (Intercept) 0.20505  0.4528       
-##  Fish_Species (Intercept) 0.86676  0.9310       
-##               Z_Length    0.02465  0.1570   1.00
+##  Lake         (Intercept) 0.20504  0.4528       
+##  Fish_Species (Intercept) 0.86715  0.9312       
+##               Z_Length    0.02466  0.1570   1.00
 ##  Residual                 0.05039  0.2245       
 ## Number of obs: 180, groups:  Lake, 6; Fish_Species, 3
 ## 
 ## Fixed effects:
 ##               Estimate Std. Error t value
-## (Intercept) -0.0009059  0.5686591  -0.002
-## Z_Length     0.4222698  0.0921927   4.580
+## (Intercept) -0.0009059  0.5687733  -0.002
+## Z_Length     0.4222697  0.0922117   4.579
 ## 
 ## Correlation of Fixed Effects:
 ##          (Intr)
@@ -378,8 +378,8 @@ différente de zéro au seuil <span class="math inline">\(\alpha\)</span> = 0.05
 <span id="cb61-12"><a href="step-4.-interprétation-et-visualisation.html#cb61-12" aria-hidden="true" tabindex="-1"></a><span class="co"># résumé du modèle.</span></span>
 <span id="cb61-13"><a href="step-4.-interprétation-et-visualisation.html#cb61-13" aria-hidden="true" tabindex="-1"></a>summ_M8<span class="sc">$</span>coefficients</span></code></pre></div>
 <pre><code>##                  Estimate Std. Error      t value
-## (Intercept) -0.0009059101 0.56865914 -0.001593064
-## Z_Length     0.4222697624 0.09219268  4.580296200</code></pre>
+## (Intercept) -0.0009058974 0.56877327 -0.001592722
+## Z_Length     0.4222697238 0.09221166  4.579352788</code></pre>
 <div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="step-4.-interprétation-et-visualisation.html#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Intercept = Intercept = 9.0589745 × 10^4 Slope =</span></span>
 <span id="cb63-2"><a href="step-4.-interprétation-et-visualisation.html#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 0.4222697</span></span>
 <span id="cb63-3"><a href="step-4.-interprétation-et-visualisation.html#cb63-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -389,18 +389,18 @@ différente de zéro au seuil <span class="math inline">\(\alpha\)</span> = 0.05
 <span id="cb63-7"><a href="step-4.-interprétation-et-visualisation.html#cb63-7" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(M8)</span></code></pre></div>
 <pre><code>## $Lake
 ##     (Intercept)  Z_Length
-## L1 -0.085984110 0.4222698
-## L2  0.002205189 0.4222698
-## L3 -0.301816663 0.4222698
-## L4 -0.574040006 0.4222698
-## L5  0.218650190 0.4222698
-## L6  0.735549939 0.4222698
+## L1 -0.085984071 0.4222697
+## L2  0.002205209 0.4222697
+## L3 -0.301816557 0.4222697
+## L4 -0.574039728 0.4222697
+## L5  0.218650140 0.4222697
+## L6  0.735549622 0.4222697
 ## 
 ## $Fish_Species
 ##    (Intercept)  Z_Length
-## S1  -1.0752976 0.2410721
-## S2   0.5597866 0.5168313
-## S3   0.5127933 0.5089059
+## S1  -1.0752985 0.2410746
+## S2   0.5597871 0.5168300
+## S3   0.5127938 0.5089046
 ## 
 ## attr(,&quot;class&quot;)
 ## [1] &quot;coef.mer&quot;</code></pre>

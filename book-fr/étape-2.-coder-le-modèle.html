@@ -277,7 +277,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## Number of obs: 180, groups:  Lake, 6; Fish_Species, 3
 ## Fixed Effects:
 ## (Intercept)     Z_Length  
-##   6.858e-14    4.198e-01</code></pre>
+##   9.752e-14    4.198e-01</code></pre>
 <p>Où:</p>
 <ul>
 <li><code>lmer()</code> est la fonction “linear mixed model” du package <code>lme4</code></li>
@@ -332,7 +332,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## Number of obs: 180, groups:  Lake, 6; Fish_Species, 3
 ## Fixed Effects:
 ## (Intercept)     Z_Length  
-##   6.858e-14    4.198e-01</code></pre>
+##   9.752e-14    4.198e-01</code></pre>
 <hr />
 <div id="défi-4-solution" class="section level4 unnumbered hasAnchor">
 <h4><strong>Défi 4 Solution:</strong><a href="étape-2.-coder-le-modèle.html#défi-4-solution" class="anchor-section" aria-label="Anchor link to header"></a></h4>
@@ -347,10 +347,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## REML criterion at convergence: 20.5786
 ## Random effects:
 ##  Groups       Name        Std.Dev. Corr 
-##  Lake         (Intercept) 0.45280       
-##               Z_Length    0.02379  -0.82
-##  Fish_Species (Intercept) 0.93097       
-##               Z_Length    0.15727  1.00 
+##  Lake         (Intercept) 0.45279       
+##               Z_Length    0.02378  -0.82
+##  Fish_Species (Intercept) 0.93103       
+##               Z_Length    0.15728  1.00 
 ##  Residual                 0.22341       
 ## Number of obs: 180, groups:  Lake, 6; Fish_Species, 3
 ## Fixed Effects:
@@ -380,7 +380,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## Number of obs: 180, groups:  Lake, 6; Fish_Species, 3
 ## Fixed Effects:
 ## (Intercept)     Z_Length  
-##   6.858e-14    4.198e-01</code></pre>
+##   9.752e-14    4.198e-01</code></pre>
 <p><em>Notez: Si nous avions différents effets fixes entre les modèles ou un modèle sans effects aléatoires, nous aurions dû indiquer <code>REML = FALSE</code> pour les comparer avec une méthode de vraisemblance comme l’AIC.</em></p>
 <hr />
 <div id="défi-5-solution" class="section level4 unnumbered hasAnchor">
@@ -463,9 +463,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb39-11"><a href="étape-2.-coder-le-modèle.html#cb39-11" aria-hidden="true" tabindex="-1"></a>(AIC.table <span class="ot">&lt;-</span> AIC.table[, <span class="fu">c</span>(<span class="st">&quot;df&quot;</span>, <span class="st">&quot;logLik&quot;</span>, <span class="st">&quot;AICc&quot;</span>, <span class="st">&quot;delta&quot;</span>)])</span></code></pre></div>
 <pre><code>##    df      logLik      AICc      delta
 ## M8  7   -8.597929  31.84702   0.000000
-## M2  9   -8.216010  35.49084   3.643823
+## M2  9   -8.216019  35.49086   3.643839
 ## M1  5  -33.480080  77.30499  45.457965
-## M7  7  -33.186374  81.02391  49.176889
+## M7  7  -33.186374  81.02391  49.176890
 ## M5  6 -128.310995 269.10754 237.260517
 ## M3  4 -134.532965 277.29450 245.447480
 ## M4  4 -224.715763 457.66010 425.813076

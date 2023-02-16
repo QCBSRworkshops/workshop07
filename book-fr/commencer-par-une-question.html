@@ -263,42 +263,43 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>Avant de nous plonger dans le vif du sujet, commençons par se familiariser avec le jeu de données que nous utiliserons à titre d’exemple pour proposer une question de recherche.</p>
 <p>Le <a href="https://raw.githubusercontent.com/QCBSRworkshops/workshop07/main/book-fr/data/qcbs_w7_data.csv">jeu de données</a> que nous utiliserons porte sur les positions trophiques des poissons. Dans ce jeu de données, des données ont été collectées pour <strong>3</strong> espèces de poissons différentes (S1-3) avec <strong>10</strong> individus échantillonnés par espèce dans <strong>6</strong> lacs différents (L1-6). Les individus de chaque espèce ont été mesurés et présentent des variations dans leur longueur corporelle et leur position trophique.</p>
 <p>Voici une représentation visuelle pour vous aider à comprendre tout cela!</p>
-<p><em>Notez: seulement trois individus sont montrés par espèce, mais en réalité il y a 10 individus par espèce.</em></p>
+<p><em>Note: Seulement trois individus sont montrés par espèce, mais en réalité il y a 10 individus par espèce.</em></p>
 <p><img src="images/fig_1_qcbs_wiki.png" /></p>
-<p>Une simple question à laquelle vous pourriez répondre avec ce jeu de données est <strong>est-ce que la position trophique des poissons augmente avec leur taille?</strong> Au cours de l’atelier, on tentera de répondre à cette question.</p>
+<p>Une question toute simple à laquelle vous pourriez répondre avec ce jeu de données est: <strong>est-ce que la position trophique des poissons augmente avec leur taille?</strong> Au cours de l’atelier, on tentera de répondre à cette question.</p>
 <div id="défi-1" class="section level2 hasAnchor" number="4.1">
 <h2><span class="header-section-number">4.1</span> Défi 1<a href="commencer-par-une-question.html#défi-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Pour notre premier défi, nous allons commencer à examiner notre jeu de données plus en profondeur. Reproduisez les graphiques 1-3 en utilisant le script ci-dessous et le jeu de données de poissons.</p>
-<p>Observez les graphiques puis evaluez ce que vous observez. Quelques questions clés sont:</p>
-<p><strong>1.</strong> Est-ce qu’on s’attend à ce que, pour <strong>toutes les espèces</strong>, la position trophique augmente avec la longueur corporelle? Exactement de la même façon?</p>
-<p><strong>2.</strong> S’attend-on à ce que la relation entre la position trophique et la longueur corporelle soit pareille <strong>entre les lacs</strong>?</p>
+<p>Observez les graphiques, puis évaluez ce que vous observez. Quelques questions clés sont:</p>
+<p><strong>1.</strong> S’attend-on à ce que, pour <em>toutes les espèces</em>, la position trophique augmente avec la longueur corporelle? Exactement de la même façon?</p>
+<p><strong>2.</strong> S’attend-on à ce que la relation entre la position trophique et la longueur corporelle soit pareille <em>entre les lacs</em>?</p>
 <p><strong>Comment ces relations pourraient-elles différer?</strong></p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="commencer-par-une-question.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Chargez le jeu de données</span></span>
-<span id="cb4-2"><a href="commencer-par-une-question.html#cb4-2" aria-hidden="true" tabindex="-1"></a>fish.data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&#39;data/qcbs_w7_data.csv&#39;</span>, <span class="at">stringsAsFactors =</span> <span class="cn">TRUE</span>) </span>
-<span id="cb4-3"><a href="commencer-par-une-question.html#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Cette ligne variera en fonction de l&#39;endroit où vos données sont enregistrées. </span></span>
-<span id="cb4-4"><a href="commencer-par-une-question.html#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Vérifiez votre répertoire de travail avec getwd(), et changez-le avec setwd() au besoin.</span></span>
-<span id="cb4-5"><a href="commencer-par-une-question.html#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-6"><a href="commencer-par-une-question.html#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Format &#39;custom&#39; pour simplifier tous les figures ggplot produites par la suite</span></span>
-<span id="cb4-7"><a href="commencer-par-une-question.html#cb4-7" aria-hidden="true" tabindex="-1"></a>fig <span class="ot">&lt;-</span> <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
-<span id="cb4-8"><a href="commencer-par-une-question.html#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.minor=</span><span class="fu">element_blank</span>(), </span>
-<span id="cb4-9"><a href="commencer-par-une-question.html#cb4-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major=</span><span class="fu">element_blank</span>(), </span>
-<span id="cb4-10"><a href="commencer-par-une-question.html#cb4-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.background=</span><span class="fu">element_blank</span>(), </span>
-<span id="cb4-11"><a href="commencer-par-une-question.html#cb4-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">strip.background=</span><span class="fu">element_blank</span>(), </span>
-<span id="cb4-12"><a href="commencer-par-une-question.html#cb4-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">strip.text.y =</span> <span class="fu">element_text</span>(),</span>
-<span id="cb4-13"><a href="commencer-par-une-question.html#cb4-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.background=</span><span class="fu">element_blank</span>(),</span>
-<span id="cb4-14"><a href="commencer-par-une-question.html#cb4-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.key=</span><span class="fu">element_blank</span>(),</span>
-<span id="cb4-15"><a href="commencer-par-une-question.html#cb4-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.border =</span> <span class="fu">element_rect</span>(<span class="at">colour=</span><span class="st">&quot;black&quot;</span>, <span class="at">fill =</span> <span class="cn">NA</span>))</span>
-<span id="cb4-16"><a href="commencer-par-une-question.html#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-17"><a href="commencer-par-une-question.html#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Explorez les données graphiquement!</span></span>
-<span id="cb4-18"><a href="commencer-par-une-question.html#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-19"><a href="commencer-par-une-question.html#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Structure ggplot de base pour la relation qui nous intéresse</span></span>
-<span id="cb4-20"><a href="commencer-par-une-question.html#cb4-20" aria-hidden="true" tabindex="-1"></a>plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Fish_Length, <span class="at">y =</span> Trophic_Pos), <span class="at">data =</span> fish.data)</span>
-<span id="cb4-21"><a href="commencer-par-une-question.html#cb4-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-22"><a href="commencer-par-une-question.html#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Graphique 1 - Toutes les données</span></span>
-<span id="cb4-23"><a href="commencer-par-une-question.html#cb4-23" aria-hidden="true" tabindex="-1"></a>plot <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb4-24"><a href="commencer-par-une-question.html#cb4-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Longueur corporelle (mm)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Position trophique&quot;</span>, </span>
-<span id="cb4-25"><a href="commencer-par-une-question.html#cb4-25" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Toutes les données&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb4-26"><a href="commencer-par-une-question.html#cb4-26" aria-hidden="true" tabindex="-1"></a>  fig <span class="co"># notre joli format ggplot!</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="commencer-par-une-question.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb4-2"><a href="commencer-par-une-question.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Chargez le jeu de données</span></span>
+<span id="cb4-3"><a href="commencer-par-une-question.html#cb4-3" aria-hidden="true" tabindex="-1"></a>fish.data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&#39;data/qcbs_w7_data.csv&#39;</span>, <span class="at">stringsAsFactors =</span> <span class="cn">TRUE</span>) </span>
+<span id="cb4-4"><a href="commencer-par-une-question.html#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Cette ligne variera en fonction de l&#39;endroit où vos données sont enregistrées. </span></span>
+<span id="cb4-5"><a href="commencer-par-une-question.html#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Vérifiez votre répertoire de travail avec getwd(), et changez-le avec setwd() au besoin.</span></span>
+<span id="cb4-6"><a href="commencer-par-une-question.html#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="commencer-par-une-question.html#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Format &#39;custom&#39; pour simplifier toutes les figures ggplot produites par la suite</span></span>
+<span id="cb4-8"><a href="commencer-par-une-question.html#cb4-8" aria-hidden="true" tabindex="-1"></a>fig <span class="ot">&lt;-</span> <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb4-9"><a href="commencer-par-une-question.html#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.minor=</span><span class="fu">element_blank</span>(), </span>
+<span id="cb4-10"><a href="commencer-par-une-question.html#cb4-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.major=</span><span class="fu">element_blank</span>(), </span>
+<span id="cb4-11"><a href="commencer-par-une-question.html#cb4-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.background=</span><span class="fu">element_blank</span>(), </span>
+<span id="cb4-12"><a href="commencer-par-une-question.html#cb4-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">strip.background=</span><span class="fu">element_blank</span>(), </span>
+<span id="cb4-13"><a href="commencer-par-une-question.html#cb4-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">strip.text.y =</span> <span class="fu">element_text</span>(),</span>
+<span id="cb4-14"><a href="commencer-par-une-question.html#cb4-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.background=</span><span class="fu">element_blank</span>(),</span>
+<span id="cb4-15"><a href="commencer-par-une-question.html#cb4-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.key=</span><span class="fu">element_blank</span>(),</span>
+<span id="cb4-16"><a href="commencer-par-une-question.html#cb4-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.border =</span> <span class="fu">element_rect</span>(<span class="at">colour=</span><span class="st">&quot;black&quot;</span>, <span class="at">fill =</span> <span class="cn">NA</span>))</span>
+<span id="cb4-17"><a href="commencer-par-une-question.html#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-18"><a href="commencer-par-une-question.html#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Explorez les données graphiquement!</span></span>
+<span id="cb4-19"><a href="commencer-par-une-question.html#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-20"><a href="commencer-par-une-question.html#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Structure ggplot de base pour la relation qui nous intéresse</span></span>
+<span id="cb4-21"><a href="commencer-par-une-question.html#cb4-21" aria-hidden="true" tabindex="-1"></a>plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Fish_Length, <span class="at">y =</span> Trophic_Pos), <span class="at">data =</span> fish.data)</span>
+<span id="cb4-22"><a href="commencer-par-une-question.html#cb4-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-23"><a href="commencer-par-une-question.html#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Graphique 1 - Toutes les données</span></span>
+<span id="cb4-24"><a href="commencer-par-une-question.html#cb4-24" aria-hidden="true" tabindex="-1"></a>plot <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb4-25"><a href="commencer-par-une-question.html#cb4-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Longueur corporelle (mm)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Position trophique&quot;</span>, </span>
+<span id="cb4-26"><a href="commencer-par-une-question.html#cb4-26" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Toutes les données&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb4-27"><a href="commencer-par-une-question.html#cb4-27" aria-hidden="true" tabindex="-1"></a>  fig <span class="co"># notre joli format ggplot!</span></span></code></pre></div>
 <p><img src="book-fr_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="commencer-par-une-question.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Graphique 2 - Par espèce</span></span>
 <span id="cb5-2"><a href="commencer-par-une-question.html#cb5-2" aria-hidden="true" tabindex="-1"></a>plot <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
@@ -316,10 +317,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="book-fr_files/figure-html/unnamed-chunk-7-3.png" width="672" /></p>
 <hr />
 <div id="défi-1-solution" class="section level4 unnumbered hasAnchor">
-<h4><strong>Défi 1 Solution</strong><a href="commencer-par-une-question.html#défi-1-solution" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>A partir de ces graphiques, nous pouvons tirer deux premières observations:</p>
+<h4><strong>Défi 1 Solution:</strong><a href="commencer-par-une-question.html#défi-1-solution" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>À partir de ces graphiques, nous pouvons tirer deux premières observations:</p>
 <p><strong>1.</strong> Toutes les espèces semblent augmenter leur position trophique avec la longueur, mais la pente peut être différente selon les espèces.</p>
-<p><strong>2.</strong> Certains paramètres spécifiques à chaque lac en particulier (e.g. la productivité primaire du système) peuvent changer la relation observée.</p>
+<p><strong>2.</strong> Certains paramètres spécifiques à chacun des lacs (e.g. la productivité primaire du système) peuvent changer la relation observée.</p>
 </div>
 </div>
 </div>
