@@ -1,8 +1,8 @@
 # Pourquoi choisir un MLM?
 
-Les données écologiques et biologiques peuvent être complexes et désordonnées. Il existe généralement une structure particulière dans les données (*i.e.* les observations individuelles ne sont pas toujours indépendantes), les relations entre les variables d'intérêt peuvent différer en fonction de facteurs de regroupement, telles que les espèces, et la plupart du temps de faibles tailles d'échantillons rendent l'ajustement de modèles avec de nombreux paramètres difficile.
+Les données écologiques et biologiques peuvent être complexes et désordonnées. Il existe généralement une structure particulière dans les données (*i.e.* les observations individuelles ne sont pas toujours indépendantes), les relations entre les variables d'intérêt peuvent différer en fonction de facteurs de regroupement, tels que les espèces, et la plupart du temps de faibles tailles d'échantillons rendent l'ajustement de modèles avec de nombreux paramètres difficile.
 
-Les modèles linéaires à effets mixtes (MLM) ont été développés pour aborder ces questions. Ils peuvent être appliqués à un grand nombre de questions écologiques et prennent de nombreuses formes différentes. Dans cet atelier, nous allons utiliser une simple approche interrogative pour apprendre les bases du fonctionnement des MLMs et nous verrons comment les ajuster. 
+Les modèles linéaires à effets mixtes (MLM) ont été développés pour aborder ces questions. Ils peuvent être appliqués à un grand nombre de questions écologiques et prennent de nombreuses formes différentes. Dans cet atelier, nous allons utiliser une simple approche interrogative pour apprendre les bases du fonctionnement des MLMs. Nous verrons également comment les ajuster. 
 
 # Commencer par une question
 
@@ -12,32 +12,33 @@ Le [jeu de données](https://raw.githubusercontent.com/QCBSRworkshops/workshop07
 
 Voici une représentation visuelle pour vous aider à comprendre tout cela! 
 
-*Notez: seulement trois individus sont montrés par espèce, mais en réalité il y a 10 individus par espèce.*
+*Note: Seulement trois individus sont montrés par espèce, mais en réalité il y a 10 individus par espèce.*
 
 ![](images/fig_1_qcbs_wiki.png)
 
-Une simple question à laquelle vous pourriez répondre avec ce jeu de données est **est-ce que la position trophique des poissons augmente avec leur taille?** Au cours de l'atelier, on tentera de répondre à cette question.
+Une question toute simple à laquelle vous pourriez répondre avec ce jeu de données est: **est-ce que la position trophique des poissons augmente avec leur taille?** Au cours de l'atelier, on tentera de répondre à cette question.
 
 ## Défi 1
 
 Pour notre premier défi, nous allons commencer à examiner notre jeu de données plus en profondeur. Reproduisez les graphiques 1-3 en utilisant le script ci-dessous et le jeu de données de poissons. 
 
-Observez les graphiques puis evaluez ce que vous observez. Quelques questions clés sont:
+Observez les graphiques, puis évaluez ce que vous observez. Quelques questions clés sont:
 
-**1.** Est-ce qu'on s'attend à ce que, pour **toutes les espèces**, la position trophique augmente avec la longueur corporelle? Exactement de la même façon? 
+**1.** S'attend-on à ce que, pour *toutes les espèces*, la position trophique augmente avec la longueur corporelle? Exactement de la même façon? 
 
-**2.** S'attend-on à ce que la relation entre la position trophique et la longueur corporelle soit pareille **entre les lacs**?  
+**2.** S'attend-on à ce que la relation entre la position trophique et la longueur corporelle soit pareille *entre les lacs*?  
 
 **Comment ces relations pourraient-elles différer?**  
 
 
 ```{r, echo = TRUE, eval = TRUE}
+library(ggplot2)
 # Chargez le jeu de données
 fish.data <- read.csv('data/qcbs_w7_data.csv', stringsAsFactors = TRUE) 
 # Cette ligne variera en fonction de l'endroit où vos données sont enregistrées. 
-#Vérifiez votre répertoire de travail avec getwd(), et changez-le avec setwd() au besoin.
+# Vérifiez votre répertoire de travail avec getwd(), et changez-le avec setwd() au besoin.
 
-# Format 'custom' pour simplifier tous les figures ggplot produites par la suite
+# Format 'custom' pour simplifier toutes les figures ggplot produites par la suite
 fig <- theme_bw() + 
   theme(panel.grid.minor=element_blank(), 
         panel.grid.major=element_blank(), 
@@ -76,20 +77,20 @@ plot + geom_point() +
 
 ---
 
-#### **Défi 1 Solution** {-}
+#### **Défi 1 Solution:** {-}
 
-A partir de ces graphiques, nous pouvons tirer deux premières observations:
+À partir de ces graphiques, nous pouvons tirer deux premières observations:
 
 **1.** Toutes les espèces semblent augmenter leur position trophique avec la longueur, mais la pente peut être différente selon les espèces.  
 
-**2.** Certains paramètres spécifiques à chaque lac en particulier (e.g. la productivité primaire du système) peuvent changer la relation observée.
+**2.** Certains paramètres spécifiques à chacun des lacs (e.g. la productivité primaire du système) peuvent changer la relation observée.
 
 # Analyse des données
 
 Nous savons que les données écologiques et biologiques sont souvent complexes. De nombreux ensembles de données comprennent:
 
 - Une structure hiérarchique des données
-- Nombreuses covariables et facteurs de regroupement
+- Plusieurs covariables et facteurs de regroupement
 - Une étude ou un plan expérimental non équilibré
 
 Alors, comment pouvons-nous analyser nos données?
@@ -116,7 +117,7 @@ Il y a peu de chances de détecter un effet à cause de la faible taille d'écha
 
 Une autre façon d'analyser ces données est de faire une seule analyse en ignorant les variables espèce et lac.
 
-Voici à quoi cela ressemblerait pour *toutes* nos données dans *tous* les lacs à la fois
+Voici à quoi cela ressemblerait pour *toutes* nos données dans *tous* les lacs à la fois:
 
 ![](images/fig_6_w5.png)
 
@@ -124,7 +125,7 @@ Remarquez que vous avez maintenant une taille d'échantillon énorme et beaucoup
 
 Mais qu'en est-il de la pseudo-réplication? Les poissons d'un même lac et d'une même espèce peuvent être corrélés.
 
-De plus, regardez tout ce bruit dans les données! Une partie pourrait être due à des **différences** entre les **espèces** et les **lacs**.
+De plus, regardez tout ce bruit dans les données! Une partie pourrait être causée par des **différences** entre les **espèces** et les **lacs**.
 
 ## Option 3: Est-ce qu'on a une autre option?
 
@@ -134,14 +135,14 @@ Cependant, cette relation peut différer légèrement entre les **espèces** en 
  
 Cela nous amène aux modèles mixtes! Les MLMs sont un compromis entre séparer et regrouper. Ils:
 
-- Prennent en compte la variabilité spécifique à chaque espèce et chaque lac (**séparer**) tout en calculant moins de paramètres qu’une régression classique.
-- Utilisent toutes les données disponibles (**regrouper**) tout en contrôlant les différences entre les lacs et les espèces (pseudo-replication).
+- prennent en compte la variabilité spécifique à chaque espèce et chaque lac (**séparer**) tout en calculant moins de paramètres qu’une régression classique;
+- utilisent toutes les données disponibles (**regrouper**) tout en contrôlant les différences entre les lacs et les espèces (pseudo-réplication).
 
 Ce faisant, ils:  
 
 - permettent d'utiliser toutes les données disponibles au lieu d'utiliser les moyennes d'un échantillon non indépendant;
-- tiennent compte de la structure des données (par exemple, des quadrats imbriqués dans des sites imbriqués dans des forêts) ;
-- permettent aux relations de varier en fonction de différents facteurs de regroupement (également appelés effets aléatoires) ;
+- tiennent compte de la structure des données (par exemple, des quadrats imbriqués dans des sites imbriqués dans des forêts);
+- permettent aux relations de varier en fonction de différents facteurs de regroupement (également appelés effets aléatoires);
 - nécessitent moins d'estimations de paramètres que la régression classique, ce qui vous fait gagner des degrés de liberté. 
 
 Mais comment font-ils tout cela? Entrons dans le vif du sujet!

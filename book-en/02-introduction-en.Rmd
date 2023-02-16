@@ -19,7 +19,7 @@ there are 10 individuals per species.*
 
 ![](images/fig_1_qcbs_wiki.png)
 
-A simple question you could answer with this dataset is **does fish trophic position increase with fish size?**
+A simple question you could answer with this dataset is: **does fish trophic position increase with fish size?**
 This will be our motivating question for this workshop.
 
 ## Challenge 1 
@@ -31,7 +31,10 @@ Observe each plot and try to get a sense of what is occurring. A few key questio
 - **1.** Do we expect an increase in trophic position with length in the exact same way for *all species*?
 - **2.** Do we expect an increase in trophic position with length in the exact same way for *all lakes*?
 
+**How might these relationships differ?**
+
 ```{r, echo = TRUE, eval = TRUE}
+library(ggplot2)
 # Load the dataset
 fish.data <- read.csv('data/qcbs_w7_data.csv', stringsAsFactors = TRUE) 
 # This line will vary depending on where your data is saved. 
@@ -56,22 +59,22 @@ plot <- ggplot(aes(Fish_Length, Trophic_Pos), data = fish.data)
 
 # Plot 1 - All data
 plot + geom_point() + 
-  labs(x = "Length (mm)", y = "Trophic Position", 
-       title = "All Data") + 
+  labs(x = "Length (mm)", y = "Trophic position", 
+       title = "All data") + 
   fig
 
 # Plot 2 - By species
 plot + geom_point() + 
   facet_wrap(~ Fish_Species) + 
-  labs(x = "Length (mm)", y = "Trophic Position", 
-       title = "By Species") + 
+  labs(x = "Length (mm)", y = "Trophic position", 
+       title = "By species") + 
   fig
 
 # Plot 3 – By lake
 plot + geom_point() + 
   facet_wrap(~ Lake) + 
-  labs(x = "Length (mm)", y = "Trophic Position", 
-       title = "By Lake") + 
+  labs(x = "Length (mm)", y = "Trophic position", 
+       title = "By lake") + 
   fig
 ```
 
@@ -79,7 +82,7 @@ plot + geom_point() +
 
 #### **Challenge 1 Solution:** {-}
 
-Based on these plots we can draw two initial observations:
+Based on these plots, we can draw two initial observations:
 
 **1.** All species appear to increase in trophic position with length, but the slope might be different across species.
 
@@ -126,28 +129,28 @@ Notice you now have a huge sample size and far fewer parameters to estimate!
 
 But what about pseudoreplication? Fish within a lake and within a species might be correlated. 
 
-Also, look at all that noise in the data, some of it might be due to **differences** among **species** and **lakes**
+Also, look at all that noise in the data, some of it might be due to **differences** among **species** and **lakes**.
 
 
 ## Option 3: Is there a third option? 
 
 For our question, we only want to know if there is a **general effect of body length on the trophic position**.
 
-However, this relationship might differ slightly among **species** due to unmeasured biological processes (e.g. growth rate) or among **lakes** due to unmeasured environmental variables. But we are not interested in this variation, so we need to find a way to **control** for these potential effects while still maximizing the use of our data. This is why both separating and lumping alone are unsatisfactory options.
+However, this relationship might differ slightly among **species** due to unmeasured biological processes (e.g. growth rate) or among **lakes** due to unmeasured environmental variables. But we are not interested in this variation, so we need to find a way to **control** these potential effects while still maximizing the use of our data. This is why both separating and lumping alone are unsatisfactory options.
 
 This brings us to mixed models! Linear mixed models enable us to lump **and** separate the analysis. 
 
 Linear mixed models:
 
-- Estimate slope and intercept parameters for each species and lake (**separating**) but estimate fewer parameters than classical regression.
-- Use all the data available (**lumping**) while accounting for pseudoreplication by controlling for differences among lakes and species.
+- estimate slope and intercept parameters for each species and lake (**separating**), but estimate fewer parameters than classical regression;
+- use all the data available (**lumping**) while accounting for pseudoreplication by controlling differences among lakes and species.
 
 In doing so, they: 
 
 - allow you to use all the data you have instead of using means of non-independent sample;
 - account for structure in your data (for example, quadrates nested in sites nested in forests);
 - allow relationships to vary by different grouping factors (also known as random effects);
-- they require less parameter estimates than classical regression which saves you degrees of freedom. 
+- require less parameter estimates than classical regression which saves you degrees of freedom. 
 
 But how do they do all of this? Let's get into it! 
 
