@@ -270,16 +270,16 @@ where:
 <h2><span class="header-section-number">9.1</span> Check data structure<a href="step-1.-a-priori-model-building.html#check-data-structure" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><strong>Does the data have the right structure?</strong></p>
 <p>Look at the data structure:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="step-1.-a-priori-model-building.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Look at data structure</span></span>
-<span id="cb6-2"><a href="step-1.-a-priori-model-building.html#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(fish.data)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="step-1.-a-priori-model-building.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Look at data structure</span></span>
+<span id="cb7-2"><a href="step-1.-a-priori-model-building.html#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(fish.data)</span></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    180 obs. of  4 variables:
 ##  $ Lake        : chr  &quot;L1&quot; &quot;L1&quot; &quot;L1&quot; &quot;L1&quot; ...
 ##  $ Fish_Species: chr  &quot;S1&quot; &quot;S1&quot; &quot;S1&quot; &quot;S1&quot; ...
 ##  $ Fish_Length : num  105 195 294 414 237 ...
 ##  $ Trophic_Pos : num  2.6 2.7 2.74 2.74 2.79 ...</code></pre>
 <p>Now look at the distribution of samples for each factor:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="step-1.-a-priori-model-building.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Look at the distribution of samples for each factor</span></span>
-<span id="cb8-2"><a href="step-1.-a-priori-model-building.html#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(fish.data[, <span class="fu">c</span>(<span class="st">&quot;Lake&quot;</span>, <span class="st">&quot;Fish_Species&quot;</span>)])</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="step-1.-a-priori-model-building.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Look at the distribution of samples for each factor</span></span>
+<span id="cb9-2"><a href="step-1.-a-priori-model-building.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(fish.data[, <span class="fu">c</span>(<span class="st">&quot;Lake&quot;</span>, <span class="st">&quot;Fish_Species&quot;</span>)])</span></code></pre></div>
 <pre><code>##     Fish_Species
 ## Lake S1 S2 S3
 ##   L1 10 10 10
@@ -290,11 +290,11 @@ where:
 ##   L6 10 10 10</code></pre>
 <p>This dataset is perfectly balanced, but <strong>mixed models can be used to analyze unbalanced experimental plans</strong>, as it is often the case in ecology!</p>
 <p>Let’s also look at the distribution of continuous variables:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="step-1.-a-priori-model-building.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Look at the distribution of continuous variables:</span></span>
-<span id="cb10-2"><a href="step-1.-a-priori-model-building.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">1</span>))</span>
-<span id="cb10-3"><a href="step-1.-a-priori-model-building.html#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(fish.data<span class="sc">$</span>Fish_Length, <span class="at">xlab =</span> <span class="st">&quot;Length (mm)&quot;</span>, <span class="at">main =</span> <span class="st">&quot;&quot;</span>)</span>
-<span id="cb10-4"><a href="step-1.-a-priori-model-building.html#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(fish.data<span class="sc">$</span>Trophic_Pos, <span class="at">xlab =</span> <span class="st">&quot;Trophic position&quot;</span>, <span class="at">main =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
-<p><img src="book-en_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="step-1.-a-priori-model-building.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Look at the distribution of continuous variables:</span></span>
+<span id="cb11-2"><a href="step-1.-a-priori-model-building.html#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb11-3"><a href="step-1.-a-priori-model-building.html#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(fish.data<span class="sc">$</span>Fish_Length, <span class="at">xlab =</span> <span class="st">&quot;Length (mm)&quot;</span>, <span class="at">main =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb11-4"><a href="step-1.-a-priori-model-building.html#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(fish.data<span class="sc">$</span>Trophic_Pos, <span class="at">xlab =</span> <span class="st">&quot;Trophic position&quot;</span>, <span class="at">main =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<p><img src="book-en_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <p>Major deviations could cause heteroscedasticity problems. If necessary, make transformations. In this case, <strong>the data seems OK</strong>.</p>
 <hr />
 </div>
@@ -328,11 +328,11 @@ Consider the scale of the variables within our dataset:</p>
 <p>Body length -&gt; Long scale
 Trophic position -&gt; Short scale</p>
 <p>Because our data have very different scales of variation, we apply the <strong>Z-correction</strong></p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="step-1.-a-priori-model-building.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Standardized length, &#39;by hand&#39;</span></span>
-<span id="cb11-2"><a href="step-1.-a-priori-model-building.html#cb11-2" aria-hidden="true" tabindex="-1"></a>fish.data<span class="sc">$</span>Z_Length <span class="ot">&lt;-</span> (fish.data<span class="sc">$</span>Fish_Length <span class="sc">-</span> <span class="fu">mean</span>(fish.data<span class="sc">$</span>Fish_Length))<span class="sc">/</span><span class="fu">sd</span>(fish.data<span class="sc">$</span>Fish_Length)</span>
-<span id="cb11-3"><a href="step-1.-a-priori-model-building.html#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="step-1.-a-priori-model-building.html#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Standardized trophic position, with the function scale</span></span>
-<span id="cb11-5"><a href="step-1.-a-priori-model-building.html#cb11-5" aria-hidden="true" tabindex="-1"></a>fish.data<span class="sc">$</span>Z_TP <span class="ot">&lt;-</span> <span class="fu">scale</span>(fish.data<span class="sc">$</span>Trophic_Pos)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="step-1.-a-priori-model-building.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Standardized length, &#39;by hand&#39;</span></span>
+<span id="cb12-2"><a href="step-1.-a-priori-model-building.html#cb12-2" aria-hidden="true" tabindex="-1"></a>fish.data<span class="sc">$</span>Z_Length <span class="ot">&lt;-</span> (fish.data<span class="sc">$</span>Fish_Length <span class="sc">-</span> <span class="fu">mean</span>(fish.data<span class="sc">$</span>Fish_Length))<span class="sc">/</span><span class="fu">sd</span>(fish.data<span class="sc">$</span>Fish_Length)</span>
+<span id="cb12-3"><a href="step-1.-a-priori-model-building.html#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="step-1.-a-priori-model-building.html#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Standardized trophic position, with the function scale</span></span>
+<span id="cb12-5"><a href="step-1.-a-priori-model-building.html#cb12-5" aria-hidden="true" tabindex="-1"></a>fish.data<span class="sc">$</span>Z_TP <span class="ot">&lt;-</span> <span class="fu">scale</span>(fish.data<span class="sc">$</span>Trophic_Pos)</span></code></pre></div>
 <hr />
 </div>
 <div id="do-you-need-a-lmm" class="section level2 hasAnchor" number="9.5">
@@ -352,22 +352,22 @@ Trophic position -&gt; Short scale</p>
 </ol></li>
 </ul>
 <p>Create a linear model without random effects</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="step-1.-a-priori-model-building.html#cb12-1" aria-hidden="true" tabindex="-1"></a>lm.test <span class="ot">&lt;-</span> <span class="fu">lm</span>(Z_TP <span class="sc">~</span> Z_Length, <span class="at">data =</span> fish.data)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="step-1.-a-priori-model-building.html#cb13-1" aria-hidden="true" tabindex="-1"></a>lm.test <span class="ot">&lt;-</span> <span class="fu">lm</span>(Z_TP <span class="sc">~</span> Z_Length, <span class="at">data =</span> fish.data)</span></code></pre></div>
 <p>Calculate residuals of this linear model</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="step-1.-a-priori-model-building.html#cb13-1" aria-hidden="true" tabindex="-1"></a>lm.test.resid <span class="ot">&lt;-</span> <span class="fu">rstandard</span>(lm.test)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="step-1.-a-priori-model-building.html#cb14-1" aria-hidden="true" tabindex="-1"></a>lm.test.resid <span class="ot">&lt;-</span> <span class="fu">rstandard</span>(lm.test)</span></code></pre></div>
 <p>Plot the residuals against the levels of the potential random factors</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="step-1.-a-priori-model-building.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb14-2"><a href="step-1.-a-priori-model-building.html#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="step-1.-a-priori-model-building.html#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lm.test.resid <span class="sc">~</span> <span class="fu">as.factor</span>(fish.data<span class="sc">$</span>Fish_Species), <span class="at">xlab =</span> <span class="st">&quot;Species&quot;</span>,</span>
-<span id="cb14-4"><a href="step-1.-a-priori-model-building.html#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">ylab =</span> <span class="st">&quot;Standardized residuals&quot;</span>)</span>
-<span id="cb14-5"><a href="step-1.-a-priori-model-building.html#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-6"><a href="step-1.-a-priori-model-building.html#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
-<span id="cb14-7"><a href="step-1.-a-priori-model-building.html#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-8"><a href="step-1.-a-priori-model-building.html#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lm.test.resid <span class="sc">~</span> <span class="fu">as.factor</span>(fish.data<span class="sc">$</span>Lake), <span class="at">xlab =</span> <span class="st">&quot;Lake&quot;</span>,</span>
-<span id="cb14-9"><a href="step-1.-a-priori-model-building.html#cb14-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">ylab =</span> <span class="st">&quot;Standardized residuals&quot;</span>)</span>
-<span id="cb14-10"><a href="step-1.-a-priori-model-building.html#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-11"><a href="step-1.-a-priori-model-building.html#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="book-en_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="step-1.-a-priori-model-building.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb15-2"><a href="step-1.-a-priori-model-building.html#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="step-1.-a-priori-model-building.html#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lm.test.resid <span class="sc">~</span> <span class="fu">as.factor</span>(fish.data<span class="sc">$</span>Fish_Species), <span class="at">xlab =</span> <span class="st">&quot;Species&quot;</span>,</span>
+<span id="cb15-4"><a href="step-1.-a-priori-model-building.html#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">ylab =</span> <span class="st">&quot;Standardized residuals&quot;</span>)</span>
+<span id="cb15-5"><a href="step-1.-a-priori-model-building.html#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="step-1.-a-priori-model-building.html#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb15-7"><a href="step-1.-a-priori-model-building.html#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-8"><a href="step-1.-a-priori-model-building.html#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lm.test.resid <span class="sc">~</span> <span class="fu">as.factor</span>(fish.data<span class="sc">$</span>Lake), <span class="at">xlab =</span> <span class="st">&quot;Lake&quot;</span>,</span>
+<span id="cb15-9"><a href="step-1.-a-priori-model-building.html#cb15-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">ylab =</span> <span class="st">&quot;Standardized residuals&quot;</span>)</span>
+<span id="cb15-10"><a href="step-1.-a-priori-model-building.html#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-11"><a href="step-1.-a-priori-model-building.html#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="book-en_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <p>These results suggest that there is residual variance that could be explained by these factors, so they should be included in a mixed effect model!</p>
 </div>
 </div>

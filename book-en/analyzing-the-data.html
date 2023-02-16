@@ -288,24 +288,24 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="images/fig_6_w5.png" /></p>
 <p>Notice you now have a huge sample size and far fewer parameters to estimate!</p>
 <p>But what about pseudoreplication? Fish within a lake and within a species might be correlated.</p>
-<p>Also, look at all that noise in the data, some of it might be due to <strong>differences</strong> among <strong>species</strong> and <strong>lakes</strong></p>
+<p>Also, look at all that noise in the data, some of it might be due to <strong>differences</strong> among <strong>species</strong> and <strong>lakes</strong>.</p>
 </div>
 <div id="option-3-is-there-a-third-option" class="section level2 hasAnchor" number="5.3">
 <h2><span class="header-section-number">5.3</span> Option 3: Is there a third option?<a href="analyzing-the-data.html#option-3-is-there-a-third-option" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>For our question, we only want to know if there is a <strong>general effect of body length on the trophic position</strong>.</p>
-<p>However, this relationship might differ slightly among <strong>species</strong> due to unmeasured biological processes (e.g. growth rate) or among <strong>lakes</strong> due to unmeasured environmental variables. But we are not interested in this variation, so we need to find a way to <strong>control</strong> for these potential effects while still maximizing the use of our data. This is why both separating and lumping alone are unsatisfactory options.</p>
+<p>However, this relationship might differ slightly among <strong>species</strong> due to unmeasured biological processes (e.g. growth rate) or among <strong>lakes</strong> due to unmeasured environmental variables. But we are not interested in this variation, so we need to find a way to <strong>control</strong> these potential effects while still maximizing the use of our data. This is why both separating and lumping alone are unsatisfactory options.</p>
 <p>This brings us to mixed models! Linear mixed models enable us to lump <strong>and</strong> separate the analysis.</p>
 <p>Linear mixed models:</p>
 <ul>
-<li>Estimate slope and intercept parameters for each species and lake (<strong>separating</strong>) but estimate fewer parameters than classical regression.</li>
-<li>Use all the data available (<strong>lumping</strong>) while accounting for pseudoreplication by controlling for differences among lakes and species.</li>
+<li>estimate slope and intercept parameters for each species and lake (<strong>separating</strong>), but estimate fewer parameters than classical regression;</li>
+<li>use all the data available (<strong>lumping</strong>) while accounting for pseudoreplication by controlling differences among lakes and species.</li>
 </ul>
 <p>In doing so, they:</p>
 <ul>
 <li>allow you to use all the data you have instead of using means of non-independent sample;</li>
 <li>account for structure in your data (for example, quadrates nested in sites nested in forests);</li>
 <li>allow relationships to vary by different grouping factors (also known as random effects);</li>
-<li>they require less parameter estimates than classical regression which saves you degrees of freedom.</li>
+<li>require less parameter estimates than classical regression which saves you degrees of freedom.</li>
 </ul>
 <p>But how do they do all of this? Let’s get into it!</p>
 

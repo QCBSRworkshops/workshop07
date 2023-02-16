@@ -263,25 +263,25 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>Given the mean-variance relationship, we will most likely need a model with over-dispersion.</strong></p>
 <p>To understand why, let’s start with a Poisson model.</p>
 <p>To run a GLMM in <code>R</code> we will use the <code>glmer()</code> function from the <code>lme4</code> package:</p>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="poisson-glmm.html#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Poisson GLMM Given the mean-variance relationship, we</span></span>
-<span id="cb73-2"><a href="poisson-glmm.html#cb73-2" aria-hidden="true" tabindex="-1"></a><span class="co"># will most likely need a model with over-dispersion.  To</span></span>
-<span id="cb73-3"><a href="poisson-glmm.html#cb73-3" aria-hidden="true" tabindex="-1"></a><span class="co"># understand why, let&#39;s start with a Poisson model.</span></span>
-<span id="cb73-4"><a href="poisson-glmm.html#cb73-4" aria-hidden="true" tabindex="-1"></a>mp1 <span class="ot">&lt;-</span> <span class="fu">glmer</span>(total.fruits <span class="sc">~</span> nutrient <span class="sc">*</span> amd <span class="sc">+</span> rack <span class="sc">+</span> status <span class="sc">+</span></span>
-<span id="cb73-5"><a href="poisson-glmm.html#cb73-5" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">1</span> <span class="sc">|</span> popu) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> gen), <span class="at">data =</span> dat.tf, <span class="at">family =</span> <span class="st">&quot;poisson&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="poisson-glmm.html#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Poisson GLMM Given the mean-variance relationship, we</span></span>
+<span id="cb74-2"><a href="poisson-glmm.html#cb74-2" aria-hidden="true" tabindex="-1"></a><span class="co"># will most likely need a model with over-dispersion.  To</span></span>
+<span id="cb74-3"><a href="poisson-glmm.html#cb74-3" aria-hidden="true" tabindex="-1"></a><span class="co"># understand why, let&#39;s start with a Poisson model.</span></span>
+<span id="cb74-4"><a href="poisson-glmm.html#cb74-4" aria-hidden="true" tabindex="-1"></a>mp1 <span class="ot">&lt;-</span> <span class="fu">glmer</span>(total.fruits <span class="sc">~</span> nutrient <span class="sc">*</span> amd <span class="sc">+</span> rack <span class="sc">+</span> status <span class="sc">+</span></span>
+<span id="cb74-5"><a href="poisson-glmm.html#cb74-5" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">1</span> <span class="sc">|</span> popu) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> gen), <span class="at">data =</span> dat.tf, <span class="at">family =</span> <span class="st">&quot;poisson&quot;</span>)</span></code></pre></div>
 <p><strong>Random effects</strong>: <code>(1|popu)</code> and <code>(1|gen)</code>. We model random intercepts for both factors so that total fruit production can vary among populations (<code>popu</code>) and genotypes (<code>gen</code>).</p>
 <hr />
 <p><strong>Over-dispersion check</strong></p>
 <p>We can check for overdispersion using the <code>overdisp_fun()</code> function (Bolker <em>et al</em>. 2011) which divides the Pearson residuals by the residual degrees of freedom.</p>
 <p>The function tests whether <strong>the ratio is greater than 1</strong>.</p>
 <p>Let’s run the test:</p>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="poisson-glmm.html#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Download the glmm_funs.R code from the wiki page and</span></span>
-<span id="cb74-2"><a href="poisson-glmm.html#cb74-2" aria-hidden="true" tabindex="-1"></a><span class="co"># source it to run the function</span></span>
-<span id="cb74-3"><a href="poisson-glmm.html#cb74-3" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="at">file =</span> <span class="st">&quot;data/glmm_funs.R&quot;</span>)  <span class="co"># This line will vary depending on where your data is saved</span></span>
-<span id="cb74-4"><a href="poisson-glmm.html#cb74-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Over-dispersion check</span></span>
-<span id="cb74-5"><a href="poisson-glmm.html#cb74-5" aria-hidden="true" tabindex="-1"></a><span class="fu">overdisp_fun</span>(mp1)</span></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="poisson-glmm.html#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Download the glmm_funs.R code from the wiki page and</span></span>
+<span id="cb75-2"><a href="poisson-glmm.html#cb75-2" aria-hidden="true" tabindex="-1"></a><span class="co"># source it to run the function</span></span>
+<span id="cb75-3"><a href="poisson-glmm.html#cb75-3" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="at">file =</span> <span class="st">&quot;data/glmm_funs.R&quot;</span>)  <span class="co"># This line will vary depending on where your data is saved</span></span>
+<span id="cb75-4"><a href="poisson-glmm.html#cb75-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Over-dispersion check</span></span>
+<span id="cb75-5"><a href="poisson-glmm.html#cb75-5" aria-hidden="true" tabindex="-1"></a><span class="fu">overdisp_fun</span>(mp1)</span></code></pre></div>
 <pre><code>##       chisq       ratio           p        logp 
 ## 15755.86835    25.57771     0.00000 -6578.47028</code></pre>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="poisson-glmm.html#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ratio is significantly &gt; 1</span></span></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="poisson-glmm.html#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ratio is significantly &gt; 1</span></span></code></pre></div>
 <p><strong>Ratio is significantly &gt; 1</strong></p>
 <p>As expected, we need to model a <strong>different distribution</strong> where the variance increases more rapidly than the mean.</p>
 </div>

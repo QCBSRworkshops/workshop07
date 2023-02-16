@@ -39,9 +39,12 @@ library(remotes)
 library(gridExtra)
 library(lattice)
 
+source("data/glmm_funs.R")
+
 
 ##Section: 02-introduction-en.R 
 
+library(ggplot2)
 # Load the dataset
 fish.data <- read.csv('data/qcbs_w7_data.csv', stringsAsFactors = TRUE) 
 # This line will vary depending on where your data is saved. 
@@ -66,22 +69,22 @@ plot <- ggplot(aes(Fish_Length, Trophic_Pos), data = fish.data)
 
 # Plot 1 - All data
 plot + geom_point() + 
-  labs(x = "Length (mm)", y = "Trophic Position", 
-       title = "All Data") + 
+  labs(x = "Length (mm)", y = "Trophic position", 
+       title = "All data") + 
   fig
 
 # Plot 2 - By species
 plot + geom_point() + 
   facet_wrap(~ Fish_Species) + 
-  labs(x = "Length (mm)", y = "Trophic Position", 
-       title = "By Species") + 
+  labs(x = "Length (mm)", y = "Trophic position", 
+       title = "By species") + 
   fig
 
 # Plot 3 – By lake
 plot + geom_point() + 
   facet_wrap(~ Lake) + 
-  labs(x = "Length (mm)", y = "Trophic Position", 
-       title = "By Lake") + 
+  labs(x = "Length (mm)", y = "Trophic position", 
+       title = "By lake") + 
   fig
 
 

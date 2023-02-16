@@ -270,14 +270,14 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>As with the LMM portion of this workshop, we are going to work through the GLMM material with a dataset in order to better understand how GLMMs work and how to implement them in <code>R</code>.</p>
 <p>In the Arabidopsis dataset, the effect of nutrient availability and herbivory (<strong>fixed effects</strong>) on the fruit production (<strong>response variable</strong>) of Arabidopsis thaliana was evaluated by measuring 625 plants across 9 different populations, each comprised of 2 to 3 different genotypes (<strong>random effects</strong>).</p>
 <p>Start by importing the <code>Arabidopsis</code> dataset <code>banta_totalfruits.csv</code> into <code>R</code>.</p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="introduction-to-glmm.html#cb68-1" aria-hidden="true" tabindex="-1"></a>dat.tf <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/banta_totalfruits.csv&quot;</span>)</span>
-<span id="cb68-2"><a href="introduction-to-glmm.html#cb68-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb68-3"><a href="introduction-to-glmm.html#cb68-3" aria-hidden="true" tabindex="-1"></a><span class="co"># In this dataset, the column headers are defined as: popu</span></span>
-<span id="cb68-4"><a href="introduction-to-glmm.html#cb68-4" aria-hidden="true" tabindex="-1"></a><span class="co"># factor with a level for each population gen factor with a</span></span>
-<span id="cb68-5"><a href="introduction-to-glmm.html#cb68-5" aria-hidden="true" tabindex="-1"></a><span class="co"># level for each genotype nutrient factor with levels for</span></span>
-<span id="cb68-6"><a href="introduction-to-glmm.html#cb68-6" aria-hidden="true" tabindex="-1"></a><span class="co"># low (value = 1) or high (value = 8) amd factor with</span></span>
-<span id="cb68-7"><a href="introduction-to-glmm.html#cb68-7" aria-hidden="true" tabindex="-1"></a><span class="co"># levels for no damage or simulated herbivory total.fruits</span></span>
-<span id="cb68-8"><a href="introduction-to-glmm.html#cb68-8" aria-hidden="true" tabindex="-1"></a><span class="co"># integer indicating the number of fruits per plant</span></span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="introduction-to-glmm.html#cb69-1" aria-hidden="true" tabindex="-1"></a>dat.tf <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/banta_totalfruits.csv&quot;</span>)</span>
+<span id="cb69-2"><a href="introduction-to-glmm.html#cb69-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-3"><a href="introduction-to-glmm.html#cb69-3" aria-hidden="true" tabindex="-1"></a><span class="co"># In this dataset, the column headers are defined as: popu</span></span>
+<span id="cb69-4"><a href="introduction-to-glmm.html#cb69-4" aria-hidden="true" tabindex="-1"></a><span class="co"># factor with a level for each population gen factor with a</span></span>
+<span id="cb69-5"><a href="introduction-to-glmm.html#cb69-5" aria-hidden="true" tabindex="-1"></a><span class="co"># level for each genotype nutrient factor with levels for</span></span>
+<span id="cb69-6"><a href="introduction-to-glmm.html#cb69-6" aria-hidden="true" tabindex="-1"></a><span class="co"># low (value = 1) or high (value = 8) amd factor with</span></span>
+<span id="cb69-7"><a href="introduction-to-glmm.html#cb69-7" aria-hidden="true" tabindex="-1"></a><span class="co"># levels for no damage or simulated herbivory total.fruits</span></span>
+<span id="cb69-8"><a href="introduction-to-glmm.html#cb69-8" aria-hidden="true" tabindex="-1"></a><span class="co"># integer indicating the number of fruits per plant</span></span></code></pre></div>
 </div>
 <hr>
 <center> 
